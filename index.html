@@ -1299,9 +1299,9 @@ function banner(icon,title,sub,action,label){
  const el=$('#banner');
  el.innerHTML=`<div class="bi">${icon}</div>
   <div class="bt"><b>${title}</b><span>${sub}</span></div>
-  <button class="btn sm" id="bAct">${label}</button>
+  ${action?`<button class="btn sm" id="bAct">${label}</button>`:''}
   <button class="bx" onclick="hideBanner()">×</button>`;
- $('#bAct').onclick=()=>{action();hideBanner()};
+ if(action)$('#bAct').onclick=()=>{action();hideBanner()};
  el.classList.add('show');
 }
 window.hideBanner=()=>$('#banner').classList.remove('show');
@@ -1329,14 +1329,25 @@ function iosHint(){
 
 if('serviceWorker' in navigator && location.protocol.startsWith('http')){
  window.addEventListener('load',()=>{
-  navigator.serviceWorker.register('./sw.js').then(reg=>{
+  navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(reg=>{
+   /* Updates land on their own. A creator should never be stuck on an old build
+      because they ignored a banner — that reads as "the app is broken". */
+   const check=()=>{try{reg.update()}catch(e){}};
+   check();
+   document.addEventListener('visibilitychange',()=>{if(!document.hidden)check()});
+   setInterval(check,15*60*1000);
+   let reloading=false;
+   navigator.serviceWorker.addEventListener('controllerchange',()=>{
+    if(reloading)return; reloading=true;
+    try{sessionStorage.setItem('rcg_reloaded','1')}catch(e){}
+    location.reload();
+   });
    reg.addEventListener('updatefound',()=>{
     const nw=reg.installing; if(!nw)return;
     nw.addEventListener('statechange',()=>{
      if(nw.state==='installed'&&navigator.serviceWorker.controller){
-      banner(ico('flame',19),'New version ready',
-       'Austin pushed an update. Reload to get it.',
-       ()=>{nw.postMessage('SKIP_WAITING');setTimeout(()=>location.reload(),260)},'Reload');
+      nw.postMessage('SKIP_WAITING');   // take over now; controllerchange reloads us
+      banner(ico('flame',19),'Updating…','Grabbing the newest version.',null,null);
      }});
    });
    setInterval(()=>reg.update(),15*60*1000);   // check for a push every 15 min
