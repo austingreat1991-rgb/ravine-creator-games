@@ -1251,6 +1251,39 @@ function ago(iso){
  const h=Math.round(m/60); if(h<24)return h+'h ago';
  return Math.round(h/24)+'d ago';
 }
+/* ---- LIVE TRACKER -------------------------------------------------------
+   The pill goes green the moment a data feed exists at ./data.json next to
+   index.html. Shape:
+     {"at":"2026-08-19T22:00:00Z","source":"Trybe","trybeSales":103000,
+      "metaSales":97100,"creators":[{"n":"Leo Ortiz","v":22,"sub":22,"sales":24100,"$":2694}]}
+   Match creators by name. Anything missing is left as-is. Re-checks every 5 min. */
+async function pullFeed(){
+ try{
+  const r=await fetch('./data.json?t='+Date.now(),{cache:'no-store'});
+  if(!r.ok)return false;
+  const d=await r.json();
+  if(!d||!d.at)return false;
+  if(Array.isArray(d.creators)){
+   d.creators.forEach(row=>{
+    const c=CR.find(x=>x.n.toLowerCase()===String(row.n||'').toLowerCase());
+    if(!c)return;
+    ['v','sub','sales','$','xp'].forEach(k=>{ if(row[k]!=null)c[k]=row[k] });
+   });
+  }
+  SYNC.at=d.at; SYNC.live=true;
+  if(d.source)SYNC.source=d.source;
+  if(d.trybeSales!=null)SYNC.trybeSales=d.trybeSales;
+  if(d.metaSales!=null)SYNC.metaSales=d.metaSales;
+  return true;
+ }catch(e){ return false }
+}
+window.pullFeed=pullFeed;
+function startFeed(){
+ pullFeed().then(ok=>{ if(ok&&typeof render==='function')render() });
+ setInterval(()=>{ pullFeed().then(ok=>{ if(ok&&typeof render==='function')render() }) }, 300000);
+}
+window.startFeed=startFeed;
+
 function livePill(cls){
  const on=SYNC.live;
  return `<span class="livep ${on?'on':'snap'} ${cls||''}" title="${on?'Connected to a live feed':'Snapshot taken '+ago(SYNC.at)}">
@@ -1570,17 +1603,17 @@ board(){const L=rk('sales'),c=me(),roster=ACTIVE().filter(x=>!x.admin);
   ['$2,000','Core prize','30 qualified videos · paid once'],
   ['$5,000','Signature prize','60 qualified videos · paid once']];
  setTimeout(()=>{try{paintPool()}catch(e){}},0);
- return `${bar('Leaderboard','Ranked on sales you actually drove. Only creators with activity appear here.')}
+ return `${bar('Leaderboard','Ranked on sales you actually drove. Everyone sees the order — nobody sees anyone else\u2019s numbers but their own.')}
  <div class="anim">
  <div class="gap">
   <div style="min-width:0"><div class="lbl">YOU ARE</div>
    <div class="mono" style="font-size:38px;font-weight:800;letter-spacing:-1.6px;line-height:1;margin-top:5px">#${myRank||'—'}</div>
    <div class="mini" style="margin-top:5px">of ${rows.length} active creators</div></div>
   <div style="width:1px;height:52px;background:var(--ln)"></div>
-  <div style="min-width:0;flex:1"><div class="lbl">GAP TO #1</div>
+  <div style="min-width:0;flex:1"><div class="lbl">YOUR SHARE OF PROGRAM SALES</div>
    <div style="display:flex;align-items:baseline;gap:9px;margin-top:5px">
-    <div class="mono" style="font-size:28px;font-weight:800;letter-spacing:-1.1px;color:var(--o2)">${leader&&leader.id!==c.id?'$'+(leader.sales-c.sales).toLocaleString():'$0'}</div>
-    <div class="mini">in sales behind ${leader&&leader.id!==c.id?esc(leader.n.split(' ')[0]):'nobody — you lead'}</div></div>
+    <div class="mono" style="font-size:28px;font-weight:800;letter-spacing:-1.1px;color:var(--o2)">${(c.sales/Math.max(1,CR.reduce((a,x)=>a+x.sales,0))*100).toFixed(1)}%</div>
+    <div class="mini">${myRank===1?'you are #1 on the board':'of everything the program has driven'}</div></div>
    <div class="bbar" style="margin-top:9px"><i style="width:${Math.round(c.sales/top*100)}%"></i></div></div>
   <div style="text-align:right"><div class="lbl">SALES ACROSS THE PROGRAM</div>
    <div class="mono" style="font-size:26px;font-weight:800;letter-spacing:-1px;color:var(--gr);margin-top:5px">$${CR.reduce((s,x)=>s+x.sales,0).toLocaleString()}</div>
@@ -1609,8 +1642,8 @@ board(){const L=rk('sales'),c=me(),roster=ACTIVE().filter(x=>!x.admin);
  <div class="pod">${pod.map(x=>{const p=rows.indexOf(x)+1,t=tOf(x.xp);
   return `<div class="pc ${p===1?'p1':''}">${p===1?'<div class="cr">👑</div>':''}${av(x,p===1?58:48,p===1?19:16)}
   <div class="n">${esc(x.n)}</div><div class="lbl" style="color:${t.ink};margin-top:4px">${t.n}</div>
-  <div class="x mono">$${(x.sales/1000).toFixed(1)}k</div>
-  <div class="mini">#${p} · ${x.v} approved</div></div>`}).join('')}</div>
+  <div class="x mono">${x.id===ME?'$'+(x.sales/1000).toFixed(1)+'k':'#'+p}</div>
+  <div class="mini">${x.v} approved</div></div>`}).join('')}</div>
  <div class="sec"><h2>Every active creator</h2><span class="mini">${rows.length} ranked · ${CR.length} accounts total</span></div>
  <div class="g p">${rows.map((x,i)=>{const t=tOf(x.xp);
   return `<div class="brow ${x.id===ME?'me':''}"><div class="rn mono">${i+1}</div>${av(x,38,13)}
@@ -1618,7 +1651,9 @@ board(){const L=rk('sales'),c=me(),roster=ACTIVE().filter(x=>!x.admin);
    <div class="bmeta"><span style="color:${t.ink};font-weight:750;letter-spacing:.6px">${t.n}</span>
     <b>${x.v}</b> approved <b>${appr(x)}%</b> approval</div>
    <div class="bbar"><i style="width:${Math.round(x.sales/top*100)}%"></i></div></div>
-  <div class="bright"><div style="text-align:right"><div class="rx mono" style="color:var(--gr)">$${x.sales.toLocaleString()}</div><div class="mini">sales</div></div></div></div>`}).join('')}</div>
+  <div class="bright"><div style="text-align:right">${x.id===ME
+   ?`<div class="rx mono" style="color:var(--gr)">$${x.sales.toLocaleString()}</div><div class="mini">your sales</div>`
+   :`<div class="rx mono" style="color:var(--tx4)">••••</div><div class="mini">private</div>`}</div></div></div>`}).join('')}</div>
  <div class="sec"><h2>Also on the line</h2><span class="mini">one-time prizes</span></div>
  <div class="prz">${PRIZES.map(p=>`<div class="pz"><b class="mono">${p[0]}</b><div class="w">${p[1]}</div><div class="d">${p[2]}</div></div>`).join('')}</div>
  <div class="sec"><h2>Where everyone sits</h2><span class="mini">${CR.length} accounts</span></div>
@@ -1719,7 +1754,7 @@ brand(){const roster=CR.filter(x=>!x.admin);
    <div class="st"><div class="v mono">$${(tot.sales/1000).toFixed(1)}k</div><div class="k">In this app</div><div class="mini" style="margin-top:5px">Snapshot ${ago(SYNC.at)}</div></div>
   </div>
   <div class="note" style="margin-top:14px">Trybe is a live system and this app holds a snapshot, so the two drift apart between refreshes — that is the whole difference, not a bug in the math. Every creator figure here is summed from the same pull, so ranking and pool shares are internally consistent even when the headline has moved on Trybe.</div>
-  <div class="note" style="margin-top:10px"><b style="color:var(--tx)">To make the pill go green:</b> connect a data feed. Then this reads from Trybe directly, the badge switches to LIVE, and the numbers stop being a snapshot.</div>
+  <div class="note" style="margin-top:10px"><b style="color:var(--tx)">To make the pill go green:</b> put a <code>data.json</code> file next to the app with the latest Trybe export. The badge flips to LIVE, every creator's numbers refresh from it, and it re-checks itself every 5 minutes.</div>
  </div>
  <div class="sec"><h2>Activation</h2></div>
  <div class="g p"><div style="font-size:14px;color:var(--tx2);line-height:1.6">
@@ -1851,6 +1886,7 @@ window.logout=()=>{clearSession();AUTH=null;$('#lpw').value='';$('#app').style.d
  $('#login').classList.remove('gone');paintLogin()};
 $('#lpw').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
 (function boot(){
+ try{ startFeed() }catch(e){}
  const saved=readSession();
  if(saved&&CR.some(c=>c.id===saved)){AUTH=saved;enter(saved,true);return}
  AUTH=CR.find(c=>c.admin).id;paintLogin();
