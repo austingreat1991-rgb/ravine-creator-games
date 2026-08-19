@@ -429,6 +429,8 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border:0;border-radiu
  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .swx{position:absolute;top:calc(env(safe-area-inset-top) + 14px);left:14px;z-index:6;width:40px;height:40px;border-radius:50%;
  display:grid;place-items:center;color:#fff;background:rgba(10,12,16,.6);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14)}
+.swx.wide{width:auto;padding:0 15px;border-radius:99px;gap:8px;grid-auto-flow:column;font-size:12px;font-weight:750;letter-spacing:.5px}
+.swx.wide.off{background:rgba(255,110,32,.92);border-color:rgba(255,255,255,.22);color:#0b0c0e;box-shadow:0 8px 24px rgba(255,110,32,.35)}
 .swcount{position:absolute;top:calc(env(safe-area-inset-top) + 14px);right:14px;z-index:6;height:40px;padding:0 15px;border-radius:99px;
  display:grid;place-items:center;color:#fff;font-size:12.5px;font-weight:700;background:rgba(10,12,16,.6);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14)}
 
@@ -1098,7 +1100,9 @@ function swMount(){
     const el=document.createElement('video');
     el.controls=false;
     mountSeg(el, ref, SWMUTE);
-    el.addEventListener('click',e=>{e.stopPropagation();el.paused?el.play():el.pause()});
+    el.addEventListener('click',e=>{e.stopPropagation();
+     if(SWMUTE){SWMUTE=false;el.muted=false;paintMute();el.play().catch(()=>{SWMUTE=true;el.muted=true;paintMute()});return}
+     el.paused?el.play():el.pause()});
     holder.appendChild(el); holder.classList.add('on');
     el.play().catch(()=>{el.muted=true;SWMUTE=true;el.play().catch(()=>{});paintMute()});
    } else if(id){
@@ -1118,13 +1122,15 @@ window.swMute=()=>{SWMUTE=!SWMUTE;
  const v=$('#swtrack')&&$('#swtrack').querySelector('.swplay video');
  if(v){v.muted=SWMUTE; if(!SWMUTE)v.play().catch(()=>{})}
  paintMute()};
-function paintMute(){const b=$('#swMuteBtn'); if(b)b.innerHTML=SWMUTE?ico('mute',19):ico('sound',19)}
+function paintMute(){const b=$('#swMuteBtn'); if(!b)return;
+ b.className='swx wide'+(SWMUTE?' off':'');
+ b.innerHTML=(SWMUTE?ico('mute',18)+'<span>TAP FOR SOUND</span>':ico('sound',18)+'<span>SOUND ON</span>');}
 window.openSwipe=(i)=>{
  SWI=typeof i==='number'?i:0;
  const L=feedList();
  const el=$('#swipe');
  el.innerHTML=`<button class="swx" onclick="closeSwipe()">${ico('x',20)}</button>
-  <button class="swx" id="swMuteBtn" style="left:62px" onclick="swMute()">${ico('mute',19)}</button>
+  <button class="swx wide ${SWMUTE?'off':''}" id="swMuteBtn" style="left:62px" onclick="swMute()">${SWMUTE?ico('mute',18)+'<span>TAP FOR SOUND</span>':ico('sound',18)+'<span>SOUND ON</span>'}</button>
   <div class="swcount"><span id="swnum">${SWI+1}</span> / ${L.length}</div>
   <div class="swtrack" id="swtrack">${L.map((v,n)=>{const th=thumbOf(v),nt=noteOf(v.id),tt=ttid(v);
    return `<section class="swcard" data-i="${n}">
