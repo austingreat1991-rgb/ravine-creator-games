@@ -1,7 +1,7 @@
 /* Ravine Creator Games — service worker
    Strategy: network-first for the app shell so a push goes live on next open,
    cache fallback so the app still works with no signal. */
-const VERSION = 'rcg-v1.0.0';
+const VERSION = 'rcg-v1.2.0';
 const SHELL = ['./', './index.html', './manifest.webmanifest',
   './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 
@@ -21,6 +21,15 @@ self.addEventListener('fetch', e => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== location.origin) return;           // let YouTube/TikTok/Meta through untouched
+  // Immutable media (thumbnails, ad clips): cache-first, they never change under the same name.
+  if (/\/(thumbs|ads)\//.test(url.pathname)) {
+    e.respondWith(caches.match(req).then(hit => hit || fetch(req).then(res => {
+      const copy = res.clone();
+      caches.open(VERSION).then(c => c.put(req, copy));
+      return res;
+    })));
+    return;
+  }
   e.respondWith(
     fetch(req).then(res => {
       const copy = res.clone();
