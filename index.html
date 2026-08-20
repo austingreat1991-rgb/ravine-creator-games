@@ -144,6 +144,8 @@ h1.pt{font-size:31px;font-weight:800;letter-spacing:-1.1px;line-height:1.05}
 .stats.three{grid-template-columns:repeat(3,minmax(0,1fr))}
 .stats.three .v{font-size:19px}
 .stats.three .k{font-size:9px;letter-spacing:.06em}
+.vthumb{width:44px;height:78px;border-radius:9px;object-fit:cover;flex:0 0 auto;border:1px solid var(--ln);background:#111}
+.vthumb.ph{display:block}
 .chartwrap{position:relative;margin:2px 0 0}
 .chartwrap svg{display:block;width:100%;height:auto;overflow:visible}
 .ctip{position:absolute;pointer-events:none;z-index:8;opacity:0;transform:translate(-50%,-118%);transition:opacity .12s;
@@ -1441,14 +1443,14 @@ const BANDHEX={good:'#3DDC84',warn:'#FFB020',bad:'#FF5C4D'};
 function roasChart(rows){
  const pts=rows.filter(x=>x.spend>0);
  if(pts.length<2)return '';
- const W=340,H=190,L=30,R=12,T=14,B=26;
+ const W=340,H=214,L=30,R=12,T=18,B=26;
  const lg=v=>Math.log10(Math.max(v,10));
  const xs=pts.map(p=>lg(p.spend)), x0=Math.min(...xs)-.12, x1=Math.max(...xs)+.12;
  const yTop=Math.max(3, Math.ceil(Math.max(...pts.map(p=>p.roas))*1.12));
  const px=v=>L+(lg(v)-x0)/(x1-x0||1)*(W-L-R);
  const py=v=>T+(1-Math.min(v,yTop)/yTop)*(H-T-B);
  const mxs=Math.max(...pts.map(p=>p.spend));
- const rad=s=>4+Math.sqrt(s/mxs)*7.5;                    // area, not radius, tracks spend
+ const rad=s=>5+Math.sqrt(s/mxs)*13;                     // area, not radius, tracks spend
 
  // x ticks at decade boundaries only — no crowding on a phone
  const ticks=[100,1000,10000,100000].filter(v=>lg(v)>=x0&&lg(v)<=x1);
@@ -1464,18 +1466,27 @@ function roasChart(rows){
   <text x="${L+3}" y="${py(1)-5}" font-size="8" font-weight="700" fill="#FF5C4D" opacity=".9" letter-spacing=".06em">BREAK EVEN</text>
   ${yTop>=2?`<line x1="${L}" y1="${py(2)}" x2="${W-R}" y2="${py(2)}" stroke="#3DDC84" stroke-width="1.5" stroke-dasharray="4 4" opacity=".45"/>
   <text x="${L+3}" y="${py(2)-5}" font-size="8" font-weight="700" fill="#3DDC84" opacity=".85" letter-spacing=".06em">BRAND KEEPS FEEDING IT</text>`:''}`;
- const dots=pts.map((p,i)=>{const b=BAND(p.roas);
-  return `<circle class="cdot" data-i="${i}" cx="${px(p.spend).toFixed(1)}" cy="${py(p.roas).toFixed(1)}" r="${rad(p.spend).toFixed(1)}"
-   fill="${BANDHEX[b]}" fill-opacity=".82" stroke="#0B0D11" stroke-width="2"/>`}).join('');
+ /* The dot IS the video. A creator recognises their own thumbnail instantly;
+    a coloured disc tells them nothing. The ring keeps the win/lose state, and
+    the state is spelled out in the legend and on every row below. */
+ const defs=pts.map((p,i)=>p.t?`<clipPath id="cp${i}"><circle cx="${px(p.spend).toFixed(1)}" cy="${py(p.roas).toFixed(1)}" r="${rad(p.spend).toFixed(1)}"/></clipPath>`:'').join('');
+ const dots=pts.map((p,i)=>{const b=BAND(p.roas), cx=px(p.spend), cy=py(p.roas), r=rad(p.spend);
+  const img=p.t?`<image href="./v/${p.id}.jpg" x="${(cx-r).toFixed(1)}" y="${(cy-r*1.1).toFixed(1)}" width="${(r*2).toFixed(1)}" height="${(r*2.2).toFixed(1)}" preserveAspectRatio="xMidYMid slice" clip-path="url(#cp${i})"/>`:'';
+  return `<g class="cdot" data-i="${i}">
+   <circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${r.toFixed(1)}" fill="${BANDHEX[b]}" fill-opacity="${p.t?'1':'.82'}"/>
+   ${img}
+   <circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${r.toFixed(1)}" fill="none" stroke="${BANDHEX[b]}" stroke-width="2.5"/>
+   <circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${(r+1.6).toFixed(1)}" fill="none" stroke="#0B0D11" stroke-width="1.5"/></g>`}).join('');
  // one direct label: the video carrying the most money
  const bl=best?`<text x="${px(best.spend).toFixed(1)}" y="${(py(best.roas)-rad(best.spend)-7).toFixed(1)}" text-anchor="middle"
    font-size="9.5" font-weight="750" fill="rgba(255,255,255,.92)">best · ${best.roas.toFixed(2)}x</text>`:'';
- const data=pts.map(p=>({id:p.id,s:Math.round(p.spend),r:+p.roas.toFixed(2),t:Math.round(p.ts),c:Math.round(p.cpa),v:Math.round(p.pv)}));
+ const data=pts.map((p,i)=>({n:i+1,s:Math.round(p.spend),r:+p.roas.toFixed(2),t:Math.round(p.ts),c:Math.round(p.cpa),v:Math.round(p.pv),p:p.p||''}));
  return `<div class="g p">
   <h3>Where your money is going</h3>
   <div class="sub" style="margin-top:5px;margin-bottom:12px">Each dot is one video. Further right means more spend behind it; higher means more came back. Tap one.</div>
   <div class="chartwrap" id="cw" data-pts="${esc(JSON.stringify(data))}">
    <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Spend against return for each of your videos">
+    <defs>${defs}</defs>
     ${grid}${refs}${xax}
     <text x="${L}" y="${H-8}" font-size="9" fill="rgba(255,255,255,.3)">spend →</text>
     ${dots}${bl}
@@ -1494,7 +1505,7 @@ window.bindChart=()=>{
  let D=[]; try{D=JSON.parse(wrap.dataset.pts||'[]')}catch(e){return}
  const show=el=>{const d=D[+el.dataset.i]; if(!d)return;
   const b=BAND(d.r);
-  tip.innerHTML=`<b>Video ${d.id}</b>
+  tip.innerHTML=`<b>Video ${d.n}${d.p?' · '+d.p:''}</b>
    <div class="r"><span>Spend</span><i>$${d.s.toLocaleString()}</i></div>
    <div class="r"><span>Ad revenue</span><i>$${d.v.toLocaleString()}</i></div>
    <div class="r"><span>ROAS</span><i style="color:${BANDHEX[b]}">${d.r.toFixed(2)}x</i></div>
@@ -1507,9 +1518,9 @@ window.bindChart=()=>{
   x=Math.max(half+pad, Math.min(r.width-half-pad, x));
   tip.style.left=x+'px';
   tip.style.top=Math.max(tip.offsetHeight*0.2, c.top-r.top)+'px';
-  wrap.querySelectorAll('.cdot').forEach(o=>o.setAttribute('fill-opacity',o===el?'1':'.28'));
+  wrap.querySelectorAll('.cdot').forEach(o=>o.style.opacity=(o===el?'1':'.3'));
  };
- const hide=()=>{tip.classList.remove('on');wrap.querySelectorAll('.cdot').forEach(o=>o.setAttribute('fill-opacity','.82'))};
+ const hide=()=>{tip.classList.remove('on');wrap.querySelectorAll('.cdot').forEach(o=>o.style.opacity='1')};
  wrap.querySelectorAll('.cdot').forEach(el=>{
   el.style.cursor='pointer';
   el.addEventListener('mouseenter',()=>show(el));
@@ -1687,12 +1698,13 @@ ads(){
   <div class="g p">${rows.map((x,i)=>{const b=BAND(x.roas);
    return `<div class="brow">
    <div class="rn mono">${i+1}</div>
+   ${x.t?`<img class="vthumb" src="./v/${x.id}.jpg" loading="lazy" alt="">`:`<div class="vthumb ph" style="background:${BANDC[b]}22"></div>`}
    <div style="min-width:0;flex:1">
     <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
-     <span style="font-size:13px;font-weight:650">Video <span class="mono" style="color:var(--tx3)">${esc(x.id)}</span></span>
-     <span class="pill" style="color:${BANDC[b]};border-color:${BANDC[b]}33">${x.roas.toFixed(2)}x</span>
-     ${x.ads?`<span class="pill live">● ${x.ads} live</span>`:''}</div>
-    <div class="bmeta"><b>${money(x.spend)}</b> spend · <b>${x.ts.toFixed(0)}%</b> hook · <b>${x.cpa?money(x.cpa):'—'}</b> per sale</div>
+     <span class="pill" style="color:${BANDC[b]};border-color:${BANDC[b]}33;font-weight:750">${x.roas.toFixed(2)}x</span>
+     ${x.ads?`<span class="pill live">● ${x.ads} live</span>`:''}
+     ${x.p?`<span class="mini" style="color:var(--tx4)">${esc(x.p)}</span>`:''}</div>
+    <div class="bmeta" style="margin-top:5px"><b>${money(x.spend)}</b> spend · <b>${x.ts.toFixed(0)}%</b> hook · <b>${x.cpa?money(x.cpa):'—'}</b> per sale</div>
     <div class="bbar"><i style="width:${Math.round(x.spend/mx*100)}%;background:${BANDC[b]}"></i></div></div>
    <div class="bright"><div style="text-align:right">
     <div class="rx mono">${money(x.pv)}</div>
