@@ -424,6 +424,63 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border:0;border-radiu
 .vc:hover .vt:after{opacity:.85}
 
 /* ---- swipe feed ---- */
+.pushcard{display:flex;gap:13px;align-items:flex-start;padding:15px;border:1px solid var(--ln);border-radius:16px;
+ background:linear-gradient(140deg,rgba(255,128,54,.10),var(--gl3));margin-bottom:15px}
+.pci{width:42px;height:42px;flex:0 0 42px;border-radius:13px;display:grid;place-items:center;background:var(--gl);color:var(--o2)}
+.apalert{display:flex;align-items:center;gap:12px;padding:13px 15px;border:1px solid color-mix(in srgb,var(--warn) 40%,var(--ln));
+ border-radius:14px;background:var(--gl3);margin-bottom:14px;cursor:pointer;transition:.2s var(--ease)}
+.apalert:hover{background:var(--gl)}
+.apalert b{font-size:13.5px;font-weight:700}
+/* ---- submissions / approvals ---- */
+.apc{display:flex;gap:13px;align-items:flex-start;padding:13px;border:1px solid var(--ln);border-radius:14px;background:var(--gl3)}
+.apt{position:relative;flex:0 0 84px;width:84px;aspect-ratio:9/16;border-radius:10px;overflow:hidden;background:#0A0C0F;cursor:pointer;border:1px solid var(--ln)}
+.apt img{width:100%;height:100%;object-fit:cover}
+.apt .ph{width:100%;height:100%;background:linear-gradient(150deg,#171B21,#0D1014)}
+.pill.warn{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 45%,transparent)}
+.pill.bad{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,transparent)}
+.qdrop{display:flex;align-items:center;gap:13px;padding:16px;border:1.5px dashed var(--ln);border-radius:14px;cursor:pointer;
+ background:var(--gl3);transition:.2s var(--ease)}
+.qdrop:hover{border-color:var(--o2);background:var(--gl)}
+.qdi{width:44px;height:44px;flex:0 0 44px;border-radius:12px;display:grid;place-items:center;background:var(--gl);color:var(--o2)}
+.qdrop b{font-size:14px;font-weight:700}
+.qupfile{display:flex;align-items:center;gap:12px;padding:11px;border:1px solid var(--ln);border-radius:12px;background:var(--gl3);margin-top:10px}
+.qupfile img{width:44px;height:78px;object-fit:cover;border-radius:8px;flex:0 0 44px;background:#000}
+.qupfile .ph{width:44px;height:78px;border-radius:8px;flex:0 0 44px;background:linear-gradient(150deg,#171B21,#0D1014)}
+.npush{display:flex;align-items:center;gap:12px;padding:12px 13px;border:1px solid var(--ln);border-radius:12px;background:var(--gl3);margin-bottom:13px}
+.npush b{font-size:13px}
+/* ---- B-roll ---- */
+#brview{position:fixed;inset:0;z-index:260;background:#05070A;display:none;flex-direction:column}
+#brview.show{display:flex}
+.brstage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative;padding:56px 8px 8px}
+.brmedia{height:100%;max-width:min(100%,520px);display:flex;align-items:center;justify-content:center}
+.brmedia video,.brmedia img{max-height:100%;max-width:100%;width:auto;border-radius:16px;background:#000;display:block}
+.brnav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:64px;border-radius:12px;border:1px solid var(--ln);
+ background:rgba(12,14,18,.72);color:#fff;font-size:26px;line-height:1;cursor:pointer;backdrop-filter:blur(8px);z-index:3}
+.brnav:hover{background:rgba(30,34,42,.9)}
+.brnav.l{left:10px}.brnav.r{right:10px}
+.brbar{flex:0 0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 18px calc(14px + env(safe-area-inset-bottom));
+ border-top:1px solid var(--ln);background:#0A0C10}
+.brg{grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:13px}
+.brc{cursor:pointer;transition:.22s var(--ease);position:relative}
+.brc:hover{transform:translateY(-3px)}
+.brc.sel .brt{outline:2px solid var(--o2);outline-offset:2px}
+.brt{position:relative;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:#0A0C0F;border:1px solid var(--ln)}
+.brt img{width:100%;height:100%;object-fit:cover;transition:.3s var(--ease)}
+.brc:hover .brt img{transform:scale(1.05)}
+.brd{position:absolute;right:7px;bottom:7px;z-index:2;background:rgba(0,0,0,.74);color:#fff;font:600 10.5px/1 ui-monospace,monospace;
+ padding:4px 6px;border-radius:5px;letter-spacing:.4px}
+.brd.img{letter-spacing:.9px;font-size:9.5px}
+.brpick{position:absolute;left:6px;top:6px;z-index:3;width:22px;height:22px;border-radius:99px;border:1.5px solid rgba(255,255,255,.55);
+ background:rgba(0,0,0,.3);color:#fff;font-size:12px;font-weight:800;cursor:pointer;padding:0;opacity:.45;transition:.18s var(--ease)}
+.brc:hover .brpick,.brc.sel .brpick{opacity:1}
+.brc.sel .brpick{background:var(--o2);border-color:transparent}
+.brn{font-size:12.5px;font-weight:640;line-height:1.35;margin-top:8px;color:var(--tx);
+ display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.brm{font-size:11px;color:var(--tx4);margin-top:3px}
+.brsel{display:flex;align-items:center;gap:11px;flex-wrap:wrap;padding:11px 14px;border:1px solid var(--ln);border-radius:12px;
+ background:var(--gl3);margin-bottom:14px}
+.brsel b{font-size:13px}
+@media(max-width:640px){.brg{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}.brnav{display:none}}
 #swipe{position:fixed;inset:0;z-index:250;background:#000;display:none}
 #swipe.show{display:block}
 .swtrack{height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
@@ -541,6 +598,7 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border:0;border-radiu
  .fmode button{height:38px;padding:0 13px;font-size:12.5px;flex:1;justify-content:center}
  .fmode .swipebtn{margin-left:0;width:100%;flex:none}
  .vg{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+ .brg{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
  .rail2{grid-auto-columns:150px;gap:11px}
  .pod{gap:8px}
  .pc{padding:15px 6px 12px}
@@ -581,7 +639,7 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border:0;border-radiu
  .mobnav b{position:absolute;top:1px;right:calc(50% - 18px);background:var(--o);color:#fff;font-size:8px;font-weight:800;
   min-width:14px;height:14px;border-radius:99px;display:grid;place-items:center}
 }
-@media(max-width:400px){.vg{gap:9px}.st .v{font-size:22px}}
+@media(max-width:400px){.vg{gap:9px}.brg{gap:7px}.st .v{font-size:22px}}
 
 /* ---- motion ---- */
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
@@ -634,6 +692,7 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border:0;border-radiu
 <div class="mobnav" id="mobnav"></div>
 <div id="banner"></div>
 <div id="swipe"></div>
+<div id="brview"></div>
 <div id="toast"></div>
 <div id="scrim"><div id="mod"></div></div>
 <div id="cf"></div>
@@ -755,6 +814,8 @@ target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx
 trophy:'<path d="M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M7 6H4.6A2.4 2.4 0 0 0 7 10"/><path d="M17 6h2.4A2.4 2.4 0 0 1 17 10"/><path d="M9 20h6M12 14v6"/>',
 user:'<circle cx="12" cy="8" r="4"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/>',
 gear:'<circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.1a1.6 1.6 0 0 0-2.7-1.1l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.6 1.6 0 0 0 3 15a2 2 0 1 1 0-4 1.6 1.6 0 0 0 1.1-2.7l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.6 1.6 0 0 0 9 4.6V4a2 2 0 1 1 4 0 1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1A1.6 1.6 0 0 0 21 11a2 2 0 1 1 0 4 1.6 1.6 0 0 0-1.6 0Z"/>',
+check:'<path d="M20 6 9 17l-5-5"/>',
+film:'<rect x="2.5" y="4" width="19" height="16" rx="2.5"/><path d="M7 4v16M17 4v16M2.5 12h19M2.5 8h4.5M2.5 16h4.5M17 8h4.5M17 16h4.5"/>',
 bell:'<path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8Z"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/>'};
 const ico=(k,s=18)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICO[k]||''}</svg>`;
 /* ===== HELPERS ===== */
@@ -779,6 +840,9 @@ const hc=h=>h>=50?'hi':h>=38?'md':'lo';
 const av=(c,s,f)=>`<div class="av" style="width:${s}px;height:${s}px;font-size:${f}px;background:linear-gradient(140deg,${ac(c.id)},${ac(c.id+3)})">${ini(c.n)}</div>`;
 const mmss=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
 
+const BRCAT=["Hunting + Shooting","Blue Collar","UGC Images"];
+const BRSUB=["Action shots","Earbuds","Statics"];
+const BROLL=[{"i":"2d939f44","k":1,"t":"Broll 13 Scott Ravine","c":1,"s":0,"d":24.5,"z":130104,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/2d939f44-8613-4eba-93a8-6a76f5c2cc74"},{"i":"a999b623","k":1,"t":"Broll 12 Scott Ravine","c":1,"s":0,"d":30.3,"z":122452,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/a999b623-a299-4ca6-9228-3436332c7415"},{"i":"3f75f474","k":1,"t":"Broll 11 Scott Ravine","c":1,"s":0,"d":38.2,"z":202388,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/3f75f474-81f1-4ef7-a636-e4299d362752"},{"i":"5c68d5e1","k":1,"t":"Broll 10 Scott Ravine","c":1,"s":0,"d":25.0,"z":169631,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/5c68d5e1-a047-4810-ba3b-2f45319c5c28"},{"i":"6e94b601","k":1,"t":"Broll 9 Scott Ravine","c":1,"s":0,"d":18.6,"z":117349,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/6e94b601-7c16-4485-9bbf-3304f694007e"},{"i":"a7144d87","k":1,"t":"Broll 8 Scott Ravine","c":1,"s":0,"d":47.2,"z":892896,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/a7144d87-6971-46e0-85d0-eb16eea64fa5"},{"i":"8d032a51","k":1,"t":"Broll 7 Scott Ravine","c":1,"s":0,"d":38.4,"z":689022,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/8d032a51-e8ae-4ef2-9f79-9ef13dd4e9ef"},{"i":"e47fcada","k":1,"t":"Broll 6 Scott Ravine","c":1,"s":0,"d":29.4,"z":241645,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/e47fcada-29e1-4116-8bdb-0db752088294"},{"i":"2dbc2929","k":1,"t":"Broll 5 Scott Ravine","c":1,"s":0,"d":15.0,"z":61295,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/2dbc2929-1077-455c-a508-9b04be376645"},{"i":"6b3edf19","k":1,"t":"Broll 4 Scott Ravine","c":1,"s":0,"d":63.1,"z":742522,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/6b3edf19-a8f8-4533-b68c-4d555386c2c1"},{"i":"38030dbb","k":1,"t":"Broll 3 Scott Ravine","c":1,"s":0,"d":37.7,"z":415443,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/38030dbb-0942-428b-a390-88edc84868d2"},{"i":"2ac49e5c","k":1,"t":"Broll 2 Scott Ravine","c":1,"s":0,"d":39.3,"z":702476,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/2ac49e5c-d418-4c53-a297-4b30e40e0286"},{"i":"05f32da2","k":1,"t":"Broll 1 Scott Ravine","c":1,"s":0,"d":32.0,"z":592022,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/05f32da2-8f7c-4b01-8b40-26ce9639d322"},{"i":"e6ab74a9","k":1,"t":"CM119 broll20(waving at someone with earbuds","c":1,"s":0,"d":6.1,"z":85496,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/e6ab74a9-e54d-4ad4-9139-3ea88b7c7930"},{"i":"a4d1da13","k":1,"t":"CM119 broll19","c":1,"s":0,"d":18.2,"z":89459,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/a4d1da13-c517-45e7-8e8b-8d685283f0de"},{"i":"5aaff2c8","k":1,"t":"CM119 broll18","c":1,"s":0,"d":22.4,"z":245245,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/5aaff2c8-c804-4ffe-847e-f4b86673542a"},{"i":"37865ab3","k":1,"t":"CM119 broll17","c":1,"s":0,"d":3.3,"z":27754,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/37865ab3-0903-4d6b-8147-3eb63f045802"},{"i":"7a31fab1","k":1,"t":"CM119 broll16","c":1,"s":0,"d":8.1,"z":86935,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/7a31fab1-dbe3-4db6-b4eb-018f78d8d5ba"},{"i":"e71c216e","k":1,"t":"CM119 broll15","c":1,"s":0,"d":14.9,"z":187407,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/e71c216e-6fa1-4081-b895-27fa5ee145c4"},{"i":"e5cc7064","k":1,"t":"CM119 broll14","c":1,"s":0,"d":12.4,"z":178401,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/e5cc7064-0487-460a-8afa-7e11df731e23"},{"i":"ee2e3056","k":1,"t":"CM119 broll9","c":1,"s":0,"d":15.0,"z":150446,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/ee2e3056-344e-47fc-b4f2-4c6c4f5e0ac6"},{"i":"a5f32d10","k":1,"t":"CM119 broll8","c":1,"s":0,"d":14.8,"z":142542,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/a5f32d10-365e-46ef-a8ef-ffa6a67f9585"},{"i":"7118c3be","k":1,"t":"CM119 broll7","c":1,"s":0,"d":9.9,"z":129798,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/7118c3be-ef62-4045-8889-c67fb1355d35"},{"i":"44108c8e","k":1,"t":"CM119 broll6","c":1,"s":0,"d":6.1,"z":50599,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/44108c8e-a1c7-4b47-a49c-7a529501f832"},{"i":"a1729928","k":1,"t":"CM119 broll5","c":1,"s":0,"d":11.9,"z":133410,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/a1729928-9483-4128-86cb-b9a2d2df7022"},{"i":"206b4e5c","k":1,"t":"CM119 broll3","c":1,"s":0,"d":12.2,"z":135652,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/206b4e5c-ed90-4850-89ac-1c9746b64f25"},{"i":"678795d8","k":1,"t":"CM119 broll1","c":1,"s":0,"d":5.3,"z":74215,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/678795d8-4109-45dc-92a3-ef62bd3a50d8"},{"i":"665bae18","k":1,"t":"Broll 6","c":0,"s":0,"d":14.1,"z":296145,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/665bae18-237a-44eb-b9ad-cfb677fb29cc"},{"i":"113fbcfa","k":1,"t":"Broll 6 copy","c":0,"s":0,"d":25.7,"z":291758,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/113fbcfa-7df5-4086-80be-9147b00d59f6"},{"i":"1101d8de","k":1,"t":"Broll 5","c":0,"s":0,"d":12.6,"z":254907,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/1101d8de-b270-478f-8e8b-7d3d08c998a0"},{"i":"8d638d5d","k":1,"t":"Broll 5 copy","c":0,"s":0,"d":37.3,"z":249232,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/8d638d5d-05f2-46f0-b567-a802106b70b6"},{"i":"49e0ca48","k":1,"t":"Broll 4","c":0,"s":0,"d":7.0,"z":134148,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/49e0ca48-5dc6-4b0f-a9cf-fa0914da92af"},{"i":"7febe9ab","k":1,"t":"Broll 3","c":0,"s":0,"d":7.0,"z":93261,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/7febe9ab-4967-44b2-b5b6-2bf80ed78a28"},{"i":"549fc601","k":1,"t":"Broll 2","c":0,"s":0,"d":9.0,"z":126220,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/549fc601-fa79-45a7-90a9-7ff7a4344b81"},{"i":"7da60738","k":1,"t":"Broll 1","c":0,"s":0,"d":3.5,"z":60518,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/7da60738-c7e7-465d-ac59-5a7a603414c3"},{"i":"5c8c7c80","k":1,"t":"Broll 1 copy","c":0,"s":0,"d":79.1,"z":1010323,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/5c8c7c80-a9ad-466b-b04f-af5c7ddd0a88"},{"i":"7025ab9c","k":1,"t":"1000008699","c":0,"s":0,"d":23.3,"z":1143969,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/7025ab9c-a7c1-43ea-b5b5-734f19b72c74"},{"i":"a795ca6f","k":1,"t":"1000008690","c":0,"s":0,"d":13.8,"z":699155,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/a795ca6f-b13f-4dfe-9258-3b15def3dd8f"},{"i":"740ae045","k":1,"t":"1000008687","c":0,"s":0,"d":11.0,"z":525478,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/740ae045-7ae2-456d-aeb1-a55d086162af"},{"i":"c1bfb0ab","k":1,"t":"1000008684","c":0,"s":0,"d":10.7,"z":564155,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/c1bfb0ab-3471-4b67-956d-a832097fa8a9"},{"i":"bfaf4913","k":1,"t":"1000008568","c":0,"s":0,"d":17.6,"z":740547,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/bfaf4913-75d9-47ad-82fd-1a0a68fece95"},{"i":"4dea7208","k":1,"t":"1000008564","c":0,"s":0,"d":30.7,"z":1734755,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/4dea7208-fb5e-4701-8dd9-04637cabc37d"},{"i":"503f61cc","k":1,"t":"1000008559","c":0,"s":0,"d":27.8,"z":1358144,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/503f61cc-51e6-4012-8d42-c9367d5899c0"},{"i":"e919fe3d","k":1,"t":"1000008555","c":0,"s":0,"d":14.5,"z":633683,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/e919fe3d-9f37-4831-a1cc-0aa937a6dc8b"},{"i":"1bb7e962","k":1,"t":"1000008547","c":0,"s":0,"d":19.8,"z":1201207,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/1bb7e962-0c12-4042-b0b3-9c8fb31accb3"},{"i":"7bba5822","k":1,"t":"2026 08 17 11 29 58","c":0,"s":0,"d":10.8,"z":136970,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/7bba5822-0660-4a5b-886b-0a3f96337760"},{"i":"0363277a","k":1,"t":"2026 08 17 11 17 50","c":0,"s":0,"d":13.5,"z":229581,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/0363277a-d18f-4e3a-b947-3754bc5254de"},{"i":"ba6267fd","k":1,"t":"2026 08 17 11 14 53","c":0,"s":0,"d":12.9,"z":173345,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/ba6267fd-885e-4905-9af6-0806c2a80736"},{"i":"4d382444","k":1,"t":"2026 08 17 11 11 27","c":0,"s":0,"d":10.7,"z":156612,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/4d382444-1fb0-4097-8a4e-636fd22b6178"},{"i":"0d79bf28","k":1,"t":"2026 08 17 11 10 31","c":0,"s":0,"d":10.0,"z":146294,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/0d79bf28-0274-40d9-8d0b-4dea66c16dbd"},{"i":"f8b07bc6","k":1,"t":"2026 08 17 10 52 48","c":0,"s":0,"d":24.5,"z":247780,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/f8b07bc6-e9c9-4124-b121-3a2533c44689"},{"i":"0ee758a8","k":1,"t":"2026 08 17 10 49 47","c":0,"s":0,"d":27.0,"z":295162,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/0ee758a8-9782-4f4e-a1ce-206bcdace38e"},{"i":"28db75ca","k":1,"t":"2026 08 17 10 48 24","c":0,"s":0,"d":22.3,"z":230866,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/28db75ca-fc89-4691-9f48-d078a0f94cdd"},{"i":"a553e698","k":1,"t":"2026 08 17 10 41 45","c":0,"s":0,"d":15.7,"z":195185,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/a553e698-cf79-4865-8759-d468322b92ca"},{"i":"22d1a8b5","k":1,"t":"2026 08 17 10 40 51","c":0,"s":0,"d":13.6,"z":207478,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/22d1a8b5-421a-404f-9042-02d4b4b55bc8"},{"i":"f7b1a822","k":1,"t":"2026 08 17 10 40 21","c":0,"s":0,"d":9.1,"z":131180,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/f7b1a822-91aa-416c-8045-61a32a768bbb"},{"i":"20017abb","k":1,"t":"2026 08 17 10 38 57","c":0,"s":0,"d":9.3,"z":205026,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/20017abb-7cdc-4f36-a154-25e5d38b1c19"},{"i":"7d1b5667","k":1,"t":"2026 08 17 10 37 30","c":0,"s":0,"d":11.9,"z":265148,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/7d1b5667-331c-42ec-8ac0-4e65fe9faa97"},{"i":"5c3b3e7a","k":1,"t":"2 broll putting earbuds in ears","c":0,"s":0,"d":93.6,"z":1157500,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/5c3b3e7a-5b62-4d68-9e94-5949ef33dad8"},{"i":"32a8dde5","k":1,"t":"0 broll walking with shotgun","c":0,"s":0,"d":12.2,"z":190198,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/32a8dde5-5347-4c8a-ba27-54abb10dd415"},{"i":"1584e785","k":1,"t":"IMG 0245","c":0,"s":0,"d":9.3,"z":720603,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/1584e785-8219-4376-8b26-28dffc98e82f"},{"i":"b7c18f92","k":1,"t":"IMG 0244","c":0,"s":0,"d":13.8,"z":1141853,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/b7c18f92-453f-4cf1-b01e-791298e1bcdb"},{"i":"b6ecfc10","k":1,"t":"IMG 0243","c":0,"s":0,"d":22.6,"z":1902662,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/b6ecfc10-e035-4a82-8031-9618ed8c156b"},{"i":"cb6f4e8d","k":1,"t":"IMG 0242","c":0,"s":0,"d":17.8,"z":239204,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/cb6f4e8d-b390-4452-9b69-9215f8633381"},{"i":"b08d4f8e","k":1,"t":"IMG 0241","c":0,"s":0,"d":8.0,"z":146335,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/b08d4f8e-6beb-4f31-8598-732b09c6bcad"},{"i":"d247d852","k":1,"t":"IMG 0240","c":0,"s":0,"d":13.9,"z":228226,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/d247d852-2682-4893-a85d-9155ac4498f0"},{"i":"e96efa92","k":1,"t":"IMG 0238","c":0,"s":0,"d":15.4,"z":251704,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/e96efa92-b03b-4774-abaa-7857f3b0b22d"},{"i":"9dbbe777","k":1,"t":"Broll6","c":0,"s":0,"d":57.8,"z":932847,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/9dbbe777-e378-4af6-bdb7-d8ed5f953a21"},{"i":"a0519769","k":1,"t":"Broll4","c":0,"s":0,"d":12.5,"z":89263,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/a0519769-0c91-4745-b916-9b4c40c1192d"},{"i":"4375881b","k":1,"t":"Broll2","c":0,"s":0,"d":9.5,"z":71412,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/4375881b-ed6f-4a40-a572-a7bc9561de82"},{"i":"3db83a77","k":1,"t":"B Roll Extra(3)","c":0,"s":0,"d":9.9,"z":84628,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/3db83a77-39c8-4392-a7c8-29d4cb09b164"},{"i":"f7bd6c86","k":1,"t":"B Roll Extra(2)","c":0,"s":0,"d":9.2,"z":77231,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/f7bd6c86-940b-4c04-83bc-7bc0f5e45a65"},{"i":"d689f57f","k":1,"t":"B Roll Extra(1)","c":0,"s":0,"d":6.0,"z":49212,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/d689f57f-ef00-4ebb-95d9-59093a43ae29"},{"i":"67b07cd7","k":1,"t":"B Roll 7 (1)","c":0,"s":0,"d":19.9,"z":221522,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/67b07cd7-16c3-440f-a1a0-14fc24efc2a3"},{"i":"9d3770fd","k":1,"t":"B Roll 6 (3)","c":0,"s":0,"d":11.9,"z":154666,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/9d3770fd-8499-4ec4-8296-e5f337ae065b"},{"i":"25ebb0be","k":1,"t":"B Roll 5 (1)","c":0,"s":0,"d":12.2,"z":156827,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/25ebb0be-260b-415e-a2a3-1798ea85abea"},{"i":"6530cf86","k":1,"t":"2026 07 21 10 40 35","c":0,"s":0,"d":8.8,"z":103722,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/6530cf86-10d5-4d66-87e4-ebc282e9df79"},{"i":"10eeaea1","k":1,"t":"2026 07 21 10 39 27","c":0,"s":0,"d":21.8,"z":276179,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/10eeaea1-4601-46f7-a43f-67e7e9b9f0a9"},{"i":"2160d037","k":1,"t":"2026 07 21 10 38 25","c":0,"s":0,"d":21.9,"z":262681,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/2160d037-2488-407e-b563-01cfd6077c9e"},{"i":"17fadad5","k":1,"t":"2026 07 21 10 36 03","c":0,"s":0,"d":36.3,"z":489486,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/17fadad5-3c6f-4941-b0e8-127c3a49d5a2"},{"i":"d5080c1d","k":1,"t":"2026 07 21 10 29 05","c":0,"s":0,"d":20.8,"z":172416,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/d5080c1d-5cde-4c0e-b2cc-3cc20aa29201"},{"i":"5370eaf7","k":1,"t":"2026 07 21 10 28 26","c":0,"s":0,"d":20.0,"z":183190,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/5370eaf7-99ad-45f5-bb84-b689b11d5360"},{"i":"f2349b52","k":1,"t":"2026 07 21 10 26 16","c":0,"s":0,"d":17.8,"z":179828,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/f2349b52-55ae-46b2-9e16-845b8375d989"},{"i":"c18fc1db","k":1,"t":"2026 07 21 10 25 54","c":0,"s":0,"d":7.4,"z":69831,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/c18fc1db-27e0-4d6e-89e9-7fefeb3d7bcb"},{"i":"a3147717","k":1,"t":"2026 07 21 10 24 46","c":0,"s":0,"d":44.5,"z":377712,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/a3147717-a9ae-4c74-9aef-d37e674911f8"},{"i":"0ba1c3c2","k":1,"t":"4 b roll opening case with diff angles","c":0,"s":0,"d":123.4,"z":1087994,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/0ba1c3c2-e86e-4115-9804-6d30ad96fb55"},{"i":"faff4ab5","k":1,"t":"865f021e 3da5 4ca6 920a 45ac083cb04c","c":0,"s":0,"d":10.2,"z":139483,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/faff4ab5-8d97-49b4-b4cf-a6bab224d6c3"},{"i":"9e7950d7","k":1,"t":"lv 0 20260620172618","c":0,"s":0,"d":3.9,"z":45043,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/9e7950d7-3a57-45cf-808d-6ebbd2ae5f93"},{"i":"0fe9361e","k":1,"t":"lv 0 20260620172708","c":0,"s":0,"d":5.4,"z":21927,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/0fe9361e-39ca-43cc-9f55-77743ad5e434"},{"i":"7abc1d69","k":1,"t":"B roll 8","c":0,"s":0,"d":10.5,"z":1002994,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/7abc1d69-b0c9-4216-b92c-2b8c5d683902"},{"i":"daa23921","k":1,"t":"lv 0 20260620172542","c":0,"s":0,"d":4.7,"z":50399,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/daa23921-c1f5-449a-99cf-2a987d4d728e"},{"i":"3a64dcc8","k":1,"t":"lv 0 20260620172500","c":0,"s":0,"d":4.1,"z":43217,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/3a64dcc8-3ed1-47af-b574-8c1c2717bb90"},{"i":"a14ac3de","k":1,"t":"B roll","c":0,"s":0,"d":11.2,"z":624458,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/a14ac3de-c822-4435-87f7-1fe1a788922e"},{"i":"5129f663","k":1,"t":"B roll 9","c":0,"s":0,"d":11.8,"z":494127,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/5129f663-eece-4448-822f-d3604c576763"},{"i":"336b236a","k":1,"t":"B roll 5","c":0,"s":0,"d":17.0,"z":574208,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/336b236a-f9aa-464a-9361-2102ff0d95e6"},{"i":"915bb1c8","k":1,"t":"lv 0 20260620172425","c":0,"s":0,"d":4.1,"z":50313,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/915bb1c8-251e-464f-9abf-e5afea2618f6"},{"i":"f4aa06d6","k":1,"t":"B roll 1","c":0,"s":0,"d":7.1,"z":805743,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/f4aa06d6-00f2-4239-bc0f-c6f594c148c6"},{"i":"3f121e6c","k":1,"t":"B roll 7","c":0,"s":0,"d":25.4,"z":894662,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/3f121e6c-5f0e-48c7-b035-84934b7e273d"},{"i":"efbbc027","k":1,"t":"broll ear muffs 3","c":0,"s":0,"d":92.0,"z":754403,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/efbbc027-1350-4c57-9427-9916e86a8060"},{"i":"be125409","k":1,"t":"broll firing pistol","c":0,"s":0,"d":30.8,"z":206507,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/be125409-fb83-4fb2-924d-99385e642e55"},{"i":"c42fb288","k":1,"t":"broll music","c":0,"s":0,"d":7.5,"z":66783,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/c42fb288-c551-44b0-9bce-b2788dfd61dd"},{"i":"1d110a02","k":1,"t":"broll putting the ravine in","c":0,"s":0,"d":143.9,"z":1071136,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/1d110a02-4d2f-4500-87f9-ebcfa740fcd6"},{"i":"4fe41a26","k":1,"t":"PXL 20260628 152532794","c":0,"s":0,"d":39.0,"z":189597,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/4fe41a26-58dc-45c5-8171-d2a7d335c18a"},{"i":"8db0eb5a","k":1,"t":"PXL 20260628 152531486","c":0,"s":0,"d":41.6,"z":255600,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/8db0eb5a-9e20-4e45-8123-d586c9086ba3"},{"i":"590b6f4a","k":1,"t":"broll shooting","c":0,"s":0,"d":53.3,"z":460408,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/590b6f4a-32c6-4b17-985c-3be30b563c2e"},{"i":"56a98c8c","k":1,"t":"broll earmuffs 4","c":0,"s":0,"d":91.8,"z":691724,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/56a98c8c-4ed8-49f1-8c96-c7f7f1787706"},{"i":"fc868118","k":1,"t":"PXL 20260628 145916345","c":0,"s":0,"d":143.9,"z":874166,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/fc868118-77b0-46d7-bb23-d75fbb40d0b8"},{"i":"792cff18","k":1,"t":"broll shooting (2)","c":0,"s":0,"d":49.4,"z":420160,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/792cff18-9ad8-4033-9e07-f18c75804268"},{"i":"776f4cbb","k":1,"t":"broll axil","c":0,"s":0,"d":89.8,"z":750582,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/776f4cbb-c8f3-41ff-8474-9729a7e245ab"},{"i":"5daef810","k":1,"t":"broll ear muffs 2","c":0,"s":0,"d":18.3,"z":201593,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/5daef810-acb6-40e3-bf73-5bdf32b0f908"},{"i":"98d7dbe0","k":1,"t":"PXL 20260628 152343371","c":0,"s":0,"d":27.0,"z":137621,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/98d7dbe0-9cab-4b30-beaa-2720a91bab6e"},{"i":"d9ecaca4","k":1,"t":"broll ear muffs","c":0,"s":0,"d":27.9,"z":263177,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/d9ecaca4-638a-495b-a709-3ee6ca13b20c"},{"i":"f299328b","k":1,"t":"PXL 20260628 145727027","c":0,"s":0,"d":89.8,"z":645018,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/f299328b-8436-495b-9ad0-f08d3ab0921f"},{"i":"584caed3","k":1,"t":"WhatsApp Video 2026 01 17 at 13.28.18","c":0,"s":0,"d":19.0,"z":200956,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/584caed3-1de3-465e-bf3c-5d37be786215"},{"i":"6e0814a4","k":1,"t":"WhatsApp Video 2026 01 17 at 13.28.22","c":0,"s":0,"d":11.4,"z":181176,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/6e0814a4-f67d-486b-ba75-96c6c09ab765"},{"i":"478bba0c","k":1,"t":"WhatsApp Video 2026 01 17 at 13.28.38","c":0,"s":0,"d":17.4,"z":216942,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/478bba0c-03c2-4ac7-8f34-8110952f42ab"},{"i":"2b8b5eab","k":1,"t":"WhatsApp Video 2026 01 17 at 13.28.47","c":0,"s":0,"d":13.2,"z":232705,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/2b8b5eab-807d-430d-ba72-7fa698ec245d"},{"i":"f1b81eda","k":1,"t":"WhatsApp Video 2026 01 17 at 13.28.55","c":0,"s":0,"d":17.9,"z":169430,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/f1b81eda-ab16-40fe-8e74-a7b888fc2111"},{"i":"8919c54d","k":1,"t":"WhatsApp Video 2026 01 17 at 13.29.07","c":0,"s":0,"d":14.6,"z":134453,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/8919c54d-19a5-4408-91f4-6a8eaeb8c369"},{"i":"99f5ee93","k":1,"t":"B Roll 9 (1)","c":0,"s":0,"d":25.1,"z":435706,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/99f5ee93-74ae-47eb-9361-09ee3e91b88d"},{"i":"43e69e06","k":1,"t":"B Roll 10 (2)","c":0,"s":0,"d":16.3,"z":254274,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/43e69e06-8ab2-4b9a-b163-0b2ba0aa7a9e"},{"i":"ebf67145","k":1,"t":"B Roll 8 (1)","c":0,"s":0,"d":15.6,"z":154100,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/ebf67145-483c-45dd-a025-0045bcb9dc20"},{"i":"8ba4af47","k":1,"t":"B Roll 6 (2)","c":0,"s":0,"d":19.5,"z":365620,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/8ba4af47-b1d9-4058-ad16-d974a8421954"},{"i":"9f6ec0cb","k":1,"t":"B Roll 7","c":0,"s":0,"d":9.7,"z":202019,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/9f6ec0cb-f76f-4dda-b63d-62a506f7ca49"},{"i":"bf56d2cd","k":1,"t":"B Roll 4 (1)","c":0,"s":0,"d":24.2,"z":353957,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/bf56d2cd-fde1-40c4-ac32-d623a131b9fc"},{"i":"5473c7de","k":1,"t":"B Roll 1 (1)","c":0,"s":0,"d":6.0,"z":126420,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/5473c7de-a7d4-4c4a-af3c-d163f88b13ed"},{"i":"b0798a5f","k":1,"t":"Script relevant b rolls (shooting range day, your old muﬀs or foam plu","c":0,"s":1,"d":6.6,"z":47935,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/b0798a5f-672b-4db1-baa9-3fa648bb5f5a"},{"i":"a213cb0f","k":1,"t":"Ravine hear everything around you Your muﬀs on the bench next to your ","c":0,"s":1,"d":9.3,"z":111679,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/a213cb0f-777e-4e0e-98c1-9151abb42302"},{"i":"17bd7693","k":1,"t":"Ravine hear everything around you Macro of the case opening.","c":0,"s":1,"d":13.1,"z":159856,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/17bd7693-60fa-4454-b763-27acfaaca7dd"},{"i":"4845b0f2","k":1,"t":"Macro shot holding or opening the charging case.","c":0,"s":1,"d":13.0,"z":114566,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/4845b0f2-5c12-45ae-87db-6883ff89bc79"},{"i":"6044db47","k":1,"t":"case).","c":0,"s":1,"d":5.2,"z":34065,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/6044db47-eb44-4452-9097-13e53e7bb50c"},{"i":"4e43d9c6","k":1,"t":"broll unpacking bag","c":0,"s":1,"d":80.9,"z":777861,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/4e43d9c6-a8ae-4d11-8c73-d588f176e8d9"},{"i":"1850b223","k":1,"t":"broll pairing bluetooth","c":0,"s":1,"d":36.2,"z":166506,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/1850b223-0515-4643-bebf-e12d5ad0a867"},{"i":"6e593185","k":1,"t":"broll case (1)","c":0,"s":1,"d":12.2,"z":127507,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/6e593185-1db0-4ea1-962d-e4ddf7e08eda"},{"i":"c151551e","k":1,"t":"broll buds with sizes","c":0,"s":1,"d":14.0,"z":96855,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/c151551e-09d4-4216-a589-a0d1fec38a6d"},{"i":"11db2fef","k":1,"t":"broll buds vs muffs","c":0,"s":1,"d":22.7,"z":165975,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/11db2fef-98fa-4e99-8edb-198511c6ade5"},{"i":"4f519d1a","k":1,"t":"broll buds and muffs in bag","c":0,"s":1,"d":9.7,"z":65442,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/4f519d1a-18e1-48b8-b05e-fdf6a9e889f8"},{"i":"125e5fa0","k":1,"t":"Broll 4 copy","c":0,"s":1,"d":34.8,"z":459221,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/125e5fa0-3882-4d22-80e4-dbd3f385453b"},{"i":"5d2951da","k":1,"t":"Broll 3 copy","c":0,"s":1,"d":20.9,"z":299946,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/5d2951da-6fd5-4bb0-8fe1-9d5b43282e8e"},{"i":"8dd85c0f","k":1,"t":"1000008680","c":0,"s":1,"d":20.6,"z":194089,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/8dd85c0f-18b7-4c16-bc51-d6fd40e5eb65"},{"i":"3e4f7826","k":1,"t":"1000008551","c":0,"s":1,"d":12.3,"z":749428,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/3e4f7826-e2a5-4e17-8346-bfdf3a5a5429"},{"i":"3802f1b5","k":1,"t":"1000008550","c":0,"s":1,"d":11.6,"z":606421,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/3802f1b5-0c30-44aa-b519-ef7fa3d8f97d"},{"i":"d5d53b45","k":1,"t":"2026 08 17 11 20 01","c":0,"s":1,"d":12.4,"z":32419,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/d5d53b45-99cd-48f9-83a4-b486ab3f43c3"},{"i":"f9b85411","k":1,"t":"2026 08 17 11 19 00","c":0,"s":1,"d":15.6,"z":196985,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/f9b85411-914d-4319-b99e-2ddebcb9977b"},{"i":"b2e924b8","k":1,"t":"2026 08 17 11 16 35","c":0,"s":1,"d":22.2,"z":262077,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/b2e924b8-1e2e-41c6-88af-db76229e6b1b"},{"i":"aa2faf45","k":1,"t":"2026 08 17 11 13 28","c":0,"s":1,"d":17.9,"z":210563,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/aa2faf45-247e-4c27-8bcb-909222eb1b43"},{"i":"ddde7f82","k":1,"t":"2026 08 17 10 43 20","c":0,"s":1,"d":19.0,"z":242663,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/ddde7f82-ec8a-46de-b97e-3c9dcfb61a07"},{"i":"5d6152e8","k":1,"t":"Unboxing Video","c":0,"s":1,"d":504.9,"z":4127100,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/5d6152e8-e545-48cb-8950-da956a53eed0"},{"i":"99cc37d4","k":1,"t":"1 broll holding and opening case","c":0,"s":1,"d":83.1,"z":1119620,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/99cc37d4-8c69-4aaa-8d2f-04fd8d50ea06"},{"i":"dc5c5a4c","k":1,"t":"IMG 0239","c":0,"s":1,"d":27.6,"z":424860,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/dc5c5a4c-fe4f-43c5-b3b3-a0f6abde75d0"},{"i":"24f23066","k":1,"t":"IMG 0237","c":0,"s":1,"d":7.2,"z":97042,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/24f23066-ebe5-4200-be18-2abe0288a923"},{"i":"2b3dc982","k":1,"t":"IMG 0236","c":0,"s":1,"d":27.9,"z":335233,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/2b3dc982-be73-41f8-880f-2d46f443302f"},{"i":"0b0321bc","k":1,"t":"IMG 0235","c":0,"s":1,"d":13.5,"z":207528,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/0b0321bc-5798-43d3-84e4-5ccdb54af452"},{"i":"72cdc760","k":1,"t":"IMG 0234","c":0,"s":1,"d":13.4,"z":217476,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/72cdc760-f6a4-4a80-97d2-56ebc7622e1e"},{"i":"7d3564fe","k":1,"t":"IMG 0233","c":0,"s":1,"d":5.6,"z":28245,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/7d3564fe-b2b0-426e-b960-2f7366a23d1e"},{"i":"5ce16332","k":1,"t":"Broll5","c":0,"s":1,"d":14.4,"z":163305,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/5ce16332-9e14-432f-8705-d8768c61a4ca"},{"i":"09fc6842","k":1,"t":"Broll3","c":0,"s":1,"d":13.7,"z":134023,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/09fc6842-06e8-4daa-91f4-0878a198a05e"},{"i":"df5e2965","k":1,"t":"Broll","c":0,"s":1,"d":10.8,"z":69563,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/df5e2965-7095-4965-9d4f-c249655d4905"},{"i":"2659e594","k":1,"t":"B Roll Extra","c":0,"s":1,"d":18.0,"z":114457,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/2659e594-4165-47ca-87b1-a92b8d232adf"},{"i":"c5af1e81","k":1,"t":"B Roll 4 (2)","c":0,"s":1,"d":45.1,"z":497752,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/c5af1e81-4231-475a-9f5d-6925699cc5c6"},{"i":"d267665f","k":1,"t":"B Roll 3 (3)","c":0,"s":1,"d":11.4,"z":84910,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/d267665f-7228-466d-85eb-5ec10e460d0b"},{"i":"79429538","k":1,"t":"B Roll 2 (2)","c":0,"s":1,"d":27.4,"z":266142,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/79429538-3c2d-4c3f-b581-c4e8b3ad3b9e"},{"i":"9c98ffe5","k":1,"t":"B Roll 1 (2)","c":0,"s":1,"d":23.3,"z":319481,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/9c98ffe5-695b-4316-a203-19407638d183"},{"i":"494e7a08","k":1,"t":"2026 07 21 10 26 53","c":0,"s":1,"d":67.0,"z":1880881,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/494e7a08-bf81-42e1-b00f-7ec508a959e2"},{"i":"1c340c79","k":1,"t":"2026 07 21 10 22 50","c":0,"s":1,"d":37.5,"z":604013,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/1c340c79-3817-4dd0-8814-2a7f754de820"},{"i":"2ca1867a","k":1,"t":"2026 07 21 10 21 45","c":0,"s":1,"d":18.5,"z":298911,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/2ca1867a-877c-4ee4-afec-dcffb3e57e0c"},{"i":"fb46eab2","k":1,"t":"2026 07 21 10 20 46","c":0,"s":1,"d":21.5,"z":331329,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/fb46eab2-9bb3-431e-871f-6c56ce65ec86"},{"i":"7297f949","k":1,"t":"2026 07 21 10 17 55","c":0,"s":1,"d":42.4,"z":508733,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/7297f949-9a9a-4ccc-ac02-f62f841ce05e"},{"i":"1b626412","k":1,"t":"5 b roll opening case and wearing","c":0,"s":1,"d":163.8,"z":1966443,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/1b626412-43c1-4a14-922e-74081041c5da"},{"i":"d8797bdf","k":1,"t":"2 b roll case angle","c":0,"s":1,"d":31.6,"z":436011,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/d8797bdf-5c32-4acb-a8fc-f7cf3b2f7313"},{"i":"dae82ee3","k":1,"t":"B roll 4","c":0,"s":1,"d":13.7,"z":2009532,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/dae82ee3-fb12-490a-ac67-79a086c5b36f"},{"i":"7fed69e9","k":1,"t":"lv 0 20260620172329","c":0,"s":1,"d":3.2,"z":31542,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/7fed69e9-c0e2-447b-adba-2ee10d82d76d"},{"i":"9aeebafb","k":1,"t":"B roll 2","c":0,"s":1,"d":19.6,"z":1085911,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/9aeebafb-8461-460d-a634-82da1a4d223a"},{"i":"411118d0","k":1,"t":"B roll 3","c":0,"s":1,"d":9.7,"z":1263144,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/411118d0-96d0-4b5b-b597-a46e6f53c9d8"},{"i":"a6a961e1","k":1,"t":"B roll 6","c":0,"s":1,"d":19.3,"z":755042,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/a6a961e1-3cb4-4c19-9a8b-d2e26d7d7d82"},{"i":"f57ba315","k":1,"t":"lv 0 20260620172255","c":0,"s":1,"d":3.2,"z":36479,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/f57ba315-7d3d-4e2f-8bb9-ef46a5bb225b"},{"i":"e1b4c96b","k":1,"t":"broll case on bench","c":0,"s":1,"d":30.3,"z":340917,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/e1b4c96b-e320-4940-9c6c-989f6a56f373"},{"i":"dabd6a54","k":1,"t":"broll case","c":0,"s":1,"d":7.4,"z":62691,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/dabd6a54-87ec-45c1-b59c-dd124d5a03e5"},{"i":"b18552e2","k":1,"t":"be56c4d6842e3b67eab2a82de9e95b75 1773199587 qe7m5tq3","c":0,"s":1,"d":5.0,"z":41388,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/b18552e2-392a-468a-b8f3-bf174d81111e"},{"i":"bb0597e3","k":1,"t":"WhatsApp Video 2026 01 17 at 13.28.06","c":0,"s":1,"d":22.7,"z":175102,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/bb0597e3-df23-4fc7-9601-503604c00bc1"},{"i":"8860c2b3","k":1,"t":"WhatsApp Video 2026 01 17 at 13.28.11","c":0,"s":1,"d":18.7,"z":109234,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/8860c2b3-461e-4c19-aabc-51e37218f67a"},{"i":"643d312a","k":1,"t":"WhatsApp Video 2026 01 17 at 13.29.01","c":0,"s":1,"d":16.3,"z":42728,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/643d312a-d809-4407-9e1a-a44475c4edbd"},{"i":"6c5e317a","k":1,"t":"WhatsApp Video 2026 01 17 at 13.29.13","c":0,"s":1,"d":13.7,"z":144335,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/6c5e317a-054e-4ef7-869b-ffb505989081"},{"i":"762fa6f9","k":1,"t":"WhatsApp Video 2026 01 17 at 13.29.17","c":0,"s":1,"d":12.2,"z":84656,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/762fa6f9-23aa-47db-b6a3-49c4ff88839e"},{"i":"00675a5c","k":1,"t":"WhatsApp Video 2026 01 17 at 13.29.21","c":0,"s":1,"d":12.7,"z":83042,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/00675a5c-5d26-4669-a9fe-1815519bf9db"},{"i":"dceaa976","k":1,"t":"B Roll 5","c":0,"s":1,"d":24.8,"z":273931,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/dceaa976-e1b5-4fc3-8bcb-e33d7f12b725"},{"i":"740b5309","k":1,"t":"B Roll 3","c":0,"s":1,"d":25.6,"z":268030,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/740b5309-def9-4d97-a071-d46772f65cb4"},{"i":"1375f9d6","k":1,"t":"B Roll 2","c":0,"s":1,"d":23.0,"z":378230,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/1375f9d6-36af-4c78-b845-a188c3711c3e"},{"i":"00437dc7","k":0,"t":"Static 2","c":2,"s":2,"z":92580,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"9ce27540","k":0,"t":"Static 1","c":2,"s":2,"z":62888,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"5897680a","k":0,"t":"IMG 0762","c":2,"s":2,"z":71103,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"091ad4c5","k":0,"t":"IMG 0761","c":2,"s":2,"z":111299,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"285cb81b","k":0,"t":"Static 4","c":2,"s":2,"z":56508,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"07a8b0b5","k":0,"t":"Static 3","c":2,"s":2,"z":82570,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"9aef0d5a","k":0,"t":"IMG 0760","c":2,"s":2,"z":131169,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"4a2c97ec","k":0,"t":"IMG 0249","c":2,"s":2,"z":80196,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"e0d84d41","k":0,"t":"IMG 0759","c":2,"s":2,"z":69657,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"eecd95b4","k":0,"t":"IMG 0758","c":2,"s":2,"z":59258,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"e9d5b387","k":0,"t":"IMG 0260","c":2,"s":2,"z":88016,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"064d6b05","k":0,"t":"IMG 0257","c":2,"s":2,"z":167330,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"fc28bd48","k":0,"t":"IMG 0252","c":2,"s":2,"z":29114,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"2b13d056","k":0,"t":"IMG 0251","c":2,"s":2,"z":30572,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"0de99973","k":0,"t":"IMG 0246","c":2,"s":2,"z":82041,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"2d48a86a","k":0,"t":"20260721 103249","c":2,"s":2,"z":261141,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"40bbec0e","k":0,"t":"20260721 103232","c":2,"s":2,"z":190008,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"bcba9c5e","k":0,"t":"20260721 103214","c":2,"s":2,"z":237982,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"02792aa7","k":0,"t":"20260721 103155","c":2,"s":2,"z":236054,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"196f2b57","k":0,"t":"20260721 103050","c":2,"s":2,"z":194998,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"548e3e4f","k":0,"t":"20260721 103414","c":2,"s":2,"z":127074,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"b425355f","k":0,"t":"20260721 103406","c":2,"s":2,"z":108235,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"adfb7b3d","k":0,"t":"20260721 103343","c":2,"s":2,"z":125492,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"7fe7b346","k":0,"t":"20260721 103330","c":2,"s":2,"z":65017,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"4005a606","k":0,"t":"22 image rocks 2.heic","c":2,"s":2,"z":277216,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"4a3a0fa1","k":0,"t":"21 image red rock.heic","c":2,"s":2,"z":156984,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"cc83ac16","k":0,"t":"20 image e left.heic","c":2,"s":2,"z":97520,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"fe3c09dc","k":0,"t":"19 image e forward.heic","c":2,"s":2,"z":96060,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"1b91aba8","k":0,"t":"18 image e right.heic","c":2,"s":2,"z":90342,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"48d3eb7e","k":0,"t":"17 image cliff.heic","c":2,"s":2,"z":146742,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"1f764e0e","k":0,"t":"16 image rocks 1.heic","c":2,"s":2,"z":136016,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"677af6be","k":0,"t":"15 image case closed wood.heic","c":2,"s":2,"z":57231,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"b5a13ff8","k":0,"t":"14 image holding case wood.heic","c":2,"s":2,"z":65507,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"ca3723f0","k":0,"t":"13 image earbuds wood.heic","c":2,"s":2,"z":62282,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"a92b46b3","k":0,"t":"12 image case open wood floor.heic","c":2,"s":2,"z":67581,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"9c8097fb","k":0,"t":"11 image holding case white.heic","c":2,"s":2,"z":48636,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"48077ea6","k":0,"t":"10 image case closed white.heic","c":2,"s":2,"z":44806,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"dbf3a44a","k":0,"t":"9 image case open white.heic","c":2,"s":2,"z":50635,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"4bde5dd0","k":0,"t":"8 image earbuds white.heic","c":2,"s":2,"z":32661,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"61e972b1","k":0,"t":"20260620 165352","c":2,"s":2,"z":266329,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"caa2df1f","k":0,"t":"20260620 165807","c":2,"s":2,"z":59259,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"d219bf7a","k":0,"t":"20260620 165605","c":2,"s":2,"z":131398,"u":"https://next.frame.io/share/67c223ce-83c8-427c-a40f-f4c3943721af"},{"i":"005931d4","k":1,"t":"BROLL ShowingOffProduct","c":1,"s":1,"d":65.4,"z":811572,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/005931d4-383d-4589-8370-27218527dce5"},{"i":"e143d098","k":1,"t":"BROLL Putting earbuds in 3","c":1,"s":1,"d":57.8,"z":538487,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/e143d098-e873-4cab-ac39-24bf720d310c"},{"i":"cd2c9783","k":1,"t":"BROLL Putting earbuds in 2","c":1,"s":1,"d":29.1,"z":292738,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/cd2c9783-60b3-455a-9ed7-58bc5ed28d86"},{"i":"ef122df3","k":1,"t":"BROLL Putting earbuds in 1","c":1,"s":1,"d":9.1,"z":86796,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/ef122df3-c7ea-48b4-93e9-4da4ce4dca97"},{"i":"626dc36b","k":1,"t":"BROLL Product showing box","c":1,"s":1,"d":44.1,"z":447954,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/626dc36b-103b-448b-b7af-d0885e206811"},{"i":"d4f35690","k":1,"t":"BROLL Product earbuds withtools 2","c":1,"s":1,"d":37.8,"z":230424,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/d4f35690-33ca-4b30-90c9-117281b0d388"},{"i":"972acaf0","k":1,"t":"BROLL Product earbuds withtools 1","c":1,"s":1,"d":20.2,"z":135642,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/972acaf0-c887-4ceb-9b6b-26a8c6b81e26"},{"i":"4cf33f5b","k":1,"t":"Broll 25 Scott Ravine","c":1,"s":1,"d":58.8,"z":868590,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/4cf33f5b-1ce0-4e6b-9398-9ca1e31c8939"},{"i":"b7a90feb","k":1,"t":"Broll 24 Scott Ravine","c":1,"s":1,"d":48.2,"z":656956,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/b7a90feb-68d4-4b3b-b1c6-da20fccf76a5"},{"i":"02e1ed17","k":1,"t":"Broll 23 Scott Ravine","c":1,"s":1,"d":79.2,"z":1041041,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/02e1ed17-e347-41b8-82f3-7e0a1bf4f214"},{"i":"b09b2883","k":1,"t":"CM119 broll13","c":1,"s":1,"d":17.1,"z":139670,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/b09b2883-9222-4f27-b819-b566b8df3a1f"},{"i":"97ba1b6f","k":1,"t":"CM119 broll12","c":1,"s":1,"d":8.8,"z":70294,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/97ba1b6f-cb6a-4c9f-b4d9-b3a618fbc895"},{"i":"47141222","k":1,"t":"CM119 broll11","c":1,"s":1,"d":18.8,"z":175057,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/47141222-c493-4a32-bd1d-53dec8cbfef7"},{"i":"61e98503","k":1,"t":"CM119 broll10","c":1,"s":1,"d":3.5,"z":33887,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/61e98503-7948-4fb7-9b7e-51b3a54c4546"},{"i":"26c75885","k":1,"t":"CM119 broll2","c":1,"s":1,"d":20.0,"z":274653,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/26c75885-1c61-490a-a9ee-2b18e780a61c"},{"i":"6b674cd0","k":1,"t":"BROLL Trimmer 2","c":1,"s":0,"d":44.2,"z":551626,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/6b674cd0-8dc4-4436-be66-c5caaeb458b4"},{"i":"e7d8fbf2","k":1,"t":"BROLL Trimmer 1","c":1,"s":0,"d":38.9,"z":391176,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/e7d8fbf2-0221-47f1-bcb0-c047d3085199"},{"i":"91a3d132","k":1,"t":"BROLL Orbital Sander 3","c":1,"s":0,"d":52.0,"z":564860,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/91a3d132-754a-4fba-a8bd-d3437e4acecc"},{"i":"129e8e30","k":1,"t":"BROLL Orbital Sander 2","c":1,"s":0,"d":53.1,"z":542525,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/129e8e30-d948-4315-b29c-4209050e7ecd"},{"i":"f569711b","k":1,"t":"BROLL Orbital Sander 1","c":1,"s":0,"d":50.0,"z":445200,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/f569711b-0fa8-4f9c-9c8a-0a2518206fa6"},{"i":"f6691ee0","k":1,"t":"BROLL MitreSaw","c":1,"s":0,"d":27.5,"z":195766,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/f6691ee0-ab35-46f2-a6b8-70fc5b6faf88"},{"i":"622556cf","k":1,"t":"BROLL grabbingGear outofTruck 2","c":1,"s":0,"d":35.4,"z":307114,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/622556cf-3bad-4388-9b31-e0c36f64a5ce"},{"i":"f89dca01","k":1,"t":"BROLL grabbingGear outofTruck 1","c":1,"s":0,"d":20.6,"z":175111,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/f89dca01-a425-42d6-9c71-8420e8541f6c"},{"i":"d9711ab9","k":1,"t":"BROLL CircularSaw","c":1,"s":0,"d":57.1,"z":476394,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/d9711ab9-ec96-4317-b08c-2fa1d7b1c1a6"},{"i":"0356a274","k":1,"t":"Broll 21 Scott Ravine","c":1,"s":0,"d":34.2,"z":311859,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/0356a274-384d-4726-9696-a90a7ab30a32"},{"i":"7ae03398","k":1,"t":"Broll 20 Scott Ravine","c":1,"s":0,"d":16.8,"z":155883,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/7ae03398-5dcf-4d45-9184-bfcf3a87d3fd"},{"i":"f8066a54","k":1,"t":"Broll 19 Scott Ravine","c":1,"s":0,"d":6.2,"z":82214,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/f8066a54-c353-463f-a5b9-13bd3b2cfb96"},{"i":"108677e0","k":1,"t":"Broll 16 Scott Ravine","c":1,"s":0,"d":31.2,"z":227415,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/108677e0-fc3d-40a4-975e-a0ab5305222d"},{"i":"0460916f","k":1,"t":"Broll 15 Scott Ravine","c":1,"s":0,"d":20.5,"z":94589,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/0460916f-8b1e-44aa-8717-3a583e932b74"},{"i":"36f25674","k":1,"t":"Broll 14 Scott Ravine","c":1,"s":0,"d":25.6,"z":148379,"u":"https://next.frame.io/share/326bbb8b-d84e-4708-b0ee-debeea240d62/36f25674-ef55-4e3e-9c8c-ea49b6844e5b"},{"i":"b3be8928","k":1,"t":"shooting with muffs","c":0,"s":0,"d":65.4,"z":816703,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/b3be8928-9dcf-45ad-b608-bdedaa0f4354"},{"i":"baba874b","k":1,"t":"shooting with buds","c":0,"s":0,"d":54.6,"z":573334,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/baba874b-c8bb-4ded-8ddf-fed3f7c9cff9"},{"i":"65922f30","k":1,"t":"shooting with buds v2","c":0,"s":0,"d":64.5,"z":594450,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/65922f30-c57e-4eee-904a-5b9cacb4350c"},{"i":"464bcc06","k":1,"t":"shooting with buds looking at camera","c":0,"s":0,"d":35.8,"z":381364,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/464bcc06-57dd-4258-bf54-1ed28e204cc9"},{"i":"e49a35be","k":1,"t":"shooting side angle","c":0,"s":0,"d":109.8,"z":812532,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/e49a35be-df16-41ce-a79b-3330c282d720"},{"i":"e6ef0a3f","k":1,"t":"shooting looking at camera","c":0,"s":0,"d":37.6,"z":437973,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/e6ef0a3f-b9ff-48b9-9a61-76a4b4001090"},{"i":"4f2d1ab9","k":1,"t":"shooting in background","c":0,"s":0,"d":56.3,"z":70053,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/4f2d1ab9-4968-4294-ae3f-eb6519f44f63"},{"i":"11f63c00","k":1,"t":"Ravine hear everything around you One shot of shooting with the buds i","c":0,"s":0,"d":11.6,"z":188709,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/11f63c00-10d8-45fc-9907-4cd7d7f3efae"},{"i":"acdb2803","k":1,"t":"Ravine hear everything around you Heat detail sweat, wiping your foreh","c":0,"s":0,"d":10.4,"z":221407,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/acdb2803-3672-4be6-ae02-f897110df353"},{"i":"350b08db","k":1,"t":"Ravine hear everything around you Close up of the earbud sitting flush","c":0,"s":0,"d":8.7,"z":140862,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/350b08db-9e27-4d38-ae5a-7d344ddc5c57"},{"i":"125a5ead","k":1,"t":"loading mag","c":0,"s":0,"d":97.9,"z":961341,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/125a5ead-e636-437a-8470-d5f3414892a8"},{"i":"d931d7e0","k":1,"t":"listening to people in other bays","c":0,"s":0,"d":9.4,"z":93448,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/d931d7e0-e20e-424e-a6b0-ad468c82889f"},{"i":"795b38eb","k":1,"t":"IMG 1105","c":0,"s":0,"d":9.9,"z":182588,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/795b38eb-c874-447d-84c4-ff83289aa641"},{"i":"b9f405bf","k":1,"t":"IMG 1104","c":0,"s":0,"d":8.5,"z":163850,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/b9f405bf-6bba-4391-8428-08117b9e3b50"},{"i":"b2f9dbec","k":1,"t":"closeup buds in ears","c":0,"s":0,"d":11.5,"z":224173,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/b2f9dbec-7622-42df-bf0f-fee7584fc105"},{"i":"d09fd59b","k":1,"t":"Clear shot of you putting the ear bud inside your ear .","c":0,"s":0,"d":18.6,"z":247058,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/d09fd59b-bec5-47cf-82b3-22108115284c"},{"i":"ac4e4b09","k":1,"t":"Broll2","c":0,"s":0,"d":13.4,"z":120527,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/ac4e4b09-b5af-46ca-966b-0f177c9258fb"},{"i":"344337be","k":1,"t":"broll removing earbuds and case","c":0,"s":0,"d":30.6,"z":415113,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/344337be-c07a-47e6-a29d-238a46c9efa3"},{"i":"721a3b9c","k":1,"t":"broll putting earbuds in ears updated","c":0,"s":0,"d":37.1,"z":429672,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/721a3b9c-95d7-41cb-9396-54e075ef43f8"},{"i":"2ecc04f9","k":1,"t":"broll motion side to side with earbuds in","c":0,"s":0,"d":26.0,"z":317222,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/2ecc04f9-31a9-481c-9e7c-5a21a7f83c3d"},{"i":"52f9fd6f","k":1,"t":"Broll 11","c":0,"s":0,"d":4.7,"z":48062,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/52f9fd6f-ed23-4573-bcd5-87f04466f7b3"},{"i":"0de2ad56","k":1,"t":"Broll 11 copy","c":0,"s":0,"d":22.2,"z":191554,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/0de2ad56-ffec-4ecc-aa79-44bcf19064a9"},{"i":"7e28486e","k":1,"t":"Broll 10","c":0,"s":0,"d":5.9,"z":80578,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/7e28486e-7053-4145-b00c-1be43c7db3ef"},{"i":"42c2cd55","k":1,"t":"Broll 10 copy","c":0,"s":0,"d":9.7,"z":101448,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/42c2cd55-3566-44cb-8b1d-445c04974ab6"},{"i":"fa6a932d","k":1,"t":"Broll 9","c":0,"s":0,"d":6.4,"z":112402,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/fa6a932d-d2ed-484c-af1c-ce998ddbc2ce"},{"i":"0a4c403b","k":1,"t":"Broll 9 copy","c":0,"s":0,"d":19.4,"z":220166,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/0a4c403b-3aad-431c-aec0-39fb947a7fd0"},{"i":"56477e66","k":1,"t":"Broll 8","c":0,"s":0,"d":8.5,"z":118839,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/56477e66-d016-4861-8a47-2429a92685ce"},{"i":"2d58b082","k":1,"t":"Broll 8 copy","c":0,"s":0,"d":4.8,"z":60130,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/2d58b082-67c9-4c9d-8da2-ac014860de6b"},{"i":"87ce4cb3","k":1,"t":"Broll 7","c":0,"s":0,"d":19.2,"z":426159,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/87ce4cb3-4e9c-4ec2-b9ed-8600058c70ad"},{"i":"145de115","k":1,"t":"Broll 7 copy","c":0,"s":0,"d":26.9,"z":324534,"u":"https://next.frame.io/share/b8271a25-bcf4-469a-acf3-3982815aa76b/145de115-c372-4c2d-8c35-d7b6d55e43ee"}];
 const SC={
  woods:{k:['#1B2E3A','#3E5B52'],s:'#E8B44A',h:['#1E3428','#16261D','#0E1A13'],tr:1,f:.14},
  dawn:{k:['#2A2036','#B5643A'],s:'#FFB86B',h:['#2A3428','#1B241B','#111811'],tr:1,f:.2},
@@ -869,7 +933,7 @@ function bar(t,s){
  const c=me();
  return `<div class="topbar"><div><h1 class="pt">${esc(t)}</h1>${s?`<div class="psub">${s}</div>`:''}</div>
  <div class="tools">
-  <button class="icb" onclick="notif()">${ico('bell',17)}<b>${NOTIF.length}</b></button>
+  <button class="icb" onclick="notif()">${ico('bell',17)}<b>${notifList().length}</b></button>
   <div class="heat">🔥 <span class="mono">${c.xp.toLocaleString()}</span></div>
  </div></div>`}
 
@@ -1069,9 +1133,11 @@ window.postReview=()=>{
  REVIEWS[cid]=(revOf(cid)).filter(r=>r.wk!==wk).concat([row]);
  RVWHO=cid;render();toast(`Week ${wk} posted to ${CR.find(c=>c.id===cid).n}`)};
 window.delReview=(cid,wk)=>{REVIEWS[cid]=revOf(cid).filter(r=>r.wk!==wk);render();toast('Removed')};
-window.notif=()=>{$('#mod').innerHTML=`<h3 style="font-size:18px;font-weight:800;letter-spacing:-.5px">Notifications</h3>
- <div class="sub" style="font-size:12px;color:var(--tx3);margin:3px 0 14px">${NOTIF.length} new</div>
- ${NOTIF.map(n=>`<div class="nt"><div class="i">${n.i}</div><div style="flex:1">
+window.notif=()=>{const NL=notifList();const adm=me().admin;
+ $('#mod').innerHTML=`<h3 style="font-size:18px;font-weight:800;letter-spacing:-.5px">Notifications</h3>
+ <div class="sub" style="font-size:12px;color:var(--tx3);margin:3px 0 14px">${NL.length} new${adm?' · brand view':''}</div>
+ ${!pushAsked()?`<div class="npush"><div style="flex:1"><b>Get these on your phone</b><div class="mini" style="margin-top:2px">Approvals and your end-of-day number. Nothing else.</div></div><button class="btn sm" onclick="closeM();askPush()">Turn on</button></div>`:(pushOn()?'<div class="mini" style="margin-bottom:12px">Phone notifications are on · <a href="#" onclick="event.preventDefault();closeM();pushOff()" style="color:var(--o2)">mute</a></div>':`<div class="npush"><div style="flex:1"><b>Notifications are muted</b></div><button class="btn sm gh" onclick="closeM();askPush()">Turn on</button></div>`)}
+ ${NL.map(n=>`<div class="nt"${n.sub?` style="cursor:pointer" onclick="closeM();playSub('${n.sub}')"`:''}><div class="i">${n.i}</div><div style="flex:1">
   <div style="font-size:13px;font-weight:650">${esc(n.t)}</div>
   <div style="font-size:11.5px;color:var(--tx3);margin-top:3px;line-height:1.5">${esc(n.b)}</div></div>
   <div class="mini">${n.ago}</div></div>`).join('')}
@@ -1529,15 +1595,521 @@ window.bindChart=()=>{
  });
  document.addEventListener('click',hide,{passive:true});
 };
+/* ===================== SUBMISSIONS · APPROVALS · NOTIFICATIONS =====================
+   The app is a static site, so this layer is written against a pluggable backend.
+   BACKEND.mode 'local'  — everything lives on this device (works with zero setup)
+                'gas'    — a Google Apps Script web app on Austin's own Google account
+                'supa'   — Supabase REST + Storage (real video upload, multi-device)
+   Switching modes changes nothing above this line: same UI, same calls. */
+const BACKEND={mode:(window.RCG_BACKEND&&window.RCG_BACKEND.mode)||'local',
+               url:(window.RCG_BACKEND&&window.RCG_BACKEND.url)||'',
+               key:(window.RCG_BACKEND&&window.RCG_BACKEND.key)||''};
+const SUBKEY='rcg_subs_v1', CLKEY='rcg_claims_v1', NKEY='rcg_seen_v1', PUSHKEY='rcg_push_v1';
+
+/* ---------- tiny IndexedDB for the video files ---------- */
+let IDB=null;
+function idb(){if(IDB)return IDB;
+ IDB=new Promise((res,rej)=>{const r=indexedDB.open('rcg',1);
+  r.onupgradeneeded=()=>{const d=r.result;if(!d.objectStoreNames.contains('blobs'))d.createObjectStore('blobs')};
+  r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});
+ return IDB}
+async function blobPut(k,v){try{const d=await idb();return new Promise((res,rej)=>{const t=d.transaction('blobs','readwrite');t.objectStore('blobs').put(v,k);t.oncomplete=()=>res(1);t.onerror=()=>rej(t.error)})}catch(e){return 0}}
+async function blobGet(k){try{const d=await idb();return new Promise(res=>{const t=d.transaction('blobs','readonly');const q=t.objectStore('blobs').get(k);q.onsuccess=()=>res(q.result||null);q.onerror=()=>res(null)})}catch(e){return null}}
+async function blobDel(k){try{const d=await idb();return new Promise(res=>{const t=d.transaction('blobs','readwrite');t.objectStore('blobs').delete(k);t.oncomplete=()=>res(1);t.onerror=()=>res(0)})}catch(e){return 0}}
+
+/* ---------- local mirror ---------- */
+const lsGet=(k,f)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):f}catch(e){return f}};
+const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+let SUBS=lsGet(SUBKEY,[]);
+let CLAIMS=lsGet(CLKEY,{});
+let SEEN=lsGet(NKEY,{});
+const saveSubs=()=>lsSet(SUBKEY,SUBS);
+const saveClaims=()=>lsSet(CLKEY,CLAIMS);
+
+/* ---------- backend adapters ---------- */
+const REMOTE={
+ async push(sub,file){
+  if(BACKEND.mode==='gas'){
+   const body={op:'submit',sub};
+   if(file&&file.size<=18*1024*1024)body.file={name:file.name,type:file.type,b64:await toB64(file)};
+   const r=await fetch(BACKEND.url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)});
+   return await r.json();
+  }
+  if(BACKEND.mode==='supa'){
+   let vurl=null;
+   if(file){const path=`subs/${sub.id}_${(file.name||'clip').replace(/[^\w.\-]+/g,'_')}`;
+    const up=await fetch(`${BACKEND.url}/storage/v1/object/${path}`,{method:'POST',
+     headers:{apikey:BACKEND.key,Authorization:'Bearer '+BACKEND.key,'Content-Type':file.type||'video/mp4'},body:file});
+    if(up.ok)vurl=`${BACKEND.url}/storage/v1/object/public/${path}`}
+   const r=await fetch(`${BACKEND.url}/rest/v1/submissions`,{method:'POST',
+    headers:{apikey:BACKEND.key,Authorization:'Bearer '+BACKEND.key,'Content-Type':'application/json',Prefer:'return=minimal'},
+    body:JSON.stringify(Object.assign({},sub,{video_url:vurl}))});
+   return {ok:r.ok,video_url:vurl};
+  }
+  return {ok:true,local:true};
+ },
+ async pull(){
+  if(BACKEND.mode==='gas'){
+   const r=await fetch(BACKEND.url+'?op=list&t='+Date.now());return await r.json();
+  }
+  if(BACKEND.mode==='supa'){
+   const r=await fetch(`${BACKEND.url}/rest/v1/submissions?select=*&order=ts.desc`,
+    {headers:{apikey:BACKEND.key,Authorization:'Bearer '+BACKEND.key}});
+   return r.ok?await r.json():[];
+  }
+  return null;
+ },
+ async decide(id,status,reason){
+  if(BACKEND.mode==='gas'){
+   const r=await fetch(BACKEND.url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body:JSON.stringify({op:'decide',id,status,reason})});return await r.json();
+  }
+  if(BACKEND.mode==='supa'){
+   const r=await fetch(`${BACKEND.url}/rest/v1/submissions?id=eq.${encodeURIComponent(id)}`,{method:'PATCH',
+    headers:{apikey:BACKEND.key,Authorization:'Bearer '+BACKEND.key,'Content-Type':'application/json',Prefer:'return=minimal'},
+    body:JSON.stringify({status,reason,decided:Date.now()})});
+   return {ok:r.ok};
+  }
+  return {ok:true,local:true};
+ }
+};
+const toB64=f=>new Promise(res=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.readAsDataURL(f)});
+const LIVE=()=>BACKEND.mode!=='local';
+
+/* ---------- poster frame from the creator's own file ---------- */
+function posterOf(file){
+ return new Promise(res=>{
+  const u=URL.createObjectURL(file);const v=document.createElement('video');
+  v.preload='metadata';v.muted=true;v.playsInline=true;v.src=u;
+  let done=false;const fin=r=>{if(done)return;done=true;URL.revokeObjectURL(u);res(r)};
+  setTimeout(()=>fin({poster:null,dur:0}),7000);
+  v.onloadedmetadata=()=>{const d=v.duration||0;v.currentTime=Math.min(1.2,Math.max(0.1,d/6));};
+  v.onseeked=()=>{try{
+    const w=180,h=Math.round(w*(v.videoHeight||16)/(v.videoWidth||9));
+    const c=document.createElement('canvas');c.width=w;c.height=h;
+    c.getContext('2d').drawImage(v,0,0,w,h);
+    fin({poster:c.toDataURL('image/jpeg',0.62),dur:Math.round(v.duration||0)});
+   }catch(e){fin({poster:null,dur:Math.round(v.duration||0)})}};
+  v.onerror=()=>fin({poster:null,dur:0});
+ });
+}
+
+/* ---------- quest claim ---------- */
+window.claimQ=id=>{const q=QUESTS.find(x=>x.id===id);if(!q)return;
+ CLAIMS[ME+':'+id]={ts:Date.now()};saveClaims();
+ render();toast('Claimed — upload your video when it’s cut');
+ setTimeout(()=>{const el=$('#qUpWrap');if(el)el.scrollIntoView({behavior:'smooth',block:'center'})},250)};
+window.unclaimQ=id=>{delete CLAIMS[ME+':'+id];saveClaims();render();toast('Dropped')};
+const claimed=id=>!!CLAIMS[ME+':'+id];
+const subsFor=(cid,qid)=>SUBS.filter(s=>s.cid===cid&&s.qid===qid);
+const myPending=()=>SUBS.filter(s=>s.cid===ME&&s.status==='pending');
+const pendingAll=()=>SUBS.filter(s=>s.status==='pending');
+
+/* ---------- creator submits ---------- */
+let PENDFILE=null;
+window.pickQFile=async(inp,qid)=>{
+ const f=inp.files&&inp.files[0];if(!f)return;
+ if(!/^video\//.test(f.type)&&!/\.(mp4|mov|m4v|webm)$/i.test(f.name)){toast('That is not a video file');return}
+ if(f.size>500*1024*1024){toast('That file is over 500MB — export a smaller version');return}
+ PENDFILE=f;
+ const st=$('#qUpState');if(st)st.innerHTML='<div class="mini">Reading your video…</div>';
+ const {poster,dur}=await posterOf(f);
+ PENDFILE.__poster=poster;PENDFILE.__dur=dur;
+ if(st)st.innerHTML=`<div class="qupfile">
+   ${poster?`<img src="${poster}" alt="">`:'<div class="ph"></div>'}
+   <div style="min-width:0;flex:1"><div style="font-size:13px;font-weight:650;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(f.name)}</div>
+    <div class="mini" style="margin-top:3px">${dur?Math.floor(dur/60)+':'+String(dur%60).padStart(2,'0')+' · ':''}${(f.size/1048576).toFixed(1)} MB · ready</div></div>
+   <button class="btn sm gh" onclick="clearQFile(${qid})">Change</button></div>`;
+};
+window.clearQFile=qid=>{PENDFILE=null;const i=$('#qUpInput');if(i)i.value='';const st=$('#qUpState');if(st)st.innerHTML='';};
+window.sendQ=async qid=>{
+ const q=QUESTS.find(x=>x.id===qid);if(!q)return;
+ if(!PENDFILE){toast('Attach your video first');return}
+ const link=($('#qUpLink')&&$('#qUpLink').value.trim())||'';
+ const note=($('#qUpNote')&&$('#qUpNote').value.trim())||'';
+ const c=me();
+ const id='s'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+ const sub={id,cid:c.id,cname:c.n,qid,qtitle:q.t,qtag:q.tag,xp:q.x,
+   link,note,file:PENDFILE.name,size:PENDFILE.size,dur:PENDFILE.__dur||0,
+   poster:PENDFILE.__poster||null,ts:Date.now(),status:'pending',reason:'',video_url:null};
+ const btn=$('#qSendBtn');if(btn){btn.disabled=true;btn.textContent='Sending…'}
+ await blobPut(id,PENDFILE);
+ try{const r=await REMOTE.push(sub,PENDFILE);if(r&&r.video_url)sub.video_url=r.video_url}
+ catch(e){sub.queued=true}
+ SUBS.unshift(sub);saveSubs();
+ PENDFILE=null;
+ notifyAdmin(sub);
+ render();
+ toast(LIVE()?'Sent to Austin for approval':'Submitted — waiting on approval');
+};
+
+/* ---------- admin decides ---------- */
+window.decideQ=async(id,status)=>{
+ const s=SUBS.find(x=>x.id===id);if(!s||s.status!=='pending')return;
+ let reason='';
+ if(status==='denied'){reason=(prompt('What should they fix? (they will see this)')||'').trim();if(!reason){toast('Give them a reason');return}}
+ s.status=status;s.reason=reason;s.decided=Date.now();
+ saveSubs();
+ try{await REMOTE.decide(id,status,reason)}catch(e){}
+ if(status==='approved'){
+  const q=QUESTS.find(x=>x.id===s.qid);
+  if(q){q.got=Math.min(q.need,q.got+1);q.subs=(q.subs||0)+1;
+   if(q.got>=q.need)award(s.cid,q.x,'completed '+q.t);
+   else {const c=CR.find(z=>z.id===s.cid);if(c)c.xp+=Math.round(q.x*M()/Math.max(1,q.need));}}
+  pushCreator(s.cname.split(' ')[0]+', your '+s.qtitle+' video is approved','+'+(s.xp*M())+' XP just landed. Keep the run going.');
+ } else {
+  pushCreator('Changes needed on your '+s.qtitle+' video',reason);
+ }
+ render();
+ toast(status==='approved'?`Approved · ${s.cname} got the points`:'Sent back with notes');
+};
+window.playSub=async id=>{
+ const s=SUBS.find(x=>x.id===id);if(!s)return;
+ const b=await blobGet(id);
+ const src=b?URL.createObjectURL(b):(s.video_url||'');
+ $('#mod').innerHTML=`<h3 style="font-size:17px;font-weight:800;letter-spacing:-.4px">${esc(s.qtitle)}</h3>
+  <div class="sub" style="font-size:12px;color:var(--tx3);margin:3px 0 12px">${esc(s.cname)} · ${esc(s.file)}</div>
+  ${src?`<video src="${src}" controls autoplay playsinline style="width:100%;max-height:56vh;border-radius:12px;background:#000"></video>`
+      :`<div class="note">The video file is on ${esc(s.cname.split(' ')[0])}’s device. ${s.link?'Their post link is below.':'Ask them to resend it.'}</div>`}
+  ${s.note?`<div class="note" style="margin-top:12px"><b style="color:var(--tx)">Their note.</b> ${esc(s.note)}</div>`:''}
+  ${s.link?`<a class="btn gh" style="margin-top:12px" href="${esc(s.link)}" target="_blank" rel="noopener">${ico('ext',15)} Open their post</a>`:''}
+  <div style="display:flex;gap:9px;margin-top:14px;flex-wrap:wrap">
+   ${s.status==='pending'?`<button class="btn" onclick="closeM();decideQ('${s.id}','approved')">Approve · +${s.xp*M()} XP</button>
+   <button class="btn gh" onclick="closeM();decideQ('${s.id}','denied')">Send back</button>`:''}
+   <button class="btn gh" onclick="closeM()">Close</button></div>`;
+ $('#scrim').classList.add('show')};
+
+/* ---------- notifications ---------- */
+function milestones(){
+ const out=[];
+ try{
+  const t=window.ANTOT||null;
+  const rows=CR.filter(x=>!x.admin&&x.sales>0);
+  if(t){
+   out.push({i:'📈',t:'Program ROAS is '+(t.pv/Math.max(1,t.spend)).toFixed(2)+'x',
+    b:'$'+Math.round(t.pv).toLocaleString()+' back on $'+Math.round(t.spend).toLocaleString()+' spent across '+t.vids+' videos.',ago:'today',admin:1});
+   out.push({i:'🎯',t:'Thumbstop holding at '+t.ts+'%',b:'Spend-weighted across every video with budget on it.',ago:'today',admin:1});
+  }
+  if(rows.length){
+   const top=rows.slice().sort((a,b)=>b.sales-a.sales)[0];
+   if(top)out.push({i:'🏆',t:top.n+' is the top seller right now',b:'$'+top.sales.toLocaleString()+' driven on '+top.v+' approved videos.',ago:'today',admin:1});
+   const an=(me().an&&me().an.rows)||[];
+   const best=CR.filter(x=>!x.admin).map(x=>({n:x.n,v:x.v})).sort((a,b)=>b.v-a.v)[0];
+   if(best&&best.v)out.push({i:'🎬',t:best.n+' leads on volume',b:best.v+' approved videos this season — the most of anyone.',ago:'today',admin:1});
+  }
+  out.push({i:'💵',t:'$'+TOTALS.sales.toLocaleString()+' driven so far',b:'$'+TOTALS.paid.toLocaleString()+' paid out across '+TOTALS.active+' active creators.',ago:'today',admin:1});
+ }catch(e){}
+ return out;
+}
+function notifList(){
+ const c=me();
+ const mine=[];
+ if(c.admin){
+  pendingAll().forEach(s=>mine.push({i:'🕐',t:s.cname+' needs an approval',b:esc(s.qtitle)+' · tap Approvals to watch it',ago:ago(s.ts),admin:1,sub:s.id}));
+  mine.push(...milestones());
+ } else {
+  SUBS.filter(s=>s.cid===c.id).slice(0,6).forEach(s=>{
+   if(s.status==='approved')mine.push({i:'✅',t:'Your '+s.qtitle+' video was approved',b:'+'+(s.xp*M())+' XP',ago:ago(s.decided||s.ts)});
+   else if(s.status==='denied')mine.push({i:'✏️',t:'Changes needed: '+s.qtitle,b:s.reason||'',ago:ago(s.decided||s.ts)});
+   else mine.push({i:'🕐',t:'Waiting on approval',b:s.qtitle,ago:ago(s.ts)});
+  });
+ }
+ return mine.concat(NOTIF);
+}
+function ago(ts){if(!ts)return '';const m=Math.round((Date.now()-ts)/60000);
+ if(m<1)return 'just now';if(m<60)return m+'m';const h=Math.round(m/60);if(h<24)return h+'h';return Math.round(h/24)+'d'}
+
+/* ---------- push ---------- */
+let PUSHOK=(typeof Notification!=='undefined')&&Notification.permission==='granted';
+window.askPush=async()=>{
+ if(typeof Notification==='undefined'){toast('This browser cannot do notifications');return}
+ if(Notification.permission==='denied'){toast('Turn notifications back on in your browser settings');return}
+ const p=await Notification.requestPermission();
+ PUSHOK=p==='granted';
+ lsSet(PUSHKEY,{on:PUSHOK,asked:1});
+ render();
+ if(PUSHOK){fire('Notifications are on','We’ll only ping you for approvals and your end-of-day number.');toast('You’re in')}
+ else toast('No problem — you can turn it on later');
+};
+window.pushOff=()=>{lsSet(PUSHKEY,{on:false,asked:1});PUSHOK=false;render();toast('Muted in the app')};
+const pushAsked=()=>!!lsGet(PUSHKEY,{}).asked;
+const pushOn=()=>PUSHOK&&lsGet(PUSHKEY,{on:true}).on!==false;
+async function fire(title,body,tag){
+ if(!pushOn())return;
+ try{const reg=await navigator.serviceWorker.getRegistration();
+  const o={body,icon:'./icon-192.png',badge:'./favicon-64.png',tag:tag||'rcg',renotify:true};
+  if(reg&&reg.showNotification)await reg.showNotification(title,o);else new Notification(title,o);
+ }catch(e){}
+}
+function notifyAdmin(sub){
+ if(me().admin)fire('Approval request',sub.cname+' submitted to '+sub.qtitle,'approval');
+}
+function pushCreator(t,b){if(!me().admin)fire(t,b,'decision')}
+/* end-of-day nudge — fires when the app is opened after 6pm and not yet sent today */
+function dayNudge(){
+ if(!pushOn())return;
+ const c=me();if(c.admin)return;
+ const k='rcg_eod_'+new Date().toDateString();
+ try{if(localStorage.getItem(k))return}catch(e){}
+ if(new Date().getHours()<17)return;
+ try{localStorage.setItem(k,'1')}catch(e){}
+ const mine=SUBS.filter(s=>s.cid===c.id&&s.status==='approved').length;
+ fire('You moved $'+(c.sales||0).toLocaleString()+' for Ravine',
+   mine?'That’s '+mine+' approved this season. One or two more this week keeps the momentum.':'Get one more up today and keep the streak alive.','eod');
+}
+
+/* ---------- admin: connect a backend ---------- */
+(function(){const c=lsGet('rcg_backend',null);
+ if(c&&c.mode){BACKEND.mode=c.mode;BACKEND.url=c.url||'';BACKEND.key=c.key||''}})();
+window.saveBackend=async()=>{
+ const mode=$('#bkMode').value, url=$('#bkUrl').value.trim(), key=$('#bkKey').value.trim();
+ if(mode!=='local'&&!/^https:\/\//.test(url)){$('#bkOut').textContent='That needs to be an https:// URL.';return}
+ if(mode==='supa'&&!key){$('#bkOut').textContent='Supabase needs the public anon key too.';return}
+ BACKEND.mode=mode;BACKEND.url=url;BACKEND.key=key;
+ lsSet('rcg_backend',{mode,url,key});
+ if(mode==='local'){render();toast('Back to this device only');return}
+ await testBackend(true);
+};
+window.clearBackend=()=>{BACKEND.mode='local';BACKEND.url='';BACKEND.key='';
+ lsSet('rcg_backend',{mode:'local',url:'',key:''});render();toast('Disconnected')};
+window.testBackend=async(quiet)=>{
+ const out=$('#bkOut');if(out)out.textContent='Testing…';
+ try{const r=await REMOTE.pull();
+  const n=Array.isArray(r)?r.length:(r&&r.subs?r.subs.length:0);
+  if(out){out.style.color='var(--gr)';out.textContent='Connected — '+n+' submission'+(n===1?'':'s')+' on the server.'}
+  if(!quiet)toast('Connection is good');else{render();toast('Connected')}
+ }catch(e){if(out){out.style.color='var(--bad)';out.textContent='Could not reach it: '+e.message}toast('Could not reach that URL')}
+};
+window.syncSubs=async()=>{
+ if(!LIVE())return;
+ try{const r=await REMOTE.pull();const rows=Array.isArray(r)?r:(r&&r.subs)||[];
+  if(!rows.length)return;
+  const byId={};SUBS.forEach(s=>byId[s.id]=s);
+  rows.forEach(row=>{const ex=byId[row.id];
+   if(!ex)SUBS.push(row);
+   else if(row.status&&row.status!==ex.status){ex.status=row.status;ex.reason=row.reason||'';ex.decided=row.decided||Date.now()}});
+  SUBS.sort((a,b)=>b.ts-a.ts);saveSubs();render();
+ }catch(e){}
+};
+setInterval(()=>{if(LIVE()&&document.visibilityState==='visible')syncSubs()},45000);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')syncSubs()});
+
+/* ---------- the permission prompt, shown once, in plain language ---------- */
+window.dismissPush=()=>{lsSet(PUSHKEY,{on:false,asked:1});render()};
+function pushCard(){
+ if(pushAsked()||typeof Notification==='undefined'||Notification.permission!=='default')return '';
+ const adm=me().admin;
+ return `<div class="pushcard">
+  <div class="pci">${ico('bell',20)}</div>
+  <div style="min-width:0;flex:1">
+   <div style="font-size:14.5px;font-weight:750;letter-spacing:-.2px">${adm?'Get pinged when a video needs you':'Turn on notifications'}</div>
+   <div class="mini" style="margin-top:4px;line-height:1.55">${adm
+     ?'Approval requests and the days you break a record. Nothing else.'
+     :'When your video gets approved, and one end-of-day note with what you made. That is it — we are not going to spam you.'}</div>
+   <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:12px">
+    <button class="btn sm" onclick="askPush()">Allow notifications</button>
+    <button class="btn sm gh" onclick="dismissPush()">Not now</button></div>
+  </div></div>`;
+}
+/* ===================== B-ROLL ===================== */
+let BRC=-1, BRS=-1, BRQ='', BRSEL=null, BRMUTE=false, BRPICK={};
+const brFile=b=>(b.k?'./b/'+b.i+'.mp4':'./b/'+b.i+'.jpg');
+const brPost=b=>'./bp/'+b.i+'.jpg';
+const brMB=z=>z?(z>=1048576?(z/1048576).toFixed(1)+' MB':Math.round(z/1024)+' KB'):'';
+const brDur=d=>d?`${Math.floor(d/60)}:${String(Math.round(d%60)).padStart(2,'0')}`:'';
+function brList(){
+ const q=BRQ.trim().toLowerCase();
+ return BROLL.filter(b=>(BRC<0||b.c===BRC)&&(BRS<0||b.s===BRS)&&(!q||b.t.toLowerCase().includes(q)||BRCAT[b.c].toLowerCase().includes(q)));
+}
+window.setBRC=n=>{BRC=n;BRS=-1;render()};
+window.setBRS=n=>{BRS=n;render()};
+window.setBRQ=v=>{BRQ=v;const g=$('#brgrid');if(g)g.innerHTML=brCards();};
+window.brToggle=i=>{if(BRPICK[i])delete BRPICK[i];else BRPICK[i]=1;render()};
+window.brClear=()=>{BRPICK={};render()};
+window.brGrab=async()=>{
+ const ids=Object.keys(BRPICK);if(!ids.length)return;
+ toast(`Saving ${ids.length} file${ids.length>1?'s':''}…`);
+ for(const i of ids){const b=BROLL.find(x=>String(x.i)===String(i));if(!b)continue;
+  await brSave(b);await new Promise(r=>setTimeout(r,900));}
+};
+async function brSave(b){
+ try{const r=await fetch(brFile(b));const bl=await r.blob();
+  const u=URL.createObjectURL(bl);const a=document.createElement('a');
+  a.href=u;a.download=(b.t.replace(/[^\w \-]+/g,'').trim()||('ravine-'+b.i))+(b.k?'.mp4':'.jpg');
+  document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(u);a.remove()},3000);
+ }catch(e){toast('Could not save that one')}
+}
+window.brDownload=i=>{const b=BROLL.find(x=>String(x.i)===String(i));if(b){brSave(b);toast('Saving to your device')}};
+function brCards(){
+ const L=brList();
+ if(!L.length)return '<div class="note">Nothing matches that filter.</div>';
+ return L.map(b=>`<div class="brc ${BRPICK[b.i]?'sel':''}" onclick="openBR('${b.i}')">
+  <div class="brt"><img src="${brPost(b)}" loading="lazy" alt="">
+   ${b.k?`<span class="brd">${brDur(b.d)}</span>`:'<span class="brd img">STILL</span>'}
+   <button class="brpick" onclick="event.stopPropagation();brToggle('${b.i}')" aria-label="Select">${BRPICK[b.i]?'✓':''}</button>
+   <div class="vp"><div>▶</div></div></div>
+  <div class="brn">${esc(b.t)}</div>
+  <div class="brm">${esc(BRCAT[b.c])} · ${brMB(b.z)}</div></div>`).join('');
+}
+window.openBR=i=>{
+ const L=brList();const n=L.findIndex(x=>String(x.i)===String(i));
+ BRSEL=n<0?0:n;brPaint();
+};
+window.closeBR=()=>{const el=$('#brview');if(el){el.classList.remove('show');el.innerHTML=''}BRSEL=null;document.body.style.overflow=''};
+window.brStep=d=>{const L=brList();if(BRSEL==null)return;BRSEL=(BRSEL+d+L.length)%L.length;brPaint()};
+window.brMuteT=()=>{BRMUTE=!BRMUTE;const v=$('#brvid');if(v){v.muted=BRMUTE;if(!BRMUTE)v.play().catch(()=>{})}
+ const btn=$('#brMute');if(btn)btn.innerHTML=BRMUTE?ico('mute',18)+'<span>TAP FOR SOUND</span>':ico('sound',18)+'<span>SOUND ON</span>';
+ if(btn)btn.className='swx wide'+(BRMUTE?' off':'')};
+function brPaint(){
+ const L=brList();const b=L[BRSEL];if(!b)return;
+ const el=$('#brview');
+ el.innerHTML=`<button class="swx" onclick="closeBR()">${ico('x',20)}</button>
+  ${b.k?`<button class="swx wide ${BRMUTE?'off':''}" id="brMute" style="left:62px" onclick="brMuteT()">${BRMUTE?ico('mute',18)+'<span>TAP FOR SOUND</span>':ico('sound',18)+'<span>SOUND ON</span>'}</button>`:''}
+  <div class="swcount">${BRSEL+1} / ${L.length}</div>
+  <div class="brstage">
+   <button class="brnav l" onclick="brStep(-1)" aria-label="Previous">‹</button>
+   <div class="brmedia">${b.k
+     ?`<video id="brvid" src="${brFile(b)}" poster="${brPost(b)}" playsinline autoplay loop ${BRMUTE?'muted':''} controls></video>`
+     :`<img src="${brFile(b)}" alt="${esc(b.t)}">`}</div>
+   <button class="brnav r" onclick="brStep(1)" aria-label="Next">›</button>
+  </div>
+  <div class="brbar">
+   <div style="min-width:0;flex:1">
+    <div style="font-size:15px;font-weight:700;letter-spacing:-.3px">${esc(b.t)}</div>
+    <div class="mini" style="margin-top:3px">${esc(BRCAT[b.c])} · ${esc(BRSUB[b.s])}${b.k?' · '+brDur(b.d):''} · ${brMB(b.z)}</div>
+   </div>
+   <button class="btn" onclick="brDownload('${b.i}')">${ico('download',16)} Save to device</button>
+   ${b.u?`<a class="btn gh" href="${b.u}" target="_blank" rel="noopener">${ico('ext',16)} Full quality</a>`:''}
+  </div>`;
+ el.classList.add('show');document.body.style.overflow='hidden';
+ const v=$('#brvid');if(v){v.muted=BRMUTE;v.play().catch(()=>{v.muted=true;BRMUTE=true;v.play().catch(()=>{})})}
+}
+function brollView(){
+ const L=brList(), picks=Object.keys(BRPICK).length;
+ const catN=c=>BROLL.filter(b=>b.c===c).length;
+ const subs=[...new Set(BROLL.filter(b=>BRC<0||b.c===BRC).map(b=>b.s))].sort();
+ const subN=s=>BROLL.filter(b=>(BRC<0||b.c===BRC)&&b.s===s).length;
+ const vids=BROLL.filter(b=>b.k).length, imgs=BROLL.length-vids;
+ return `${bar('B-roll','Every clip Chris shot, in here. Watch it, save it, cut with it — you never have to leave the app to get footage.')}
+ <div class="anim">
+ <div class="stats three" style="margin-bottom:16px">
+  <div class="st"><div class="v mono">${vids}</div><div class="k">clips ready to use</div></div>
+  <div class="st"><div class="v mono">${imgs}</div><div class="k">product stills</div></div>
+  <div class="st"><div class="v mono">${BRCAT.length}</div><div class="k">angles covered</div></div>
+ </div>
+ <div class="chips"><input class="search" placeholder="Search the b-roll" value="${esc(BRQ)}" oninput="setBRQ(this.value)"></div>
+ <div class="flab">Angle</div>
+ <div class="chips row"><button class="chip ${BRC<0?'on':''}" onclick="setBRC(-1)">All<i>${BROLL.length}</i></button>
+  ${BRCAT.map((c,n)=>`<button class="chip ${BRC===n?'on':''}" onclick="setBRC(${n})">${esc(c)}<i>${catN(n)}</i></button>`).join('')}</div>
+ ${subs.length>1?`<div class="flab">Type</div><div class="chips row"><button class="chip ${BRS<0?'on':''}" onclick="setBRS(-1)">All</button>
+  ${subs.map(s=>`<button class="chip ${BRS===s?'on':''}" onclick="setBRS(${s})">${esc(BRSUB[s])}<i>${subN(s)}</i></button>`).join('')}</div>`:''}
+ <div class="note" style="margin-bottom:15px">These play straight from the app so you can scrub them on your phone. <b style="color:var(--tx)">Save to device</b> pulls the file down. <b style="color:var(--tx)">Full quality</b> opens the original in Frame.io when you need it for a real edit.</div>
+ ${picks?`<div class="brsel"><b>${picks} selected</b><button class="btn sm" onclick="brGrab()">${ico('download',15)} Save all ${picks}</button><button class="btn sm gh" onclick="brClear()">Clear</button></div>`:''}
+ <div class="vg brg anim" id="brgrid">${brCards()}</div>
+ <div class="mini" style="margin-top:16px;text-align:center">Showing ${L.length} of ${BROLL.length}</div>
+ </div>`;
+}
+/* ===================== APPROVALS (admin) ===================== */
+let APF='pending';
+window.setAPF=v=>{APF=v;render()};
+function subCard(s,adminView){
+ const st=s.status;
+ const badge=st==='pending'?'<span class="pill warn">● Waiting</span>':st==='approved'?'<span class="pill live">✓ Approved</span>':'<span class="pill bad">Sent back</span>';
+ return `<div class="apc">
+  <div class="apt" onclick="playSub('${s.id}')">
+   ${s.poster?`<img src="${s.poster}" alt="">`:'<div class="ph"></div>'}
+   <div class="vp"><div>▶</div></div>
+   ${s.dur?`<span class="brd">${Math.floor(s.dur/60)}:${String(s.dur%60).padStart(2,'0')}</span>`:''}</div>
+  <div style="min-width:0;flex:1">
+   <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">${badge}<span class="mini">${ago(s.ts)==='just now'?'just now':ago(s.ts)+' ago'}</span></div>
+   <div style="font-size:14px;font-weight:700;letter-spacing:-.2px;margin-top:6px">${esc(s.qtitle)}</div>
+   <div class="mini" style="margin-top:3px">${adminView?esc(s.cname)+' · ':''}${esc(s.file)} · ${(s.size/1048576).toFixed(1)} MB · worth +${s.xp*M()} XP</div>
+   ${s.note?`<div class="mini" style="margin-top:6px;color:var(--tx2)">“${esc(s.note)}”</div>`:''}
+   ${s.reason?`<div class="note" style="margin-top:8px;padding:9px 11px"><b style="color:var(--tx)">Notes back.</b> ${esc(s.reason)}</div>`:''}
+   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:11px">
+    <button class="btn sm gh" onclick="playSub('${s.id}')">${ico('play',14)} Watch</button>
+    ${adminView&&st==='pending'?`<button class="btn sm" onclick="decideQ('${s.id}','approved')">Approve · +${s.xp*M()} XP</button>
+     <button class="btn sm gh" onclick="decideQ('${s.id}','denied')">Send back</button>`:''}
+    ${s.link?`<a class="btn sm gh" href="${esc(s.link)}" target="_blank" rel="noopener">${ico('ext',14)} Their post</a>`:''}
+   </div></div></div>`;
+}
+function approvalsView(){
+ const admin=me().admin;
+ const all=admin?SUBS:SUBS.filter(s=>s.cid===ME);
+ const pend=all.filter(s=>s.status==='pending');
+ const app=all.filter(s=>s.status==='approved');
+ const den=all.filter(s=>s.status==='denied');
+ const L=APF==='pending'?pend:APF==='approved'?app:APF==='denied'?den:all;
+ const xpOut=app.reduce((a,s)=>a+s.xp*M(),0);
+ return `${bar(admin?'Approvals':'My submissions',
+   admin?'Every quest video waiting on you. Points only move when you approve — nothing is automatic.'
+        :'Everything you have sent in for a quest, and where it stands.')}
+ <div class="anim">
+ ${admin&&!LIVE()?`<div class="note" style="margin-bottom:15px;border-color:var(--warn)"><b style="color:var(--warn)">Running on this device.</b> Submissions and approvals are stored in this browser until a backend is connected — creators on their own phones won’t sync yet. <button class="btn sm gh" style="margin-left:8px" onclick="go('admin')">Connect one</button></div>`:''}
+ <div class="stats three" style="margin-bottom:16px">
+  <div class="st"><div class="v mono" style="color:${pend.length?'var(--warn)':'var(--tx)'}">${pend.length}</div><div class="k">waiting on ${admin?'you':'Austin'}</div></div>
+  <div class="st"><div class="v mono" style="color:var(--gr)">${app.length}</div><div class="k">approved</div></div>
+  <div class="st"><div class="v mono">${xpOut.toLocaleString()}</div><div class="k">XP ${admin?'awarded':'earned'}</div></div>
+ </div>
+ <div class="chips row">
+  <button class="chip ${APF==='pending'?'on':''}" onclick="setAPF('pending')">Waiting<i>${pend.length}</i></button>
+  <button class="chip ${APF==='approved'?'on':''}" onclick="setAPF('approved')">Approved<i>${app.length}</i></button>
+  <button class="chip ${APF==='denied'?'on':''}" onclick="setAPF('denied')">Sent back<i>${den.length}</i></button>
+  <button class="chip ${APF==='all'?'on':''}" onclick="setAPF('all')">Everything<i>${all.length}</i></button>
+ </div>
+ <div style="display:grid;gap:12px">${L.map(s=>subCard(s,admin)).join('')||
+   `<div class="note">${APF==='pending'?(admin?'Nothing waiting. You are clear.':'Nothing waiting on Austin right now.'):'Nothing here yet.'}</div>`}</div>
+ </div>`;
+}
+/* ---------- the upload panel that lives inside a quest ---------- */
+function questUpload(q){
+ const cl=claimed(q.id);
+ const mine=subsFor(ME,q.id);
+ const pend=mine.filter(s=>s.status==='pending');
+ if(!cl)return `<div class="g p" style="margin-top:14px" id="qUpWrap"><h3>Take this quest</h3>
+  <div class="sub">Claim it, cut it, upload it here. Austin watches it and approves — that is when the ${q.x*M()} XP lands.</div>
+  <button class="btn" style="margin-top:14px" onclick="claimQ(${q.id})">${ico('target',16)} I'm working on this quest</button></div>`;
+ return `<div class="g p" style="margin-top:14px" id="qUpWrap">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+   <h3 style="margin:0">Upload your video</h3><span class="pill live">● Claimed</span></div>
+  <div class="sub" style="margin-top:6px">Attach the cut. It stays on your phone — Austin gets it to review, and the ${q.x*M()} XP lands the moment he approves.</div>
+  <div class="form" style="margin-top:14px">
+   <label class="qdrop" for="qUpInput">
+    <input type="file" id="qUpInput" accept="video/*" hidden onchange="pickQFile(this,${q.id})">
+    <div class="qdi">${ico('play',22)}</div>
+    <div><b>Choose your video</b><div class="mini">MP4 or MOV, up to 500MB</div></div>
+   </label>
+   <div id="qUpState"></div>
+   <div class="field"><label>Where you posted it <span class="mini">(optional)</span></label>
+    <input id="qUpLink" placeholder="Paste the TikTok / Reels / Trybe link"></div>
+   <div class="field"><label>Anything Austin should know <span class="mini">(optional)</span></label>
+    <input id="qUpNote" placeholder="Shot at the range at golden hour, hook lands at 1s"></div>
+   <div style="display:flex;gap:9px;flex-wrap:wrap">
+    <button class="btn" id="qSendBtn" onclick="sendQ(${q.id})">Send for approval</button>
+    <button class="btn gh" onclick="unclaimQ(${q.id})">Drop this quest</button></div>
+  </div>
+  ${mine.length?`<div class="sec" style="margin-top:20px"><h2 style="font-size:14px">Your submissions to this quest</h2>
+    <span class="mini">${pend.length} waiting</span></div>
+   <div style="display:grid;gap:11px">${mine.map(s=>subCard(s,false)).join('')}</div>`:''}
+  </div>`;
+}
 
 /* ===================== VIEWS ===================== */
 const V={
+ approvals(){return approvalsView()},
+ broll(){return brollView()},
 
 home(){const c=me(),n=nt(c.xp),beat=rk('xp').filter(x=>x.xp>c.xp).pop();
  const nq=QUESTS.filter(q=>q.got<q.need).sort((a,b)=>b.x-a.x)[0];
  const act=ACTIVE().filter(x=>!x.admin); const avgAppr=Math.round(act.reduce((s,x)=>s+appr(x),0)/Math.max(1,act.length));
  return `${bar('Home','Where you stand, what is live, and what the brand needs this week.')}
  <div class="anim">
+  ${pushCard()}
+  ${(()=>{const P=me().admin?pendingAll():myPending();return P.length?`<div class="apalert" onclick="go('approvals')">
+   <span class="pill warn">● ${P.length}</span>
+   <div style="flex:1;min-width:0"><b>${me().admin?(P.length===1?'A video is waiting on you':P.length+' videos are waiting on you'):(P.length===1?'Your video is with Austin':P.length+' of your videos are with Austin')}</b>
+   <div class="mini" style="margin-top:2px">${me().admin?'Approve it and the creator gets their points.':'Points land the moment he approves.'}</div></div>
+   <span class="mini">Open →</span></div>`:''})()}
   ${hero()}
   <div style="margin:-4px 0 12px">${livePill()} <span class="mini" style="margin-left:8px">Pulled from ${SYNC.source} · ranking and pool update the moment this refreshes</span></div>
   ${statrow()}
@@ -1751,6 +2323,7 @@ ads(){
    <button class="${isA?'on':''}" onclick="setFM('angles')">${ico('flame',16)} Winning angles <i>${LIB.filter(isAngle).length}</i></button>
    <button class="${!isA?'on':''}" onclick="setFM('inspo')">${ico('grid',16)} Inspiration <i>${LIB.filter(isInspo).length}</i></button>
    <button class="swipebtn" onclick="openSwipe(0)">${ico('play',16)} Swipe mode</button>
+   <button onclick=\"go('broll')\">${ico('film',16)} B-roll <i>${BROLL.length}</i></button>
   </div>
   <div class="chips"><input class="search" placeholder="${isA?'Search a hook':'Search creator or angle'}" value="${esc(LQ)}" oninput="setLQ(this.value)"></div>
   <div class="flab">${isA?'Angle':'Niche'}</div>
@@ -1789,15 +2362,15 @@ quests(){
      <div style="font-size:16px;line-height:1.7;color:var(--tx);margin-top:11px">${esc(q.brief)}</div>
      <div class="qpr" style="margin-top:20px"><div class="qbar"><div class="qbf" style="width:${p}%"></div></div><div class="mini mono">${q.got}/${q.need}</div></div>
      <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:16px">
-      <button class="btn" ${d?'disabled':''} onclick="logQ(${q.id})">${d?'Completed':'Log a submission +1'}</button>
       <button class="btn gh" onclick="openSwipe(LIBIDX(${r.id}))">Swipe this angle</button></div>
     </div>
+    ${questUpload(q)}
     <div class="g p" style="margin-top:14px"><h3>How to run this quest</h3>
      <ol style="margin:12px 0 0 17px;color:var(--tx2);font-size:13px;line-height:1.85">
       <li>Watch three references in this angle before you touch a camera.</li>
       <li>Write down what happens at 0-3s in each one. Look for the shape they share.</li>
       <li>Shoot your version in your own setting, with your own words.</li>
-      <li>Submit, then log it here.</li></ol>
+      <li>Upload it right here and send it to Austin. Points land when he approves.</li></ol>
      <div class="note" style="margin-top:14px">${q.subs} creators have submitted to this quest · $${q.paid} paid out on it so far.</div></div>
     ${refs.length?`<div class="sec"><h2>More in this angle</h2><span class="mini">${refs.length} references</span></div>
      <div class="rail2">${refs.map((x,n)=>vc(x,null,LIBIDX(x.id))).join('')}</div>`:''}
@@ -1832,10 +2405,6 @@ board(){const L=rk('sales'),c=me(),roster=ACTIVE().filter(x=>!x.admin);
  const top=Math.max(...rows.map(x=>x.v))||1;
  const ms=myShare();
  const dist=RANKS.map(t=>({t,n:roster.filter(x=>tOf(x.v).n===t.n).length}));
- const PRIZES=[['$250','Scout prize','5 qualified videos · paid once'],
-  ['$750','Operator prize','15 qualified videos · paid once'],
-  ['$2,000','Core prize','30 qualified videos · paid once'],
-  ['$5,000','Signature prize','60 qualified videos · paid once']];
  setTimeout(()=>{try{paintPool()}catch(e){}},0);
  return `${bar('Leaderboard','Ranked on sales you actually drove. Everyone sees the order — nobody sees anyone else\u2019s numbers but their own.')}
  <div class="anim">
@@ -1888,8 +2457,6 @@ board(){const L=rk('sales'),c=me(),roster=ACTIVE().filter(x=>!x.admin);
   <div class="bright"><div style="text-align:right">${x.id===ME
    ?`<div class="rx mono" style="color:var(--gr)">$${x.sales.toLocaleString()}</div><div class="mini">your sales</div>`
    :`<div class="rx mono" style="color:var(--tx4)">••••</div><div class="mini">private</div>`}</div></div></div>`}).join('')}</div>
- <div class="sec"><h2>Also on the line</h2><span class="mini">one-time prizes</span></div>
- <div class="prz">${PRIZES.map(p=>`<div class="pz"><b class="mono">${p[0]}</b><div class="w">${p[1]}</div><div class="d">${p[2]}</div></div>`).join('')}</div>
  <div class="sec"><h2>Where everyone sits</h2><span class="mini">${CR.length} accounts</span></div>
  <div class="g p">
   <div class="dist">${dist.map(d=>`<i style="width:${Math.max(d.n/CR.length*100,d.n?1.5:0)}%;background:${d.t.c}"></i>`).join('')}<i style="flex:1;background:rgba(255,255,255,.06)"></i></div>
@@ -2041,6 +2608,25 @@ admin(){
  setTimeout(()=>{try{econ()}catch(e){};try{paintPool(true)}catch(e){}},0);
  return `${bar('Brand controls','Levers you can pull without shipping anything.')}
  <div class="grid g2 anim">
+  <div class="g p" style="grid-column:1/-1"><h3>Where submissions go</h3>
+   <div class="sub">Quest videos and approvals need somewhere to live. Right now they live <b style="color:var(--tx)">${LIVE()?'on your connected backend':'only in this browser'}</b>.</div>
+   ${LIVE()?`<div class="note" style="margin-top:13px;border-color:var(--gr)"><b style="color:var(--gr)">Connected.</b> ${esc(BACKEND.mode==='supa'?'Supabase':'Google Apps Script')} · every creator's phone syncs to the same queue.</div>`
+   :`<div class="note" style="margin-top:13px;border-color:var(--warn)"><b style="color:var(--warn)">Not connected yet.</b> Creators can claim quests, upload and send — but their submission sits on their own phone until you connect a backend. Paste a URL below and everything syncs.</div>`}
+   <div class="form" style="margin-top:14px">
+    <div class="field"><label>Backend type</label>
+     <select id="bkMode"><option value="local" ${BACKEND.mode==='local'?'selected':''}>Not connected (this device only)</option>
+      <option value="gas" ${BACKEND.mode==='gas'?'selected':''}>Google Apps Script — your Google account, no signup</option>
+      <option value="supa" ${BACKEND.mode==='supa'?'selected':''}>Supabase — real video upload</option></select></div>
+    <div class="field"><label>URL</label><input id="bkUrl" placeholder="https://script.google.com/macros/s/.../exec" value="${esc(BACKEND.url)}"></div>
+    <div class="field"><label>Public anon key <span class="mini">(Supabase only)</span></label><input id="bkKey" placeholder="eyJhbGci..." value="${esc(BACKEND.key)}"></div>
+    <div style="display:flex;gap:9px;flex-wrap:wrap">
+     <button class="btn" onclick="saveBackend()">Save & test</button>
+     <button class="btn gh" onclick="testBackend()">Test connection</button>
+     ${LIVE()?`<button class="btn gh" onclick="clearBackend()">Disconnect</button>`:''}</div>
+    <div id="bkOut" class="mini" style="margin-top:4px"></div>
+   </div>
+   <div class="note" style="margin-top:13px">Setting this here switches <b style="color:var(--tx)">your</b> device over so you can test it end to end. Send me the URL and I bake it into the build so every creator's phone points at it too.</div>
+  </div>
   <div class="g p"><h3>Double XP weekend</h3><div class="sub">Every action worth 2× while this is on. Use it when the library has a gap.</div>
    <button class="btn ${DXP?'gh':''}" style="margin-top:15px" onclick="toggleDXP()">${DXP?'Turn Double XP off':'Turn Double XP on'}</button></div>
   <div class="g p"><h3>XP rules</h3><div class="sub">What earns points, and why.</div>
@@ -2091,11 +2677,11 @@ admin(){
 };
 
 /* ===================== NAV / RENDER ===================== */
-const NAV=[['','WATCH'],['home','Home','home'],['reviews','My ad reviews','play'],['stats','Analytics','chart'],['angles','Winning angles','flame'],['inspo','Inspiration','grid'],['',''],
- ['','COMPETE'],['quests','Quests','target'],['board','Leaderboard','trophy'],['profile','My profile','user'],['',''],
+const NAV=[['','WATCH'],['home','Home','home'],['reviews','My ad reviews','play'],['stats','Analytics','chart'],['angles','Winning angles','flame'],['inspo','Inspiration','grid'],['broll','B-roll','film'],['',''],
+ ['','COMPETE'],['quests','Quests','target'],['approvals','Approvals','check'],['board','Leaderboard','trophy'],['profile','My profile','user'],['',''],
  ['','BRAND'],['brand','Brand dashboard','grid'],['admin','Brand controls','gear']];
-const MOB=[['home','Home','home'],['stats','Stats','chart'],['angles','Angles','flame'],['inspo','Inspo','grid'],['quests','Quests','target'],['board','Board','trophy']];
-const TITLES={home:'Home',stats:'Analytics',reviews:'My ad reviews',angles:'Winning angles',inspo:'Inspiration',feed:'Library',quests:'Quests',board:'Leaderboard',profile:'My profile',brand:'Brand dashboard',admin:'Brand controls'};
+const MOB=[['home','Home','home'],['inspo','Inspo','grid'],['broll','B-roll','film'],['quests','Quests','target'],['approvals','Review','check'],['board','Board','trophy']];
+const TITLES={home:'Home',broll:'B-roll',approvals:'Approvals',stats:'Analytics',reviews:'My ad reviews',angles:'Winning angles',inspo:'Inspiration',feed:'Library',quests:'Quests',board:'Leaderboard',profile:'My profile',brand:'Brand dashboard',admin:'Brand controls'};
 
 function render(){
  const c=me();
@@ -2103,10 +2689,11 @@ function render(){
   if(!n[0]&&!n[1])return '<div style="height:6px"></div>';
   if(!n[0])return (n[1]==='BRAND'&&!c.admin)?'':`<div class="nlbl">${n[1]}</div>`;
   if((n[0]==='admin'||n[0]==='brand')&&!c.admin)return '';
-  const o=n[0]==='quests'?QUESTS.filter(q=>q.got<q.need).length:0;
+  if(n[0]==='approvals'&&!c.admin)n=['approvals','My submissions','check'];
+  const o=n[0]==='quests'?QUESTS.filter(q=>q.got<q.need).length:(n[0]==='approvals'?(c.admin?pendingAll().length:myPending().length):0);
   const on=(n[0]==='angles')?(VIEW==='feed'&&FMODE==='angles'):(n[0]==='inspo')?(VIEW==='feed'&&FMODE==='inspo'):VIEW===n[0];
   return `<button class="${on?'on':''}" onclick="go('${n[0]}')">${ico(n[2])}<span>${n[1]}</span>${o?`<span class="pip">${o}</span>`:''}</button>`}).join('');
- $('#mobnav').innerHTML=MOB.map(m=>{const o=m[0]==='quests'?QUESTS.filter(q=>q.got<q.need).length:0;
+ $('#mobnav').innerHTML=MOB.map(m0=>{const m=(m0[0]==='approvals'&&!c.admin)?['approvals','Mine','check']:m0;const o=m[0]==='quests'?QUESTS.filter(q=>q.got<q.need).length:(m[0]==='approvals'?(c.admin?pendingAll().length:myPending().length):0);
   const on=(m[0]==='angles')?(VIEW==='feed'&&FMODE==='angles'):(m[0]==='inspo')?(VIEW==='feed'&&FMODE==='inspo'):VIEW===m[0];
   return `<button class="${on?'on':''}" onclick="go('${m[0]}')">${ico(m[2],20)}<span>${m[1]}</span>${o?`<b>${o}</b>`:''}</button>`}).join('');
  const t=tOf(c.v);
@@ -2116,9 +2703,10 @@ function render(){
   sw.onchange=e=>{ME=+e.target.value;RVWHO=null;render()}}
  else {sw.style.display='none';sw.innerHTML=''}
  $('#mtitle').textContent=(VIEW==='feed')?(FMODE==='angles'?'Winning angles':'Inspiration'):(TITLES[VIEW]||'Home');
- $('#mnotif').textContent=NOTIF.length;
+ $('#mnotif').textContent=notifList().length;
  $('#main').innerHTML=V[VIEW]();
  if(VIEW==='stats'){try{bindChart()}catch(e){}}
+ try{dayNudge()}catch(e){}
 }
 window.go=k=>{QS=null;LSEL=null;ASEL=null;
  if(k==='angles'){FMODE='angles';LANG='All';LQ='';k='feed'}
