@@ -1829,18 +1829,18 @@ function notifList(){
  const c=me();
  const mine=[];
  if(c.admin){
-  pendingAll().forEach(s=>mine.push({i:'🕐',t:s.cname+' needs an approval',b:esc(s.qtitle)+' · tap Approvals to watch it',ago:ago(s.ts),admin:1,sub:s.id}));
+  pendingAll().forEach(s=>mine.push({i:'🕐',t:s.cname+' needs an approval',b:esc(s.qtitle)+' · tap Approvals to watch it',ago:agoTs(s.ts),admin:1,sub:s.id}));
   mine.push(...milestones());
  } else {
   SUBS.filter(s=>s.cid===c.id).slice(0,6).forEach(s=>{
-   if(s.status==='approved')mine.push({i:'✅',t:'Your '+s.qtitle+' video was approved',b:'+'+(s.xp*M())+' XP',ago:ago(s.decided||s.ts)});
-   else if(s.status==='denied')mine.push({i:'✏️',t:'Changes needed: '+s.qtitle,b:s.reason||'',ago:ago(s.decided||s.ts)});
-   else mine.push({i:'🕐',t:'Waiting on approval',b:s.qtitle,ago:ago(s.ts)});
+   if(s.status==='approved')mine.push({i:'✅',t:'Your '+s.qtitle+' video was approved',b:'+'+(s.xp*M())+' XP',ago:agoTs(s.decided||s.ts)});
+   else if(s.status==='denied')mine.push({i:'✏️',t:'Changes needed: '+s.qtitle,b:s.reason||'',ago:agoTs(s.decided||s.ts)});
+   else mine.push({i:'🕐',t:'Waiting on approval',b:s.qtitle,ago:agoTs(s.ts)});
   });
  }
  return mine.concat(NOTIF);
 }
-function ago(ts){if(!ts)return '';const m=Math.round((Date.now()-ts)/60000);
+function agoTs(ts){if(!ts)return '';const m=Math.round((Date.now()-ts)/60000);
  if(m<1)return 'just now';if(m<60)return m+'m';const h=Math.round(m/60);if(h<24)return h+'h';return Math.round(h/24)+'d'}
 
 /* ---------- push ---------- */
@@ -2062,7 +2062,7 @@ function subCard(s,adminView){
    <div class="vp"><div>▶</div></div>
    ${s.dur?`<span class="brd">${Math.floor(s.dur/60)}:${String(s.dur%60).padStart(2,'0')}</span>`:''}</div>
   <div style="min-width:0;flex:1">
-   <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">${badge}<span class="mini">${ago(s.ts)==='just now'?'just now':ago(s.ts)+' ago'}</span></div>
+   <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">${badge}<span class="mini">${agoTs(s.ts)==='just now'?'just now':agoTs(s.ts)+' ago'}</span></div>
    <div style="font-size:14px;font-weight:700;letter-spacing:-.2px;margin-top:6px">${esc(s.qtitle)}</div>
    <div class="mini" style="margin-top:3px">${adminView?esc(s.cname)+' · ':''}${esc(s.file)} · ${(s.size/1048576).toFixed(1)} MB · worth +${s.xp*M()} XP</div>
    ${s.note?`<div class="mini" style="margin-top:6px;color:var(--tx2)">“${esc(s.note)}”</div>`:''}
