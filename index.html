@@ -1617,16 +1617,52 @@ const BACKEND={mode:(window.RCG_BACKEND&&window.RCG_BACKEND.mode)||'local',
                adminKey:''};   // set by Austin on his device only — never shipped
 const SUBKEY='rcg_subs_v1', CLKEY='rcg_claims_v1', NKEY='rcg_seen_v1', PUSHKEY='rcg_push_v1';
 
-/* ---------- tiny IndexedDB for the video files ---------- */
-let IDB=null;
-function idb(){if(IDB)return IDB;
- IDB=new Promise((res,rej)=>{const r=indexedDB.open('rcg',1);
-  r.onupgradeneeded=()=>{const d=r.result;if(!d.objectStoreNames.contains('blobs'))d.createObjectStore('blobs')};
-  r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});
- return IDB}
-async function blobPut(k,v){try{const d=await idb();return new Promise((res,rej)=>{const t=d.transaction('blobs','readwrite');t.objectStore('blobs').put(v,k);t.oncomplete=()=>res(1);t.onerror=()=>rej(t.error)})}catch(e){return 0}}
-async function blobGet(k){try{const d=await idb();return new Promise(res=>{const t=d.transaction('blobs','readonly');const q=t.objectStore('blobs').get(k);q.onsuccess=()=>res(q.result||null);q.onerror=()=>res(null)})}catch(e){return null}}
-async function blobDel(k){try{const d=await idb();return new Promise(res=>{const t=d.transaction('blobs','readwrite');t.objectStore('blobs').delete(k);t.oncomplete=()=>res(1);t.onerror=()=>res(0)})}catch(e){return 0}}
+/* ---------- tiny IndexedDB for the video files ----------
+   Purely a convenience: it keeps a local copy so the creator can replay what
+   they sent and so Austin can watch it without a round trip. It is NEVER on the
+   critical path — IndexedDB can hang indefinitely (a blocked deleteDatabase, a
+   locked profile, private browsing), and a stuck local cache must never stop a
+   submission from reaching the server. Everything here fails fast and quiet. */
+const IDB_TIMEOUT=4000;
+const withTimeout=(p,ms,fallback)=>Promise.race([p,new Promise(r=>setTimeout(()=>r(fallback),ms))]);
+let IDB=null, IDB_DEAD=false;
+function idb(){
+ if(IDB_DEAD)return Promise.resolve(null);
+ if(IDB)return IDB;
+ IDB=new Promise(res=>{
+  let done=false;
+  const fin=v=>{if(done)return;done=true;if(!v)IDB_DEAD=true;res(v)};
+  setTimeout(()=>fin(null),IDB_TIMEOUT);
+  let r;
+  try{r=indexedDB.open('rcg',1)}catch(e){return fin(null)}
+  r.onupgradeneeded=()=>{try{const d=r.result;if(!d.objectStoreNames.contains('blobs'))d.createObjectStore('blobs')}catch(e){}};
+  r.onsuccess=()=>fin(r.result);
+  r.onerror=()=>fin(null);
+  r.onblocked=()=>fin(null);
+ });
+ return IDB;
+}
+async function blobPut(k,v){
+ const d=await idb(); if(!d)return 0;
+ return withTimeout(new Promise(res=>{
+  try{const t=d.transaction('blobs','readwrite');t.objectStore('blobs').put(v,k);
+   t.oncomplete=()=>res(1);t.onerror=()=>res(0);t.onabort=()=>res(0)}catch(e){res(0)}
+ }),IDB_TIMEOUT,0);
+}
+async function blobGet(k){
+ const d=await idb(); if(!d)return null;
+ return withTimeout(new Promise(res=>{
+  try{const t=d.transaction('blobs','readonly');const q=t.objectStore('blobs').get(k);
+   q.onsuccess=()=>res(q.result||null);q.onerror=()=>res(null);t.onabort=()=>res(null)}catch(e){res(null)}
+ }),IDB_TIMEOUT,null);
+}
+async function blobDel(k){
+ const d=await idb(); if(!d)return 0;
+ return withTimeout(new Promise(res=>{
+  try{const t=d.transaction('blobs','readwrite');t.objectStore('blobs').delete(k);
+   t.oncomplete=()=>res(1);t.onerror=()=>res(0);t.onabort=()=>res(0)}catch(e){res(0)}
+ }),IDB_TIMEOUT,0);
+}
 
 /* ---------- local mirror ---------- */
 const lsGet=(k,f)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):f}catch(e){return f}};
@@ -1649,10 +1685,10 @@ const REMOTE={
   if(BACKEND.mode==='supa'){
    let vurl=null;
    if(file){const path=`subs/${sub.id}_${(file.name||'clip').replace(/[^\w.\-]+/g,'_')}`;
-    const up=await fetch(`${BACKEND.url}/storage/v1/object/${path}`,{method:'POST',
+    const up=await fetch(`${BACKEND.url}/storage/v1/object/${path}`,{method:'POST',signal:netTimeout(120000),
      headers:{apikey:BACKEND.key,Authorization:'Bearer '+BACKEND.key,'Content-Type':file.type||'video/mp4'},body:file});
     if(up.ok)vurl=`${BACKEND.url}/storage/v1/object/public/${path}`}
-   const r=await fetch(`${BACKEND.url}/rest/v1/submissions`,{method:'POST',
+   const r=await fetch(`${BACKEND.url}/rest/v1/submissions`,{method:'POST',signal:netTimeout(),
     headers:{apikey:BACKEND.key,Authorization:'Bearer '+BACKEND.key,'Content-Type':'application/json',Prefer:'return=minimal'},
     body:JSON.stringify(Object.assign({},sub,{video_url:vurl,status:'pending',reason:'',decided:null,queued:undefined}))});
    if(!r.ok){let t='';try{t=(await r.text()).slice(0,160)}catch(e){}return {ok:false,error:t,video_url:vurl}}
@@ -1666,7 +1702,7 @@ const REMOTE={
   }
   if(BACKEND.mode==='supa'){
    const r=await fetch(`${BACKEND.url}/rest/v1/submissions?select=*&order=ts.desc`,
-    {headers:{apikey:BACKEND.key,Authorization:'Bearer '+BACKEND.key}});
+    {signal:netTimeout(20000),headers:{apikey:BACKEND.key,Authorization:'Bearer '+BACKEND.key}});
    return r.ok?await r.json():[];
   }
   return null;
@@ -1680,7 +1716,7 @@ const REMOTE={
    // Direct UPDATE is blocked by RLS on purpose. Only decide() can move a status,
    // and it wants the admin key that lives on Austin's device and nowhere else.
    if(!BACKEND.adminKey)return {ok:false,error:'no admin key'};
-   const r=await fetch(`${BACKEND.url}/rest/v1/rpc/decide`,{method:'POST',
+   const r=await fetch(`${BACKEND.url}/rest/v1/rpc/decide`,{method:'POST',signal:netTimeout(),
     headers:{apikey:BACKEND.key,Authorization:'Bearer '+BACKEND.key,'Content-Type':'application/json'},
     body:JSON.stringify({p_id:id,p_status:status,p_reason:reason||'',p_key:BACKEND.adminKey})});
    let j=null; try{j=await r.json()}catch(e){}
@@ -1690,6 +1726,8 @@ const REMOTE={
  }
 };
 const toB64=f=>new Promise(res=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.readAsDataURL(f)});
+/* every network call gets a ceiling — a hung request must not freeze the UI */
+const netTimeout=(ms=45000)=>{const c=new AbortController();setTimeout(()=>c.abort(),ms);return c.signal};
 const LIVE=()=>BACKEND.mode!=='local';
 
 /* ---------- poster frame from the creator's own file ---------- */
@@ -1773,11 +1811,30 @@ window.sendQ=async qid=>{
    link,note,file:PENDFILE.name,size:PENDFILE.size,dur:PENDFILE.__dur||0,
    poster:PENDFILE.__poster||null,ts:Date.now(),status:'pending',reason:'',video_url:null};
  const btn=$('#qSendBtn');if(btn){btn.disabled=true;btn.textContent='Sending…'}
- await blobPut(id,PENDFILE);
- try{const r=await REMOTE.push(sub,PENDFILE);if(r&&r.video_url)sub.video_url=r.video_url}
- catch(e){sub.queued=true}
+ const file=PENDFILE;
+ PENDFILE=null;                       // taken; a double tap cannot send it twice
+
+ // local copy is best-effort and time-boxed — never blocks the send
+ blobPut(id,file).catch(()=>{});
+
+ let sent=false, err='';
+ try{
+  const r=await REMOTE.push(sub,file);
+  if(r&&r.video_url)sub.video_url=r.video_url;
+  sent=!!(r&&r.ok!==false);
+  if(!sent)err=(r&&r.error)||'server refused it';
+ }catch(e){err=e.name==='AbortError'?'timed out':e.message}
+
+ if(LIVE()&&!sent){
+  // it never reached the server — say so and give them the file back
+  sub.queued=true;
+  PENDFILE=file;
+  if(btn){btn.disabled=false;btn.textContent='Send for approval'}
+  toast('Could not send it — '+err+'. Your video is still attached, try again.');
+  return;
+ }
+
  SUBS.unshift(sub);saveSubs();
- PENDFILE=null;
  notifyAdmin(sub);
  render();
  toast(LIVE()?'Sent to Austin for approval':'Submitted — waiting on approval');
