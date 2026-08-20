@@ -1,1 +1,1 @@
-{"id": 23, "n": "Alejandro Rico", "sales": 310, "$": 46, "v": 2, "sub": 2, "xp": 0, "rank": 22, "pool": {"pct": 0.3441, "amt": 17.2}}
+{"id": 23, "n": "Alejandro Rico", "sales": 310, "$": 46, "v": 2, "sub": 2, "xp": 0, "rank": 22, "pool": {"pct": 0.3441, "amt": 17.2}, "an": {"rows": [{"who": "Alejandro Rico", "id": "f003d007", "ads": 1, "cpa": 147.95, "pv": 310.94, "roas": 1.05, "sales": 309.96, "spend": 295.9, "ts": 25.08}], "agg": {"vids": 1, "ads": 1, "cpa": 147.95, "pv": 310.94, "roas": 1.05, "sales": 309.96, "spend": 295.9, "ts": 25.08}}}
