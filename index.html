@@ -1595,6 +1595,16 @@ window.bindChart=()=>{
  });
  document.addEventListener('click',hide,{passive:true});
 };
+/* Where this build talks to. The URL and publishable key are public by design —
+   Supabase expects them in client code, and the database is locked down with RLS
+   so that holding them gets you exactly two things: submit a video, read the
+   queue. Approving is gated behind a separate admin key that is NOT in this file
+   and never will be — it lives only in Austin's browser. */
+window.RCG_BACKEND = {
+  mode: 'supa',
+  url:  'https://wzlsestcuynztzwjidvj.supabase.co',
+  key:  'sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht'
+};
 /* ===================== SUBMISSIONS · APPROVALS · NOTIFICATIONS =====================
    The app is a static site, so this layer is written against a pluggable backend.
    BACKEND.mode 'local'  — everything lives on this device (works with zero setup)
@@ -1603,7 +1613,8 @@ window.bindChart=()=>{
    Switching modes changes nothing above this line: same UI, same calls. */
 const BACKEND={mode:(window.RCG_BACKEND&&window.RCG_BACKEND.mode)||'local',
                url:(window.RCG_BACKEND&&window.RCG_BACKEND.url)||'',
-               key:(window.RCG_BACKEND&&window.RCG_BACKEND.key)||''};
+               key:(window.RCG_BACKEND&&window.RCG_BACKEND.key)||'',
+               adminKey:''};   // set by Austin on his device only — never shipped
 const SUBKEY='rcg_subs_v1', CLKEY='rcg_claims_v1', NKEY='rcg_seen_v1', PUSHKEY='rcg_push_v1';
 
 /* ---------- tiny IndexedDB for the video files ---------- */
@@ -1643,8 +1654,9 @@ const REMOTE={
     if(up.ok)vurl=`${BACKEND.url}/storage/v1/object/public/${path}`}
    const r=await fetch(`${BACKEND.url}/rest/v1/submissions`,{method:'POST',
     headers:{apikey:BACKEND.key,Authorization:'Bearer '+BACKEND.key,'Content-Type':'application/json',Prefer:'return=minimal'},
-    body:JSON.stringify(Object.assign({},sub,{video_url:vurl}))});
-   return {ok:r.ok,video_url:vurl};
+    body:JSON.stringify(Object.assign({},sub,{video_url:vurl,status:'pending',reason:'',decided:null,queued:undefined}))});
+   if(!r.ok){let t='';try{t=(await r.text()).slice(0,160)}catch(e){}return {ok:false,error:t,video_url:vurl}}
+   return {ok:true,video_url:vurl};
   }
   return {ok:true,local:true};
  },
@@ -1665,10 +1677,14 @@ const REMOTE={
     body:JSON.stringify({op:'decide',id,status,reason})});return await r.json();
   }
   if(BACKEND.mode==='supa'){
-   const r=await fetch(`${BACKEND.url}/rest/v1/submissions?id=eq.${encodeURIComponent(id)}`,{method:'PATCH',
-    headers:{apikey:BACKEND.key,Authorization:'Bearer '+BACKEND.key,'Content-Type':'application/json',Prefer:'return=minimal'},
-    body:JSON.stringify({status,reason,decided:Date.now()})});
-   return {ok:r.ok};
+   // Direct UPDATE is blocked by RLS on purpose. Only decide() can move a status,
+   // and it wants the admin key that lives on Austin's device and nowhere else.
+   if(!BACKEND.adminKey)return {ok:false,error:'no admin key'};
+   const r=await fetch(`${BACKEND.url}/rest/v1/rpc/decide`,{method:'POST',
+    headers:{apikey:BACKEND.key,Authorization:'Bearer '+BACKEND.key,'Content-Type':'application/json'},
+    body:JSON.stringify({p_id:id,p_status:status,p_reason:reason||'',p_key:BACKEND.adminKey})});
+   let j=null; try{j=await r.json()}catch(e){}
+   return {ok:!!(j&&j.ok),error:(j&&j.error)||(r.ok?'':'http '+r.status)};
   }
   return {ok:true,local:true};
  }
@@ -1772,9 +1788,18 @@ window.decideQ=async(id,status)=>{
  const s=SUBS.find(x=>x.id===id);if(!s||s.status!=='pending')return;
  let reason='';
  if(status==='denied'){reason=(prompt('What should they fix? (they will see this)')||'').trim();if(!reason){toast('Give them a reason');return}}
+ if(LIVE()){
+  let r=null;
+  try{r=await REMOTE.decide(id,status,reason)}catch(e){r={ok:false,error:e.message}}
+  if(!r||!r.ok){
+   toast(r&&r.error==='no admin key'
+     ?'Add your admin approval key in Brand controls first'
+     :'Could not record that decision — '+((r&&r.error)||'no connection'));
+   return;
+  }
+ }
  s.status=status;s.reason=reason;s.decided=Date.now();
  saveSubs();
- try{await REMOTE.decide(id,status,reason)}catch(e){}
  if(status==='approved'){
   const q=QUESTS.find(x=>x.id===s.qid);
   if(q){q.got=Math.min(q.need,q.got+1);q.subs=(q.subs||0)+1;
@@ -1883,19 +1908,23 @@ function dayNudge(){
 }
 
 /* ---------- admin: connect a backend ---------- */
-(function(){const c=lsGet('rcg_backend',null);
- if(c&&c.mode){BACKEND.mode=c.mode;BACKEND.url=c.url||'';BACKEND.key=c.key||''}})();
+(function(){const c=lsGet('rcg_backend',null);if(!c)return;
+ // per-field merge: the build supplies url/key, this device supplies the admin key
+ ['mode','url','key','adminKey'].forEach(k=>{if(c[k]!=null&&c[k]!=='')BACKEND[k]=c[k]});
+ if(c.mode==='local')BACKEND.mode='local';})();
 window.saveBackend=async()=>{
  const mode=$('#bkMode').value, url=$('#bkUrl').value.trim(), key=$('#bkKey').value.trim();
+ const adminKey=($('#bkAdmin')&&$('#bkAdmin').value.trim())||'';
  if(mode!=='local'&&!/^https:\/\//.test(url)){$('#bkOut').textContent='That needs to be an https:// URL.';return}
  if(mode==='supa'&&!key){$('#bkOut').textContent='Supabase needs the public anon key too.';return}
- BACKEND.mode=mode;BACKEND.url=url;BACKEND.key=key;
- lsSet('rcg_backend',{mode,url,key});
+ if(mode==='supa'&&!adminKey){$('#bkOut').textContent='Paste the admin approval key too — without it you cannot approve anything.';return}
+ BACKEND.mode=mode;BACKEND.url=url;BACKEND.key=key;BACKEND.adminKey=adminKey;
+ lsSet('rcg_backend',{mode,url,key,adminKey});
  if(mode==='local'){render();toast('Back to this device only');return}
  await testBackend(true);
 };
-window.clearBackend=()=>{BACKEND.mode='local';BACKEND.url='';BACKEND.key='';
- lsSet('rcg_backend',{mode:'local',url:'',key:''});render();toast('Disconnected')};
+window.clearBackend=()=>{BACKEND.mode='local';BACKEND.url='';BACKEND.key='';BACKEND.adminKey='';
+ lsSet('rcg_backend',{mode:'local',url:'',key:'',adminKey:''});render();toast('Disconnected')};
 window.testBackend=async(quiet)=>{
  const out=$('#bkOut');if(out)out.textContent='Testing…';
  try{const r=await REMOTE.pull();
@@ -2660,13 +2689,15 @@ admin(){
       <option value="supa" ${BACKEND.mode==='supa'?'selected':''}>Supabase — real video upload</option></select></div>
     <div class="field"><label>URL</label><input id="bkUrl" placeholder="https://script.google.com/macros/s/.../exec" value="${esc(BACKEND.url)}"></div>
     <div class="field"><label>Public anon key <span class="mini">(Supabase only)</span></label><input id="bkKey" placeholder="eyJhbGci..." value="${esc(BACKEND.key)}"></div>
+    <div class="field"><label>Admin approval key <span class="mini">(Supabase only — stays on this device)</span></label>
+     <input id="bkAdmin" type="password" placeholder="${BACKEND.adminKey?'•••••••• saved on this device':'Paste the key the SQL printed for you'}" value="${esc(BACKEND.adminKey)}"></div>
     <div style="display:flex;gap:9px;flex-wrap:wrap">
      <button class="btn" onclick="saveBackend()">Save & test</button>
      <button class="btn gh" onclick="testBackend()">Test connection</button>
      ${LIVE()?`<button class="btn gh" onclick="clearBackend()">Disconnect</button>`:''}</div>
     <div id="bkOut" class="mini" style="margin-top:4px"></div>
    </div>
-   <div class="note" style="margin-top:13px">Setting this here switches <b style="color:var(--tx)">your</b> device over so you can test it end to end. Send me the URL and I bake it into the build so every creator's phone points at it too.</div>
+   <div class="note" style="margin-top:13px">The URL and anon key are public by design — they ship inside the app. The <b style="color:var(--tx)">admin approval key</b> is not: it stays in this browser and never goes into the build, which is the only reason a creator can't approve their own video and hand themselves XP.</div>
   </div>
   <div class="g p"><h3>Double XP weekend</h3><div class="sub">Every action worth 2× while this is on. Use it when the library has a gap.</div>
    <button class="btn ${DXP?'gh':''}" style="margin-top:15px" onclick="toggleDXP()">${DXP?'Turn Double XP off':'Turn Double XP on'}</button></div>
