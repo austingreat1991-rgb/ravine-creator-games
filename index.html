@@ -20,7 +20,7 @@
  --ln:rgba(255,255,255,.085); --ln2:rgba(255,255,255,.14);
  --tx:#EDEFF2; --tx2:#9AA2AE; --tx3:#646C79; --tx4:#454C58;
  --o:#FF6E20; --o2:#FFA25C; --oGlow:rgba(255,110,32,.28);
- --gr:#3DDC84; --gr2:rgba(61,220,132,.14);
+ --gr:#3DDC84;--warn:#FFB020;--bad:#FF5C4D; --gr2:rgba(61,220,132,.14);
  --bl:#5B9DFF;
  --r:22px; --r2:16px; --r3:12px;
  --sh:0 1px 2px rgba(0,0,0,.5),0 12px 34px rgba(0,0,0,.42);
@@ -140,6 +140,25 @@ h1.pt{font-size:31px;font-weight:800;letter-spacing:-1.1px;line-height:1.05}
 .chip.on{background:linear-gradient(145deg,#FF8036,#EF5B05);color:#fff;border-color:transparent;box-shadow:0 4px 16px var(--oGlow)}
 .chip i{font-style:normal;opacity:.55;font-size:11px}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:13px}
+/* ---- analytics chart ---- */
+.stats.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.stats.three .v{font-size:19px}
+.stats.three .k{font-size:9px;letter-spacing:.06em}
+.chartwrap{position:relative;margin:2px 0 0}
+.chartwrap svg{display:block;width:100%;height:auto;overflow:visible}
+.ctip{position:absolute;pointer-events:none;z-index:8;opacity:0;transform:translate(-50%,-118%);transition:opacity .12s;
+ background:rgba(10,12,16,.96);border:1px solid var(--ln);border-radius:11px;padding:9px 11px;min-width:132px;
+ box-shadow:0 14px 34px rgba(0,0,0,.6);backdrop-filter:blur(12px)}
+.ctip.on{opacity:1}
+.ctip b{display:block;font-size:11.5px;font-weight:700;color:var(--tx);margin-bottom:5px;letter-spacing:-.1px}
+.ctip .r{display:flex;justify-content:space-between;gap:14px;font-size:11px;color:var(--tx3);line-height:1.7}
+.ctip .r i{font-style:normal;color:var(--tx);font-weight:650;font-variant-numeric:tabular-nums}
+.clg{display:flex;gap:14px;flex-wrap:wrap;margin-top:11px;padding-top:11px;border-top:1px solid var(--ln)}
+.clg span{display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:600;color:var(--tx3);letter-spacing:.02em}
+.clg i{width:9px;height:9px;border-radius:50%;display:block}
+.hero{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:4px}
+.hero .hv{font-size:52px;font-weight:800;letter-spacing:-2.4px;line-height:.94;font-variant-numeric:tabular-nums}
+.hero .hs{font-size:12.5px;color:var(--tx3);padding-bottom:7px;line-height:1.5}
 .chips.row{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-ms-overflow-style:none;margin-left:-4px;margin-right:-4px;padding:2px 4px 6px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
 .chips.row::-webkit-scrollbar{display:none}
 .chips.row>*{flex:0 0 auto;scroll-snap-align:start}
@@ -1407,6 +1426,99 @@ if('serviceWorker' in navigator && location.protocol.startsWith('http')){
 }
 iosHint();
 
+/* ===================== ANALYTICS CHART =====================
+   Job: one creator, many videos, two measures that only mean something together —
+   how much money went behind a video (spend) and what came back (ROAS). A bar of
+   ROAS alone lies: a 3.4x on $77 is not the story a 1.5x on $13,000 is.
+   So: dot plot, spend on x (log — spend spans two orders of magnitude),
+   ROAS on y, dot size by spend, colour by state against break-even.
+   Status colour never carries meaning alone — every band is labelled and every
+   figure is repeated in the list underneath, which is the table view. */
+const BAND=r=>r>=2?'good':(r>=1?'warn':'bad');
+const BANDC={good:'var(--gr)',warn:'var(--warn)',bad:'var(--bad)'};
+const BANDHEX={good:'#3DDC84',warn:'#FFB020',bad:'#FF5C4D'};
+
+function roasChart(rows){
+ const pts=rows.filter(x=>x.spend>0);
+ if(pts.length<2)return '';
+ const W=340,H=190,L=30,R=12,T=14,B=26;
+ const lg=v=>Math.log10(Math.max(v,10));
+ const xs=pts.map(p=>lg(p.spend)), x0=Math.min(...xs)-.12, x1=Math.max(...xs)+.12;
+ const yTop=Math.max(3, Math.ceil(Math.max(...pts.map(p=>p.roas))*1.12));
+ const px=v=>L+(lg(v)-x0)/(x1-x0||1)*(W-L-R);
+ const py=v=>T+(1-Math.min(v,yTop)/yTop)*(H-T-B);
+ const mxs=Math.max(...pts.map(p=>p.spend));
+ const rad=s=>4+Math.sqrt(s/mxs)*7.5;                    // area, not radius, tracks spend
+
+ // x ticks at decade boundaries only — no crowding on a phone
+ const ticks=[100,1000,10000,100000].filter(v=>lg(v)>=x0&&lg(v)<=x1);
+ const yt=[]; for(let v=0;v<=yTop;v+=(yTop>6?2:1)) yt.push(v);
+
+ const real=pts.filter(p=>p.spend>=250);
+ const best=(real.length?real:pts).slice().sort((a,b)=>b.roas-a.roas)[0];
+ const grid=yt.map(v=>`<line x1="${L}" y1="${py(v)}" x2="${W-R}" y2="${py(v)}" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
+   <text x="${L-7}" y="${py(v)+3.5}" text-anchor="end" font-size="9" fill="rgba(255,255,255,.35)">${v}x</text>`).join('');
+ const xax=ticks.map(v=>`<text x="${px(v)}" y="${H-8}" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.35)">$${v>=1000?(v/1000)+'k':v}</text>`).join('');
+ // break-even and the line the brand actually funds against
+ const refs=`<line x1="${L}" y1="${py(1)}" x2="${W-R}" y2="${py(1)}" stroke="#FF5C4D" stroke-width="1.5" stroke-dasharray="4 4" opacity=".5"/>
+  <text x="${L+3}" y="${py(1)-5}" font-size="8" font-weight="700" fill="#FF5C4D" opacity=".9" letter-spacing=".06em">BREAK EVEN</text>
+  ${yTop>=2?`<line x1="${L}" y1="${py(2)}" x2="${W-R}" y2="${py(2)}" stroke="#3DDC84" stroke-width="1.5" stroke-dasharray="4 4" opacity=".45"/>
+  <text x="${L+3}" y="${py(2)-5}" font-size="8" font-weight="700" fill="#3DDC84" opacity=".85" letter-spacing=".06em">BRAND KEEPS FEEDING IT</text>`:''}`;
+ const dots=pts.map((p,i)=>{const b=BAND(p.roas);
+  return `<circle class="cdot" data-i="${i}" cx="${px(p.spend).toFixed(1)}" cy="${py(p.roas).toFixed(1)}" r="${rad(p.spend).toFixed(1)}"
+   fill="${BANDHEX[b]}" fill-opacity=".82" stroke="#0B0D11" stroke-width="2"/>`}).join('');
+ // one direct label: the video carrying the most money
+ const bl=best?`<text x="${px(best.spend).toFixed(1)}" y="${(py(best.roas)-rad(best.spend)-7).toFixed(1)}" text-anchor="middle"
+   font-size="9.5" font-weight="750" fill="rgba(255,255,255,.92)">best · ${best.roas.toFixed(2)}x</text>`:'';
+ const data=pts.map(p=>({id:p.id,s:Math.round(p.spend),r:+p.roas.toFixed(2),t:Math.round(p.ts),c:Math.round(p.cpa),v:Math.round(p.pv)}));
+ return `<div class="g p">
+  <h3>Where your money is going</h3>
+  <div class="sub" style="margin-top:5px;margin-bottom:12px">Each dot is one video. Further right means more spend behind it; higher means more came back. Tap one.</div>
+  <div class="chartwrap" id="cw" data-pts="${esc(JSON.stringify(data))}">
+   <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Spend against return for each of your videos">
+    ${grid}${refs}${xax}
+    <text x="${L}" y="${H-8}" font-size="9" fill="rgba(255,255,255,.3)">spend →</text>
+    ${dots}${bl}
+   </svg>
+   <div class="ctip" id="ctip"></div>
+  </div>
+  <div class="clg">
+   <span><i style="background:${BANDHEX.good}"></i>2x and up · winning</span>
+   <span><i style="background:${BANDHEX.warn}"></i>1–2x · working</span>
+   <span><i style="background:${BANDHEX.bad}"></i>under 1x · costing money</span>
+  </div>
+ </div>`;
+}
+window.bindChart=()=>{
+ const wrap=$('#cw'), tip=$('#ctip'); if(!wrap||!tip)return;
+ let D=[]; try{D=JSON.parse(wrap.dataset.pts||'[]')}catch(e){return}
+ const show=el=>{const d=D[+el.dataset.i]; if(!d)return;
+  const b=BAND(d.r);
+  tip.innerHTML=`<b>Video ${d.id}</b>
+   <div class="r"><span>Spend</span><i>$${d.s.toLocaleString()}</i></div>
+   <div class="r"><span>Ad revenue</span><i>$${d.v.toLocaleString()}</i></div>
+   <div class="r"><span>ROAS</span><i style="color:${BANDHEX[b]}">${d.r.toFixed(2)}x</i></div>
+   <div class="r"><span>Hook rate</span><i>${d.t}%</i></div>
+   <div class="r"><span>Per sale</span><i>${d.c?'$'+d.c.toLocaleString():'—'}</i></div>`;
+  const r=wrap.getBoundingClientRect(), c=el.getBoundingClientRect();
+  tip.classList.add('on');
+  const half=tip.offsetWidth/2, pad=6;
+  let x=c.left-r.left+c.width/2;
+  x=Math.max(half+pad, Math.min(r.width-half-pad, x));
+  tip.style.left=x+'px';
+  tip.style.top=Math.max(tip.offsetHeight*0.2, c.top-r.top)+'px';
+  wrap.querySelectorAll('.cdot').forEach(o=>o.setAttribute('fill-opacity',o===el?'1':'.28'));
+ };
+ const hide=()=>{tip.classList.remove('on');wrap.querySelectorAll('.cdot').forEach(o=>o.setAttribute('fill-opacity','.82'))};
+ wrap.querySelectorAll('.cdot').forEach(el=>{
+  el.style.cursor='pointer';
+  el.addEventListener('mouseenter',()=>show(el));
+  el.addEventListener('mouseleave',hide);
+  el.addEventListener('click',e=>{e.stopPropagation();show(el)});
+ });
+ document.addEventListener('click',hide,{passive:true});
+};
+
 /* ===================== VIEWS ===================== */
 const V={
 
@@ -1548,35 +1660,45 @@ ads(){
   <div class="g p"><h3>Nothing running yet</h3>
   <div class="sub" style="margin-top:6px">None of your videos had ad spend behind them in the window ${TOTALS.anFrom} – ${TOTALS.anTo}. The moment one goes live it shows up here with its own numbers.</div></div>`;
  const sortBtn=(k,l)=>`<button class="chip ${ASORT===k?'on':''}" onclick="setASort('${k}')">${l}</button>`;
- const key={spend:x=>x.spend, roas:x=>x.roas, cpa:x=>-x.cpa, ts:x=>x.ts, sales:x=>x.sales}[ASORT]||(x=>x.spend);
+ const key={spend:x=>x.spend, roas:x=>x.roas, cpa:x=>-x.cpa, ts:x=>x.ts, sales:x=>x.pv}[ASORT]||(x=>x.spend);
  rows.sort((x,y)=>key(y)-key(x));
- const real=rows.filter(x=>x.spend>=250);            // ignore videos with too little spend to judge
+ const real=rows.filter(x=>x.spend>=250);
  const best=real.slice().sort((x,y)=>y.roas-x.roas)[0];
  const worst=real.length>1?real.slice().sort((x,y)=>x.roas-y.roas)[0]:null;
  const mx=Math.max(...rows.map(x=>x.spend))||1;
- return `${bar('Analytics',`Every video of yours that has had ad spend behind it. ${TOTALS.anFrom} – ${TOTALS.anTo}, pulled from Trybe.`)}
-  ${agg?`<div class="stats" style="margin-bottom:15px">
-   <div class="st"><div class="v mono">${money(agg.spend)}</div><div class="k">Spend behind your videos</div></div>
-   <div class="st"><div class="v pos mono">${money(agg.sales)}</div><div class="k">Sales they drove</div></div>
-   <div class="st"><div class="v mono" style="color:${agg.roas>=2?'var(--gr)':'var(--tx)'}">${agg.roas.toFixed(2)}</div><div class="k">ROAS</div></div>
-   <div class="st"><div class="v mono">${money(agg.cpa)}</div><div class="k">Cost per sale</div></div>
-   <div class="st"><div class="v mono">${agg.ts.toFixed(1)}%</div><div class="k">Hook rate</div></div>
-   <div class="st"><div class="v mono">${agg.ads}</div><div class="k">Live ads</div></div>
+ const band=agg?BAND(agg.roas):'warn';
+ return `${bar('Analytics',`Every video of yours with real ad spend behind it. ${TOTALS.anFrom} – ${TOTALS.anTo}, from the Meta ad account.`)}
+  ${agg?`<div class="g p" style="margin-bottom:15px">
+   <div class="lbl">RETURN ON EVERYTHING YOU HAVE RUNNING</div>
+   <div class="hero" style="margin-top:9px">
+    <div class="hv mono" style="color:${BANDC[band]}">${agg.roas.toFixed(2)}x</div>
+    <div class="hs">${money(agg.spend)} spent<br>${money(agg.pv)} came back</div>
+   </div>
+   <div class="stats three" style="margin-top:16px">
+    <div class="st"><div class="v mono">${money(agg.cpa)}</div><div class="k">Cost per sale</div></div>
+    <div class="st"><div class="v mono">${agg.ts.toFixed(0)}%</div><div class="k">Hook rate</div></div>
+    <div class="st"><div class="v mono">${agg.vids}</div><div class="k">Videos with spend</div></div>
+   </div>
   </div>`:''}
-  ${best?`<div class="note" style="margin-bottom:15px"><b style="color:var(--tx)">Your best performer is doing ${best.roas.toFixed(2)}x on ${money(best.spend)} of spend at a ${best.ts.toFixed(0)}% hook rate.</b> That's the one to make three more of.${worst&&worst.id!==best.id?` Your weakest with real spend behind it is at ${worst.roas.toFixed(2)}x — worth watching what it does differently.`:''}</div>`:''}
+  ${roasChart(rows)}
+  ${best?`<div class="note" style="margin:15px 0"><b style="color:var(--tx)">Your best performer is doing ${best.roas.toFixed(2)}x on ${money(best.spend)} at a ${best.ts.toFixed(0)}% hook rate.</b> That is the one to make three more of.${worst&&worst.id!==best.id?` Your weakest with real money behind it is at ${worst.roas.toFixed(2)}x — worth watching what it does differently.`:''}</div>`:''}
   <div class="flab">Sort by</div>
-  <div class="chips row">${sortBtn('spend','Spend')}${sortBtn('roas','ROAS')}${sortBtn('cpa','Best CPA')}${sortBtn('ts','Hook rate')}${sortBtn('sales','Sales')}</div>
-  <div class="g p">${rows.map((x,i)=>`<div class="brow ${i===0?'me':''}">
+  <div class="chips row">${sortBtn('spend','Spend')}${sortBtn('roas','ROAS')}${sortBtn('cpa','Best CPA')}${sortBtn('ts','Hook rate')}${sortBtn('sales','Revenue')}</div>
+  <div class="g p">${rows.map((x,i)=>{const b=BAND(x.roas);
+   return `<div class="brow">
    <div class="rn mono">${i+1}</div>
    <div style="min-width:0;flex:1">
-    <div style="font-size:13px;font-weight:650">Video <span class="mono" style="color:var(--tx3)">${esc(x.id)}</span>${x.ads?` <span class="pill live">● ${x.ads} live</span>`:''}</div>
-    <div class="bmeta"><b>${money(x.spend)}</b> spend · <b>${x.roas.toFixed(2)}x</b> · <b>${x.ts.toFixed(0)}%</b> hook · <b>${money(x.cpa)}</b> per sale</div>
-    <div class="bbar"><i style="width:${Math.round(x.spend/mx*100)}%"></i></div></div>
+    <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+     <span style="font-size:13px;font-weight:650">Video <span class="mono" style="color:var(--tx3)">${esc(x.id)}</span></span>
+     <span class="pill" style="color:${BANDC[b]};border-color:${BANDC[b]}33">${x.roas.toFixed(2)}x</span>
+     ${x.ads?`<span class="pill live">● ${x.ads} live</span>`:''}</div>
+    <div class="bmeta"><b>${money(x.spend)}</b> spend · <b>${x.ts.toFixed(0)}%</b> hook · <b>${x.cpa?money(x.cpa):'—'}</b> per sale</div>
+    <div class="bbar"><i style="width:${Math.round(x.spend/mx*100)}%;background:${BANDC[b]}"></i></div></div>
    <div class="bright"><div style="text-align:right">
-    <div class="rx mono" style="color:${x.roas>=2?'var(--gr)':'var(--tx2)'}">${money(x.pv)}</div>
-    <div class="mini">ad revenue</div></div></div></div>`).join('')}</div>
-  <div class="note" style="margin-top:15px"><b style="color:var(--tx)">How to read this.</b> <b style="color:var(--tx)">Hook rate</b> is the share of people still watching after three seconds — it's the single number that tells you whether your opening worked. <b style="color:var(--tx)">ROAS</b> is ad revenue divided by spend; above 2x and the brand keeps feeding it. Ad revenue is what Meta attributes to that video, which is not the same as your Trybe sales — Trybe is what you get paid on, Meta is what decides whether the video keeps running. <b style="color:var(--tx)">Cost per sale</b> is what it costs to get one order out of that video. Program-wide right now: ${money(TOTALS.spend)} spent across ${TOTALS.anVids} videos at a ${TOTALS.ts}% average hook rate.</div>
-  <div class="note" style="margin-top:12px">Numbers come from the Meta ad account through Trybe and refresh when the brand pulls a new snapshot — they are not live to the second.</div>`},
+    <div class="rx mono">${money(x.pv)}</div>
+    <div class="mini">ad revenue</div></div></div></div>`}).join('')}</div>
+  <div class="note" style="margin-top:15px"><b style="color:var(--tx)">How to read this.</b> <b style="color:var(--tx)">Hook rate</b> is the share of people still watching after three seconds — the single number that tells you whether your opening worked. <b style="color:var(--tx)">ROAS</b> is ad revenue divided by spend; above 2x and the brand keeps feeding it. Ad revenue is what Meta attributes to that video, which is not the same as your Trybe sales — Trybe is what you get paid on, Meta is what decides whether a video keeps running. <b style="color:var(--tx)">Cost per sale</b> is what it costs to get one order out of that video. Program-wide right now: ${money(TOTALS.spend)} spent across ${TOTALS.anVids} videos at a ${TOTALS.ts}% average hook rate.</div>
+  <div class="note" style="margin-top:12px">Pulled from the Meta ad account through Trybe. Refreshes when the brand pulls a new snapshot — not live to the second.</div>`},
 
  feed(){
  const L=feedList();
@@ -1984,6 +2106,7 @@ function render(){
  $('#mtitle').textContent=(VIEW==='feed')?(FMODE==='angles'?'Winning angles':'Inspiration'):(TITLES[VIEW]||'Home');
  $('#mnotif').textContent=NOTIF.length;
  $('#main').innerHTML=V[VIEW]();
+ if(VIEW==='stats'){try{bindChart()}catch(e){}}
 }
 window.go=k=>{QS=null;LSEL=null;ASEL=null;
  if(k==='angles'){FMODE='angles';LANG='All';LQ='';k='feed'}
