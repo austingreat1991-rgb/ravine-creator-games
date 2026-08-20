@@ -1835,15 +1835,23 @@ profile(){const c=me(),got=BADGES.filter(b=>b.f(c)),mine=Object.keys(NOTES).map(
   <div class="st"><div class="v pos mono">$${comm(c).toLocaleString()}</div><div class="k">Commission</div></div>
  </div>
  ${c.sales===0?`<div class="note" style="margin-top:14px"><b style="color:var(--tx)">No sales attributed yet — that does not mean nothing happened.</b> Every approved video gets spend behind it. Your delivery numbers live in the section below the moment the ad account is connected.</div>`:''}
- <div class="sec"><h2>Ad performance</h2><span class="livep snap"><i></i>NOT CONNECTED</span></div>
+ <div class="sec"><h2>Ad performance</h2>${(c.an&&c.an.agg)?`<span class="livep snap"><i></i>SNAPSHOT · ${TOTALS.anFrom} – ${TOTALS.anTo}</span>`:`<span class="livep snap"><i></i>NO SPEND YET</span>`}</div>
  <div class="g p">
-  <div class="stats" style="opacity:.5">
+  ${(c.an&&c.an.agg)?`<div class="stats">
+   <div class="st"><div class="v mono">$${Math.round(c.an.agg.spend).toLocaleString()}</div><div class="k">Spend behind your videos</div></div>
+   <div class="st"><div class="v mono">${c.an.agg.ts.toFixed(1)}%</div><div class="k">Hook rate</div></div>
+   <div class="st"><div class="v mono" style="color:${c.an.agg.roas>=2?'var(--gr)':'var(--tx)'}">${c.an.agg.roas.toFixed(2)}</div><div class="k">ROAS</div></div>
+   <div class="st"><div class="v mono">$${Math.round(c.an.agg.cpa).toLocaleString()}</div><div class="k">Cost per sale</div></div>
+  </div>
+  <div class="note" style="margin-top:14px">Pulled from the Meta ad account through Trybe. <b style="color:var(--tx)">${c.an.rows.length} of your videos</b> have had real money behind them. Open <b style="color:var(--tx)">Analytics</b> to see them one by one and sort by what's working.</div>
+  <button class="btn" style="width:100%;margin-top:12px" onclick="go('stats')">Open Analytics</button>`
+  :`<div class="stats" style="opacity:.5">
    <div class="st"><div class="v mono">—</div><div class="k">Spend behind your videos</div></div>
    <div class="st"><div class="v mono">—</div><div class="k">Hook rate</div></div>
-   <div class="st"><div class="v mono">—</div><div class="k">CTR</div></div>
-   <div class="st"><div class="v mono">—</div><div class="k">Avg watch time</div></div>
+   <div class="st"><div class="v mono">—</div><div class="k">ROAS</div></div>
+   <div class="st"><div class="v mono">—</div><div class="k">Cost per sale</div></div>
   </div>
-  <div class="note" style="margin-top:14px">These four are <b style="color:var(--tx)">not in Trybe</b> — I checked. Trybe holds sales, orders and earnings. Spend, hook rate, CTR and watch time only exist in the Meta ad account, so they stay blank rather than showing a number I made up. They fill in for every creator, including everyone at zero sales, the moment the ad account is connected.</div>
+  <div class="note" style="margin-top:14px">None of your videos had ad spend behind them in this window, so there is nothing to report yet rather than a number I made up. The moment one goes live these fill in.</div>`}
  </div>
  <div class="sec"><h2>Badges</h2><span class="mini">${got.length} of ${BADGES.length}</span></div>
  <div class="g p"><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px">
