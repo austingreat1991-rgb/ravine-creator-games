@@ -671,10 +671,10 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border:0;border-radiu
 </style></head><body>
 <div id="login"><div class="lcard">
  <div class="lhead"><img src="./icon-192.png" alt="Ravine Creator Games"></div>
- <h1>Ravine Creator Games</h1><p>Sign in to your creator dashboard.</p>
+ <h1>Ravine Creator Games</h1><p>Enter the code Austin sent you.</p>
  <div class="lbox">
   <div id="lpick"></div>
-  <input id="lpw" type="text" placeholder="Your code (e.g. RVAB12CD34)" autocomplete="off" autocapitalize="characters" spellcheck="false" style="letter-spacing:1.5px;text-transform:uppercase">
+  <input id="lpw" type="text" placeholder="RVAB12CD34" autocomplete="off" autocapitalize="characters" spellcheck="false" style="letter-spacing:1.5px;text-transform:uppercase">
   <label class="stay"><input id="lstay" type="checkbox" checked><span></span>Keep me signed in on this device</label>
   <div id="lerr"></div>
   <button class="btn" style="width:100%" onclick="doLogin()">Enter Ravine Creator Games</button>
@@ -3021,27 +3021,34 @@ async function fetchMine(code){
  return await r.json();
 }
 function paintLogin(){
- $('#lpick').innerHTML=CR.map(c=>`<button class="lrow ${AUTH===c.id?'sel':''}" onclick="AUTH=${c.id};paintLogin()">
-  ${av(c,34,12)}<div style="min-width:0"><div class="ln">${esc(c.n)}</div>
-  <div class="lh">${c.admin?'<b style="color:var(--o2)">BRAND ADMIN</b> · ':''}${c.v} approved</div></div></button>`).join('');
+ // Nothing to paint. The picker used to list every creator's name and approved
+ // count to anyone who opened the URL, signed in or not. The code alone decides
+ // who you are, so the list was a liability with no purpose.
+ const el=$('#lpick'); if(el)el.innerHTML='';
 }
 function enter(id,greet){ME=id;VIEW='home';$('#lerr').textContent='';
  try{scopeAdminKey()}catch(e){}    // drop the approval key unless this is the brand account
  $('#login').classList.add('gone');$('#app').style.display='block';
  render();if(greet)setTimeout(()=>toast(`Welcome back, ${me().n.split(' ')[0]}`),420)}
+/* The code IS the identity. Asking people to also pick their name off a
+   47-person list was pure friction: the list was in roster order with no
+   search, so anyone past the first few rows tapped whoever was visible and got
+   told their own code belonged to someone else. The ?k= link path never asked
+   this, which is why some creators sailed in and others were stuck. Now both
+   paths do the same thing — enter the code, land in your own account. */
 window.doLogin=async()=>{
  const code=normCode($('#lpw').value);
- if(!AUTH){$('#lerr').textContent='Pick your account first.';return}
  if(!code){$('#lerr').textContent='Enter the code Austin sent you.';return}
  $('#lerr').textContent='Checking…';
  let d; try{ d=await fetchMine(code) }
- catch(e){ $('#lerr').textContent='That code did not work. Check it and try again.'; $('#lpw').value=''; return }
- if(d.id!==AUTH){ $('#lerr').textContent='That code belongs to a different account.'; $('#lpw').value=''; return }
- applyMine(d);
+ catch(e){ $('#lerr').textContent='That code did not work. Check it and try again — it looks like RVAB12CD34.'; return }
+ const c=applyMine(d);
+ if(!c){ $('#lerr').textContent='That code did not match an account. Send it to Austin and he will sort it.'; return }
+ AUTH=c.id;
  const stay=$('#lstay')?$('#lstay').checked:true;
  if(stay)saveSession(code);else clearSession();
  $('#lerr').textContent='';
- enter(AUTH,true)};
+ enter(c.id,true)};
 window.logout=()=>{
  // the approval key is per-device; leaving it behind would hand approval power
  // to whoever signs in on this machine next
