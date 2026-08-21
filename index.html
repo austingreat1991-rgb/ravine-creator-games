@@ -651,6 +651,12 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border:0;border-radiu
 .anim>*:nth-child(5){animation-delay:.18s}
 .anim>*:nth-child(n+6){animation-delay:.22s}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.vmore{display:flex;justify-content:center;padding:22px 0 8px}
+.vmore .btn{min-width:210px}
+.vmore .mini{opacity:.6;margin-left:7px}
+.swplay.load::after{content:"";position:absolute;left:50%;top:50%;width:30px;height:30px;margin:-15px 0 0 -15px;
+ border:2.5px solid rgba(255,255,255,.22);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;z-index:4}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style></head><body>
 <div id="login"><div class="lcard">
  <div class="lhead"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3.2v5.4c0 4.4-3.1 8.3-7.5 9.4-4.4-1.1-7.5-5-7.5-9.4V6.2L12 3Z"/><path d="m9 12 2.2 2.2L15.4 10"/></svg></div>
@@ -1003,19 +1009,65 @@ function vref(v){
  return null;
 }
 const adClip=v=>{const r=vref(v); return r?r.u:null};
+/* Each clip is an 8s (inspiration) or 30s (Meta ad) slice inside one big reel
+   file. Getting that right is the whole ballgame for how this feels:
+
+   The old order was src -> load() -> play(), then seek to the slice once
+   metadata arrived. That seek ABORTED the in-flight play, the play promise
+   rejected, and the reject handler forced the video back to muted. Result: the
+   first tap looked dead, you tapped again, and it came back silent. One race
+   caused all three complaints — the double tap, the delay, and the missing
+   sound on inspiration clips (which sit deeper into bigger reels than the ads
+   do, so they lost the race far more often).
+
+   Now: point the media fragment at the slice so the very first byte-range
+   request already lands in the right place, wait until the video is genuinely
+   positioned AND buffered, and only then play. */
 function mountSeg(el, ref, muted){
- el.src=ref.u+'#t='+ref.s;
+ el.__ref=ref;
  el.muted=!!muted; el.playsInline=true; el.setAttribute('playsinline','');
  el.preload='auto';
- const seek=()=>{ if(Math.abs(el.currentTime-ref.s)>0.3){ try{el.currentTime=ref.s}catch(e){} } };
- el.addEventListener('loadedmetadata',seek);
- el.addEventListener('canplay',()=>{ if(el.currentTime<ref.s-0.3||el.currentTime>ref.s+ref.d) seek() },{once:true});
+ el.src=ref.u+'#t='+ref.s.toFixed(2)+','+(ref.s+ref.d).toFixed(2);
+ const land=()=>{ if(Math.abs(el.currentTime-ref.s)>0.3){ try{el.currentTime=ref.s}catch(e){} } };
+ el.addEventListener('loadedmetadata',land,{once:true});
  el.addEventListener('timeupdate',()=>{
   if(el.currentTime>=ref.s+ref.d-0.06 || el.currentTime<ref.s-0.5){ try{el.currentTime=ref.s}catch(e){} }
  });
  el.load();
  return el;
 }
+
+/* Resolves once the clip is both parked on its slice and has enough buffered to
+   run. Capped so a bad connection degrades to "plays late" instead of "hangs". */
+function segReady(el,cap){
+ const ref=el.__ref; if(!ref)return Promise.resolve();
+ return new Promise(res=>{
+  let done=false;
+  const fin=()=>{if(done)return;done=true;
+   el.removeEventListener('seeked',chk);el.removeEventListener('canplay',chk);
+   el.removeEventListener('canplaythrough',chk);el.removeEventListener('loadeddata',chk);res()};
+  const chk=()=>{ if(el.readyState>=3 && Math.abs(el.currentTime-ref.s)<=0.4) fin() };
+  el.addEventListener('seeked',chk);el.addEventListener('canplay',chk);
+  el.addEventListener('canplaythrough',chk);el.addEventListener('loadeddata',chk);
+  chk();
+  setTimeout(fin,cap||7000);
+ });
+}
+
+/* Play immediately — waiting for a full buffer before starting just makes the
+   tap feel dead on a slow connection. The only thing worth retrying is an
+   AbortError, which means a seek cut the play off; that is settled by the time
+   we get here. A genuine autoplay block is the one case that drops to muted. */
+async function playSeg(el,wantSound){
+ el.muted=!wantSound;
+ const go=async()=>{try{await el.play();return true}catch(e){return (e&&e.name)||'Error'}};
+ let r=await go();
+ if(r===true)return !!wantSound;
+ if(r==='AbortError'){ await segReady(el,2500); r=await go(); if(r===true)return !!wantSound }
+ if(wantSound){ el.muted=true; if(await go()===true)return false }
+ return false;
+}
+
 const ttid=v=>{const m=String(v.u||'').match(/\/video\/(\d+)/);return m?m[1]:null};
 const playable=v=>!!ttid(v)||!!adClip(v);
 const ttsrc=(id,auto)=>`https://www.tiktok.com/player/v1/${id}?autoplay=${auto?1:0}&loop=1&controls=${auto?0:1}&description=0&music_info=0&rel=0`;
@@ -1070,14 +1122,51 @@ function revCard(r,cid,admin){const e=embed(r.url),yid=ytid(r.url);
  </div>`}
 
 /* ===================== ACTIONS ===================== */
+/* The inspiration grid was building all 584 tiles on every single render — a
+   4.7 MB HTML string rebuilt when you clicked a card, typed in search, or liked
+   something. That is what made opening a video feel like it ignored the first
+   click: the click registered, the browser then spent a second re-laying out
+   the whole grid. Now it renders a page at a time and appends, so nothing is
+   ever rebuilt from scratch. */
+const PAGESZ=48;
+let LPAGE=1;
+window.moreGrid=()=>{
+ const L=feedList(), g=document.getElementById('vgrid'); if(!g)return;
+ const from=LPAGE*PAGESZ; LPAGE++;
+ const next=L.slice(from,LPAGE*PAGESZ);
+ if(next.length)g.insertAdjacentHTML('beforeend',next.map((x,i)=>vc(x,null,from+i)).join(''));
+ const m=document.getElementById('vmore');
+ if(!m)return;
+ const left=L.length-LPAGE*PAGESZ;
+ if(left<=0)m.remove();
+ else m.querySelector('.mini').textContent=left+' left';
+};
+window.bindGrid=()=>{
+ const m=document.getElementById('vmore'); if(!m||!('IntersectionObserver' in window))return;
+ const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ const before=LPAGE; moreGrid();
+   if(!document.getElementById('vmore')){io.disconnect();return}
+   if(LPAGE===before){io.disconnect();return}
+   io.observe(document.getElementById('vmore')); } });
+ },{rootMargin:'700px'});
+ io.observe(m);
+};
+
+/* The ordering here is the whole reason Inspiration felt broken. "playable"
+   counted a TikTok embed the same as a clip we host, so the first dozen cards
+   were all iframes: slow to boot, they swallow the first tap inside TikTok's own
+   player, and their audio cannot be controlled from our side because the frame
+   is cross-origin. Meta ads are 100% locally hosted, which is why only those
+   ever had sound. Rank by what actually plays well in-app. */
+const playRank=v=>vref(v)?2:(ttid(v)?1:0);
 function feedList(){
  let base=FMODE==='angles'?LIB.filter(isAngle):LIB.filter(isInspo);
- if(FMODE!=='angles')base=base.slice().sort((a,b)=>(playable(b)?1:0)-(playable(a)?1:0));
+ if(FMODE!=='angles')base=base.slice().sort((a,b)=>playRank(b)-playRank(a));
  const q=LQ.toLowerCase();
  return base.filter(v=>(LANG==='All'||v.a===LANG)&&(LFMT==='All'||v.f===LFMT)&&(!q||v.h.toLowerCase().includes(q)||v.a.toLowerCase().includes(q)||(v.br||'').toLowerCase().includes(q)||(v.f||'').toLowerCase().includes(q)||(v.cp||'').toLowerCase().includes(q)));
 }
-window.setLF=f=>{LFMT=f;LSEL=null;render()};
-window.setFM=m=>{FMODE=m;LANG='All';LFMT='All';LQ='';LSEL=null;render();scrollTop()};
+window.setLF=f=>{LFMT=f;LPAGE=1;LSEL=null;render()};
+window.setFM=m=>{FMODE=m;LPAGE=1;LANG='All';LFMT='All';LQ='';LSEL=null;render();scrollTop()};
 window.addInspo=()=>{
  const u=$('#inU').value.trim(), h=$('#inH').value.trim(), ang=$('#inA').value, why=$('#inW').value.trim();
  if(!u){toast('Paste a video link');return}
@@ -1090,12 +1179,12 @@ window.addInspo=()=>{
 window.openLib=id=>{LSEL=id;VIEW='feed';render();scrollTop()};
 window.openAd=i=>{ASEL=i;VIEW='ads';render();scrollTop()};
 window.openQ=id=>{QS=id;VIEW='quests';render();scrollTop()};
-window.setLQ=v=>{LQ=v;LSEL=null;render();focusSearch(v)};
+window.setLQ=v=>{LQ=v;LSEL=null;LPAGE=1;render();focusSearch(v)};
 window.setAQ=v=>{AQ=v;ASEL=null;render();focusSearch(v)};
 window.setQ=v=>{Q=v;QS=null;render();focusSearch(v)};
 window.setPlat=v=>{LPLAT=v;LSEL=null;render()};
 window.setASort=k=>{ASORT=k;render()};
-window.setLA=v=>{LANG=v;LFMT='All';LSEL=null;render()};
+window.setLA=v=>{LANG=v;LFMT='All';LSEL=null;LPAGE=1;render()};
 window.setAA=v=>{AANG=v;ASEL=null;render()};
 window.setLB=k=>{LB=k;render()};
 window.setA=k=>{A=k;QS=null;render()};
@@ -1232,19 +1321,32 @@ function swMount(){
  [...tr.children].forEach((s,n)=>{
   const holder=s.querySelector('.swplay');
   if(!holder)return;
-  if(n===SWI){
-   if(holder.firstChild)return;
+  // Mount the current card AND the next one. The next sits paused and buffering,
+  // so a swipe is instant instead of starting the whole fetch-and-seek from cold.
+  const near = (n===SWI||n===SWI+1);
+  if(near){
+   if(holder.firstChild){ if(n===SWI){const vd=holder.querySelector('video'); if(vd&&vd.paused)playSeg(vd,!SWMUTE)} return }
    const v=L[n], ref=vref(v), id=ttid(v);
    if(ref){
     const el=document.createElement('video');
     el.controls=false;
-    mountSeg(el, ref, SWMUTE);
-    el.addEventListener('click',e=>{e.stopPropagation();
-     if(SWMUTE){SWMUTE=false;el.muted=false;paintMute();el.play().catch(()=>{SWMUTE=true;el.muted=true;paintMute()});return}
-     el.paused?el.play():el.pause()});
+    mountSeg(el, ref, n===SWI?SWMUTE:true);
+    el.addEventListener('click',async e=>{e.stopPropagation();
+     if(SWMUTE){ SWMUTE=false;setMutePref(false);paintMute();
+      const ok=await playSeg(el,true);
+      if(!ok){SWMUTE=true;setMutePref(true);paintMute()}
+      return }
+     if(el.paused)playSeg(el,!SWMUTE); else el.pause();});
     holder.appendChild(el); holder.classList.add('on');
-    el.play().catch(()=>{el.muted=true;SWMUTE=true;el.play().catch(()=>{});paintMute()});
+    if(n===SWI){
+     holder.classList.add('load');
+     playSeg(el,!SWMUTE).then(ok=>{
+      holder.classList.remove('load');
+      if(!ok&&!SWMUTE){SWMUTE=true;setMutePref(true);paintMute()}
+     });
+    }
    } else if(id){
+    if(n!==SWI)return;                        // only embed the visible one
     const f=document.createElement('iframe');
     f.src=ttsrc(id,true); f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';
     f.setAttribute('allowfullscreen','');
@@ -1252,18 +1354,37 @@ function swMount(){
    }
   } else if(holder.firstChild){
    const vid=holder.querySelector('video'); if(vid){vid.pause();vid.removeAttribute('src');vid.load()}
-   holder.innerHTML=''; holder.classList.remove('on');
+   holder.innerHTML=''; holder.classList.remove('on','load');
   }
  });
 }
-let SWMUTE=true;
-window.swMute=()=>{SWMUTE=!SWMUTE;
- const v=$('#swtrack')&&$('#swtrack').querySelector('.swplay video');
- if(v){v.muted=SWMUTE; if(!SWMUTE)v.play().catch(()=>{})}
- paintMute()};
+// read straight from storage: lsGet lives in a file that loads after this one
+let SWMUTE=(()=>{try{return localStorage.getItem('rcg_mute')!=='false'}catch(e){return true}})();
+const setMutePref=v=>{try{localStorage.setItem('rcg_mute',v?'true':'false')}catch(e){}};
+window.swMute=async()=>{
+ const tr=$('#swtrack'); const card=tr&&tr.children[SWI];
+ if(card&&card.querySelector('.swplay iframe')){toast('TikTok controls its own sound — tap the video');return}
+ SWMUTE=!SWMUTE;setMutePref(SWMUTE);paintMute();
+ const v=card&&card.querySelector('.swplay video');
+ if(!v)return;
+ if(SWMUTE){v.muted=true;return}
+ const ok=await playSeg(v,true);
+ if(!ok){SWMUTE=true;setMutePref(true);paintMute();toast('Your browser blocked sound — tap the video itself')}};
 function paintMute(){const b=$('#swMuteBtn'); if(!b)return;
+ const tr=$('#swtrack');
+ const card=tr&&tr.children[SWI];
+ const isEmbed=!!(card&&card.querySelector('.swplay iframe'));
+ if(isEmbed){
+  // A cross-origin TikTok frame will not take instructions about its own audio.
+  // Saying TAP FOR SOUND here would be a lie, so say what is actually true.
+  b.className='swx wide off';
+  b.innerHTML=ico('mute',18)+'<span>TIKTOK PLAYER · TAP IT</span>';
+  return;
+ }
  b.className='swx wide'+(SWMUTE?' off':'');
- b.innerHTML=(SWMUTE?ico('mute',18)+'<span>TAP FOR SOUND</span>':ico('sound',18)+'<span>SOUND ON</span>');}
+ b.innerHTML=SWMUTE?ico('mute',18)+'<span>TAP FOR SOUND</span>':ico('sound',18)+'<span>SOUND ON</span>';
+}
+
 window.openSwipe=(i)=>{
  SWI=typeof i==='number'?i:0;
  const L=feedList();
@@ -1296,10 +1417,11 @@ window.openSwipe=(i)=>{
  tr.onscroll=()=>{
   const n=Math.round(tr.scrollTop/tr.clientHeight);
   if(n!==SWI){SWI=n;const e=$('#swnum');if(e)e.textContent=n+1;
-   clearTimeout(SWT);SWT=setTimeout(swMount,260)}
+   clearTimeout(SWT);SWT=setTimeout(()=>{swMount();paintMute()},90)}
  };
- setTimeout(swMount,320);
+ setTimeout(()=>{swMount();paintMute()},60);
 };
+
 window.closeSwipe=()=>{clearTimeout(SWT);$('#swipe').classList.remove('show');$('#swipe').innerHTML='';document.body.style.overflow=''};
 window.swPaint=()=>{const L=feedList();const tr=$('#swtrack');if(!tr)return;
  [...tr.children].forEach((s,n)=>{const v=L[n];const b=s.querySelector('.swrail button');
@@ -1328,7 +1450,7 @@ function hoverIn(el,vid){
    const m=document.createElement('video');
    mountSeg(m, ref, true);
    h.appendChild(m);vt.appendChild(h);HOVEL=h;
-   m.play().catch(()=>{});
+   playSeg(m,false);
   }else{
    const f=document.createElement('iframe');
    f.src=ttsrc(id,true);f.allow='autoplay; encrypted-media; picture-in-picture';
@@ -2466,7 +2588,8 @@ ads(){
     <div class="two"><div class="field"><label>Angle</label><select id="inA">${ANGLES.filter(x=>x!=='All').map(x=>`<option>${x}</option>`).join('')}</select></div>
      <div class="field"><label>Why it works</label><input id="inW" placeholder="The hook lands in 1.5s and the payoff is visual"></div></div>
     <button class="btn" onclick="addInspo()">Add it</button></div></div>`:''}
-  <div class="vg anim">${L.map((x,n)=>vc(x,null,n)).join('')||'<div class="note">Nothing matches that filter.</div>'}</div>`},
+  <div class="vg anim" id="vgrid">${L.slice(0,LPAGE*PAGESZ).map((x,n)=>vc(x,null,n)).join('')||'<div class="note">Nothing matches that filter.</div>'}</div>
+  ${L.length>LPAGE*PAGESZ?`<div id="vmore" class="vmore"><button class="btn gh" onclick="moreGrid()">Show more <i class="mini">${L.length-LPAGE*PAGESZ} left</i></button></div>`:''}`},
 
 quests(){
  if(QS!==null){const q=QUESTS.find(x=>x.id===QS);if(!q){QS=null;return V.quests()}
@@ -2835,6 +2958,7 @@ function render(){
  $('#mnotif').textContent=notifList().length;
  $('#main').innerHTML=V[VIEW]();
  if(VIEW==='stats'){try{bindChart()}catch(e){}}
+ if(VIEW==='feed'){try{bindGrid()}catch(e){}}
  try{dayNudge()}catch(e){}
 }
 window.go=k=>{QS=null;LSEL=null;ASEL=null;
