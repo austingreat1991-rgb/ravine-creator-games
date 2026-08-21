@@ -1849,6 +1849,11 @@ const REMOTE={
   if(BACKEND.mode==='supa'){
    // Direct UPDATE is blocked by RLS on purpose. Only decide() can move a status,
    // and it wants the admin key that lives on Austin's device and nowhere else.
+   // The key is stored per-device, so if a creator signs in on the brand's own
+   // laptop it would still be sitting in localStorage. Gate on the signed-in
+   // account too — the database check is the real lock, this stops the app from
+   // ever offering the action to someone who should not have it.
+   try{ if(!me().admin)return {ok:false,error:'not the brand account'} }catch(e){ return {ok:false,error:'not signed in'} }
    if(!BACKEND.adminKey)return {ok:false,error:'no admin key'};
    const r=await fetch(`${BACKEND.url}/rest/v1/rpc/decide`,{method:'POST',signal:netTimeout(),
     headers:{apikey:BACKEND.key,Authorization:'Bearer '+BACKEND.key,'Content-Type':'application/json'},
@@ -2103,6 +2108,11 @@ function dayNudge(){
  // per-field merge: the build supplies url/key, this device supplies the admin key
  ['mode','url','key','adminKey'].forEach(k=>{if(c[k]!=null&&c[k]!=='')BACKEND[k]=c[k]});
  if(c.mode==='local')BACKEND.mode='local';})();
+/* Called once the session is known. A creator signing in on a shared machine
+   gets the admin key stripped out of memory entirely. */
+window.scopeAdminKey=()=>{
+ try{ if(!me().admin)BACKEND.adminKey=''; }catch(e){ BACKEND.adminKey=''; }
+};
 window.saveBackend=async()=>{
  const mode=$('#bkMode').value, url=$('#bkUrl').value.trim(), key=$('#bkKey').value.trim();
  const adminKey=($('#bkAdmin')&&$('#bkAdmin').value.trim())||'';
@@ -3016,6 +3026,7 @@ function paintLogin(){
   <div class="lh">${c.admin?'<b style="color:var(--o2)">BRAND ADMIN</b> · ':''}${c.v} approved</div></div></button>`).join('');
 }
 function enter(id,greet){ME=id;VIEW='home';$('#lerr').textContent='';
+ try{scopeAdminKey()}catch(e){}    // drop the approval key unless this is the brand account
  $('#login').classList.add('gone');$('#app').style.display='block';
  render();if(greet)setTimeout(()=>toast(`Welcome back, ${me().n.split(' ')[0]}`),420)}
 window.doLogin=async()=>{
@@ -3031,7 +3042,12 @@ window.doLogin=async()=>{
  if(stay)saveSession(code);else clearSession();
  $('#lerr').textContent='';
  enter(AUTH,true)};
-window.logout=()=>{clearSession();AUTH=null;$('#lpw').value='';$('#app').style.display='none';
+window.logout=()=>{
+ // the approval key is per-device; leaving it behind would hand approval power
+ // to whoever signs in on this machine next
+ try{const c=lsGet('rcg_backend',null);if(c){c.adminKey='';lsSet('rcg_backend',c)}}catch(e){}
+ BACKEND.adminKey='';
+ clearSession();AUTH=null;$('#lpw').value='';$('#app').style.display='none';
  location.reload()};
 $('#lpw').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
 (function boot(){
