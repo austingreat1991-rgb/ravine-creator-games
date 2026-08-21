@@ -487,9 +487,14 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border:0;border-radiu
 .swtrack::-webkit-scrollbar{display:none}
 .swcard{position:relative;height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden;background:#07080A}
 .swcard>img,.swcard>svg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.swplay{position:absolute;inset:0;z-index:2;background:#000;opacity:0;transition:opacity .3s var(--ease)}
+.swplay{position:absolute;inset:0;z-index:2;opacity:0;transition:opacity .3s var(--ease)}
 .swplay.on{opacity:1}
-.swplay iframe,.swplay video{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;background:#000}
+.swplay iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+/* Stay transparent until there are real frames, so the poster shows through
+   while the clip loads instead of a black rectangle. */
+.swplay video{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;
+ background:transparent;opacity:0;transition:opacity .2s var(--ease)}
+.swplay video.ready{opacity:1;background:#000}
 .swbig{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;width:74px;height:74px;border-radius:50%;
  display:grid;place-items:center;color:#fff;background:rgba(255,110,32,.92);box-shadow:0 14px 44px rgba(0,0,0,.6),0 0 0 10px rgba(255,110,32,.13)}
 .swgrad{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,transparent 22%,transparent 46%,rgba(4,5,7,.94) 100%)}
@@ -1033,6 +1038,7 @@ function mountSeg(el, ref, muted){
  el.addEventListener('timeupdate',()=>{
   if(el.currentTime>=ref.s+ref.d-0.06 || el.currentTime<ref.s-0.5){ try{el.currentTime=ref.s}catch(e){} }
  });
+ el.addEventListener('loadeddata',()=>el.classList.add('ready'),{once:true});
  el.load();
  return el;
 }
