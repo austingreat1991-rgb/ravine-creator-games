@@ -1,7 +1,7 @@
 /* Ravine Creator Games — service worker
    Strategy: network-first for the app shell so a push goes live on next open,
    cache fallback so the app still works with no signal. */
-const VERSION = 'rcg-20260828-065738';
+const VERSION = 'rcg-20260828-232155';
 const SHELL = ['./', './index.html', './manifest.webmanifest',
   './icon-192.png','./mark-96.png', './icon-512.png', './apple-touch-icon.png'];
 
