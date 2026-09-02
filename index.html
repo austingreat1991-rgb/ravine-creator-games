@@ -668,7 +668,20 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border:0;border-radiu
 .swplay.load::after{content:"";position:absolute;left:50%;top:50%;width:30px;height:30px;margin:-15px 0 0 -15px;
  border:2.5px solid rgba(255,255,255,.22);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;z-index:4}
 @keyframes spin{to{transform:rotate(360deg)}}
-</style></head><body>
+</style>
+<style id="adlibcss">
+.adgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:13px}
+.adcard .vt{position:relative;aspect-ratio:9/16;border-radius:11px;overflow:hidden;background:#14110e}
+.adcard .vt img{width:100%;height:100%;object-fit:cover;display:block}
+.adcard .adm{display:flex;justify-content:space-between;align-items:baseline;gap:6px;margin-top:7px;font-size:12px}
+.adcard .adm b{color:var(--tx);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.adcard .adm span{color:var(--mut);font-size:11px;flex:none}
+.adwrap{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
+.adplayer{flex:0 0 300px;max-width:100%}
+.adplayer video{width:100%;aspect-ratio:9/16;border-radius:13px;background:#000;display:block}
+@media(max-width:640px){.adplayer{flex:1 1 100%}.adgrid{grid-template-columns:repeat(auto-fill,minmax(132px,1fr))}}
+</style>
+</head><body>
 <div id="login"><div class="lcard">
  <div class="lhead"><img src="./icon-192.png" alt="Ravine Creator Games"></div>
  <h1>Ravine Creator Games</h1><p>Enter the code Austin sent you.</p>
@@ -2374,6 +2387,10 @@ function questUpload(q){
 }
 
 /* ===================== VIEWS ===================== */
+
+/* ADLIB-START */
+const ADP=[{"s":"ed68bc92-039c-40ce-be9e-c714ef30538a","c":"Leo Ortiz","sp":19651,"hk":61.59,"d":"8/3/2026","a":""},{"s":"20c07f52-0dbb-4f15-b15c-dd0050f38ad6","c":"Madison Thompson","sp":10226,"hk":27.25,"d":"8/18/2026","a":""},{"s":"3c04b60d-29c2-4d14-99e5-02a08d748758","c":"Hustyn Wheeler","sp":7932,"hk":48.84,"d":"8/13/2026","a":""},{"s":"7ed0f295-394f-41dc-bb02-9ff8f502ff7f","c":"Robert Garris","sp":7608,"hk":48.48,"d":"8/14/2026","a":""},{"s":"a9de74b8-fff5-41c9-a4b1-7614051d8dd6","c":"Bryan Parish","sp":6737,"hk":19.52,"d":"8/10/2026","a":""},{"s":"d90236ff-5a1e-4302-8772-4d55d9afd53f","c":"Khristian Honeyfur","sp":6516,"hk":22.41,"d":"8/15/2026","a":""},{"s":"f1c5fda8-e405-4bce-8b6a-cd52481b5884","c":"Hustyn Wheeler","sp":6365,"hk":43.2,"d":"8/15/2026","a":""},{"s":"c18fec97-5d7b-43c6-b112-cdf2c4ac0bf9","c":"Tom Montelli","sp":6336,"hk":26.6,"d":"8/4/2026","a":""},{"s":"1f745284-6869-48f3-bf77-7dc150c0c11d","c":"David Johnson","sp":6187,"hk":39.07,"d":"8/10/2026","a":""},{"s":"c17aa426-6478-4e98-b8ef-c4134f4d3439","c":"Hunter Chapman","sp":5928,"hk":47.55,"d":"8/26/2026","a":""},{"s":"6c07847e-1475-403d-aebe-c2f82c815c18","c":"Hunter Chapman","sp":5588,"hk":42.39,"d":"8/2/2026","a":""},{"s":"97569d43-ed6a-4d38-b2ca-04dd72ee4e59","c":"Hunter Chapman","sp":5235,"hk":32.92,"d":"8/7/2026","a":""},{"s":"2feaa67f-51a3-4bf6-9266-6f34971173cf","c":"David Johnson","sp":4712,"hk":47.64,"d":"8/13/2026","a":""},{"s":"77703672-6a15-4248-8284-d8cb45fb45be","c":"Hunter Chapman","sp":4682,"hk":50.01,"d":"7/31/2026","a":""},{"s":"863c4f73-b8b7-47cd-ac2d-20a79be5599b","c":"David Johnson","sp":4615,"hk":56.86,"d":"8/21/2026","a":""},{"s":"c7075605-2511-48d7-b326-058aa89586bd","c":"Hunter Chapman","sp":4242,"hk":39.61,"d":"8/24/2026","a":""},{"s":"b42195b2-f9f7-4a63-a2dc-74dba40ae78a","c":"Hunter Chapman","sp":3990,"hk":47.94,"d":"8/9/2026","a":""},{"s":"941a80ce-17c6-4302-96d3-3f6779b4c928","c":"David Johnson","sp":3343,"hk":58.25,"d":"8/13/2026","a":""},{"s":"cb7fbdc2-5aeb-4ca2-b596-c2e5ae270fcb","c":"Leo Ortiz","sp":3114,"hk":54.74,"d":"8/1/2026","a":""},{"s":"0b7025c8-2382-431b-a48b-5706a879ccf7","c":"Leo Ortiz","sp":3084,"hk":50.48,"d":"8/5/2026","a":""},{"s":"2b638585-a484-4863-94a2-8b2355285b63","c":"Hunter Chapman","sp":2999,"hk":43.98,"d":"8/9/2026","a":""},{"s":"82fcdb37-0b44-4607-baa0-a4e663bbc9e4","c":"Madison Thompson","sp":1980,"hk":48.05,"d":"8/12/2026","a":""},{"s":"fa6d5e3a-c504-47d6-a267-9543d901c2d7","c":"Kyle Farwell","sp":1600,"hk":37.92,"d":"8/27/2026","a":""},{"s":"d6e042fd-cd8b-4afd-87ee-11165bb5fa6f","c":"Kaleb Tipton","sp":1549,"hk":37.56,"d":"8/6/2026","a":""},{"s":"97c0ffc4-1fe6-4a3a-b8b7-78146726c45b","c":"Sophia Bennett","sp":1434,"hk":56.13,"d":"8/21/2026","a":""},{"s":"10fa2d62-759a-47e4-af1c-4f657d296e1b","c":"Janie S Morin","sp":1326,"hk":0.0,"d":"8/29/2026","a":""},{"s":"e781682f-51a5-451a-89e1-f11ee6588948","c":"Hustyn Wheeler","sp":1019,"hk":20.61,"d":"8/8/2026","a":""},{"s":"05a20523-fb15-46f9-8fbc-c73ac15f7653","c":"Hustyn Wheeler","sp":936,"hk":13.93,"d":"8/5/2026","a":""},{"s":"3e08e773-08b5-4627-897b-36127db8152e","c":"Hunter Chapman","sp":899,"hk":30.36,"d":"8/12/2026","a":""},{"s":"8b465c10-60c6-4524-9e5c-a464431518d9","c":"Nikkie Burns","sp":734,"hk":0.0,"d":"8/29/2026","a":""},{"s":"d36ace6b-7e73-469d-8753-91333dcaceeb","c":"Brent Tinsley","sp":710,"hk":27.01,"d":"8/12/2026","a":""},{"s":"9fdbaa7c-5f8e-4b93-b559-e2b83da4011b","c":"Molly Whetstone","sp":668,"hk":40.86,"d":"8/5/2026","a":""},{"s":"695b074f-9528-4565-92f9-fdaeef531371","c":"Sophia Bennett","sp":568,"hk":46.84,"d":"8/21/2026","a":""},{"s":"24d0aaef-d91a-4de3-a373-b1ff51a4f86c","c":"Brent Burden","sp":546,"hk":49.1,"d":"8/4/2026","a":""},{"s":"a23f75d4-3950-4204-b3a4-3f505e44d6f1","c":"Nikkie Burns","sp":523,"hk":48.75,"d":"8/22/2026","a":""},{"s":"9b2be9ce-738e-4fff-b642-b28d5794791d","c":"Brent Tinsley","sp":522,"hk":22.68,"d":"8/22/2026","a":""},{"s":"046afb0b-3d1c-4f2c-9692-40d43197ceef","c":"Jason Cardamone","sp":514,"hk":57.73,"d":"8/28/2026","a":""},{"s":"ef1f6ab8-6b75-4ab3-bb52-5c0d53b66d70","c":"Madison Thompson","sp":499,"hk":49.67,"d":"8/3/2026","a":""},{"s":"3a75a9df-b4fc-43cf-9fcb-ff45e32a0d85","c":"Scott Staddon","sp":454,"hk":41.83,"d":"7/30/2026","a":""},{"s":"a3db1c94-23ed-4e6a-b796-f1588d7df5fa","c":"Aspen Mansfield","sp":416,"hk":43.56,"d":"8/5/2026","a":""},{"s":"12983157-62ea-41ea-8a7c-b2465b584756","c":"Tyler gauthier","sp":413,"hk":22.81,"d":"8/5/2026","a":""},{"s":"e58f7a75-a4a7-433f-abe3-663c5818965d","c":"Autumn Elliott","sp":388,"hk":55.56,"d":"8/20/2026","a":""},{"s":"1307c155-9a8e-4fa8-92f1-9e89b47b2113","c":"Daniel Kairys","sp":377,"hk":28.47,"d":"7/29/2026","a":""},{"s":"3804a969-1a6c-41ec-b849-438271f6587f","c":"Heather Rodefer","sp":367,"hk":23.44,"d":"8/12/2026","a":""},{"s":"68349f41-bb7a-4dee-8c18-4720bfbb18dd","c":"Nathan Wunderlin","sp":367,"hk":19.25,"d":"8/11/2026","a":""},{"s":"8588b3c1-9f84-4a98-a04f-19cb1cbef1fa","c":"Nikkie Burns","sp":334,"hk":0.0,"d":"8/29/2026","a":""},{"s":"9c0bf119-e587-4af4-a262-2f9e666ad29a","c":"Jason Cardamone","sp":323,"hk":36.28,"d":"8/20/2026","a":""},{"s":"27270d88-e67b-43a9-a560-d4ec65ad714a","c":"Miguel Rico","sp":316,"hk":27.61,"d":"8/11/2026","a":""},{"s":"87d19980-2f92-4235-b7ec-cdd349bf2c83","c":"Renee Eide","sp":310,"hk":54.96,"d":"8/16/2026","a":""},{"s":"a8a2fbff-7d29-46f9-9f1b-11f3b370bfce","c":"Austin Mccoo","sp":309,"hk":21.91,"d":"7/21/2026","a":""},{"s":"43c06faa-3366-411f-bbb6-58d947d2d1cd","c":"Russ Scarce","sp":292,"hk":26.87,"d":"8/23/2026","a":""},{"s":"8ec2f3a5-b987-4d60-a673-e5ddebb30023","c":"Terrell Kannady","sp":286,"hk":65.95,"d":"8/12/2026","a":""},{"s":"546a6594-f983-4139-aea1-7b091d089f98","c":"Katie Romero","sp":285,"hk":36.65,"d":"8/3/2026","a":""},{"s":"98908fce-a47b-4f6b-978e-693c5da3da39","c":"Lesley Ayala","sp":275,"hk":54.09,"d":"8/11/2026","a":""},{"s":"b7091a82-fa1e-4930-8ed7-9ad9f003d007","c":"Alejandro Rico","sp":266,"hk":23.45,"d":"7/30/2026","a":""},{"s":"2e3b4418-2842-463f-bf7b-77f80e6f05c0","c":"Amanda Kotterman","sp":236,"hk":21.21,"d":"8/15/2026","a":""},{"s":"be451dcc-ef78-455d-8428-f608524cf372","c":"Alli gamble","sp":230,"hk":40.41,"d":"8/13/2026","a":""},{"s":"0b3c73db-3e3b-42fb-b1fc-c17259d8fb0a","c":"Madison Thompson","sp":225,"hk":43.59,"d":"8/10/2026","a":""},{"s":"580cd76e-aba0-48d9-ad34-986550b32b40","c":"JOHN INGLE","sp":222,"hk":45.89,"d":"8/30/2026","a":""},{"s":"16f7fd97-127d-4cff-9aa4-3d5d0139a076","c":"Nathan Wunderlin","sp":219,"hk":29.26,"d":"8/6/2026","a":""},{"s":"99106a8d-8729-457a-bb3e-66cd9b85be08","c":"Jennifer Howell","sp":217,"hk":43.06,"d":"8/15/2026","a":""},{"s":"a7d0843f-b6c1-42e8-94e7-51d93d82ed90","c":"Lesley Ayala","sp":212,"hk":29.37,"d":"8/12/2026","a":""},{"s":"3993f936-1137-4f07-81b1-78bb5f9a5b34","c":"Brent Tinsley","sp":208,"hk":17.37,"d":"8/18/2026","a":""},{"s":"4fe4683a-afd5-43d9-ab8f-f1be1b935431","c":"Khristian Honeyfur","sp":205,"hk":18.02,"d":"8/15/2026","a":""},{"s":"37f2ad0e-f36c-40a3-addb-768953018525","c":"Austin Duff","sp":185,"hk":38.24,"d":"8/7/2026","a":""},{"s":"de177233-7c58-4bca-809f-611301e692d4","c":"Jason Cardamone","sp":183,"hk":40.54,"d":"8/20/2026","a":""},{"s":"137b7e91-f6a0-41bc-bb12-f0497afd34d0","c":"MeKensie Mattio","sp":182,"hk":46.84,"d":"7/26/2026","a":""},{"s":"86b33fbe-97af-44ed-90f2-8b22d3906bbb","c":"Hustyn Wheeler","sp":182,"hk":19.29,"d":"8/14/2026","a":""},{"s":"a05b1f8b-ca80-45d1-b95b-d24c2effe712","c":"george marrero","sp":175,"hk":14.97,"d":"8/21/2026","a":""},{"s":"80a72d69-b7f1-4487-932d-ff4b9cfdca5a","c":"Abby Bolt","sp":162,"hk":34.11,"d":"8/12/2026","a":""},{"s":"1679a99d-f78f-41f2-9016-100aa77abdad","c":"Alejandro Rico","sp":161,"hk":38.55,"d":"8/20/2026","a":""},{"s":"d883ac75-d2a4-49aa-a097-f0d1fdce4299","c":"Taharra benham","sp":158,"hk":25.16,"d":"8/20/2026","a":""},{"s":"c5b53c79-f32d-4e0f-bd17-35b93158c96f","c":"Zeke Rempel","sp":158,"hk":27.45,"d":"8/21/2026","a":""},{"s":"4dbbbc55-79e0-431a-96f6-df7317c2948d","c":"Madison Thompson","sp":156,"hk":40.79,"d":"8/5/2026","a":""},{"s":"05f0170f-75d4-4eb3-9a9a-5fa4fd18ed7d","c":"MeKensie Mattio","sp":145,"hk":42.39,"d":"7/26/2026","a":""},{"s":"0f96e314-2332-49e8-a1f9-9eac1e2cc7bc","c":"Tanner Giffin","sp":144,"hk":43.34,"d":"8/6/2026","a":""},{"s":"002bcf84-d795-4110-80f2-32f5cee86f87","c":"Bryant Ayala","sp":141,"hk":38.6,"d":"8/25/2026","a":""},{"s":"f692e5fc-ab31-4733-8592-2c94fa5990f1","c":"Taharra benham","sp":138,"hk":21.49,"d":"8/6/2026","a":""},{"s":"324531d0-bf5e-432e-8c49-fcd1ada0c110","c":"Tanner Giffin","sp":137,"hk":40.0,"d":"8/5/2026","a":""},{"s":"9a0d9c0b-5cb3-400e-b9fc-844d2c69a965","c":"Sophia Bennett","sp":132,"hk":41.59,"d":"8/24/2026","a":""},{"s":"7f7e8fe1-0025-44eb-9596-3d62d6e33094","c":"Hustyn Wheeler","sp":128,"hk":41.3,"d":"8/8/2026","a":""},{"s":"e87eb62e-b176-4e61-b066-f9d91f2c66d6","c":"Emma Grace","sp":124,"hk":37.76,"d":"8/13/2026","a":""},{"s":"88a58a50-a326-4906-98ba-506056502c14","c":"Ridge Graham","sp":123,"hk":19.99,"d":"8/14/2026","a":""},{"s":"5caa8e7e-c85d-48cb-94ef-914e3bf5bdb3","c":"Dylan Thrift","sp":120,"hk":43.44,"d":"8/22/2026","a":""},{"s":"a721b842-4ef6-43c8-b5fd-5ff975e84a9a","c":"Mark Cooper","sp":119,"hk":0.0,"d":"8/29/2026","a":""},{"s":"98f24d78-1c28-4e65-81ec-5e16f1b25b3a","c":"Bryant Ayala","sp":118,"hk":40.45,"d":"8/7/2026","a":""},{"s":"b535abdc-6c21-4f71-812c-573f550fb1a2","c":"David Michael Orona","sp":114,"hk":15.26,"d":"8/24/2026","a":""},{"s":"2692b09c-3417-47d2-b8bc-31f1139013d5","c":"Janie Morin","sp":112,"hk":24.55,"d":"8/6/2026","a":""},{"s":"34b5f2e1-b851-422f-abfc-68270b00e3b7","c":"Jamie Curtis","sp":108,"hk":34.33,"d":"8/18/2026","a":""},{"s":"c4bf1f4d-477f-4892-b2c2-29b9f2afbe1b","c":"Isaac Ingram","sp":107,"hk":55.81,"d":"8/22/2026","a":""},{"s":"09479b35-35bb-4bc5-b3ec-48b4cb7192ba","c":"Tom Montelli","sp":106,"hk":26.46,"d":"8/17/2026","a":""},{"s":"cd9f2f10-2554-40a0-91ab-3a7c476d152c","c":"Madison Thompson","sp":101,"hk":27.96,"d":"8/20/2026","a":""},{"s":"d065ab88-94e5-481a-954e-0ac8263fd5fb","c":"Renee Wedan","sp":100,"hk":54.44,"d":"8/25/2026","a":""}];
+let ADSORT="spend",ADANG="All",ADQ="",ADSEL=null;
 const V={
  approvals(){return approvalsView()},
  broll(){return brollView()},
@@ -2959,11 +2976,11 @@ admin(){
 };
 
 /* ===================== NAV / RENDER ===================== */
-const NAV=[['','WATCH'],['home','Home','home'],['reviews','My ad reviews','play'],['stats','Analytics','chart'],['angles','Winning angles','flame'],['inspo','Inspiration','grid'],['broll','B-roll','film'],['',''],
+const NAV=[['','WATCH'],['home','Home','home'],['reviews','My ad reviews','play'],['stats','Analytics','chart'],['angles','Winning angles','flame'],['inspo','Inspiration','grid'],['adlib','Ad performance','chart'],['broll','B-roll','film'],['',''],
  ['','COMPETE'],['quests','Quests','target'],['approvals','Approvals','check'],['board','Leaderboard','trophy'],['profile','My profile','user'],['',''],
  ['','BRAND'],['brand','Brand dashboard','grid'],['admin','Brand controls','gear']];
 const MOB=[['home','Home','home'],['inspo','Inspo','grid'],['broll','B-roll','film'],['quests','Quests','target'],['approvals','Review','check'],['board','Board','trophy']];
-const TITLES={home:'Home',broll:'B-roll',approvals:'Approvals',stats:'Analytics',reviews:'My ad reviews',angles:'Winning angles',inspo:'Inspiration',feed:'Library',quests:'Quests',board:'Leaderboard',profile:'My profile',brand:'Brand dashboard',admin:'Brand controls'};
+const TITLES={home:'Home',broll:'B-roll',approvals:'Approvals',stats:'Analytics',reviews:'My ad reviews',angles:'Winning angles',inspo:'Inspiration',adlib:'Ad performance',feed:'Library',quests:'Quests',board:'Leaderboard',profile:'My profile',brand:'Brand dashboard',admin:'Brand controls'};
 
 function render(){
  const c=me();
@@ -2991,6 +3008,80 @@ function render(){
  if(VIEW==='feed'){try{bindGrid()}catch(e){}}
  try{dayNudge()}catch(e){}
 }
+
+V.adlib=function(){
+ const B='bf4a614a-2ec2-43fa-83f6-e19e08f57c24';
+ const th=s=>'https://cdn.jointrybe.com/tmp/thumbnail_'+s+'.jpg';
+ const vu=s=>'https://cdn.jointrybe.com/brands/'+B+'/submissions/'+s+'/preview_'+s+'.stream.mp4';
+ const mo=v=>'$'+Math.round(v).toLocaleString();
+ const angOf=v=>v.a||'Untagged';
+ const counts={}; ADP.forEach(v=>{const a=angOf(v);counts[a]=(counts[a]||0)+1});
+ const angs=['All',...Object.keys(counts).sort((a,b)=>counts[b]-counts[a])];
+
+ if(ADSEL){
+  const v=ADP.find(x=>x.s===ADSEL);
+  if(v){
+   const peers=ADP.filter(x=>x.c===v.c&&x.s!==v.s).sort((a,b)=>b.sp-a.sp).slice(0,6);
+   return `${bar('Ad performance','One creative, and what the account did with it.')}
+   <button class="btn gh" onclick="adBack()" style="margin-bottom:15px">${ico('chart',16)} Back to all ads</button>
+   <div class="adwrap">
+    <div class="adplayer"><video controls playsinline preload="none" poster="${th(v.s)}" src="${vu(v.s)}"></video></div>
+    <div style="flex:1;min-width:260px">
+     <div class="g p">
+      <h3>${esc(v.c)}</h3><div class="sub">Posted ${esc(v.d)} &middot; ${esc(angOf(v))}</div>
+      <div class="stats" style="margin-top:15px">
+       <div class="st"><div class="v mono">${mo(v.sp)}</div><div class="k">ad spend behind it</div></div>
+       <div class="st"><div class="v mono">${v.hk?v.hk.toFixed(1)+'%':'&mdash;'}</div><div class="k">hook rate</div></div>
+      </div>
+      <div class="note" style="margin-top:15px">Spend is the account voting with money. If a video is still holding budget, it is working.</div>
+     </div>
+     <div class="g p" style="margin-top:15px">
+      <h3>Why it worked</h3>
+      <div class="sub">Being written from the transcript. Not up yet for this one.</div>
+     </div>
+    </div>
+   </div>
+   ${peers.length?`<div class="sec"><h2>More from ${esc(v.c)}</h2><span class="mini">${peers.length}</span></div>
+   <div class="adgrid">${peers.map(card).join('')}</div>`:''}`;
+  }
+ }
+
+ function card(v){
+  return `<div class="vc adcard" onclick="adOpen('${v.s}')">
+   <div class="vt"><img src="${th(v.s)}" loading="lazy" alt="">
+    <span class="vd">${mo(v.sp)}</span>
+    ${v.hk?`<span class="rk ${v.hk>=45?'g':''}">${Math.round(v.hk)}%</span>`:''}</div>
+   <div class="adm"><b>${esc(v.c)}</b><span>${esc(v.d)}</span></div></div>`;
+ }
+
+ let L=ADP.slice();
+ const q=(ADQ||'').toLowerCase();
+ if(q)L=L.filter(x=>x.c.toLowerCase().includes(q)||angOf(x).toLowerCase().includes(q));
+ if(ADANG!=='All')L=L.filter(x=>angOf(x)===ADANG);
+ if(ADSORT==='hook')L.sort((a,b)=>(b.hk||0)-(a.hk||0));
+ else if(ADSORT==='new')L.sort((a,b)=>new Date(b.d)-new Date(a.d));
+ else L.sort((a,b)=>b.sp-a.sp);
+
+ const tot=ADP.reduce((n,x)=>n+x.sp,0), nCr=new Set(ADP.map(x=>x.c)).size;
+ return `${bar('Ad performance',`Every Ravine creative with real money behind it. ${ADP.length} videos, ${mo(tot)} of spend, ${nCr} creators. Tap any one to watch it and see its numbers.`)}
+  <div class="fmode">
+   <button class="${ADSORT==='spend'?'on':''}" onclick="adSort('spend')">${ico('chart',16)} Most spend</button>
+   <button class="${ADSORT==='hook'?'on':''}" onclick="adSort('hook')">${ico('flame',16)} Best hook</button>
+   <button class="${ADSORT==='new'?'on':''}" onclick="adSort('new')">${ico('play',16)} Newest</button>
+  </div>
+  <div class="chips"><input class="search" placeholder="Search a creator" value="${esc(ADQ)}" oninput="adQ(this.value)">
+   ${angs.map(a=>`<button class="chip ${ADANG===a?'on':''}" onclick="adAng('${esc(a)}')">${esc(a)}${a!=='All'?` <i>${counts[a]}</i>`:''}</button>`).join('')}</div>
+  ${L.length?`<div class="adgrid">${L.map(card).join('')}</div>`
+    :`<div class="g p"><h3>Nothing here</h3><div class="sub">No creative matches that filter.</div></div>`}
+  <div class="note" style="margin-top:18px">These are our own ads, pulled from Trybe. Numbers refresh when the board does. Recreate the structure, never the script.</div>`;
+};
+window.adOpen=s=>{ADSEL=s;render();scrollTop()};
+window.adBack=()=>{ADSEL=null;render();scrollTop()};
+window.adSort=k=>{ADSORT=k;render()};
+window.adAng=a=>{ADANG=a;ADSEL=null;render()};
+window.adQ=v=>{ADQ=v;ADSEL=null;render()};
+/* ADLIB-END */
+
 window.go=k=>{QS=null;LSEL=null;ASEL=null;
  if(k==='angles'){FMODE='angles';LANG='All';LQ='';k='feed'}
  else if(k==='inspo'){FMODE='inspo';LANG='All';LQ='';k='feed'}
