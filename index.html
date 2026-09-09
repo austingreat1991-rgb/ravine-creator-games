@@ -2636,9 +2636,19 @@ ads(){
  stats(){
  const c=me(), a=c.an||{}, rows=(a.rows||[]).slice(), agg=a.agg;
  const money=v=>'$'+Math.round(v).toLocaleString();
- if(!rows.length) return `${bar('Analytics',`Spend, ROAS and hook rate on every video you have running.`)}
-  <div class="g p"><h3>Nothing running yet</h3>
-  <div class="sub" style="margin-top:6px">None of your videos had ad spend behind them in the window ${TOTALS.anFrom} – ${TOTALS.anTo}. The moment one goes live it shows up here with its own numbers.</div></div>`;
+ if(!rows.length) return `${bar('Analytics',`Spend and hook rate on every video the brand is running for you.`)}
+  <div class="anim">
+   <div class="stats three">
+    <div class="st"><div class="v mono">${c.sub||0}</div><div class="k">submitted to Ravine</div></div>
+    <div class="st"><div class="v mono" style="color:var(--gr)">${c.v||0}</div><div class="k">approved</div></div>
+    <div class="st"><div class="v mono">0</div><div class="k">running as ads</div></div>
+   </div>
+   <div class="g p" style="margin-top:16px"><h3 style="margin:0 0 6px;font-size:18px">Your videos are here — none are running as ads yet</h3>
+   <div class="mini" style="line-height:1.7;max-width:700px">
+    This page only shows videos the brand has money behind on Meta, between <b style="color:var(--tx)">${TOTALS.anFrom}</b> and <b style="color:var(--tx)">${TOTALS.anTo}</b>. Your ${c.v||0} approved video${(c.v||0)===1?'':'s'} ${(c.v||0)===1?'is':'are'} safely on Trybe and still count${(c.v||0)===1?'s':''} toward the prize pool — the brand just has not put spend behind ${(c.v||0)===1?'it':'them'} yet.<br><br>
+    That is normal, especially in your first couple of weeks or if your videos were approved after ${TOTALS.anTo}. The moment one goes live you will see its spend, hook rate and watch time here.
+   </div></div>
+  </div>`;
  const sortBtn=(k,l)=>`<button class="chip ${ASORT===k?'on':''}" onclick="setASort('${k}')">${l}</button>`;
  const key={spend:x=>x.spend, roas:x=>x.roas, cpa:x=>-x.cpa, ts:x=>x.ts, sales:x=>x.pv}[ASORT]||(x=>x.spend);
  rows.sort((x,y)=>key(y)-key(x));
@@ -3091,6 +3101,7 @@ function render(){
   if(!n[0])return (n[1]==='BRAND'&&!c.admin)?'':`<div class="nlbl">${n[1]}</div>`;
   if((n[0]==='admin'||n[0]==='brand')&&!c.admin)return '';
   if(n[0]==='trial'&&!c.admin&&!isTrial(c))return '';
+  if(n[0]==='onboard'&&!c.admin&&!isTrial(c))return '';   /* RAVINE-BUILD-V3 */
   if(n[0]==='trial'&&c.admin)n=['trial','30-day trials','timer'];
   else if(n[0]==='trial')n=['trial','My trial','timer'];
   if(n[0]==='approvals'&&!c.admin)n=['approvals','My submissions','check'];
@@ -3457,6 +3468,9 @@ V.onboard=function(){
     </div></div>
   </div>`;
  }
+ if(!isTrial(c))return `${bar('Onboarding call','Already handled — this is for new creators.')}
+  <div class="anim"><div class="g p"><h3 style="margin:0 0 6px;font-size:18px">You are already onboarded ✅</h3>
+  <div class="mini" style="line-height:1.6;max-width:640px">The onboarding call is for creators joining from ${TRIAL.from} onward. You were already on the roster before that. If you want time with Austin anyway, just message him.</div></div></div>`;
  const booked=window.BOOKED[c.id];
  return `${bar('Your onboarding call','Twenty minutes with Austin on your content and your numbers.')}
  <div class="anim">
@@ -3492,7 +3506,7 @@ function homeExtras(){
    <div style="flex:1;min-width:0"><b>${v2usd(st.gmv)} of ${v2usd(TRIAL.bar)} · ${st.left} day${st.left===1?'':'s'} left in your trial</b>
    <div class="mini" style="margin-top:2px">${st.gmv>=TRIAL.bar?'You already cleared the bar.':'Approved videos that drive sales move this.'}</div></div>
    <span class="mini">Open →</span></div>`}
- if(!c.admin&&!window.BOOKED[c.id]&&window.BOOK_URL)
+ if(!c.admin&&isTrial(c)&&!window.BOOKED[c.id]&&window.BOOK_URL)
   h+=`<div class="apalert" onclick="go('onboard')">
    <span class="pill">CALL</span>
    <div style="flex:1;min-width:0"><b>Book your onboarding call</b>
