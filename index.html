@@ -668,6 +668,91 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border:0;border-radiu
 .swplay.load::after{content:"";position:absolute;left:50%;top:50%;width:30px;height:30px;margin:-15px 0 0 -15px;
  border:2.5px solid rgba(255,255,255,.22);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;z-index:4}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* ===== RAVINE-BUILD-V2 chart + program styles ===== */
+.chz{display:flex;flex-direction:column;gap:9px;margin-top:14px}
+.chrow{display:grid;grid-template-columns:minmax(96px,150px) minmax(0,1fr) auto;gap:12px;align-items:center}
+.chlab{font-size:12.5px;color:var(--tx2);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chtrack{position:relative;height:10px;border-radius:99px;background:var(--gl);overflow:visible}
+.chtrack i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;
+ background:linear-gradient(90deg,var(--o2),var(--o));box-shadow:0 0 14px rgba(255,110,32,.22);
+ border-right:2px solid var(--bg2);box-sizing:border-box;min-width:4px;transition:width .5s var(--ease)}
+.chtrack i.q1{background:linear-gradient(90deg,rgba(255,162,92,.55),rgba(255,110,32,.62))}
+.chtrack i.q0{background:linear-gradient(90deg,rgba(255,162,92,.3),rgba(255,110,32,.34))}
+.chtrack u{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--tx3);border-radius:2px}
+.chtrack u:after{content:attr(data-t);position:absolute;top:-15px;left:50%;transform:translateX(-50%);
+ font-size:9px;letter-spacing:.6px;color:var(--tx3);font-weight:800;white-space:nowrap}
+.chval{font-size:12.5px;font-weight:700;min-width:64px;text-align:right}
+.chnote{font-size:11px;color:var(--tx3);margin-top:10px}
+.hgm{display:flex;align-items:flex-end;gap:2px;height:150px;margin-top:16px;padding-top:20px}
+.hgb{flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%;position:relative}
+.hgb i{display:block;border-radius:4px 4px 0 0;background:var(--gl2);border-right:2px solid var(--bg2);
+ box-sizing:border-box;min-height:2px;transition:height .5s var(--ease)}
+.hgb.mine i{background:linear-gradient(180deg,var(--o2),var(--o));box-shadow:0 0 18px rgba(255,110,32,.3)}
+.hgb.mine:before{content:"YOU";position:absolute;top:-18px;left:50%;transform:translateX(-50%);
+ font-size:9px;font-weight:800;letter-spacing:1px;color:var(--o)}
+.hgx{display:flex;gap:2px;margin-top:7px}
+.hgx span{flex:1;text-align:center;font-size:9.5px;color:var(--tx4);font-weight:700}
+.fnl{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.fnr{display:grid;grid-template-columns:minmax(120px,190px) minmax(0,1fr) auto;gap:12px;align-items:center}
+.fnr .ft2{font-size:12.5px;color:var(--tx2);font-weight:600}
+.fnb{height:26px;border-radius:8px;border-right:2px solid var(--bg2);box-sizing:border-box;min-width:6px;
+ display:flex;align-items:center;padding-left:10px;font-size:11.5px;font-weight:800;color:#1a1005;
+ transition:width .5s var(--ease)}
+.tchip{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:800;letter-spacing:.4px;
+ padding:3px 9px;border-radius:99px;border:1px solid transparent;white-space:nowrap}
+.tchip b{width:6px;height:6px;border-radius:50%;display:block}
+.tchip.ok{color:var(--gr);background:rgba(61,220,132,.11);border-color:rgba(61,220,132,.28)}
+.tchip.ok b{background:var(--gr)}
+.tchip.risk{color:var(--warn);background:rgba(255,176,32,.11);border-color:rgba(255,176,32,.3)}
+.tchip.risk b{background:var(--warn);box-shadow:0 0 0 2px rgba(255,176,32,.25)}
+.tchip.miss{color:var(--bad);background:rgba(255,92,77,.1);border-color:rgba(255,92,77,.3)}
+.tchip.miss b{background:none;border:2px solid var(--bad);width:8px;height:8px}
+.tchip.new{color:var(--bl);background:rgba(91,157,255,.1);border-color:rgba(91,157,255,.28)}
+.tchip.new b{background:var(--bl)}
+.ttab{width:100%;border-collapse:collapse;margin-top:14px}
+.ttab th{text-align:left;font-size:9.5px;letter-spacing:1.5px;color:var(--tx4);font-weight:800;
+ padding:0 12px 9px 0;border-bottom:1px solid var(--ln)}
+.ttab td{padding:12px 12px 12px 0;border-bottom:1px solid var(--gl3);font-size:13px;vertical-align:middle}
+.ttab tr:last-child td{border-bottom:none}
+.ttab td.r{text-align:right}
+.ckl{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.ckr{display:flex;gap:12px;align-items:flex-start;padding:13px 14px;border-radius:var(--r3);
+ background:var(--gl3);border:1px solid var(--ln);cursor:pointer;transition:.18s var(--ease)}
+.ckr:hover{background:var(--gl);border-color:var(--ln2)}
+.ckr.on{background:rgba(61,220,132,.06);border-color:rgba(61,220,132,.24)}
+.ckb{width:21px;height:21px;border-radius:7px;border:1.8px solid var(--ln2);flex:none;display:grid;
+ place-items:center;margin-top:1px;transition:.18s var(--ease)}
+.ckr.on .ckb{background:var(--gr);border-color:var(--gr);color:#06210f}
+.ckb svg{width:13px;height:13px;opacity:0}
+.ckr.on .ckb svg{opacity:1}
+.ckt{font-size:13.5px;font-weight:650;line-height:1.35}
+.ckd{font-size:11.5px;color:var(--tx3);margin-top:3px;line-height:1.5}
+.wcard{border-radius:var(--r2);overflow:hidden;background:var(--gl3);border:1px solid var(--ln);
+ transition:.2s var(--ease)}
+.wcard:hover{border-color:var(--ln2);transform:translateY(-2px)}
+.wthumb{position:relative;aspect-ratio:9/16;max-height:300px;background:#000;overflow:hidden}
+.wthumb img,.wthumb video{width:100%;height:100%;object-fit:cover;display:block}
+.wrank{position:absolute;top:9px;left:9px;width:24px;height:24px;border-radius:8px;display:grid;
+ place-items:center;font-size:11.5px;font-weight:800;background:rgba(7,8,10,.72);
+ backdrop-filter:blur(8px);color:var(--o);border:1px solid rgba(255,110,32,.3)}
+.whk{position:absolute;bottom:9px;left:9px;right:9px;display:flex;justify-content:space-between;
+ align-items:flex-end;gap:6px;font-size:11px;font-weight:800;pointer-events:none}
+.whk span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.whk .hk{color:var(--o2);background:rgba(7,8,10,.72);backdrop-filter:blur(8px);padding:3px 8px;border-radius:7px}
+.whk .sp{color:var(--tx2);background:rgba(7,8,10,.72);backdrop-filter:blur(8px);padding:3px 8px;border-radius:7px}
+.wmeta{padding:10px 12px 12px}
+.wnm{font-size:12.5px;font-weight:650;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wdt{font-size:10.5px;color:var(--tx4);margin-top:2px}
+.bigcta{display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:20px;border-radius:var(--r);
+ background:linear-gradient(135deg,rgba(255,110,32,.13),rgba(255,110,32,.03));
+ border:1px solid rgba(255,110,32,.24);margin-top:16px}
+@media(max-width:760px){
+ .chrow{grid-template-columns:minmax(76px,1fr) minmax(0,1.4fr) auto;gap:8px}
+ .fnr{grid-template-columns:minmax(92px,1fr) minmax(0,1.2fr) auto;gap:8px}
+ .ttab th:nth-child(n+4),.ttab td:nth-child(n+4){display:none}
+ .hgm{height:120px}
+}
 </style>
 
 <style id="adlibcss">
@@ -838,6 +923,12 @@ const NOTIF=[
 ];
 let ASORT='spend';
 const ICO={
+ timer:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9 2h6"/>',
+ cart:'<circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.4 12.1a1.6 1.6 0 0 0 1.6 1.3h8.6a1.6 1.6 0 0 0 1.6-1.3L21 7H6"/>',
+ cal:'<rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+ bolt:'<path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/>',
+ gauge:'<path d="M12 21a9 9 0 1 1 9-9"/><path d="m12 13 5-4"/><circle cx="12" cy="13" r="1.3"/>',
+
  chart:'<path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/>',mute:'<path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="m23 9-6 6M17 9l6 6"/>',
 sound:'<path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/>',
 download:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/>',
@@ -2410,7 +2501,7 @@ home(){const c=me(),n=nt(c.xp),beat=rk('xp').filter(x=>x.xp>c.xp).pop();
  const act=ACTIVE().filter(x=>!x.admin); const avgAppr=Math.round(act.reduce((s,x)=>s+appr(x),0)/Math.max(1,act.length));
  return `${bar('Home','Where you stand, what is live, and what the brand needs this week.')}
  <div class="anim">
-  ${pushCard()}
+  ${pushCard()}${(()=>{try{return homeExtras()}catch(e){return ''}})()}
   ${(()=>{const P=me().admin?pendingAll():myPending();return P.length?`<div class="apalert" onclick="go('approvals')">
    <span class="pill warn">● ${P.length}</span>
    <div style="flex:1;min-width:0"><b>${me().admin?(P.length===1?'A video is waiting on you':P.length+' videos are waiting on you'):(P.length===1?'Your video is with Austin':P.length+' of your videos are with Austin')}</b>
@@ -2986,11 +3077,12 @@ admin(){
 };
 
 /* ===================== NAV / RENDER ===================== */
-const NAV=[['','WATCH'],['home','Home','home'],['reviews','My ad reviews','play'],['stats','Analytics','chart'],['angles','Winning angles','flame'],['inspo','Inspiration','grid'],['adlib','Ad performance','chart'],['broll','B-roll','film'],['',''],
- ['','COMPETE'],['quests','Quests','target'],['approvals','Approvals','check'],['board','Leaderboard','trophy'],['profile','My profile','user'],['',''],
+const NAV=[['','WATCH'],['home','Home','home'],['reviews','My ad reviews','play'],['stats','Analytics','chart'],['angles','Winning angles','flame'],['inspo','Inspiration','grid'],['adlib','Ad performance','chart'],['winners','What is working','bolt'],['broll','B-roll','film'],['',''],
+ ['','COMPETE'],['quests','Quests','target'],['approvals','Approvals','check'],['board','Leaderboard','trophy'],['pace','My pace','gauge'],['profile','My profile','user'],['',''],
+ ['','PROGRAMS'],['amazon','Amazon','cart'],['onboard','Onboarding call','cal'],['trial','30-day trials','timer'],['',''],
  ['','BRAND'],['brand','Brand dashboard','grid'],['admin','Brand controls','gear']];
 const MOB=[['home','Home','home'],['inspo','Inspo','grid'],['broll','B-roll','film'],['quests','Quests','target'],['approvals','Review','check'],['board','Board','trophy']];
-const TITLES={home:'Home',broll:'B-roll',approvals:'Approvals',stats:'Analytics',reviews:'My ad reviews',angles:'Winning angles',inspo:'Inspiration',adlib:'Ad performance',feed:'Library',quests:'Quests',board:'Leaderboard',profile:'My profile',brand:'Brand dashboard',admin:'Brand controls'};
+const TITLES={winners:'What is working',pace:'My pace',amazon:'Amazon',onboard:'Onboarding call',trial:'30-day trials',home:'Home',broll:'B-roll',approvals:'Approvals',stats:'Analytics',reviews:'My ad reviews',angles:'Winning angles',inspo:'Inspiration',adlib:'Ad performance',feed:'Library',quests:'Quests',board:'Leaderboard',profile:'My profile',brand:'Brand dashboard',admin:'Brand controls'};
 
 function render(){
  const c=me();
@@ -2998,6 +3090,9 @@ function render(){
   if(!n[0]&&!n[1])return '<div style="height:6px"></div>';
   if(!n[0])return (n[1]==='BRAND'&&!c.admin)?'':`<div class="nlbl">${n[1]}</div>`;
   if((n[0]==='admin'||n[0]==='brand')&&!c.admin)return '';
+  if(n[0]==='trial'&&!c.admin&&!isTrial(c))return '';
+  if(n[0]==='trial'&&c.admin)n=['trial','30-day trials','timer'];
+  else if(n[0]==='trial')n=['trial','My trial','timer'];
   if(n[0]==='approvals'&&!c.admin)n=['approvals','My submissions','check'];
   const o=n[0]==='quests'?QUESTS.filter(q=>q.got<q.need).length:(n[0]==='approvals'?(c.admin?pendingAll().length:myPending().length):0);
   const on=(n[0]==='angles')?(VIEW==='feed'&&FMODE==='angles'):(n[0]==='inspo')?(VIEW==='feed'&&FMODE==='inspo'):VIEW===n[0];
@@ -3092,6 +3187,320 @@ window.adSort=k=>{ADSORT=k;render()};
 window.adAng=a=>{ADANG=a;ADSEL=null;render()};
 window.adQ=v=>{ADQ=v;ADSEL=null;render()};
 /* ADLIB-VIEW-END */
+
+/* ===================== RAVINE-BUILD-V2 =====================
+   Five views bolted onto the app. All of them read data that already ships:
+   CR (roster + your own private figures once you log in), ADP (the ad-library
+   performance records) and the admin `all` table. Nothing here invents a number.
+   Creator-facing surfaces show spend, hook rate and dates only — CPA and ROAS
+   stay on the brand side, same rule as the ad library. */
+
+/* --- config Austin edits ------------------------------------------------ */
+const TRIAL={from:'2026-09-09',days:30,bar:2000,stretch:3000};
+window.BOOK_URL='';            // paste the Calendly / Cal.com link here
+window.AMZ_VIDEO='';           // walkthrough video URL once it is up
+window.AMZ_LIVE=7;             // influencer videos live on the listing
+window.AMZ={};                 // {creatorId:{applied:1,approved:1,link:1,vids:3}}
+window.BOOKED={};              // {creatorId:'2026-09-12'}
+
+/* --- small helpers ------------------------------------------------------ */
+const v2days=iso=>{const t=Date.parse(String(iso||'')+'T00:00:00Z');
+ return isNaN(t)?null:Math.max(0,Math.floor((Date.now()-t)/864e5))};
+const v2usd=n=>'$'+Math.round(Number(n)||0).toLocaleString();
+const v2pc=(a,b)=>b>0?Math.max(0,Math.min(100,a/b*100)):0;
+const isTrial=c=>!!c&&!c.admin&&String(c.join||'')>=TRIAL.from;
+const roster=()=>CR.filter(c=>!c.admin);
+function trialState(c){
+ const d=v2days(c.join), left=d==null?TRIAL.days:TRIAL.days-d, g=Number(c.sales)||0;
+ let k='new',t='Getting started';
+ if(g>=TRIAL.bar){k='ok';t='Passed'}
+ else if(left<=0){k='miss';t='Missed'}
+ else if(d!=null&&d>=7){ const proj=g/Math.max(1,d)*TRIAL.days;
+  if(proj>=TRIAL.bar){k='ok';t='On track'} else {k='risk';t='At risk'} }
+ return {d:d==null?0:d,left:Math.max(0,left),gmv:g,k:k,t:t};
+}
+/* horizontal bars — one hue, magnitude only. Status never rides on bar colour;
+   amber and red collapse to dE 4.3 under deuteranopia, so state is a labelled
+   chip instead and the bar just says how big the number is. */
+function v2bars(rows,opt){
+ opt=opt||{}; const mx=opt.max||Math.max(1,...rows.map(r=>r.v));
+ return `<div class="chz">${rows.map(r=>{
+  const w=v2pc(r.v,mx), q=w>=60?'':(w>=25?'q1':'q0');
+  return `<div class="chrow"><div class="chlab" title="${esc(r.l)}">${esc(r.l)}</div>
+   <div class="chtrack"><i class="${q}" style="width:${w.toFixed(1)}%"></i>${
+    opt.target?`<u data-t="${esc(opt.targetLabel||'')}" style="left:${v2pc(opt.target,mx).toFixed(1)}%"></u>`:''}</div>
+   <div class="chval mono">${esc(r.d)}</div></div>`}).join('')}</div>`;
+}
+function v2hist(vals,mine,lo,hi,step,unit){
+ const bins=[]; for(let x=lo;x<hi;x+=step)bins.push({a:x,b:x+step,n:0});
+ vals.forEach(v=>{const i=Math.min(bins.length-1,Math.max(0,Math.floor((v-lo)/step)));bins[i].n++});
+ const mx=Math.max(1,...bins.map(b=>b.n));
+ const mi=mine==null?-1:Math.min(bins.length-1,Math.max(0,Math.floor((mine-lo)/step)));
+ return `<div class="hgm">${bins.map((b,i)=>`<div class="hgb ${i===mi?'mine':''}" title="${b.a}–${b.b}${unit}: ${b.n} video${b.n===1?'':'s'}">
+   <i style="height:${(b.n/mx*100).toFixed(1)}%"></i></div>`).join('')}</div>
+  <div class="hgx">${bins.map((b,i)=>`<span>${(i%2===0)?b.a:''}</span>`).join('')}</div>`;
+}
+
+/* ---------- 1. 30-day trials ------------------------------------------- */
+V.trial=function(){
+ const c=me();
+ if(!c.admin){
+  const st=trialState(c);
+  if(!isTrial(c))return `${bar('Your trial','Nothing to worry about — you are grandfathered in.')}
+   <div class="anim"><div class="g p">
+    <div class="lbl">STATUS</div>
+    <h3 style="margin:8px 0 6px;font-size:20px;letter-spacing:-.4px">You are grandfathered in ✅</h3>
+    <div class="mini" style="line-height:1.6;max-width:640px">The 30-day trial applies to creators who join from ${TRIAL.from} onward. You were already on the roster, so it does not apply to you — no GMV bar, no clock. Keep posting the way you have been.</div>
+   </div></div>`;
+  return `${bar('Your 30-day trial','Day '+st.d+' of '+TRIAL.days+'.')}
+  <div class="anim"><div class="g p">
+   <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap">
+    <div><div class="lbl">GMV THIS TRIAL</div>
+     <div class="mono" style="font-size:36px;font-weight:800;letter-spacing:-1.5px;margin-top:5px;color:var(--o)">${v2usd(st.gmv)}</div>
+     <div class="mini" style="margin-top:3px">of ${v2usd(TRIAL.bar)} to lock your spot</div></div>
+    <span class="tchip ${st.k}"><b></b>${st.t}</span>
+   </div>
+   <div class="bbar" style="margin-top:16px"><i style="width:${v2pc(st.gmv,TRIAL.bar).toFixed(1)}%"></i></div>
+   <div class="mini" style="margin-top:9px">${st.left>0?`<b style="color:var(--tx)">${st.left} day${st.left===1?'':'s'} left.</b>`:'<b style="color:var(--tx)">Trial window closed.</b>'} ${st.gmv>=TRIAL.bar?'You already cleared the bar — nice work.':'Every approved video that drives a sale moves this.'}</div>
+  </div>
+  <div class="sec"><h2>How it works</h2></div>
+  <div class="g p"><div class="mini" style="line-height:1.7;max-width:700px">
+   You have ${TRIAL.days} days from the day you were added to hit <b style="color:var(--tx)">${v2usd(TRIAL.bar)} in GMV</b>. It is not a video count — one video that sells beats ten that do not. Clear it and you are on the roster the same as everyone else. Questions, message Austin.
+  </div></div></div>`;
+ }
+ const inT=roster().filter(isTrial).map(x=>({c:x,s:trialState(x)}))
+   .sort((a,b)=>a.s.left-b.s.left||b.s.gmv-a.s.gmv);
+ const recent=roster().filter(x=>!isTrial(x)).sort((a,b)=>String(b.join||'').localeCompare(String(a.join||''))).slice(0,8);
+ const n=k=>inT.filter(x=>x.s.k===k).length;
+ const rows=inT.map(x=>({l:x.c.n,v:x.s.gmv,d:v2usd(x.s.gmv)}));
+ return `${bar('30-day trials','Every creator added from '+TRIAL.from+' has '+TRIAL.days+' days to clear '+v2usd(TRIAL.bar)+' in GMV.')}
+ <div class="anim">
+  <div class="stats three">
+   <div class="st"><div class="v mono">${inT.length}</div><div class="k">in trial now</div></div>
+   <div class="st"><div class="v mono" style="color:var(--gr)">${n('ok')}</div><div class="k">on track or passed</div></div>
+   <div class="st"><div class="v mono" style="color:var(--warn)">${n('risk')+n('miss')}</div><div class="k">need a decision</div></div>
+  </div>
+  ${inT.length?`<div class="g p" style="margin-top:16px">
+   <div class="lbl">GMV AGAINST THE ${v2usd(TRIAL.bar).toUpperCase()} BAR</div>
+   ${v2bars(rows,{max:Math.max(TRIAL.bar*1.15,...rows.map(r=>r.v)),target:TRIAL.bar,targetLabel:'BAR'})}
+   <div class="chnote">Bar length is GMV. The tick is ${v2usd(TRIAL.bar)}. Status is the chip in the table below — colour alone never tells you whether someone passed.</div>
+  </div>
+  <div class="g p" style="margin-top:16px"><div class="lbl">THE TABLE</div>
+   <table class="ttab"><thead><tr><th>Creator</th><th>Day</th><th>GMV</th><th>Pace to day 30</th><th>Status</th></tr></thead><tbody>
+   ${inT.map(x=>{const proj=x.s.d>0?x.s.gmv/x.s.d*TRIAL.days:0;
+    return `<tr><td><b>${esc(x.c.n)}</b><div class="mini">${esc(x.c.h||'')}</div></td>
+     <td class="mono">${x.s.d} / ${TRIAL.days}</td>
+     <td class="mono">${v2usd(x.s.gmv)}</td>
+     <td class="mono" style="color:${proj>=TRIAL.bar?'var(--gr)':'var(--tx2)'}">${x.s.d>=3?v2usd(proj):'—'}</td>
+     <td><span class="tchip ${x.s.k}"><b></b>${x.s.t}</span></td></tr>`}).join('')}
+   </tbody></table></div>`
+ :`<div class="g p" style="margin-top:16px">
+   <h3 style="margin:0 0 6px;font-size:17px">No one is on trial yet</h3>
+   <div class="mini" style="line-height:1.6;max-width:640px">This fills in the moment someone with a join date on or after <b style="color:var(--tx)">${TRIAL.from}</b> lands on the roster. Everyone already here is grandfathered in, exactly as you told them.</div>
+  </div>`}
+  <div class="sec"><h2>Most recent joins <span class="mini" style="font-weight:600">— grandfathered, shown for reference</span></h2></div>
+  <div class="g p"><table class="ttab"><thead><tr><th>Creator</th><th>Joined</th><th>Days on roster</th><th>GMV</th></tr></thead><tbody>
+   ${recent.map(x=>`<tr><td><b>${esc(x.n)}</b></td><td class="mono">${esc(x.join||'—')}</td>
+     <td class="mono">${v2days(x.join)==null?'—':v2days(x.join)}</td>
+     <td class="mono">${v2usd(x.sales)}</td></tr>`).join('')}
+  </tbody></table></div>
+  <div class="g p" style="margin-top:16px"><div class="lbl">ONE THING TO KNOW</div>
+   <div class="mini" style="margin-top:8px;line-height:1.7;max-width:700px">The clock runs from the <b style="color:var(--tx)">Trybe join date</b>, not the day their sample landed. Those are usually a few days apart. If someone finishes $150 short on day 30 that gap is going to matter — tell me the ship dates and I will drive the counter off those instead.</div>
+  </div>
+ </div>`;
+};
+
+/* ---------- 2. Amazon ---------------------------------------------------- */
+const AMZ_STEPS=[
+ ['applied','Apply to the Amazon Influencer Program','Takes about ten minutes. You need a public account with real engagement — Instagram, TikTok, YouTube or Facebook.'],
+ ['approved','Get approved','Amazon reviews it and comes back. Sometimes same day, sometimes a couple of weeks.'],
+ ['link','Set up a separate account for the affiliate side','A dedicated Instagram or YouTube for product content, so your affiliate link has somewhere to live.'],
+ ['vids','Repurpose your Ravine videos onto the listing','The work is already made. Put it up, get the link out, earn on the traffic you send.']
+];
+const AMZK='ravine_amz_v1';
+const amzGet=()=>{try{return JSON.parse(localStorage.getItem(AMZK)||'{}')}catch(e){return {}}};
+window.amzTog=k=>{const d=amzGet();d[k]=!d[k];try{localStorage.setItem(AMZK,JSON.stringify(d))}catch(e){}render()};
+V.amazon=function(){
+ const c=me();
+ if(c.admin){
+  const R=roster(), got=k=>R.filter(x=>(window.AMZ[x.id]||{})[k]).length;
+  const st=[['On the roster',R.length],['Applied',got('applied')],['Approved',got('approved')],['Affiliate account up',got('link')],['Videos posted',got('vids')]];
+  const mx=Math.max(1,...st.map(x=>x[1]));
+  const shades=['#FFC79A','#FFB07A','#FF945A','#FF7C3C','#FF6E20'];
+  return `${bar('Amazon program','Where the roster is on the Influencer Program and the affiliate side.')}
+  <div class="anim">
+   <div class="stats three">
+    <div class="st"><div class="v mono">${window.AMZ_LIVE}</div><div class="k">videos live on the listing</div></div>
+    <div class="st"><div class="v mono">${got('approved')}</div><div class="k">approved so far</div></div>
+    <div class="st"><div class="v mono">${R.length-got('applied')}</div><div class="k">have not applied yet</div></div>
+   </div>
+   <div class="g p" style="margin-top:16px"><div class="lbl">THE FUNNEL</div>
+    <div class="fnl">${st.map((x,i)=>`<div class="fnr"><div class="ft2">${x[0]}</div>
+      <div><div class="fnb" style="width:${Math.max(6,x[1]/mx*100).toFixed(1)}%;background:${shades[i]}">${x[1]?x[1]:''}</div></div>
+      <div class="chval mono">${mx?Math.round(x[1]/R.length*100):0}%</div></div>`).join('')}</div>
+    <div class="chnote">One hue, light to dark, because this is one number getting smaller — not five different things.</div>
+   </div>
+   ${Object.keys(window.AMZ).length?`<div class="g p" style="margin-top:16px"><div class="lbl">BY CREATOR</div>
+    <table class="ttab"><thead><tr><th>Creator</th><th>Applied</th><th>Approved</th><th>Affiliate up</th><th>Videos</th></tr></thead><tbody>
+    ${R.filter(x=>window.AMZ[x.id]).map(x=>{const a=window.AMZ[x.id]||{};
+      const y=v=>v?'<span style="color:var(--gr)">Yes</span>':'<span style="color:var(--tx4)">—</span>';
+      return `<tr><td><b>${esc(x.n)}</b></td><td>${y(a.applied)}</td><td>${y(a.approved)}</td><td>${y(a.link)}</td><td class="mono">${a.vids||0}</td></tr>`}).join('')}
+    </tbody></table></div>`
+   :`<div class="g p" style="margin-top:16px"><h3 style="margin:0 0 6px;font-size:17px">No creator status logged yet</h3>
+     <div class="mini" style="line-height:1.7;max-width:700px">This app is static files — a creator ticking a box on their phone has no way to send that to you. So their checklist is theirs alone, and this board reads from a small list I keep for you. Send me who has applied and who is approved and it fills in on the next refresh.</div></div>`}
+  </div>`;
+ }
+ const d=amzGet(), done=AMZ_STEPS.filter(x=>d[x[0]]).length;
+ return `${bar('Amazon','Get set up on the Amazon side while the video work keeps running.')}
+ <div class="anim">
+  <div class="g p"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+   <div><div class="lbl">YOUR SETUP</div><div style="font-size:22px;font-weight:800;letter-spacing:-.5px;margin-top:5px">${done} of ${AMZ_STEPS.length} done</div></div>
+   ${window.AMZ_VIDEO?`<a class="btn" href="${esc(window.AMZ_VIDEO)}" target="_blank" rel="noopener">Watch the walkthrough</a>`:'<span class="mini">Austin\'s walkthrough video is coming before the next call.</span>'}
+  </div>
+  <div class="bbar" style="margin-top:14px"><i style="width:${done/AMZ_STEPS.length*100}%"></i></div></div>
+  <div class="ckl">${AMZ_STEPS.map((x,i)=>`<div class="ckr ${d[x[0]]?'on':''}" onclick="amzTog('${x[0]}')">
+    <div class="ckb">${ico('check',13)}</div>
+    <div style="min-width:0"><div class="ckt">${i+1}. ${esc(x[1])}</div><div class="ckd">${esc(x[2])}</div></div></div>`).join('')}</div>
+  <div class="g p" style="margin-top:16px"><div class="lbl">TWO THINGS</div>
+   <div class="mini" style="margin-top:8px;line-height:1.7;max-width:700px">
+    We are requesting product in batches so reviews do not all land at once. First round is already out. While you wait, the affiliate side is the part you can start on today — nothing is stopping you.<br><br>
+    On reviews: please do not push them. A rush of five-star reviews is how a listing gets pulled. Let them come naturally.<br><br>
+    <span style="color:var(--tx4)">Your ticks here are saved on this device only — they are for you, not a report to Austin.</span>
+   </div></div>
+ </div>`;
+};
+
+/* ---------- 3. what's working ------------------------------------------- */
+V.winners=function(){
+ const c=me(), B='bf4a614a-2ec2-43fa-83f6-e19e08f57c24';
+ const th=s=>'https://cdn.jointrybe.com/tmp/thumbnail_'+s+'.jpg';
+ const pool=ADP.filter(v=>v.sp>=150&&v.hk>0);
+ const top=pool.slice().sort((a,b)=>b.hk-a.hk).slice(0,12);
+ const mine=(c.an&&c.an.agg&&c.an.agg.ts)?c.an.agg.ts:null;
+ const all=ADP.filter(v=>v.hk>0).map(v=>v.hk);
+ const avg=all.length?all.reduce((a,b)=>a+b,0)/all.length:0;
+ const med=(()=>{const a=all.slice().sort((x,y)=>x-y);return a.length?a[Math.floor(a.length/2)]:0})();
+ return `${bar('What is working','Ranked from our own numbers — the hook rate is how many people did not scroll past.')}
+ <div class="anim">
+  <div class="stats three">
+   <div class="st"><div class="v mono">${avg.toFixed(1)}%</div><div class="k">account hook rate</div></div>
+   <div class="st"><div class="v mono">${med.toFixed(1)}%</div><div class="k">median video</div></div>
+   <div class="st"><div class="v mono" style="color:${mine==null?'var(--tx3)':(mine>=med?'var(--gr)':'var(--warn)')}">${mine==null?'—':mine.toFixed(1)+'%'}</div><div class="k">yours</div></div>
+  </div>
+  <div class="g p" style="margin-top:16px"><div class="lbl">WHERE EVERY VIDEO LANDS</div>
+   ${v2hist(all,mine,0,70,5,'%')}
+   <div class="chnote">Each bar is how many videos hit that hook rate.${mine==null?' Log in on your own code to see where yours sits.':' The orange bar is where yours sits.'} Anything past ${med.toFixed(0)}% is beating half the account.</div>
+  </div>
+  <div class="sec"><h2>Top 12 hooks right now</h2></div>
+  <div class="mini" style="margin:-6px 0 14px">Videos with at least $150 behind them, ranked by hook rate. Watch the first two seconds of each — that is the whole lesson.</div>
+  <div class="grid g3">${top.map((v,i)=>`<div class="wcard">
+    <div class="wthumb"><img loading="lazy" src="${th(v.s)}" alt="">
+     <div class="wrank">${i+1}</div>
+     <div class="whk"><span class="hk">${v.hk.toFixed(0)}% hook</span><span class="sp">$${(v.sp/1000>=1?(v.sp/1000).toFixed(1)+'K':v.sp)}</span></div></div>
+    <div class="wmeta"><div class="wnm">${esc(v.c)}</div><div class="wdt">${esc(v.d)}${v.a?' · '+esc(v.a):''}</div></div>
+   </div>`).join('')}</div>
+  <div class="g p" style="margin-top:18px"><div class="lbl">WHY THIS MATTERS MORE THAN VOLUME</div>
+   <div class="mini" style="margin-top:8px;line-height:1.7;max-width:700px">A video at ${(med+20).toFixed(0)}% hook keeps roughly twice as many people watching as one at ${med.toFixed(0)}% before a single word of the script lands. Same spend, same product. Copying what already works here is the fastest thing you can do this week.</div>
+  </div>
+ </div>`;
+};
+
+/* ---------- 4. pace ------------------------------------------------------ */
+V.pace=function(){
+ const c=me(), d=v2days(c.join)||0, wk=Math.max(1,d/7);
+ const per=(Number(c.v)||0)/wk;
+ const R=roster().filter(x=>v2days(x.join)>=7&&(Number(x.v)||0)>0)
+   .map(x=>({n:x.n,p:(Number(x.v)||0)/Math.max(1,v2days(x.join)/7)}));
+ const sorted=R.map(x=>x.p).sort((a,b)=>a-b);
+ const med=sorted.length?sorted[Math.floor(sorted.length/2)]:0;
+ const top=R.slice().sort((a,b)=>b.p-a.p).slice(0,10);
+ const ahead=R.filter(x=>x.p<per).length;
+ return `${bar('My pace','How much you are putting out, against the rest of the roster.')}
+ <div class="anim">
+  <div class="stats three">
+   <div class="st"><div class="v mono">${per.toFixed(1)}</div><div class="k">approved videos / week</div></div>
+   <div class="st"><div class="v mono">${med.toFixed(1)}</div><div class="k">roster median</div></div>
+   <div class="st"><div class="v mono" style="color:${per>=med?'var(--gr)':'var(--warn)'}">${R.length?Math.round(ahead/R.length*100):0}%</div><div class="k">of creators you are ahead of</div></div>
+  </div>
+  <div class="g p" style="margin-top:16px"><div class="lbl">YOU vs THE ROSTER</div>
+   ${v2bars([{l:'You',v:per,d:per.toFixed(1)+'/wk'},{l:'Roster median',v:med,d:med.toFixed(1)+'/wk'},
+     {l:'Top 10 average',v:top.length?top.reduce((a,b)=>a+b.p,0)/top.length:0,
+      d:(top.length?top.reduce((a,b)=>a+b.p,0)/top.length:0).toFixed(1)+'/wk'}],{})}
+   <div class="chnote">Approved videos divided by weeks since you joined — a steady average, not a week-by-week history. Approved, not submitted, because a video that did not clear review is not output. Trybe does not date individual submissions in the export, so I am not going to draw you a weekly chart out of numbers I do not have.</div>
+  </div>
+  <div class="g p" style="margin-top:16px"><div class="lbl">HIGHEST OUTPUT ON THE ROSTER</div>
+   ${v2bars(top.map(x=>({l:x.n,v:x.p,d:x.p.toFixed(1)+'/wk'})),{})}
+   <div class="chnote">Volume only. It is not the leaderboard — the $${'5,000'} pool ranks on sales driven, and one video that sells beats five that do not.</div>
+  </div>
+ </div>`;
+};
+
+/* ---------- 5. onboarding call ------------------------------------------ */
+V.onboard=function(){
+ const c=me(), U=window.BOOK_URL;
+ if(c.admin){
+  const R=roster(), bk=R.filter(x=>window.BOOKED[x.id]);
+  return `${bar('Onboarding calls','Who has booked, who has not.')}
+  <div class="anim">
+   <div class="stats three">
+    <div class="st"><div class="v mono">${bk.length}</div><div class="k">booked</div></div>
+    <div class="st"><div class="v mono">${R.length-bk.length}</div><div class="k">not booked</div></div>
+    <div class="st"><div class="v mono">${R.length?Math.round(bk.length/R.length*100):0}%</div><div class="k">of the roster</div></div>
+   </div>
+   ${U?'':`<div class="g p" style="margin-top:16px"><h3 style="margin:0 0 6px;font-size:17px">No booking link set yet</h3>
+    <div class="mini" style="line-height:1.7;max-width:700px">Send me your Calendly or Cal.com link and I will wire it in — it then shows as a button on every creator's home screen, and this page starts tracking who has booked.</div></div>`}
+   <div class="g p" style="margin-top:16px"><div class="lbl">GETTING THEM ON THE CALL</div>
+    <div class="mini" style="margin-top:8px;line-height:1.75;max-width:700px">
+     For new creators, make the call the gate rather than the invitation — the sample ships after the onboarding call. It uses something they already want, so it converts far better than asking.<br><br>
+     For the ${R.length} already on the roster you cannot gate anything, so give them a reason that is about them: their own numbers. "Twenty minutes on your hook rate and where your videos are losing people" books better than "onboarding call."<br><br>
+     Batch it. Five or six a week beats trying to see everyone, and it keeps the calls short enough to stay useful.
+    </div></div>
+  </div>`;
+ }
+ const booked=window.BOOKED[c.id];
+ return `${bar('Your onboarding call','Twenty minutes with Austin on your content and your numbers.')}
+ <div class="anim">
+  ${booked?`<div class="g p"><div class="lbl">BOOKED</div>
+   <h3 style="margin:8px 0 4px;font-size:20px;letter-spacing:-.4px">You are on the calendar for ${esc(booked)} ✅</h3>
+   <div class="mini">Bring one video you are unsure about. That is the most useful twenty minutes we can spend.</div></div>`
+  :`<div class="bigcta">
+   <div style="flex:1;min-width:220px">
+    <h3 style="margin:0 0 6px;font-size:19px;letter-spacing:-.4px">Grab a time with Austin</h3>
+    <div class="mini" style="line-height:1.6">We go through your hook rates, where your videos lose people, and what to make next. Twenty minutes, no prep needed.</div>
+   </div>
+   ${U?`<a class="btn" href="${esc(U)}" target="_blank" rel="noopener">Book my call</a>`
+     :`<span class="mini" style="color:var(--tx4)">Booking link coming shortly.</span>`}
+  </div>`}
+  <div class="sec"><h2>What we cover</h2></div>
+  <div class="grid g3">
+   <div class="g p"><div class="lbl">01</div><div style="font-weight:650;margin-top:7px">Your hook rate</div>
+    <div class="mini" style="margin-top:5px;line-height:1.55">Where your first two seconds sit against the account, and what the top videos are doing differently.</div></div>
+   <div class="g p"><div class="lbl">02</div><div style="font-weight:650;margin-top:7px">Your angles</div>
+    <div class="mini" style="margin-top:5px;line-height:1.55">Which of your angles are actually converting and which to stop making.</div></div>
+   <div class="g p"><div class="lbl">03</div><div style="font-weight:650;margin-top:7px">What is next</div>
+    <div class="mini" style="margin-top:5px;line-height:1.55">Amazon, the affiliate side, and where the volume needs to be for Q4.</div></div>
+  </div>
+ </div>`;
+};
+
+/* ---------- home extras -------------------------------------------------- */
+function homeExtras(){
+ const c=me(); let h='';
+ if(isTrial(c)){const st=trialState(c);
+  h+=`<div class="apalert" onclick="go('trial')" style="border-color:rgba(255,110,32,.28)">
+   <span class="pill hi">DAY ${st.d}</span>
+   <div style="flex:1;min-width:0"><b>${v2usd(st.gmv)} of ${v2usd(TRIAL.bar)} · ${st.left} day${st.left===1?'':'s'} left in your trial</b>
+   <div class="mini" style="margin-top:2px">${st.gmv>=TRIAL.bar?'You already cleared the bar.':'Approved videos that drive sales move this.'}</div></div>
+   <span class="mini">Open →</span></div>`}
+ if(!c.admin&&!window.BOOKED[c.id]&&window.BOOK_URL)
+  h+=`<div class="apalert" onclick="go('onboard')">
+   <span class="pill">CALL</span>
+   <div style="flex:1;min-width:0"><b>Book your onboarding call</b>
+   <div class="mini" style="margin-top:2px">Twenty minutes on your hook rate and what to make next.</div></div>
+   <span class="mini">Book →</span></div>`;
+ return h;
+}
+
 
 window.go=k=>{QS=null;LSEL=null;ASEL=null;
  if(k==='angles'){FMODE='angles';LANG='All';LQ='';k='feed'}
