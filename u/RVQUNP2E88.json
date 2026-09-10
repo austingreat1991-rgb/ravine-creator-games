@@ -1,1 +1,1 @@
-{"id": 60, "n": "Gary Fox", "sales": 0, "$": 15, "v": 1, "sub": 1, "xp": 0, "rank": 61, "pool": {"pct": 0.186, "amt": 9.3}, "an": {"rows": [], "agg": null}}
+{"id": 60, "n": "Gary Fox", "sales": 0, "$": 15, "v": 1, "sub": 1, "xp": 0, "rank": 61, "pool": {"pct": 0.186, "amt": 9.3}, "an": {"rows": [{"who": "Gary Fox", "id": "2e98e702", "ads": 1, "cpa": 0.0, "pv": 0.0, "roas": 0.0, "sales": 0.0, "spend": 2.98, "ts": 26.83, "t": 0, "p": "Ravine FieldOps Pro"}], "agg": {"vids": 1, "ads": 1, "pv": 0.0, "sales": 0.0, "spend": 2.98, "cpa": 2.98, "roas": 0.0, "ts": 26.83}}}
