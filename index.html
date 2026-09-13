@@ -753,6 +753,28 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border:0;border-radiu
  .ttab th:nth-child(n+4),.ttab td:nth-child(n+4){display:none}
  .hgm{height:120px}
 }
+
+.spyintro p{margin:0 0 10px;line-height:1.55}
+.spyintro p:last-child{margin-bottom:0}
+.spywarn{font-size:13px;opacity:.72}
+.spytabs{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 14px}
+.spytabs button{background:var(--card,#1a1a1a);border:1px solid var(--line,#2a2a2a);color:inherit;border-radius:999px;padding:7px 13px;font-size:13px;cursor:pointer}
+.spytabs button.on{border-color:#ff7a1a;color:#ff9a4a}
+.spytabs button i{font-style:normal;opacity:.55;margin-left:3px}
+.spygrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+.spyc{background:var(--card,#1a1a1a);border:1px solid var(--line,#2a2a2a);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.spyh h3{margin:0;font-size:19px}
+.spymeta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:5px}
+.spycat{font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.6}
+.spyn{font-size:12px;opacity:.55}
+.spynote{margin:0;font-size:13px;opacity:.7;font-style:italic}
+.spyrow{display:flex;flex-direction:column;gap:3px}
+.spyrow p{margin:0;font-size:14px;line-height:1.5}
+.spylab{font-size:11px;letter-spacing:.07em;text-transform:uppercase;opacity:.5}
+.spyflag{margin:0;font-size:12.5px;opacity:.75;display:flex;align-items:center;gap:6px}
+.spyacts{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;padding-top:4px}
+.spyacts .btn.sm{padding:6px 11px;font-size:12px}
+@media(max-width:480px){.spygrid{grid-template-columns:1fr}}
 </style>
 
 <style id="adlibcss">
@@ -3086,13 +3108,59 @@ admin(){
  </div>`}
 };
 
+
+/* ===================== RAVINE-SPY-V1 ===================== */
+const SPY=[{"n": "Loop", "adv": "Loop", "q": "Loop Earplugs", "cat": "Ear pro", "note": "Relevant to our demo", "take": "They sell an earplug on lifestyle, never on specs. Concerts, restaurants, focus. Watch how they show the problem (noise) before the product exists on screen.", "apply": "Same move for the range: lead with the wince, the flinch, the ringing afterward. Product enters late.", "ids": ["1502146178114560", "1660648161816296", "2244416996383791", "2291674244901083"], "ads": 28}, {"n": "Raycon", "adv": "Raycon", "q": "Raycon", "cat": "Ear pro", "note": "Relevant to our demo", "take": "Highest volume of creator-read earbud ads on Meta. Every one opens on a face and a claim in the first two seconds.", "apply": "Study the first 2s only. Write down 10 of their openers, then rewrite each one for hearing protection.", "ids": ["1662297028325331", "1347831843434806", "1560891718797649", "3162877100717051"], "ads": 28}, {"n": "SITKA Gear", "adv": "SITKA Gear", "q": "Sitka Gear", "cat": "Hunting", "note": "Lifestyle content around hunting we have not tapped into", "take": "Cinematic hunting lifestyle. Glassing, packing in, cold mornings. Product is worn, never pitched.", "apply": "This is the gap in our library. Shoot the hunt, not the earbud. Let the product be incidental to a real morning in the field.", "ids": ["1577020764162684", "2260305724796844", "1089315106943512"], "ads": 15}, {"n": "KUIU", "adv": "KUIU", "q": "KUIU", "cat": "Hunting", "note": "Lifestyle content around hunting we have not tapped into", "take": "Same lane as SITKA but tighter edits and more first-person POV. Strong use of real terrain and weather.", "apply": "POV walking in, POV glassing, POV the moment you hear something. That is our audio angle with a KUIU shell.", "ids": ["2239636303545559", "1017749371137521", "1719939459113195", "1747031646499357"], "ads": 23}, {"n": "Dr. Squatch", "adv": "Dr. Squatch", "q": "Dr. Squatch", "cat": "Selling to men", "note": "More fun / comedic style we have barely tested", "take": "Comedy as the hook, product as the punchline. They get away with absurd openers because the payoff is a real benefit.", "apply": "We have almost no comedic Ravine content. One joke premise about not hearing your wife, then the 4X passthrough saves you.", "ids": ["1723855265319277", "4592465647742824", "2283848789069201", "989763894099386"], "ads": 40}, {"n": "The Ridge", "adv": "The Ridge", "q": "Ridge Wallet", "cat": "Selling to men", "note": "9-figure brand selling wallets, same concepts apply", "take": "They made a boring category exciting with demo-first edits and hard product cuts. Enormous volume of format tests.", "apply": "Ravine is also a boring category on paper. Copy their demo cadence: show it, break it, prove it, repeat.", "ids": ["1092730413084317", "884818241139526", "1875657773412463", "2492619111215624"], "ads": 16}, {"n": "Mars Men", "adv": "Mars Men", "q": "Mars Men", "cat": "Selling to men", "note": "Sell to men at crazy scale", "take": "Almost every ad is a partnership post from a creator account, not the brand. That is whitelisting at scale.", "apply": "Look at how many different faces run the same script. That is the model we are building toward.", "ids": ["1306865014320574", "1336889891649254", "1896610521714904", "2010600696332406"], "ads": 23}, {"n": "Comfrt", "adv": "Comfrt", "q": "Comfrt", "cat": "UGC machine", "note": "Obvious one, they crush it with UGC", "take": "Enormous UGC volume, very plain filming. Proof that production value is not the constraint.", "apply": "Nobody here should be blocked on gear. Their winners are shot on a phone in a bedroom.", "ids": ["2153026195626395", "1114034167624325", "28981777361424855", "1092217020228972"], "ads": 22}, {"n": "Houdini Holster", "adv": "Houdini Holster", "q": "Houdini Holsters", "cat": "Same niche", "note": "Plays in a similar niche", "take": "Concealed carry demo ads. Heavy on the in-use reveal and the objection-handling comment reply format.", "apply": "Closest thing to our audience on this list. Their objections are our objections.", "ids": ["1407451690461578", "1934048910608189", "1533861094342528", "1380568970097087"], "ads": 25}, {"n": "2Tactic", "adv": "2Tactic Carry Holsters", "q": "2Tactic", "cat": "Same niche", "note": "Sells to similar demographics, what works there likely works for us", "take": "Tactical carry gear to the same 35-65 male buyer we are chasing.", "apply": "Steal their audience framing, not their product angle. Note: search also returns Forged in the Field, check the advertiser name on each card.", "ids": ["1057179760510171", "1750862122851700", "1680517999728027", "1058174140092175"], "ads": 18}, {"n": "Condition 1 Cases", "adv": "Condition 1 Cases", "q": "Condition 1 Cases", "cat": "Same niche", "note": "Plays in a similar niche", "take": "Rugged-gear torture tests. Abuse the product on camera, let the durability sell itself.", "apply": "Ravine is IPX5 with a lifetime warranty option. A torture test is a format we have never shot.", "ids": ["2408611009550691", "1373089071211678"], "ads": 4}, {"n": "Undrdog", "adv": "UndrDog", "q": "Undrdog", "cat": "Selling to men", "note": "Really effective ads targeting men (demo ad)", "take": "Demo-led ads aimed squarely at men.", "apply": "Heads up before you dig in: three different advertisers share this name (UndrDog, UndrDog Hemp, UNDRDOG ATHLETIX). Confirm with Chris which one he meant.", "ids": ["1561859398712626", "1574611124020004", "28787360367514496"], "ads": 20, "warn": 1}, {"n": "Resilia", "adv": "Resilia", "q": "Resilia", "cat": "AI formats", "note": "Masterclass in AI animation videos", "take": "AI-animated explainer ads. Useful purely as a format study.", "apply": "Worth watching for the animation technique. Note: this search is noisy with supplement advertisers, filter to the Resilia advertiser.", "ids": ["1075008651698436", "2270782683742764", "1706729424473819"], "ads": 11, "warn": 1}, {"n": "Seranova", "adv": "Seranova", "q": "Seranova", "cat": "UGC machine", "note": "Some solid UGC", "take": "Creator-led UGC, mostly partnership posts running through individual accounts.", "apply": "Study the whitelisting pattern more than the creative. Note: search is heavy with unrelated advertisers.", "ids": ["4456479431279117", "27541582028834296"], "ads": 9, "warn": 1}, {"n": "Smooche", "adv": "Smooche", "q": "Smooche", "cat": "UGC machine", "note": "Really good with solution-aware audience targeting", "take": "They speak to someone who already knows they have the problem and is shopping for the fix.", "apply": "Our solution-aware buyer is the guy who already has ringing ears. Write to him directly, skip the education.", "ids": ["1235086835413596", "1026720010237420", "1031473995972087", "2306373746776583"], "ads": 15}];
+const SPYCATS=['All','Ear pro','Hunting','Selling to men','Same niche','UGC machine','AI formats'];
+let SPYCAT='All';
+const spyURL=q=>'https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=US'
+ +'&q='+encodeURIComponent(q)+'&search_type=keyword_unordered&media_type=video'
+ +'&sort_data[mode]=total_impressions&sort_data[direction]=desc';
+const spyAd=id=>'https://www.facebook.com/ads/library/?id='+id;
+window.setSpyCat=c=>{SPYCAT=c;render();scrollTop()};
+
+V.spy=function(){
+ const rows=SPYCAT==='All'?SPY:SPY.filter(b=>b.cat===SPYCAT);
+ const totalAds=SPY.reduce((n,b)=>n+b.ads,0);
+ return `${bar('Spy board','Brands doing the numbers we want. Every card opens their live ads on Meta.')}
+ <div class="g p spyintro">
+  <p>Chris pulled this list. These are the accounts worth studying before you film anything this week.</p>
+  <p><b>How to use it.</b> Pick one brand. Watch the first three seconds of ten of their ads on repeat. Write down the structure &mdash; what happens at 0&ndash;3s, at 3&ndash;10s, when the product first appears, how it closes. Then shoot your version in your setting with your story. You are copying the <i>structure</i>, never the script, and never the video.</p>
+  <p class="spywarn">These are other brands' ads. Study them, do not re-upload them, and do not recreate any one video shot for shot.</p>
+ </div>
+ <div class="spytabs">${SPYCATS.map(c=>`<button class="${c===SPYCAT?'on':''}" onclick="setSpyCat('${c}')">${esc(c)}${c==='All'?` <i>${SPY.length}</i>`:''}</button>`).join('')}</div>
+ <div class="spygrid">
+  ${rows.map(b=>`
+  <div class="spyc">
+   <div class="spyh">
+    <div>
+     <h3>${esc(b.n)}</h3>
+     <div class="spymeta"><span class="spycat">${esc(b.cat)}</span><span class="spyn mono">${b.ads} live video ads</span></div>
+    </div>
+   </div>
+   <p class="spynote">${esc(b.note)}</p>
+   <div class="spyrow"><span class="spylab">What they do</span><p>${esc(b.take)}</p></div>
+   <div class="spyrow"><span class="spylab">Steal this for Ravine</span><p>${esc(b.apply)}</p></div>
+   ${b.warn?`<p class="spyflag">${ico('bolt',13)} Check the advertiser name on each card before you trust it.</p>`:''}
+   <div class="spyacts">
+    <a class="btn" href="${spyURL(b.q)}" target="_blank" rel="noopener">${ico('grid',15)} All their ads</a>
+    ${b.ids.map((id,i)=>`<a class="btn gh sm" href="${spyAd(id)}" target="_blank" rel="noopener">Ad ${i+1}</a>`).join('')}
+   </div>
+  </div>`).join('')}
+ </div>
+ <div class="g p" style="margin-top:16px">
+  <h3>Why these links go to Meta</h3>
+  <div class="note">Ads rotate constantly. If we copied these videos into the app they would be stale in a week and they would not be ours to host. The Ad Library is live, so what you see is what is actually running today. ${totalAds} video ads across these ${SPY.length} brands at the time this was built.</div>
+ </div>`;
+};
+
 /* ===================== NAV / RENDER ===================== */
-const NAV=[['','WATCH'],['home','Home','home'],['reviews','My ad reviews','play'],['stats','Analytics','chart'],['angles','Winning angles','flame'],['inspo','Inspiration','grid'],['adlib','Ad performance','chart'],['winners','What is working','bolt'],['broll','B-roll','film'],['',''],
+const NAV=[['','WATCH'],['home','Home','home'],['reviews','My ad reviews','play'],['stats','Analytics','chart'],['angles','Winning angles','flame'],['inspo','Inspiration','grid'],['spy','Spy board','flame'],['adlib','Ad performance','chart'],['winners','What is working','bolt'],['broll','B-roll','film'],['',''],
  ['','COMPETE'],['quests','Quests','target'],['approvals','Approvals','check'],['board','Leaderboard','trophy'],['pace','My pace','gauge'],['profile','My profile','user'],['',''],
  ['','PROGRAMS'],['amazon','Amazon','cart'],['onboard','Onboarding call','cal'],['trial','30-day trials','timer'],['',''],
  ['','BRAND'],['brand','Brand dashboard','grid'],['admin','Brand controls','gear']];
 const MOB=[['home','Home','home'],['inspo','Inspo','grid'],['broll','B-roll','film'],['quests','Quests','target'],['approvals','Review','check'],['board','Board','trophy']];
-const TITLES={winners:'What is working',pace:'My pace',amazon:'Amazon',onboard:'Onboarding call',trial:'30-day trials',home:'Home',broll:'B-roll',approvals:'Approvals',stats:'Analytics',reviews:'My ad reviews',angles:'Winning angles',inspo:'Inspiration',adlib:'Ad performance',feed:'Library',quests:'Quests',board:'Leaderboard',profile:'My profile',brand:'Brand dashboard',admin:'Brand controls'};
+const TITLES={winners:'What is working',pace:'My pace',amazon:'Amazon',onboard:'Onboarding call',trial:'30-day trials',home:'Home',broll:'B-roll',approvals:'Approvals',stats:'Analytics',reviews:'My ad reviews',angles:'Winning angles',inspo:'Inspiration',spy:'Spy board',adlib:'Ad performance',feed:'Library',quests:'Quests',board:'Leaderboard',profile:'My profile',brand:'Brand dashboard',admin:'Brand controls'};
 
 function render(){
  const c=me();
