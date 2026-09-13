@@ -592,7 +592,7 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border:0;border-radiu
  .rail{display:none}
  main{padding:0 16px 106px;max-width:100%}
  .mtop{display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:50;
-  margin:0 -16px 4px;padding:calc(env(safe-area-inset-top) + 12px) 16px 12px;
+  margin:0 0 4px;width:100%;max-width:100%;padding:calc(env(safe-area-inset-top) + 12px) 16px 12px;
   background:linear-gradient(180deg,rgba(7,8,10,.96),rgba(7,8,10,.72));backdrop-filter:blur(22px);border-bottom:1px solid var(--ln)}
  .mtop .l{display:flex;align-items:center;gap:9px}
  .mtop .blogo{width:30px;height:30px;border-radius:9px}
@@ -775,6 +775,26 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border:0;border-radiu
 .spyacts{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;padding-top:4px}
 .spyacts .btn.sm{padding:6px 11px;font-size:12px}
 @media(max-width:480px){.spygrid{grid-template-columns:1fr}}
+
+/* ---- RAVINE-POLISH-V1 ---- */
+#nav{overflow-y:auto;overscroll-behavior:contain}
+.nlbl{display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;
+ user-select:none;border-radius:8px;padding-right:6px}
+.nlbl:hover{color:var(--tx)}
+.nlbl .chev{width:14px;height:14px;flex:0 0 auto;opacity:.5;transition:transform .16s ease}
+.ngrp.shut .chev{transform:rotate(-90deg)}
+.ngrp.shut .nitm{display:none}
+.ngrp{display:flex;flex-direction:column;gap:2px}
+.ngrp+.ngrp{margin-top:10px}
+.nlbl .cnt{font-size:11px;opacity:.42;font-variant-numeric:tabular-nums}
+.ngrp.shut .cnt{opacity:.62}
+/* even out the card rhythm across views */
+main .g.p{padding:18px}
+main .g.p+.g.p{margin-top:14px}
+main .stats{gap:12px}
+main h2{letter-spacing:-.01em}
+main .note{line-height:1.55}
+@media(prefers-reduced-motion:reduce){.nlbl .chev{transition:none}}
 </style>
 
 <style id="adlibcss">
@@ -3155,6 +3175,8 @@ V.spy=function(){
 };
 
 /* ===================== NAV / RENDER ===================== */
+window.navToggle=l=>{window.NSHUT=window.NSHUT||{};window.NSHUT[l]=!window.NSHUT[l];render()};
+
 const NAV=[['','WATCH'],['home','Home','home'],['reviews','My ad reviews','play'],['stats','Analytics','chart'],['angles','Winning angles','flame'],['inspo','Inspiration','grid'],['spy','Spy board','flame'],['adlib','Ad performance','chart'],['winners','What is working','bolt'],['broll','B-roll','film'],['',''],
  ['','COMPETE'],['quests','Quests','target'],['approvals','Approvals','check'],['board','Leaderboard','trophy'],['pace','My pace','gauge'],['profile','My profile','user'],['',''],
  ['','PROGRAMS'],['amazon','Amazon','cart'],['onboard','Onboarding call','cal'],['trial','30-day trials','timer'],['',''],
@@ -3164,7 +3186,44 @@ const TITLES={winners:'What is working',pace:'My pace',amazon:'Amazon',onboard:'
 
 function render(){
  const c=me();
- $('#nav').innerHTML=NAV.map(n=>{
+ /* RAVINE-POLISH-V1 — 19 entries no longer fit one screen, so each section
+    collapses. The section holding the current view is forced open, so you can
+    never end up staring at a sidebar that hides where you are. */
+ const NSHUT=window.NSHUT=window.NSHUT||{};
+ const navKey=n=>(n[0]==='angles'||n[0]==='inspo')?(VIEW==='feed'&&FMODE===n[0]):VIEW===n[0];
+ (function(){
+  const groups=[]; let cur=null;
+  NAV.forEach(n=>{
+   if(!n[0]&&!n[1])return;
+   if(!n[0]){cur={label:n[1],items:[]};groups.push(cur);return}
+   if(cur)cur.items.push(n);
+  });
+  $('#nav').innerHTML=groups.map(g=>{
+   if(g.label==='BRAND'&&!c.admin)return '';
+   const items=g.items.map(n0=>{
+    let n=n0;
+    if((n[0]==='admin'||n[0]==='brand')&&!c.admin)return '';
+    if(n[0]==='trial'&&!c.admin&&!isTrial(c))return '';
+    if(n[0]==='onboard'&&!c.admin&&!isTrial(c))return '';
+    if(n[0]==='trial'&&c.admin)n=['trial','30-day trials','timer'];
+    else if(n[0]==='trial')n=['trial','My trial','timer'];
+    if(n[0]==='approvals'&&!c.admin)n=['approvals','My submissions','check'];
+    const o=n[0]==='quests'?QUESTS.filter(q=>q.got<q.need).length:(n[0]==='approvals'?(c.admin?pendingAll().length:myPending().length):0);
+    const on=navKey(n);
+    return `<button class="nitm ${on?'on':''}" onclick="go('${n[0]}')">${ico(n[2])}<span>${n[1]}</span>${o?`<span class="pip">${o}</span>`:''}</button>`;
+   }).filter(Boolean);
+   if(!items.length)return '';
+   const here=g.items.some(n=>navKey(n));
+   const shut=here?false:!!NSHUT[g.label];
+   const chev='<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+   return `<div class="ngrp ${shut?'shut':''}">
+     <div class="nlbl" onclick="navToggle('${g.label}')" role="button" tabindex="0">
+      <span>${g.label}</span><span class="cnt">${shut?items.length:''}</span>${chev}</div>
+     ${items.join('')}
+    </div>`;
+  }).join('');
+ })();
+ if(0)$('#nav').innerHTML=NAV.map(n=>{
   if(!n[0]&&!n[1])return '<div style="height:6px"></div>';
   if(!n[0])return (n[1]==='BRAND'&&!c.admin)?'':`<div class="nlbl">${n[1]}</div>`;
   if((n[0]==='admin'||n[0]==='brand')&&!c.admin)return '';
