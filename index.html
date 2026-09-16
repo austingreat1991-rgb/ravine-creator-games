@@ -795,6 +795,20 @@ main .stats{gap:12px}
 main h2{letter-spacing:-.01em}
 main .note{line-height:1.55}
 @media(prefers-reduced-motion:reduce){.nlbl .chev{transition:none}}
+
+/* ---- RAVINE-QUESTSOON-V1 ---- */
+.nsoon{display:flex;align-items:flex-start;gap:9px;padding:9px 11px;border-radius:9px;
+ border:1px dashed var(--line,#2a2a2a);background:rgba(255,122,26,.05);cursor:default;margin:2px 0}
+.nsoon svg{flex:0 0 auto;margin-top:2px;opacity:.55}
+.nsoon>span{min-width:0}
+.nsoon .st{display:block;font-size:13px;font-weight:600;color:var(--tx);background:none;border:0;padding:0;margin:0;box-shadow:none}
+.nsoon .ss{display:block;font-size:11px;line-height:1.35;margin-top:2px;opacity:.6}
+.msoon{opacity:.42;pointer-events:none}
+.qsoon{text-align:center;padding:52px 22px}
+.qsoon .qbadge{display:inline-block;font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+ color:#ff9a4a;border:1px solid #ff7a1a;border-radius:999px;padding:5px 13px;margin-bottom:18px}
+.qsoon h2{margin:0 0 10px;font-size:26px}
+.qsoon p{margin:0 auto;max-width:430px;line-height:1.6;opacity:.72}
 </style>
 
 <style id="adlibcss">
@@ -2459,6 +2473,7 @@ function subCard(s,adminView){
    </div></div></div>`;
 }
 function approvalsView(){
+ /* RAVINE-QUESTSOON-V1 */ if(!me().admin)return QSOON_VIEW();
  const admin=me().admin;
  const all=admin?SUBS:SUBS.filter(s=>s.cid===ME);
  const pend=all.filter(s=>s.status==='pending');
@@ -2544,7 +2559,7 @@ home(){const c=me(),n=nt(c.xp),beat=rk('xp').filter(x=>x.xp>c.xp).pop();
  return `${bar('Home','Where you stand, what is live, and what the brand needs this week.')}
  <div class="anim">
   ${pushCard()}${(()=>{try{return homeExtras()}catch(e){return ''}})()}
-  ${(()=>{const P=me().admin?pendingAll():myPending();return P.length?`<div class="apalert" onclick="go('approvals')">
+  ${(()=>{if(!me().admin)return '';const P=pendingAll();return P.length?`<div class="apalert" onclick="go('approvals')">
    <span class="pill warn">● ${P.length}</span>
    <div style="flex:1;min-width:0"><b>${me().admin?(P.length===1?'A video is waiting on you':P.length+' videos are waiting on you'):(P.length===1?'Your video is with Austin':P.length+' of your videos are with Austin')}</b>
    <div class="mini" style="margin-top:2px">${me().admin?'Approve it and the creator gets their points.':'Points land the moment he approves.'}</div></div>
@@ -2565,10 +2580,17 @@ home(){const c=me(),n=nt(c.xp),beat=rk('xp').filter(x=>x.xp>c.xp).pop();
    <button class="btn gh" onclick="go('board')">See the split</button></div>`})()}
   <div class="sec"><h2>Your move today</h2></div>
   <div class="grid g3">
-   <div class="g p" style="display:flex;gap:15px;align-items:center">${dial(nq?nq.got/nq.need*100:0,64,7,nq?nq.got:'—','')}
+   ${/* QUESTSOON-HOME — quests are not live to creators, so this slot shows
+        what we actually want them doing instead: studying the swipe library. */
+     c.admin ? `<div class="g p" style="display:flex;gap:15px;align-items:center">${dial(nq?nq.got/nq.need*100:0,64,7,nq?nq.got:'—','')}
     <div style="min-width:0"><div class="lbl">BEST QUEST FOR YOU</div>
     <div style="font-size:14px;font-weight:700;margin-top:6px;letter-spacing:-.2px">${nq?esc(nq.t):'All clear'}</div>
-    <div class="mini" style="margin-top:4px">${nq?`+${nq.x*M()} XP · ${nq.got}/${nq.need}`:'New board Monday'}</div></div></div>
+    <div class="mini" style="margin-top:4px">${nq?`+${nq.x*M()} XP · ${nq.got}/${nq.need}`:'New board Monday'}</div></div></div>`
+     : `<div class="g p" style="display:flex;gap:15px;align-items:center;cursor:pointer" onclick="go('spy')">
+    <div style="font-size:30px">🎯</div>
+    <div style="min-width:0"><div class="lbl">NEED AN IDEA?</div>
+    <div style="font-size:14px;font-weight:700;margin-top:6px;letter-spacing:-.2px">Pull one from the Spy board</div>
+    <div class="mini" style="margin-top:4px">15 brands, their live ads on Meta</div></div></div>`}
    <div class="g p" style="display:flex;gap:15px;align-items:center">${beat?av(beat,54,18):''}
     <div style="min-width:0"><div class="lbl">NEXT TO PASS</div>
     <div style="font-size:14px;font-weight:700;margin-top:6px;letter-spacing:-.2px">${beat?esc(beat.n):'You lead'}</div>
@@ -2582,7 +2604,7 @@ home(){const c=me(),n=nt(c.xp),beat=rk('xp').filter(x=>x.xp>c.xp).pop();
   <div class="rail2">${LIB.filter(isAngle).slice(0,10).map((v,n)=>vc(v,null,n)).join('')}</div>
   <div class="sec"><h2>Inspiration</h2><button class="more" onclick="go('inspo')">All ${LIB.filter(isInspo).length} →</button></div>
   <div class="rail2">${LIB.filter(isInspo).slice(0,10).map(v=>vc(v)).join('')}</div>
-  <div class="sec"><h2>This week's quests</h2><button class="more" onclick="go('quests')">All quests →</button></div>
+  ${me().admin?`<div class="sec"><h2>This week's quests</h2><button class="more" onclick="go('quests')">All quests →</button></div>`:''}
   <div class="split"><div style="display:grid;gap:9px">${QUESTS.slice(0,4).map(qrow).join('')}</div>${activity()}</div>
  </div>`},
 
@@ -2792,6 +2814,7 @@ ads(){
   ${L.length>LPAGE*PAGESZ?`<div id="vmore" class="vmore"><button class="btn gh" onclick="moreGrid()">Show more <i class="mini">${L.length-LPAGE*PAGESZ} left</i></button></div>`:''}`},
 
 quests(){
+ /* RAVINE-QUESTSOON-V1 */ if(!me().admin)return QSOON_VIEW();
  if(QS!==null){const q=QUESTS.find(x=>x.id===QS);if(!q){QS=null;return V.quests()}
   const d=q.got>=q.need,p=Math.min(100,q.got/q.need*100),r=questRef(q),th=thumbOf(r),refs=LIB.filter(v=>v.a===(LIB.find(x=>x.a===q.tag)?q.tag:SCENE2ANGLE[q.sc])).slice(0,8);
   return `${bar(q.t,`${q.tag} · worth +${q.x*M()} XP`)}
@@ -3173,10 +3196,23 @@ V.spy=function(){
  </div>`;
 };
 
+
+/* ===================== RAVINE-QUESTSOON-V1 ===================== */
+const QSOON_COPY='Quests are fully launching in Q4. Stay tuned...';
+const QSOON_NAV=`<div class="nsoon" title="${QSOON_COPY}">
+ <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+ <span><span class="st">Quests</span><span class="ss">Fully launching in Q4. Stay tuned...</span></span></div>`;
+const QSOON_VIEW=()=>`${bar('Quests','Coming in Q4')}
+ <div class="g p qsoon">
+  <div class="qbadge">Coming soon</div>
+  <h2>Quests launch in Q4</h2>
+  <p>We're building this one out properly &mdash; claimable quests, XP, and cash bonuses on top of your commission. Stay tuned, I'll announce it here the day it goes live.</p>
+ </div>`;
+
 /* ===================== NAV / RENDER ===================== */
 window.navToggle=l=>{window.NSHUT=window.NSHUT||{};window.NSHUT[l]=!window.NSHUT[l];render()};
 
-const NAV=[['','WATCH'],['home','Home','home'],['reviews','My ad reviews','play'],['stats','Analytics','chart'],['angles','Winning angles','flame'],['inspo','Inspiration','grid'],['adlib','Ad performance','chart'],['spy','Spy board','flame'],['adlib','Ad performance','chart'],['winners','What is working','bolt'],['broll','B-roll','film'],['',''],
+const NAV=[['','WATCH'],['home','Home','home'],['reviews','My ad reviews','play'],['stats','Analytics','chart'],['angles','Winning angles','flame'],['inspo','Inspiration','grid'],['adlib','Ad performance','chart'],['spy','Spy board','flame'],['winners','What is working','bolt'],['broll','B-roll','film'],['',''],
  ['','COMPETE'],['quests','Quests','target'],['approvals','Approvals','check'],['board','Leaderboard','trophy'],['pace','My pace','gauge'],['profile','My profile','user'],['',''],
  ['','PROGRAMS'],['amazon','Amazon','cart'],['onboard','Onboarding call','cal'],['trial','30-day trials','timer'],['',''],
  ['','BRAND'],['brand','Brand dashboard','grid'],['admin','Brand controls','gear']];
@@ -3206,13 +3242,16 @@ function render(){
     if(n[0]==='onboard'&&!c.admin&&!isTrial(c))return '';
     if(n[0]==='trial'&&c.admin)n=['trial','30-day trials','timer'];
     else if(n[0]==='trial')n=['trial','My trial','timer'];
-    if(n[0]==='approvals'&&!c.admin)n=['approvals','My submissions','check'];
+    /* RAVINE-QUESTSOON-V1 — quests are not live to creators yet. Drop both
+       entries and render one dashed placeholder in their place. */
+    if(n[0]==='quests'&&!c.admin)return QSOON_NAV;
+    if(n[0]==='approvals'&&!c.admin)return '';
     const o=n[0]==='quests'?QUESTS.filter(q=>q.got<q.need).length:(n[0]==='approvals'?(c.admin?pendingAll().length:myPending().length):0);
     const on=navKey(n);
     return `<button class="nitm ${on?'on':''}" onclick="go('${n[0]}')">${ico(n[2])}<span>${n[1]}</span>${o?`<span class="pip">${o}</span>`:''}</button>`;
    }).filter(Boolean);
    if(!items.length)return '';
-   const here=g.items.some(n=>navKey(n));
+   const here=g.items.some(n=>navKey(n)&&!(n[0]==='quests'&&!c.admin));
    const shut=here?false:!!NSHUT[g.label];
    const chev='<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>';
    return `<div class="ngrp ${shut?'shut':''}">
@@ -3234,7 +3273,7 @@ function render(){
   const o=n[0]==='quests'?QUESTS.filter(q=>q.got<q.need).length:(n[0]==='approvals'?(c.admin?pendingAll().length:myPending().length):0);
   const on=(n[0]==='angles')?(VIEW==='feed'&&FMODE==='angles'):(n[0]==='inspo')?(VIEW==='feed'&&FMODE==='inspo'):VIEW===n[0];
   return `<button class="${on?'on':''}" onclick="go('${n[0]}')">${ico(n[2])}<span>${n[1]}</span>${o?`<span class="pip">${o}</span>`:''}</button>`}).join('');
- $('#mobnav').innerHTML=MOB.map(m0=>{const m=(m0[0]==='approvals'&&!c.admin)?['approvals','Mine','check']:m0;const o=m[0]==='quests'?QUESTS.filter(q=>q.got<q.need).length:(m[0]==='approvals'?(c.admin?pendingAll().length:myPending().length):0);
+ $('#mobnav').innerHTML=MOB.filter(m0=>c.admin||(m0[0]!=='quests'&&m0[0]!=='approvals')).map(m0=>{const m=(m0[0]==='approvals'&&!c.admin)?['approvals','Mine','check']:m0;const o=m[0]==='quests'?QUESTS.filter(q=>q.got<q.need).length:(m[0]==='approvals'?(c.admin?pendingAll().length:myPending().length):0);
   const on=(m[0]==='angles')?(VIEW==='feed'&&FMODE==='angles'):(m[0]==='inspo')?(VIEW==='feed'&&FMODE==='inspo'):VIEW===m[0];
   return `<button class="${on?'on':''}" onclick="go('${m[0]}')">${ico(m[2],20)}<span>${m[1]}</span>${o?`<b>${o}</b>`:''}</button>`}).join('');
  const t=tOf(c.v);
