@@ -1,1 +1,1 @@
-{"id": 56, "n": "Ryan Conley", "sales": 0, "$": 0, "v": 0, "sub": 1, "xp": 0, "rank": 0, "pool": {"pct": 0, "amt": 0}, "an": {"rows": [], "agg": null}}
+{"id": 56, "n": "Ryan Conley", "sales": 280, "$": 43, "v": 1, "sub": 1, "xp": 0, "rank": 68, "pool": {"pct": 0.1522, "amt": 7.61}, "an": {"rows": [{"who": "Ryan Conley", "id": "27084275", "ads": 1, "cpa": 0.0, "pv": 0.0, "roas": 0.0, "sales": 0.0, "spend": 48.89, "ts": 49.91, "t": 0, "p": "Ravine FieldOps Pro"}], "agg": {"vids": 1, "ads": 1, "pv": 0.0, "sales": 0.0, "spend": 48.89, "cpa": 48.89, "roas": 0.0, "ts": 49.91}}}
