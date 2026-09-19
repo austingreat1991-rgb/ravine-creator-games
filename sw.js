@@ -1,9 +1,12 @@
 /* Ravine Creator Games — service worker
    Strategy: network-first for the app shell so a push goes live on next open,
    cache fallback so the app still works with no signal. */
-const VERSION = 'rcg-20260919-174144';
+const VERSION = 'rcg-20260919-181117';
 const SHELL = ['./', './index.html', './manifest.webmanifest',
   './icon-192.png','./mark-96.png', './icon-512.png', './apple-touch-icon.png'];
+// media.json (thumbnails) and fonts are large and immutable per build: cache-first,
+// fetched once after the shell has painted.
+const IMMUTABLE = /\.(jpg|jpeg|png|svg|woff2)$|\/media\.json$|\/hist\.json$/i;
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
@@ -25,7 +28,7 @@ self.addEventListener('fetch', e => {
   // browser's own HTTP cache handles them correctly. A SW in the middle breaks seeking.
   if (/\.(mp4|webm|m4v)$/i.test(url.pathname)) return;
   // Small immutable images: cache-first.
-  if (/\.(jpg|jpeg|png|svg)$/i.test(url.pathname)) {
+  if (IMMUTABLE.test(url.pathname)) {
     e.respondWith(caches.match(req).then(hit => hit || fetch(req).then(res => {
       const copy = res.clone();
       caches.open(VERSION).then(c => c.put(req, copy)).catch(()=>{});
