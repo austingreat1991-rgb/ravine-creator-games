@@ -868,6 +868,14 @@ main .note{line-height:1.55}
 @keyframes fadeup{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){#main,.mm svg polyline,.mm svg circle{animation:none;opacity:1;stroke-dashoffset:0}}
 
+/* ---- RAVINE-MOBMOM-V1 — momentum survives the phone breakpoint ---- */
+@media(max-width:900px){
+ .hgrid>div.mmcol{display:grid!important;width:100%}
+ .hgrid{gap:18px}
+}
+.mm svg{width:100%;height:auto;display:block}
+@media(max-width:900px){.mm{width:100%}.mm svg{height:72px}}
+
 /* ---- RAVINE-SPEED-V1 — shimmer while media.json arrives ---- */
 .shim{position:absolute;inset:0;border-radius:inherit;
  background:linear-gradient(100deg,rgba(255,255,255,.04) 30%,rgba(255,255,255,.10) 50%,rgba(255,255,255,.04) 70%);
@@ -1238,7 +1246,10 @@ function hero(){
    <div class="trk"><div class="trkb"><div class="trkf" style="width:${p}%"></div></div>
     <div class="trkl"><span>${t.n}</span><span>${n?`<b>${(n.v-c.v)} more qualified</b> to ${n.n}`:'<b>Top tier reached</b>'}</span></div></div>
   </div>
-  <div style="display:grid;place-items:center">${momentum(c)||dial(p,132,10,n?`${Math.max(0,n.v-c.v)}`:'MAX',n?'VIDEOS TO GO':'TOP TIER')}</div>
+  ${(()=>{const _mm=momentum(c);   /* RAVINE-MOBMOM-V1 — the phone used to hide this whole column.
+      That was written when it held a decorative ring; it now holds the momentum
+      chart, which is the thing creators actually open the app for. */
+   return `<div class="hcol${_mm?' mmcol':''}" style="display:grid;place-items:center">${_mm||dial(p,132,10,n?`${Math.max(0,n.v-c.v)}`:'MAX',n?'VIDEOS TO GO':'TOP TIER')}</div>`})()}
  </div></div>`}
 
 /* RAVINE-POLISH-V2 — zero-submission hero */
