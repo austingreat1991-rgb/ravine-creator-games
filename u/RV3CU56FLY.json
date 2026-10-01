@@ -1,1 +1,1 @@
-{"id": 133, "n": "Mike Lee", "sales": 0, "$": 0, "v": 0, "sub": 0, "xp": 0, "rank": 0, "pool": {"pct": 0, "amt": 0}, "an": {"rows": [], "agg": null}}
+{"id":133,"n":"Mike Lee","sales":0,"allSales":0,"$":0,"v":1,"sub":6,"xp":0,"rank":74,"pool":{"pct":0.0392,"amt":1.96,"g":0.0,"s":1.96},"sep":{"sales":0,"v":1,"sub":6},"base":{"sales":0,"v":0,"sub":0},"hist":{"d":["09-30"],"s":[0],"sub":[6],"v":[1]},"an":{"rows":[],"agg":null}}
