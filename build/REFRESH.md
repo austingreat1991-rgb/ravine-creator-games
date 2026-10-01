@@ -1,41 +1,36 @@
-# How the twice-daily number refresh works
+# Numbers refresh — how it works now (Sept 30, 2026)
 
-Runs 10:00 and 18:00 America/Chicago. It borrows Austin's live browser sessions
-rather than storing any credential anywhere, so it needs his computer awake with
-Chrome running. If it can't reach Chrome or Trybe it says so and changes nothing.
+The source files for index.html no longer exist anywhere; the live index.html IS
+the template. Everything below edits it in place with counted, exact splices.
 
-## Steps
+    # from the repo root, with the two Trybe exports for the Ravine brand
+    python3 build/refresh.py creators-<date>.csv analytics-<date>.csv --month 2026-10 \
+            --baseline ../pipeline/BASELINE-2026-10.json      # October runs: base = Sept 30 snapshot
+    python3 build/patch_quests.py                             # no-op once applied (RAVINE-QUESTS-V2)
 
-1. Trybe → Analytics, brand **Ravine** (`?b=bf4a614a-2ec2-43fa-83f6-e19e08f57c24`),
-   range **Last 30 days** → Export → Download CSV.
-2. Trybe → Creators, same brand, range **All time** → Export → Download CSV.
-   Both land in `~/Downloads` as `analytics-bf4a614a-<date>.csv` and
-   `creators-bf4a614a-<date>.csv`.
-3. `python3 parse_trybe.py <creators.csv> <analytics.csv>` → rebuilds
-   `CR_FULL.json`, `an.json`, `anrange.json`.
-4. `python3 buildpriv.py` → rewrites `data_core.js`, stamps the freshness pill,
-   and regenerates every `ship/u/<CODE>.json`.
-5. Rebuild `ship/index.html` by concatenating, in this exact order:
-   shell_head.html data_core.js data_helpers.js data_state.js data_util.js
-   data_broll.js art_only.js shell_app.js data_backend.js rsync.js
-   broll_view.js approvals_view.js shell_views.js
-6. Bump `VERSION` in `ship/sw.js` so phones pick it up.
-7. Commit `index.html`, `sw.js` and the changed `u/*.json` files.
+What refresh.py does
+  1. reads the live roster (CR in index.html) and every u/<CODE>.json — that is
+     where the pinned codes and the 1st-of-month baseline live
+  2. parses the creators export (All time, Ravine) — duplicates of a name are a
+     video account plus a static-image account; the one that submits videos is
+     kept, the other is dropped from the roster and never enters the pool
+  3. this-month = all-time minus the frozen baseline, per creator
+  4. parses the analytics export (Last 30 days, by creative) for ad metrics
+  5. pool = 60% sales / 40% approved videos, this month only, VIDEO accounts
+  6. rewrites u/<CODE>.json for everyone on the roster, revokes files for
+     anyone who left, mints a code for anyone new (NEW_CODES-<stamp>.json goes
+     to ../pipeline, never the repo)
+  7. splices CR / TOTALS / SYNC / POOL / POOL_END into index.html and bumps
+     VERSION in sw.js
 
-## Things that will bite you
+Guards: refuses a non-Ravine export, a non-All-time creators export, a roster
+that shrank >20% (pass --allow-shrink when Austin really removed people), and
+any login code appearing in index.html.
 
-- **Pick the Ravine brand.** The export defaults to whichever brand was last
-  open. Whitelist Wealth returns all zeros; the numbers look "broken" but the
-  export is simply for the wrong brand.
-- **Do not filter the roster by the Program column.** It names the agency a
-  creator arrived through, not the brand. Filtering on it silently drops Thomas
-  Montelli, Hustyn Wheeler and eleven others who carry ~$29k of sales.
-- **Match creators by normalised name.** Trybe's casing drifts between exports
-  ("Alli Gamble" → "Alli gamble"). Matching raw strings mints a new id, orphans
-  the pinned login code and hands that person a blank account.
-- **Login codes are pinned by creator id and must never change.** `CODEPIN.json`
-  is the source of truth and is deliberately kept out of this public repo. If it
-  is missing, `buildpriv.py` rebuilds it from the published `ship/u/*.json`
-  filenames, which is safe and lossless.
-- `parse_trybe.py` refuses to publish if sales halve or the roster shrinks by a
-  fifth. That guard is there so a bad export can't wipe 47 creators' numbers.
+Monthly flip (1st of the month): run the previous day's exports with
+--snapshot-baseline ../pipeline/BASELINE-<next-month>.json, then run the new
+month with --baseline pointing at that file. POOLS in refresh.py holds the pool
+amount per month (Oct 2026 = 25,000).
+
+Deploy = commit index.html, sw.js, build/, and the changed u/*.json. Nothing in
+../pipeline is ever committed.
