@@ -1,57 +1,20 @@
-/* Ravine Creator Games — service worker
-   Strategy: network-first for the app shell so a push goes live on next open,
-   cache fallback so the app still works with no signal. */
-const VERSION = 'rcg-20260930-230601';
-const SHELL = ['./', './index.html', './manifest.webmanifest',
-  './icon-192.png','./mark-96.png', './icon-512.png', './apple-touch-icon.png'];
-// media.json (thumbnails) and fonts are large and immutable per build: cache-first,
-// fetched once after the shell has painted.
-const IMMUTABLE = /\.(jpg|jpeg|png|svg|woff2)$|\/media\.json$|\/hist\.json$/i;
-
-self.addEventListener('install', e => {
-  e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
-});
-
-self.addEventListener('activate', e => {
-  e.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(k => k !== VERSION).map(k => caches.delete(k))))
-      .then(() => self.clients.claim())
-  );
-});
-
-self.addEventListener('fetch', e => {
-  const req = e.request;
-  if (req.method !== 'GET') return;
-  const url = new URL(req.url);
-  if (url.origin !== location.origin) return;           // let YouTube/TikTok/Meta through untouched
-  // Video: never intercept. These are large, range-requested files and the
-  // browser's own HTTP cache handles them correctly. A SW in the middle breaks seeking.
-  if (/\.(mp4|webm|m4v)$/i.test(url.pathname)) return;
-  // Small immutable images: cache-first.
-  if (IMMUTABLE.test(url.pathname)) {
-    e.respondWith(caches.match(req).then(hit => hit || fetch(req).then(res => {
-      const copy = res.clone();
-      caches.open(VERSION).then(c => c.put(req, copy)).catch(()=>{});
-      return res;
-    })));
-    return;
+/* Ravine Creator Games service worker · October build.
+   Shell: network-first. Public media (images, b-roll stills, fonts, video): cache-first, versioned.
+   Private responses (Supabase REST/auth, anything with ?k=) are NEVER cached.
+   On activate, every older cache (including the Sept 'rcg-*' shell caches that held u/*.json) is deleted. */
+const VERSION='oct-20261002-173958';
+const SHELL='rcg-oct-shell-'+VERSION, MEDIA='rcg-oct-media-'+VERSION;
+const PRIVATE=/supabase\.co|\/rest\/v1\/|\/auth\/v1\/|\/u\/[A-Z0-9]+\.json|[?&]k=/i;
+self.addEventListener('install',e=>{ self.skipWaiting(); });
+self.addEventListener('activate',e=>{ e.waitUntil((async()=>{ const keys=await caches.keys(); await Promise.all(keys.filter(k=>k!==SHELL&&k!==MEDIA).map(k=>caches.delete(k))); await self.clients.claim(); })()); });
+self.addEventListener('fetch',e=>{
+  const req=e.request; if(req.method!=='GET') return;
+  const url=new URL(req.url);
+  if(PRIVATE.test(req.url)) return;                               // straight to network, never stored
+  if(url.origin!==location.origin) return;
+  const isMedia=/\.(jpg|jpeg|png|webp|mp4|woff2|webmanifest)$/i.test(url.pathname)||/\/data\/(inspiration|library)\.json$/.test(url.pathname);
+  if(isMedia){ e.respondWith((async()=>{ const c=await caches.open(MEDIA); const hit=await c.match(req); if(hit) return hit; const r=await fetch(req); if(r.ok) c.put(req,r.clone()); return r; })()); return; }
+  if(url.pathname.endsWith('/')||url.pathname.endsWith('index.html')||url.pathname.endsWith('sw.js')){
+    e.respondWith((async()=>{ try{ const r=await fetch(req); if(r.ok){ const c=await caches.open(SHELL); c.put(req,r.clone()); } return r; }catch(err){ const c=await caches.open(SHELL); return (await c.match(req))||Response.error(); } })());
   }
-  e.respondWith(
-    fetch(req).then(res => {
-      const copy = res.clone();
-      caches.open(VERSION).then(c => c.put(req, copy));
-      return res;
-    }).catch(() => caches.match(req).then(r => r || caches.match('./index.html')))
-  );
-});
-
-self.addEventListener('message', e => { if (e.data === 'SKIP_WAITING') self.skipWaiting(); });
-
-// Tapping a notification opens the app rather than a new tab every time.
-self.addEventListener('notificationclick', e => {
-  e.notification.close();
-  e.waitUntil(clients.matchAll({type:'window', includeUncontrolled:true}).then(list => {
-    for (const c of list) { if ('focus' in c) return c.focus(); }
-    if (clients.openWindow) return clients.openWindow('./');
-  }));
 });
