@@ -494,6 +494,7 @@ body{background:radial-gradient(1200px 600px at 85% -10%,rgba(255,110,32,.07),tr
 .kbgo{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-weight:700;font-size:13px;color:var(--o2)}
 @media (max-width:900px){.spytop{grid-template-columns:1fr}.spytop .kbcard{order:-1}}
 @media (max-width:900px){.kbbtn{display:none!important}}
+.spytop{grid-template-columns:1fr}
 </style>
 </head>
 <body>
@@ -512,7 +513,7 @@ body{background:radial-gradient(1200px 600px at 85% -10%,rgba(255,110,32,.07),tr
 <aside class="drawer" id="drawer" tabindex="-1" aria-label="Details"></aside>
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
-<script>window.APP_MODE="live";window.BUILD="20261003-050916";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261003-051326";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1354,7 +1355,6 @@ route('spy',async()=>{ await loadRef();
   const KB='https://www.loom.com/share/2f18b54391eb4e12b4a4407db4629da3';
   return `${ph('Spyboard','Advertisers worth studying. Every button opens the public Meta Ad Library, never a private Ads Manager page.',{eyebrow:'Create',acts:`<a class="btn kbbtn" ${openExt(KB)}>${ico('play',14)} Watch Knowledge Bomb #2</a>`})}
   <div class="spytop">
-   <div class="note"><b>How to use it.</b> Pick one brand. Watch the first three seconds of ten of their ads. Write the structure: 0 to 3s, 3 to 10s, when the product appears, how it closes. Shoot your version in your setting. Study them; never re-upload or recreate a video shot for shot.</div>
    <a class="kbcard" ${openExt(KB)} aria-label="Watch Chris's Knowledge Bomb #2 on Loom">
     <div class="kbplay">${ico('play',26)}</div>
     <div style="min-width:0"><div class="lbl" style="color:var(--o2)">Watch this first · Knowledge Bomb #2</div>
