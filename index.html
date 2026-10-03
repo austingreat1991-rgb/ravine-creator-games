@@ -330,7 +330,7 @@ kbd{font-family:var(--mono);background:var(--sf3);padding:1px 6px;border-radius:
 <aside class="drawer" id="drawer" tabindex="-1" aria-label="Details"></aside>
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
-<script>window.APP_MODE="live";window.BUILD="20261002-173958";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261003-013911";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -455,6 +455,7 @@ const FX={
       case 'my_submissions': return d(m.submissions);
       case 'my_analytics': return d(a.p_from<'2026-10-01'?m.analytics_sep:m.analytics);
       case 'my_pace': return d(m.pace);
+      case 'my_numbers': return d(FX.numbersOf(m));
       case 'start_quest': return FX.start(m,a);
       case 'save_quest_draft': return FX.save(m,a);
       case 'submit_quest': return FX.submit(m,a);
@@ -464,6 +465,10 @@ const FX={
       default: throw new Error('fixture: unknown rpc '+name);
     }
   },
+  numbersOf(m){ const pop=/Populated/.test(m.home?.creator?.display_name||''); const now=new Date(Date.now()-2*3600e3).toISOString();
+    if(/NoSource/.test(m.home?.creator?.display_name||'')) return {};
+    return pop?{month_sales:4210.5,month_earnings:512.3,month_submissions:9,month_approved:8,all_sales:18840.5,all_earnings:2310.4,all_submissions:41,all_approved:39,approval_rate:95,month_rank:6,ranked_creators:35,base_sales:14630,sep_sales:9120,sep_approved:14,sep_submissions:15,in_export:true,data_through:now}
+      :{month_sales:0,month_earnings:0,month_submissions:0,month_approved:0,all_sales:0,all_earnings:0,all_submissions:0,all_approved:0,approval_rate:null,month_rank:null,ranked_creators:35,base_sales:0,sep_sales:null,sep_approved:null,in_export:true,data_through:now}; },
   homeOf(m){ const h=m.home; const q=FX.questsOf(m); h.quests={xp_earned:q.xp_earned,xp_pending:q.xp_pending,period_now:q.period_now,
       in_progress:q.instances.filter(i=>['in_progress','needs_changes'].includes(i.state)).length, in_review:q.instances.filter(i=>i.state==='submitted').length, needs_changes:q.instances.filter(i=>i.state==='needs_changes').length};
     const r=FX.rewardsOf(m); h.rewards={xp:r.xp,concepts:r.concepts,tiers:r.tiers}; return h; },
@@ -658,8 +663,26 @@ function daysLeft(ends){ return Math.max(0,Math.ceil((new Date(ends)-Date.now())
 function nextTier(r){ return (r.tiers||[]).find(t=>t.status==='locked'); }
 
 /* ---------------- Home */
+/* Sales numbers card: October (all-time minus the Sept 30 snapshot) + all-time, from app.my_numbers.
+   Degrades to a quiet "syncing" card if the numbers have not been loaded yet. */
+async function myNumbers(){ try{ return await API.page('my_numbers'); }catch(e){ return null; } }
+function numbersCard(N){
+  if(!N||N.all_sales==null) return `<div class="card" style="margin-bottom:12px"><div class="lbl">Your numbers</div><p style="margin-top:6px">Your sales numbers are syncing from Trybe. Check back shortly.</p></div>`;
+  const rk=N.month_rank?`#${N.month_rank} by October sales`:'Not ranked yet this month';
+  const fresh=N.data_through?`<span class="badge d noicon">Snapshot · ${esc(fmt.ago(N.data_through))}</span>`:'';
+  return `<div class="card hi" style="margin-bottom:12px">
+    <div class="row between"><div class="lbl">Your October numbers</div>${fresh}</div>
+    <div class="kpi" style="margin-top:8px"><span class="big" style="font-size:52px">${fmt.usd(N.month_sales)}</span><span class="lbl">October sales</span></div>
+    <div class="mini" style="margin-top:6px">${fmt.usd(N.all_sales)} all time · ${fmt.usd(N.base_sales??0)} before Oct 1</div>
+    <div class="row" style="margin-top:10px;gap:16px;flex-wrap:wrap;font-size:14px"><span><b>${fmt.int(N.month_approved??0)}</b> approved this month</span>${N.approval_rate!=null?`<span><b>${N.approval_rate}%</b> approval</span>`:''}<span><b>${rk}</b></span>${N.month_earnings!=null?`<span><b style="color:var(--gr)">${fmt.usd2(N.month_earnings)}</b> earned this month</span>`:''}</div>
+    ${N.in_export===false?`<div class="note warn" style="margin-top:10px">Your account was not in today's Trybe export, so these are your numbers as of Sept 30. Message Austin if that looks wrong.</div>`:''}
+    <div class="mini" style="margin-top:8px">Pulled from Trybe${N.data_through?' · as of '+esc(fmt.dt(N.data_through)):''}</div>
+  </div>
+  <div class="grid g4" style="margin-bottom:12px">${metric('Approved in Oct',fmt.int(N.month_approved??0))}${metric('Sales in Oct',fmt.usd(N.month_sales))}${metric('Approved all time',fmt.int(N.all_approved??0))}${metric('Approval rate',N.approval_rate==null?null:N.approval_rate+'%')}</div>`;
+}
 route('home',async()=>{
   const h=await API.page('my_home'); const c=h.campaign||{}; const ct=h.contest||{}; const q=h.quests||{}; const r=h.rewards||{}; const sub=h.submissions||{};
+  const N=await myNumbers();
   const nt=nextTier(r); const dl=daysLeft(c.ends_at);
   // one practical next action, from real state
   let action;
@@ -671,10 +694,11 @@ route('home',async()=>{
   const tierHtml=nt?`<div class="plabel"><span>Next reward: <b>${esc(nt.name)} · ${fmt.usd(nt.cash_total_cents,{cents:true})}</b></span>${badge('d','Draft terms')}</div>
      ${pbar(Math.min(r.xp||0,nt.xp_required),nt.xp_required,{label:'October XP',cls:'gold'})}<div style="height:8px"></div>${pbar(Math.min(r.concepts||0,nt.concepts_required),nt.concepts_required,{label:'Approved concepts',cls:'green'})}`:`<div class="note good">Every October tier reached. Nice.</div>`;
   return `${ph('Home','',{eyebrow:`October 2026 · ${dl} day${dl===1?'':'s'} left · ends Oct 31, 11:59 pm CT`,acts:`<button class="btn" onclick="go('${action.go}',${JSON.stringify(action.p||{}).replace(/"/g,'&quot;')})">${esc(action.t)}</button>`})}
+  ${numbersCard(N)}
   <div class="grid g3">
     <div class="card hi"><div class="lbl">October competition</div>
       <div class="kpi" style="margin-top:6px"><span class="big" style="color:var(--gold)">${fmt.usd(c.prize_total_cents,{cents:true})}</span><span class="small">1st ${fmt.usd(c.prizes?.[0]?.cents,{cents:true})} · 2nd ${fmt.usd(c.prizes?.[1]?.cents,{cents:true})} · 3rd ${fmt.usd(c.prizes?.[2]?.cents,{cents:true})}</span></div>
-      <div class="grid g2" style="margin-top:12px;gap:8px">${metric('My qualifying sales',ct.score_sales==null?null:fmt.usd(ct.score_sales),{sub:ct.score_sales==null?'No eligible video with sales data yet':'October only'})}${metric('My rank',ct.rank==null?null:'#'+ct.rank+(ct.tied?' (tied)':''),{sub:ct.ranked_creators?`of ${ct.ranked_creators} ranked`:'Not ranked yet'})}</div>
+      <div class="grid g2" style="margin-top:12px;gap:8px">${metric('My qualifying sales',ct.score_sales==null?null:fmt.usd(ct.score_sales),{sub:ct.score_sales==null?'Contest scoring starts once video-level data is in':'October only'})}${metric('My rank',ct.rank==null?null:'#'+ct.rank+(ct.tied?' (tied)':''),{sub:ct.ranked_creators?`of ${ct.ranked_creators} ranked`:'Not ranked yet'})}</div>
       <div class="row between" style="margin-top:12px"><span class="small">${ct.entries||0} eligible entr${ct.entries===1?'y':'ies'} · ${ct.slots_used??0} of 20 slots used</span><button class="btn gh sm" onclick="go('compete')">Open my 20 slots ${ico('arrow',14)}</button></div></div>
     <div class="card"><div class="lbl">My progress</div>
       <div class="kpi" style="margin-top:6px"><span class="big">${q.xp_earned||0}<span style="font-size:18px;color:var(--tx3)"> XP</span></span>${q.xp_pending?`<span class="badge r">+${q.xp_pending} XP in review</span>`:''}</div>
@@ -1014,12 +1038,12 @@ const AMZK='ravine_amz_v1'; const amzGet=()=>{ try{ return JSON.parse(localStora
 function amzTog(k){ const d=amzGet(); d[k]=!d[k]; try{ localStorage.setItem(AMZK,JSON.stringify(d)); }catch(e){} render(); }
 
 route('profile',async()=>{
-  const h=await API.page('my_home'); const c=h.creator||{}; const sep=await API.page('my_analytics',{p_from:'2026-09-01',p_to:'2026-09-30'});
+  const h=await API.page('my_home'); const c=h.creator||{}; const sep=await API.page('my_analytics',{p_from:'2026-09-01',p_to:'2026-09-30'}); const N=(await myNumbers())||{};
   return `${ph(c.display_name||'My profile','',{eyebrow:'Profile'})}
   <div class="grid g2"><div class="card"><div class="lbl">Account</div><div class="timeline" style="margin-top:10px"><div><time>Name</time><span>${esc(c.display_name)}</span></div><div><time>Joined</time><span>${fmt.date(c.joined_at,{year:'numeric'})||'Unknown'}</span></div><div><time>Role</time><span>${S.admin?'Admin':'Creator'}</span></div><div><time>Sign-in</time><span>Personal link, bound to this device. No email needed.</span></div></div>
     <div class="hr"></div><div class="lbl">Lost your link?</div><p style="margin-top:6px;font-size:14px">Message Austin. He can issue a fresh code from the admin view; your old link stops working and the devices you already use keep working.</p>
     <div class="row" style="margin-top:12px"><button class="btn gh" onclick="logout()">Switch account</button></div></div>
-   <div class="card"><div class="lbl">September history</div><p style="margin-top:6px;font-size:14px">Kept with its original dates. The September pool was settled separately and is not part of October.</p><div class="grid g2" style="gap:8px;margin-top:10px">${metric('Submissions',sep.submissions_in_range)}${metric('Approved',sep.approved_in_range)}${metric('Ad spend',sep.spend==null?null:fmt.usd(sep.spend))}${metric('Attributed sales',sep.sales==null?null:fmt.usd(sep.sales))}</div><div class="row" style="margin-top:12px"><button class="btn gh sm" onclick="go('analytics',{r:'2026-09'})">September analytics</button></div></div></div>
+   <div class="card"><div class="lbl">September history</div><p style="margin-top:6px;font-size:14px">Kept with its original dates. The September pool was settled separately and is not part of October.</p><div class="grid g2" style="gap:8px;margin-top:10px">${metric('Submissions',fmt.int(N.sep_submissions??sep.submissions_in_range))}${metric('Approved',fmt.int(N.sep_approved??sep.approved_in_range))}${metric('September sales',N.sep_sales!=null?fmt.usd(N.sep_sales):(sep.sales==null?null:fmt.usd(sep.sales)))}${metric('All-time sales',N.all_sales==null?null:fmt.usd(N.all_sales),{sub:N.data_through?'as of '+esc(fmt.dt(N.data_through)):''})}</div><div class="row" style="margin-top:12px"><button class="btn gh sm" onclick="go('analytics',{r:'2026-09'})">September analytics</button></div></div></div>
   <div class="sec"><h2>Programs</h2></div><div class="grid g3"><button class="card" style="text-align:left;cursor:pointer" onclick="go('amazon')"><h3>Amazon</h3><p>Influencer Program and affiliate setup checklist.</p></button><button class="card" style="text-align:left;cursor:pointer" onclick="go('onboard')"><h3>Onboarding call</h3><p>Twenty minutes with Austin on your content and numbers.</p></button><button class="card" style="text-align:left;cursor:pointer" onclick="go('trial')"><h3>30-day trial</h3><p>For creators who joined from ${fmt.date(TRIAL.from,{year:'numeric'})}.</p></button></div>`;
 });
 route('amazon',async()=>{ const d=amzGet(); const done=AMZ_STEPS.filter(x=>d[x[0]]).length;
