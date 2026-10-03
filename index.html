@@ -365,6 +365,91 @@ kbd{font-family:var(--mono);background:var(--sf3);padding:1px 6px;border-radius:
   .brow .bright{grid-column:3;text-align:left;display:flex;gap:6px;align-items:baseline}
   .vthumb{width:42px;height:56px}
 }
+
+/* ---- October leaderboard / incentive */
+.av{border-radius:50%;display:inline-grid;place-items:center;font-weight:800;color:#fff;flex:none;font-family:var(--f);letter-spacing:-.2px;
+  box-shadow:0 3px 12px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.25);text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.lbhero{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center;border-radius:var(--r);padding:24px 26px;
+  border:1px solid rgba(232,182,74,.32);background:radial-gradient(90% 140% at 0% 0%,rgba(232,182,74,.18),transparent 60%),radial-gradient(80% 120% at 100% 100%,rgba(255,110,32,.16),transparent 60%),var(--sf)}
+.lbhero::before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(255,226,160,.5),transparent)}
+.lbh-amt{font-family:var(--disp);font-size:72px;font-weight:800;line-height:.9;color:var(--gold);margin-top:8px;text-shadow:0 8px 40px rgba(232,182,74,.35);letter-spacing:.5px}
+.lbh-sub{color:var(--tx2);font-size:14.5px;margin-top:8px}
+.lbh-prizes{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.lbh-pz{display:flex;flex-direction:column;gap:2px;padding:9px 13px;border-radius:12px;background:rgba(0,0,0,.28);border:1px solid var(--ln);min-width:110px}
+.lbh-pz span{font-size:12px;color:var(--tx3);font-weight:700}.lbh-pz b{font-family:var(--disp);font-size:22px;font-weight:800;color:var(--tx)}
+.lbh-pz.first{border-color:rgba(232,182,74,.45);background:rgba(232,182,74,.1)}.lbh-pz.first b{color:var(--gold)}
+.lbh-r{text-align:right}
+.cd{display:flex;gap:8px;margin-top:8px;justify-content:flex-end}
+.cd div{min-width:58px;text-align:center;padding:9px 6px;border-radius:12px;background:rgba(0,0,0,.35);border:1px solid var(--ln)}
+.cd b{font-family:var(--disp);font-size:26px;font-weight:800;display:block;line-height:1}
+.cd span{font-size:9.5px;letter-spacing:1.3px;font-weight:800;color:var(--tx3);margin-top:4px;display:block}
+.lbme{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:0;margin:16px 0 4px;border-radius:var(--r);border:1px solid rgba(255,110,32,.35);background:linear-gradient(110deg,rgba(255,110,32,.12),transparent 60%),var(--sf);overflow:hidden}
+.lbme>div{padding:18px 22px}.lbme>div+div{border-left:1px solid var(--ln)}
+.lbme-rank{font-family:var(--disp);font-size:52px;font-weight:800;line-height:1;margin-top:6px;color:var(--o2)}
+.lbme-gmv{font-family:var(--disp);font-size:40px;font-weight:800;line-height:1;margin-top:8px;color:var(--gold)}
+.lbme-next{font-size:18px;font-weight:700;margin-top:8px}.lbme-next b{font-family:var(--disp);font-size:30px;color:var(--tx)}
+.podium2{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:end}
+.pc2{position:relative;text-align:center;padding:22px 12px 18px;border-radius:var(--r);border:1px solid var(--ln);background:var(--sf);transition:transform .2s var(--ease)}
+.pc2:hover{transform:translateY(-3px)}
+.pc2.p1{padding-top:34px;padding-bottom:24px;border-color:rgba(232,182,74,.45);background:linear-gradient(170deg,rgba(232,182,74,.16),var(--sf) 70%);box-shadow:0 14px 44px rgba(232,182,74,.12)}
+.pc2.p2{border-color:rgba(200,210,225,.28)}.pc2.p3{border-color:rgba(205,127,50,.32)}
+.pc2.me{box-shadow:inset 0 0 0 1px rgba(255,110,32,.5)}
+.pc2 .crown{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:24px;filter:drop-shadow(0 3px 8px rgba(0,0,0,.5))}
+.pc2 .n{font-weight:700;font-size:14px;margin-top:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pc2 .pl{font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--tx3);font-weight:800;margin-top:6px}
+.pc2 .amt{font-family:var(--disp);font-size:24px;font-weight:800;color:var(--gold);margin-top:2px}
+.pc2.p1 .amt{font-size:30px}
+.lbrow{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:var(--r2);transition:background .15s}
+.lbrow+.lbrow{border-top:1px solid var(--ln);border-top-left-radius:0;border-top-right-radius:0}
+.lbrow:hover{background:var(--sf2)}
+.lbrow.me{background:linear-gradient(90deg,rgba(255,110,32,.16),transparent 75%);box-shadow:inset 0 0 0 1px rgba(255,110,32,.32);border-radius:var(--r2)}
+.lbrow .rn{width:34px;text-align:center;font-family:var(--mono);font-weight:800;font-size:13px;color:var(--tx3);flex:none}
+.lbrow.p1 .rn,.lbrow.p2 .rn,.lbrow.p3 .rn{font-size:20px}
+.lbrow .nm{font-weight:700;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lbrow .rv{text-align:right;flex:none}.lbrow .rv b{display:block;font-family:var(--mono);font-weight:800;font-size:15px;color:var(--gold)}
+.lbrow .rv b.priv{color:var(--tx4);display:inline-flex}.lbrow .rv span{font-size:11px;color:var(--tx3)}
+.you{display:inline-block;vertical-align:middle;margin-left:6px;font-size:9.5px;letter-spacing:1.2px;font-weight:800;padding:2px 7px;border-radius:6px;background:var(--o);color:var(--o-ink)}
+.lbgap{text-align:center;color:var(--tx4);letter-spacing:4px;padding:4px 0}
+.mestick{position:sticky;bottom:12px;z-index:5;margin-top:12px;border:1px solid rgba(255,110,32,.55);border-radius:14px;background:rgba(20,15,12,.94);backdrop-filter:blur(10px);
+  box-shadow:0 12px 30px rgba(0,0,0,.55);padding:10px 14px;display:flex;align-items:center;gap:11px}
+.mestick .rn{font-family:var(--disp);font-size:20px;font-weight:800;color:var(--o2);min-width:36px}
+.mestick .nm{font-weight:700;font-size:14px}
+@media (max-width:900px){.mestick{bottom:86px}}
+@media (max-width:760px){
+  .lbhero{grid-template-columns:1fr;padding:20px 18px}.lbh-r{text-align:left}.cd{justify-content:flex-start}.lbh-amt{font-size:56px}
+  .lbme{grid-template-columns:1fr 1fr}.lbme-c{grid-column:1/-1;border-left:0!important;border-top:1px solid var(--ln)}.lbme>div{padding:14px 16px}
+  .lbme-rank{font-size:42px}.lbme-gmv{font-size:30px}
+  .podium2{gap:8px}.pc2{padding:18px 6px 14px}.pc2.p1{padding-top:28px}.pc2 .amt{font-size:18px}.pc2.p1 .amt{font-size:22px}.pc2 .n{font-size:12.5px}
+}
+
+/* ---- facelift: depth, light and motion, same layout */
+body{background:radial-gradient(1200px 600px at 85% -10%,rgba(255,110,32,.07),transparent 60%),radial-gradient(900px 500px at -10% 10%,rgba(91,157,255,.04),transparent 60%),var(--bg);background-attachment:fixed}
+.card,.metric{position:relative;background-image:linear-gradient(180deg,rgba(255,255,255,.022),transparent 40%)}
+.card::before{content:"";position:absolute;inset:0 0 auto;height:1px;border-radius:var(--r) var(--r) 0 0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.09),transparent);pointer-events:none}
+.card.pad0::before{display:none}
+.card[onclick]{transition:transform .2s var(--ease),border-color .2s,box-shadow .2s}
+.card[onclick]:hover{transform:translateY(-2px);border-color:var(--ln2);box-shadow:0 14px 34px rgba(0,0,0,.35)}
+.ph h1{font-size:34px;letter-spacing:.3px}
+.ph .eyebrow{display:inline-flex;align-items:center;gap:6px}
+.nitm{position:relative;transition:background .15s,color .15s}
+.nitm.on::before{content:"";position:absolute;left:-14px;top:8px;bottom:8px;width:3px;border-radius:0 3px 3px 0;background:var(--o)}
+.btn:not(.gh):not(.soft):not(.danger){box-shadow:0 6px 18px rgba(255,110,32,.22),inset 0 1px 0 rgba(255,255,255,.25)}
+.btn.gold{box-shadow:0 6px 18px rgba(232,182,74,.22),inset 0 1px 0 rgba(255,255,255,.3)}
+.metric{transition:border-color .2s}
+.metric:hover{border-color:var(--ln2)}
+.metric.gold{border-color:rgba(232,182,74,.22)}.metric.green{border-color:rgba(61,220,132,.2)}.metric.orange{border-color:rgba(255,110,32,.22)}
+.vcard,.qcard,.rcard{transition:transform .18s var(--ease),border-color .18s,box-shadow .18s}
+.vcard:hover,.rcard:hover{transform:translateY(-2px);border-color:var(--ln2);box-shadow:0 14px 30px rgba(0,0,0,.35)}
+.tabs button{transition:background .15s,color .15s,border-color .15s}
+.tabs button:hover{color:var(--tx);border-color:var(--ln2)}
+.sec h2{display:flex;align-items:center;gap:8px}
+.sec h2::before{content:"";width:4px;height:16px;border-radius:2px;background:var(--o)}
+.lbh-prizes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));max-width:420px}
+.lbh-pz{min-width:0}
+@media (max-width:760px){.lbh-pz{padding:8px 10px}.lbh-pz b{font-size:18px}}
+.slot.empty .th{display:grid;place-items:center;background:repeating-linear-gradient(135deg,rgba(255,255,255,.015) 0 10px,transparent 10px 20px),var(--bg2)}
+.slot.empty .th svg{width:46%;height:46%;opacity:.35}
+.slot.empty:hover .th svg{opacity:.6}
 </style>
 </head>
 <body>
@@ -383,7 +468,7 @@ kbd{font-family:var(--mono);background:var(--sf3);padding:1px 6px;border-radius:
 <aside class="drawer" id="drawer" tabindex="-1" aria-label="Details"></aside>
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
-<script>window.APP_MODE="live";window.BUILD="20261003-025028";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261003-034759";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -507,7 +592,8 @@ const FX={
       case 'my_contest_status': return d(m.contest);
       case 'my_submissions': return d(m.submissions);
       case 'my_analytics': return d(a.p_from<'2026-10-01'?m.analytics_sep:m.analytics);
-      case 'my_pace': return d(m.pace);
+      case 'my_pace': return d(FX.paceOf(m));
+      case 'my_leaderboard': return d(FX.leaderboardOf(m));
       case 'my_numbers': return d(FX.numbersOf(m));
       case 'my_ads': return d(FX.adsOf(m,a.p_range||'2026-10'));
       case 'start_quest': return FX.start(m,a);
@@ -531,6 +617,17 @@ const FX={
     const S_=k=>rows.reduce((n,r)=>n+(r[k]||0),0); const sp=S_('spend'), as=S_('ad_sales'); const pur=rows.reduce((n,r)=>n+(r.cpa?r.spend/r.cpa:0),0);
     return {range,rows,agg:rows.length?{spend:sp,ad_sales:as,sales:S_('sales'),vids:rows.length,roas:sp?+(as/sp).toFixed(2):null,cpa:pur?+(sp/pur).toFixed(2):null,hook:sp?+(rows.reduce((n,r)=>n+r.hook*r.spend,0)/sp).toFixed(1):null}:null,
       program:{spend:oct?15954.96:459467.87,vids:oct?622:1670,hook:oct?28.3:31.2},counts:{submitted:vids.length,approved:vids.filter(v=>v.status==='approved').length},data_through:new Date(Date.now()-3*3600e3).toISOString()}; },
+  /* synthetic boards for the preview: invented names, never real creators */
+  FAKE:['Avery Stone','Jordan Pike','Casey Brooks','Riley Hart','Morgan Lake','Quinn Ellis','Drew Carter','Sam Rivers','Taylor Reed','Jamie Fox','Parker Lane','Cameron Hale','Reese Ward','Blake Moss'],
+  paceOf(m){ const p=JSON.parse(JSON.stringify(m.pace||{})); const mine=p.my_originals||0; const names=FX.FAKE.slice(0,11); const ns=[14,11,9,9,7,6,5,4,4,3,2];
+    const meName=m.home?.creator?.display_name||'You'; let L=names.map((n,i)=>({name:n,n:ns[i]})); if(mine>0) L.push({name:meName,n:mine,me:true}); L.sort((a,b)=>b.n-a.n||a.name.localeCompare(b.name));
+    let rk=0,prev=null; L.forEach((x,i)=>{ if(x.n!==prev){rk=i+1;prev=x.n;} x.rank=rk; x.me=!!x.me; }); const me=L.find(x=>x.me);
+    return {...p,cohort_size:p.cohort_size||121,ranked:L.length,my_rank:me?.rank||null,median_posting:5,avg_posting:6.1,top:L.slice(0,10),above:me?[...L].filter(x=>x.n>me.n).sort((a,b)=>a.n-b.n)[0]||null:L[L.length-1]}; },
+  leaderboardOf(m){ const c=m.contest?.campaign||{}; const pop=/Populated/.test(m.home?.creator?.display_name||''); const meName=m.home?.creator?.display_name||'You';
+    const g=[9120,7450,6020,4880,3910,3300,2710,2150,1780,1210,980,640,410,220]; let L=FX.FAKE.map((n,i)=>({name:n,v:g[i]})); const myV=pop?2930:0; if(myV) L.push({name:meName,v:myV,me:true});
+    L.sort((a,b)=>b.v-a.v); L.forEach((x,i)=>{ x.rank=i+1; x.tied=false; x.me=!!x.me; }); const me=L.find(x=>x.me); const above=me?L[me.rank-2]:L[L.length-1];
+    return {campaign:c,now:new Date().toISOString(),rows:L.map(({rank,name,tied,me})=>({rank,name,tied,me})),ranked:L.length,not_ranked:7,
+      me:{rank:me?.rank??null,tied:false,gmv:myV,next_rank:above?.rank??null,next_name:above?.name??null,gap:above?+(above.v-myV+0.01).toFixed(2):null},total_gmv:L.reduce((n,x)=>n+x.v,0),data_through:new Date(Date.now()-2*3600e3).toISOString()}; },
   homeOf(m){ const h=m.home; const q=FX.questsOf(m); h.quests={xp_earned:q.xp_earned,xp_pending:q.xp_pending,period_now:q.period_now,
       in_progress:q.instances.filter(i=>['in_progress','needs_changes'].includes(i.state)).length, in_review:q.instances.filter(i=>i.state==='submitted').length, needs_changes:q.instances.filter(i=>i.state==='needs_changes').length};
     const r=FX.rewardsOf(m); h.rewards={xp:r.xp,concepts:r.concepts,tiers:r.tiers}; return h; },
@@ -608,14 +705,14 @@ function go(view,params={}){ S.view=view; S.params=params; const h='#/'+view+(Ob
 function parseHash(){ const m=location.hash.match(/^#\/([a-z0-9_-]+)(?:\?(.*))?/i); if(!m) return {view:'home',params:{}}; return {view:m[1],params:Object.fromEntries(new URLSearchParams(m[2]||''))}; }
 window.addEventListener('popstate',()=>{ const p=parseHash(); S.view=p.view; S.params=p.params; closeDrawer(true); render(); });
 /* retired routes resolve to the closest permitted page */
-const REDIRECT={adlib:'analytics',winners:'angles',board:'compete',stats:'analytics',approvals:'submissions',reviews:'submissions',feed:'inspo',amazon:'home',onboard:'home',trial:'home'};
+const REDIRECT={adlib:'analytics',winners:'angles',board:'leaderboard',stats:'analytics',approvals:'submissions',reviews:'submissions',feed:'inspo',amazon:'home',onboard:'home',trial:'home'};
 
 /* ---- nav */
 const NAV=[
  ['Home',[['home','Home','home']]],
  ['Create',[['inspo','Inspiration','grid'],['angles','Winning angles','flame'],['spy','Spyboard','eye'],['broll','B-roll','film']]],
  ['Progress',[['quests','Quests','target'],['rewards','Rewards','gift'],['submissions','My submissions','check'],['analytics','Analytics','chart']]],
- ['Compete',[['compete','October competition','trophy'],['pace','My pace','gauge']]],
+ ['Compete',[['leaderboard','Leaderboard','star'],['compete','October competition','trophy'],['pace','My pace','gauge']]],
  ['Profile',[['profile','My profile','user']]],
  ['Admin',[['admin','Review queue','check'],['admin_contest','Contest & imports','gear'],['admin_rewards','Rewards & claims','gift']]],
 ];
@@ -719,7 +816,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
 
 /* Home · Quests · Rewards */
 'use strict';
-const PERIOD_LABEL=k=>({'2026-10-P1':'Oct 1–7','2026-10-P2':'Oct 8–14','2026-10-P3':'Oct 15–21','2026-10-P4':'Oct 22–31'})[k]||k;
+const PERIOD_LABEL=k=>((S.cache['my_quests{}']?.periods||[]).find(p=>p.key===k)?.label)||({'2026-10-P1':'Oct 1–15','2026-10-P2':'Oct 16–31'})[k]||k;
 function periodNow(q){ return (q.periods||[]).find(p=>p.key===q.period_now); }
 function daysLeft(ends){ return Math.max(0,Math.ceil((new Date(ends)-Date.now())/86400000)); }
 function nextTier(r){ return (r.tiers||[]).find(t=>t.status==='locked'); }
@@ -754,14 +851,14 @@ route('home',async()=>{
   else if((sub.pending||0)>0&&(sub.approved||0)===0) action={t:'Pick a quest while your video is in review',d:'Posting three videos for feedback is the fastest 15 XP.',go:'quests'};
   else action={t:'Start the recommended quest',d:'Quests put most XP behind filming. One a week keeps you on pace.',go:'quests'};
   const tierHtml=nt?`<div class="plabel"><span>Next reward: <b>${esc(nt.name)} · ${fmt.usd(nt.cash_total_cents,{cents:true})}</b></span>${badge('d','Draft terms')}</div>
-     ${pbar(Math.min(r.xp||0,nt.xp_required),nt.xp_required,{label:'October XP',cls:'gold'})}<div style="height:8px"></div>${pbar(Math.min(r.concepts||0,nt.concepts_required),nt.concepts_required,{label:'Approved concepts',cls:'green'})}`:`<div class="note good">Every October tier reached. Nice.</div>`;
+     ${pbar(Math.min(r.xp||0,nt.xp_required),nt.xp_required,{label:'October XP',cls:'gold'})}<div style="height:8px"></div>${pbar(Math.min(r.concepts||0,nt.concepts_required),nt.concepts_required,{label:'Approved October videos',cls:'green'})}`:`<div class="note good">Every October tier reached. Nice.</div>`;
   return `${ph('Home','',{eyebrow:`October 2026 · ${dl} day${dl===1?'':'s'} left · ends Oct 31, 11:59 pm CT`,acts:`<button class="btn" onclick="go('${action.go}',${JSON.stringify(action.p||{}).replace(/"/g,'&quot;')})">${esc(action.t)}</button>`})}
   ${numbersCard(N)}
   <div class="grid g3">
-    <div class="card hi"><div class="lbl">October competition</div>
+    <div class="card hi" style="cursor:pointer" onclick="go('leaderboard')"><div class="lbl">October incentive</div>
       <div class="kpi" style="margin-top:6px"><span class="big" style="color:var(--gold)">${fmt.usd(c.prize_total_cents,{cents:true})}</span><span class="small">1st ${fmt.usd(c.prizes?.[0]?.cents,{cents:true})} · 2nd ${fmt.usd(c.prizes?.[1]?.cents,{cents:true})} · 3rd ${fmt.usd(c.prizes?.[2]?.cents,{cents:true})}</span></div>
-      <div class="grid g2" style="margin-top:12px;gap:8px">${metric('My contest sales',ct.score_sales==null?null:(Number(ct.score_sales)<100?fmt.usd2(ct.score_sales):fmt.usd(ct.score_sales)),{sub:ct.entries?'From my October entries':'No eligible October video yet'})}${metric('My rank',ct.rank==null?'—':'#'+ct.rank+(ct.tied?' (tied)':''),{sub:ct.rank!=null?`of ${ct.ranked_creators} ranked`:'Ranked once an entry has sales'})}</div>
-      <div class="row between" style="margin-top:12px"><span class="small">${ct.entries||0} eligible entr${ct.entries===1?'y':'ies'} · ${ct.slots_used??0} of 20 slots used</span><button class="btn gh sm" onclick="go('compete')">Open my 20 slots ${ico('arrow',14)}</button></div></div>
+      <div class="grid g2" style="margin-top:12px;gap:8px">${metric('My October GMV',ct.score_sales==null?'$0':(Number(ct.score_sales)<100?fmt.usd2(ct.score_sales):fmt.usd(ct.score_sales)),{sub:'Only you see this'})}${metric('My place',ct.rank==null?'—':'#'+ct.rank+(ct.tied?' (tied)':''),{sub:ct.rank!=null?`of ${ct.ranked_creators} ranked`:'Make an October sale to rank'})}</div>
+      <div class="row between" style="margin-top:12px"><span class="small">Top 3 by October GMV win</span><button class="btn gh sm" onclick="event.stopPropagation();go('leaderboard')">Leaderboard ${ico('arrow',14)}</button></div></div>
     <div class="card"><div class="lbl">My progress</div>
       <div class="kpi" style="margin-top:6px"><span class="big">${q.xp_earned||0}<span style="font-size:18px;color:var(--tx3)"> XP</span></span>${q.xp_pending?`<span class="badge r">+${q.xp_pending} XP in review</span>`:''}</div>
       <div style="margin-top:12px">${tierHtml}</div>
@@ -779,7 +876,7 @@ function activityText(a){ const k={submission:{imported:'Video added to your rec
 const QF=['all','available','in_progress','submitted','approved','needs_changes'];
 const QF_LABEL={all:'All',available:'Available',in_progress:'In progress',submitted:'In review',approved:'Completed',needs_changes:'Changes needed'};
 function questState(cat,insts){ const mine=insts.filter(i=>i.quest_key===cat.quest_key); const cur=mine.find(i=>i.period_key===cat.period_now&&['in_progress','needs_changes','submitted'].includes(i.state));
-  const done=cat.done_in_period||0; const maxThis=cat.per_period_limit; const total=cat.completions_total||0; const maxTotal=cat.period_kind==='reward_period'?maxThis*4:(cat.period_kind==='day'?Math.floor(cat.monthly_xp_cap/cat.xp_value):maxThis);
+  const done=cat.done_in_period||0; const maxThis=cat.per_period_limit; const total=cat.completions_total||0; const maxTotal=cat.max_xp&&cat.xp_value?Math.round(cat.max_xp/cat.xp_value):(cat.period_kind==='reward_period'?maxThis*2:(cat.period_kind==='day'?Math.floor(cat.monthly_xp_cap/cat.xp_value):maxThis));
   let state='available'; if(cur) state=cur.state; else if(cat.period_kind==='day'&&(cat.xp_this_month||0)>=cat.monthly_xp_cap) state='approved'; else if(done>=maxThis&&(cat.period_kind!=='reward_period'||total>=maxTotal)) state='approved'; else if(done>=maxThis) state='approved_period';
   return {cur,mine,done,maxThis,total,maxTotal,state}; }
 function reqProgress(cat,inst){ const req=cat.requirement||{}; const n=req.count||1; if(!inst||!inst.draft) return {have:0,need:n,unit:req.unit||''}; const p=(cat.proof||[]).find(f=>f.type==='url_list'||f.type==='submission_list'); let have=0;
@@ -793,25 +890,25 @@ route('quests',async(p)=>{
   const cats_=['All',...new Set(cats.map(c=>c.category))];
   const list=cats.filter(c=>{ const st=states[c.quest_key].state; const f=S.ui.qf; const okF=f==='all'||(f==='approved'?['approved','approved_period'].includes(st):st===f); const okC=S.ui.qcat==='All'||c.category===S.ui.qcat; const s=S.ui.qs.toLowerCase(); const okS=!s||(c.title+' '+c.outcome+' '+c.category).toLowerCase().includes(s); return okF&&okC&&okS; });
   // recommended: needs_changes first, then in-progress, then highest XP available
-  const rec=cats.find(c=>states[c.quest_key].state==='needs_changes')||cats.find(c=>states[c.quest_key].state==='in_progress')||[...cats].filter(c=>states[c.quest_key].state==='available').sort((a,b)=>b.xp_value-a.xp_value)[0];
+  const rec=cats.find(c=>states[c.quest_key].state==='needs_changes')||cats.find(c=>states[c.quest_key].state==='in_progress')||[...cats].filter(c=>states[c.quest_key].state==='available'&&!c.scarce&&c.quest_key!=='oct_host').sort((a,b)=>b.xp_value-a.xp_value)[0];
   const pn=periodNow(q);
-  return `${ph('Quests',`Reward period <b>${PERIOD_LABEL(q.period_now)}</b> · ${pn?`ends ${fmt.date(pn.ends_at)} 12:00 am CT`:''} · 325 XP possible this month`,{eyebrow:'October 2026',acts:`<button class="btn gh" onclick="go('rewards')">${ico('gift')} View rewards</button>`})}
-  <div class="grid g4" style="margin-bottom:16px">${metric('October XP',q.xp_earned||0,{cls:'gold'})}${metric('In review',(q.xp_pending||0)+' XP',{sub:'Pending, not yet earned'})}${metric('Level',levelName(q.xp_earned||0))}${nt?metric('Next reward',`${fmt.usd(nt.cash_total_cents,{cents:true})} · ${esc(nt.name)}`,{sub:`${nt.xp_required} XP + ${nt.concepts_required} concepts (draft terms)`}):metric('Next reward','All tiers reached')}</div>
+  return `${ph('Quests',`Reward period <b>${PERIOD_LABEL(q.period_now)}</b> · ${pn?`resets ${fmt.date(pn.ends_at)} 12:00 am CT`:''}${q.max_xp_month?` · ${q.max_xp_month} XP possible this month`:''}`,{eyebrow:'October 2026',acts:`<button class="btn gh" onclick="go('rewards')">${ico('gift')} View rewards</button>`})}
+  <div class="grid g4" style="margin-bottom:16px">${metric('October XP',q.xp_earned||0,{cls:'gold'})}${metric('In review',(q.xp_pending||0)+' XP',{sub:'Pending, not yet earned'})}${metric('Level',levelName(q.xp_earned||0))}${nt?metric('Next reward',`${fmt.usd(nt.cash_total_cents,{cents:true})} · ${esc(nt.name)}`,{sub:`${nt.xp_required} XP + ${nt.concepts_required} approved Oct videos`}):metric('Next reward','All tiers reached')}</div>
   ${rec?`<div class="card hi featured" style="margin-bottom:18px"><div class="art">${art(rec.image_key,rec.category,'',{wide:true})}</div><div><div class="lbl">Recommended now</div><h2 style="margin-top:6px">${esc(rec.title)}</h2><p style="margin-top:6px">${esc(rec.outcome)}</p>
     <div class="row" style="margin-top:12px"><span class="xp">+${rec.xp_value} XP</span>${badge(QSTATE[states[rec.quest_key].state]?.[0]||'n',QSTATE[states[rec.quest_key].state]?.[1]||'Available')}<button class="btn" onclick="openQuest('${rec.quest_key}')">${questCta(states[rec.quest_key])}</button></div></div></div>`:''}
   <div class="filters"><div class="tabs" role="tablist">${QF.map(f=>`<button role="tab" aria-selected="${S.ui.qf===f}" class="${S.ui.qf===f?'on':''}" onclick="go('quests',{f:'${f}'})">${QF_LABEL[f]}<i>${cnt(f)}</i></button>`).join('')}</div>
     <select aria-label="Category" onchange="go('quests',{f:S.ui.qf,c:this.value})">${cats_.map(c=>`<option ${S.ui.qcat===c?'selected':''}>${esc(c)}</option>`).join('')}</select>
     <input type="search" placeholder="Search quests" value="${esc(S.ui.qs)}" aria-label="Search quests" oninput="S.ui.qs=this.value;saveUI();$('#qlist').innerHTML=questList()"></div>
   <div id="qlist" class="grid g2">${questList()}</div>
-  <div class="sec"><h2>Reward periods</h2><span class="mini">Weekly-capped quests reset on these dates (Central)</span></div>
-  <div class="grid g4">${(q.periods||[]).map(pp=>`<div class="metric ${pp.key===q.period_now?'orange':''}"><div class="k">${pp.key===q.period_now?'Now · ':''}${esc(pp.label)}</div><div class="v" style="font-size:16px;font-family:var(--f);font-weight:600">${fmt.date(pp.starts_at)} to ${fmt.date(new Date(new Date(pp.ends_at)-1))}</div></div>`).join('')}</div>`;
+  <div class="sec"><h2>Reward periods</h2><span class="mini">Quests reset twice a month (Central time)</span></div>
+  <div class="grid g2">${(q.periods||[]).map(pp=>`<div class="metric ${pp.key===q.period_now?'orange':''}"><div class="k">${pp.key===q.period_now?'Now · ':''}${esc(pp.label)}</div><div class="v" style="font-size:16px;font-family:var(--f);font-weight:600">${fmt.date(pp.starts_at)} to ${fmt.date(new Date(new Date(pp.ends_at)-1))}</div></div>`).join('')}</div>`;
   function questList(){ const s=(S.ui.qs||'').toLowerCase(); const L=cats.filter(c=>{ const st=states[c.quest_key].state; const f=S.ui.qf; const okF=f==='all'||(f==='approved'?['approved','approved_period'].includes(st):st===f); const okC=S.ui.qcat==='All'||c.category===S.ui.qcat; const okS=!s||(c.title+' '+c.outcome+' '+c.category).toLowerCase().includes(s); return okF&&okC&&okS; });
     if(!L.length) return `<div class="empty" style="grid-column:1/-1"><h3>No quests match</h3><p>Try another filter or clear the search.</p></div>`;
     return L.map(c=>questCard(c,states[c.quest_key])).join(''); }
   window.questList=questList;
 });
 function nextPeriodDate(st){ const q=S.cache['my_quests{}']; const i=(q?.periods||[]).findIndex(p=>p.key===q.period_now); const n=q?.periods?.[i+1]; return n?fmt.date(n.starts_at):'next month'; }
-function levelName(xp){ return xp>=300?'Elite':xp>=200?'Operator':xp>=100?'Builder':xp>=50?'Rookie II':'Rookie'; }
+function levelName(xp){ return xp>=200?'Elite':xp>=100?'Operator':xp>=50?'Builder':xp>=25?'Rookie II':'Rookie'; }
 function questCta(st){ return {available:'Start quest',approved_period:'Next period opens '+nextPeriodDate(st),in_progress:'Continue quest',needs_changes:'Fix and resubmit',submitted:'View submission',approved:'View',rejected:'View'}[st.state]||'Open'; }
 function questCard(c,st){ const s=st.state; const [k,label]=QSTATE[s]||QSTATE.available; const rp=reqProgress(c,st.cur);
   const capText=c.period_kind==='reward_period'?`${st.done}/${st.maxThis} this period · ${st.total}/${st.maxTotal} this month`:c.period_kind==='day'?`${c.xp_this_month||0}/${c.monthly_xp_cap} XP this month · max ${c.per_period_limit}/day`:`${st.total}/${st.maxTotal} completed`;
@@ -871,9 +968,9 @@ async function submitQuest(ev,id){ ev.preventDefault(); const q=await API.page('
 /* ---------------- Rewards */
 route('rewards',async()=>{
   const r=await API.page('my_rewards'); const tiers=r.tiers||[]; const anyDraft=tiers.some(t=>t.draft||!t.published);
-  return `${ph('Rewards','Cash milestones for October. Both bars must fill: earned XP and approved original concepts.',{eyebrow:'October 2026',acts:`<button class="btn gh" onclick="go('quests')">${ico('target')} Earn XP</button>`})}
+  return `${ph('Rewards','Cash milestones for October. Both bars must fill: XP from quests and approved October videos.',{eyebrow:'October 2026',acts:`<button class="btn gh" onclick="go('quests')">${ico('target')} Earn XP</button>`})}
   ${anyDraft?`<div class="note draft" style="margin-bottom:16px"><b>Draft terms.</b> These tiers are the proposed October rewards. Amounts and thresholds are not final until Austin publishes them, and claims open then. Your XP and approvals count from October 1 either way.</div>`:''}
-  <div class="grid g3" style="margin-bottom:16px">${metric('October XP',r.xp||0,{cls:'gold',sub:r.xp_pending?`+${r.xp_pending} XP in review`:'Earned, verified'})}${metric('Approved October concepts',r.concepts||0,{cls:'green',sub:'Original videos submitted and approved in October (not marked BOF)'})}${metric('Reward model',r.reward_model==='cumulative'?'Cumulative':'Additive',{sub:r.reward_model==='cumulative'?'Reaching a tier pays that tier total for the month':'Each tier pays on top (draft)'})}</div>
+  <div class="grid g3" style="margin-bottom:16px">${metric('October XP',r.xp||0,{cls:'gold',sub:r.xp_pending?`+${r.xp_pending} XP in review`:'Earned, verified'})}${metric('Approved October videos',r.concepts||0,{cls:'green',sub:'Original videos submitted and approved in October (not marked BOF)'})}${metric('Reward model',r.reward_model==='cumulative'?'Cumulative':'Additive',{sub:r.reward_model==='cumulative'?'Reaching a tier pays that tier total for the month':'Each tier pays on top (draft)'})}</div>
   <div class="grid g3">${tiers.map(t=>rewardCard(t,r)).join('')}</div>
   <div class="sec"><h2>How it works</h2></div>
   <div class="card"><ol class="ol"><li>Earn XP by completing quests. Only verified completions count; pending XP is shown separately.</li><li>Get original Ravine videos approved. Revisions and hook variants never add a concept.</li><li>When both bars fill, the tier becomes eligible and you can submit a claim.</li><li>An admin approves the claim for payment, then records the payout. Nothing is paid automatically.</li></ol>
@@ -882,8 +979,8 @@ route('rewards',async()=>{
 });
 function rewardCard(t,r){ const [k,label]=RSTATE[t.status]||RSTATE.locked; const lock=t.status==='locked'; return `<button class="rcard ${lock?'lock':''}" onclick="openReward('${t.id}')" aria-label="${esc(t.name)} ${label}"><div class="art">${art('reward','gold','',{wide:true})}</div><div class="body"><div class="row between"><span class="badge ${k}">${label}</span>${t.draft||!t.published?badge('d','Draft'):''}</div>
   <div class="row" style="margin-top:8px;align-items:baseline"><span class="amt">${fmt.usd(t.cash_total_cents,{cents:true})}</span><span class="small">${esc(t.name)} · month total</span></div>
-  <div class="req">${pbar(Math.min(r.xp||0,t.xp_required),t.xp_required,{label:'XP',cls:'gold'})}${pbar(Math.min(r.concepts||0,t.concepts_required),t.concepts_required,{label:'Approved concepts',cls:'green'})}</div>
-  <div class="mini" style="margin-top:10px">${t.xp_met&&t.concepts_met?(t.status==='eligible'?'Both gates met. Open to claim.':statusText(t)):t.xp_met?`Needs ${t.concepts_required-(r.concepts||0)} more approved concept${t.concepts_required-(r.concepts||0)===1?'':'s'}`:t.concepts_met?`Needs ${t.xp_required-(r.xp||0)} more XP`:`Needs ${t.xp_required-(r.xp||0)} XP and ${t.concepts_required-(r.concepts||0)} concepts`}</div></div></button>`; }
+  <div class="req">${pbar(Math.min(r.xp||0,t.xp_required),t.xp_required,{label:'XP',cls:'gold'})}${pbar(Math.min(r.concepts||0,t.concepts_required),t.concepts_required,{label:'Approved October videos',cls:'green'})}</div>
+  <div class="mini" style="margin-top:10px">${t.xp_met&&t.concepts_met?(t.status==='eligible'?'Both gates met. Open to claim.':statusText(t)):t.xp_met?`Needs ${t.concepts_required-(r.concepts||0)} more approved video${t.concepts_required-(r.concepts||0)===1?'':'s'}`:t.concepts_met?`Needs ${t.xp_required-(r.xp||0)} more XP`:`Needs ${t.xp_required-(r.xp||0)} XP and ${t.concepts_required-(r.concepts||0)} approved videos`}</div></div></button>`; }
 function statusText(t){ return {claim_submitted:'Claim submitted, waiting for admin approval',approved_for_payment:'Approved for payment',paid:'Paid'}[t.status]||''; }
 async function openReward(id){ const r=await API.page('my_rewards'); const t=r.tiers.find(x=>x.id===id); const [k,label]=RSTATE[t.status]; const prev=r.tiers.filter(x=>x.sort_order<t.sort_order);
   openDrawer(`<div class="row"><span class="badge ${k}">${label}</span>${t.draft||!t.published?badge('d','Draft terms'):''}</div><h2>${esc(t.name)} · ${fmt.usd(t.cash_total_cents,{cents:true})}</h2><div class="art">${art('reward','gold','',{wide:true})}</div>
@@ -908,55 +1005,101 @@ const BAND=r=>r==null?'none':r>=2?'good':(r>=1?'warn':'bad');
 const BANDC={good:'var(--gr)',warn:'var(--warn)',bad:'var(--bad)',none:'var(--tx3)'};
 const BANDHEX={good:'#3DDC84',warn:'#FFB020',bad:'#FF5C4D',none:'#848C99'};
 
+/* shared bits for the October boards */
+const AVC=['#FF6E20','#E8B64A','#3DDC84','#5B9DFF','#C77DFF','#FF5C8A','#2EC4B6','#F4A261'];
+const initials=n=>String(n||'?').trim().split(/\s+/).slice(0,2).map(w=>w[0]||'').join('').toUpperCase()||'?';
+const avColor=n=>AVC[[...String(n||'')].reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,7)%AVC.length];
+const avatar=(n,s=36)=>`<span class="av" style="width:${s}px;height:${s}px;font-size:${Math.round(s*.36)}px;background:${avColor(n)}">${esc(initials(n))}</span>`;
+function countdown(ends){ const ms=Math.max(0,new Date(ends)-Date.now()); const d=Math.floor(ms/864e5), h=Math.floor(ms%864e5/36e5), m=Math.floor(ms%36e5/6e4);
+  return `<div class="cd"><div><b>${d}</b><span>DAYS</span></div><div><b>${h}</b><span>HRS</span></div><div><b>${m}</b><span>MIN</span></div></div>`; }
+function incentiveHero(c,{compact=false}={}){ const pz=c.prizes||[]; const medal=['🥇','🥈','🥉'];
+  return `<div class="lbhero ${compact?'compact':''}"><div class="lbh-l"><div class="lbl" style="color:var(--o2)">October 2026 · incentive</div>
+     <div class="lbh-amt">${fmt.usd(c.prize_total_cents,{cents:true})}</div>
+     <div class="lbh-sub">Top 3 by October GMV win. Every sale you drive Oct 1–31 counts.</div>
+     <div class="lbh-prizes">${pz.map((p,i)=>`<div class="lbh-pz ${i===0?'first':''}"><span>${medal[i]||''} ${esc(p.label)}</span><b>${fmt.usd(p.cents,{cents:true})}</b></div>`).join('')}</div></div>
+   <div class="lbh-r"><div class="lbl">Time left</div>${countdown(c.ends_at)}<div class="mini" style="margin-top:8px">Ends Oct 31, 11:59 pm CT</div></div></div>`; }
+
+/* ---------------- October competition */
 route('compete',async()=>{
   const ct=await API.page('my_contest_status'); const c=ct.campaign||{}; const lim=c.slot_limit||20;
+  const lb=await API.page('my_leaderboard'); const me=lb.me||{};
   const slots=(ct.slots||[]).filter(s=>s.slot<=lim); const extra=(ct.slots||[]).filter(s=>s.slot>lim);
   const subs=await API.page('my_submissions'); const byId=Object.fromEntries((subs.videos||[]).map(v=>[v.id,v]));
-  const used=slots.length, remaining=Math.max(0,lim-used), elig=slots.filter(s=>s.outcome==='qualifies').length, rev=slots.filter(s=>s.outcome==='awaiting_review').length;
-  const dl=daysLeft(c.ends_at); const draft=c.status!=='published'; const score=ct.score_sales==null?0:Number(ct.score_sales);
+  const used=slots.length, appr=slots.filter(s=>s.status==='approved').length, rev=slots.filter(s=>s.outcome==='awaiting_review').length;
+  const draft=(c.draft_decisions||[]).length>0;
   const tiles=[]; for(let i=1;i<=lim;i++){ const s=slots.find(x=>x.slot===i);
     if(!s){ tiles.push(`<button class="slot empty" onclick="slotInfo(${i})" aria-label="Slot ${i}: open"><span class="n">${i}</span><div class="th">${art('empty','neutral')}</div><div class="cap">Open</div></button>`); continue; }
-    const v=byId[s.submission_id]||{}; const th=s.thumb_url||v.thumb_url; const sales=Number(s.oct_sales)||0;
-    tiles.push(`<button class="slot ${SLOT_CLS[s.outcome]||''}" onclick="openVideo('${esc(s.submission_id)}')" aria-label="Slot ${i}: ${esc(s.title||s.submission_id)}, ${SLOT_SHORT[s.outcome]||s.outcome}"><span class="n">${i}</span><div class="th">${thumb(th,'tile','Film')}</div><div class="cap"><b>${esc(s.title||s.submission_id)}</b><span>${SLOT_SHORT[s.outcome]||esc(s.outcome)}${s.funnel?' · '+esc(s.funnel):''}${sales>0?` · <b style="display:inline;color:var(--gold)">${money(sales)}</b>`:''}</span></div></button>`); }
-  return `${ph('October competition',`Ends Oct 31, 11:59 pm CT · ${dl} day${dl===1?'':'s'} left`,{eyebrow:'Compete',acts:`<button class="btn gh" onclick="openRules()">${ico('book')} Rules</button>`})}
-  ${draft?`<div class="note draft" style="margin-bottom:14px"><b>Draft rules.</b> Prize amounts are confirmed. Slot, revision, tie and payout details below are the proposed rules until Austin publishes them.</div>`:''}
-  <div class="row between" style="margin-bottom:10px">${freshness({last_run:ct.data_at,reporting_through:ct.data_through})}${ct.final_snapshot?badge('g','Final standings '+fmt.date(ct.final_snapshot)):badge('r','Provisional standings')}</div>
-  <div class="podium">${(c.prizes||[]).map((p,i)=>`<div class="p ${i===0?'first':''}"><div class="place">${esc(p.label)} place</div><div class="amt">${fmt.usd(p.cents,{cents:true})}</div></div>`).join('')}</div>
-  <div class="mini" style="text-align:center;margin:8px 0 18px">Total ${fmt.usd(c.prize_total_cents,{cents:true})} · ranked by October sales from your first 20 October videos</div>
-  <div class="card hi" style="margin-bottom:18px"><div class="lbl">My score card</div><div class="grid g4" style="margin-top:10px;gap:8px">
-    ${metric('My October contest sales',money(score),{cls:'gold',sub:elig?`From ${elig} eligible video${elig===1?'':'s'}`:'No eligible video yet'})}
-    ${metric('My rank',ct.rank==null?'—':'#'+ct.rank+(ct.tied?' · tied':''),{sub:ct.rank==null?'Ranked once an entry has sales':`of ${ct.ranked_creators} ranked creators`})}
-    ${metric('Slots used',`${used} / ${lim}`,{sub:`${remaining} remaining`})}
-    ${metric('Eligible entries',elig,{sub:`${rev} awaiting a decision`})}</div></div>
-  <div class="sec"><h2>My first 20 October videos</h2><span class="mini">Tap a video for its numbers · ${used} of ${lim} used · ${elig} eligible · ${rev} in review</span></div>
+    const v=byId[s.submission_id]||{}; const th=s.thumb_url||v.thumb_url; const sales=Number(s.oct_sales)||0; const [sk,sl]=SSTATE[s.status]||['n',s.status];
+    tiles.push(`<button class="slot ${s.status==='approved'?'q':s.status==='rejected'?'x':'r'}" onclick="openVideo('${esc(s.submission_id)}')" aria-label="Slot ${i}: ${esc(s.title||s.submission_id)}, ${sl}"><span class="n">${i}</span><div class="th">${thumb(th,'tile','Film')}</div><div class="cap"><b>${esc(s.title||s.submission_id)}</b><span>${sl}${s.funnel?' · '+esc(s.funnel):''}${sales>0?` · <b style="display:inline;color:var(--gold)">${money(sales)}</b>`:''}</span></div></button>`); }
+  const top=(lb.rows||[]).slice(0,5);
+  return `${ph('October competition','',{eyebrow:'Compete',acts:`<button class="btn gh" onclick="openRules()">${ico('book')} Rules</button><button class="btn" onclick="go('leaderboard')">${ico('trophy')} Leaderboard</button>`})}
+  ${incentiveHero({...c,ends_at:c.ends_at})}
+  ${draft?`<div class="note draft" style="margin:12px 0 0"><b>Prize amounts are locked.</b> Payout timing and the tie-break rule are still being finalized.</div>`:''}
+  <div class="card hi" style="margin:16px 0 18px"><div class="row between"><div class="lbl">My standing</div>${freshness({last_run:lb.data_through})}</div><div class="grid g4" style="margin-top:10px;gap:8px">
+    ${metric('My October GMV',money(me.gmv||0),{cls:'gold',sub:'Only you can see this'})}
+    ${metric('My place',me.rank==null?'—':'#'+me.rank+(me.tied?' · tied':''),{sub:me.rank==null?'Make an October sale to get on the board':`of ${lb.ranked} ranked creators`})}
+    ${metric(me.rank===1?'You are in first':'To pass the next place',me.rank===1?'👑':(me.gap==null?'—':money(me.gap)),{cls:'orange',sub:me.rank===1?'Hold it to Oct 31':(me.next_name?`#${me.next_rank} ${esc(me.next_name)}`:'')})}
+    ${metric('October videos',used,{sub:`${appr} approved · ${rev} in review`})}</div></div>
+  <div class="sec"><h2>Top of the board</h2><a href="#/leaderboard" class="mini">See every place →</a></div>
+  <div class="card" style="padding:8px">${top.length?top.map(r=>lbRow(r,lb)).join(''):`<div class="mini" style="padding:10px">Nobody has an October sale yet. The board fills in as soon as someone does.</div>`}</div>
+  <div class="sec"><h2>My first 20 October videos</h2><span class="mini">Tap a video for its numbers</span></div>
   <div class="slots">${tiles.join('')}</div>
-  <div class="mini" style="margin-top:10px">Slots fill in the order you submitted on Trybe. Pending, rejected and BOF videos keep their slot. A revision shares its original's slot. ${extra.length?`<b>${extra.length}</b> video${extra.length>1?'s are':' is'} outside the first 20: still earns normal commissions, never contest sales. <a href="#/submissions?f=outside">See them</a>`:''}</div>
-  <div class="sec"><h2>Leaderboard</h2><span class="mini">Names and ranks only. Your sales show on your row.</span></div>
-  <div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Rank</th><th>Creator</th><th class="num">Contest sales</th></tr></thead><tbody>
-   ${(ct.leaderboard||[]).length?ct.leaderboard.map(l=>{ const me=S.me&&l.name===S.me.display_name; return `<tr class="${me?'me':''}"><td class="mono">#${l.rank}${l.tied?' <span class="mini">tie</span>':''}</td><td>${esc(l.name)}${me?' <span class="mini">(you)</span>':''}</td><td class="num">${me?money(ct.score_sales):'<span class="muted">·</span>'}</td></tr>`; }).join(''):`<tr><td colspan="3"><div class="mini" style="padding:10px 0">Nobody's October videos have sales yet. The board fills in as soon as they do.</div></td></tr>`}
-  </tbody></table></div></div>
-  ${ct.rank==null&&elig?`<div class="note" style="margin-top:10px">You have ${elig} eligible entr${elig===1?'y':'ies'}. None has October sales yet, so you are not ranked yet. This updates with every data refresh.</div>`:''}
+  <div class="mini" style="margin-top:10px">Your October videos in the order you submitted them on Trybe. ${extra.length?`<b>${extra.length}</b> more after these. <a href="#/submissions">See them all</a>`:''}</div>
   <div class="sec"><h2>Rules in short</h2></div>
-  <div class="card"><ol class="ol"><li>Submit and get approved in October (Central time). September videos approved in October do not count. October videos approved in November do not count.</li><li>Every approved video counts unless Austin marks it BOF (bottom of funnel).</li><li>Only your first 20 October submissions can be entries. Videos after that still earn your normal commissions.</li><li>Rank = October sales from your eligible videos, from Trybe's per-video reporting. Not XP, not video count.</li><li>Ties show as ties until a tie-break rule is approved.</li></ol><div style="margin-top:12px"><button class="btn gh sm" onclick="openRules()">Full rules</button></div></div>`;
+  <div class="card"><ol class="ol"><li>Prizes go to the top 3 creators by October GMV: ${(c.prizes||[]).map(p=>fmt.usd(p.cents,{cents:true})).join(', ')}.</li><li>October GMV = every sale Trybe credits to you from Oct 1 to Oct 31, Central time.</li><li>Everyone sees names and places. Only you see your own GMV, plus what it takes to pass the place above you.</li><li>Standings update with every data refresh from Trybe. Final standings are taken after Oct 31.</li><li>Ties show as ties until a tie-break rule is published.</li></ol><div style="margin-top:12px"><button class="btn gh sm" onclick="openRules()">Full rules</button></div></div>`;
 });
-function slotInfo(i){ openDrawer(`<h2>Slot ${i}</h2><p>Open. Your next original October submission through Trybe takes this slot, in order of submission time.</p><section><h3>What counts</h3><ul><li>An original video (not a revision) submitted in October.</li><li>Approved in October. It counts unless Austin marks it BOF.</li><li>Pending or rejected videos still hold a slot under the proposed rules.</li></ul></section>`); }
-async function openRules(){ const ct=await API.page('my_contest_status'); const c=ct.campaign||{}; const d=new Set(c.draft_decisions||[]);
-  const row=(k,label,text)=>`<li>${label}: ${text} ${d.has(k)?badge('d','Draft'):''}</li>`;
-  const stage=c.unclassified_counts===false?`${(c.eligible_funnels||[]).join(' or ')} only, as classified by the brand`:'every approved video counts unless Austin marks it BOF';
-  openDrawer(`<h2>October competition rules</h2><p>Campaign ${esc(c.name)} · ${fmt.dt(c.starts_at)} to ${fmt.dt(new Date(new Date(c.ends_at)-1))}, ${esc(c.tz)}.</p>
-   <section><h3>Prizes</h3><ul>${(c.prizes||[]).map(p=>`<li>${esc(p.label)}: ${fmt.usd(p.cents,{cents:true})}</li>`).join('')}<li>Total ${fmt.usd(c.prize_total_cents,{cents:true})}</li></ul></section>
-   <section><h3>Eligibility</h3><ul>${row('start_date_oct1','Window','submitted on or after Oct 1, 12:00 am CT and before Nov 1, 12:00 am CT; approved inside the same window')}<li>Stage: ${stage}</li>${row('slot_consumption_on_submit','Slots',`first ${c.slot_limit} original submissions; ${c.slot_consumption==='on_submit'?'pending, rejected and BOF videos keep their slot':'only approved videos take a slot'}`)}${row('revision_shares_slot','Revisions',c.revision_policy==='shares_parent_slot'?'a revision shares its original submission\'s slot and concept':'a revision takes its own slot')}</ul></section>
-   <section><h3>Scoring</h3><ul>${row('rank_metric_sales_in_window','Score',c.rank_metric==='attributed_sales_lifetime'?'lifetime sales of eligible videos':'October sales from eligible videos, from Trybe\'s per-video reporting')}${row('tie_display_only','Ties',c.tie_rule==='display_tie'?'shown as a tie; no cash is assigned by a tie-break until one is approved':'earliest to reach the final score wins')}${row('payout_terms_unset','Payout',c.payout_terms?esc(c.payout_terms):'timing, method and reconciliation cutoff to be confirmed')}</ul></section>
-   <section><h3>What this is not</h3><ul><li>No percentage splits. Three places, fixed amounts.</li><li>Other creators' sales are never shown. You see names and ranks.</li><li>A video with no sales yet scores $0 and is not ranked. It is never dropped.</li></ul></section>`); }
+function slotInfo(i){ openDrawer(`<h2>Slot ${i}</h2><p>Open. Your next October video on Trybe fills this spot, in the order you submit.</p><section><h3>Good to know</h3><ul><li>Your October GMV is what ranks you, from every video you have running.</li><li>New October videos are how you grow it. Need an idea? Open Inspiration.</li></ul></section><section><button class="btn" onclick="closeDrawer();go('inspo')">Find an angle</button></section>`); }
+async function openRules(){ const lb=await API.page('my_leaderboard'); const c=lb.campaign||{}; const d=new Set(c.draft_decisions||[]);
+  const row=(k,label,text)=>`<li>${label}: ${text} ${d.has(k)?badge('d','Being finalized'):''}</li>`;
+  openDrawer(`<h2>October incentive rules</h2><p>${esc(c.name||'October 2026')} · ${fmt.dt(c.starts_at)} to ${fmt.dt(new Date(new Date(c.ends_at)-1))}, ${esc(c.tz||'America/Chicago')}.</p>
+   <section><h3>Prizes</h3><ul>${(c.prizes||[]).map(p=>`<li>${esc(p.label)} place: ${fmt.usd(p.cents,{cents:true})}</li>`).join('')}<li>Total ${fmt.usd(c.prize_total_cents,{cents:true})}</li></ul></section>
+   <section><h3>How you are ranked</h3><ul><li>By October GMV: every sale Trybe credits to you between Oct 1, 12:00 am and Nov 1, 12:00 am Central.</li><li>Same number as the October sales on your Home page.</li>${row('tie_display_only','Ties',c.tie_rule==='display_tie'?'shown as a tie until a tie-break rule is published':'earliest to reach the final number wins')}${row('payout_terms_unset','Payout',c.payout_terms?esc(c.payout_terms):'timing and method to be confirmed')}</ul></section>
+   <section><h3>Privacy</h3><ul><li>Everyone sees names and places.</li><li>Only you see your own GMV. You also see how much more you need to pass the place right above you.</li></ul></section>`); }
+
+/* ---------------- Leaderboard */
+function lbRow(r,lb,{big=false}={}){ const m=r.me; const g=lb.me||{};
+  return `<div class="lbrow ${m?'me':''} ${r.rank<=3?'p'+r.rank:''}"><div class="rn">${r.rank<=3?['🥇','🥈','🥉'][r.rank-1]:'#'+r.rank}</div>${avatar(r.name,big?40:34)}
+    <div style="min-width:0;flex:1"><div class="nm">${esc(r.name)}${m?' <span class="you">YOU</span>':''}${r.tied?' <span class="mini">tie</span>':''}</div>
+     ${r.rank<=3?`<div class="mini" style="color:var(--gold)">${fmt.usd((lb.campaign?.prizes||[])[r.rank-1]?.cents,{cents:true})} prize place</div>`:''}</div>
+    <div class="rv">${m?`<b>${money(g.gmv)}</b><span>your GMV</span>`:`<b class="priv">${ico('lock',13)}</b><span>private</span>`}</div></div>`; }
+route('leaderboard',async(p)=>{
+  const lb=await API.page('my_leaderboard'); const c=lb.campaign||{}; const me=lb.me||{}; const rows=lb.rows||[];
+  const all=p.all==='1'; const shown=all?rows:rows.slice(0,10); const myRow=rows.find(r=>r.me); const meHidden=myRow&&!shown.includes(myRow);
+  const pct=me.gap!=null&&me.gmv!=null?clamp(me.gmv/(me.gmv+me.gap)*100,2,99):0;
+  const pod=rows.filter(r=>r.rank<=3).slice(0,3);
+  return `${ph('October leaderboard','Ranked by October GMV. Everyone sees the order; only you see your own number.',{eyebrow:'Compete',acts:`<button class="btn gh" onclick="openRules()">${ico('book')} Rules</button>`})}
+  ${incentiveHero(c)}
+  <div class="lbme">
+   <div class="lbme-a"><div class="lbl">You are</div><div class="lbme-rank">${me.rank==null?'—':'#'+me.rank}</div><div class="mini">${me.rank==null?'not on the board yet':`of ${lb.ranked} ranked${me.tied?' · tied':''}`}</div></div>
+   <div class="lbme-b"><div class="lbl">Your October GMV</div><div class="lbme-gmv">${money(me.gmv||0)}</div><div class="mini">only you can see this</div></div>
+   <div class="lbme-c">${me.rank===1?`<div class="lbl">Status</div><div class="lbme-next">👑 You are in first.</div><div class="mini">Keep posting. Everyone below you can see how far behind they are, not your number.</div>`
+     :me.gap!=null?`<div class="lbl">To pass ${me.next_rank?'#'+me.next_rank:''} ${esc(me.next_name||'')}</div><div class="lbme-next"><b>${money(me.gap)}</b> more GMV</div><div class="bar gold" style="margin-top:8px"><i style="width:${pct.toFixed(1)}%"></i></div>`
+     :`<div class="lbl">Get on the board</div><div class="lbme-next">Make your first October sale</div>`}</div>
+  </div>
+  ${pod.length?`<div class="sec"><h2>Top 3</h2><span class="mini">Prize places right now</span></div>
+  <div class="podium2">${[pod[1],pod[0],pod[2]].filter(Boolean).map(r=>`<div class="pc2 p${r.rank} ${r.me?'me':''}">${r.rank===1?'<div class="crown">👑</div>':''}${avatar(r.name,r.rank===1?64:52)}<div class="n">${esc(r.name)}${r.me?' <span class="you">YOU</span>':''}</div><div class="pl">${['1st','2nd','3rd'][r.rank-1]} place</div><div class="amt">${fmt.usd((c.prizes||[])[r.rank-1]?.cents,{cents:true})}</div>${r.me?`<div class="mini" style="margin-top:4px">Your GMV ${money(me.gmv)}</div>`:''}</div>`).join('')}</div>`:''}
+  <div class="sec"><h2>Every ranked creator</h2><span class="mini">${lb.ranked} ranked${lb.not_ranked?` · ${lb.not_ranked} still at $0`:''}</span></div>
+  ${rows.length?`<div class="card" style="padding:8px">${shown.map(r=>lbRow(r,lb)).join('')}
+    ${meHidden?`<div class="lbgap">⋯</div>${lbRow(myRow,lb)}`:''}
+    ${rows.length>10?`<button class="btn gh" style="width:100%;margin-top:8px" onclick="go('leaderboard',${all?'{}':"{all:'1'}"})">${all?'Show top 10 only':`Show all ${rows.length} places`}</button>`:''}</div>`
+   :emptyState('Nobody is on the board yet','The first October sale puts someone in first place.','','leader')}
+  ${myRow&&all&&myRow.rank>10?`<div class="mestick"><div class="rn">#${myRow.rank}</div>${avatar(myRow.name,30)}<div style="min-width:0;flex:1"><div class="nm">${esc(myRow.name)} <span class="you">YOU</span></div><div class="mini">${me.gap!=null?`${money(me.gap)} to pass #${me.next_rank}`:''}</div></div><div style="text-align:right"><div style="font-family:var(--mono);font-weight:800;color:var(--gold)">${money(me.gmv)}</div><div class="mini">your GMV</div></div></div>`:''}
+  <div class="note" style="margin-top:14px">Updated with each Trybe refresh${lb.data_through?` · last one ${fmt.dt(lb.data_through)}`:''}. GMV here is the same October sales number on your Home page.</div>`;
+});
 
 /* ---------------- My pace */
 route('pace',async()=>{
-  const p=await API.page('my_pace'); const med=p.median_originals;
-  const cmp=p.available&&med!=null?(p.my_originals>med?'ahead of':p.my_originals<med?'behind':'level with'):null;
-  return `${ph('My pace','Your original October submissions against the roster median.',{eyebrow:'Compete'})}
-  <div class="grid g3" style="margin-bottom:16px">${metric('My original submissions',p.my_originals??0,{cls:'orange',sub:'October, originals only'})}${metric('Roster median',p.available?med:null,{sub:p.available?`${p.cohort_size} creators on the ${esc(p.cohort)}`:`Needs at least ${p.min_cohort} creators (${p.cohort_size} now)`})}${metric('My approved concepts',p.my_approved_concepts??0,{cls:'green',sub:'Counted separately'})}</div>
-  <div class="card">${p.available&&cmp?`<h3>You are ${cmp} the median</h3><p style="margin-top:4px">${p.my_originals} originals vs a median of ${med}. ${p.my_originals>=20?'You have used your 20 contest slots; more videos still earn normal commissions.':''}</p>`:`<h3>Not enough creators to compare yet</h3><p>A comparison shows once at least ${p.min_cohort} creators are on the roster.</p>`}
-   <div class="hr"></div><div class="lbl">How this is calculated</div><ul style="padding-left:18px;margin-top:8px;color:var(--tx2);font-size:14px;display:grid;gap:4px"><li>Cohort: ${esc(p.cohort)}, including creators with zero submissions. Duplicate registrations count once.</li><li>Window: ${fmt.date(p.window?.starts_at)} to ${fmt.date(new Date(new Date(p.window?.ends_at)-1))}, ${esc(p.window?.tz)}.</li><li>Revisions do not count. Only your own numbers are shown; no individual peer figures.</li><li>Snapshot: ${fmt.dt(p.snapshot_at)||'no complete import yet'}.</li></ul></div>`;
+  const p=await API.page('my_pace'); const top=p.top||[]; const mine=p.my_originals??0; const mx=Math.max(1,...top.map(t=>t.n));
+  const inTop=top.some(t=>t.me);
+  const row=t=>`<div class="lbrow ${t.me?'me':''}"><div class="rn">#${t.rank}</div>${avatar(t.name,34)}<div style="min-width:0;flex:1"><div class="nm">${esc(t.name)}${t.me?' <span class="you">YOU</span>':''}</div><div class="bar" style="margin-top:6px;height:5px"><i style="width:${(t.n/mx*100).toFixed(1)}%"></i></div></div><div class="rv"><b>${t.n}</b><span>video${t.n===1?'':'s'}</span></div></div>`;
+  return `${ph('My pace','How many videos you have posted in October, next to the rest of the roster.',{eyebrow:'Compete'})}
+  <div class="grid g4" style="margin-bottom:16px">${metric('My October videos',mine,{cls:'orange',sub:p.my_rank?`#${p.my_rank} of ${p.ranked} creators posting`:'Not posting yet this month'})}${metric('Most on the roster',top[0]?.n??0,{sub:top[0]?esc(top[0].name):'Nobody yet'})}${metric('Typical creator',p.median_posting==null?'—':Math.round(p.median_posting*10)/10,{sub:'median of creators posting'})}${metric('Roster',p.cohort_size,{sub:`${p.ranked} have posted in October`})}</div>
+  <div class="card hi" style="margin-bottom:16px"><h3>${mine===0?'Post your first October video to get on the board':p.above?`Post ${p.above.n-mine+1} more to pass ${esc(p.above.name)} (#${p.above.rank})`:'You are leading the roster on October videos 🔥'}</h3>
+   <p style="margin-top:4px">${mine===0?`${p.ranked} creators have already posted this month.`:`You have ${mine} October video${mine===1?'':'s'}. The typical creator who is posting has ${p.median_posting==null?'—':Math.round(p.median_posting*10)/10}.`} Your approved October videos: <b>${p.my_approved_concepts??0}</b>.</p></div>
+  <div class="sec"><h2>Top 10 this month</h2><span class="mini">October videos, originals only</span></div>
+  <div class="card" style="padding:8px">${top.length?top.map(row).join(''):`<div class="mini" style="padding:10px">Nobody has posted an October video yet.</div>`}
+   ${!inTop&&p.my_rank?`<div class="lbgap">⋯</div>${row({rank:p.my_rank,name:S.me?.display_name||'You',n:mine,me:true})}`:''}</div>
+  <div class="note" style="margin-top:14px"><b style="color:var(--tx)">How this is counted.</b> Original videos submitted on Trybe from Oct 1 to Oct 31 (Central), whatever their review status. Revisions and image posts do not count. Creators with two Trybe accounts count once. Snapshot ${fmt.dt(p.snapshot_at)||'pending'}.</div>`;
 });
 
 /* ---------------- My submissions */
