@@ -523,6 +523,7 @@ button.actrow:hover{background:var(--sf2)}
 .act-th img,.act-th svg{width:100%;height:100%;object-fit:cover}
 .act-ic{color:var(--o2)}
 .act-t{font-weight:700;font-size:14px}
+.gmvq{font-weight:600;text-transform:none;letter-spacing:0;color:var(--tx3)}
 </style>
 </head>
 <body>
@@ -541,7 +542,7 @@ button.actrow:hover{background:var(--sf2)}
 <aside class="drawer" id="drawer" tabindex="-1" aria-label="Details"></aside>
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
-<script>window.APP_MODE="live";window.BUILD="20261003-143222";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261003-143416";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -939,7 +940,7 @@ route('home',async()=>{
   <div class="grid g3">
     <div class="card hi" style="cursor:pointer" onclick="go('leaderboard')"><div class="lbl">October incentive</div>
       <div class="kpi" style="margin-top:6px"><span class="big" style="color:var(--gold)">${fmt.usd(c.prize_total_cents,{cents:true})}</span><span class="small">1st ${fmt.usd(c.prizes?.[0]?.cents,{cents:true})} · 2nd ${fmt.usd(c.prizes?.[1]?.cents,{cents:true})} · 3rd ${fmt.usd(c.prizes?.[2]?.cents,{cents:true})}</span></div>
-      <div class="grid g2" style="margin-top:12px;gap:8px">${metric('My October GMV',ct.score_sales==null?'$0':(Number(ct.score_sales)<100?fmt.usd2(ct.score_sales):fmt.usd(ct.score_sales)),{sub:'From October videos · only you'})}${metric('My place',ct.rank==null?'—':'#'+ct.rank+(ct.tied?' (tied)':''),{sub:ct.rank!=null?`of ${ct.ranked_creators} ranked`:'Get an October video selling'})}</div>
+      <div class="grid g2" style="margin-top:12px;gap:8px">${metric('My October GMV (videos posted in October only)',ct.score_sales==null?'$0':(Number(ct.score_sales)<100?fmt.usd2(ct.score_sales):fmt.usd(ct.score_sales)),{sub:'Only you see this'})}${metric('My place',ct.rank==null?'—':'#'+ct.rank+(ct.tied?' (tied)':''),{sub:ct.rank!=null?`of ${ct.ranked_creators} ranked`:'Get an October video selling'})}</div>
       <div class="row between" style="margin-top:12px"><span class="small">Only October videos count</span><button class="btn gh sm" onclick="event.stopPropagation();go('leaderboard')">Leaderboard ${ico('arrow',14)}</button></div></div>
     <div class="card"><div class="lbl">My progress</div>
       <div class="kpi" style="margin-top:6px"><span class="big">${q.xp_earned||0}<span style="font-size:18px;color:var(--tx3)"> XP</span></span>${q.xp_pending?`<span class="badge r">+${q.xp_pending} XP in review</span>`:''}</div>
@@ -1139,7 +1140,7 @@ route('compete',async()=>{
   ${incentiveHero({...c,ends_at:c.ends_at})}
   ${draft?`<div class="note draft" style="margin:12px 0 0"><b>Prize amounts are locked.</b> Payout timing and the tie-break rule are still being finalized.</div>`:''}
   <div class="card hi" style="margin:16px 0 18px"><div class="row between"><div class="lbl">My standing</div>${freshness({last_run:lb.data_through})}</div><div class="grid g4" style="margin-top:10px;gap:8px">
-    ${metric('My October GMV',money(me.gmv||0),{cls:'gold',sub:'From your October videos · only you see this'})}
+    ${metric('My October GMV (videos posted in October only)',money(me.gmv||0),{cls:'gold',sub:'Only you can see this'})}
     ${metric('My place',me.rank==null?'—':'#'+me.rank+(me.tied?' · tied':''),{sub:me.rank==null?'Get an October video approved and selling':`of ${lb.ranked} ranked creators`})}
     ${metric(me.rank===1?'You are in first':'To pass the next place',me.rank===1?'👑':(me.gap==null?'—':money(me.gap)),{cls:'orange',sub:me.rank===1?'Hold it to Oct 31':(me.next_name?`#${me.next_rank} ${esc(me.next_name)}`:'')})}
     ${metric('October videos',used,{sub:`${appr} approved · ${rev} in review`})}</div></div>
@@ -1174,7 +1175,7 @@ route('leaderboard',async(p)=>{
   ${incentiveHero(c)}
   <div class="lbme">
    <div class="lbme-a"><div class="lbl">You are</div><div class="lbme-rank">${me.rank==null?'—':'#'+me.rank}</div><div class="mini">${me.rank==null?'not on the board yet':`of ${lb.ranked} ranked${me.tied?' · tied':''}`}</div>${me.move?`<div class="mvline ${me.move>0?'up':'dn'}">${me.move>0?'▲':'▼'} ${Math.abs(me.move)} since ${fmt.date(lb.since)}</div>`:''}</div>
-   <div class="lbme-b"><div class="lbl">Your October GMV</div><div class="lbme-gmv">${money(me.gmv||0)}</div><div class="mini">only you can see this</div></div>
+   <div class="lbme-b"><div class="lbl">Your October GMV <span class="gmvq">(videos posted in October only)</span></div><div class="lbme-gmv">${money(me.gmv||0)}</div><div class="mini">only you can see this</div></div>
    <div class="lbme-c">${me.rank===1?`<div class="lbl">Status</div><div class="lbme-next">👑 You are in first.</div><div class="mini">Keep posting. Everyone below you can see how far behind they are, not your number.</div>`
      :me.gap!=null?`<div class="lbl">To pass ${me.next_rank?'#'+me.next_rank:''} ${esc(me.next_name||'')}</div><div class="lbme-next"><b>${money(me.gap)}</b> more GMV</div><div class="bar gold" style="margin-top:8px"><i style="width:${pct.toFixed(1)}%"></i></div>`
      :`<div class="lbl">Get on the board</div><div class="lbme-next">Make your first October sale</div>`}</div>
