@@ -544,7 +544,7 @@ button.actrow:hover{background:var(--sf2)}
 <aside class="drawer" id="drawer" tabindex="-1" aria-label="Details"></aside>
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
-<script>window.APP_MODE="live";window.BUILD="20261003-191734";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261003-201044";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -806,7 +806,7 @@ const BOOK_CALL='https://calendly.com/whitelistwealth/ravine-1-1-with-austin';
 const bookCta=(cls='')=>`<a class="bookcta ${cls}" ${openExt(BOOK_CALL)}><span class="bk-ic">${ico('cal',20)}</span><span class="bk-tx"><b>Book a 1:1 call</b><small>${cls==='bk-side'?'With Austin · pick a time':'With Austin: your content, your numbers, your next video'}</small></span><span class="bk-go">${ico('arrow',16)}</span></a>`;
 function renderShell(){
   const c=S.me; const admin=S.admin;
-  const pips=S.cache._pips||{};
+  const pips=admin?(S.pips||{}):{};
   const navHtml=NAV.filter(g=>g[0]!=='Admin'||admin).map(g=>`<div class="ngrp"><div class="nlbl">${g[0]}</div>${g[1].map(n=>`<button class="nitm ${S.view===n[0]?'on':''}" onclick="go('${n[0]}')">${ico(n[2])}<span>${esc(n[1])}</span>${pips[n[0]]?`<span class="pip">${pips[n[0]]}</span>`:''}</button>`).join('')}</div>`).join('');
   $('#nav').innerHTML=navHtml+bookCta('bk-side');
   $('#who').innerHTML=`<b>${esc(c?.display_name||'')}</b>${admin?'Admin':'Creator'} · <a href="#" onclick="logout();return false">Switch account</a>`;
@@ -822,6 +822,7 @@ async function render(){
   if(REDIRECT[S.view]){ const to=REDIRECT[S.view]; try{ history.replaceState(null,'','#/'+to); }catch(e){} S.view=to; }
   if(S.view.startsWith('admin')&&!S.admin){ S.view='home'; }
   renderShell();
+  if(S.admin) API.page('admin').then(A=>{ const q=(A.queue||[]).filter(x=>x.state==='submitted').length, pay=(A.payouts||[]).filter(x=>x.claim_state!=='paid').length; const n={admin:q||0,admin_rewards:pay||0}; if(JSON.stringify(n)!==JSON.stringify(S.pips||{})){ S.pips=n; renderShell(); } }).catch(()=>{});
   const fn=ROUTES[S.view]||ROUTES.home; const main=$('#main');
   main.innerHTML=`<div class="stack"><div class="sk" style="height:34px;width:40%"></div><div class="sk" style="height:120px"></div><div class="sk" style="height:200px"></div></div>`;
   document.title=(TITLES[S.view]||'Ravine')+' · Ravine Creator Games';
@@ -901,7 +902,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
 
 /* Home · Quests · Rewards */
 'use strict';
-const PERIOD_LABEL=k=>((S.cache['my_quests{}']?.periods||[]).find(p=>p.key===k)?.label)||({'2026-10-P1':'Oct 1–15','2026-10-P2':'Oct 16–31'})[k]||k;
+const PERIOD_LABEL=k=>((S.cache['my_quests{}']?.periods||[]).find(p=>p.key===k)?.label)||({'2026-10-P1':'Oct 1–15','2026-10-P2':'Oct 16–31','2026-10':'October'})[k]||(/^\d{4}-\d{2}-\d{2}$/.test(k||'')?fmt.date(k+'T12:00:00Z'):k);
 function periodNow(q){ return (q.periods||[]).find(p=>p.key===q.period_now); }
 function daysLeft(ends){ return Math.max(0,Math.ceil((new Date(ends)-Date.now())/86400000)); }
 function nextTier(r){ return (r.tiers||[]).find(t=>t.status==='locked'); }
@@ -1466,7 +1467,7 @@ route('trial',async()=>{ const h=await API.page('my_home'); const c=h.creator||{
 route('admin',async()=>{ const A=await API.page('admin'); const Q=(A.queue||[]).filter(q=>q.state==='submitted'); const other=(A.queue||[]).filter(q=>q.state!=='submitted');
   return `${ph('Review queue',`${Q.length} quest entr${Q.length===1?'y':'ies'} waiting. Approve awards XP once; the database enforces caps and duplicates.`,{eyebrow:'Admin'})}
   ${Q.length?Q.map(q=>`<div class="card" style="margin-bottom:10px"><div class="admin-row"><div><div class="row"><b>${esc(q.display_name)}</b><span class="mini">· ${esc(q.title)} · ${PERIOD_LABEL(q.period_key)} · entry ${q.seq}</span>${q.duplicate_registration?badge('v','Duplicate registration'):''}${q.same_evidence_elsewhere?badge('x','Same evidence as another creator'):''}</div>
-     <div class="mini" style="margin-top:4px">Submitted ${fmt.dt(q.submitted_at)} · requests +${q.requested_xp} XP · ${q.done_in_period}/${q.per_period_limit} already awarded this period</div>
+     <div class="mini" style="margin-top:4px">Submitted ${fmt.dt(q.submitted_at)||'—'} · requests +${q.requested_xp} XP · ${q.done_in_period}/${q.per_period_limit} already awarded this period</div>
      <div style="margin-top:8px;font-size:13.5px">${Object.entries(q.draft||{}).map(([k,v])=>`<div><b>${esc(k)}:</b> ${Array.isArray(v)?v.map(u=>/^https?:/.test(u)?`<a ${openExt(u)}>${esc(u)}</a>`:esc(u)).join('<br>'):(/^https?:/.test(String(v))?`<a ${openExt(v)}>${esc(v)}</a>`:esc(v))}</div>`).join('')}</div></div>
      <div class="stack"><button class="btn sm" onclick="adminAct('approve_quest','${q.id}')">Approve +${q.requested_xp} XP</button><button class="btn gh sm" onclick="adminNote('return_quest','${q.id}')">Request changes</button><button class="btn danger sm" onclick="adminNote('reject_quest','${q.id}')">Reject</button></div></div></div>`).join(''):emptyState('Queue is empty','Nothing is waiting for review.','','review')}
   <div class="sec"><h2>Recently decided</h2></div><div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Creator</th><th>Quest</th><th>Period</th><th>State</th><th>Note</th></tr></thead><tbody>${other.slice(0,30).map(q=>`<tr><td>${esc(q.display_name)}</td><td>${esc(q.title)}</td><td class="mono">${PERIOD_LABEL(q.period_key)}</td><td>${badge((QSTATE[q.state]||['n',q.state])[0],(QSTATE[q.state]||['n',q.state])[1])}</td><td class="mini">${esc(q.review_note||'')}</td></tr>`).join('')||'<tr><td colspan="5" class="mini">None yet</td></tr>'}</tbody></table></div></div>`; });
@@ -1498,7 +1499,13 @@ async function freezeDo(final){ closeDrawer(true); try{ await API.rpc('snapshot_
 
 route('admin_rewards',async()=>{ const A=await API.page('admin'); const M=A.milestones||[]; const P=A.pacing||{}; const elite=Math.max(0,...M.map(m=>m.xp_required||0)); const on=(A.roster||[]).length;
   const CL={claim_requested:'r',approved_for_payment:'p',paid:'d',rejected:'x'};
-  return `${ph('Rewards and claims','Reward tiers, how much XP is reachable, and the claim ledger.',{eyebrow:'Admin'})}
+  const PAY=(A.payouts||[]); const due=PAY.filter(x=>x.claim_state!=='paid');
+  const PST={claim_requested:['r','Claimed · approve it'],approved_for_payment:['p','Approved · pay now'],paid:['g','Paid']};
+  return `${ph('Rewards and claims','Who reached a reward tier, what to pay, and the claim ledger.',{eyebrow:'Admin'})}
+  <div class="sec"><h2>Ready to pay</h2><span class="mini">${due.length?`${due.length} creator${due.length===1?'':'s'} reached a tier and ${due.length===1?'is':'are'} not paid yet`:'Nobody is waiting on a payout'}</span></div>
+  <div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Creator</th><th>Tier reached</th><th class="num">Tier total</th><th class="num">XP</th><th class="num">Approved Oct videos</th><th>Status</th><th></th></tr></thead><tbody>${PAY.map(x=>{ const st=PST[x.claim_state]||['n','Reached · not claimed yet']; return `<tr><td><b>${esc(x.display_name)}</b></td><td>${esc(x.tier)}</td><td class="num">${fmt.usd(x.tier_cents,{cents:true})}${x.paid_cents>0&&x.claim_state!=='paid'?`<div class="mini">${fmt.usd(x.paid_cents,{cents:true})} already paid</div>`:''}</td><td class="num">${x.xp}</td><td class="num">${x.concepts}</td><td>${badge(st[0],st[1])}</td>
+    <td>${x.claim_state==='claim_requested'?`<button class="btn sm" onclick="claimAct('${x.claim_id}','approve')">Approve</button>`:x.claim_state==='approved_for_payment'?`<button class="btn sm" onclick="claimAsk('${x.claim_id}','paid')">Mark paid</button>`:''}</td></tr>`; }).join('')||'<tr><td colspan="7" class="mini">Nobody has reached a tier yet. Builder needs 50 XP and 5 approved October videos.</td></tr>'}</tbody></table></div></div>
+  <div class="mini" style="margin-top:6px">A creator shows here as soon as both bars fill. "Not claimed yet" means they have not pressed Claim on their Rewards page; you can still pay them, or nudge them to claim so it is on record.</div>
   <div class="grid g3">${M.map(m=>`<div class="card"><div class="row between"><b>${esc(m.name)}</b>${m.published?badge('g','Live'):badge('d','Draft')}</div><div class="disp" style="font-size:28px;font-weight:800;color:var(--gold);margin-top:6px">${fmt.usd(m.cash_total_cents,{cents:true})}</div><div class="mini">${m.xp_required} XP + ${m.concepts_required} approved October videos · month total</div></div>`).join('')}</div>
   <div class="sec"><h2>Claims</h2><span class="mini">Approve, then mark paid once it goes out</span></div><div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Creator</th><th>Tier</th><th class="num">Amount</th><th>State</th><th>Requested</th><th></th></tr></thead><tbody>${(A.claims||[]).map(c=>`<tr><td>${esc(c.display_name)}</td><td>${esc(c.milestone)}</td><td class="num">${fmt.usd(c.amount_cents,{cents:true})}</td><td>${badge(CL[c.state]||'n',c.state.replace(/_/g,' '))}${c.payment_ref?`<div class="mini">${esc(c.payment_ref)}</div>`:''}</td><td class="mono">${fmt.dt(c.requested_at)}</td>
     <td>${c.state==='claim_requested'?`<div class="row" style="gap:6px;flex-wrap:nowrap"><button class="btn sm" onclick="claimAct('${c.id}','approve')">Approve</button><button class="btn danger sm" onclick="claimAsk('${c.id}','reject')">Reject</button></div>`:c.state==='approved_for_payment'?`<button class="btn sm" onclick="claimAsk('${c.id}','paid')">Mark paid</button>`:''}</td></tr>`).join('')||'<tr><td colspan="6" class="mini">No claims yet. Creators claim from Rewards once both bars are full.</td></tr>'}</tbody></table></div></div>
