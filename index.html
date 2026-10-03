@@ -450,6 +450,35 @@ body{background:radial-gradient(1200px 600px at 85% -10%,rgba(255,110,32,.07),tr
 .slot.empty .th{display:grid;place-items:center;background:repeating-linear-gradient(135deg,rgba(255,255,255,.015) 0 10px,transparent 10px 20px),var(--bg2)}
 .slot.empty .th svg{width:46%;height:46%;opacity:.35}
 .slot.empty:hover .th svg{opacity:.6}
+
+/* ---- brand photos */
+.rcard .art.ph{height:170px;position:relative;overflow:hidden}
+.rcard .art.ph img{width:100%;height:100%;object-fit:cover;object-position:center 45%;transition:transform .5s var(--ease)}
+.rcard:hover .art.ph img{transform:scale(1.04)}
+.rcard .art.ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,8,10,0) 35%,rgba(17,20,25,.92))}
+.rcard.lock .art.ph img{filter:saturate(.55) brightness(.8)}
+.tierchip{position:absolute;left:14px;bottom:12px;z-index:2;display:flex;align-items:baseline;gap:8px}
+.tierchip b{font-family:var(--disp);font-size:22px;font-weight:800;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.tierchip span{font-family:var(--disp);font-size:18px;font-weight:800;color:var(--gold)}
+.qcard .art.ph img{width:100%;height:100%;object-fit:cover}
+.featured .art.ph{position:relative}.featured .art.ph img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.drawer .art img{object-position:center 40%}
+.rwhero{position:relative;overflow:hidden;border-radius:var(--r);border:1px solid rgba(232,182,74,.3);background:linear-gradient(100deg,rgba(17,20,25,1) 38%,rgba(17,20,25,.55) 70%,rgba(17,20,25,.2)),var(--sf);min-height:170px}
+.rwhero-photo{position:absolute;right:0;top:0;bottom:0;width:55%;background-size:cover;background-position:center 60%;z-index:0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 45%);mask-image:linear-gradient(90deg,transparent,#000 45%);opacity:.75}
+.rwhero-in{position:relative;z-index:1;padding:22px 24px;max-width:640px}
+.rwhero-amt{font-family:var(--disp);font-size:54px;font-weight:800;color:var(--gold);line-height:.95;margin-top:8px;text-shadow:0 6px 30px rgba(232,182,74,.3)}
+.rwhero-sub{color:var(--tx2);margin-top:8px;font-size:14.5px}.rwhero-sub b{color:var(--tx)}
+.rwhero-steps{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.rwhero-steps span{padding:7px 11px;border-radius:10px;background:rgba(0,0,0,.4);border:1px solid var(--ln2);font-family:var(--disp);font-weight:800;font-size:16px;color:var(--tx)}
+.rwhero-steps span i{font-style:normal;font-family:var(--f);font-weight:600;font-size:11.5px;color:var(--tx3);margin-left:4px}
+.rwhero-steps span.on{border-color:rgba(61,220,132,.5);background:rgba(61,220,132,.12);color:var(--gr)}
+.lbh-photo{position:absolute;right:0;top:0;bottom:0;width:48%;background-size:cover;background-position:center 55%;opacity:.33;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 55%);mask-image:linear-gradient(90deg,transparent,#000 55%);pointer-events:none}
+.lbhero>.lbh-l,.lbhero>.lbh-r{position:relative;z-index:1}
+@media (max-width:760px){.rwhero-photo{width:100%;opacity:.28;-webkit-mask-image:linear-gradient(180deg,transparent,#000 70%);mask-image:linear-gradient(180deg,transparent,#000 70%)}.rwhero-amt{font-size:42px}.lbh-photo{width:100%;opacity:.18}}
+.pframe{position:relative;width:100%;height:100%;overflow:hidden;background:#000;display:flex;justify-content:center}
+.pframe .pbg{position:absolute;inset:-20px;background-size:cover;background-position:center;filter:blur(18px) brightness(.55) saturate(1.2);transform:scale(1.1)}
+.pframe img{position:relative;height:100%!important;width:auto!important;max-width:100%;object-fit:contain!important;box-shadow:0 10px 40px rgba(0,0,0,.6)}
 </style>
 </head>
 <body>
@@ -468,7 +497,7 @@ body{background:radial-gradient(1200px 600px at 85% -10%,rgba(255,110,32,.07),tr
 <aside class="drawer" id="drawer" tabindex="-1" aria-label="Details"></aside>
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
-<script>window.APP_MODE="live";window.BUILD="20261003-034759";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261003-042953";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -547,6 +576,13 @@ const PAL={Film:['#17120C','#FF6E20'],Improve:['#101616','#3DDC84'],Community:['
 function art(key,cat='Film',extra='',{wide=false}={}){ const [a,b]=PAL[cat]||PAL.neutral; const f=ART[key]||ART.empty;
   if(wide) return `<svg viewBox="0 0 240 100" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(key)} illustration" ${extra}><rect width="240" height="100" fill="${a}"/><g transform="translate(70 0)">${f(a,b)}</g><g stroke="${b}" stroke-opacity=".18" stroke-width="2"><path d="M14 20h30M14 32h18M196 68h30M208 80h18"/></g></svg>`;
   return `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(key)} illustration" ${extra}>${f(a,b)}</svg>`; }
+/* brand photos (Ravine b-roll stills, served from ./ph) */
+const QPHOTO={oct_review3:'q-review',oct_recreate:'q-recreate',oct_unaware:'q-unaware',oct_hooks3:'q-hooks',oct_improve:'q-improve',oct_call:'q-call',oct_host:'q-host',oct_coach:'q-coach',oct_objection:'q-objection',oct_concepts5:'q-concepts',oct_feedback:'q-feedback',oct_streak7:'q-streak',oct_leader:'q-leader'};
+const questPhoto=c=>QPHOTO[c.quest_key]?`./ph/${QPHOTO[c.quest_key]}.jpg`:null;
+const tierPhoto=t=>{ const k=String(t.id||t.name||'').split(':').pop().toLowerCase(); return ['builder','operator','elite'].includes(k)?`./ph/tier-${k}.jpg`:null; };
+/* wide frame for a portrait photo: blurred fill behind, sharp photo in front (stays crisp at any width) */
+function photoFrame(url,fallbackKey='tile',cat='neutral'){ if(!url) return art(fallbackKey,cat,'',{wide:true});
+  return `<div class="pframe"><div class="pbg" style="background-image:url('${esc(url)}')"></div><img src="${esc(url)}" alt="" loading="lazy" onerror="this.parentNode.outerHTML=art('${fallbackKey}','${cat}','',{wide:true})"></div>`; }
 function thumb(url,fallbackKey='tile',cat='neutral'){ if(url) return `<img src="${esc(url)}" alt="" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{innerHTML:art('${fallbackKey}','${cat}')}).firstChild)">`; return art(fallbackKey,cat); }
 
 /* ---- store (per-session UI state; private data never goes to localStorage) */
@@ -894,7 +930,7 @@ route('quests',async(p)=>{
   const pn=periodNow(q);
   return `${ph('Quests',`Reward period <b>${PERIOD_LABEL(q.period_now)}</b> · ${pn?`resets ${fmt.date(pn.ends_at)} 12:00 am CT`:''}${q.max_xp_month?` · ${q.max_xp_month} XP possible this month`:''}`,{eyebrow:'October 2026',acts:`<button class="btn gh" onclick="go('rewards')">${ico('gift')} View rewards</button>`})}
   <div class="grid g4" style="margin-bottom:16px">${metric('October XP',q.xp_earned||0,{cls:'gold'})}${metric('In review',(q.xp_pending||0)+' XP',{sub:'Pending, not yet earned'})}${metric('Level',levelName(q.xp_earned||0))}${nt?metric('Next reward',`${fmt.usd(nt.cash_total_cents,{cents:true})} · ${esc(nt.name)}`,{sub:`${nt.xp_required} XP + ${nt.concepts_required} approved Oct videos`}):metric('Next reward','All tiers reached')}</div>
-  ${rec?`<div class="card hi featured" style="margin-bottom:18px"><div class="art">${art(rec.image_key,rec.category,'',{wide:true})}</div><div><div class="lbl">Recommended now</div><h2 style="margin-top:6px">${esc(rec.title)}</h2><p style="margin-top:6px">${esc(rec.outcome)}</p>
+  ${rec?`<div class="card hi featured" style="margin-bottom:18px"><div class="art">${photoFrame(questPhoto(rec),rec.image_key,rec.category)}</div><div><div class="lbl">Recommended now</div><h2 style="margin-top:6px">${esc(rec.title)}</h2><p style="margin-top:6px">${esc(rec.outcome)}</p>
     <div class="row" style="margin-top:12px"><span class="xp">+${rec.xp_value} XP</span>${badge(QSTATE[states[rec.quest_key].state]?.[0]||'n',QSTATE[states[rec.quest_key].state]?.[1]||'Available')}<button class="btn" onclick="openQuest('${rec.quest_key}')">${questCta(states[rec.quest_key])}</button></div></div></div>`:''}
   <div class="filters"><div class="tabs" role="tablist">${QF.map(f=>`<button role="tab" aria-selected="${S.ui.qf===f}" class="${S.ui.qf===f?'on':''}" onclick="go('quests',{f:'${f}'})">${QF_LABEL[f]}<i>${cnt(f)}</i></button>`).join('')}</div>
     <select aria-label="Category" onchange="go('quests',{f:S.ui.qf,c:this.value})">${cats_.map(c=>`<option ${S.ui.qcat===c?'selected':''}>${esc(c)}</option>`).join('')}</select>
@@ -913,14 +949,14 @@ function questCta(st){ return {available:'Start quest',approved_period:'Next per
 function questCard(c,st){ const s=st.state; const [k,label]=QSTATE[s]||QSTATE.available; const rp=reqProgress(c,st.cur);
   const capText=c.period_kind==='reward_period'?`${st.done}/${st.maxThis} this period · ${st.total}/${st.maxTotal} this month`:c.period_kind==='day'?`${c.xp_this_month||0}/${c.monthly_xp_cap} XP this month · max ${c.per_period_limit}/day`:`${st.total}/${st.maxTotal} completed`;
   const prog=st.cur&&['in_progress','needs_changes'].includes(st.cur.state)&&rp.need>1?`<div class="prog">${pbar(rp.have,rp.need,{label:`${rp.have} of ${rp.need} ${rp.unit} attached`,fmtv:x=>x})}</div>`:(st.cur&&st.cur.state==='submitted'?`<div class="prog"><div class="plabel"><span>Submitted ${fmt.dt(st.cur.submitted_at)}</span><b>+${c.xp_value} XP pending</b></div><div class="bar"><i style="width:100%;background:var(--warn)"></i></div></div>`:'');
-  return `<button class="qcard ${s==='approved'?'done':''}" onclick="openQuest('${c.quest_key}')" aria-label="${esc(c.title)}: ${label}"><div class="art">${art(c.image_key,c.category)}</div><div style="min-width:0"><div class="row between"><span class="badge ${k}">${label}</span><span class="xp">+${c.xp_value} XP</span></div><div class="ttl" style="margin-top:6px">${esc(c.title)}</div><div class="out">${esc(c.outcome)}</div>${prog}<div class="foot"><span class="mini">${capText}</span><span class="btn sm ${s==='approved'||s==='approved_period'?'gh':''}">${questCta(st)}</span></div></div></button>`; }
+  return `<button class="qcard ${s==='approved'?'done':''}" onclick="openQuest('${c.quest_key}')" aria-label="${esc(c.title)}: ${label}"><div class="art ph">${thumb(questPhoto(c),c.image_key,c.category)}</div><div style="min-width:0"><div class="row between"><span class="badge ${k}">${label}</span><span class="xp">+${c.xp_value} XP</span></div><div class="ttl" style="margin-top:6px">${esc(c.title)}</div><div class="out">${esc(c.outcome)}</div>${prog}<div class="foot"><span class="mini">${capText}</span><span class="btn sm ${s==='approved'||s==='approved_period'?'gh':''}">${questCta(st)}</span></div></div></button>`; }
 
 async function openQuest(key,instId){
   const q=await API.page('my_quests'); const c=q.catalog.find(x=>x.quest_key===key); if(!c) return; const st=questState(c,q.instances); const inst=instId?q.instances.find(i=>i.id===instId):st.cur;
   const history=q.instances.filter(i=>i.quest_key===key&&i!==inst);
   const canStart=st.state==='available'&&!inst;
   openDrawer(`<div class="row"><span class="badge ${QSTATE[inst?.state||'available'][0]}">${QSTATE[inst?.state||'available'][1]}</span><span class="xp">+${c.xp_value} XP</span><span class="mini">${esc(c.category)}</span></div>
-   <h2>${esc(c.title)}</h2><div class="art">${art(c.image_key,c.category,'',{wide:true})}</div>
+   <h2>${esc(c.title)}</h2><div class="art">${photoFrame(questPhoto(c),c.image_key,c.category)}</div>
    <p>${esc(c.outcome)}</p>
    <section><h3>Why it helps</h3><p>${esc(c.why)}</p></section>
    <section><h3>Steps</h3>${inst&&['in_progress','needs_changes'].includes(inst.state)?`<div id="chk">${(c.steps||[]).map((s,i)=>`<label class="chk ${inst.checklist?.[i]?'on':''}"><input type="checkbox" ${inst.checklist?.[i]?'checked':''} onchange="tickStep('${inst.id}',${i},this.checked)"><span>${esc(s)}</span></label>`).join('')}</div><div class="mini" style="margin-top:6px">Ticks are for you. XP comes only from verified completion.</div>`:`<ol class="ol">${(c.steps||[]).map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`}</section>
@@ -968,7 +1004,11 @@ async function submitQuest(ev,id){ ev.preventDefault(); const q=await API.page('
 /* ---------------- Rewards */
 route('rewards',async()=>{
   const r=await API.page('my_rewards'); const tiers=r.tiers||[]; const anyDraft=tiers.some(t=>t.draft||!t.published);
+  const topT=tiers[tiers.length-1]; const reached=[...tiers].reverse().find(t=>['eligible','claim_submitted','approved_for_payment','paid'].includes(t.status));
   return `${ph('Rewards','Cash milestones for October. Both bars must fill: XP from quests and approved October videos.',{eyebrow:'October 2026',acts:`<button class="btn gh" onclick="go('quests')">${ico('target')} Earn XP</button>`})}
+  <div class="rwhero" style="margin-bottom:16px"><div class="rwhero-photo" style="background-image:url(./ph/hero-rewards.jpg)"></div><div class="rwhero-in"><div class="lbl" style="color:var(--gold)">October cash rewards</div>
+    <div class="rwhero-amt">Up to ${fmt.usd(topT?.cash_total_cents,{cents:true})||'$0'}</div><div class="rwhero-sub">${reached?`You have unlocked <b>${esc(reached.name)} · ${fmt.usd(reached.cash_total_cents,{cents:true})}</b>.`:'Earn XP from quests and get October videos approved to unlock cash.'}</div>
+    <div class="rwhero-steps">${tiers.map(t=>`<span class="${['eligible','claim_submitted','approved_for_payment','paid'].includes(t.status)?'on':''}">${fmt.usd(t.cash_total_cents,{cents:true})} <i>${t.xp_required} XP · ${t.concepts_required} videos</i></span>`).join('')}</div></div></div>
   ${anyDraft?`<div class="note draft" style="margin-bottom:16px"><b>Draft terms.</b> These tiers are the proposed October rewards. Amounts and thresholds are not final until Austin publishes them, and claims open then. Your XP and approvals count from October 1 either way.</div>`:''}
   <div class="grid g3" style="margin-bottom:16px">${metric('October XP',r.xp||0,{cls:'gold',sub:r.xp_pending?`+${r.xp_pending} XP in review`:'Earned, verified'})}${metric('Approved October videos',r.concepts||0,{cls:'green',sub:'Original videos submitted and approved in October (not marked BOF)'})}${metric('Reward model',r.reward_model==='cumulative'?'Cumulative':'Additive',{sub:r.reward_model==='cumulative'?'Reaching a tier pays that tier total for the month':'Each tier pays on top (draft)'})}</div>
   <div class="grid g3">${tiers.map(t=>rewardCard(t,r)).join('')}</div>
@@ -977,13 +1017,13 @@ route('rewards',async()=>{
    <div class="mini" style="margin-top:12px">Claim states: Locked, Eligible, Claim submitted, Approved for payment, Paid. Your claim history stays on this page.</div></div>
   ${(r.history||[]).length?`<div class="sec"><h2>Claim history</h2></div><div class="card"><div class="timeline">${r.history.map(h=>`<div><time>${fmt.dt(h.at)}</time><span>${esc(({requested:'Claim submitted',approved_for_payment:'Approved for payment',paid:'Paid',rejected:'Rejected',review_issue:'Review issue'})[h.event]||h.event)} · ${fmt.usd(h.amount_cents,{cents:true})||''} ${h.note?'· '+esc(h.note):''}</span></div>`).join('')}</div></div>`:''}`;
 });
-function rewardCard(t,r){ const [k,label]=RSTATE[t.status]||RSTATE.locked; const lock=t.status==='locked'; return `<button class="rcard ${lock?'lock':''}" onclick="openReward('${t.id}')" aria-label="${esc(t.name)} ${label}"><div class="art">${art('reward','gold','',{wide:true})}</div><div class="body"><div class="row between"><span class="badge ${k}">${label}</span>${t.draft||!t.published?badge('d','Draft'):''}</div>
+function rewardCard(t,r){ const [k,label]=RSTATE[t.status]||RSTATE.locked; const lock=t.status==='locked'; return `<button class="rcard ${lock?'lock':''}" onclick="openReward('${t.id}')" aria-label="${esc(t.name)} ${label}"><div class="art ph">${thumb(tierPhoto(t),'reward','gold')}<div class="tierchip"><b>${esc(t.name)}</b><span>${fmt.usd(t.cash_total_cents,{cents:true})}</span></div></div><div class="body"><div class="row between"><span class="badge ${k}">${label}</span>${t.draft||!t.published?badge('d','Draft'):''}</div>
   <div class="row" style="margin-top:8px;align-items:baseline"><span class="amt">${fmt.usd(t.cash_total_cents,{cents:true})}</span><span class="small">${esc(t.name)} · month total</span></div>
   <div class="req">${pbar(Math.min(r.xp||0,t.xp_required),t.xp_required,{label:'XP',cls:'gold'})}${pbar(Math.min(r.concepts||0,t.concepts_required),t.concepts_required,{label:'Approved October videos',cls:'green'})}</div>
   <div class="mini" style="margin-top:10px">${t.xp_met&&t.concepts_met?(t.status==='eligible'?'Both gates met. Open to claim.':statusText(t)):t.xp_met?`Needs ${t.concepts_required-(r.concepts||0)} more approved video${t.concepts_required-(r.concepts||0)===1?'':'s'}`:t.concepts_met?`Needs ${t.xp_required-(r.xp||0)} more XP`:`Needs ${t.xp_required-(r.xp||0)} XP and ${t.concepts_required-(r.concepts||0)} approved videos`}</div></div></button>`; }
 function statusText(t){ return {claim_submitted:'Claim submitted, waiting for admin approval',approved_for_payment:'Approved for payment',paid:'Paid'}[t.status]||''; }
 async function openReward(id){ const r=await API.page('my_rewards'); const t=r.tiers.find(x=>x.id===id); const [k,label]=RSTATE[t.status]; const prev=r.tiers.filter(x=>x.sort_order<t.sort_order);
-  openDrawer(`<div class="row"><span class="badge ${k}">${label}</span>${t.draft||!t.published?badge('d','Draft terms'):''}</div><h2>${esc(t.name)} · ${fmt.usd(t.cash_total_cents,{cents:true})}</h2><div class="art">${art('reward','gold','',{wide:true})}</div>
+  openDrawer(`<div class="row"><span class="badge ${k}">${label}</span>${t.draft||!t.published?badge('d','Draft terms'):''}</div><h2>${esc(t.name)} · ${fmt.usd(t.cash_total_cents,{cents:true})}</h2><div class="art">${photoFrame(tierPhoto(t),'reward','gold')}</div>
    <p>${fmt.usd(t.cash_total_cents,{cents:true})} total for October at this tier${r.reward_model==='cumulative'?' (cumulative: lower tiers are included, not added)':''}.</p>
    <section><h3>Requirements</h3>${pbar(Math.min(r.xp||0,t.xp_required),t.xp_required,{label:'Earned October XP',cls:'gold'})}<div style="height:10px"></div>${pbar(Math.min(r.concepts||0,t.concepts_required),t.concepts_required,{label:'Approved original October videos (not marked BOF)',cls:'green'})}
      <div class="mini" style="margin-top:8px">Pending XP (${r.xp_pending||0}) does not count until verified. A revision never counts as a new concept.</div></section>
@@ -1013,7 +1053,7 @@ const avatar=(n,s=36)=>`<span class="av" style="width:${s}px;height:${s}px;font-
 function countdown(ends){ const ms=Math.max(0,new Date(ends)-Date.now()); const d=Math.floor(ms/864e5), h=Math.floor(ms%864e5/36e5), m=Math.floor(ms%36e5/6e4);
   return `<div class="cd"><div><b>${d}</b><span>DAYS</span></div><div><b>${h}</b><span>HRS</span></div><div><b>${m}</b><span>MIN</span></div></div>`; }
 function incentiveHero(c,{compact=false}={}){ const pz=c.prizes||[]; const medal=['🥇','🥈','🥉'];
-  return `<div class="lbhero ${compact?'compact':''}"><div class="lbh-l"><div class="lbl" style="color:var(--o2)">October 2026 · incentive</div>
+  return `<div class="lbhero ${compact?'compact':''}"><div class="lbh-photo" style="background-image:url(./ph/hero-board.jpg)"></div><div class="lbh-l"><div class="lbl" style="color:var(--o2)">October 2026 · incentive</div>
      <div class="lbh-amt">${fmt.usd(c.prize_total_cents,{cents:true})}</div>
      <div class="lbh-sub">Top 3 by October GMV win. Every sale you drive Oct 1–31 counts.</div>
      <div class="lbh-prizes">${pz.map((p,i)=>`<div class="lbh-pz ${i===0?'first':''}"><span>${medal[i]||''} ${esc(p.label)}</span><b>${fmt.usd(p.cents,{cents:true})}</b></div>`).join('')}</div></div>
