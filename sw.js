@@ -2,7 +2,7 @@
    Shell: network-first. Public media (images, b-roll stills, fonts, video): cache-first, versioned.
    Private responses (Supabase REST/auth, anything with ?k=) are NEVER cached.
    On activate, every older cache (including the Sept 'rcg-*' shell caches that held u/*.json) is deleted. */
-const VERSION='oct-20261003-051326';
+const VERSION='oct-20261003-054148';
 const SHELL='rcg-oct-shell-'+VERSION, MEDIA='rcg-oct-media-'+VERSION;
 const PRIVATE=/supabase\.co|\/rest\/v1\/|\/auth\/v1\/|\/u\/[A-Z0-9]+\.json|[?&]k=/i;
 self.addEventListener('install',e=>{ self.skipWaiting(); });
