@@ -479,6 +479,8 @@ body{background:radial-gradient(1200px 600px at 85% -10%,rgba(255,110,32,.07),tr
 .pframe{position:relative;width:100%;height:100%;overflow:hidden;background:#000;display:flex;justify-content:center}
 .pframe .pbg{position:absolute;inset:-20px;background-size:cover;background-position:center;filter:blur(18px) brightness(.55) saturate(1.2);transform:scale(1.1)}
 .pframe img{position:relative;height:100%!important;width:auto!important;max-width:100%;object-fit:contain!important;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+.qcard{grid-template-columns:116px 1fr}.qcard .art{width:116px;height:116px}
+@media (max-width:640px){.qcard{grid-template-columns:88px 1fr}.qcard .art{width:88px;height:88px}}
 </style>
 </head>
 <body>
@@ -497,7 +499,7 @@ body{background:radial-gradient(1200px 600px at 85% -10%,rgba(255,110,32,.07),tr
 <aside class="drawer" id="drawer" tabindex="-1" aria-label="Details"></aside>
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
-<script>window.APP_MODE="live";window.BUILD="20261003-042953";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261003-044648";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -577,7 +579,7 @@ function art(key,cat='Film',extra='',{wide=false}={}){ const [a,b]=PAL[cat]||PAL
   if(wide) return `<svg viewBox="0 0 240 100" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(key)} illustration" ${extra}><rect width="240" height="100" fill="${a}"/><g transform="translate(70 0)">${f(a,b)}</g><g stroke="${b}" stroke-opacity=".18" stroke-width="2"><path d="M14 20h30M14 32h18M196 68h30M208 80h18"/></g></svg>`;
   return `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(key)} illustration" ${extra}>${f(a,b)}</svg>`; }
 /* brand photos (Ravine b-roll stills, served from ./ph) */
-const QPHOTO={oct_review3:'q-review',oct_recreate:'q-recreate',oct_unaware:'q-unaware',oct_hooks3:'q-hooks',oct_improve:'q-improve',oct_call:'q-call',oct_host:'q-host',oct_coach:'q-coach',oct_objection:'q-objection',oct_concepts5:'q-concepts',oct_feedback:'q-feedback',oct_streak7:'q-streak',oct_leader:'q-leader'};
+const QPHOTO={oct_review3:'qa-review',oct_recreate:'qa-recreate',oct_unaware:'qa-unaware',oct_hooks3:'qa-hooks',oct_improve:'qa-improve',oct_call:'qa-call',oct_host:'qa-host',oct_coach:'qa-coach',oct_objection:'qa-objection',oct_concepts5:'qa-concepts',oct_feedback:'qa-feedback',oct_streak7:'qa-streak',oct_leader:'qa-leader'};
 const questPhoto=c=>QPHOTO[c.quest_key]?`./ph/${QPHOTO[c.quest_key]}.jpg`:null;
 const tierPhoto=t=>{ const k=String(t.id||t.name||'').split(':').pop().toLowerCase(); return ['builder','operator','elite'].includes(k)?`./ph/tier-${k}.jpg`:null; };
 /* wide frame for a portrait photo: blurred fill behind, sharp photo in front (stays crisp at any width) */
