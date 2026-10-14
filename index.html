@@ -546,10 +546,91 @@ button.actrow:hover{background:var(--sf2)}
 .rules{margin:10px 0 0;padding-left:18px;display:grid;gap:10px}.rules li{line-height:1.55}
 @media (max-width:760px){.stat3.stat4{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){.stat3.stat5{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* ================= Oct 14: quest reset clock, claim banner, quest progress, easier proof ================= */
+.qtimer{display:inline-flex;align-items:center;gap:8px;background:rgba(17,20,25,.94);border:1px solid rgba(255,110,32,.5);color:var(--tx);border-radius:99px;padding:7px 14px 7px 12px;font-weight:700;font-size:13px;box-shadow:var(--sh);cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.qtimer[hidden]{display:none!important}
+.qtimer:hover{border-color:var(--o)}
+.qtimer .qt-l{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--o2);font-weight:800}
+.qtimer .qt-l::before{content:"⏳ "}
+.qtimer .qt-v{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13px;white-space:nowrap}
+.qtimer.soon{border-color:var(--bad);animation:qtpulse 2s ease-in-out infinite}
+.qtimer.soon .qt-l{color:var(--bad)}
+@keyframes qtpulse{50%{box-shadow:0 0 0 4px rgba(255,92,77,.2)}}
+.qtimer.d{position:fixed;top:14px;right:18px;z-index:45}
+.qtimer.m{display:none}
+@media (min-width:901px){.main{padding-top:64px}.mode{top:auto;bottom:14px}}
+@media (max-width:900px){
+  .qtimer.d{display:none!important}
+  .qtimer.m{display:inline-flex;flex-direction:column;align-items:flex-start;gap:0;padding:4px 11px;box-shadow:none;margin-left:auto;margin-right:8px;line-height:1.25}
+  .qtimer.m .qt-l{font-size:9px;letter-spacing:1.1px}.qtimer.m .qt-v{font-size:12.5px}
+  .mobtop .brand small{font-size:9.5px;letter-spacing:1.2px}
+}
+/* claim banner */
+.claimwrap{display:grid;gap:10px;margin-bottom:16px}
+.claimbar{position:relative;overflow:hidden;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;padding:18px 20px;border-radius:var(--r);border:1px solid rgba(232,182,74,.65);background:linear-gradient(110deg,rgba(232,182,74,.26),rgba(255,110,32,.16) 60%,rgba(232,182,74,.10)),var(--sf);box-shadow:0 10px 40px rgba(232,182,74,.16);animation:cbin .5s var(--ease) both}
+.claimbar::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.10) 50%,transparent 70%);transform:translateX(-100%);animation:cbshine 3.4s ease-in-out .6s infinite;pointer-events:none}
+.cb-ic{font-size:36px;line-height:1}
+.cb-k{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;color:var(--gold)}
+.cb-tx b{display:block;font-family:var(--disp);font-size:28px;font-weight:800;line-height:1.08;margin-top:3px;color:var(--tx)}
+.cb-tx span{display:block;font-size:13.5px;color:var(--tx2);margin-top:5px;max-width:660px}
+.cb-go{font-size:15px;padding:12px 18px;position:relative;z-index:1;white-space:nowrap}
+@keyframes cbin{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+@keyframes cbshine{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+@media (max-width:640px){.claimbar{grid-template-columns:auto minmax(0,1fr);padding:16px;gap:12px}.cb-go{grid-column:1/-1;width:100%;justify-content:center}.cb-tx b{font-size:23px}.cb-ic{font-size:30px}}
+/* quest progress hero */
+.qhero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;align-items:center}
+.qh-bar{position:relative;height:14px;background:var(--sf3);border-radius:99px;margin:16px 6px 40px}
+.qh-bar i.e{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--o),var(--gold));border-radius:99px;transition:width .6s var(--ease)}
+.qh-bar i.p{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(45deg,rgba(255,176,32,.6) 0 6px,rgba(255,176,32,.25) 6px 12px);border-radius:0 99px 99px 0}
+.qh-mk{position:absolute;top:-4px;transform:translateX(-50%);text-align:center}
+.qh-mk i{display:block;width:4px;height:22px;margin:0 auto;background:var(--tx4);border-radius:2px}
+.qh-mk.on i{background:var(--gold)}
+.qh-mk span{display:block;margin-top:3px;font-size:10.5px;color:var(--tx3);white-space:nowrap;font-family:var(--mono)}
+.qh-mk span b{display:block;font-size:12.5px;color:var(--tx2);font-family:var(--f)}
+.qh-mk.on span b{color:var(--gold)}
+.qh-mk:last-child{transform:translateX(-100%);text-align:right}.qh-mk:last-child i{margin:0 0 0 auto}
+.qh-next{font-size:14px;color:var(--tx2);line-height:1.5}
+.qh-next b{color:var(--tx)}
+.qh-next.good{color:var(--gr)}
+.qh-tag{display:inline-block;font-size:10px;letter-spacing:1.3px;text-transform:uppercase;font-weight:800;color:var(--o-ink);background:var(--o);padding:2px 7px;border-radius:99px;margin-right:4px;vertical-align:1px}
+.qh-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.qh-chips span{font-size:12.5px;color:var(--tx2);background:var(--sf2);border:1px solid var(--ln);border-radius:99px;padding:5px 10px}
+.qh-chips b{color:var(--tx)}
+.rclock{text-align:center;padding:14px 16px;border-radius:14px;background:rgba(0,0,0,.3);border:1px solid rgba(255,110,32,.35)}
+.rclock .lbl{color:var(--o2)}
+.rclock .cd{justify-content:center}
+.rclock .cd b{font-variant-numeric:tabular-nums}
+.rclock.soon{border-color:rgba(255,92,77,.6)}.rclock.soon .cd b{color:var(--bad)}
+.rclock .mini{max-width:270px;margin-left:auto;margin-right:auto}
+@media (max-width:800px){.qhero{grid-template-columns:1fr}.rclock .cd div{min-width:0;flex:1}}
+.qimpact{margin-top:8px;font-size:12.5px;font-weight:600;color:var(--gold);background:var(--gold-soft);border:1px solid rgba(232,182,74,.3);border-radius:10px;padding:5px 10px;display:inline-block;line-height:1.35}
+.qimpact.hit{color:var(--gr);background:var(--gr-soft);border-color:rgba(61,220,132,.35)}
+.dots{display:inline-flex;gap:3px;margin-right:6px;vertical-align:-1px}
+.dots i{width:8px;height:8px;border-radius:50%;background:var(--sf3);border:1px solid var(--ln2)}
+.dots i.on{background:var(--gr);border-color:var(--gr)}
+/* data freshness */
+.syncline{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--tx3);margin:0 0 10px;line-height:1.45}
+.syncline .dot{width:8px;height:8px;border-radius:50%;background:var(--gr);flex:none;margin-top:5px}
+.syncline b{color:var(--tx2)}
+/* proof: helper line, paste, screenshots */
+.field .help{line-height:1.45}
+.shotrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.shotbtn{cursor:pointer}
+.shotbtn[hidden]{display:none!important}
+.shots{display:flex;flex-wrap:wrap;gap:8px}
+.shots:not(:empty){margin-top:8px}
+.shotchip{display:inline-flex;align-items:center;gap:8px;background:var(--sf2);border:1px solid var(--ln2);border-radius:12px;padding:5px 8px 5px 5px;font-size:12.5px;color:var(--tx2)}
+.shotchip img{width:42px;height:42px;object-fit:cover;border-radius:8px;background:var(--sf3);display:block}
+.shotchip button{color:var(--tx3);display:grid;place-items:center;width:26px;height:26px;border-radius:99px}
+.shotchip button:hover{background:var(--sf3);color:var(--tx)}
+.shotlink{display:inline-flex;align-items:center;gap:8px;margin:4px 0}
+.shotlink img{width:76px;height:76px;object-fit:cover;border-radius:10px;border:1px solid var(--ln2);background:var(--sf3)}
+.aa-prog{margin-top:16px}.aa-prog[hidden]{display:none}
 </style>
 </head>
 <body>
-<div class="mobtop"><div class="brand"><img src="./mark-96.png" alt=""><div><b>Ravine Creator Games</b></div></div><button class="menu" onclick="openSheet()" aria-label="Menu">Menu</button></div>
+<div class="mobtop"><div class="brand"><img src="./mark-96.png" alt=""><div><b>Ravine</b><small>Creator Games</small></div></div><button class="qtimer m" id="qtimer-m" onclick="go('quests')" hidden></button><button class="menu" onclick="openSheet()" aria-label="Menu">Menu</button></div>
 <div class="shell">
   <aside class="side" aria-label="Navigation">
     <div class="brand"><img src="./mark-96.png" alt=""><div><b>Ravine</b><small>Creator Games</small></div></div>
@@ -564,7 +645,8 @@ button.actrow:hover{background:var(--sf2)}
 <aside class="drawer" id="drawer" tabindex="-1" aria-label="Details"></aside>
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
-<script>window.APP_MODE="live";window.BUILD="20261011-152753";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
+<script>window.APP_MODE="live";window.BUILD="20261014-163015";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -654,11 +736,11 @@ function thumb(url,fallbackKey='tile',cat='neutral'){ if(url) return `<img src="
 
 /* ---- store (per-session UI state; private data never goes to localStorage) */
 const S={
-  mode:'fixture', me:null, admin:false, view:'home', params:{}, cache:{}, drawer:null, loading:{},
+  mode:'fixture', me:null, admin:false, view:'home', params:{}, cache:{}, cacheAt:{}, drawer:null, loading:{},
   ui:(()=>{ try{ return JSON.parse(sessionStorage.getItem('rcg_ui')||'{}'); }catch(e){ return {}; } })(),
 };
 function saveUI(){ try{ sessionStorage.setItem('rcg_ui',JSON.stringify(S.ui)); }catch(e){} }
-function clearPrivate(){ S.cache={}; S.me=null; S.admin=false; S.ui={}; try{ sessionStorage.removeItem('rcg_ui'); }catch(e){} }
+function clearPrivate(){ S.cache={}; S.cacheAt={}; S.me=null; S.admin=false; S.ui={}; try{ sessionStorage.removeItem('rcg_ui'); }catch(e){} }
 
 /* ---- data layer: fixture | live. Every page reads through API.* so screens agree. */
 const API={
@@ -670,10 +752,12 @@ const API={
   // page payloads; cached per view until a write invalidates
   async page(name,args={},{force=false}={}){
     const k=name+JSON.stringify(args);
-    if(!force&&S.cache[k]) return S.cache[k];
-    const v=await API.rpc(name,args); S.cache[k]=v; return v;
+    // Oct 14: entries expire after 2 minutes, so a phone that keeps the app open in the background never shows an old status
+    if(!force&&S.cache[k]&&Date.now()-(S.cacheAt[k]||0)<API.TTL) return S.cache[k];
+    const v=await API.rpc(name,args); S.cache[k]=v; S.cacheAt[k]=Date.now(); return v;
   },
-  bust(){ S.cache={}; },
+  TTL:120000,
+  bust(){ S.cache={}; S.cacheAt={}; },
 };
 
 /* fixture backend: mirrors the server RPC semantics closely enough to exercise every
@@ -846,14 +930,14 @@ async function render(){
   const fn=ROUTES[S.view]||ROUTES.home; const main=$('#main');
   main.innerHTML=`<div class="stack"><div class="sk" style="height:34px;width:40%"></div><div class="sk" style="height:120px"></div><div class="sk" style="height:200px"></div></div>`;
   document.title=(TITLES[S.view]||'Ravine')+' · Ravine Creator Games';
-  try{ const html=await fn(S.params); if(html!=null) main.innerHTML=`<div class="anim">${html}</div>`; main.querySelectorAll('[data-chart]').forEach(drawChart); }
+  try{ const html=await fn(S.params); if(html!=null) main.innerHTML=`<div class="anim">${html}</div>`; main.querySelectorAll('[data-chart]').forEach(drawChart); afterRender(); }
   catch(e){ console.error(e); main.innerHTML=errorState(e); }
 }
 function errorState(e){ const nb=e.code==='NO_BACKEND'; return `<div class="empty"><div class="ill">${art('empty')}</div><h3>${nb?'Backend not set up':'This page could not load'}</h3><p>${nb?'The October data model has not been applied to the Supabase project yet, so this page has nothing to read. An admin needs to run the SQL in <code>oct/sql</code> and enable anonymous sign-ins.':esc(e.message||e)}</p><div style="margin-top:14px"><button class="btn gh" onclick="API.bust();render()">${ico('refresh')} Try again</button></div></div>`; }
 
 /* ---- login */
 function renderLogin(){
-  $('#nav').innerHTML=''; $('#who').innerHTML=''; $('#mobbar').innerHTML='';
+  $('#nav').innerHTML=''; $('#who').innerHTML=''; $('#mobbar').innerHTML=''; ['#qtimer','#qtimer-m'].forEach(x=>{ const e=$(x); if(e) e.hidden=true; });
   $('#main').innerHTML=`<div class="login"><div class="card"><div class="brand" style="padding:0 0 14px"><img src="./mark-96.png" alt=""><div><b>Ravine Creator Games</b><small>October 2026</small></div></div>
    <h2>Open your link</h2><p style="margin:6px 0 14px">Use the personal link Austin sent you, or paste your access code.</p>
    <form onsubmit="return doLogin(event)"><div class="field"><label for="code">Access code</label><input id="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="RV…"></div>
@@ -1002,7 +1086,7 @@ function numbersCard(N){
 }
 route('home',async()=>{
   const h=await API.page('my_home'); const c=h.campaign||{}; const ct=h.contest||{}; const q=h.quests||{}; const r=h.rewards||{}; const sub=h.submissions||{};
-  const N=await myNumbers(); let SUBS=[]; try{ SUBS=(await API.page('my_submissions')).videos||[]; }catch(e){}
+  const N=await myNumbers(); let SP={}; try{ SP=await API.page('my_submissions'); }catch(e){} const SUBS=SP.videos||[]; try{ await API.page('my_quests'); }catch(e){}
   const nt=nextTier(r); const dl=daysLeft(c.ends_at);
   // one practical next action, from real state
   let action;
@@ -1031,21 +1115,31 @@ route('home',async()=>{
       ${sub.changes?`<div class="note warn" style="margin-top:10px">${sub.changes} video${sub.changes>1?'s':''} need${sub.changes>1?'':'s'} changes. <a href="#/submissions?f=changes_requested">Open</a></div>`:''}</div>
   </div>
   <div class="sec"><h2>Recent activity</h2><a class="mini" href="#/submissions">All my videos →</a></div>
+  ${syncLine(SP.source,SUBS)}
   ${activityFeed(h.activity||[],SUBS)}`;
 });
-/* Home feed: your real video events (submitted / approved) merged with quest and reward events */
+/* Home feed (Oct 14): ONE row per video showing its current Trybe status, so an approved video never also shows a
+   "Submitted" row. Quest and reward events collapse to their latest step. Labels match My submissions exactly. */
 function activityFeed(acts,vids){
-  const ev=[]; const lab={approved:['g','Approved'],submitted:['r','Submitted'],rejected:['x','Not approved'],changes:['c','Changes requested']};
-  vids.forEach(v=>{ const kind=v.media_type==='IMAGE'?'Image':'Video';
-    if(v.approved_at) ev.push({at:v.approved_at,k:'approved',v,t:`${kind} approved`});
-    if(v.submitted_at) ev.push({at:v.submitted_at,k:v.status==='rejected'?'rejected':v.status==='changes_requested'?'changes':'submitted',v,t:`${kind} submitted`}); });
-  acts.forEach(a=>ev.push({at:a.at,k:'other',t:activityText(a)}));
+  const ev=[]; const qcat=Object.fromEntries((S.cache['my_quests{}']?.catalog||[]).map(c=>[c.quest_key,c.title]));
+  vids.forEach(v=>{ const kind=v.media_type==='IMAGE'?'Image':'Video'; const st=SSTATE[v.status]?v.status:'pending';
+    const at=st==='approved'?(v.approved_at||v.submitted_at):v.submitted_at; if(!at) return;
+    const t={approved:`${kind} approved`,pending:`${kind} sent, waiting for review`,changes_requested:`Changes requested on a ${kind.toLowerCase()}`,rejected:`${kind} not approved`}[st];
+    const sub=st==='approved'?`${esc(v.title||'')}${v.submitted_at?' · sent '+esc(fmt.date(v.submitted_at)||''):''} · approved ${esc(fmt.ago(at)||'')}`:`${esc(v.title||'')} · sent ${esc(fmt.ago(at)||'')}`;
+    ev.push({at,k:st,v,t,sub}); });
+  const seen=new Set();
+  [...acts].sort((x,y)=>new Date(y.at)-new Date(x.at)).forEach(a=>{ if(a.kind==='submission') return; const key=a.kind+':'+(a.ref||''); if(a.ref&&seen.has(key)) return; seen.add(key);
+    const nm=a.kind==='quest'&&qcat[a.ref]?' · '+qcat[a.ref]:''; ev.push({at:a.at,k:'other',t:activityText(a)+nm,sub:esc(fmt.ago(a.at)||'')}); });
   ev.sort((x,y)=>new Date(y.at)-new Date(x.at)); const L=ev.slice(0,8);
   if(!L.length) return emptyState('Nothing yet','Your first video or quest will show up here.',`<button class="btn" onclick="go('inspo')">Find an angle</button>`,'video');
-  return `<div class="card" style="padding:6px">${L.map(e=>{ const [bk,bl]=lab[e.k]||['n','Update']; return `<${e.v?'button':'div'} class="actrow" ${e.v?`onclick="openVideo('${esc(e.v.id)}')"`:''}>
+  return `<div class="card" style="padding:6px">${L.map(e=>{ const [bk,bl]=SSTATE[e.k]||['n','Update']; return `<${e.v?'button':'div'} class="actrow" ${e.v?`onclick="openVideo('${esc(e.v.id)}')"`:''}>
     <div class="act-th">${e.v?thumb(e.v.thumb_url,'tile','Film'):`<span class="act-ic">${ico('bolt',18)}</span>`}</div>
-    <div style="min-width:0;flex:1"><div class="act-t">${esc(e.t)}${e.v&&e.k!=='approved'&&e.k!=='submitted'?` · <span class="muted">${bl.toLowerCase()}</span>`:''}</div><div class="mini">${e.v?(e.k==='approved'?'Sent '+esc(e.v.title||'')+' · approved '+esc(fmt.ago(e.at)||''):esc(e.v.title||'')+' · '+esc(fmt.ago(e.at)||'')):esc(fmt.ago(e.at)||'')}</div></div>
+    <div style="min-width:0;flex:1"><div class="act-t">${esc(e.t)}</div><div class="mini">${e.sub}</div></div>
     ${e.v?`<span class="badge ${bk}">${bl}</span>`:''}</${e.v?'button':'div'}>`; }).join('')}</div>`; }
+/* when the video statuses were last pulled from Trybe, and what that means for anything still pending */
+function syncLine(src,vids){ const at=src?.last_run; const pend=(vids||[]).filter(v=>v.status==='pending').length;
+  if(!at) return '';
+  return `<div class="syncline"><span class="dot"></span><span>Video statuses from Trybe · updated <b>${esc(fmt.ago(at))}</b> (${esc(fmt.dt(at))})${pend?`. ${pend} still pending. If Austin approved ${pend===1?'it':'them'} in Trybe after that, ${pend===1?'it':'they'} turn${pend===1?'s':''} green here with the next update.`:'.'}</span></div>`; }
 function activityText(a){ const k={submission:{imported:'Video added to your records',approved:'Video approved',rejected:'Video rejected',changes_requested:'Changes requested on a video',funnel_set:'Video stage classified',revision_linked:'Revision linked to its original',corrected:'Video record corrected'},quest:{started:'Started a quest',submitted:'Submitted quest evidence',changes_requested:'Quest returned with notes',approved:'Quest approved',rejected:'Quest not approved',reversed:'Quest award reversed'},claim:{requested:'Reward claim submitted',approved_for_payment:'Reward claim approved for payment',paid:'Reward recorded as paid',rejected:'Reward claim rejected',review_issue:'Review issue opened'}}; return (k[a.kind]||{})[a.event]||`${a.kind}: ${a.event}`; }
 
 /* ---------------- Quests */
@@ -1067,11 +1161,11 @@ route('quests',async(p)=>{
   const list=cats.filter(c=>{ const st=states[c.quest_key].state; const f=S.ui.qf; const okF=f==='all'||(f==='approved'?['approved','approved_period'].includes(st):st===f); const okC=S.ui.qcat==='All'||c.category===S.ui.qcat; const s=S.ui.qs.toLowerCase(); const okS=!s||(c.title+' '+c.outcome+' '+c.category).toLowerCase().includes(s); return okF&&okC&&okS; });
   // recommended: needs_changes first, then in-progress, then highest XP available
   const rec=cats.find(c=>states[c.quest_key].state==='needs_changes')||cats.find(c=>states[c.quest_key].state==='in_progress')||[...cats].filter(c=>states[c.quest_key].state==='available'&&!c.scarce&&!c.locked&&c.quest_key!=='oct_host').sort((a,b)=>b.xp_value-a.xp_value)[0];
-  const pn=periodNow(q);
+  const pn=periodNow(q); const H=halfCtx(q,r);
   return `${ph('Quests',`Reward period <b>${PERIOD_LABEL(q.period_now)}</b> · ${pn?`XP, quests and cash tiers reset ${fmt.date(pn.ends_at)} 12:00 am CT`:''}${(q.max_xp_period||q.max_xp_month)?` · ${q.max_xp_period||q.max_xp_month} XP possible this half`:''}`,{eyebrow:'October 2026',acts:`<button class="btn gh" onclick="openRewardRules()">📜 Rules</button><button class="btn gh" onclick="go('rewards')">${ico('gift')} View rewards</button>`})}
-  <div class="grid g4" style="margin-bottom:16px">${metric('XP this half',q.xp_earned||0,{cls:'gold',sub:PERIOD_LABEL(q.period_now)+(q.xp_month!=null&&q.xp_month!==q.xp_earned?` · ${q.xp_month} XP in October`:'')})}${metric('In review',(q.xp_pending||0)+' XP',{sub:'Pending, not yet earned'})}${metric('Level',`${q.prestige_emblem||'🎯'} ${esc(q.prestige_name||'Rookie')}`,{sub:(q.prestige_unlocked||0)>(q.prestige_level||0)?`🔓 ${esc(PNAMES[q.prestige_unlocked])} unlocked · <a href="#" onclick="go('rewards');return false">pick it</a>`:`<a href="#" onclick="go('rewards');return false">Prestige</a> · hit the top tier to level up`})}${nt?metric('Next reward',`${fmt.usd(nt.cash_total_cents,{cents:true})} · ${esc(nt.name)}`,{sub:`${nt.xp_required} XP + ${nt.concepts_required} approved videos this half`}):metric('Next reward','All tiers reached')}</div>
-  <div class="note" style="margin-bottom:16px"><b>🔁 Resets on the 1st and 16th.</b> XP, approved videos and every quest start fresh each half. <b>🚫 No stacking:</b> your highest cash tier is your total for the half. <a href="#" onclick="openRewardRules();return false">Read the rules</a></div>
-  ${rec?`<div class="card hi featured" style="margin-bottom:18px"><div class="art">${photoFrame(questPhoto(rec),rec.image_key,rec.category)}</div><div><div class="lbl">Recommended now</div><h2 style="margin-top:6px">${esc(rec.title)}</h2><p style="margin-top:6px">${esc(rec.outcome)}</p>
+  ${questHero(q,r,insts)}
+  <div class="note" style="margin:16px 0"><b>🔁 Resets on the 1st and 16th.</b> XP, approved videos and every quest start fresh each half. <b>🚫 No stacking:</b> your highest cash tier is your total for the half. <a href="#" onclick="openRewardRules();return false">Read the rules</a></div>
+  ${rec?`<div class="card hi featured" style="margin-bottom:18px"><div class="art">${photoFrame(questPhoto(rec),rec.image_key,rec.category)}</div><div><div class="lbl">Recommended now</div><h2 style="margin-top:6px">${esc(rec.title)}</h2><p style="margin-top:6px">${esc(rec.outcome)}</p>${questImpact(rec,states[rec.quest_key],H)}
     <div class="row" style="margin-top:12px"><span class="xp">+${rec.xp_value} XP</span>${badge(QSTATE[states[rec.quest_key].state]?.[0]||'n',QSTATE[states[rec.quest_key].state]?.[1]||'Available')}<button class="btn" onclick="openQuest('${rec.quest_key}')">${questCta(states[rec.quest_key])}</button></div></div></div>`:''}
   <div class="filters"><div class="tabs" role="tablist">${QF.map(f=>`<button role="tab" aria-selected="${S.ui.qf===f}" class="${S.ui.qf===f?'on':''}" onclick="go('quests',{f:'${f}'})">${QF_LABEL[f]}<i>${cnt(f)}</i></button>`).join('')}</div>
     <select aria-label="Category" onchange="go('quests',{f:S.ui.qf,c:this.value})">${cats_.map(c=>`<option ${S.ui.qcat===c?'selected':''}>${esc(c)}</option>`).join('')}</select>
@@ -1081,20 +1175,20 @@ route('quests',async(p)=>{
   <div class="grid g2">${(q.periods||[]).map(pp=>`<div class="metric ${pp.key===q.period_now?'orange':''}"><div class="k">${pp.key===q.period_now?'Now · ':''}${esc(pp.label)}</div><div class="v" style="font-size:16px;font-family:var(--f);font-weight:600">${fmt.date(pp.starts_at)} to ${fmt.date(new Date(new Date(pp.ends_at)-1))}</div></div>`).join('')}</div>`;
   function questList(){ const s=(S.ui.qs||'').toLowerCase(); const L=cats.filter(c=>{ const st=states[c.quest_key].state; const f=S.ui.qf; const okF=f==='all'||(f==='approved'?['approved','approved_period'].includes(st):st===f); const okC=S.ui.qcat==='All'||c.category===S.ui.qcat; const okS=!s||(c.title+' '+c.outcome+' '+c.category).toLowerCase().includes(s); return okF&&okC&&okS; });
     if(!L.length) return `<div class="empty" style="grid-column:1/-1"><h3>No quests match</h3><p>Try another filter or clear the search.</p></div>`;
-    return L.map(c=>questCard(c,states[c.quest_key])).join(''); }
+    return L.map(c=>questCard(c,states[c.quest_key],H)).join(''); }
   window.questList=questList;
 });
 function nextPeriodDate(st){ const q=S.cache['my_quests{}']; const i=(q?.periods||[]).findIndex(p=>p.key===q.period_now); const n=q?.periods?.[i+1]; return n?fmt.date(n.starts_at):'next month'; }
 function levelName(xp){ return xp>=200?'Elite':xp>=100?'Operator':xp>=50?'Builder':xp>=25?'Rookie II':'Rookie'; }
 function questCta(st){ return {available:'Start quest',approved_period:'Next period opens '+nextPeriodDate(st),in_progress:'Continue quest',needs_changes:'Fix and resubmit',submitted:'View submission',approved:'View',rejected:'View'}[st.state]||'Open'; }
-function questCard(c,st){ const s=st.state; const [k,label]=QSTATE[s]||QSTATE.available; const rp=reqProgress(c,st.cur);
-  const capText=c.period_kind==='reward_period'?`${st.done}/${st.maxThis} this half · ${st.total}/${st.maxTotal} this month`:c.period_kind==='day'?`${(c.xp_this_period??c.xp_this_month)||0}/${c.monthly_xp_cap} XP this half · max ${c.per_period_limit}/day`:`${st.total}/${st.maxTotal} completed`;
+function questCard(c,st,H){ const s=st.state; const [k,label]=QSTATE[s]||QSTATE.available; const rp=reqProgress(c,st.cur);
+  const capText=c.period_kind==='reward_period'?`${doneDots(st.done,st.maxThis)}${st.done}/${st.maxThis} done this half · ${st.total}/${st.maxTotal} this month`:c.period_kind==='day'?`${(c.xp_this_period??c.xp_this_month)||0}/${c.monthly_xp_cap} XP this half · max ${c.per_period_limit}/day`:`${st.total}/${st.maxTotal} completed`;
   const prog=st.cur&&['in_progress','needs_changes'].includes(st.cur.state)&&rp.need>1?`<div class="prog">${pbar(rp.have,rp.need,{label:`${rp.have} of ${rp.need} ${rp.unit} attached`,fmtv:x=>x})}</div>`:(st.cur&&st.cur.state==='submitted'?`<div class="prog"><div class="plabel"><span>Submitted ${fmt.dt(st.cur.submitted_at)}</span><b>+${c.xp_value} XP pending</b></div><div class="bar"><i style="width:100%;background:var(--warn)"></i></div></div>`:'');
   const lk=!!c.locked;
-  return `<button class="qcard ${s==='approved'?'done':''} ${lk?'lock':''}" onclick="openQuest('${c.quest_key}')" aria-label="${esc(c.title)}: ${lk?'locked':label}"><div class="art ph">${thumb(questPhoto(c),c.image_key,c.category)}</div><div style="min-width:0"><div class="row between">${lk?`<span class="badge n">🔒 Unlock ${esc(c.min_prestige_name||'Prestige')}</span>`:`<span class="badge ${k}">${label}</span>`}<span class="xp">+${c.xp_value} XP</span></div><div class="ttl" style="margin-top:6px">${c.category==='Boss'?'⚔️ ':''}${esc(c.title)}</div><div class="out">${esc(c.outcome)}</div>${prog}<div class="foot"><span class="mini">${lk?`Unlock ${esc(c.min_prestige_name||'a higher level')} to unlock this quest`:capText}</span><span class="btn sm ${s==='approved'||s==='approved_period'||lk?'gh':''}">${lk?'Preview':questCta(st)}</span></div></div></button>`; }
+  return `<button class="qcard ${s==='approved'?'done':''} ${lk?'lock':''}" onclick="openQuest('${c.quest_key}')" aria-label="${esc(c.title)}: ${lk?'locked':label}"><div class="art ph">${thumb(questPhoto(c),c.image_key,c.category)}</div><div style="min-width:0"><div class="row between">${lk?`<span class="badge n">🔒 Unlock ${esc(c.min_prestige_name||'Prestige')}</span>`:`<span class="badge ${k}">${label}</span>`}<span class="xp">+${c.xp_value} XP</span></div><div class="ttl" style="margin-top:6px">${c.category==='Boss'?'⚔️ ':''}${esc(c.title)}</div><div class="out">${esc(c.outcome)}</div>${questImpact(c,st,H)}${prog}<div class="foot"><span class="mini">${lk?`Unlock ${esc(c.min_prestige_name||'a higher level')} to unlock this quest`:capText}</span><span class="btn sm ${s==='approved'||s==='approved_period'||lk?'gh':''}">${lk?'Preview':questCta(st)}</span></div></div></button>`; }
 
 async function openQuest(key,instId){
-  const q=await API.page('my_quests'); const c=q.catalog.find(x=>x.quest_key===key); if(!c) return; const st=questState(c,q.instances); const inst=instId?q.instances.find(i=>i.id===instId):st.cur;
+  const q=await API.page('my_quests'); let rw=null; try{ rw=await API.page('my_rewards'); }catch(e){} const c=q.catalog.find(x=>x.quest_key===key); if(!c) return; const st=questState(c,q.instances); const inst=instId?q.instances.find(i=>i.id===instId):st.cur;
   const history=q.instances.filter(i=>i.quest_key===key&&i!==inst);
   const canStart=st.state==='available'&&!inst&&!c.locked;
   openDrawer(`<div class="row">${c.locked&&!inst?`<span class="badge n">🔒 Unlock ${esc(c.min_prestige_name||'Prestige')}</span>`:`<span class="badge ${QSTATE[inst?.state||'available'][0]}">${QSTATE[inst?.state||'available'][1]}</span>`}<span class="xp">+${c.xp_value} XP</span><span class="mini">${esc(c.category)}</span></div>
@@ -1105,31 +1199,42 @@ async function openQuest(key,instId){
    <section><h3>Steps</h3>${inst&&['in_progress','needs_changes'].includes(inst.state)?`<div id="chk">${(c.steps||[]).map((s,i)=>`<label class="chk ${inst.checklist?.[i]?'on':''}"><input type="checkbox" ${inst.checklist?.[i]?'checked':''} onchange="tickStep('${inst.id}',${i},this.checked)"><span>${esc(s)}</span></label>`).join('')}</div><div class="mini" style="margin-top:6px">Ticks are for you. XP comes only from verified completion.</div>`:`<ol class="ol">${(c.steps||[]).map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`}</section>
    ${(c.examples||[]).length?`<section><h3>Examples</h3><ul>${c.examples.map(e=>`<li>${esc(e)}</li>`).join('')}</ul></section>`:''}
    <section><h3>Completion criteria</h3><ul>${(c.criteria||[]).map(e=>`<li>${esc(e)}</li>`).join('')}</ul>${c.reuse_rule?`<div class="note" style="margin-top:8px"><b>Reuse rule.</b> ${esc(c.reuse_rule)}</div>`:''}</section>
-   <section><h3>Award</h3><div class="mini">${c.xp_value} XP per completion · ${c.period_kind==='reward_period'?`up to ${st.maxThis} per half, resets the 1st and 16th (${st.done}/${st.maxThis} this half, ${st.total}/${st.maxTotal} this month)`:c.period_kind==='day'?`up to ${c.per_period_limit} per Central day, ${c.monthly_xp_cap} XP per half (${(c.xp_this_period??c.xp_this_month)||0} earned this half)`:`up to ${st.maxTotal} this campaign (${st.total} done)`}${c.scarce?' · scarce bonus award':''}</div></section>
+   <section><h3>Award</h3><div class="mini">${c.xp_value} XP per completion · ${c.period_kind==='reward_period'?`up to ${st.maxThis} per half, resets the 1st and 16th (${st.done}/${st.maxThis} this half, ${st.total}/${st.maxTotal} this month)`:c.period_kind==='day'?`up to ${c.per_period_limit} per Central day, ${c.monthly_xp_cap} XP per half (${(c.xp_this_period??c.xp_this_month)||0} earned this half)`:`up to ${st.maxTotal} this campaign (${st.total} done)`}${c.scarce?' · scarce bonus award':''}</div>${questImpact(c,st,rw?halfCtx(q,rw):null)}</section>
    ${inst?.review_note?`<section><h3>${inst.state==='rejected'?'Reason':'Reviewer feedback'}</h3><div class="note ${inst.state==='rejected'?'bad':'warn'}">${esc(inst.review_note)}</div></section>`:''}
    ${inst?evidenceForm(c,inst):''}
    ${canStart?`<section><button class="btn" id="startbtn" onclick="startQuest('${key}')">${ico('bolt')} ${questCta(st)}</button><div class="mini" style="margin-top:8px">Starting creates your entry for ${c.period_kind==='reward_period'?PERIOD_LABEL(c.period_now):c.period_kind==='day'?'today':'this campaign'}. You can save a draft and come back.</div></section>`:''}
    ${!canStart&&!inst&&(st.state==='approved'||st.state==='approved_period')?`<section><div class="note good">Completed for ${st.state==='approved_period'?'this half':'this campaign'}.${st.state==='approved_period'?' Opens again '+nextPeriodDate(st)+'.':''}</div></section>`:''}
    ${history.length?`<section><h3>History</h3><div class="timeline">${history.map(i=>`<div><time>${fmt.date(i.created_at)}</time><span>${PERIOD_LABEL(i.period_key)} · ${QSTATE[i.state][1]}${i.xp?` · +${i.xp} XP`:''} <a href="#" onclick="openQuest('${key}','${i.id}');return false">open</a></span></div>`).join('')}</div></section>`:''}
    ${inst?.history?.length?`<section><h3>Timeline</h3><div class="timeline">${inst.history.map(h=>`<div><time>${fmt.dt(h.at)}</time><span>${esc(({started:'Started',submitted:'Submitted for review',changes_requested:'Returned with notes',approved:'Approved',rejected:'Not approved',reversed:'Award reversed'})[h.event]||h.event)}${h.detail?.xp?` · +${h.detail.xp} XP`:''}</span></div>`).join('')}</div></section>`:''}`);
+  hydrateShots($('#drawer'));
 }
 function evidenceForm(c,inst){ const editable=['in_progress','needs_changes'].includes(inst.state); const d=inst.draft||{};
-  const field=f=>{ const v=d[f.field]; const id='f_'+f.field; let input='';
-    if(f.type==='url_list'||f.type==='submission_list') input=`<textarea id="${id}" ${editable?'':'disabled'} placeholder="One per line${f.min?` (${f.min}${f.max&&f.max!==f.min?'–'+f.max:''} ${f.type==='url_list'?'links':'IDs'})`:''}" oninput="draftChanged('${inst.id}')">${esc(Array.isArray(v)?v.join('\n'):(v||''))}</textarea>`;
-    else if(f.type==='text') input=`<textarea id="${id}" ${editable?'':'disabled'} oninput="draftChanged('${inst.id}')">${esc(v||'')}</textarea>`;
-    else if(f.type==='date') input=`<input id="${id}" type="date" ${editable?'':'disabled'} value="${esc(v||'')}" oninput="draftChanged('${inst.id}')">`;
-    else if(f.type==='choice') input=`<select id="${id}" ${editable?'':'disabled'} onchange="draftChanged('${inst.id}')"><option value="">Choose…</option>${(f.options||[]).map(o=>`<option ${v===o?'selected':''}>${esc(o)}</option>`).join('')}</select>`;
-    else input=`<input id="${id}" type="url" inputmode="url" ${editable?'':'disabled'} value="${esc(v||'')}" placeholder="https://" oninput="draftChanged('${inst.id}')">`;
-    return `<div class="field" data-field="${f.field}"><label for="${id}">${esc(f.label)}${f.required?' *':''}</label>${input}<div class="ferr" id="e_${f.field}"></div></div>`; };
+  S.shots={}; S.shotField={}; const canPaste=editable&&!!(navigator.clipboard&&navigator.clipboard.readText);
+  const field=f=>{ const sp=splitShots(f,d[f.field]); S.shots[f.field]=[...sp.shots]; S.shotField[f.field]=f; const v=sp.text; const id='f_'+f.field; const dis=editable?'':'disabled'; const oi=`oninput="draftChanged('${inst.id}')"`; let input='';
+    if(f.type==='url_list'||f.type==='submission_list') input=`<textarea id="${id}" ${dis} rows="${Math.min(Math.max(f.min||3,3),7)}" placeholder="${f.type==='url_list'?`Paste ${f.min?f.min+' ':''}link${f.min===1?'':'s'}, one per line`:'One ID per line'}" ${oi} ${f.type==='url_list'?`onchange="tidyUrlField(this,'url_list');draftChanged('${inst.id}')"`:''}>${esc(Array.isArray(v)?v.join('\n'):(v||''))}</textarea>`;
+    else if(f.type==='text') input=`<textarea id="${id}" ${dis} ${oi}>${esc(v||'')}</textarea>`;
+    else if(f.type==='date') input=`<input id="${id}" type="date" ${dis} value="${esc(v||'')}" ${oi}>`;
+    else if(f.type==='choice') input=`<select id="${id}" ${dis} onchange="draftChanged('${inst.id}')"><option value="">Choose…</option>${(f.options||[]).map(o=>`<option ${v===o?'selected':''}>${esc(o)}</option>`).join('')}</select>`;
+    else input=`<input id="${id}" type="url" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" ${dis||(sp.shots.length?'disabled':'')} value="${esc(v||'')}" placeholder="${sp.shots.length?'Using your screenshot':'Paste link here'}" ${oi} onchange="tidyUrlField(this,'url');draftChanged('${inst.id}')">`;
+    const isLink=f.type==='url'||f.type==='url_list'; const nLines=Array.isArray(v)?v.length:0;
+    const full=(f.type==='url'&&sp.shots.length>0)||(f.type==='url_list'&&f.max&&nLines+sp.shots.length>=f.max);
+    const paste=canPaste&&isLink?`<button type="button" class="btn gh sm" onclick="pasteInto('${f.field}','${inst.id}')">📋 Paste</button>`:'';
+    const shot=editable&&canShot(f)?`<label class="btn gh sm shotbtn" id="sb_${f.field}" ${full?'hidden':''}><input type="file" accept="image/*" hidden onchange="addShot(event,'${f.field}','${inst.id}')">📷 ${f.type==='url'?'Upload a screenshot instead':'Add a screenshot'}</label>`:'';
+    const help=editable?proofHelp(f):'';
+    return `<div class="field" data-field="${f.field}"><label for="${id}">${esc(f.label)}${f.required?' *':''}</label>${input}${help?`<div class="help">👉 ${esc(help)}</div>`:''}<div class="shots" id="sh_${f.field}">${shotChips(f.field,editable,inst.id)}</div>${paste||shot?`<div class="shotrow">${paste}${shot}</div>`:''}<div class="ferr" id="e_${f.field}"></div></div>`; };
   return `<section><h3>${editable?'Your evidence':'Submitted evidence'}</h3>
     ${inst.inspiration_ref?`<div class="note" style="margin-bottom:8px">Started from inspiration <b>${esc(inst.inspiration_ref)}</b>. <a href="#/inspo?id=${encodeURIComponent(inst.inspiration_ref)}">Open it</a></div>`:''}
     <form id="evform" onsubmit="return submitQuest(event,'${inst.id}')">${(c.proof||[]).map(field).join('')}
     <div id="everr" class="ferr" style="margin-top:8px"></div>
     ${editable?`<div class="row" style="margin-top:14px"><button type="submit" class="btn" id="subbtn">${inst.state==='needs_changes'?'Resubmit for review':'Submit for review'}</button><button type="button" class="btn gh" id="savebtn" onclick="saveDraft('${inst.id}')">Save draft</button><span class="mini" id="savestate">${inst.updated_at?'Saved '+fmt.ago(inst.updated_at):''}</span></div>`:`<div class="mini" style="margin-top:8px">Submitted ${fmt.dt(inst.submitted_at)}. ${inst.state==='submitted'?'An admin will verify it. XP shows as pending until then.':''}</div>`}
     </form></section>`; }
-function readDraft(c){ const d={}; (c.proof||[]).forEach(f=>{ const el=$('#f_'+f.field); if(!el) return; let v=el.value; if(f.type==='url_list'||f.type==='submission_list') v=v.split(/\n+/).map(x=>x.trim()).filter(Boolean); d[f.field]=v; }); return d; }
+function readDraft(c){ const d={}; (c.proof||[]).forEach(f=>{ const el=$('#f_'+f.field); if(!el) return; let v=el.value; const shots=(S.shotField&&S.shotField[f.field]&&S.shots[f.field])||[];
+    if(f.type==='url_list'||f.type==='submission_list'){ v=v.split(/\n+/).map(x=>f.type==='url_list'?normUrl(x):x.trim()).filter(Boolean); if(f.type==='url_list') v=[...v,...shots]; }
+    else if(f.type==='url'){ v=el.disabled&&shots.length?shots[0]:(normUrl(v)||shots[0]||''); }
+    else if(f.type==='text'&&shots.length){ v=[String(v||'').trim(),...shots].filter(Boolean).join('\n'); }
+    d[f.field]=v; }); return d; }
 let draftTimer; function draftChanged(id){ $('#savestate')&&($('#savestate').textContent='Unsaved changes'); clearTimeout(draftTimer); draftTimer=setTimeout(()=>saveDraft(id,true),1200); }
-async function saveDraft(id,auto){ const q=await API.page('my_quests'); const inst=q.instances.find(i=>i.id===id); const c=q.catalog.find(x=>x.quest_key===inst.quest_key); const d=readDraft(c);
+async function saveDraft(id,auto){ if(!$('#evform')) return; const q=await API.page('my_quests'); const inst=q.instances.find(i=>i.id===id); const c=q.catalog.find(x=>x.quest_key===inst.quest_key); const d=readDraft(c);
   const r=await API.rpc('save_quest_draft',{p_instance:id,p_draft:d}); if(r.ok){ inst.draft=d; inst.updated_at=new Date().toISOString(); $('#savestate')&&($('#savestate').textContent='Saved just now'); if(!auto) toast('Draft saved'); } else toast(r.why,'bad'); }
 async function tickStep(id,i,on){ const q=await API.page('my_quests'); const inst=q.instances.find(x=>x.id===id); const ck=[...(inst.checklist||[])]; ck[i]=on; const r=await API.rpc('save_quest_draft',{p_instance:id,p_draft:null,p_checklist:ck}); if(r.ok) inst.checklist=ck; }
 async function startQuest(key){ const b=$('#startbtn'); b.classList.add('pending'); b.disabled=true; try{ const r=await API.rpc('start_quest',{p_quest:key,p_inspiration_ref:S.params.ref||null}); if(!r.ok){ toast(r.why,'bad'); return; } API.bust(); await API.page('my_quests'); openQuest(key,r.instance_id); toast(r.why==='resumed'?'Resumed your entry':'Quest started'); render(); } catch(e){ toast(e.message,'bad'); } finally{ b.classList.remove('pending'); b.disabled=false; } }
@@ -1190,6 +1295,147 @@ async function openReward(id){ const r=await API.page('my_rewards'); let ctx=r, 
      <div id="claimerr" class="ferr"></div></section>
    <section><h3>Fine print</h3><ul><li>Approved video = an original video submitted in this half and approved in October. It counts unless Austin marks it BOF.</li><li>Comment volume alone cannot unlock a cash tier.</li><li>XP and approved videos reset at 12:00 am CT on the 1st and 16th. A finished half stays claimable after the reset.</li><li>Payouts go out after the half closes: Oct 16 for Oct 1–15, Nov 1 for Oct 16–31.</li></ul></section>`); }
 async function claimReward(id){ const b=$('#claimbtn'); b.classList.add('pending'); b.disabled=true; try{ S._claimReq=S._claimReq||{}; S._claimReq[id]=S._claimReq[id]||uid(); const r=await API.rpc('request_claim',{p_milestone_id:id,p_request_id:S._claimReq[id]}); if(!r.ok){ $('#claimerr').textContent=r.why; return; } API.bust(); toast('Claim submitted: '+fmt.usd(r.amount_cents,{cents:true}),'good'); await API.page('my_rewards'); openReward(id); render(); } catch(e){ $('#claimerr').textContent=e.message; } finally{ b.classList.remove('pending'); b.disabled=false; } }
+
+/* ================= Oct 14 (Austin): reset clock, claim banner, quest progress, easier proof ================= */
+/* ---- Quest reset clock: counts down to 12:00 am CT on the 1st and 16th (the server's period end wins when loaded) */
+function ctMidnight(y,m,d){ let t=Date.UTC(y,m-1,d,5); const h=+new Intl.DateTimeFormat('en-US',{timeZone:TZ,hour:'numeric',hourCycle:'h23'}).format(new Date(t)); if(h===23) t+=36e5; return t; }
+function nextResetAt(){ const now=Date.now(); const q=S.cache['my_quests{}']; const pn=q&&(q.periods||[]).find(p=>p.key===q.period_now);
+  if(pn?.ends_at&&new Date(pn.ends_at)>now) return new Date(pn.ends_at).getTime();
+  const r=S.cache['my_rewards{}']; if(r?.period?.ends_at&&new Date(r.period.ends_at)>now) return new Date(r.period.ends_at).getTime();
+  const p=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:TZ,year:'numeric',month:'numeric',day:'numeric'}).formatToParts(new Date(now)).map(x=>[x.type,x.value]));
+  let y=+p.year,m=+p.month,d=+p.day; if(d<16) return ctMidnight(y,m,16); m++; if(m>12){ m=1; y++; } return ctMidnight(y,m,1); }
+function leftParts(ms){ ms=Math.max(0,ms); return {d:Math.floor(ms/864e5),h:Math.floor(ms%864e5/36e5),m:Math.floor(ms%36e5/6e4),s:Math.floor(ms%6e4/1e3)}; }
+function leftShort(ms){ const p=leftParts(ms); return (p.d?p.d+'d ':'')+p.h+'h '+String(p.m).padStart(2,'0')+'m '+String(p.s).padStart(2,'0')+'s'; }
+function leftWords(ms){ const p=leftParts(ms), w=(n,u)=>`${n} ${u}${n===1?'':'s'}`; return [p.d?w(p.d,'day'):'',w(p.h,'hour'),w(p.m,'minute'),w(p.s,'second')].filter(Boolean).join(', '); }
+function resetBig(){ const at=nextResetAt(); const p=leftParts(at-Date.now());
+  return `<div class="rclock" data-reset-clock><div class="lbl">⏳ Quest reset in</div>
+    <div class="cd rc-cd"><div><b data-u="d">${p.d}</b><span>DAYS</span></div><div><b data-u="h">${p.h}</b><span>HRS</span></div><div><b data-u="m">${p.m}</b><span>MIN</span></div><div><b data-u="s">${p.s}</b><span>SEC</span></div></div>
+    <div class="mini" style="margin-top:8px">${esc(fmt.date(new Date(at)))}, 12:00 am CT. XP, approved videos and quests all go back to 0.</div></div>`; }
+let RESET_FIRED=0;
+function tickReset(){ const at=nextResetAt(); const ms=at-Date.now(); const on=!!S.me;
+  [['#qtimer',`<span class="qt-l">Quest reset</span><span class="qt-v">${leftShort(ms)}</span>`],['#qtimer-m',`<span class="qt-l">Quest reset</span><span class="qt-v">${leftShort(ms)}</span>`]].forEach(([sel,html])=>{ const el=$(sel); if(!el) return; el.hidden=!on; if(on){ el.innerHTML=html; el.classList.toggle('soon',ms<6*36e5); el.setAttribute('aria-label',`Quest reset in ${leftWords(ms)}. Open quests`); } });
+  $$('[data-reset-clock]').forEach(el=>{ const p=leftParts(ms); ['d','h','m','s'].forEach(u=>{ const b=el.querySelector(`[data-u="${u}"]`); if(b) b.textContent=p[u]; }); el.classList.toggle('soon',ms<6*36e5); });
+  // the half just rolled over: reload everything once so the new half shows
+  if(on&&ms<=0&&RESET_FIRED!==at){ RESET_FIRED=at; setTimeout(()=>{ API.bust(); render(); toast('New half started. XP and quests are back to 0.','good'); },1500); } }
+setInterval(tickReset,1000);
+
+/* ---- Claim banner: any unlocked cash tier that still needs a claim, on every page */
+function claimables(r){ const out=[]; const add=(tiers,ctx,label,current)=>{ const el=(tiers||[]).filter(t=>t.status==='eligible'&&t.published!==false&&!t.draft); if(!el.length) return;
+    const t=el.reduce((a,b)=>(b.cash_total_cents||0)>(a.cash_total_cents||0)?b:a);
+    // no stacking: a lower tier already claimed this half is part of the total, so only the difference is new
+    const before=(tiers||[]).filter(x=>x.claim&&['claim_submitted','approved_for_payment','paid'].includes(x.status)).reduce((n,x)=>n+(Number(x.claim.amount_cents)||0),0);
+    out.push({t,ctx,label,current,before,amount:Math.max(0,(t.cash_total_cents||0)-before)}); };
+  (r.periods||[]).filter(p=>!p.current).forEach(p=>add(p.tiers,p,p.label,false)); add(r.tiers,r,r.period?.label||halfLabel(),true); return out; }
+function claimBannerHtml(r){ const L=claimables(r); if(!L.length) return '';
+  return L.slice(0,2).map(({t,ctx,label,current,before,amount})=>`<div class="claimbar" role="alert"><div class="cb-ic" aria-hidden="true">💸</div>
+    <div class="cb-tx"><div class="cb-k">Action needed · claim your reward</div><b>You have ${fmt.usd(amount,{cents:true})}${before?' more':''} to claim</b><span>${esc((t.prestige_level>0?PNAMES[t.prestige_level]+' · ':'')+t.name)} tier · ${esc(label)}${before?` · ${fmt.usd(t.cash_total_cents,{cents:true})} total, ${fmt.usd(before,{cents:true})} already claimed`:''}. Austin can only pay rewards that are claimed. ${current?`Claim it now and it pays on ${esc(payday(ctx))}.`:'This half is closed, so claim it now to get paid.'}</span></div>
+    <button class="btn gold cb-go" onclick="openClaim('${esc(t.id)}')">${ico('gift')} Claim now</button></div>`).join(''); }
+function openClaim(id){ if(S.view!=='rewards') go('rewards'); openReward(id); }
+let BANNER_SEQ=0;
+async function topBanner(){ const seq=++BANNER_SEQ; const view=S.view; if(!S.me||view.startsWith('admin')) return; let r; try{ r=await API.page('my_rewards'); }catch(e){ return; }
+  if(seq!==BANNER_SEQ||S.view!==view) return; const html=claimBannerHtml(r); const a=$('#main .anim'); if(!a) return; $('#main .claimwrap')?.remove(); if(html) a.insertAdjacentHTML('afterbegin',`<div class="claimwrap">${html}</div>`); }
+function afterRender(){ tickReset(); topBanner(); hydrateShots($('#main')); }
+
+/* ---- refresh when the app comes back to the screen (phones keep it open for days) */
+let HIDDEN_AT=0;
+document.addEventListener('visibilitychange',()=>{ if(document.hidden){ HIDDEN_AT=Date.now(); return; } const away=HIDDEN_AT?Date.now()-HIDDEN_AT:0; HIDDEN_AT=0;
+  if(S.me&&away>60000){ API.bust(); if(!S.drawer) render(); } });
+window.addEventListener('pageshow',e=>{ if(e.persisted&&S.me){ API.bust(); if(!S.drawer) render(); } });
+
+/* ---- Quest progress: where this half stands and what the next tier needs */
+function halfCtx(q,r){ const tiers=r?.tiers||[]; const xp=r?.xp??q.xp_earned??0; const pending=q.xp_pending||r?.xp_pending||0; const cc=r?.concepts||0; const nt=nextTier(r||{}); return {xp,pending,cc,tiers,nt,sales:r?.sales_cents||0}; }
+function questHero(q,r,insts){ const H=halfCtx(q,r); const top=H.tiers[H.tiers.length-1]; const max=Math.max(top?.xp_required||100,H.xp+H.pending,1);
+  const pc=x=>clamp(x/max*100,0,100).toFixed(1);
+  const cur=q.period_now; const hs=periodNow(q)?.starts_at; const mine=(insts||[]).filter(i=>i.period_key===cur||(hs&&new Date(i.created_at)>=new Date(hs)));
+  const nDone=mine.filter(i=>i.state==='approved').length, nRev=mine.filter(i=>i.state==='submitted').length, nOpen=(insts||[]).filter(i=>['in_progress','needs_changes'].includes(i.state)).length;
+  const marks=H.tiers.map(t=>{ const hit=['eligible','claim_submitted','approved_for_payment','paid','included'].includes(t.status); return `<div class="qh-mk ${hit?'on':''}" style="left:${pc(t.xp_required)}%"><i></i><span><b>${fmt.usd(t.cash_total_cents,{cents:true})}</b>${t.xp_required} XP</span></div>`; }).join('');
+  let next='';
+  if(H.nt){ const nx=Math.max(0,H.nt.xp_required-H.xp), nv=Math.max(0,H.nt.concepts_required-H.cc), ns=H.nt.sales_required_cents>0?Math.max(0,H.nt.sales_required_cents-H.sales):0;
+    const parts=[nx?`<b>${nx} XP</b>`:'',nv?`<b>${nv} approved video${nv===1?'':'s'}</b>`:'',ns?`<b>${usd0(ns)}</b> in Trybe sales`:''].filter(Boolean);
+    next=`<div class="qh-next"><span class="qh-tag">Next</span> <b>${esc(H.nt.name)} · ${fmt.usd(H.nt.cash_total_cents,{cents:true})}</b> ${parts.length?`needs ${parts.join(' + ')} more`:'is unlocked once your numbers update'}${H.pending&&nx?`<span class="mini"> · ${H.pending>=nx?`your ${H.pending} XP in review covers the XP once approved`:`${H.pending} XP in review counts once approved`}</span>`:''}</div>`; }
+  else next=`<div class="qh-next good">🏆 Every tier reached for ${esc(halfLabel(cur))}. Claim it on Rewards.</div>`;
+  const vidBar=H.nt?`<div style="margin-top:12px">${pbar(Math.min(H.cc,H.nt.concepts_required),H.nt.concepts_required,{label:`Approved videos for ${H.nt.name}`,cls:'green'})}</div>`:'';
+  return `<div class="card hi qhero"><div class="qh-l"><div class="lbl">Your half · ${esc(halfLabel(cur))}${q.prestige_name?` · ${q.prestige_emblem||'🎯'} ${esc(q.prestige_name)}`:''}</div>
+      <div class="kpi" style="margin-top:6px"><span class="big" style="color:var(--gold)">${H.xp}<span style="font-size:18px;color:var(--tx3)"> XP</span></span>${H.pending?`<span class="badge r">+${H.pending} XP in review</span>`:''}</div>
+      <div class="qh-bar" role="img" aria-label="${H.xp} XP earned, ${H.pending} in review, out of ${max}"><i class="e" style="width:${pc(H.xp)}%"></i><i class="p" style="left:${pc(H.xp)}%;width:${(pc(H.xp+H.pending)-pc(H.xp)).toFixed(1)}%"></i>${marks}</div>
+      ${next}${vidBar}
+      <div class="qh-chips"><span>✅ <b>${nDone}</b> approved</span><span>⏳ <b>${nRev}</b> in review</span><span>✏️ <b>${nOpen}</b> started, not sent</span></div></div>
+    <div class="qh-r">${resetBig()}</div></div>
+    ${nOpen?`<div class="note warn" style="margin:12px 0 0"><b>✏️ ${nOpen} quest${nOpen===1?'':'s'} started but not submitted.</b> Get ${nOpen===1?'it':'them'} in before the reset. <a href="#" onclick="go('quests',{f:'in_progress'});return false">Finish ${nOpen===1?'it':'them'}</a></div>`:''}`; }
+/* what one quest adds toward the next tier */
+function questImpact(c,st,H){ if(!H||!H.nt||c.locked||!['available','in_progress','needs_changes'].includes(st.state)) return '';
+  const need=H.nt.xp_required-H.xp-H.pending; if(need<=0) return '';
+  const vids=Math.max(0,H.nt.concepts_required-H.cc);
+  if(c.xp_value>=need) return `<div class="qimpact hit">🔓 Covers the last ${need} XP for ${esc(H.nt.name)} · ${fmt.usd(H.nt.cash_total_cents,{cents:true})}${vids?` (plus ${vids} approved video${vids===1?'':'s'})`:''}</div>`;
+  return `<div class="qimpact">+${c.xp_value} XP toward ${esc(H.nt.name)} · ${need-c.xp_value} XP left after this</div>`; }
+function doneDots(n,max){ if(!max||max>8) return ''; return `<span class="dots" aria-hidden="true">${Array.from({length:max},(_,i)=>`<i class="${i<n?'on':''}"></i>`).join('')}</span>`; }
+
+/* ---- Easier proof: a helper line under every box, a Paste button, and screenshot upload */
+const PROOF_BUCKET='quest-proof';
+const SHOT_RE=new RegExp('/storage/v1/object/(?:authenticated/|public/|sign/)?'+PROOF_BUCKET+'/([^?#\\s]+)');
+const isShot=u=>SHOT_RE.test(String(u||''));
+const shotPath=u=>(String(u).match(SHOT_RE)||[])[1];
+S.shots={}; S.shotPreview={}; const SIGNED={};
+function canShot(f){ return (f.type==='url'||f.type==='url_list')?f.shot!==false:f.shot===true; }
+function proofHelp(f){ if(f.help) return f.help; const L=(f.label||'').toLowerCase();
+  if(f.type==='url') return /video/.test(L)?'Paste the link to your video from Trybe.':/skool/.test(L)?'Open the post in Skool, copy its link and paste it here.':'Paste the full link. It starts with https://';
+  if(f.type==='url_list') return `Paste ${f.min?f.min+' ':''}link${f.min===1?'':'s'}, one per line.`;
+  if(f.type==='submission_list') return 'One ID per line. Find each ID on My submissions: open the video and tap Copy ID.';
+  if(f.type==='date') return 'Pick the date.';
+  if(f.type==='text'&&f.min>1) return `A short answer is fine (at least ${f.min} characters).`;
+  return ''; }
+function normUrl(v){ v=String(v||'').trim(); if(!v) return v; const m=v.match(/https?:\/\/[^\s<>"']+/i); if(m) return m[0].replace(/[),.]+$/,''); if(/^(www\.)?[a-z0-9-]+(\.[a-z0-9-]+)+(\/\S*)?$/i.test(v)) return 'https://'+v; return v; }
+function splitShots(f,v){ if(!canShot(f)) return {text:v,shots:[]};
+  if(f.type==='url') return isShot(v)?{text:'',shots:[v]}:{text:v||'',shots:[]};
+  const arr=Array.isArray(v)?v.map(String):String(v||'').split(/\n+/); const shots=arr.filter(isShot); const rest=arr.filter(x=>!isShot(x));
+  return {text:f.type==='url_list'?rest:rest.join('\n').trim(),shots}; }
+function shotChips(field,editable,instId){ const L=S.shots[field]||[]; if(!L.length) return '';
+  return L.map((u,i)=>`<span class="shotchip"><a data-shot="${esc(u)}" href="#" target="_blank" rel="noopener noreferrer"><img data-shot="${esc(u)}" alt="Screenshot ${i+1}" ${(S.shotPreview[u]||SIGNED[u])?`src="${esc(S.shotPreview[u]||SIGNED[u])}"`:''}></a><span>📷 Screenshot ${L.length>1?i+1:''} attached</span>${editable?`<button type="button" aria-label="Remove screenshot" onclick="removeShot('${field}',${i},'${instId}')">${ico('x',14)}</button>`:''}</span>`).join(''); }
+function renderShots(field,instId,editable=true){ const box=$('#sh_'+field); if(box) box.innerHTML=shotChips(field,editable,instId);
+  const f=S.shotField?.[field]; const inp=$('#f_'+field), btn=$('#sb_'+field);
+  if(f&&f.type==='url'&&inp){ const has=(S.shots[field]||[]).length>0; inp.disabled=has||!editable; inp.placeholder=has?'Using your screenshot':'Paste link here'; if(btn) btn.hidden=has; }
+  if(f&&f.type==='url_list'&&btn){ btn.hidden=f.max&&(readLines(field).length+(S.shots[field]||[]).length)>=f.max; }
+  hydrateShots(box); }
+const readLines=field=>String($('#f_'+field)?.value||'').split(/\n+/).map(x=>x.trim()).filter(Boolean);
+function removeShot(field,i,instId){ (S.shots[field]||[]).splice(i,1); renderShots(field,instId); draftChanged(instId); }
+async function pasteInto(field,instId){ const el=$('#f_'+field); if(!el||el.disabled) return;
+  try{ const t=(await navigator.clipboard.readText()).trim(); if(!t){ toast('Your clipboard is empty. Copy the link first.','bad'); return; }
+    const u=normUrl(t); if(el.tagName==='TEXTAREA'){ el.value=(el.value.trim()?el.value.trim()+'\n':'')+u; } else el.value=u; draftChanged(instId); toast('Pasted'); }
+  catch(e){ el.focus(); toast('Tap and hold the box, then tap Paste.'); } }
+function tidyUrlField(el,type){ if(type==='url') el.value=normUrl(el.value); else el.value=String(el.value).split(/\n+/).map(x=>normUrl(x)).filter(Boolean).join('\n'); }
+function shrinkImage(file){ return new Promise((res,rej)=>{ if(file.type&&!/^image\//.test(file.type)) return rej(new Error('Pick an image: a screenshot or a photo.'));
+  const u=URL.createObjectURL(file); const img=new Image();
+  img.onload=()=>{ const M=1600; let w=img.naturalWidth,h=img.naturalHeight; const k=Math.min(1,M/Math.max(w,h)); w=Math.max(1,Math.round(w*k)); h=Math.max(1,Math.round(h*k));
+    const cv=document.createElement('canvas'); cv.width=w; cv.height=h; const g=cv.getContext('2d'); g.fillStyle='#fff'; g.fillRect(0,0,w,h); g.drawImage(img,0,0,w,h); URL.revokeObjectURL(u);
+    cv.toBlob(b=>b?res(b):rej(new Error('Could not read that image.')),'image/jpeg',0.82); };
+  img.onerror=()=>{ URL.revokeObjectURL(u); if(file.size<5e6&&/^image\/(jpeg|png|webp)$/.test(file.type)) res(file); else rej(new Error('That image did not open. Try a PNG or JPG screenshot.')); };
+  img.src=u; }); }
+async function uploadProof(blob){ const ext=blob.type==='image/png'?'png':blob.type==='image/webp'?'webp':'jpg'; const path=`${S.me.id}/${uid()}.${ext}`;
+  if(S.mode==='fixture'){ await new Promise(r=>setTimeout(r,250)); return `https://fixture.invalid/storage/v1/object/${PROOF_BUCKET}/${path}`; }
+  await LIVE.ensureSession();
+  const r=await fetch(`${LIVE.url}/storage/v1/object/${PROOF_BUCKET}/${path}`,{method:'POST',headers:{'apikey':LIVE.key,'Authorization':'Bearer '+LIVE.session.access_token,'Content-Type':blob.type||'image/jpeg','x-upsert':'false'},body:blob});
+  if(!r.ok){ const t=(await r.text()).slice(0,300);
+    if(/bucket not found/i.test(t)) throw new Error('Screenshot upload is not switched on yet. Paste a link for now.');
+    if(r.status===413||/too large|exceeded the maximum/i.test(t)) throw new Error('That image is too big. Try a smaller screenshot.');
+    if(r.status===403||/row-level security|unauthori/i.test(t)) throw new Error('Upload was blocked. Close the app, open your link again and retry.');
+    throw new Error('Upload did not go through ('+r.status+'). Try again, or paste a link.'); }
+  return `${LIVE.url}/storage/v1/object/${PROOF_BUCKET}/${path}`; }
+async function addShot(ev,field,instId){ const inp=ev.target; const file=inp.files&&inp.files[0]; inp.value=''; if(!file) return;
+  const lab=inp.closest('label'); lab?.classList.add('pending');
+  try{ const blob=await shrinkImage(file); const url=await uploadProof(blob); (S.shots[field]=S.shots[field]||[]).push(url); S.shotPreview[url]=URL.createObjectURL(blob);
+    renderShots(field,instId); draftChanged(instId); toast('Screenshot attached','good'); }
+  catch(e){ toast(e.message,'bad'); const er=$('#e_'+field); if(er) er.textContent=e.message; }
+  finally{ lab?.classList.remove('pending'); } }
+async function signShots(urls){ const need=[...new Set(urls)].filter(u=>isShot(u)&&!SIGNED[u]&&!S.shotPreview[u]); if(!need.length) return;
+  if(S.mode==='fixture'){ need.forEach(u=>SIGNED[u]='./ph/hero-rewards.jpg'); return; }
+  try{ await LIVE.ensureSession(); const paths=need.map(shotPath).map(decodeURIComponent);
+    const r=await fetch(`${LIVE.url}/storage/v1/object/sign/${PROOF_BUCKET}`,{method:'POST',headers:{'apikey':LIVE.key,'Authorization':'Bearer '+LIVE.session.access_token,'Content-Type':'application/json'},body:JSON.stringify({expiresIn:3600,paths})});
+    if(!r.ok) return; const j=await r.json(); (Array.isArray(j)?j:[]).forEach(x=>{ const i=paths.indexOf(x.path); if(i>=0&&x.signedURL) SIGNED[need[i]]=LIVE.url+'/storage/v1'+x.signedURL; }); }catch(e){} }
+async function hydrateShots(root){ if(!root) return; const els=$$('[data-shot]',root); if(!els.length) return; await signShots(els.map(e=>e.dataset.shot));
+  els.forEach(e=>{ const u=S.shotPreview[e.dataset.shot]||SIGNED[e.dataset.shot]; if(!u) return; if(e.tagName==='IMG') e.src=u; else e.href=u; }); }
+/* how a proof value reads for the reviewer: links stay links, screenshots show as thumbnails */
+function proofValueHtml(v){ const one=u=>isShot(u)?`<a class="shotlink" data-shot="${esc(u)}" href="#" target="_blank" rel="noopener noreferrer"><img data-shot="${esc(u)}" alt="Screenshot"><span>📷 View screenshot</span></a>`:(/^https?:/.test(String(u))?`<a ${openExt(u)}>${esc(u)}</a>`:esc(u));
+  if(Array.isArray(v)) return v.map(one).join('<br>'); const s=String(v??''); if(s.includes('\n')) return s.split('\n').map(one).join('<br>'); return one(s); }
 
 /* October competition · My pace · My submissions · Analytics */
 'use strict';
@@ -1316,7 +1562,8 @@ route('submissions',async(p)=>{
   const entries=(q.instances||[]).map(i=>({i,c:q.catalog.find(c=>c.quest_key===i.quest_key)}));
   const state=vids.length?'':(s.source?.last_run?'empty':'nosource'); const C=s.counts||{};
   return `${ph('My submissions','Every video you have sent through Trybe: its review status, its contest slot and its ad numbers. Tap any video for the full breakdown.',{eyebrow:'Progress'})}
-  <div class="row between" style="margin-bottom:12px">${freshness(s.source,s.stale)}<span class="mini">Counts match Trybe</span></div>
+  <div class="row between" style="margin-bottom:6px">${freshness(s.source,s.stale)}<span class="mini">Same statuses as Trybe at that time</span></div>
+  ${C.pending?syncLine(s.source,vids):''}
   <div class="grid g5" style="margin-bottom:14px">${metric('All videos',C.all??0)}${metric('Approved',C.approved??0,{cls:'green'})}${metric('Pending',C.pending??0,{cls:'orange'})}${metric('Changes requested',C.changes??0)}${metric('Rejected',C.rejected??0)}</div>
   <div class="tabs" style="margin-bottom:8px"><button class="${S.ui.stab==='videos'?'on':''}" onclick="go('submissions',{t:'videos'})">All videos<i>${vids.length}</i></button><button class="${S.ui.stab==='quests'?'on':''}" onclick="go('submissions',{t:'quests'})">Quest entries<i>${entries.length}</i></button></div>
   ${S.ui.stab==='quests'?questEntries(entries):`
@@ -1354,7 +1601,8 @@ async function openVideo(id){
    <section><h3>All time</h3>${hasAll?`<div class="grid g2" style="gap:8px">${metric('Ad spend',money(v.spend))}${metric('Sales (Trybe)',money(v.sales),{cls:'gold'})}${metric('ROAS',roasX(v.roas),{cls:v.roas>=2?'green':''})}${metric('Hook rate',v.hook_rate==null?null:Math.round(v.hook_rate)+'%',{sub:'still watching after 3 seconds'})}${v.hold_rate!=null||v.atc_rate!=null?metric('Hold rate',v.hold_rate==null?null:pct(v.hold_rate),{sub:'ThruPlays ÷ 3-second plays'})+metric('Add-to-cart rate',v.atc_rate==null?null:pct(v.atc_rate),{sub:'Adds to cart ÷ landing page views'}):''}</div>`:'<div class="mini">No ads have run from this video yet.</div>'}
      ${hasAll?'<div class="mini" style="margin-top:8px">Every sales number here is Trybe-attributed: what you are paid on. ROAS is Trybe sales divided by ad spend.</div>':''}</section>
    ${v.ad_only?`<section><div class="note">This video is running as an ad, but it is no longer in your Trybe submissions list. Its ad numbers show here; it does not count toward the contest or rewards.</div></section>`:`
-   <section><h3>Record</h3><div class="timeline"><div><time>Submitted</time><span>${fmt.dt(v.submitted_at)||'<span class="muted">Unknown</span>'}</span></div><div><time>Status</time><span>${label}</span></div><div><time>Approved</time><span>${fmt.dt(v.approved_at)||'<span class="muted">Not approved</span>'}</span></div>${v.slot?`<div><time>Contest slot</time><span>${v.slot}${v.in_first_n===false?' (outside the first 20)':''}</span></div>`:''}${v.version>1?`<div><time>Version</time><span>v${v.version}</span></div>`:''}</div></section>
+   ${v.status==='pending'&&s.source?.last_run?`<div class="note" style="margin-top:12px">Pending as of the last Trybe update, ${esc(fmt.dt(s.source.last_run))}. If Austin approved it after that, it turns green here with the next update.</div>`:''}
+   <section><h3>Record</h3><div class="timeline"><div><time>Video ID</time><span><span class="mono" style="font-size:12px;word-break:break-all">${esc(v.id)}</span> <button class="btn gh sm" style="margin-left:6px" onclick="copyText('${esc(v.id)}')">Copy ID</button></span></div><div><time>Submitted</time><span>${fmt.dt(v.submitted_at)||'<span class="muted">Unknown</span>'}</span></div><div><time>Status</time><span>${label}</span></div><div><time>Approved</time><span>${fmt.dt(v.approved_at)||'<span class="muted">Not approved</span>'}</span></div>${v.slot?`<div><time>Contest slot</time><span>${v.slot}${v.in_first_n===false?' (outside the first 20)':''}</span></div>`:''}${v.version>1?`<div><time>Version</time><span>v${v.version}</span></div>`:''}</div></section>
    <section><h3>Contest</h3><div class="note">${esc(reason)}</div></section>`}
    ${v.revisions?.length?`<section><h3>Revisions</h3><div class="timeline">${v.revisions.map(r=>`<div><time>${fmt.date(r.submitted_at)}</time><span>${SSTATE[r.status]?.[1]||r.status}</span></div>`).join('')}</div></section>`:''}
    ${(v.events||[]).length?`<section><h3>Timeline</h3><div class="timeline">${v.events.map(e=>`<div><time>${fmt.dt(e.at)}</time><span>${esc(activityText({kind:'submission',event:e.event}))}${e.reason?' · '+esc(e.reason):''}</span></div>`).join('')}</div></section>`:''}
@@ -1437,6 +1685,8 @@ function roasTip(el){ const d=(window.__rpts||[])[+el.dataset.i]; const tip=$('#
   tip.style.left=Math.max(half+pad,Math.min(r.width-half-pad,c.left-r.left+c.width/2))+'px'; tip.style.top=Math.max(tip.offsetHeight*0.2,c.top-r.top)+'px';
   wrap.querySelectorAll('.cdot').forEach(o=>o.style.opacity=(o===el?'1':'.35')); }
 function roasTipHide(){ $('#ctip')?.classList.remove('on'); $$('#cw .cdot').forEach(o=>o.style.opacity='1'); }
+
+async function copyText(t){ try{ await navigator.clipboard.writeText(t); toast('Copied'); }catch(e){ const a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select(); try{ document.execCommand('copy'); toast('Copied'); }catch(e2){ toast('Could not copy. Long-press to select it.','bad'); } a.remove(); } }
 
 /* Inspiration · Winning angles · Spyboard · B-roll */
 'use strict';
@@ -1561,12 +1811,34 @@ route('trial',async()=>{ const h=await API.page('my_home'); const c=h.creator||{
 
 /* ---------------- Admin */
 route('admin',async()=>{ const A=await API.page('admin'); const Q=(A.queue||[]).filter(q=>q.state==='submitted'); const other=(A.queue||[]).filter(q=>q.state!=='submitted');
-  return `${ph('Review queue',`${Q.length} quest entr${Q.length===1?'y':'ies'} waiting. Approve awards XP once; the database enforces caps and duplicates.`,{eyebrow:'Admin'})}
+  let LBL={}; try{ const mq=await API.page('my_quests'); (mq.catalog||[]).forEach(c=>(c.proof||[]).forEach(f=>{ LBL[c.quest_key+':'+f.field]=f.label; })); }catch(e){}
+  const xpAll=Q.reduce((n,q)=>n+(q.requested_xp||0),0);
+  return `${ph('Review queue',`${Q.length} quest entr${Q.length===1?'y':'ies'} waiting${Q.length?` · +${xpAll} XP requested`:''}. Approve awards XP once; the database enforces caps and duplicates.`,{eyebrow:'Admin',acts:Q.length>1?`<button class="btn" onclick="approveAll()">${ico('check')} Approve all ${Q.length}</button>`:''})}
   ${Q.length?Q.map(q=>`<div class="card" style="margin-bottom:10px"><div class="admin-row"><div><div class="row"><b>${esc(q.display_name)}</b><span class="mini">· ${esc(q.title)} · ${PERIOD_LABEL(q.period_key)} · entry ${q.seq}</span>${q.duplicate_registration?badge('v','Duplicate registration'):''}${q.same_evidence_elsewhere?badge('x','Same evidence as another creator'):''}</div>
      <div class="mini" style="margin-top:4px">Submitted ${fmt.dt(q.submitted_at)||'—'} · requests +${q.requested_xp} XP · ${q.done_in_period}/${q.per_period_limit} already awarded this period</div>
-     <div style="margin-top:8px;font-size:13.5px">${Object.entries(q.draft||{}).map(([k,v])=>`<div><b>${esc(k)}:</b> ${Array.isArray(v)?v.map(u=>/^https?:/.test(u)?`<a ${openExt(u)}>${esc(u)}</a>`:esc(u)).join('<br>'):(/^https?:/.test(String(v))?`<a ${openExt(v)}>${esc(v)}</a>`:esc(v))}</div>`).join('')}</div></div>
+     <div class="proofv" style="margin-top:8px;font-size:13.5px">${Object.entries(q.draft||{}).map(([k,v])=>`<div><b>${esc(LBL[q.quest_key+':'+k]||k)}:</b> ${proofValueHtml(v)}</div>`).join('')}</div></div>
      <div class="stack"><button class="btn sm" onclick="adminAct('approve_quest','${q.id}')">Approve +${q.requested_xp} XP</button><button class="btn gh sm" onclick="adminNote('return_quest','${q.id}')">Request changes</button><button class="btn danger sm" onclick="adminNote('reject_quest','${q.id}')">Reject</button></div></div></div>`).join(''):emptyState('Queue is empty','Nothing is waiting for review.','','review')}
   <div class="sec"><h2>Recently decided</h2></div><div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Creator</th><th>Quest</th><th>Period</th><th>State</th><th>Note</th></tr></thead><tbody>${other.slice(0,30).map(q=>`<tr><td>${esc(q.display_name)}</td><td>${esc(q.title)}</td><td class="mono">${PERIOD_LABEL(q.period_key)}</td><td>${badge((QSTATE[q.state]||['n',q.state])[0],(QSTATE[q.state]||['n',q.state])[1])}</td><td class="mini">${esc(q.review_note||'')}</td></tr>`).join('')||'<tr><td colspan="5" class="mini">None yet</td></tr>'}</tbody></table></div></div>`; });
+/* Approve all (Austin, Oct 14): one click approves every entry in review, one at a time through the same approve_quest
+   call, so caps and duplicate checks still apply. Flagged entries are left out unless Austin ticks the box. */
+async function approveAll(){ const A=await API.page('admin',{},{force:true}); const Q=(A.queue||[]).filter(q=>q.state==='submitted'); if(!Q.length){ toast('Nothing is waiting'); render(); return; }
+  const fl=Q.filter(q=>q.duplicate_registration||q.same_evidence_elsewhere); const xp=Q.reduce((n,q)=>n+(q.requested_xp||0),0); const ppl=new Set(Q.map(q=>q.creator_id)).size;
+  openDrawer(`<div class="lbl">Admin · review queue</div><h2>Approve all ${Q.length} quest entries?</h2>
+    <p style="margin-top:8px">That is up to <b>+${xp} XP</b> across <b>${ppl}</b> creator${ppl===1?'':'s'}. Each one goes through the normal approval, so anything over a cap is skipped and stays in the queue for you.</p>
+    ${fl.length?`<label class="chk" style="margin-top:12px"><input type="checkbox" id="aa_flag"><span>Also approve the <b>${fl.length}</b> flagged entr${fl.length===1?'y':'ies'} (duplicate registration or same evidence as another creator). Left unticked, ${fl.length===1?'it stays':'they stay'} in the queue.</span></label>`:''}
+    <div class="row" style="margin-top:16px"><button class="btn" id="aa_go" onclick="runApproveAll()">${ico('check')} Approve all</button><button class="btn gh" onclick="closeDrawer()">Cancel</button></div>
+    <div class="aa-prog" id="aa_prog" hidden><div class="plabel"><span id="aa_txt">Starting…</span><b id="aa_n"></b></div><div class="bar green"><i id="aa_bar" style="width:0%"></i></div></div><div id="aa_res"></div>`); }
+async function runApproveAll(){ const go_=$('#aa_go'); if(!go_||go_.disabled) return; go_.disabled=true; go_.classList.add('pending'); const incl=!!$('#aa_flag')?.checked;
+  const A=await API.page('admin',{},{force:true}); const Q=(A.queue||[]).filter(q=>q.state==='submitted'&&(incl||!(q.duplicate_registration||q.same_evidence_elsewhere)));
+  $('#aa_prog').hidden=false; let ok=0,xp=0; const bad=[];
+  for(let i=0;i<Q.length;i++){ const q=Q[i]; $('#aa_txt').textContent=`Approving ${q.display_name} · ${q.title}`; $('#aa_n').textContent=`${i+1} / ${Q.length}`;
+    try{ const r=await API.rpc('approve_quest',{p_instance:q.id}); if(r&&(r.awarded||r.ok)){ ok++; xp+=r.xp||0; } else bad.push({q,why:r?.why||'not approved'}); }catch(e){ bad.push({q,why:e.message}); }
+    $('#aa_bar').style.width=((i+1)/Q.length*100).toFixed(1)+'%'; }
+  API.bust(); go_.classList.remove('pending'); go_.hidden=true; $('#aa_txt').textContent='Done';
+  $('#aa_res').innerHTML=`<div class="note good" style="margin-top:14px"><b>✅ Approved ${ok} entr${ok===1?'y':'ies'} · +${xp} XP awarded.</b></div>
+    ${bad.length?`<div class="note warn" style="margin-top:10px"><b>${bad.length} not approved</b> (still in the queue):<ul style="margin-top:6px">${bad.map(b=>`<li>${esc(b.q.display_name)} · ${esc(b.q.title)}: ${esc(b.why)}</li>`).join('')}</ul></div>`:''}
+    <div class="row" style="margin-top:14px"><button class="btn" onclick="closeDrawer();render()">Done</button></div>`;
+  if(ok) xpPop(xp); render(); }
 async function adminAct(fn,id,extra={}){ try{ const r=await API.rpc(fn,{p_instance:id,...extra}); if(r.ok||r.awarded){ toast(fn==='approve_quest'?`Awarded ${r.xp} XP`:r.why,'good'); if(fn==='approve_quest') xpPop(r.xp); } else toast(r.why,'bad'); API.bust(); render(); }catch(e){ toast(e.message,'bad'); } }
 function adminNote(fn,id){ const label=fn==='return_quest'?'Feedback for the creator':'Reason for rejection'; openDrawer(`<h2>${fn==='return_quest'?'Request changes':'Reject entry'}</h2><div class="field"><label for="anote">${label}</label><textarea id="anote"></textarea><div class="help">${fn==='return_quest'?'The creator edits the same entry and resubmits. Rejection is a different event.':'The entry closes. The creator can start a new one if the cap allows.'}</div></div><div class="row" style="margin-top:12px"><button class="btn ${fn==='reject_quest'?'danger':''}" onclick="(async()=>{const n=$('#anote').value.trim(); if(!n){toast('A note is required','bad');return;} closeDrawer(true); await adminAct('${fn}','${id}',${fn==='return_quest'?'{p_note:n}':'{p_reason:n}'});})()">Send</button><button class="btn gh" onclick="closeDrawer()">Cancel</button></div>`); }
 
