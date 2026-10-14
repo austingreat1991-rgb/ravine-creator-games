@@ -627,6 +627,29 @@ button.actrow:hover{background:var(--sf2)}
 .shotlink{display:inline-flex;align-items:center;gap:8px;margin:4px 0}
 .shotlink img{width:76px;height:76px;object-fit:cover;border-radius:10px;border:1px solid var(--ln2);background:var(--sf3)}
 .aa-prog{margin-top:16px}.aa-prog[hidden]{display:none}
+/* ---- Video stat sheet (Oct 14) */
+.vstabs{display:inline-flex;background:var(--sf2);border:1px solid var(--ln);border-radius:99px;padding:3px;gap:2px}
+.vstabs button{font-size:12.5px;font-weight:700;color:var(--tx3);padding:5px 12px;border-radius:99px}
+.vstabs button.on{background:var(--o);color:var(--o-ink)}
+.vstips{display:grid;gap:6px;margin-top:10px}
+.vstips div{font-size:13px;color:var(--tx);background:var(--o-soft);border:1px solid rgba(255,110,32,.3);border-radius:10px;padding:8px 11px;line-height:1.45}
+.vsgrp{margin-top:14px;background:var(--sf);border:1px solid var(--ln);border-radius:var(--r2);padding:4px 12px 8px}
+.vsg{font-size:11px;letter-spacing:1.3px;text-transform:uppercase;font-weight:800;color:var(--tx3);padding:8px 0 2px}
+.vsrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:9px 0;border-top:1px solid var(--ln)}
+.vsg+.vsrow{border-top:0}
+.vsl{font-size:13.5px;color:var(--tx2);font-weight:600;align-self:center}
+.vsv{font-family:var(--disp);font-size:20px;font-weight:800;text-align:right;align-self:center;white-space:nowrap}
+.vsv small{font-family:var(--f);font-size:12px;color:var(--tx3);font-weight:600}
+.vss{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;font-size:12px;color:var(--tx3)}
+.vsd{font-weight:800;font-size:12px;padding:1px 7px;border-radius:99px;font-family:var(--mono)}
+.vsd.g{color:var(--gr);background:var(--gr-soft)}.vsd.b{color:var(--bad);background:var(--bad-soft)}.vsd.n{color:var(--bl);background:var(--bl-soft)}.vsd.eq{color:var(--tx2);background:var(--sf2);font-family:var(--f)}
+.vsret{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:12px 0 2px;border-top:1px solid var(--ln)}
+.vsret .rc{text-align:center}
+.vsret .rbar{position:relative;height:74px;background:var(--sf3);border-radius:8px;overflow:hidden}
+.vsret .rbar i{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(180deg,var(--gold),var(--o));border-radius:8px 8px 0 0}
+.vsret .rbar b{position:absolute;left:0;right:0;height:2px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
+.vsret span{display:block;font-family:var(--mono);font-weight:700;font-size:13px;margin-top:5px}
+.vsret small{display:block;font-size:10.5px;color:var(--tx3);letter-spacing:.6px;text-transform:uppercase}
 </style>
 </head>
 <body>
@@ -646,7 +669,7 @@ button.actrow:hover{background:var(--sf2)}
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261014-163015";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261014-170142";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1597,16 +1620,19 @@ async function openVideo(id){
   const media=v.media_url?`<div class="vplay"><video src="${esc(v.media_url)}" ${v.thumb_url?`poster="${esc(v.thumb_url)}"`:''} controls playsinline preload="none" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"></video><div class="art" style="display:none;margin:0;width:100%">${thumb(v.thumb_url,'tile','Film')}</div></div>`:`<div class="art">${thumb(v.thumb_url,'tile','Film')}</div>`;
   openDrawer(`<div class="row"><span class="badge ${k}">${label}</span>${v.ad_only?badge('n','Ad only'):`<span class="badge ${oc[0]}">${oc[1]}</span>`}${v.funnel?badge(v.funnel==='BOF'?'x':'n',v.funnel):''}${v.ads?`<span class="pill live">● ${v.ads} live</span>`:''}</div><h2>${esc(v.title||v.id)}</h2>
    ${media}
+   ${v.ad_only?'':`<div id="vstats"><div class="sk" style="height:160px;margin-top:14px"></div></div>`}
+   <div id="oldnums">
    <section><h3>October</h3>${hasOct?`<div class="grid g2" style="gap:8px">${metric('Ad spend',money(v.oct_spend))}${metric('Sales (Trybe)',money(v.oct_sales),{cls:'gold'})}${metric('ROAS',roasX(v.oct_roas),{cls:v.oct_roas>=2?'green':''})}${v.oct_hold_rate!=null||v.oct_atc_rate!=null?metric('Hold rate',v.oct_hold_rate==null?null:pct(v.oct_hold_rate),{sub:'ThruPlays ÷ 3-second plays'})+metric('Add-to-cart rate',v.oct_atc_rate==null?null:pct(v.oct_atc_rate),{sub:'Adds to cart ÷ landing page views'}):''}</div>`:'<div class="mini">No ad spend on this video in October yet.</div>'}</section>
    <section><h3>All time</h3>${hasAll?`<div class="grid g2" style="gap:8px">${metric('Ad spend',money(v.spend))}${metric('Sales (Trybe)',money(v.sales),{cls:'gold'})}${metric('ROAS',roasX(v.roas),{cls:v.roas>=2?'green':''})}${metric('Hook rate',v.hook_rate==null?null:Math.round(v.hook_rate)+'%',{sub:'still watching after 3 seconds'})}${v.hold_rate!=null||v.atc_rate!=null?metric('Hold rate',v.hold_rate==null?null:pct(v.hold_rate),{sub:'ThruPlays ÷ 3-second plays'})+metric('Add-to-cart rate',v.atc_rate==null?null:pct(v.atc_rate),{sub:'Adds to cart ÷ landing page views'}):''}</div>`:'<div class="mini">No ads have run from this video yet.</div>'}
-     ${hasAll?'<div class="mini" style="margin-top:8px">Every sales number here is Trybe-attributed: what you are paid on. ROAS is Trybe sales divided by ad spend.</div>':''}</section>
+     ${hasAll?'<div class="mini" style="margin-top:8px">Every sales number here is Trybe-attributed: what you are paid on. ROAS is Trybe sales divided by ad spend.</div>':''}</section></div>
    ${v.ad_only?`<section><div class="note">This video is running as an ad, but it is no longer in your Trybe submissions list. Its ad numbers show here; it does not count toward the contest or rewards.</div></section>`:`
    ${v.status==='pending'&&s.source?.last_run?`<div class="note" style="margin-top:12px">Pending as of the last Trybe update, ${esc(fmt.dt(s.source.last_run))}. If Austin approved it after that, it turns green here with the next update.</div>`:''}
    <section><h3>Record</h3><div class="timeline"><div><time>Video ID</time><span><span class="mono" style="font-size:12px;word-break:break-all">${esc(v.id)}</span> <button class="btn gh sm" style="margin-left:6px" onclick="copyText('${esc(v.id)}')">Copy ID</button></span></div><div><time>Submitted</time><span>${fmt.dt(v.submitted_at)||'<span class="muted">Unknown</span>'}</span></div><div><time>Status</time><span>${label}</span></div><div><time>Approved</time><span>${fmt.dt(v.approved_at)||'<span class="muted">Not approved</span>'}</span></div>${v.slot?`<div><time>Contest slot</time><span>${v.slot}${v.in_first_n===false?' (outside the first 20)':''}</span></div>`:''}${v.version>1?`<div><time>Version</time><span>v${v.version}</span></div>`:''}</div></section>
    <section><h3>Contest</h3><div class="note">${esc(reason)}</div></section>`}
    ${v.revisions?.length?`<section><h3>Revisions</h3><div class="timeline">${v.revisions.map(r=>`<div><time>${fmt.date(r.submitted_at)}</time><span>${SSTATE[r.status]?.[1]||r.status}</span></div>`).join('')}</div></section>`:''}
    ${(v.events||[]).length?`<section><h3>Timeline</h3><div class="timeline">${v.events.map(e=>`<div><time>${fmt.dt(e.at)}</time><span>${esc(activityText({kind:'submission',event:e.event}))}${e.reason?' · '+esc(e.reason):''}</span></div>`).join('')}</div></section>`:''}
-   ${v.media_url?`<section><a class="btn gh" ${openExt(v.media_url)}>Open video ${ico('ext')}</a></section>`:''}`); }
+   ${v.media_url?`<section><a class="btn gh" ${openExt(v.media_url)}>Open video ${ico('ext')}</a></section>`:''}`);
+  if(!v.ad_only) loadVideoStats(id,v); }
 
 /* ---------------- Analytics (September layout, refreshed): every video with ad money behind it */
 const ASORTS=[['spend','Spend'],['rev','Trybe sales'],['roas','ROAS'],['hook','Hook rate'],['hold','Hold rate'],['atc','ATC rate']];
@@ -1616,7 +1642,7 @@ route('analytics',async(p)=>{
   const a=await API.page('my_ads',{p_range:r}); const rows=(a.rows||[]).map(x=>({...x,roas:TROAS(x.sales,x.spend)})); const agg=a.agg?{...a.agg,roas:TROAS(a.agg.sales,a.agg.spend)}:null; const oct=r==='2026-10';
   const label=oct?'October':'All time';
   const toggle=`<div class="rtoggle" role="tablist">${[['2026-10','October'],['all','All time']].map(([k,l])=>`<button role="tab" class="${r===k?'on':''}" onclick="go('analytics',{r:'${k}'})">${l}</button>`).join('')}</div>`;
-  const head=ph('Analytics',`Every video of yours with ad spend behind it · ${label}${a.data_through?' · updated '+fmt.dt(a.data_through):''}`,{eyebrow:'Progress',acts:toggle});
+  const head=ph('Analytics',`Every video of yours with ad spend behind it · ${label}${a.data_through?' · updated '+fmt.dt(a.data_through):''}. <b>Tap any video</b> for its full stat sheet: hook, watch time, CTR, clicks and more, next to your average.`,{eyebrow:'Progress',acts:toggle});
   if(!rows.length){ const c=a.counts||{};
     return `${head}<div class="stat3" style="margin-top:0"><div class="st"><div class="v">${c.submitted||0}</div><div class="k">Submitted</div></div><div class="st"><div class="v" style="color:var(--gr)">${c.approved||0}</div><div class="k">Approved</div></div><div class="st"><div class="v">0</div><div class="k">Running as ads${oct?' in Oct':''}</div></div></div>
     <div class="card" style="margin-top:14px"><h3>${oct?'No ad spend on your videos in October yet':'None of your videos are running as ads yet'}</h3><p style="margin-top:6px;max-width:680px">${oct?'Spend starts when the brand puts money behind a video. Your approved videos still count for the contest and rewards either way. ':'Your approved videos are safely on Trybe and still count. The brand just has not put spend behind them yet. '}The moment one goes live, its spend, hook rate and return show here.</p>${oct?`<div style="margin-top:12px"><button class="btn gh sm" onclick="go('analytics',{r:'all'})">See all time</button></div>`:''}</div>`; }
@@ -1687,6 +1713,53 @@ function roasTip(el){ const d=(window.__rpts||[])[+el.dataset.i]; const tip=$('#
 function roasTipHide(){ $('#ctip')?.classList.remove('on'); $$('#cw .cdot').forEach(o=>o.style.opacity='1'); }
 
 async function copyText(t){ try{ await navigator.clipboard.writeText(t); toast('Copied'); }catch(e){ const a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select(); try{ document.execCommand('copy'); toast('Copied'); }catch(e2){ toast('Could not copy. Long-press to select it.','bad'); } a.remove(); } }
+
+/* ---------------- Video stat sheet (Austin, Oct 14): every number from Trybe's video panel, next to your average.
+   Sales and ROAS are Trybe sales like everywhere else in the app. Purchases, cost per purchase and AOV are Meta pixel numbers. */
+const VS_GROUPS=[
+  ['💰 Results',[['sales','Sales (Trybe)','money',1],['roas','ROAS','x',1],['spend','Ad spend','money',0]]],
+  ['👀 Hook and watch time',[['thumbstop','Thumbstop (hook rate)','pct1',1],['avg_watch_s','Avg watched','watch',1],['v3s','3-sec views','int',0]]],
+  ['👆 Reach and clicks',[['impressions','Impressions','int',0],['ctr','CTR (link)','pct2',1],['link_clicks','Link clicks','int',0],['cpc_link','Cost per click','usd2',-1],['cpm','CPM','usd2',-1]]],
+  ['🛒 Purchases (Meta pixel)',[['conversions','Purchases','num1',1],['cpa','Cost per purchase','usd2',-1],['aov','Avg order value','usd2',1]]],
+];
+function vsFmt(k,f,o){ const v=o?.[k]; if(v==null||!isFinite(v)) return '—'; const n=Number(v);
+  if((k==='cpa'||k==='aov')&&!(Number(o.conversions)>0)) return '—';
+  return f==='money'?money(n):f==='usd2'?fmt.usd2(n):f==='x'?n.toFixed(2)+'x':f==='pct1'?n.toFixed(1)+'%':f==='pct2'?n.toFixed(2)+'%':f==='int'?fmt.int(Math.round(n)):f==='num1'?(Number.isInteger(n)?fmt.int(n):n.toFixed(1)):f==='watch'?`${n.toFixed(1)}s${o.avg_watch_pct!=null?` <small>(${Number(o.avg_watch_pct).toFixed(0)}%)</small>`:''}`:String(n); }
+function vsDelta(k,better,x,me){ const a=Number(x?.[k]), b=Number(me?.[k]); if(!isFinite(a)||!isFinite(b)||x?.[k]==null||me?.[k]==null||b===0) return '';
+  if((k==='cpa'||k==='aov')&&!(Number(x.conversions)>0&&Number(me.conversions)>0)) return '';
+  const p=(a-b)/Math.abs(b)*100; if(Math.abs(p)<3) return `<span class="vsd eq">≈ your avg</span>`;
+  const up=p>0, cls=better===0?'n':((up?1:-1)*better>0?'g':'b'); const t=Math.abs(p)>=900?Math.round(a/b)+'x':Math.round(Math.abs(p))+'%';
+  return `<span class="vsd ${cls}">${up?'▲':'▼'} ${t}</span>`; }
+function vsTips(x,me){ if(!x||!me) return []; const T=[]; const lo=(k,f=0.85)=>x[k]!=null&&me[k]!=null&&Number(me[k])>0&&Number(x[k])<Number(me[k])*f; const hi=(k,f=1.15)=>x[k]!=null&&me[k]!=null&&Number(me[k])>0&&Number(x[k])>Number(me[k])*f;
+  if(lo('thumbstop')) T.push('👀 Fewer people stopped on this one than on your usual video. Test a stronger first 2 seconds: movement, a bold visual or a question right away.');
+  if(lo('avg_watch_pct')) T.push('⏱️ People left earlier than usual. Cut the slow parts and get to the point sooner.');
+  if(lo('ctr')) T.push('👆 Fewer clicks than your average. Make the reason to tap clearer near the end.');
+  if(!T.length&&hi('thumbstop')&&hi('ctr',1.0)) T.push('🔥 This one beats your average on hook and clicks. Make more like it: same opening style, new angle.');
+  else if(!T.length&&hi('roas')) T.push('🔥 Better ROAS than your average. Study what this one does differently and repeat it.');
+  return T.slice(0,2); }
+function vsRetention(x,me){ const P=[['25%','ret25'],['50%','ret50'],['75%','ret75'],['End','ret100']]; if(P.every(([,k])=>x?.[k]==null)) return '';
+  return `<div class="vsret">${P.map(([l,k])=>{ const a=clamp(Number(x[k])||0,0,100), b=me?.[k]!=null?clamp(Number(me[k]),0,100):null; return `<div class="rc"><div class="rbar"><i style="height:${a}%"></i>${b!=null?`<b style="bottom:${b}%" title="Your avg ${Math.round(b)}%"></b>`:''}</div><span>${Math.round(a)}%</span><small>${l}</small></div>`; }).join('')}</div>
+    <div class="mini" style="margin-top:6px">Share of viewers still watching at each point${x.duration?` of the ${x.duration}s video`:''}. The white line is your average.</div>`; }
+function vsHtml(d,rk,v){ const R=d[rk]||{}, x=R.video, me=R.me, rv=R.ravine; const lbl=rk==='month'?'October':'All time';
+  const tabs=`<div class="vstabs" role="tablist">${[['month','October'],['all','All time']].map(([k,t])=>`<button role="tab" aria-selected="${rk===k}" class="${rk===k?'on':''}" onclick="S.ui.vsr='${k}';saveUI();renderVideoStats()">${t}</button>`).join('')}</div>`;
+  if(!x) return `<section><div class="row between"><h3 style="margin:0">📊 Stat sheet</h3>${tabs}</div><div class="note" style="margin-top:10px">No ad stats for this video ${rk==='month'?'in October':'yet'}. Stats show once it has $1 or more in ad spend${rk==='month'?' this month':''}.</div></section>`;
+  const tips=vsTips(x,me);
+  return `<section><div class="row between"><h3 style="margin:0">📊 Stat sheet</h3>${tabs}</div>
+    <div class="mini" style="margin-top:6px">${lbl} · compared to your average video${me?.n?` (${me.n} with ad spend)`:''}. Green = better than your average, red = worse.</div>
+    ${tips.length?`<div class="vstips">${tips.map(t=>`<div>${esc(t)}</div>`).join('')}</div>`:''}
+    ${VS_GROUPS.map(([g,rows])=>`<div class="vsgrp"><div class="vsg">${g}</div>${rows.map(([k,label,f,better])=>{ const dl=vsDelta(k,better,x,me);
+      return `<div class="vsrow"><div class="vsl">${esc(label)}</div><div class="vsv">${vsFmt(k,f,x)}</div><div class="vss">${dl}${me?`<span>Your avg ${vsFmt(k,f,me)}</span>`:''}${rv?`<span>Ravine ${vsFmt(k,f,rv)}</span>`:''}</div></div>`; }).join('')}
+      ${g.startsWith('🛒')&&(rk==='month'?v.oct_atc_rate:v.atc_rate)!=null?`<div class="vsrow"><div class="vsl">Add-to-cart rate</div><div class="vsv">${pct(rk==='month'?v.oct_atc_rate:v.atc_rate)}</div><div class="vss"><span>Adds to cart ÷ landing page views</span></div></div>`:''}
+      ${g.startsWith('👀')?vsRetention(x,me):''}${g.startsWith('👀')&&(rk==='month'?v.oct_hold_rate:v.hold_rate)!=null?`<div class="vsrow"><div class="vsl">Hold rate</div><div class="vsv">${pct(rk==='month'?v.oct_hold_rate:v.hold_rate)}</div><div class="vss"><span>ThruPlays ÷ 3-second plays</span></div></div>`:''}</div>`).join('')}
+    <div class="mini" style="margin-top:10px">Sales and ROAS use Trybe sales, the same numbers you are paid on. Purchases, cost per purchase and AOV are what Meta's pixel reports, so they will not match your Trybe sales. Stats from ${esc(fmt.dt(d.data_through)||'the last update')}.</div></section>`; }
+const VSC={};
+async function loadVideoStats(id,v){ const box=$('#vstats'); if(!box) return;
+  try{ const d=await API.page('my_video_stats',{p_id:id}); if(!d||d.ok===false){ box.innerHTML=''; return; }
+    VSC.cur={id,v,d}; renderVideoStats(); }
+  catch(e){ box.innerHTML=''; } }
+function renderVideoStats(){ const box=$('#vstats'); const c=VSC.cur; if(!box||!c) return;
+  let rk=S.ui.vsr||'month'; if(!c.d[rk]?.video&&c.d[rk==='month'?'all':'month']?.video&&!S.ui.vsr) rk=rk==='month'?'all':'month';
+  box.innerHTML=vsHtml(c.d,rk,c.v); const old=$('#oldnums'); if(old) old.hidden=!!(c.d.all?.video||c.d.month?.video); }
 
 /* Inspiration · Winning angles · Spyboard · B-roll */
 'use strict';
