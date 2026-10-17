@@ -651,33 +651,98 @@ button.actrow:hover{background:var(--sf2)}
 .vsret span{display:block;font-family:var(--mono);font-weight:700;font-size:13px;margin-top:5px}
 .vsret small{display:block;font-size:10.5px;color:var(--tx3);letter-spacing:.6px;text-transform:uppercase}
 
-/* team goal thermometer (Oct 16): orange fill on a lighter orange track, checkpoints cut as surface gaps */
-.tg{margin-bottom:12px}
-.tg-top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-top:10px}
-.tg-num{font-family:var(--disp);font-size:48px;font-weight:800;line-height:1}
-.tg-of{font-size:15px;color:var(--tx2);margin-left:8px;font-weight:600;white-space:nowrap}
-.tg-pct{font-family:var(--disp);font-size:30px;font-weight:800;line-height:1;color:var(--tx)}
-.tgm{display:flex;align-items:center;margin-top:16px}
-.tgm-bulb{width:30px;height:30px;border-radius:50%;background:var(--o);flex:none;position:relative;z-index:1;box-shadow:0 0 0 4px var(--sf),0 0 18px rgba(255,110,32,.45)}
-.tgm-tube{position:relative;flex:1;height:16px;margin-left:-8px;background:var(--o-soft);border-radius:0 99px 99px 0;overflow:hidden}
-.tgm-tube i{display:block;height:100%;background:linear-gradient(90deg,var(--o),var(--o2));border-radius:0 99px 99px 0;transition:width .9s var(--ease)}
-.tgm-cp{position:absolute;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--sf)}
-.tgm.won .tgm-bulb{background:var(--gold);box-shadow:0 0 0 4px var(--sf),0 0 18px rgba(232,182,74,.5)}
-.tgm.won .tgm-tube i{background:var(--gold)}
-.tgm-scale{position:relative;height:18px;margin:7px 0 0 22px;font-size:12px;color:var(--tx3);font-weight:600}
-.tgm-scale span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
-.tgm-scale span.first{left:0;transform:translateX(-50%)}
-.tgm-scale span.end{transform:translateX(-100%)}
-.tgm-scale span.hit{color:var(--tx)}
-.tg-sub{display:flex;gap:6px 16px;flex-wrap:wrap;margin-top:12px;font-size:14px;color:var(--tx2)}
-.tg-sub b{color:var(--tx)}
-.tg-rule{margin-top:14px;padding:10px 12px;border-radius:var(--r2);background:var(--gold-soft);color:var(--tx);font-size:14px;line-height:1.45}
-.tg-me{margin-top:14px;padding-top:14px;border-top:1px solid var(--ln)}
-.tg-mv{font-family:var(--disp);font-size:32px;font-weight:800;line-height:1}
-.tg-cut{margin-top:8px;font-size:14px;color:var(--tx2)}
-.tg-cut b{color:var(--gold)}
-.tgm-scale span .flag{position:static;transform:none}
-@media (max-width:560px){ .tg-num{font-size:40px} .tg-pct{font-size:24px} .tgm-scale span .flag{display:none} }
+/* Team goal thermometer (Oct 17 redesign): a glass fundraiser thermometer. Molten-orange mercury in a dark glass
+   tube, a glowing bulb that carries the %, graduation ticks underneath, gold checks on passed checkpoints.
+   One load moment (mercury rises, numbers count up), then still. */
+.card.tg{position:relative;overflow:hidden;margin-bottom:14px;padding:22px 22px 20px;border-color:rgba(255,122,46,.32);
+  background:radial-gradient(120% 90% at 0% 0%,rgba(255,110,32,.16),transparent 55%),radial-gradient(80% 70% at 100% 100%,rgba(232,182,74,.07),transparent 60%),linear-gradient(180deg,#14171D,#0F1116)}
+.tg-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.tg-title{font-family:var(--disp);font-size:24px;font-weight:800;letter-spacing:.2px;line-height:1.05;color:var(--tx)}
+.tg-sub{font-size:13px;color:var(--tx3);margin-top:3px}
+.tg-pot{flex:none;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:99px;font-weight:700;font-size:13px;color:#F6D58E;
+  background:linear-gradient(180deg,rgba(232,182,74,.2),rgba(232,182,74,.08));border:1px solid rgba(232,182,74,.38);box-shadow:0 0 22px rgba(232,182,74,.12)}
+.tg-hero{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:16px}
+.tg-num{font-family:var(--disp);font-size:60px;font-weight:800;line-height:.92;letter-spacing:-.5px;color:#fff;font-variant-numeric:tabular-nums;
+  background:linear-gradient(180deg,#FFFFFF 30%,#FFD9BD);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.tg-of{font-size:15px;color:var(--tx2);font-weight:600}
+/* the thermometer */
+.tgm{position:relative;display:flex;align-items:center;margin-top:20px;height:66px}
+.tgm-bulb{position:relative;z-index:2;flex:none;width:66px;height:66px;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 34% 28%,#FFD2AE 0%,#FF8A3D 30%,#F26414 62%,#B8430A 100%);
+  box-shadow:0 0 0 5px #12151A,0 0 0 6px rgba(255,255,255,.09),0 0 34px rgba(255,110,32,.6),inset 0 -6px 12px rgba(120,35,0,.45)}
+.tgm-bulb::after{content:'';position:absolute;left:15px;top:11px;width:18px;height:9px;border-radius:50%;background:rgba(255,255,255,.45);filter:blur(2px);transform:rotate(-24deg)}
+.tgm-bulb span{position:relative;z-index:1;font-family:var(--disp);font-weight:800;font-size:23px;color:#fff;line-height:1;text-shadow:0 1px 6px rgba(110,30,0,.55)}
+.tgm-bulb small{font-size:13px;margin-left:1px}
+.tgm-tube{position:relative;flex:1;height:28px;margin-left:-16px;border-radius:0 99px 99px 0;overflow:hidden;
+  background:linear-gradient(180deg,#0B0D11,#171A21 55%,#0D0F13);border:1px solid rgba(255,255,255,.1);border-left:0;
+  box-shadow:inset 0 3px 7px rgba(0,0,0,.7),inset 0 -1px 0 rgba(255,255,255,.04)}
+.tgm-tube::after{content:'';position:absolute;z-index:3;left:18px;right:12px;top:4px;height:4px;border-radius:99px;pointer-events:none;
+  background:linear-gradient(90deg,rgba(255,255,255,.32),rgba(255,255,255,.08) 55%,rgba(255,255,255,.02))}
+.tgm-merc{position:relative;z-index:1;height:100%;min-width:20px;border-radius:0 99px 99px 0;
+  background:linear-gradient(180deg,#FFC08F 0%,#FF8A3D 30%,#FF6E20 58%,#C94C0C 100%);
+  box-shadow:0 0 18px rgba(255,110,32,.55),inset -3px 0 6px rgba(255,220,190,.35);animation:tgrise 1.4s var(--ease) .1s both}
+.tgm-merc::after{content:'';position:absolute;right:3px;top:5px;bottom:5px;width:5px;border-radius:99px;background:rgba(255,236,220,.75);filter:blur(1.5px)}
+.tgm-notch{position:absolute;z-index:2;top:0;bottom:0;width:2px;margin-left:-1px;background:rgba(0,0,0,.42)}
+.tgm-notch.hit{background:rgba(90,30,0,.35)}
+.tgm-notch i{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:10px;font-weight:900;color:#2A1C02;background:radial-gradient(circle at 35% 30%,#FFF0C2,#E8B64A 60%,#B88A24);box-shadow:0 0 0 2px rgba(80,25,0,.45),0 0 8px rgba(232,182,74,.6)}
+.tgm.won .tgm-bulb{background:radial-gradient(circle at 34% 28%,#FFF1C8 0%,#F2CC6A 32%,#E0A93A 62%,#9C6E14 100%);box-shadow:0 0 0 5px #12151A,0 0 0 6px rgba(255,255,255,.09),0 0 38px rgba(232,182,74,.7),inset 0 -6px 12px rgba(90,60,0,.45)}
+.tgm.won .tgm-merc{background:linear-gradient(180deg,#FFF0C2 0%,#F2CC6A 32%,#E8B64A 60%,#A87A1C 100%);box-shadow:0 0 22px rgba(232,182,74,.6)}
+@keyframes tgrise{from{width:0}}
+.tg.still .tgm-merc{animation:none}
+/* graduation ticks + checkpoint labels, aligned to the tube (bulb overlap = 50px) */
+.tgm-under{margin:6px 0 0 50px}
+.tgm-grad{position:relative;height:9px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.16) 0 1px,transparent 1px 2.5%)}
+.tgm-grad b{position:absolute;top:0;width:2px;height:14px;margin-left:-1px;background:rgba(255,255,255,.4);border-radius:1px}
+.tgm-grad b.end{margin-left:-2px}
+.tgm-grad b.hit{background:var(--gold);box-shadow:0 0 6px rgba(232,182,74,.6)}
+.tgm-scale{position:relative;height:24px;margin-top:6px;font-size:12.5px;font-weight:700;color:var(--tx3);font-variant-numeric:tabular-nums}
+.tgm-scale span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap;display:inline-flex;align-items:center;gap:4px}
+.tgm-scale span.first{left:0}
+.tgm-scale span.end{transform:translateX(-100%);color:var(--tx2)}
+.tgm-scale span.hit{color:#F6D58E}
+.tgm-scale span.next{color:var(--o2)}
+.tgm-scale em{font-style:normal}
+.tgm.won .tgm-notch i{box-shadow:0 0 0 2px rgba(60,40,0,.5)}
+/* stats row */
+.tg-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:16px;border-top:1px solid var(--ln);border-bottom:1px solid var(--ln)}
+.tg-stat{padding:12px 4px 12px 14px;border-left:1px solid var(--ln)}
+.tg-stat:first-child{border-left:0;padding-left:0}
+.tg-stat b{display:block;font-family:var(--disp);font-size:24px;font-weight:800;line-height:1.05;color:var(--tx);font-variant-numeric:tabular-nums}
+.tg-stat span{display:block;font-size:12.5px;color:var(--tx3);margin-top:3px}
+.tg-stat.win b{font-family:var(--f)}
+/* the pot rule */
+.tg-rule{margin-top:16px;padding:12px 14px;border-radius:12px;font-size:14px;line-height:1.5;color:var(--tx2);
+  background:linear-gradient(90deg,rgba(232,182,74,.13),rgba(232,182,74,.04));border:1px solid rgba(232,182,74,.22)}
+.tg-rule b{color:#F6D58E;font-weight:700}
+/* your contribution */
+.tg-you{display:flex;align-items:center;gap:16px;margin-top:14px;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid var(--ln)}
+.tg-ringwrap{position:relative;flex:none;width:78px;height:78px;display:grid;place-items:center}
+.tg-ring{position:absolute;inset:0;width:100%;height:100%}
+.tg-ring circle{fill:none;stroke-width:7}
+.tg-ring .trk{stroke:var(--sf3)}
+.tg-ring .arc{stroke:var(--gold);stroke-linecap:round;filter:drop-shadow(0 0 4px rgba(232,182,74,.45))}
+.tg-ringwrap span{position:relative;font-family:var(--disp);font-weight:800;font-size:17px;color:var(--tx)}
+.tg-you-txt{min-width:0}
+.tg-you-h{font-size:13px;font-weight:700;color:var(--tx3)}
+.tg-you-v{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-top:2px}
+.tg-you-v span{font-family:var(--disp);font-size:34px;font-weight:800;line-height:1;color:var(--tx);font-variant-numeric:tabular-nums}
+.tg-you-v small{font-size:13.5px;color:var(--tx2)}
+.tg-cut{margin-top:6px;font-size:14px;color:var(--tx2)}
+.tg-cut b{color:var(--gold);font-weight:800;font-size:15px}
+.tg-priv{margin-top:4px;font-size:12px;color:var(--tx4)}
+@media (max-width:560px){
+  .card.tg{padding:18px 16px 16px}
+  .tg-title{font-size:21px}
+  .tg-num{font-size:48px}
+  .tgm{height:56px} .tgm-bulb{width:56px;height:56px} .tgm-bulb span{font-size:19px} .tgm-bulb::after{left:12px;top:9px;width:15px}
+  .tgm-tube{height:24px;margin-left:-14px} .tgm-under{margin-left:42px} .tgm-notch i{width:14px;height:14px;font-size:9px}
+  .tgm-scale{font-size:11.5px} .tgm-scale em.flag{display:none}
+  .tg-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tg-stat:nth-child(3){border-left:0;padding-left:0}
+  .tg-stat:nth-child(n+3){border-top:1px solid var(--ln)}
+  .tg-you{padding:12px;gap:12px} .tg-ringwrap{width:66px;height:66px} .tg-you-v span{font-size:28px}
+}
+@media (prefers-reduced-motion:reduce){ .tgm-merc{animation:none} }
 </style>
 </head>
 <body>
@@ -697,7 +762,7 @@ button.actrow:hover{background:var(--sf2)}
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261017-044924";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261017-154535";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1143,37 +1208,52 @@ function numbersCard(N){
   </div>
   <div class="grid g4" style="margin-bottom:12px">${metric('Approved in Oct',fmt.int(N.month_approved??0))}${metric('Sales in Oct',fmt.usd(N.month_sales))}${metric('Approved all time',fmt.int(N.all_approved??0))}${metric('Approval rate',N.approval_rate==null?null:N.approval_rate+'%')}</div>`;
 }
-/* Team goal thermometer (Oct 16, Austin + Chris): one monthly Trybe sales goal for Ravine Elite, like a school
-   fundraiser thermometer. Hit it and the bonus pool is split by share of team sales (20% of the sales = 20% of the pot).
-   Resets every month. Creators get the team total and only their own numbers; the full split is admin only. */
+/* Team goal thermometer (Oct 16, Austin + Chris; redesigned Oct 17): one monthly Trybe sales goal for Ravine Elite,
+   drawn like a school fundraiser thermometer. Hit it and the pot is split by share of team sales (20% of the sales =
+   20% of the pot). Resets every month. Creators get the team total and only their own numbers; the split is admin only. */
 async function teamGoal(){ try{ return await API.page('my_team_goal'); }catch(e){ return null; } }
 function fmtK(n){ n=Number(n)||0; if(n>=1e6) return '$'+(+(n/1e6).toFixed(2))+'M'; if(n>=1e3) return '$'+Math.round(n/1e3)+'K'; return '$'+Math.round(n); }
 function fmtShare(s){ const x=Number(s||0)*100; return (x>=1||x===0?x.toFixed(1):x.toFixed(2))+'%'; }
-function teamBar(g){ const goal=Number(g.goal)||1, cur=Math.max(0,Number(g.team_sales)||0), p=Math.min(100,cur/goal*100);
-  const cps=(g.checkpoints||[]).map(Number).filter(v=>v>0&&v<goal); const won=cur>=goal;
-  return `<div class="tgm ${won?'won':''}" role="progressbar" aria-label="${esc(g.label||'')} team sales toward the ${esc(fmtK(goal))} goal" aria-valuemin="0" aria-valuemax="${goal}" aria-valuenow="${Math.round(Math.min(cur,goal))}" aria-valuetext="${esc(fmt.usd(cur))} of ${esc(fmt.usd(goal))}">
-    <span class="tgm-bulb"></span><div class="tgm-tube"><i style="width:${p.toFixed(2)}%"></i>${cps.map(v=>`<b class="tgm-cp" style="left:${(v/goal*100).toFixed(2)}%"></b>`).join('')}</div></div>
-  <div class="tgm-scale" aria-hidden="true"><span class="first hit">$0</span>${cps.map(v=>`<span class="${cur>=v?'hit':''}" style="left:${(v/goal*100).toFixed(2)}%">${fmtK(v)}${cur>=v?' ✓':''}</span>`).join('')}<span class="end ${won?'hit':''}" style="left:100%"><span class="flag">🏁 </span>${fmtK(goal)}</span></div>`; }
-function teamGoalHead(g){ const goal=Number(g.goal), cur=Math.max(0,Number(g.team_sales)||0), left=Math.max(0,goal-cur), dl=daysLeft(g.ends_at);
-  const next=(g.checkpoints||[]).map(Number).find(v=>v>cur&&v<goal);
-  return `<div class="row between" style="gap:8px;flex-wrap:wrap"><div class="lbl">🎯 ${esc(g.label)} team goal · Ravine Elite</div>${Number(g.bonus_pool)>0?`<span class="badge g noicon">${esc(fmt.usd(g.bonus_pool))} bonus pool</span>`:''}</div>
-  <div class="tg-top"><div><span class="tg-num">${esc(fmt.usd(cur))}</span><span class="tg-of">of ${esc(fmt.usd(goal))}</span></div><span class="tg-pct">${Math.floor(cur/goal*100)}%</span></div>
+function tgNums(g){ const goal=Number(g.goal)||1, cur=Math.max(0,Number(g.team_sales)||0), left=Math.max(0,goal-cur), dl=Math.max(1,daysLeft(g.ends_at));
+  return {goal,cur,left,dl,pct:cur/goal*100,won:cur>=goal,perDay:left/dl,cps:(g.checkpoints||[]).map(Number).filter(v=>v>0&&v<goal)}; }
+function teamBar(g){ const n=tgNums(g); const p=Math.min(100,n.pct); const next=n.cps.find(v=>v>n.cur);
+  const lbl=v=>{ const hit=n.cur>=v; return `<span class="${hit?'hit':''}${v===next?' next':''}" style="left:${(v/n.goal*100).toFixed(2)}%">${fmtK(v)}</span>`; };
+  return `<div class="tgm ${n.won?'won':''}" role="progressbar" aria-label="${esc(g.label||'')} team sales toward the ${esc(fmtK(n.goal))} goal" aria-valuemin="0" aria-valuemax="${n.goal}" aria-valuenow="${Math.round(Math.min(n.cur,n.goal))}" aria-valuetext="${esc(fmt.usd(n.cur))} of ${esc(fmt.usd(n.goal))}">
+    <div class="tgm-bulb"><span>${Math.floor(n.pct)}<small>%</small></span></div>
+    <div class="tgm-tube"><div class="tgm-merc" style="width:${p.toFixed(2)}%"></div>${n.cps.map(v=>`<b class="tgm-notch${n.cur>=v?' hit':''}" style="left:${(v/n.goal*100).toFixed(2)}%">${n.cur>=v?'<i>✓</i>':''}</b>`).join('')}</div>
+  </div>
+  <div class="tgm-under" aria-hidden="true"><div class="tgm-grad">${n.cps.map(v=>`<b class="${n.cur>=v?'hit':''}" style="left:${(v/n.goal*100).toFixed(2)}%"></b>`).join('')}<b class="end${n.won?' hit':''}" style="left:100%"></b></div>
+    <div class="tgm-scale"><span class="first">$0</span>${n.cps.map(lbl).join('')}<span class="end ${n.won?'hit':''}" style="left:100%"><em class="flag">${n.won?'🏆':'🏁'}</em>${fmtK(n.goal)}</span></div></div>`; }
+function teamGoalHead(g){ const n=tgNums(g); const pot=Number(g.bonus_pool)||0;
+  const stat=(v,k,cls='')=>`<div class="tg-stat ${cls}"><b>${v}</b><span>${k}</span></div>`;
+  return `<div class="tg-head"><div><h3 class="tg-title">${esc(g.label)} team goal</h3><div class="tg-sub">Ravine Elite Trybe sales${g.data_through?`, updated ${esc(fmt.ago(g.data_through))}`:''}</div></div>${pot>0?`<div class="tg-pot"><span aria-hidden="true">💰</span> ${esc(fmt.usd(pot))} pot</div>`:''}</div>
+  <div class="tg-hero"><span class="tg-num" data-countup="${Math.round(n.cur)}">${esc(fmt.usd(n.cur))}</span><span class="tg-of">${n.won?'raised. Goal smashed.':`raised toward ${esc(fmt.usd(n.goal))}`}</span></div>
   ${teamBar(g)}
-  <div class="tg-sub">${cur>=goal?`<span>🎉 <b>Goal hit.</b> Team sales went past ${esc(fmtK(goal))}.</span>`:`<span><b>${esc(fmt.usd(left))}</b> to go</span>${next?`<span>Next checkpoint <b>${esc(fmtK(next))}</b></span>`:''}<span><b>${dl}</b> day${dl===1?'':'s'} left</span>`}<span><b>${fmt.int(g.sellers||0)}</b> creators with sales</span></div>`; }
+  <div class="tg-stats">${n.won?stat('🎉','goal hit','win')+stat(esc(fmt.usd(n.cur-n.goal)),'past the goal'):stat(esc(fmt.usd(n.left)),'to go')+stat(esc(fmtK(n.perDay)),'a day gets us there')}${stat(daysLeft(g.ends_at),'days left')}${stat(fmt.int(g.sellers||0),'creators selling')}</div>`; }
+function shareRing(s){ const r=25, c=2*Math.PI*r, x=Math.max(0,Math.min(1,Number(s)||0)), dash=x>0?Math.max(c*x,3):0;
+  return `<svg class="tg-ring" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="${r}" class="trk"/><circle cx="32" cy="32" r="${r}" class="arc" stroke-dasharray="${dash.toFixed(2)} ${c.toFixed(2)}" transform="rotate(-90 32 32)"/></svg>`; }
 function teamGoalCard(g){ if(!g||!g.month_key) return '';
-  const goal=Number(g.goal), pool=Number(g.bonus_pool)||0, mine=Number(g.my_sales)||0, won=Number(g.team_sales)>=goal;
-  const rule=pool>0?`<div class="tg-rule">💰 <b>Hit ${esc(fmtK(goal))} as a team and ${esc(fmt.usd(pool))} gets split by contribution.</b> Bring in 20% of the team's sales, get 20% of the pot (${esc(fmt.usd(pool*0.2))}). Resets every month.</div>`:'';
-  const me=g.on_team?`<div class="tg-me"><div class="lbl">Your contribution</div>
-      <div class="row" style="gap:10px;align-items:baseline;flex-wrap:wrap;margin-top:6px"><span class="tg-mv">${esc(fmt.usd(mine))}</span><span class="small">${mine>0?`<b>${fmtShare(g.my_share)}</b> of team sales`:`No Trybe sales yet in ${esc(g.label)}`}</span></div>
-      ${pool>0?`<div class="tg-cut">${mine>0?(won?`Your cut of the ${esc(fmt.usd(pool))}: <b>${esc(fmt.usd(g.my_bonus_if_hit))}</b> on today's numbers. The final split uses the numbers at the end of ${esc(g.label)}.`:`If we hit ${esc(fmtK(goal))}, your cut of the ${esc(fmt.usd(pool))} is <b>${esc(fmt.usd(g.my_bonus_if_hit))}</b> on today's numbers.`):`Every sale you drive moves the bar and earns you a cut of the ${esc(fmt.usd(pool))}.`}</div>`:''}
-      <div class="mini" style="margin-top:6px">Only you see your numbers</div></div>`:'';
-  return `<div class="card hi tg">${teamGoalHead(g)}${rule}${me}
-    <div class="mini" style="margin-top:10px">Trybe sales from every Ravine Elite creator this month${g.data_through?' · as of '+esc(fmt.dt(g.data_through)):''}</div></div>`; }
+  const n=tgNums(g), pot=Number(g.bonus_pool)||0, mine=Number(g.my_sales)||0;
+  const rule=pot>0?`<div class="tg-rule"><b>Hit ${esc(fmtK(n.goal))} as a team and the ${esc(fmt.usd(pot))} pot gets split by contribution.</b> Bring in 20% of the team's sales, take home 20% of the pot (${esc(fmt.usd(pot*0.2))}). Resets every month.</div>`:'';
+  const you=g.on_team?`<div class="tg-you">
+      <div class="tg-ringwrap">${shareRing(g.my_share)}<span>${mine>0?fmtShare(g.my_share):'0%'}</span></div>
+      <div class="tg-you-txt"><div class="tg-you-h">Your contribution</div>
+        <div class="tg-you-v"><span data-countup="${Math.round(mine)}">${esc(fmt.usd(mine))}</span><small>${mine>0?'of the team’s sales':`in ${esc(g.label)} so far`}</small></div>
+        ${pot>0?`<div class="tg-cut">${mine>0?(n.won?`Your cut of the pot: <b>${esc(fmt.usd(g.my_bonus_if_hit))}</b>. Final split uses the numbers at the end of ${esc(g.label)}.`:`Your cut if we hit ${esc(fmtK(n.goal))}: <b>${esc(fmt.usd(g.my_bonus_if_hit))}</b>`):`Every sale you drive moves the bar and earns you a cut of the ${esc(fmt.usd(pot))}.`}</div>`:''}
+        <div class="tg-priv">Only you see your numbers</div></div></div>`:'';
+  return `<section class="card tg">${teamGoalHead(g)}${rule}${you}</section>`; }
 function teamGoalAdmin(g){ if(!g||!g.month_key) return ''; const rows=g.rows||[]; const won=Number(g.team_sales)>=Number(g.goal);
   return `<div class="sec"><h2>🎯 ${esc(g.label)} team goal</h2><span class="mini">${esc(fmt.usd(g.bonus_pool))} split by share if the team hits ${esc(fmt.usd(g.goal))}</span></div>
-  <div class="card hi tg">${teamGoalHead(g)}<div class="mini" style="margin-top:10px">Trybe sales${g.data_through?' · as of '+esc(fmt.dt(g.data_through)):''}</div></div>
+  <section class="card tg">${teamGoalHead(g)}</section>
   <div class="card pad0" style="margin-top:10px"><div class="tblwrap"><table class="tbl"><thead><tr><th>Creator</th><th class="num">${esc(g.label)} Trybe sales</th><th class="num">Share</th><th class="num">Cut if we hit it</th></tr></thead><tbody>${rows.map(x=>`<tr><td>${esc(x.display_name)}</td><td class="num">${esc(fmt.usd2(x.sales))}</td><td class="num">${fmtShare(x.share)}</td><td class="num"><b>${esc(fmt.usd2(x.bonus))}</b></td></tr>`).join('')||'<tr><td colspan="4" class="mini">No sales yet this month</td></tr>'}</tbody></table></div></div>
   <div class="mini" style="margin-top:6px">${won?'Goal hit. Pay from the numbers after the last refresh of the month.':'Not hit yet. Cuts move with every refresh. Pay only if the bar reaches the goal, from the final numbers of the month.'} Creators only ever see their own cut.</div>`; }
+/* one load moment per session: the mercury rises (CSS) and the dollar figures count up with it */
+function tgAnimate(){ const els=[...document.querySelectorAll('.tg [data-countup]')]; if(!els.length) return;
+  const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(S.tgSeen||reduce){ document.querySelectorAll('.tg').forEach(x=>x.classList.add('still')); return; } S.tgSeen=true;
+  const t0=performance.now(), D=1400, ease=t=>1-Math.pow(1-t,4);
+  const step=now=>{ const t=Math.min(1,(now-t0)/D); els.forEach(el=>{ el.textContent=fmt.usd(Math.round(Number(el.dataset.countup)*ease(t))); }); if(t<1) requestAnimationFrame(step); };
+  requestAnimationFrame(step); }
 route('home',async()=>{
   const h=await API.page('my_home'); const c=h.campaign||{}; const ct=h.contest||{}; const q=h.quests||{}; const r=h.rewards||{}; const sub=h.submissions||{};
   const N=await myNumbers(); const TG=await teamGoal(); let SP={}; try{ SP=await API.page('my_submissions'); }catch(e){} const SUBS=SP.videos||[]; try{ await API.page('my_quests'); }catch(e){}
@@ -1425,7 +1505,7 @@ function openClaim(id){ if(S.view!=='rewards') go('rewards'); openReward(id); }
 let BANNER_SEQ=0;
 async function topBanner(){ const seq=++BANNER_SEQ; const view=S.view; if(!S.me||view.startsWith('admin')) return; let r; try{ r=await API.page('my_rewards'); }catch(e){ return; }
   if(seq!==BANNER_SEQ||S.view!==view) return; const html=claimBannerHtml(r); const a=$('#main .anim'); if(!a) return; $('#main .claimwrap')?.remove(); if(html) a.insertAdjacentHTML('afterbegin',`<div class="claimwrap">${html}</div>`); }
-function afterRender(){ tickReset(); topBanner(); hydrateShots($('#main')); }
+function afterRender(){ tickReset(); topBanner(); hydrateShots($('#main')); tgAnimate(); }
 
 /* ---- refresh when the app comes back to the screen (phones keep it open for days) */
 let HIDDEN_AT=0;
