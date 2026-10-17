@@ -650,6 +650,34 @@ button.actrow:hover{background:var(--sf2)}
 .vsret .rbar b{position:absolute;left:0;right:0;height:2px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
 .vsret span{display:block;font-family:var(--mono);font-weight:700;font-size:13px;margin-top:5px}
 .vsret small{display:block;font-size:10.5px;color:var(--tx3);letter-spacing:.6px;text-transform:uppercase}
+
+/* team goal thermometer (Oct 16): orange fill on a lighter orange track, checkpoints cut as surface gaps */
+.tg{margin-bottom:12px}
+.tg-top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-top:10px}
+.tg-num{font-family:var(--disp);font-size:48px;font-weight:800;line-height:1}
+.tg-of{font-size:15px;color:var(--tx2);margin-left:8px;font-weight:600;white-space:nowrap}
+.tg-pct{font-family:var(--disp);font-size:30px;font-weight:800;line-height:1;color:var(--tx)}
+.tgm{display:flex;align-items:center;margin-top:16px}
+.tgm-bulb{width:30px;height:30px;border-radius:50%;background:var(--o);flex:none;position:relative;z-index:1;box-shadow:0 0 0 4px var(--sf),0 0 18px rgba(255,110,32,.45)}
+.tgm-tube{position:relative;flex:1;height:16px;margin-left:-8px;background:var(--o-soft);border-radius:0 99px 99px 0;overflow:hidden}
+.tgm-tube i{display:block;height:100%;background:linear-gradient(90deg,var(--o),var(--o2));border-radius:0 99px 99px 0;transition:width .9s var(--ease)}
+.tgm-cp{position:absolute;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--sf)}
+.tgm.won .tgm-bulb{background:var(--gold);box-shadow:0 0 0 4px var(--sf),0 0 18px rgba(232,182,74,.5)}
+.tgm.won .tgm-tube i{background:var(--gold)}
+.tgm-scale{position:relative;height:18px;margin:7px 0 0 22px;font-size:12px;color:var(--tx3);font-weight:600}
+.tgm-scale span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
+.tgm-scale span.first{left:0;transform:translateX(-50%)}
+.tgm-scale span.end{transform:translateX(-100%)}
+.tgm-scale span.hit{color:var(--tx)}
+.tg-sub{display:flex;gap:6px 16px;flex-wrap:wrap;margin-top:12px;font-size:14px;color:var(--tx2)}
+.tg-sub b{color:var(--tx)}
+.tg-rule{margin-top:14px;padding:10px 12px;border-radius:var(--r2);background:var(--gold-soft);color:var(--tx);font-size:14px;line-height:1.45}
+.tg-me{margin-top:14px;padding-top:14px;border-top:1px solid var(--ln)}
+.tg-mv{font-family:var(--disp);font-size:32px;font-weight:800;line-height:1}
+.tg-cut{margin-top:8px;font-size:14px;color:var(--tx2)}
+.tg-cut b{color:var(--gold)}
+.tgm-scale span .flag{position:static;transform:none}
+@media (max-width:560px){ .tg-num{font-size:40px} .tg-pct{font-size:24px} .tgm-scale span .flag{display:none} }
 </style>
 </head>
 <body>
@@ -669,7 +697,7 @@ button.actrow:hover{background:var(--sf2)}
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261014-170142";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261017-044924";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -805,6 +833,8 @@ const FX={
       case 'my_pace': return d(FX.paceOf(m));
       case 'my_leaderboard': return d(FX.leaderboardOf(m));
       case 'my_numbers': return d(FX.numbersOf(m));
+      case 'my_team_goal': return d(FX.teamGoalOf(m));
+      case 'admin_team_goal': return d(FX.teamGoalAdmin());
       case 'my_ads': return d(FX.adsOf(m,a.p_range||'2026-10'));
       case 'start_quest': return FX.start(m,a);
       case 'save_quest_draft': return FX.save(m,a);
@@ -819,6 +849,12 @@ const FX={
     if(/NoSource/.test(m.home?.creator?.display_name||'')) return {};
     return pop?{month_sales:4210.5,month_earnings:512.3,month_submissions:9,month_approved:8,all_sales:18840.5,all_earnings:2310.4,all_submissions:41,all_approved:39,approval_rate:95,month_rank:6,ranked_creators:35,base_sales:14630,sep_sales:9120,sep_approved:14,sep_submissions:15,in_export:true,data_through:now}
       :{month_sales:0,month_earnings:0,month_submissions:0,month_approved:0,all_sales:0,all_earnings:0,all_submissions:0,all_approved:0,approval_rate:null,month_rank:null,ranked_creators:35,base_sales:0,sep_sales:null,sep_approved:null,in_export:true,data_through:now}; },
+  /* team goal fixture: synthetic team total; the populated creator's sales match numbersOf */
+  teamGoalOf(m){ const n=FX.numbersOf(m); const team=412380.55; const base={month_key:'2026-10',label:'October',goal:1000000,checkpoints:[250000,500000,750000],bonus_pool:5000,starts_at:'2026-10-01T05:00:00Z',ends_at:'2026-11-01T05:00:00Z',team_sales:team,sellers:61,reached:false,data_through:new Date(Date.now()-2*3600e3).toISOString()};
+    if(n.month_sales==null) return {...base,on_team:false,my_sales:null,my_share:null,my_bonus_if_hit:null};
+    const mine=n.month_sales||0; return {...base,on_team:true,my_sales:mine,my_share:+(mine/team).toFixed(6),my_bonus_if_hit:+(5000*mine/team).toFixed(2)}; },
+  teamGoalAdmin(){ const g=FX.teamGoalOf({home:{creator:{display_name:'Admin'}}}); const s=[48210,39900,31250,22400,15800,9100,4210.5,2380,990,310]; const tot=g.team_sales;
+    return {...g,rows:s.map((v,i)=>({display_name:FX.FAKE[i],sales:v,share:+(v/tot).toFixed(6),bonus:+(5000*v/tot).toFixed(2)}))}; },
   /* Analytics fixture: built from the fixture videos so every screen agrees */
   adsOf(m,range){ const vids=(m.submissions?.videos||[]); const h=s=>[...String(s)].reduce((n,c)=>(n*31+c.charCodeAt(0))>>>0,7);
     const oct=range!=='all'; const rows=vids.filter(v=>v.spend>0).map(v=>{ const k=h(v.id); const f=oct?0.32:1; const spend=+(v.spend*f).toFixed(2), sales=+((v.sales||0)*f).toFixed(2);
@@ -1107,9 +1143,40 @@ function numbersCard(N){
   </div>
   <div class="grid g4" style="margin-bottom:12px">${metric('Approved in Oct',fmt.int(N.month_approved??0))}${metric('Sales in Oct',fmt.usd(N.month_sales))}${metric('Approved all time',fmt.int(N.all_approved??0))}${metric('Approval rate',N.approval_rate==null?null:N.approval_rate+'%')}</div>`;
 }
+/* Team goal thermometer (Oct 16, Austin + Chris): one monthly Trybe sales goal for Ravine Elite, like a school
+   fundraiser thermometer. Hit it and the bonus pool is split by share of team sales (20% of the sales = 20% of the pot).
+   Resets every month. Creators get the team total and only their own numbers; the full split is admin only. */
+async function teamGoal(){ try{ return await API.page('my_team_goal'); }catch(e){ return null; } }
+function fmtK(n){ n=Number(n)||0; if(n>=1e6) return '$'+(+(n/1e6).toFixed(2))+'M'; if(n>=1e3) return '$'+Math.round(n/1e3)+'K'; return '$'+Math.round(n); }
+function fmtShare(s){ const x=Number(s||0)*100; return (x>=1||x===0?x.toFixed(1):x.toFixed(2))+'%'; }
+function teamBar(g){ const goal=Number(g.goal)||1, cur=Math.max(0,Number(g.team_sales)||0), p=Math.min(100,cur/goal*100);
+  const cps=(g.checkpoints||[]).map(Number).filter(v=>v>0&&v<goal); const won=cur>=goal;
+  return `<div class="tgm ${won?'won':''}" role="progressbar" aria-label="${esc(g.label||'')} team sales toward the ${esc(fmtK(goal))} goal" aria-valuemin="0" aria-valuemax="${goal}" aria-valuenow="${Math.round(Math.min(cur,goal))}" aria-valuetext="${esc(fmt.usd(cur))} of ${esc(fmt.usd(goal))}">
+    <span class="tgm-bulb"></span><div class="tgm-tube"><i style="width:${p.toFixed(2)}%"></i>${cps.map(v=>`<b class="tgm-cp" style="left:${(v/goal*100).toFixed(2)}%"></b>`).join('')}</div></div>
+  <div class="tgm-scale" aria-hidden="true"><span class="first hit">$0</span>${cps.map(v=>`<span class="${cur>=v?'hit':''}" style="left:${(v/goal*100).toFixed(2)}%">${fmtK(v)}${cur>=v?' ✓':''}</span>`).join('')}<span class="end ${won?'hit':''}" style="left:100%"><span class="flag">🏁 </span>${fmtK(goal)}</span></div>`; }
+function teamGoalHead(g){ const goal=Number(g.goal), cur=Math.max(0,Number(g.team_sales)||0), left=Math.max(0,goal-cur), dl=daysLeft(g.ends_at);
+  const next=(g.checkpoints||[]).map(Number).find(v=>v>cur&&v<goal);
+  return `<div class="row between" style="gap:8px;flex-wrap:wrap"><div class="lbl">🎯 ${esc(g.label)} team goal · Ravine Elite</div>${Number(g.bonus_pool)>0?`<span class="badge g noicon">${esc(fmt.usd(g.bonus_pool))} bonus pool</span>`:''}</div>
+  <div class="tg-top"><div><span class="tg-num">${esc(fmt.usd(cur))}</span><span class="tg-of">of ${esc(fmt.usd(goal))}</span></div><span class="tg-pct">${Math.floor(cur/goal*100)}%</span></div>
+  ${teamBar(g)}
+  <div class="tg-sub">${cur>=goal?`<span>🎉 <b>Goal hit.</b> Team sales went past ${esc(fmtK(goal))}.</span>`:`<span><b>${esc(fmt.usd(left))}</b> to go</span>${next?`<span>Next checkpoint <b>${esc(fmtK(next))}</b></span>`:''}<span><b>${dl}</b> day${dl===1?'':'s'} left</span>`}<span><b>${fmt.int(g.sellers||0)}</b> creators with sales</span></div>`; }
+function teamGoalCard(g){ if(!g||!g.month_key) return '';
+  const goal=Number(g.goal), pool=Number(g.bonus_pool)||0, mine=Number(g.my_sales)||0, won=Number(g.team_sales)>=goal;
+  const rule=pool>0?`<div class="tg-rule">💰 <b>Hit ${esc(fmtK(goal))} as a team and ${esc(fmt.usd(pool))} gets split by contribution.</b> Bring in 20% of the team's sales, get 20% of the pot (${esc(fmt.usd(pool*0.2))}). Resets every month.</div>`:'';
+  const me=g.on_team?`<div class="tg-me"><div class="lbl">Your contribution</div>
+      <div class="row" style="gap:10px;align-items:baseline;flex-wrap:wrap;margin-top:6px"><span class="tg-mv">${esc(fmt.usd(mine))}</span><span class="small">${mine>0?`<b>${fmtShare(g.my_share)}</b> of team sales`:`No Trybe sales yet in ${esc(g.label)}`}</span></div>
+      ${pool>0?`<div class="tg-cut">${mine>0?(won?`Your cut of the ${esc(fmt.usd(pool))}: <b>${esc(fmt.usd(g.my_bonus_if_hit))}</b> on today's numbers. The final split uses the numbers at the end of ${esc(g.label)}.`:`If we hit ${esc(fmtK(goal))}, your cut of the ${esc(fmt.usd(pool))} is <b>${esc(fmt.usd(g.my_bonus_if_hit))}</b> on today's numbers.`):`Every sale you drive moves the bar and earns you a cut of the ${esc(fmt.usd(pool))}.`}</div>`:''}
+      <div class="mini" style="margin-top:6px">Only you see your numbers</div></div>`:'';
+  return `<div class="card hi tg">${teamGoalHead(g)}${rule}${me}
+    <div class="mini" style="margin-top:10px">Trybe sales from every Ravine Elite creator this month${g.data_through?' · as of '+esc(fmt.dt(g.data_through)):''}</div></div>`; }
+function teamGoalAdmin(g){ if(!g||!g.month_key) return ''; const rows=g.rows||[]; const won=Number(g.team_sales)>=Number(g.goal);
+  return `<div class="sec"><h2>🎯 ${esc(g.label)} team goal</h2><span class="mini">${esc(fmt.usd(g.bonus_pool))} split by share if the team hits ${esc(fmt.usd(g.goal))}</span></div>
+  <div class="card hi tg">${teamGoalHead(g)}<div class="mini" style="margin-top:10px">Trybe sales${g.data_through?' · as of '+esc(fmt.dt(g.data_through)):''}</div></div>
+  <div class="card pad0" style="margin-top:10px"><div class="tblwrap"><table class="tbl"><thead><tr><th>Creator</th><th class="num">${esc(g.label)} Trybe sales</th><th class="num">Share</th><th class="num">Cut if we hit it</th></tr></thead><tbody>${rows.map(x=>`<tr><td>${esc(x.display_name)}</td><td class="num">${esc(fmt.usd2(x.sales))}</td><td class="num">${fmtShare(x.share)}</td><td class="num"><b>${esc(fmt.usd2(x.bonus))}</b></td></tr>`).join('')||'<tr><td colspan="4" class="mini">No sales yet this month</td></tr>'}</tbody></table></div></div>
+  <div class="mini" style="margin-top:6px">${won?'Goal hit. Pay from the numbers after the last refresh of the month.':'Not hit yet. Cuts move with every refresh. Pay only if the bar reaches the goal, from the final numbers of the month.'} Creators only ever see their own cut.</div>`; }
 route('home',async()=>{
   const h=await API.page('my_home'); const c=h.campaign||{}; const ct=h.contest||{}; const q=h.quests||{}; const r=h.rewards||{}; const sub=h.submissions||{};
-  const N=await myNumbers(); let SP={}; try{ SP=await API.page('my_submissions'); }catch(e){} const SUBS=SP.videos||[]; try{ await API.page('my_quests'); }catch(e){}
+  const N=await myNumbers(); const TG=await teamGoal(); let SP={}; try{ SP=await API.page('my_submissions'); }catch(e){} const SUBS=SP.videos||[]; try{ await API.page('my_quests'); }catch(e){}
   const nt=nextTier(r); const dl=daysLeft(c.ends_at);
   // one practical next action, from real state
   let action;
@@ -1121,6 +1188,7 @@ route('home',async()=>{
   const tierHtml=nt?`<div class="plabel"><span>Next reward: <b>${esc(nt.name)} · ${fmt.usd(nt.cash_total_cents,{cents:true})}</b></span>${nt.draft||!nt.published?badge('d','Draft terms'):badge('g','Live')}</div>
      ${pbar(Math.min(r.xp||0,nt.xp_required),nt.xp_required,{label:'XP · '+halfLabel(q.period_now),cls:'gold'})}<div style="height:8px"></div>${pbar(Math.min(r.concepts||0,nt.concepts_required),nt.concepts_required,{label:'Approved videos · '+halfLabel(q.period_now),cls:'green'})}`:`<div class="note good">Every tier reached for ${esc(halfLabel(q.period_now))}. Nice.</div>`;
   return `${ph('Home','',{eyebrow:`October 2026 · ${dl} day${dl===1?'':'s'} left · ends Oct 31, 11:59 pm CT`,acts:`<button class="btn" onclick="go('${action.go}',${JSON.stringify(action.p||{}).replace(/"/g,'&quot;')})">${esc(action.t)}</button>`})}
+  ${teamGoalCard(TG)}
   ${numbersCard(N)}
   <div class="grid g3">
     <div class="card hi" style="cursor:pointer" onclick="go('leaderboard')"><div class="lbl">October incentive</div>
@@ -1938,7 +2006,7 @@ function freezeAsk(final){ openDrawer(`<h2>${final?'Freeze final standings':'Sav
   <div class="row" style="margin-top:14px"><button class="btn" onclick="freezeDo(${final})">${final?'Yes, freeze final standings':'Save snapshot'}</button><button class="btn gh" onclick="closeDrawer()">Cancel</button></div>`); }
 async function freezeDo(final){ closeDrawer(true); try{ await API.rpc('snapshot_contest',{p_campaign:'2026-10',p_final:final}); toast(final?'Final standings frozen':'Snapshot saved','good'); API.bust(); render(); }catch(e){ toast(e.message,'bad'); } }
 
-route('admin_rewards',async()=>{ const A=await API.page('admin'); const ALLM=A.milestones||[]; const on=(A.roster||[]).length;
+route('admin_rewards',async()=>{ const A=await API.page('admin'); let TG=null; try{ TG=await API.page('admin_team_goal'); }catch(e){} const ALLM=A.milestones||[]; const on=(A.roster||[]).length;
   /* half-month rewards: the same 3 tiers run in each half (Oct 1-15, Oct 16-31), so show one ladder, not one card per half */
   const PER=A.periods||[]; const nowT=Date.now(); const curP=PER.find(p=>new Date(p.starts_at)<=nowT&&nowT<new Date(p.ends_at))||PER[0]||{};
   const M=(ALLM.some(m=>m.period_key)?ALLM.filter(m=>m.period_key===(curP.period_key||ALLM[0].period_key)&&!(m.prestige_level>0)):ALLM).slice().sort((a,b)=>a.sort_order-b.sort_order);
@@ -1950,6 +2018,7 @@ route('admin_rewards',async()=>{ const A=await API.page('admin'); const ALLM=A.m
   const PST={claim_requested:['r','Claimed · approve it'],approved_for_payment:['p','Approved · pay now'],paid:['g','Paid']};
   const pst=x=>x.claim_state==='approved_for_payment'&&isOpen(x.period_key)?['p',`Approved · pay ${PD(x.period_key)}`]:(PST[x.claim_state]||['n','Reached · not claimed yet']);
   return `${ph('Rewards and claims','Who reached a reward tier, what to pay, and the claim ledger.',{eyebrow:'Admin'})}
+  ${teamGoalAdmin(TG)}
   <div class="sec"><h2>Ready to pay</h2><span class="mini">${due.length?`${due.length} creator${due.length===1?'':'s'} reached a tier and ${due.length===1?'is':'are'} not paid yet`:'Nobody is waiting on a payout'}</span></div>
   <div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Creator</th><th>Tier reached</th><th class="num">Tier total</th><th class="num">XP (that half)</th><th class="num">Approved videos (that half)</th><th class="num">Trybe sales (that half)</th><th>Status</th><th></th></tr></thead><tbody>${PAY.map(x=>{ const st=pst(x); return `<tr><td><b>${esc(x.display_name)}</b></td><td>${esc(x.tier)}${x.claim_state!=='paid'&&PD(x.period_key)?`<div class="mini">${isOpen(x.period_key)?'Payday':'Was due'} ${PD(x.period_key)}</div>`:''}</td><td class="num">${fmt.usd(x.tier_cents,{cents:true})}${x.paid_cents>0&&x.claim_state!=='paid'?`<div class="mini">${fmt.usd(x.paid_cents,{cents:true})} already paid</div>`:''}</td><td class="num">${x.xp}</td><td class="num">${x.concepts}</td><td class="num">${x.sales_cents!=null?fmt.usd(x.sales_cents,{cents:true}):'—'}</td><td>${badge(st[0],st[1])}</td>
     <td>${x.claim_state==='claim_requested'?`<button class="btn sm" onclick="claimAct('${x.claim_id}','approve')">Approve</button>`:x.claim_state==='approved_for_payment'?`<button class="btn sm" onclick="claimAsk('${x.claim_id}','paid')">Mark paid</button>`:''}</td></tr>`; }).join('')||`<tr><td colspan="8" class="mini">Nobody has reached a tier yet. Builder needs ${M[0]?M[0].xp_required:50} XP and ${M[0]?M[0].concepts_required:5} approved videos inside one half.</td></tr>`}</tbody></table></div></div>
