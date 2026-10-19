@@ -743,6 +743,72 @@ button.actrow:hover{background:var(--sf2)}
   .tg-you{padding:12px;gap:12px} .tg-ringwrap{width:66px;height:66px} .tg-you-v span{font-size:28px}
 }
 @media (prefers-reduced-motion:reduce){ .tgm-merc{animation:none} }
+
+/* ---- Angle Library (Oct 19) */
+.libstats{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin:4px 0 16px;padding:12px 16px;background:var(--sf);border:1px solid var(--ln);border-radius:var(--r2)}
+.libstats>div>b{font-family:var(--disp);font-size:22px;font-weight:800;letter-spacing:.3px;margin-right:6px;color:var(--tx)}
+.libstats>div>span{font-size:12.5px;color:var(--tx3);font-weight:600}
+.atiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.atile{all:unset;cursor:pointer;display:flex;flex-direction:column;background:var(--sf);border:1px solid var(--ln);border-radius:var(--r2);overflow:hidden;transition:transform .18s var(--ease),border-color .18s;color:var(--tx)}
+.atile:hover{transform:translateY(-2px);border-color:var(--ln2)}
+.atile.on{border-color:var(--ac,var(--o));box-shadow:0 0 0 1px var(--ac,var(--o)) inset,0 10px 26px rgba(0,0,0,.35)}
+.atile .acov{position:relative;aspect-ratio:16/10;background:var(--sf3);display:grid;place-items:center}
+.atile .acov img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.atile .ashade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.55) 100%)}
+.atile .aemo{position:absolute;left:10px;bottom:8px;font-size:22px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.6))}
+.atile .aemo.big{position:static;font-size:34px}
+.atile.all .acov{background:linear-gradient(135deg,rgba(255,110,32,.35),rgba(255,110,32,.05)),var(--sf3)}
+.atile .abody{padding:9px 11px 10px;display:flex;flex-direction:column;gap:1px}
+.atile .abody b{font-size:13.5px;font-weight:700}
+.atile .abody small{font-size:11.5px;color:var(--tx3);font-family:var(--mono)}
+.atile.on .abody b{color:var(--ac,var(--o2))}
+.libbar{position:sticky;top:0;z-index:5;display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:10px 0 12px;background:linear-gradient(180deg,var(--bg) 85%,transparent)}
+.libbar input[type=search]{max-width:260px;flex:1 1 180px}
+.libbar select{width:auto}
+.seg{display:inline-flex;border:1px solid var(--ln);border-radius:99px;overflow:hidden;background:var(--sf)}
+.seg button{padding:6px 11px;font-size:12.5px;font-weight:600;color:var(--tx2);background:transparent;display:inline-flex;gap:5px;align-items:center}
+.seg button.on{background:var(--o-soft);color:var(--o2)}
+.lgrid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.lcard .th.tall{aspect-ratio:4/5}
+.lcard .th .lt{position:absolute;top:8px;left:8px;display:flex;gap:5px;flex-wrap:wrap}
+.lcard .th .ldur{position:absolute;top:8px;right:8px;font-family:var(--mono);font-size:11px;font-weight:600;background:rgba(0,0,0,.6);color:#fff;padding:2px 6px;border-radius:6px}
+.lcard .th .lang{position:absolute;left:0;right:0;bottom:0;padding:18px 10px 7px;font-size:11.5px;font-weight:700;color:#fff;background:linear-gradient(180deg,transparent,rgba(0,0,0,.75));text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.lcard .th .lang::before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ac,var(--o));margin-right:6px;vertical-align:1px}
+.lcard.coached{border-color:rgba(232,182,74,.35)}
+.lcard .body .hook{font-size:13.5px;line-height:1.4;color:var(--tx);font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.8em}
+.chip.gold{background:var(--gold-soft);color:var(--gold)}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.lstats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid var(--ln)}
+.lstats>div{min-width:0}
+.lstats small{display:block;font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--tx4);font-weight:700}
+.lstats b{display:block;font-family:var(--mono);font-size:13px;font-weight:600;color:var(--tx);margin-top:1px;white-space:nowrap}
+.lstats.big{margin-top:4px;padding:12px 14px;background:var(--sf);border:1px solid var(--ln);border-radius:var(--r2)}
+.lstats.big b{font-family:var(--disp);font-size:22px;font-weight:800}
+.lstats.big i{display:block;font-style:normal;font-size:11px;color:var(--tx3)}
+.lplayer{border-radius:14px;overflow:hidden;background:#000;max-height:62vh;display:grid;place-items:center;margin-top:12px}
+.lplayer video{width:100%;max-height:62vh;display:block;object-fit:contain}
+.retbar{display:flex;gap:10px;align-items:flex-end;height:92px;margin:12px 0 4px;padding:8px 12px 6px;background:var(--sf);border:1px solid var(--ln);border-radius:var(--r2);position:relative}
+.retbar>small{position:absolute;top:8px;left:12px;font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--tx4);font-weight:700}
+.retbar>div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:2px}
+.retbar>div i{display:block;width:100%;max-width:38px;background:linear-gradient(180deg,var(--o2),var(--o));border-radius:5px 5px 2px 2px;min-height:2px}
+.retbar>div b{font-family:var(--mono);font-size:11px;font-weight:600}
+.retbar>div small{font-size:10px;color:var(--tx3)}
+.lquote{margin:6px 0 0;padding:10px 14px;border-left:3px solid var(--o);background:var(--o-soft);border-radius:0 10px 10px 0;font-size:15px;line-height:1.45;color:var(--tx)}
+.rsteps{margin:6px 0 6px 18px;font-size:13.5px;color:var(--tx2);display:grid;gap:4px}
+.rsteps b{color:var(--tx)}
+.scriptbox summary{cursor:pointer;color:var(--o2);font-weight:600;font-size:13.5px}
+.scriptbox p{margin-top:8px;font-size:13.5px;line-height:1.6;color:var(--tx2);white-space:pre-line;max-height:50vh;overflow:auto;padding-right:6px}
+.hooklist{display:flex;flex-direction:column;gap:6px}
+.hrow{all:unset;cursor:pointer;display:grid;grid-template-columns:52px 1fr 72px 64px 64px;gap:12px;align-items:center;padding:8px 12px 8px 8px;background:var(--sf);border:1px solid var(--ln);border-radius:var(--r2);color:var(--tx)}
+.hrow:hover{border-color:var(--ln2)}
+.hrow .hth{width:52px;aspect-ratio:4/5;border-radius:8px;overflow:hidden;background:var(--sf3)}
+.hrow .hth img,.hrow .hth svg{width:100%;height:100%;object-fit:cover}
+.hrow .hk{font-size:14px;font-weight:600;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.hrow .meta{font-size:11.5px;color:var(--tx3);margin-top:3px;display:flex;gap:8px;flex-wrap:wrap}
+.hrow .hnum{text-align:right}
+.hrow .hnum b{display:block;font-family:var(--mono);font-size:13px;font-weight:600}
+.hrow .hnum small{font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--tx4);font-weight:700}
+@media (max-width:640px){ .hrow{grid-template-columns:44px 1fr 60px} .hrow .hnum:nth-child(4),.hrow .hnum:nth-child(5){display:none} .lgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px} .lstats{grid-template-columns:repeat(2,1fr)} .atiles{display:flex;overflow-x:auto;gap:8px;padding:2px 2px 8px;margin:0 -2px;scroll-snap-type:x mandatory;scrollbar-width:none} .atiles::-webkit-scrollbar{display:none} .atile{flex:0 0 128px;scroll-snap-align:start} .atile .acov{aspect-ratio:16/11} .atile .abody{padding:7px 8px} .atile .abody b{font-size:12px} .libbar{position:static} }
 </style>
 </head>
 <body>
@@ -762,7 +828,7 @@ button.actrow:hover{background:var(--sf2)}
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261017-154535";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261019-155929";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1016,12 +1082,12 @@ function go(view,params={}){ S.view=view; S.params=params; const h='#/'+view+(Ob
 function parseHash(){ const m=location.hash.match(/^#\/([a-z0-9_-]+)(?:\?(.*))?/i); if(!m) return {view:'home',params:{}}; return {view:m[1],params:Object.fromEntries(new URLSearchParams(m[2]||''))}; }
 window.addEventListener('popstate',()=>{ const p=parseHash(); S.view=p.view; S.params=p.params; closeDrawer(true); render(); });
 /* retired routes resolve to the closest permitted page */
-const REDIRECT={adlib:'analytics',winners:'angles',board:'leaderboard',stats:'analytics',approvals:'submissions',reviews:'submissions',feed:'inspo',amazon:'home',onboard:'home',trial:'home'};
+const REDIRECT={adlib:'analytics',winners:'angles',board:'leaderboard',stats:'analytics',approvals:'submissions',reviews:'submissions',feed:'library',inspo:'library',amazon:'home',onboard:'home',trial:'home'};
 
 /* ---- nav */
 const NAV=[
  ['Home',[['home','Home','home']]],
- ['Create',[['inspo','Inspiration','grid'],['angles','Winning angles','flame'],['spy','Spyboard','eye'],['broll','B-roll','film']]],
+ ['Create',[['library','Angle Library','grid'],['angles','Winning angles','flame'],['spy','Spyboard','eye'],['broll','B-roll','film']]],
  ['Progress',[['quests','Quests','target'],['rewards','Rewards','gift'],['submissions','My submissions','check'],['analytics','Analytics','chart']]],
  ['Compete',[['leaderboard','Leaderboard','star'],['compete','October competition','trophy'],['pace','My pace','gauge']]],
  ['Profile',[['profile','My profile','user']]],
@@ -1262,7 +1328,7 @@ route('home',async()=>{
   let action;
   if(q.needs_changes>0) action={t:'Address review feedback',d:`${q.needs_changes} quest entr${q.needs_changes>1?'ies were':'y was'} returned with notes.`,go:'quests',p:{f:'needs_changes'}};
   else if(q.in_progress>0) action={t:'Finish a quest you started',d:`${q.in_progress} in progress. Pick up where you left off.`,go:'quests',p:{f:'in_progress'}};
-  else if((sub.all||0)===0) action={t:'Create your first video',d:'Start in Inspiration, pick an angle, and film it. Your first submission opens your October board.',go:'inspo'};
+  else if((sub.all||0)===0) action={t:'Create your first video',d:'Start in the Angle Library, pick an angle, and film it. Your first submission opens your October board.',go:'library'};
   else if((sub.pending||0)>0&&(sub.approved||0)===0) action={t:'Pick a quest while your video is in review',d:'Posting three videos for feedback is the fastest 15 XP.',go:'quests'};
   else action={t:'Start the recommended quest',d:'Quests put most XP behind filming. One a week keeps you on pace.',go:'quests'};
   const tierHtml=nt?`<div class="plabel"><span>Next reward: <b>${esc(nt.name)} · ${fmt.usd(nt.cash_total_cents,{cents:true})}</b></span>${nt.draft||!nt.published?badge('d','Draft terms'):badge('g','Live')}</div>
@@ -1302,7 +1368,7 @@ function activityFeed(acts,vids){
   [...acts].sort((x,y)=>new Date(y.at)-new Date(x.at)).forEach(a=>{ if(a.kind==='submission') return; const key=a.kind+':'+(a.ref||''); if(a.ref&&seen.has(key)) return; seen.add(key);
     const nm=a.kind==='quest'&&qcat[a.ref]?' · '+qcat[a.ref]:''; ev.push({at:a.at,k:'other',t:activityText(a)+nm,sub:esc(fmt.ago(a.at)||'')}); });
   ev.sort((x,y)=>new Date(y.at)-new Date(x.at)); const L=ev.slice(0,8);
-  if(!L.length) return emptyState('Nothing yet','Your first video or quest will show up here.',`<button class="btn" onclick="go('inspo')">Find an angle</button>`,'video');
+  if(!L.length) return emptyState('Nothing yet','Your first video or quest will show up here.',`<button class="btn" onclick="go('library')">Find an angle</button>`,'video');
   return `<div class="card" style="padding:6px">${L.map(e=>{ const [bk,bl]=SSTATE[e.k]||['n','Update']; return `<${e.v?'button':'div'} class="actrow" ${e.v?`onclick="openVideo('${esc(e.v.id)}')"`:''}>
     <div class="act-th">${e.v?thumb(e.v.thumb_url,'tile','Film'):`<span class="act-ic">${ico('bolt',18)}</span>`}</div>
     <div style="min-width:0;flex:1"><div class="act-t">${esc(e.t)}</div><div class="mini">${e.sub}</div></div>
@@ -1394,7 +1460,7 @@ function evidenceForm(c,inst){ const editable=['in_progress','needs_changes'].in
     const help=editable?proofHelp(f):'';
     return `<div class="field" data-field="${f.field}"><label for="${id}">${esc(f.label)}${f.required?' *':''}</label>${input}${help?`<div class="help">👉 ${esc(help)}</div>`:''}<div class="shots" id="sh_${f.field}">${shotChips(f.field,editable,inst.id)}</div>${paste||shot?`<div class="shotrow">${paste}${shot}</div>`:''}<div class="ferr" id="e_${f.field}"></div></div>`; };
   return `<section><h3>${editable?'Your evidence':'Submitted evidence'}</h3>
-    ${inst.inspiration_ref?`<div class="note" style="margin-bottom:8px">Started from inspiration <b>${esc(inst.inspiration_ref)}</b>. <a href="#/inspo?id=${encodeURIComponent(inst.inspiration_ref)}">Open it</a></div>`:''}
+    ${inst.inspiration_ref?`<div class="note" style="margin-bottom:8px">Started from inspiration <b>${esc(inst.inspiration_ref)}</b>. <a href="#/library?id=${encodeURIComponent(inst.inspiration_ref)}">Open it</a></div>`:''}
     <form id="evform" onsubmit="return submitQuest(event,'${inst.id}')">${(c.proof||[]).map(field).join('')}
     <div id="everr" class="ferr" style="margin-top:8px"></div>
     ${editable?`<div class="row" style="margin-top:14px"><button type="submit" class="btn" id="subbtn">${inst.state==='needs_changes'?'Resubmit for review':'Submit for review'}</button><button type="button" class="btn gh" id="savebtn" onclick="saveDraft('${inst.id}')">Save draft</button><span class="mini" id="savestate">${inst.updated_at?'Saved '+fmt.ago(inst.updated_at):''}</span></div>`:`<div class="mini" style="margin-top:8px">Submitted ${fmt.dt(inst.submitted_at)}. ${inst.state==='submitted'?'An admin will verify it. XP shows as pending until then.':''}</div>`}
@@ -1667,7 +1733,7 @@ route('compete',async()=>{
   <div class="sec"><h2>Rules in short</h2></div>
   <div class="card"><ol class="ol"><li>Prizes go to the top 3 creators by October GMV: ${(c.prizes||[]).map(p=>fmt.usd(p.cents,{cents:true})).join(', ')}.</li><li>October GMV = sales from Oct 1 to Oct 31 (Central) on videos you submitted and got approved in October, up to your first 20.</li><li>Videos from September or earlier don't count, even if they're still selling.</li><li>Everyone sees names and places. Only you see your own GMV, plus what it takes to pass the place above you.</li><li>Standings update with every data refresh from Trybe. Final standings are taken after Oct 31.</li><li>${esc(TIE_TEXT(c.tie_rule||lb.campaign?.tie_rule))}</li>${(lb.campaign?.payout_terms)?`<li>${esc(lb.campaign.payout_terms)}</li>`:''}</ol><div style="margin-top:12px"><button class="btn gh sm" onclick="openRules()">Full rules</button></div></div>`;
 });
-function slotInfo(i){ openDrawer(`<h2>Slot ${i}</h2><p>Open. Your next October video on Trybe fills this spot, in the order you submit.</p><section><h3>Good to know</h3><ul><li>Only October videos count toward your rank. Older videos don't, even if they're still selling.</li><li>Every new October video that gets approved and sells adds to your GMV. Need an idea? Open Inspiration.</li></ul></section><section><button class="btn" onclick="closeDrawer();go('inspo')">Find an angle</button></section>`); }
+function slotInfo(i){ openDrawer(`<h2>Slot ${i}</h2><p>Open. Your next October video on Trybe fills this spot, in the order you submit.</p><section><h3>Good to know</h3><ul><li>Only October videos count toward your rank. Older videos don't, even if they're still selling.</li><li>Every new October video that gets approved and sells adds to your GMV. Need an idea? Open the Angle Library.</li></ul></section><section><button class="btn" onclick="closeDrawer();go('library')">Find an angle</button></section>`); }
 async function openRules(){ const lb=await API.page('my_leaderboard'); const c=lb.campaign||{}; const d=new Set(c.draft_decisions||[]);
   const row=(k,label,text)=>`<li>${label}: ${text} ${d.has(k)?badge('d','Being finalized'):''}</li>`;
   openDrawer(`<h2>October incentive rules</h2><p>${esc(c.name||'October 2026')} · ${fmt.dt(c.starts_at)} to ${fmt.dt(new Date(new Date(c.ends_at)-1))}, ${esc(c.tz||'America/Chicago')}.</p>
@@ -1742,7 +1808,7 @@ route('submissions',async(p)=>{
    <select aria-label="Month" onchange="S.ui.sm2=this.value;saveUI();$('#slist').innerHTML=subList()"><option value="all" ${S.ui.sm2==='all'?'selected':''}>All months</option>${months.map(m=>`<option value="${m}" ${S.ui.sm2===m?'selected':''}>${m==='unknown'?'Unknown date':new Date(m+'-02').toLocaleDateString('en-US',{month:'long',year:'numeric'})}</option>`).join('')}</select>
    <input type="search" placeholder="Search title or ID" value="${esc(S.ui.ss)}" aria-label="Search" oninput="S.ui.ss=this.value;saveUI();$('#slist').innerHTML=subList()"></div>
   ${state==='nosource'?emptyState('No video records yet','Your videos go through Trybe. Once the brand\'s data is imported, every submission shows here with its status and contest slot.',`<a class="btn gh" ${openExt('https://jointrybe.com')}>Open Trybe ${ico('ext')}</a>`,'video')
-   :state==='empty'?emptyState('No submissions yet','Your first video through Trybe opens your October board. Need an angle? Start in Inspiration.',`<button class="btn" onclick="go('inspo')">Find an angle</button>`,'video')
+   :state==='empty'?emptyState('No submissions yet','Your first video through Trybe opens your October board. Need an angle? Start in the Angle Library.',`<button class="btn" onclick="go('library')">Find an angle</button>`,'video')
    :`<div id="slist" class="grid gauto">${subList()}</div>`}`}`;
 });
 function videoCard(v){ const [k,label]=SSTATE[v.status]||['n',v.status]; const oc=v.contest&&v.contest.startsWith('revision_of_')?['n','Revision']:(OUTCOME[v.contest]||OUTCOME.not_in_contest);
@@ -1911,11 +1977,9 @@ function renderVideoStats(){ const box=$('#vstats'); const c=VSC.cur; if(!box||!
 
 /* Inspiration · Winning angles · Spyboard · B-roll */
 'use strict';
-const INSPO=()=>window.INSPIRATION||{videos:[],ideas:[],report:{}};
 const LIBX=()=>window.LIBRARY||{winners:[],spy:[],broll:[]};
 /* public reference data is fetched on demand (kept out of the shell so first paint stays light) */
-async function loadRef(){ if(!window.INSPIRATION){ const r=await fetch('./data/inspiration.json?v='+(window.BUILD||'')); if(!r.ok) throw new Error('could not load inspiration data'); window.INSPIRATION=await r.json(); }
-  if(!window.LIBRARY){ const r=await fetch('./data/library.json?v='+(window.BUILD||'')); if(!r.ok) throw new Error('could not load library data'); window.LIBRARY=await r.json(); } }
+async function loadRef(){ if(!window.LIBRARY){ const r=await fetch('./data/library.json?v='+(window.BUILD||'')); if(!r.ok) throw new Error('could not load library data'); window.LIBRARY=await r.json(); } }
 const SAVED_KEY='rcg_saved_inspo';
 function savedSet(){ try{ return new Set(JSON.parse(localStorage.getItem(SAVED_KEY)||'[]')); }catch(e){ return new Set(); } }
 function toggleSaved(id){ const s=savedSet(); s.has(id)?s.delete(id):s.add(id); try{ localStorage.setItem(SAVED_KEY,JSON.stringify([...s])); }catch(e){} toast(s.has(id)?'Saved on this device':'Removed'); render(); }
@@ -1923,37 +1987,7 @@ const metaSearch=q=>`https://www.facebook.com/ads/library/?active_status=active&
 const metaPage=id=>`https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=US&view_all_page_id=${id}`;
 const metaAd=id=>`https://www.facebook.com/ads/library/?id=${id}`;
 
-route('inspo',async(p)=>{ await loadRef();
-  const D=INSPO(); const V=D.videos; const saved=savedSet();
-  S.ui.it=p.topic||S.ui.it||'All'; S.ui.ip=p.platform||S.ui.ip||'All'; S.ui.ia=p.aw||S.ui.ia||'All'; S.ui.is=p.s??S.ui.is??''; S.ui.isv=p.saved==='1'||(p.saved==null&&S.ui.isv)||false; S.ui.ipage=1; saveUI();
-  if(p.id){ const v=V.find(x=>x.id===p.id); if(v) setTimeout(()=>openInspo(v.id),50); }
-  const topics=['All',...Object.keys(D.report.topics||{}).sort()]; const plats=['All',...new Set(V.map(v=>v.platform))]; const aws=['All','Unaware','Problem aware','Solution aware','Product aware','Most aware'];
-  const filt=()=>V.filter(v=>(S.ui.it==='All'||v.topics.includes(S.ui.it))&&(S.ui.ip==='All'||v.platform===S.ui.ip)&&(S.ui.ia==='All'||v.awareness===S.ui.ia)&&(!S.ui.isv||saved.has(v.id))&&(!S.ui.is||JSON.stringify([v.title,v.hook,v.caption,v.brand,v.handle,v.sheets,v.topics]).toLowerCase().includes(S.ui.is.toLowerCase())));
-  window.inspoGrid=(more)=>{ const L=filt(); if(more) S.ui.ipage++; const n=48*S.ui.ipage; const g=$('#igrid'); if(!g) return; g.innerHTML=L.length?L.slice(0,n).map(inspoCard).join('')+(L.length>n?`<div style="grid-column:1/-1;text-align:center"><button class="btn gh" onclick="inspoGrid(true)">Show more (${L.length-n} left)</button></div>`:''):`<div class="empty" style="grid-column:1/-1"><h3>Nothing matches</h3><p>Loosen a filter or clear the search.</p></div>`; $('#icount').textContent=L.length+' video'+(L.length===1?'':'s'); };
-  setTimeout(()=>inspoGrid(),0);
-  return `${ph('Inspiration','Public videos and ads to study for structure. Copy the shape, never the script. Every card links to the specific video.',{eyebrow:'Create'})}
-  <div class="note" style="margin-bottom:12px">Source: the Ravine swipe sheet (${D.report.swipe_unique_in_sheet} unique rows, read ${fmt.date(D.report.source_sheet?.modified,{year:'numeric'})}) merged with the app library. ${D.report.merged_unique_videos} unique videos after deduplication; ${D.report.cross_source_duplicates_merged} duplicates merged. An ad being in Meta's library proves it ran, not that it sold.</div>
-  <div class="filters"><input type="search" placeholder="Search hooks, captions, brands" value="${esc(S.ui.is)}" aria-label="Search inspiration" oninput="S.ui.is=this.value;S.ui.ipage=1;saveUI();inspoGrid()">
-   <select aria-label="Topic" onchange="S.ui.it=this.value;S.ui.ipage=1;saveUI();inspoGrid()">${topics.map(t=>`<option ${S.ui.it===t?'selected':''}>${esc(t)}</option>`).join('')}</select>
-   <select aria-label="Platform" onchange="S.ui.ip=this.value;S.ui.ipage=1;saveUI();inspoGrid()">${plats.map(t=>`<option ${S.ui.ip===t?'selected':''}>${esc(t)}</option>`).join('')}</select>
-   <select aria-label="Awareness" onchange="S.ui.ia=this.value;S.ui.ipage=1;saveUI();inspoGrid()">${aws.map(t=>`<option ${S.ui.ia===t?'selected':''}>${t==='All'?'Any awareness':esc(t)}</option>`).join('')}</select>
-   <button class="btn gh sm ${S.ui.isv?'soft':''}" onclick="S.ui.isv=!S.ui.isv;saveUI();render()">${ico('star',14)} Saved (${saved.size})</button><span class="mini" id="icount"></span></div>
-  <div id="igrid" class="grid gauto"></div>
-  <div class="sec"><h2>Angles to try</h2><span class="mini">${D.ideas.length} written angles from the swipe sheet, by awareness stage</span></div>
-  <div class="grid g3">${D.ideas.slice(0,S.ui.ideasAll?999:9).map(ideaCard).join('')}</div>
-  ${D.ideas.length>9?`<div style="text-align:center;margin-top:12px"><button class="btn gh" onclick="S.ui.ideasAll=!S.ui.ideasAll;saveUI();render()">${S.ui.ideasAll?'Show fewer':'Show all '+D.ideas.length+' angles'}</button></div>`:''}`;
-});
-function inspoCard(v){ const saved=savedSet().has(v.id); return `<div class="vcard icard"><button style="all:unset;cursor:pointer;display:block" onclick="openInspo('${v.id}')" aria-label="${esc(v.title)}"><div class="th">${thumb(v.thumb?'./'+v.thumb:null,'tile','Film')}<span class="tag chip o">${esc(v.platform)}</span></div></button><div class="body"><div class="ttl">${esc(v.title)}</div><div class="meta">${v.brand?`<span>${esc(v.brand)}</span>`:''}${v.handle?`<span>${esc(v.handle)}</span>`:''}${v.awareness?`<span>${esc(v.awareness)}</span>`:''}${v.format?`<span>${esc(v.format)}</span>`:''}</div>${v.hook&&v.hook!==v.title?`<div class="hook">${esc(v.hook)}</div>`:(v.caption?`<div class="hook">${esc(v.caption)}</div>`:'')}<div class="chips">${v.topics.slice(0,3).map(t=>`<span class="chip">${esc(t)}</span>`).join('')}</div>
-  <div class="row" style="margin-top:10px"><a class="btn sm" ${openExt(v.url)}>Open video ${ico('ext',13)}</a><button class="btn gh sm" onclick="toggleSaved('${v.id}')" aria-pressed="${saved}">${ico('star',13)} ${saved?'Saved':'Save'}</button></div></div></div>`; }
-function ideaCard(i){ return `<div class="card"><div class="row between"><span class="chip o">${esc(i.awareness||'Awareness n/a')}</span><span class="mini">${esc(i.audience||'')}</span></div><h3 style="margin-top:8px">${esc(i.name)}</h3><p style="margin-top:4px;font-style:italic">"${esc(i.hook)}"</p><p style="margin-top:6px;font-size:13.5px">${esc(i.what)}</p><p style="margin-top:6px;font-size:13.5px"><b style="color:var(--tx)">Ravine enters:</b> ${esc(i.ravine_entry)}</p><div class="row" style="margin-top:10px"><span class="chip">${esc(i.format||'')}</span><button class="btn sm soft" onclick="useForQuest('idea_${i.n}')">Use this for a quest</button></div></div>`; }
-function openInspo(id){ const v=INSPO().videos.find(x=>x.id===id); if(!v) return; const saved=savedSet().has(id);
-  openDrawer(`<div class="row"><span class="chip o">${esc(v.platform)}</span>${v.awareness?`<span class="chip">${esc(v.awareness)}</span>`:''}${v.format?`<span class="chip">${esc(v.format)}</span>`:''}</div><h2>${esc(v.title)}</h2><div class="art">${thumb(v.thumb?'./'+v.thumb:null,'tile','Film')}</div>
-   <section><h3>What was reviewed</h3><div class="timeline">${v.brand?`<div><time>Brand</time><span>${esc(v.brand)}</span></div>`:''}${v.handle?`<div><time>Account</time><span>${esc(v.handle)}</span></div>`:''}${v.scene?`<div><time>Setting</time><span>${esc(v.scene)}</span></div>`:''}${v.why?`<div><time>Why it is here</time><span>${esc(v.why)}</span></div>`:''}<div><time>Topics</time><span>${v.topics.map(esc).join(', ')||'Uncategorised'}</span></div><div><time>Sheet tags</time><span>${v.sheets.map(esc).join(', ')||'None'}</span></div></div></section>
-   ${v.hook||v.caption?`<section><h3>Hook / copy</h3><p>${esc(v.hook||v.caption)}</p></section>`:''}
-   ${v.idea?`<section><h3>Ravine adaptation</h3><p><b>${esc(v.idea.name)}</b>: ${esc(v.idea.what)} ${esc(v.idea.ravine_entry)}</p></section>`:`<section><h3>Ravine adaptation</h3><p>Keep the beats: what happens at 0 to 3 seconds, when the product first appears, how it closes. Rebuild it in your setting with your story. Use the "Recreate an ad format" quest to get credit.</p></section>`}
-   <section><h3>Provenance</h3><ul>${v.sources.map(s=>`<li>${esc(s)}</li>`).join('')}<li class="mono">${esc(v.id)}</li></ul></section>
-   ${/fb\.me\/adspreview/.test(v.url)?`<div class="note warn" style="margin-top:12px">This is a Facebook ad <b>preview</b> link from the sheet. Sampled preview links had expired, so it may open the Facebook home feed instead of the ad. Flagged for re-sourcing.</div>`:''}
-   <section><div class="row"><a class="btn" ${openExt(v.url)}>Open on ${esc(v.platform)} ${ico('ext')}</a><button class="btn soft" onclick="useForQuest('${v.id}')">Use this for a quest</button><button class="btn gh" onclick="toggleSaved('${v.id}');openInspo('${v.id}')">${ico('star')} ${saved?'Saved':'Save'}</button></div><div class="mini" style="margin-top:8px">If the link is dead, the ad may have been retired. ${v.brand?`<a ${openExt(metaSearch(v.brand))}>Search ${esc(v.brand)} in the Ad Library</a>.`:''}</div></section>`); }
+/* Inspiration route retired Oct 19: replaced by the Angle Library (pages_library.js). #/inspo redirects there. */
 function useForQuest(ref){ closeDrawer(true); go('quests',{ref}); toast('Reference attached. Pick a quest, then Start: the reference is saved on the entry. No XP is awarded by this.'); }
 
 /* ---------------- Winning angles: observed internal winners, not public examples */
@@ -1999,6 +2033,103 @@ route('broll',async()=>{ await loadRef();
   <div id="bgrid" class="grid gauto">${brollGrid()}</div>`;
   function brollGrid(){ const L=B.filter(b=>!S.ui.bs||b.title.toLowerCase().includes(S.ui.bs.toLowerCase())); window.brollGrid=brollGrid; return L.slice(0,120).map(b=>`<a class="vcard" ${openExt(b.url)} style="text-decoration:none"><div class="th">${thumb(b.thumb?'./'+b.thumb:null,'tile','neutral')}</div><div class="body"><div class="ttl">${esc(b.title)}</div><div class="meta"><span>${b.duration_s?b.duration_s+'s':''}</span><span>${b.bytes?(b.bytes/1048576).toFixed(1)+' MB':''}</span><span>Frame.io ${ico('ext',11)}</span></div></div></a>`).join('')+(L.length>120?`<div class="mini" style="grid-column:1/-1">Showing 120 of ${L.length}. Search to narrow.</div>`:''); }
 });
+
+/* Angle Library · every approved Ravine video, tagged by angle / setting / format, with its real ad numbers.
+   Public-safe numbers only: spend, hook rate, watch time, CTR. Never sales, ROAS, CPA or earnings. */
+'use strict';
+const ANGLES=[
+ ['🎯 Range Day','Range Day','For anyone who shoots.','#FF6E20'],
+ ['🦌 Hunting','Hunting','Deer, turkey, hogs, predators.','#B8743A'],
+ ['🎁 Gifting','Gifting','Shopping for the hunter in your life.','#E86A9A'],
+ ['👷 Blue Collar','Blue Collar','Job sites, tools, mowing.','#E8B64A'],
+ ['🦆 Duck Season','Duck Season','Waterfowl, in the blind.','#3DDC84'],
+ ['👴 Older Guys','Older Guys','Decades of shooting.','#9AA4B2'],
+ ['🔊 Everyday Loud','Everyday Loud','Races, concerts, fireworks.','#5B9DFF'],
+ ['👩 Women Who Shoot','Women Who Shoot','Women at the range and in the woods.','#B57BFF'],
+ ['🏆 Competition','Competition','Matches and PRS.','#FFD166'],
+];
+const SETTINGS=['🎯 Range','🌲 Hunting','🦆 Waterfowl','🔨 Work & Yard','🏡 Everyday','📦 Any'];
+const FORMATS=['Talking Head','Faceless / B-roll VO','This vs That','Skit','Story Time','Humor','Reverse Psychology','Tier List','Listicle','Split Screen','Explainer','Unboxing / Test','Game / Quiz','Interview','AI','Music / Song','Spanish'];
+const SORTS=[['mix','Mixed up'],['spend','Highest spend'],['hook','Best hook rate'],['watch','Longest watch time'],['ctr','Best CTR'],['new','Newest'],['old','Oldest']];
+const LIB=()=>window.ANGLE_LIBRARY||{meta:{},videos:[]};
+async function loadLib(){ if(!window.ANGLE_LIBRARY){ const r=await fetch('./data/angle_library.json?v='+(window.BUILD||'')); if(!r.ok) throw new Error('could not load the Angle Library'); window.ANGLE_LIBRARY=await r.json(); } }
+async function loadScripts(){ if(!window.ANGLE_SCRIPTS){ const r=await fetch('./data/angle_scripts.json?v='+(window.BUILD||'')); window.ANGLE_SCRIPTS=r.ok?await r.json():{}; } return window.ANGLE_SCRIPTS; }
+const LSAVED='rcg_saved_lib';
+function libSaved(){ try{ return new Set(JSON.parse(localStorage.getItem(LSAVED)||'[]')); }catch(e){ return new Set(); } }
+function libToggleSaved(id){ const s=libSaved(); s.has(id)?s.delete(id):s.add(id); try{ localStorage.setItem(LSAVED,JSON.stringify([...s])); }catch(e){} toast(s.has(id)?'Saved on this device':'Removed'); libGrid(); const b=$('#libsavebtn'); if(b) b.textContent=`${s.has(id)?'Saved':'Save'}`; }
+const angleOf=k=>ANGLES.find(a=>a[0]===k);
+const lmoney=v=>v==null?'–':'$'+Math.round(v).toLocaleString('en-US');
+const pct1=v=>v==null?'–':Number(v).toFixed(1)+'%';
+const secs=v=>v==null?'–':Number(v).toFixed(1)+'s';
+const dur=v=>v==null?'':Math.round(v)+'s';
+const libLS=()=>{ const u=S.ui; return {a:u.la||'All',s:u.ls||'All',f:u.lf||'All',q:u.lq||'',co:!!u.lco,ran:!!u.lran,sv:!!u.lsv,sort:u.lsort||'mix',view:u.lview||'grid'}; };
+
+function libFilter(){ const {a,s,f,q,co,ran,sv}=libLS(); const saved=libSaved(); const qq=q.trim().toLowerCase(); const SC=window.ANGLE_SCRIPTS||null;
+  return LIB().videos.filter(v=>(a==='All'||(a==='new'?!v.a:v.a===a))&&(s==='All'||v.s===s)&&(f==='All'||(v.f||[]).includes(f))&&(!co||v.co)&&(!ran||v.sp>=50)&&(!sv||saved.has(v.id))
+    &&(!qq||(v.h+' '+v.w+' '+v.c+' '+v.t+' '+(v.f||[]).join(' ')+' '+(SC&&SC[v.id]||'')).toLowerCase().includes(qq))); }
+function libSort(L){ const {sort}=libLS(); const n=x=>x==null?-1:Number(x);
+  const by={mix:(x,y)=>x.o-y.o, spend:(x,y)=>n(y.sp)-n(x.sp)||x.o-y.o, hook:(x,y)=>n(y.hr)-n(x.hr)||n(y.sp)-n(x.sp), watch:(x,y)=>n(y.ws)-n(x.ws)||n(y.sp)-n(x.sp), ctr:(x,y)=>n(y.ctr)-n(x.ctr)||n(y.sp)-n(x.sp), new:(x,y)=>(y.d||'').localeCompare(x.d||'')||x.o-y.o, old:(x,y)=>(x.d||'').localeCompare(y.d||'')||x.o-y.o}[sort]||((x,y)=>x.o-y.o);
+  return L.slice().sort(by); }
+
+route('library',async(p)=>{ await loadLib(); const D=LIB(); const M=D.meta||{};
+  if(p.a&&(p.a==='All'||angleOf(p.a))) S.ui.la=p.a; if(p.id){ const v=D.videos.find(x=>x.id===p.id); if(v) setTimeout(()=>openLibVideo(v.id),60); }
+  S.ui.lpage=1; saveUI(); const st=libLS(); const saved=libSaved();
+  const counts=Object.fromEntries(ANGLES.map(a=>[a[0],0])); let untagged=0; for(const v of D.videos){ if(v.a) counts[v.a]=(counts[v.a]||0)+1; else untagged++; }
+  const tile=(a)=>{ const [k,name,tag,col]=a; const cover=D.videos.filter(v=>v.a===k&&v.co&&v.th).sort((x,y)=>x.o-y.o)[0]||D.videos.filter(v=>v.a===k&&v.th)[0]; const on=st.a===k;
+    return `<button class="atile ${on?'on':''}" style="--ac:${col}" onclick="S.ui.la='${esc(k)}';S.ui.ls='All';S.ui.lpage=1;saveUI();libSync();libGrid();libTiles()" aria-pressed="${on}"><div class="acov">${cover?`<img src="${esc(cover.th)}" alt="" loading="lazy">`:art('tile','neutral')}<div class="ashade"></div><div class="aemo">${k.split(' ')[0]}</div></div><div class="abody"><b>${esc(name)}</b><small>${counts[k]||0} videos</small></div></button>`; };
+  window.libTiles=()=>{ const g=$('#atiles'); if(!g) return; const st=libLS(); g.innerHTML=`<button class="atile all ${st.a==='All'?'on':''}" onclick="S.ui.la='All';S.ui.ls='All';S.ui.lpage=1;saveUI();libSync();libGrid();libTiles()" aria-pressed="${st.a==='All'}"><div class="acov"><div class="aemo big">🎬</div></div><div class="abody"><b>All angles</b><small>${D.videos.length.toLocaleString()} videos</small></div></button>`+ANGLES.map(tile).join('')+(untagged?`<button class="atile ${st.a==='new'?'on':''}" style="--ac:#9AA4B2" onclick="S.ui.la='new';S.ui.lpage=1;saveUI();libSync();libGrid();libTiles()"><div class="acov"><div class="aemo big">🆕</div></div><div class="abody"><b>Just approved</b><small>${untagged} not tagged yet</small></div></button>`:''); };
+  window.libSync=()=>{ const st=libLS(); const h=$('#libhead'); if(h){ const a=angleOf(st.a); h.innerHTML=a?`<div class="row between wrap"><div><div class="eyebrow" style="color:${a[3]}">${esc(a[0].split(' ')[0])} ${esc(a[1])}</div><p class="muted" style="margin:0">${esc(a[2])}</p></div><button class="btn gh sm" onclick="S.ui.la='All';saveUI();libSync();libGrid();libTiles()">${ico('x',13)} Clear angle</button></div>`:(st.a==='new'?`<div class="eyebrow">🆕 Just approved</div><p class="muted" style="margin:0">Approved on Trybe since the last tagging pass. Angle, setting and format get added on the next pass.</p>`:''); }
+    const sel=$('#libset'); if(sel) sel.value=st.s; const fs=$('#libfmt'); if(fs) fs.value=st.f; };
+  window.libGrid=(more)=>{ const L=libSort(libFilter()); if(more) S.ui.lpage=(S.ui.lpage||1)+1; const n=48*(S.ui.lpage||1); const g=$('#lgrid'); if(!g) return; const st=libLS();
+    const c=$('#lcount'); if(c) c.textContent=`${L.length.toLocaleString()} video${L.length===1?'':'s'}`;
+    if(!L.length){ g.className='grid'; g.innerHTML=emptyState('Nothing matches','Loosen a filter or clear the search.',`<button class="btn gh" onclick="libReset()">Clear filters</button>`,'video'); return; }
+    g.className=st.view==='list'?'hooklist':'grid lgrid';
+    g.innerHTML=L.slice(0,n).map(st.view==='list'?hookRow:libCard).join('')+(L.length>n?`<div style="grid-column:1/-1;text-align:center;margin-top:6px"><button class="btn gh" onclick="libGrid(true)">Show more (${(L.length-n).toLocaleString()} left)</button></div>`:''); };
+  window.libReset=()=>{ Object.assign(S.ui,{la:'All',ls:'All',lf:'All',lq:'',lco:false,lran:false,lsv:false,lsort:'mix',lpage:1}); saveUI(); render(); };
+  setTimeout(()=>{ libTiles(); libSync(); libGrid(); },0);
+  return `${ph('Angle Library','Every approved Ravine video, tagged by angle, setting and format, with the real ad numbers next to it. Pick an angle, watch the first 3 seconds, steal the structure. Never copy a video 1:1.',{eyebrow:'Create'})}
+  <div class="libstats"><div><b>${(M.n||0).toLocaleString()}</b><span>videos</span></div><div><b>${M.creators||0}</b><span>creators</span></div><div><b>${(M.ran||0).toLocaleString()}</b><span>ran as ads</span></div><div><b>${M.coached||0}</b><span>⭐ coached</span></div><div class="mini" style="margin-left:auto">Numbers from Trybe · ${M.metrics_at?fmt.dt(M.metrics_at):''}</div></div>
+  <div id="atiles" class="atiles"></div>
+  <div id="libhead" style="margin:16px 0 4px"></div>
+  <div class="libbar">
+   <input type="search" placeholder="Search hooks, scripts, creators" value="${esc(st.q)}" aria-label="Search the library" oninput="S.ui.lq=this.value;S.ui.lpage=1;saveUI();libGrid()">
+   <select id="libset" aria-label="Setting" onchange="S.ui.ls=this.value;S.ui.lpage=1;saveUI();libGrid()"><option value="All">Any setting</option>${SETTINGS.map(s=>`<option ${st.s===s?'selected':''}>${esc(s)}</option>`).join('')}</select>
+   <select id="libfmt" aria-label="Format" onchange="S.ui.lf=this.value;S.ui.lpage=1;saveUI();libGrid()"><option value="All">Any format</option>${FORMATS.map(f=>`<option ${st.f===f?'selected':''}>${esc(f)}</option>`).join('')}</select>
+   <select aria-label="Sort" onchange="S.ui.lsort=this.value;S.ui.lpage=1;saveUI();libGrid()">${SORTS.map(([k,l])=>`<option value="${k}" ${st.sort===k?'selected':''}>${l}</option>`).join('')}</select>
+   <button class="btn gh sm ${st.co?'soft':''}" aria-pressed="${st.co}" onclick="S.ui.lco=!S.ui.lco;S.ui.lpage=1;saveUI();this.classList.toggle('soft');libGrid()">⭐ Coached</button>
+   <button class="btn gh sm ${st.ran?'soft':''}" aria-pressed="${st.ran}" onclick="S.ui.lran=!S.ui.lran;S.ui.lpage=1;saveUI();this.classList.toggle('soft');libGrid()">${ico('flame',13)} Ran as an ad</button>
+   <button class="btn gh sm ${st.sv?'soft':''}" aria-pressed="${st.sv}" onclick="S.ui.lsv=!S.ui.lsv;S.ui.lpage=1;saveUI();this.classList.toggle('soft');libGrid()">${ico('star',13)} Saved (${saved.size})</button>
+   <div class="seg" role="group" aria-label="View"><button class="${st.view!=='list'?'on':''}" onclick="S.ui.lview='grid';saveUI();render()">${ico('grid',13)} Cards</button><button class="${st.view==='list'?'on':''}" onclick="S.ui.lview='list';saveUI();render()">🪝 Hook bank</button></div>
+   <span class="mini" id="lcount"></span>
+  </div>
+  <div id="lgrid" class="grid lgrid"></div>
+  <div class="note" style="margin-top:16px">Spend, hook rate and watch time are the Trybe numbers for that video's ads, all time. A video with no spend never ran as an ad; that does not mean the concept is bad. Sales stay private.</div>`;
+});
+
+function libCard(v){ const a=angleOf(v.a); const saved=libSaved().has(v.id); const ran=v.sp>=50;
+  return `<div class="vcard lcard ${v.co?'coached':''}"><button style="all:unset;cursor:pointer;display:block" onclick="openLibVideo('${v.id}')" aria-label="${esc(v.h||v.t)}"><div class="th tall">${thumb(v.th,'tile','neutral')}
+    <div class="lt">${v.co?`<span class="chip gold">⭐ Coached</span>`:''}${ran?`<span class="chip o">${lmoney(v.sp)} spend</span>`:''}</div>${v.sec?`<span class="ldur">${dur(v.sec)}</span>`:''}${a?`<span class="lang" style="--ac:${a[3]}">${esc(a[0])}</span>`:''}</div></button>
+   <div class="body"><div class="hook">${esc(v.h||v.w||v.t)}</div><div class="meta"><span>${esc(v.c)}</span>${v.s?`<span>·</span><span>${esc(v.s)}</span>`:''}</div>
+    <div class="lstats"><div><small>Hook</small><b>${pct1(v.hr)}</b></div><div><small>Watch</small><b>${secs(v.ws)}</b></div><div><small>CTR</small><b>${pct1(v.ctr)}</b></div><div><small>Spend</small><b>${v.sp?lmoney(v.sp):'–'}</b></div></div>
+    <div class="chips">${(v.f||[]).slice(0,3).map(f=>`<span class="chip">${esc(f)}</span>`).join('')}${v.cl?`<span class="chip warn">⚠️ claims</span>`:''}</div></div></div>`; }
+function hookRow(v){ const a=angleOf(v.a); return `<button class="hrow" onclick="openLibVideo('${v.id}')"><div class="hth">${thumb(v.th,'tile','neutral')}</div><div class="hbody"><div class="hk">"${esc(v.h||v.w||v.t)}"</div><div class="meta"><span>${esc(v.c)}</span>${a?`<span style="color:${a[3]}">${esc(a[0])}</span>`:''}${(v.f||[]).slice(0,2).map(f=>`<span>${esc(f)}</span>`).join('')}${v.co?'<span>⭐ coached</span>':''}</div></div><div class="hnum"><b>${v.sp?lmoney(v.sp):'–'}</b><small>spend</small></div><div class="hnum"><b>${pct1(v.hr)}</b><small>hook</small></div><div class="hnum"><b>${secs(v.ws)}</b><small>watch</small></div></button>`; }
+
+async function openLibVideo(id){ const v=LIB().videos.find(x=>x.id===id); if(!v) return; const a=angleOf(v.a); const saved=libSaved().has(id);
+  const ret=[['25%',v.r25],['50%',v.r50],['75%',v.r75],['100%',v.r100]].filter(x=>x[1]!=null);
+  openDrawer(`<div class="row">${a?`<span class="chip o" style="background:color-mix(in srgb,${a[3]} 18%,transparent);color:${a[3]}">${esc(a[0])}</span>`:'<span class="chip">🆕 Not tagged yet</span>'}${v.s?`<span class="chip">${esc(v.s)}</span>`:''}${(v.f||[]).map(f=>`<span class="chip">${esc(f)}</span>`).join('')}${v.co?`<span class="chip gold">⭐ Coached</span>`:''}</div>
+   <h2 style="font-size:20px;line-height:1.3">${esc(v.h||v.t)}</h2><div class="mini">${esc(v.c)} · ${v.sec?dur(v.sec)+' · ':''}${fmt.date(v.d,{year:'numeric'})||''}</div>
+   <div class="lplayer"><video controls playsinline preload="metadata" poster="${esc(v.th||'')}" src="${esc(v.v)}"></video></div>
+   <div class="row" style="margin:10px 0 14px"><a class="btn sm" ${openExt(v.v)} download>${ico('ext',13)} Download video</a><button id="libsavebtn" class="btn gh sm" onclick="libToggleSaved('${v.id}')">${saved?'Saved':'Save'}</button><button class="btn soft sm" onclick="useForQuest('${v.id}')">Use this for a quest</button></div>
+   <div class="lstats big"><div><small>Spend</small><b>${v.sp?lmoney(v.sp):'–'}</b></div><div><small>Hook rate</small><b>${pct1(v.hr)}</b></div><div><small>Avg watch</small><b>${secs(v.ws)}</b>${v.wp!=null?`<i>${pct1(v.wp)} of video</i>`:''}</div><div><small>CTR</small><b>${pct1(v.ctr)}</b></div></div>
+   ${ret.length?`<div class="retbar"><small>Still watching at</small>${ret.map(([k,x])=>`<div><i style="height:${clamp(Number(x),2,100)}%"></i><b>${Math.round(x)}%</b><small>${k}</small></div>`).join('')}</div>`:(v.sp?'':`<div class="note" style="margin-top:10px">This one has not run as an ad yet, so there are no numbers. Judge it on the hook and the structure.</div>`)}
+   ${v.h?`<section><h3>🪝 The hook</h3><blockquote class="lquote">"${esc(v.h)}"</blockquote></section>`:''}
+   ${v.w?`<section><h3>🎬 ${v.co?'What they went for':'What it is'}</h3><p>${esc(v.w)}</p></section>`:''}
+   ${v.cn?`<section><h3>🧠 Coach notes</h3><p>${esc(v.cn)}</p></section>`:''}
+   ${v.cl?`<div class="note warn" style="margin-top:12px"><b>Claims check.</b> This script has hearing-loss or health lines. Steal the format, not those lines. Stick to what the product does: 31 NRR, 4x sound amplification, comfort, fit.</div>`:''}
+   <section><h3>🔁 Recreate it</h3><ol class="rsteps"><li><b>0–3s:</b> what is on screen and what is the first line?</li><li><b>3–10s:</b> how does it earn the next 7 seconds?</li><li><b>Product:</b> when does Ravine show up, and how?</li><li><b>Close:</b> how does it land the CTA?</li></ol><p class="mini">Write those four down, then film your version: your face, your gear, your words.</p></section>
+   <section id="libscript"><h3>📝 Full script</h3><p class="mini">Loading…</p></section>`);
+  const sc=await loadScripts(); const el=$('#libscript'); if(!el) return; const txt=sc[id];
+  el.innerHTML=`<h3>📝 Full script</h3>${txt?`<details class="scriptbox"><summary>Show the full script</summary><p>${esc(txt)}</p></details>`:'<p class="mini">No transcript for this one. Watch it for the visuals, the on-screen text and the edit.</p>'}`; }
 
 /* Profile · Amazon · Onboarding · Trial · Admin */
 'use strict';
