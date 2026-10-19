@@ -753,8 +753,11 @@ button.actrow:hover{background:var(--sf2)}
 .atile:hover{transform:translateY(-2px);border-color:var(--ln2)}
 .atile.on{border-color:var(--ac,var(--o));box-shadow:0 0 0 1px var(--ac,var(--o)) inset,0 10px 26px rgba(0,0,0,.35)}
 .atile .acov{position:relative;aspect-ratio:16/10;background:var(--sf3);display:grid;place-items:center}
-.atile .acov img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
-.atile .ashade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.55) 100%)}
+.atile .acov img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.92) contrast(1.04);transition:transform .5s var(--ease)}
+.atile:hover .acov img{transform:scale(1.04)}
+/* one grade on every cover so nine different videos read as one set: a soft dark base, a whisper of the angle colour at the top, and a darker foot for the emoji */
+.atile .ashade{position:absolute;inset:0;background:linear-gradient(180deg,color-mix(in srgb,var(--ac,var(--o)) 22%,transparent),transparent 38%),linear-gradient(180deg,rgba(8,10,14,.08),rgba(8,10,14,.62) 100%)}
+.atile.on .ashade{box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--ac,var(--o)) 70%,transparent)}
 .atile .aemo{position:absolute;left:10px;bottom:8px;font-size:22px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.6))}
 .atile .aemo.big{position:static;font-size:34px}
 .atile.all .acov{background:linear-gradient(135deg,rgba(255,110,32,.35),rgba(255,110,32,.05)),var(--sf3)}
@@ -828,7 +831,7 @@ button.actrow:hover{background:var(--sf2)}
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261019-155929";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261019-162434";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -2038,16 +2041,17 @@ route('broll',async()=>{ await loadRef();
    Public-safe numbers only: spend, hook rate, watch time, CTR. Never sales, ROAS, CPA or earnings. */
 'use strict';
 const ANGLES=[
- ['🎯 Range Day','Range Day','For anyone who shoots.','#FF6E20'],
- ['🦌 Hunting','Hunting','Deer, turkey, hogs, predators.','#B8743A'],
- ['🎁 Gifting','Gifting','Shopping for the hunter in your life.','#E86A9A'],
- ['👷 Blue Collar','Blue Collar','Job sites, tools, mowing.','#E8B64A'],
- ['🦆 Duck Season','Duck Season','Waterfowl, in the blind.','#3DDC84'],
- ['👴 Older Guys','Older Guys','Decades of shooting.','#9AA4B2'],
- ['🔊 Everyday Loud','Everyday Loud','Races, concerts, fireworks.','#5B9DFF'],
- ['👩 Women Who Shoot','Women Who Shoot','Women at the range and in the woods.','#B57BFF'],
- ['🏆 Competition','Competition','Matches and PRS.','#FFD166'],
+ ['🎯 Range Day','Range Day','For anyone who shoots.','#FF6E20','range'],
+ ['🦌 Hunting','Hunting','Deer, turkey, hogs, predators.','#B8743A','hunting'],
+ ['🎁 Gifting','Gifting','Shopping for the hunter in your life.','#E86A9A','gifting'],
+ ['👷 Blue Collar','Blue Collar','Job sites, tools, mowing.','#E8B64A','blue'],
+ ['🦆 Duck Season','Duck Season','Waterfowl, in the blind.','#3DDC84','duck'],
+ ['👴 Older Guys','Older Guys','Decades of shooting.','#9AA4B2','older'],
+ ['🔊 Everyday Loud','Everyday Loud','Races, concerts, fireworks.','#5B9DFF','loud'],
+ ['👩 Women Who Shoot','Women Who Shoot','Women at the range and in the woods.','#B57BFF','women'],
+ ['🏆 Competition','Competition','Matches and PRS.','#FFD166','competition'],
 ];
+/* 5th column = cover photo key → ph/angle-<key>.jpg (a frame from an approved Ravine video, cropped 16:10, chosen by hand Oct 19) */
 const SETTINGS=['🎯 Range','🌲 Hunting','🦆 Waterfowl','🔨 Work & Yard','🏡 Everyday','📦 Any'];
 const FORMATS=['Talking Head','Faceless / B-roll VO','This vs That','Skit','Story Time','Humor','Reverse Psychology','Tier List','Listicle','Split Screen','Explainer','Unboxing / Test','Game / Quiz','Interview','AI','Music / Song','Spanish'];
 const SORTS=[['mix','Mixed up'],['spend','Highest spend'],['hook','Best hook rate'],['watch','Longest watch time'],['ctr','Best CTR'],['new','Newest'],['old','Oldest']];
@@ -2070,17 +2074,25 @@ function libFilter(){ const {a,s,f,q,co,ran,sv}=libLS(); const saved=libSaved();
 function libSort(L){ const {sort}=libLS(); const n=x=>x==null?-1:Number(x);
   const by={mix:(x,y)=>x.o-y.o, spend:(x,y)=>n(y.sp)-n(x.sp)||x.o-y.o, hook:(x,y)=>n(y.hr)-n(x.hr)||n(y.sp)-n(x.sp), watch:(x,y)=>n(y.ws)-n(x.ws)||n(y.sp)-n(x.sp), ctr:(x,y)=>n(y.ctr)-n(x.ctr)||n(y.sp)-n(x.sp), new:(x,y)=>(y.d||'').localeCompare(x.d||'')||x.o-y.o, old:(x,y)=>(x.d||'').localeCompare(y.d||'')||x.o-y.o}[sort]||((x,y)=>x.o-y.o);
   return L.slice().sort(by); }
+/* Austin, Oct 19: never show the same creator's videos back to back. After any filter + sort, pull the next
+   different creator forward whenever two neighbours share one (keeps the ranking almost exactly). */
+function libSpread(L){ const out=L.slice();
+  for(let i=1;i<out.length;i++){ if(out[i].c!==out[i-1].c) continue; const c=out[i].c; let j=i+1; while(j<out.length&&out[j].c===c) j++;
+    if(j<out.length){ const [x]=out.splice(j,1); out.splice(i,0,x); }
+    else { /* nothing different ahead: tuck this one into an earlier gap between two other creators */ for(let p=i-2;p>=0;p--){ if(out[p].c!==c&&out[p+1].c!==c){ const [x]=out.splice(i,1); out.splice(p+1,0,x); break; } } } }
+  return out; }
 
 route('library',async(p)=>{ await loadLib(); const D=LIB(); const M=D.meta||{};
   if(p.a&&(p.a==='All'||angleOf(p.a))) S.ui.la=p.a; if(p.id){ const v=D.videos.find(x=>x.id===p.id); if(v) setTimeout(()=>openLibVideo(v.id),60); }
   S.ui.lpage=1; saveUI(); const st=libLS(); const saved=libSaved();
   const counts=Object.fromEntries(ANGLES.map(a=>[a[0],0])); let untagged=0; for(const v of D.videos){ if(v.a) counts[v.a]=(counts[v.a]||0)+1; else untagged++; }
-  const tile=(a)=>{ const [k,name,tag,col]=a; const cover=D.videos.filter(v=>v.a===k&&v.co&&v.th).sort((x,y)=>x.o-y.o)[0]||D.videos.filter(v=>v.a===k&&v.th)[0]; const on=st.a===k;
-    return `<button class="atile ${on?'on':''}" style="--ac:${col}" onclick="S.ui.la='${esc(k)}';S.ui.ls='All';S.ui.lpage=1;saveUI();libSync();libGrid();libTiles()" aria-pressed="${on}"><div class="acov">${cover?`<img src="${esc(cover.th)}" alt="" loading="lazy">`:art('tile','neutral')}<div class="ashade"></div><div class="aemo">${k.split(' ')[0]}</div></div><div class="abody"><b>${esc(name)}</b><small>${counts[k]||0} videos</small></div></button>`; };
+  const tile=(a)=>{ const [k,name,tag,col,ph]=a; const fallback=D.videos.filter(v=>v.a===k&&v.co&&v.th).sort((x,y)=>x.o-y.o)[0]||D.videos.filter(v=>v.a===k&&v.th)[0]; const on=st.a===k;
+    const img=ph?`<img src="./ph/angle-${ph}.jpg" alt="" width="640" height="400" onerror="${fallback?`this.onerror=null;this.src='${esc(fallback.th)}'`:'this.remove()'}">`:(fallback?`<img src="${esc(fallback.th)}" alt="" loading="lazy">`:art('tile','neutral'));
+    return `<button class="atile ${on?'on':''}" style="--ac:${col}" onclick="S.ui.la='${esc(k)}';S.ui.ls='All';S.ui.lpage=1;saveUI();libSync();libGrid();libTiles()" aria-pressed="${on}"><div class="acov">${img}<div class="ashade"></div><div class="aemo">${k.split(' ')[0]}</div></div><div class="abody"><b>${esc(name)}</b><small>${counts[k]||0} videos</small></div></button>`; };
   window.libTiles=()=>{ const g=$('#atiles'); if(!g) return; const st=libLS(); g.innerHTML=`<button class="atile all ${st.a==='All'?'on':''}" onclick="S.ui.la='All';S.ui.ls='All';S.ui.lpage=1;saveUI();libSync();libGrid();libTiles()" aria-pressed="${st.a==='All'}"><div class="acov"><div class="aemo big">🎬</div></div><div class="abody"><b>All angles</b><small>${D.videos.length.toLocaleString()} videos</small></div></button>`+ANGLES.map(tile).join('')+(untagged?`<button class="atile ${st.a==='new'?'on':''}" style="--ac:#9AA4B2" onclick="S.ui.la='new';S.ui.lpage=1;saveUI();libSync();libGrid();libTiles()"><div class="acov"><div class="aemo big">🆕</div></div><div class="abody"><b>Just approved</b><small>${untagged} not tagged yet</small></div></button>`:''); };
   window.libSync=()=>{ const st=libLS(); const h=$('#libhead'); if(h){ const a=angleOf(st.a); h.innerHTML=a?`<div class="row between wrap"><div><div class="eyebrow" style="color:${a[3]}">${esc(a[0].split(' ')[0])} ${esc(a[1])}</div><p class="muted" style="margin:0">${esc(a[2])}</p></div><button class="btn gh sm" onclick="S.ui.la='All';saveUI();libSync();libGrid();libTiles()">${ico('x',13)} Clear angle</button></div>`:(st.a==='new'?`<div class="eyebrow">🆕 Just approved</div><p class="muted" style="margin:0">Approved on Trybe since the last tagging pass. Angle, setting and format get added on the next pass.</p>`:''); }
     const sel=$('#libset'); if(sel) sel.value=st.s; const fs=$('#libfmt'); if(fs) fs.value=st.f; };
-  window.libGrid=(more)=>{ const L=libSort(libFilter()); if(more) S.ui.lpage=(S.ui.lpage||1)+1; const n=48*(S.ui.lpage||1); const g=$('#lgrid'); if(!g) return; const st=libLS();
+  window.libGrid=(more)=>{ const L=libSpread(libSort(libFilter())); if(more) S.ui.lpage=(S.ui.lpage||1)+1; const n=48*(S.ui.lpage||1); const g=$('#lgrid'); if(!g) return; const st=libLS();
     const c=$('#lcount'); if(c) c.textContent=`${L.length.toLocaleString()} video${L.length===1?'':'s'}`;
     if(!L.length){ g.className='grid'; g.innerHTML=emptyState('Nothing matches','Loosen a filter or clear the search.',`<button class="btn gh" onclick="libReset()">Clear filters</button>`,'video'); return; }
     g.className=st.view==='list'?'hooklist':'grid lgrid';
