@@ -983,7 +983,7 @@ button.actrow:hover{background:var(--sf2)}
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261019-205635";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261019-210351";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1237,12 +1237,12 @@ function go(view,params={}){ S.view=view; S.params=params; const h='#/'+view+(Ob
 function parseHash(){ const m=location.hash.match(/^#\/([a-z0-9_-]+)(?:\?(.*))?/i); if(!m) return {view:'home',params:{}}; return {view:m[1],params:Object.fromEntries(new URLSearchParams(m[2]||''))}; }
 window.addEventListener('popstate',()=>{ const p=parseHash(); S.view=p.view; S.params=p.params; closeDrawer(true); render(); });
 /* retired routes resolve to the closest permitted page */
-const REDIRECT={adlib:'analytics',winners:'angles',board:'leaderboard',stats:'analytics',approvals:'submissions',reviews:'submissions',feed:'library',inspo:'library',amazon:'home',onboard:'home',trial:'home'};
+const REDIRECT={adlib:'analytics',winners:'library',angles:'library',board:'leaderboard',stats:'analytics',approvals:'submissions',reviews:'submissions',feed:'library',inspo:'library',amazon:'home',onboard:'home',trial:'home'};
 
 /* ---- nav */
 const NAV=[
  ['Home',[['home','Home','home']]],
- ['Create',[['library','Angle Library','grid'],['angles','Winning angles','flame'],['spy','Spyboard','eye'],['broll','B-roll','film']]],
+ ['Create',[['library','Angle Library','grid'],['spy','Spyboard','eye'],['broll','B-roll','film']]],
  ['Progress',[['quests','Quests','target'],['rewards','Rewards','gift'],['submissions','My submissions','check'],['analytics','Analytics','chart']]],
  ['Compete',[['leaderboard','Leaderboard','star'],['compete','October competition','trophy'],['pace','My pace','gauge']]],
  ['Profile',[['profile','My profile','user']]],
