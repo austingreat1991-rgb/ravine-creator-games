@@ -812,6 +812,15 @@ button.actrow:hover{background:var(--sf2)}
 .hrow .hnum b{display:block;font-family:var(--mono);font-size:13px;font-weight:600}
 .hrow .hnum small{font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--tx4);font-weight:700}
 @media (max-width:640px){ .hrow{grid-template-columns:44px 1fr 60px} .hrow .hnum:nth-child(4),.hrow .hnum:nth-child(5){display:none} .lgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px} .lstats{grid-template-columns:repeat(2,1fr)} .atiles{display:flex;overflow-x:auto;gap:8px;padding:2px 2px 8px;margin:0 -2px;scroll-snap-type:x mandatory;scrollbar-width:none} .atiles::-webkit-scrollbar{display:none} .atile{flex:0 0 128px;scroll-snap-align:start} .atile .acov{aspect-ratio:16/11} .atile .abody{padding:7px 8px} .atile .abody b{font-size:12px} .libbar{position:static} }
+
+/* CTA bank (Oct 19) */
+.ctabar{margin:4px 0 12px}
+.ctabar .chips{display:flex;flex-wrap:wrap;gap:6px}
+.ctabar .chip{cursor:pointer;border:1px solid var(--ln);background:var(--sf);color:var(--tx2);font-weight:600}
+.ctabar .chip.on{background:var(--o-soft);border-color:color-mix(in srgb,var(--o) 45%,transparent);color:var(--o2)}
+.crow .hk{font-weight:500;color:var(--tx)}
+.crow .hk::first-letter{color:var(--o2)}
+.hrow .meta .warnc{color:var(--warn)}
 </style>
 </head>
 <body>
@@ -831,7 +840,7 @@ button.actrow:hover{background:var(--sf2)}
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261019-162434";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261019-170401";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -2055,6 +2064,7 @@ const ANGLES=[
 const SETTINGS=['🎯 Range','🌲 Hunting','🦆 Waterfowl','🔨 Work & Yard','🏡 Everyday','📦 Any'];
 const FORMATS=['Talking Head','Faceless / B-roll VO','This vs That','Skit','Story Time','Humor','Reverse Psychology','Tier List','Listicle','Split Screen','Explainer','Unboxing / Test','Game / Quiz','Interview','AI','Music / Song','Spanish'];
 const SORTS=[['mix','Mixed up'],['spend','Highest spend'],['hook','Best hook rate'],['watch','Longest watch time'],['ctr','Best CTR'],['new','Newest'],['old','Oldest']];
+const CTA_TYPES=[['link','🔗 Link'],['offer','💸 Offer'],['urgency','⏰ Urgency'],['gift','🎁 Gift'],['soft','🤝 Soft close']];
 const LIB=()=>window.ANGLE_LIBRARY||{meta:{},videos:[]};
 async function loadLib(){ if(!window.ANGLE_LIBRARY){ const r=await fetch('./data/angle_library.json?v='+(window.BUILD||'')); if(!r.ok) throw new Error('could not load the Angle Library'); window.ANGLE_LIBRARY=await r.json(); } }
 async function loadScripts(){ if(!window.ANGLE_SCRIPTS){ const r=await fetch('./data/angle_scripts.json?v='+(window.BUILD||'')); window.ANGLE_SCRIPTS=r.ok?await r.json():{}; } return window.ANGLE_SCRIPTS; }
@@ -2066,13 +2076,13 @@ const lmoney=v=>v==null?'–':'$'+Math.round(v).toLocaleString('en-US');
 const pct1=v=>v==null?'–':Number(v).toFixed(1)+'%';
 const secs=v=>v==null?'–':Number(v).toFixed(1)+'s';
 const dur=v=>v==null?'':Math.round(v)+'s';
-const libLS=()=>{ const u=S.ui; return {a:u.la||'All',s:u.ls||'All',f:u.lf||'All',q:u.lq||'',co:!!u.lco,ran:!!u.lran,sv:!!u.lsv,sort:u.lsort||'mix',view:u.lview||'grid'}; };
+const libLS=()=>{ const u=S.ui; return {a:u.la||'All',s:u.ls||'All',f:u.lf||'All',q:u.lq||'',co:!!u.lco,ran:!!u.lran,sv:!!u.lsv,sort:u.lsort||'mix',view:u.lview||'grid',ct:u.lct||'All'}; };
 
-function libFilter(){ const {a,s,f,q,co,ran,sv}=libLS(); const saved=libSaved(); const qq=q.trim().toLowerCase(); const SC=window.ANGLE_SCRIPTS||null;
-  return LIB().videos.filter(v=>(a==='All'||(a==='new'?!v.a:v.a===a))&&(s==='All'||v.s===s)&&(f==='All'||(v.f||[]).includes(f))&&(!co||v.co)&&(!ran||v.sp>=50)&&(!sv||saved.has(v.id))
-    &&(!qq||(v.h+' '+v.w+' '+v.c+' '+v.t+' '+(v.f||[]).join(' ')+' '+(SC&&SC[v.id]||'')).toLowerCase().includes(qq))); }
-function libSort(L){ const {sort}=libLS(); const n=x=>x==null?-1:Number(x);
-  const by={mix:(x,y)=>x.o-y.o, spend:(x,y)=>n(y.sp)-n(x.sp)||x.o-y.o, hook:(x,y)=>n(y.hr)-n(x.hr)||n(y.sp)-n(x.sp), watch:(x,y)=>n(y.ws)-n(x.ws)||n(y.sp)-n(x.sp), ctr:(x,y)=>n(y.ctr)-n(x.ctr)||n(y.sp)-n(x.sp), new:(x,y)=>(y.d||'').localeCompare(x.d||'')||x.o-y.o, old:(x,y)=>(x.d||'').localeCompare(y.d||'')||x.o-y.o}[sort]||((x,y)=>x.o-y.o);
+function libFilter(){ const {a,s,f,q,co,ran,sv,view,ct}=libLS(); const saved=libSaved(); const qq=q.trim().toLowerCase(); const SC=window.ANGLE_SCRIPTS||null;
+  return LIB().videos.filter(v=>(a==='All'||(a==='new'?!v.a:v.a===a))&&(s==='All'||v.s===s)&&(f==='All'||(v.f||[]).includes(f))&&(!co||v.co)&&(!ran||v.sp>=50)&&(!sv||saved.has(v.id))&&(view!=='cta'||(v.ct&&(ct==='All'||(v.cty||[]).includes(ct))))
+    &&(!qq||(v.h+' '+(v.ct||'')+' '+v.w+' '+v.c+' '+v.t+' '+(v.f||[]).join(' ')+' '+(SC&&SC[v.id]||'')).toLowerCase().includes(qq))); }
+function libSort(L){ const {sort}=libLS(); const n=x=>x==null?-1:Number(x); const rel=x=>x.sp>=50?1:0;
+  const by={mix:(x,y)=>x.o-y.o, spend:(x,y)=>n(y.sp)-n(x.sp)||x.o-y.o, hook:(x,y)=>rel(y)-rel(x)||n(y.hr)-n(x.hr)||n(y.sp)-n(x.sp), watch:(x,y)=>rel(y)-rel(x)||n(y.ws)-n(x.ws)||n(y.sp)-n(x.sp), ctr:(x,y)=>rel(y)-rel(x)||n(y.ctr)-n(x.ctr)||n(y.sp)-n(x.sp), new:(x,y)=>(y.d||'').localeCompare(x.d||'')||x.o-y.o, old:(x,y)=>(x.d||'').localeCompare(y.d||'')||x.o-y.o}[sort]||((x,y)=>x.o-y.o);
   return L.slice().sort(by); }
 /* Austin, Oct 19: never show the same creator's videos back to back. After any filter + sort, pull the next
    different creator forward whenever two neighbours share one (keeps the ranking almost exactly). */
@@ -2093,11 +2103,11 @@ route('library',async(p)=>{ await loadLib(); const D=LIB(); const M=D.meta||{};
   window.libSync=()=>{ const st=libLS(); const h=$('#libhead'); if(h){ const a=angleOf(st.a); h.innerHTML=a?`<div class="row between wrap"><div><div class="eyebrow" style="color:${a[3]}">${esc(a[0].split(' ')[0])} ${esc(a[1])}</div><p class="muted" style="margin:0">${esc(a[2])}</p></div><button class="btn gh sm" onclick="S.ui.la='All';saveUI();libSync();libGrid();libTiles()">${ico('x',13)} Clear angle</button></div>`:(st.a==='new'?`<div class="eyebrow">🆕 Just approved</div><p class="muted" style="margin:0">Approved on Trybe since the last tagging pass. Angle, setting and format get added on the next pass.</p>`:''); }
     const sel=$('#libset'); if(sel) sel.value=st.s; const fs=$('#libfmt'); if(fs) fs.value=st.f; };
   window.libGrid=(more)=>{ const L=libSpread(libSort(libFilter())); if(more) S.ui.lpage=(S.ui.lpage||1)+1; const n=48*(S.ui.lpage||1); const g=$('#lgrid'); if(!g) return; const st=libLS();
-    const c=$('#lcount'); if(c) c.textContent=`${L.length.toLocaleString()} video${L.length===1?'':'s'}`;
+    const c=$('#lcount'); if(c) c.textContent=st.view==='cta'?`${L.length.toLocaleString()} CTA${L.length===1?'':'s'}`:`${L.length.toLocaleString()} video${L.length===1?'':'s'}`;
     if(!L.length){ g.className='grid'; g.innerHTML=emptyState('Nothing matches','Loosen a filter or clear the search.',`<button class="btn gh" onclick="libReset()">Clear filters</button>`,'video'); return; }
-    g.className=st.view==='list'?'hooklist':'grid lgrid';
-    g.innerHTML=L.slice(0,n).map(st.view==='list'?hookRow:libCard).join('')+(L.length>n?`<div style="grid-column:1/-1;text-align:center;margin-top:6px"><button class="btn gh" onclick="libGrid(true)">Show more (${(L.length-n).toLocaleString()} left)</button></div>`:''); };
-  window.libReset=()=>{ Object.assign(S.ui,{la:'All',ls:'All',lf:'All',lq:'',lco:false,lran:false,lsv:false,lsort:'mix',lpage:1}); saveUI(); render(); };
+    g.className=st.view==='list'||st.view==='cta'?'hooklist':'grid lgrid';
+    g.innerHTML=L.slice(0,n).map(st.view==='list'?hookRow:st.view==='cta'?ctaRow:libCard).join('')+(L.length>n?`<div style="grid-column:1/-1;text-align:center;margin-top:6px"><button class="btn gh" onclick="libGrid(true)">Show more (${(L.length-n).toLocaleString()} left)</button></div>`:''); };
+  window.libReset=()=>{ Object.assign(S.ui,{la:'All',ls:'All',lf:'All',lq:'',lco:false,lran:false,lsv:false,lsort:'mix',lct:'All',lpage:1}); saveUI(); render(); };
   setTimeout(()=>{ libTiles(); libSync(); libGrid(); },0);
   return `${ph('Angle Library','Every approved Ravine video, tagged by angle, setting and format, with the real ad numbers next to it. Pick an angle, watch the first 3 seconds, steal the structure. Never copy a video 1:1.',{eyebrow:'Create'})}
   <div class="libstats"><div><b>${(M.n||0).toLocaleString()}</b><span>videos</span></div><div><b>${M.creators||0}</b><span>creators</span></div><div><b>${(M.ran||0).toLocaleString()}</b><span>ran as ads</span></div><div><b>${M.coached||0}</b><span>⭐ coached</span></div><div class="mini" style="margin-left:auto">Numbers from Trybe · ${M.metrics_at?fmt.dt(M.metrics_at):''}</div></div>
@@ -2111,9 +2121,10 @@ route('library',async(p)=>{ await loadLib(); const D=LIB(); const M=D.meta||{};
    <button class="btn gh sm ${st.co?'soft':''}" aria-pressed="${st.co}" onclick="S.ui.lco=!S.ui.lco;S.ui.lpage=1;saveUI();this.classList.toggle('soft');libGrid()">⭐ Coached</button>
    <button class="btn gh sm ${st.ran?'soft':''}" aria-pressed="${st.ran}" onclick="S.ui.lran=!S.ui.lran;S.ui.lpage=1;saveUI();this.classList.toggle('soft');libGrid()">${ico('flame',13)} Ran as an ad</button>
    <button class="btn gh sm ${st.sv?'soft':''}" aria-pressed="${st.sv}" onclick="S.ui.lsv=!S.ui.lsv;S.ui.lpage=1;saveUI();this.classList.toggle('soft');libGrid()">${ico('star',13)} Saved (${saved.size})</button>
-   <div class="seg" role="group" aria-label="View"><button class="${st.view!=='list'?'on':''}" onclick="S.ui.lview='grid';saveUI();render()">${ico('grid',13)} Cards</button><button class="${st.view==='list'?'on':''}" onclick="S.ui.lview='list';saveUI();render()">🪝 Hook bank</button></div>
+   <div class="seg" role="group" aria-label="View"><button class="${st.view!=='list'?'on':''}" onclick="S.ui.lview='grid';saveUI();render()">${ico('grid',13)} Cards</button><button class="${st.view==='list'?'on':''}" onclick="S.ui.lview='list';saveUI();render()">🪝 Hook bank</button><button class="${st.view==='cta'?'on':''}" onclick="S.ui.lview='cta';saveUI();render()">📣 CTA bank</button></div>
    <span class="mini" id="lcount"></span>
   </div>
+  ${st.view==='cta'?`<div class="ctabar"><p class="mini" style="margin:0 0 8px">How everyone closes their videos. Sort by <b>Best CTR</b> to see which closes got people to click. Steal the move, say it your way.</p><div class="chips">${[['All','All closes'],...CTA_TYPES].map(([k,l])=>`<button class="chip ${st.ct===k?'on':''}" aria-pressed="${st.ct===k}" onclick="S.ui.lct='${k}';S.ui.lpage=1;saveUI();document.querySelectorAll('.ctabar .chip').forEach(b=>{const on=b===this;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)});libGrid()">${l}</button>`).join('')}</div></div>`:''}
   <div id="lgrid" class="grid lgrid"></div>
   <div class="note" style="margin-top:16px">Spend, hook rate and watch time are the Trybe numbers for that video's ads, all time. A video with no spend never ran as an ad; that does not mean the concept is bad. Sales stay private.</div>`;
 });
@@ -2126,6 +2137,9 @@ function libCard(v){ const a=angleOf(v.a); const saved=libSaved().has(v.id); con
     <div class="chips">${(v.f||[]).slice(0,3).map(f=>`<span class="chip">${esc(f)}</span>`).join('')}${v.cl?`<span class="chip warn">⚠️ claims</span>`:''}</div></div></div>`; }
 function hookRow(v){ const a=angleOf(v.a); return `<button class="hrow" onclick="openLibVideo('${v.id}')"><div class="hth">${thumb(v.th,'tile','neutral')}</div><div class="hbody"><div class="hk">"${esc(v.h||v.w||v.t)}"</div><div class="meta"><span>${esc(v.c)}</span>${a?`<span style="color:${a[3]}">${esc(a[0])}</span>`:''}${(v.f||[]).slice(0,2).map(f=>`<span>${esc(f)}</span>`).join('')}${v.co?'<span>⭐ coached</span>':''}</div></div><div class="hnum"><b>${v.sp?lmoney(v.sp):'–'}</b><small>spend</small></div><div class="hnum"><b>${pct1(v.hr)}</b><small>hook</small></div><div class="hnum"><b>${secs(v.ws)}</b><small>watch</small></div></button>`; }
 
+function ctaRow(v){ const a=angleOf(v.a); const tl=(v.cty||[]).map(t=>(CTA_TYPES.find(x=>x[0]===t)||[])[1]).filter(Boolean);
+  return `<button class="hrow crow" onclick="openLibVideo('${v.id}')"><div class="hth">${thumb(v.th,'tile','neutral')}</div><div class="hbody"><div class="hk">"${esc(v.ct)}"</div><div class="meta"><span>${esc(v.c)}</span>${a?`<span style="color:${a[3]}">${esc(a[0])}</span>`:''}${tl.map(t=>`<span>${esc(t)}</span>`).join('')}${v.co?'<span>⭐ coached</span>':''}${v.cl?'<span class="warnc">⚠️ claims</span>':''}</div></div><div class="hnum"><b>${pct1(v.ctr)}</b><small>CTR</small></div><div class="hnum"><b>${v.sp?lmoney(v.sp):'–'}</b><small>spend</small></div><div class="hnum"><b>${v.r100!=null?Math.round(v.r100)+'%':'–'}</b><small>finish</small></div></button>`; }
+
 async function openLibVideo(id){ const v=LIB().videos.find(x=>x.id===id); if(!v) return; const a=angleOf(v.a); const saved=libSaved().has(id);
   const ret=[['25%',v.r25],['50%',v.r50],['75%',v.r75],['100%',v.r100]].filter(x=>x[1]!=null);
   openDrawer(`<div class="row">${a?`<span class="chip o" style="background:color-mix(in srgb,${a[3]} 18%,transparent);color:${a[3]}">${esc(a[0])}</span>`:'<span class="chip">🆕 Not tagged yet</span>'}${v.s?`<span class="chip">${esc(v.s)}</span>`:''}${(v.f||[]).map(f=>`<span class="chip">${esc(f)}</span>`).join('')}${v.co?`<span class="chip gold">⭐ Coached</span>`:''}</div>
@@ -2135,6 +2149,7 @@ async function openLibVideo(id){ const v=LIB().videos.find(x=>x.id===id); if(!v)
    <div class="lstats big"><div><small>Spend</small><b>${v.sp?lmoney(v.sp):'–'}</b></div><div><small>Hook rate</small><b>${pct1(v.hr)}</b></div><div><small>Avg watch</small><b>${secs(v.ws)}</b>${v.wp!=null?`<i>${pct1(v.wp)} of video</i>`:''}</div><div><small>CTR</small><b>${pct1(v.ctr)}</b></div></div>
    ${ret.length?`<div class="retbar"><small>Still watching at</small>${ret.map(([k,x])=>`<div><i style="height:${clamp(Number(x),2,100)}%"></i><b>${Math.round(x)}%</b><small>${k}</small></div>`).join('')}</div>`:(v.sp?'':`<div class="note" style="margin-top:10px">This one has not run as an ad yet, so there are no numbers. Judge it on the hook and the structure.</div>`)}
    ${v.h?`<section><h3>🪝 The hook</h3><blockquote class="lquote">"${esc(v.h)}"</blockquote></section>`:''}
+   ${v.ct?`<section><h3>📣 The close</h3><blockquote class="lquote">"${esc(v.ct)}"</blockquote></section>`:''}
    ${v.w?`<section><h3>🎬 ${v.co?'What they went for':'What it is'}</h3><p>${esc(v.w)}</p></section>`:''}
    ${v.cn?`<section><h3>🧠 Coach notes</h3><p>${esc(v.cn)}</p></section>`:''}
    ${v.cl?`<div class="note warn" style="margin-top:12px"><b>Claims check.</b> This script has hearing-loss or health lines. Steal the format, not those lines. Stick to what the product does: 31 NRR, 4x sound amplification, comfort, fit.</div>`:''}
