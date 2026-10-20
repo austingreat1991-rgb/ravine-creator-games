@@ -983,7 +983,7 @@ button.actrow:hover{background:var(--sf2)}
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261019-210351";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261020-172013";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -2084,18 +2084,16 @@ function roasTipHide(){ $('#ctip')?.classList.remove('on'); $$('#cw .cdot').forE
 async function copyText(t){ try{ await navigator.clipboard.writeText(t); toast('Copied'); }catch(e){ const a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select(); try{ document.execCommand('copy'); toast('Copied'); }catch(e2){ toast('Could not copy. Long-press to select it.','bad'); } a.remove(); } }
 
 /* ---------------- Video stat sheet (Austin, Oct 14): every number from Trybe's video panel, next to your average.
-   Sales and ROAS are Trybe sales like everywhere else in the app. Purchases, cost per purchase and AOV are Meta pixel numbers. */
+   Every sales number is Trybe-attributed. Meta only supplies hook rate, hold rate and add-to-cart rate (Austin, Oct 20). */
 const VS_GROUPS=[
   ['💰 Results',[['sales','Sales (Trybe)','money',1],['roas','ROAS','x',1],['spend','Ad spend','money',0]]],
   ['👀 Hook and watch time',[['thumbstop','Thumbstop (hook rate)','pct1',1],['avg_watch_s','Avg watched','watch',1],['v3s','3-sec views','int',0]]],
   ['👆 Reach and clicks',[['impressions','Impressions','int',0],['ctr','CTR (link)','pct2',1],['link_clicks','Link clicks','int',0],['cpc_link','Cost per click','usd2',-1],['cpm','CPM','usd2',-1]]],
-  ['🛒 Purchases (Meta pixel)',[['conversions','Purchases','num1',1],['cpa','Cost per purchase','usd2',-1],['aov','Avg order value','usd2',1]]],
+  ['🛒 Add to cart',[]],
 ];
 function vsFmt(k,f,o){ const v=o?.[k]; if(v==null||!isFinite(v)) return '—'; const n=Number(v);
-  if((k==='cpa'||k==='aov')&&!(Number(o.conversions)>0)) return '—';
   return f==='money'?money(n):f==='usd2'?fmt.usd2(n):f==='x'?n.toFixed(2)+'x':f==='pct1'?n.toFixed(1)+'%':f==='pct2'?n.toFixed(2)+'%':f==='int'?fmt.int(Math.round(n)):f==='num1'?(Number.isInteger(n)?fmt.int(n):n.toFixed(1)):f==='watch'?`${n.toFixed(1)}s${o.avg_watch_pct!=null?` <small>(${Number(o.avg_watch_pct).toFixed(0)}%)</small>`:''}`:String(n); }
 function vsDelta(k,better,x,me){ const a=Number(x?.[k]), b=Number(me?.[k]); if(!isFinite(a)||!isFinite(b)||x?.[k]==null||me?.[k]==null||b===0) return '';
-  if((k==='cpa'||k==='aov')&&!(Number(x.conversions)>0&&Number(me.conversions)>0)) return '';
   const p=(a-b)/Math.abs(b)*100; if(Math.abs(p)<3) return `<span class="vsd eq">≈ your avg</span>`;
   const up=p>0, cls=better===0?'n':((up?1:-1)*better>0?'g':'b'); const t=Math.abs(p)>=900?Math.round(a/b)+'x':Math.round(Math.abs(p))+'%';
   return `<span class="vsd ${cls}">${up?'▲':'▼'} ${t}</span>`; }
@@ -2116,11 +2114,11 @@ function vsHtml(d,rk,v){ const R=d[rk]||{}, x=R.video, me=R.me, rv=R.ravine; con
   return `<section><div class="row between"><h3 style="margin:0">📊 Stat sheet</h3>${tabs}</div>
     <div class="mini" style="margin-top:6px">${lbl} · compared to your average video${me?.n?` (${me.n} with ad spend)`:''}. Green = better than your average, red = worse.</div>
     ${tips.length?`<div class="vstips">${tips.map(t=>`<div>${esc(t)}</div>`).join('')}</div>`:''}
-    ${VS_GROUPS.map(([g,rows])=>`<div class="vsgrp"><div class="vsg">${g}</div>${rows.map(([k,label,f,better])=>{ const dl=vsDelta(k,better,x,me);
+    ${VS_GROUPS.filter(([g])=>!g.startsWith('🛒')||(rk==='month'?v.oct_atc_rate:v.atc_rate)!=null).map(([g,rows])=>`<div class="vsgrp"><div class="vsg">${g}</div>${rows.map(([k,label,f,better])=>{ const dl=vsDelta(k,better,x,me);
       return `<div class="vsrow"><div class="vsl">${esc(label)}</div><div class="vsv">${vsFmt(k,f,x)}</div><div class="vss">${dl}${me?`<span>Your avg ${vsFmt(k,f,me)}</span>`:''}${rv?`<span>Ravine ${vsFmt(k,f,rv)}</span>`:''}</div></div>`; }).join('')}
       ${g.startsWith('🛒')&&(rk==='month'?v.oct_atc_rate:v.atc_rate)!=null?`<div class="vsrow"><div class="vsl">Add-to-cart rate</div><div class="vsv">${pct(rk==='month'?v.oct_atc_rate:v.atc_rate)}</div><div class="vss"><span>Adds to cart ÷ landing page views</span></div></div>`:''}
       ${g.startsWith('👀')?vsRetention(x,me):''}${g.startsWith('👀')&&(rk==='month'?v.oct_hold_rate:v.hold_rate)!=null?`<div class="vsrow"><div class="vsl">Hold rate</div><div class="vsv">${pct(rk==='month'?v.oct_hold_rate:v.hold_rate)}</div><div class="vss"><span>ThruPlays ÷ 3-second plays</span></div></div>`:''}</div>`).join('')}
-    <div class="mini" style="margin-top:10px">Sales and ROAS use Trybe sales, the same numbers you are paid on. Purchases, cost per purchase and AOV are what Meta's pixel reports, so they will not match your Trybe sales. Stats from ${esc(fmt.dt(d.data_through)||'the last update')}.</div></section>`; }
+    <div class="mini" style="margin-top:10px">Sales and ROAS are Trybe-attributed, the same numbers you are paid on. Meta only supplies hook rate, hold rate and add-to-cart rate. Stats from ${esc(fmt.dt(d.data_through)||'the last update')}.</div></section>`; }
 const VSC={};
 async function loadVideoStats(id,v){ const box=$('#vstats'); if(!box) return;
   try{ const d=await API.page('my_video_stats',{p_id:id}); if(!d||d.ok===false){ box.innerHTML=''; return; }
