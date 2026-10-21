@@ -967,6 +967,8 @@ button.actrow:hover{background:var(--sf2)}
 .lbme-below{margin-top:10px;padding-top:8px;border-top:1px solid var(--ln);font-size:13px;color:var(--tx2)}
 .lbme-below .lbl{margin-right:6px}
 .lbme-below b{color:var(--gr)}
+/* Quests top block (Oct 21, item 1) */
+.qrec .qrec-why{margin-top:8px;font-size:13.5px;color:var(--o2);line-height:1.4}
 </style>
 </head>
 <body>
@@ -986,7 +988,7 @@ button.actrow:hover{background:var(--sf2)}
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261021-233146";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261021-233434";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1538,6 +1540,16 @@ function syncLine(src,vids){ const at=src?.last_run; const pend=(vids||[]).filte
 function activityText(a){ const k={submission:{imported:'Video added to your records',approved:'Video approved',rejected:'Video rejected',changes_requested:'Changes requested on a video',funnel_set:'Video stage classified',revision_linked:'Revision linked to its original',corrected:'Video record corrected'},quest:{started:'Started a quest',submitted:'Submitted quest evidence',changes_requested:'Quest returned with notes',approved:'Quest approved',rejected:'Quest not approved',reversed:'Quest award reversed'},claim:{requested:'Reward claim submitted',approved_for_payment:'Reward claim approved for payment',paid:'Reward recorded as paid',rejected:'Reward claim rejected',review_issue:'Review issue opened'}}; return (k[a.kind]||{})[a.event]||`${a.kind}: ${a.event}`; }
 
 /* ---------------- Quests */
+/* Skill per quest, used only for the recommendation reason (Oct 21, item 1). Keys not listed fall back to their category. */
+const QSKILL={oct_review3:'Storytelling',oct_recreate:'Research',oct_unaware:'Hooks',oct_hooks3:'Hooks',oct_improve:'Editing',oct_objection:'Conversion',oct_concepts5:'Storytelling',oct_sprint3:'Storytelling',oct_field:'Storytelling',oct_broll:'Editing',oct_gift:'Conversion',
+  oct_comment:'Research',oct_win_post:'Research',oct_call:'Research',oct_host:'Research',oct_coach:'Editing',oct_feedback:'Research',oct_streak7:'Research',oct_leader:'Research',
+  oct_boss_hook:'Hooks',oct_boss_format:'Research',oct_boss_angle:'Storytelling',oct_boss_1k:'Conversion',oct_boss_5k:'Conversion',oct_boss_10k:'Conversion',oct_boss_scale:'Conversion',oct_boss_25in5:'Storytelling',oct_boss_top5:'Conversion',oct_boss_refer:'Research',oct_boss_speaker:'Research',oct_boss_mentor:'Research'};
+const QSKILL_CAT={Film:'Storytelling',Improve:'Editing',Community:'Research',Boss:'Conversion'};
+const qskill=c=>QSKILL[c.quest_key]||QSKILL_CAT[c.category]||'Storytelling';
+function recReason(c,cats,states){ const done=[...new Set(cats.filter(x=>['approved','approved_period','submitted'].includes(states[x.quest_key].state)).map(qskill))]; const sk=qskill(c);
+  if(!done.length) return `A good first quest. ${sk} first, the rest follows.`;
+  if(done.includes(sk)) return `You are on a roll with ${sk.toLowerCase()}. Keep it going.`;
+  return `You have done ${done.map(x=>x.toLowerCase()).join(' and ')}. Try ${sk.toLowerCase()} next.`; }
 const QF=['all','available','in_progress','submitted','approved','needs_changes'];
 const QF_LABEL={all:'All',available:'Available',in_progress:'In progress',submitted:'In review',approved:'Completed',needs_changes:'Changes needed'};
 function questState(cat,insts){ const mine=insts.filter(i=>i.quest_key===cat.quest_key); const cur=mine.find(i=>i.period_key===cat.period_now&&['in_progress','needs_changes','submitted'].includes(i.state));
@@ -1555,13 +1567,16 @@ route('quests',async(p)=>{
   const cats_=['All',...new Set(cats.map(c=>c.category))];
   const list=cats.filter(c=>{ const st=states[c.quest_key].state; const f=S.ui.qf; const okF=f==='all'||(f==='approved'?['approved','approved_period'].includes(st):st===f); const okC=S.ui.qcat==='All'||c.category===S.ui.qcat; const s=S.ui.qs.toLowerCase(); const okS=!s||(c.title+' '+c.outcome+' '+c.category).toLowerCase().includes(s); return okF&&okC&&okS; });
   // recommended: needs_changes first, then in-progress, then highest XP available
-  const rec=cats.find(c=>states[c.quest_key].state==='needs_changes')||cats.find(c=>states[c.quest_key].state==='in_progress')||[...cats].filter(c=>states[c.quest_key].state==='available'&&!c.scarce&&!c.locked&&c.quest_key!=='oct_host').sort((a,b)=>b.xp_value-a.xp_value)[0];
+  const doneSkills=new Set(cats.filter(x=>['approved','approved_period','submitted'].includes(states[x.quest_key].state)).map(qskill));
+  const rec=cats.find(c=>states[c.quest_key].state==='needs_changes')||cats.find(c=>states[c.quest_key].state==='in_progress')||[...cats].filter(c=>states[c.quest_key].state==='available'&&!c.scarce&&!c.locked&&c.quest_key!=='oct_host').sort((a,b)=>(doneSkills.has(qskill(a))?1:0)-(doneSkills.has(qskill(b))?1:0)||b.xp_value-a.xp_value)[0];
+  const recState=rec?states[rec.quest_key].state:null;
   const pn=periodNow(q); const H=halfCtx(q,r);
   return `${ph('Quests',`Reward period <b>${PERIOD_LABEL(q.period_now)}</b> · ${pn?`XP, quests and cash tiers reset ${fmt.date(pn.ends_at)} 12:00 am CT`:''}${(q.max_xp_period||q.max_xp_month)?` · ${q.max_xp_period||q.max_xp_month} XP possible this half`:''}`,{eyebrow:'October 2026',acts:`<button class="btn gh" onclick="openRewardRules()">📜 Rules</button><button class="btn gh" onclick="go('rewards')">${ico('gift')} View rewards</button>`})}
   ${questHero(q,r,insts)}
+  ${rec?`<div class="card hi featured qrec" style="margin:16px 0 0"><div class="art">${photoFrame(questPhoto(rec),rec.image_key,rec.category)}</div><div><div class="lbl">${recState==='needs_changes'?'Fix this first':recState==='in_progress'?'Pick up where you left off':'Recommended for you'}</div><h2 style="margin-top:6px">${esc(rec.title)}</h2><p style="margin-top:6px">${esc(rec.outcome)}</p>
+    <div class="qrec-why">💡 ${esc(recState==='needs_changes'?'Austin left notes. Apply them and resubmit, it keeps your slot.':recState==='in_progress'?'Finish what you started before the reset.':recReason(rec,cats,states))}</div>${questImpact(rec,states[rec.quest_key],H)}
+    <div class="row" style="margin-top:12px"><span class="xp">+${rec.xp_value} XP</span><span class="chip">${esc(qskill(rec))}</span>${badge(QSTATE[recState]?.[0]||'n',QSTATE[recState]?.[1]||'Available')}<button class="btn" onclick="openQuest('${rec.quest_key}')">${questCta(states[rec.quest_key])}</button></div></div></div>`:''}
   <div class="note" style="margin:16px 0"><b>🔁 Resets on the 1st and 16th.</b> XP, approved videos and every quest start fresh each half. <b>🚫 No stacking:</b> your highest cash tier is your total for the half. <a href="#" onclick="openRewardRules();return false">Read the rules</a></div>
-  ${rec?`<div class="card hi featured" style="margin-bottom:18px"><div class="art">${photoFrame(questPhoto(rec),rec.image_key,rec.category)}</div><div><div class="lbl">Recommended now</div><h2 style="margin-top:6px">${esc(rec.title)}</h2><p style="margin-top:6px">${esc(rec.outcome)}</p>${questImpact(rec,states[rec.quest_key],H)}
-    <div class="row" style="margin-top:12px"><span class="xp">+${rec.xp_value} XP</span>${badge(QSTATE[states[rec.quest_key].state]?.[0]||'n',QSTATE[states[rec.quest_key].state]?.[1]||'Available')}<button class="btn" onclick="openQuest('${rec.quest_key}')">${questCta(states[rec.quest_key])}</button></div></div></div>`:''}
   <div class="filters"><div class="tabs" role="tablist">${QF.map(f=>`<button role="tab" aria-selected="${S.ui.qf===f}" class="${S.ui.qf===f?'on':''}" onclick="go('quests',{f:'${f}'})">${QF_LABEL[f]}<i>${cnt(f)}</i></button>`).join('')}</div>
     <select aria-label="Category" onchange="go('quests',{f:S.ui.qf,c:this.value})">${cats_.map(c=>`<option ${S.ui.qcat===c?'selected':''}>${esc(c)}</option>`).join('')}</select>
     <input type="search" placeholder="Search quests" value="${esc(S.ui.qs)}" aria-label="Search quests" oninput="S.ui.qs=this.value;saveUI();$('#qlist').innerHTML=questList()"></div>
