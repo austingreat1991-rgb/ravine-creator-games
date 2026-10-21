@@ -969,6 +969,37 @@ button.actrow:hover{background:var(--sf2)}
 .lbme-below b{color:var(--gr)}
 /* Quests top block (Oct 21, item 1) */
 .qrec .qrec-why{margin-top:8px;font-size:13.5px;color:var(--o2);line-height:1.4}
+/* Quests top block v2 (Oct 21 review): charcoal surface, breathing room, one obvious action */
+.ph h1{font-size:36px}
+.ph .qdates{display:block;margin-top:6px;font-size:13px;color:var(--tx3)}
+.qhero2{background:#111419;border:1px solid rgba(255,255,255,.085);border-radius:18px;padding:24px;margin-top:4px}
+.qh-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.qh-prest{font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--gold-soft);color:var(--gold)}
+.qh-reset{font-size:12.5px;color:var(--tx3)}.qh-reset a{color:var(--tx2);margin-left:8px;text-decoration:underline dotted;text-underline-offset:3px}
+.qh-xp{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-top:14px}
+.qh-xp .big{font-family:var(--disp);font-size:44px;line-height:1;font-weight:800;color:var(--gold)}.qh-xp .big small{font-size:16px;color:var(--tx3);font-weight:600;margin-left:6px;font-family:var(--f)}
+.qh-pending{font-size:13px;color:var(--tx3);padding:4px 10px;border-radius:99px;background:var(--sf2);border:1px dashed var(--ln2)}
+.qhero2 .qh-bar{margin:18px 6px 44px}
+.qhero2 .qh-bar i.e{background:var(--gold)}
+.qhero2 .qh-bar i.p{background:repeating-linear-gradient(45deg,rgba(255,255,255,.22) 0 6px,rgba(255,255,255,.08) 6px 12px)}
+.qh-nr{font-size:15px;color:var(--tx)}.qh-nr b{color:var(--gold)}
+.qh-need{font-size:13.5px;color:var(--tx2);margin-top:3px}.qh-need b{color:var(--tx)}.qh-pend{color:var(--tx3)}
+.qh-vid{margin-top:14px}.qh-vid.done{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;color:var(--gr);font-weight:600}
+.qhero2 .qh-chips{margin-top:16px}
+.qh-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px;padding:12px 16px;background:#111419;border:1px solid rgba(255,255,255,.085);border-radius:12px;font-size:14px;color:var(--tx2)}
+.qh-row b{color:var(--tx)}.qh-row a{color:var(--o2);font-weight:700;white-space:nowrap}
+.qh-row.amber{border-color:rgba(255,176,32,.45);background:var(--warn-soft);color:var(--tx)}
+.qrec{grid-template-columns:2fr 3fr;gap:22px;margin-top:16px;padding:0;overflow:hidden;align-items:stretch}
+.qrec .art{aspect-ratio:auto;max-height:none;border-radius:0;min-height:220px}
+.qrec .qrec-b{padding:22px 24px 22px 0;display:flex;flex-direction:column;gap:10px}
+.qrec h2{font-size:26px;margin:0}.qrec p{margin:0;color:var(--tx2)}
+.qrec .qrec-fb{padding:10px 12px;border-radius:10px;background:var(--warn-soft);color:var(--tx);font-size:13.5px;line-height:1.45}.qrec .qrec-fb a{color:var(--o2);white-space:nowrap}
+.qrec .qrec-why{margin-top:0}
+.qrec-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.qrec-xp{font-size:13px;color:var(--tx3)}.qrec-xp b{color:var(--gold);font-size:15px}
+.qrec .btn{min-height:44px;border-radius:12px;padding:10px 20px}
+.qhero2 .btn,.qh-row .btn{min-height:44px;border-radius:12px}
+@media (max-width:800px){ .qhero2{padding:16px} .qh-xp .big{font-size:38px} .qrec{grid-template-columns:1fr;gap:0} .qrec .art{min-height:0;aspect-ratio:16/8} .qrec .qrec-b{padding:16px} .qrec h2{font-size:22px} .qh-row{flex-direction:column;align-items:flex-start} }
 </style>
 </head>
 <body>
@@ -988,7 +1019,7 @@ button.actrow:hover{background:var(--sf2)}
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261021-233434";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261021-234302";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1571,11 +1602,17 @@ route('quests',async(p)=>{
   const rec=cats.find(c=>states[c.quest_key].state==='needs_changes')||cats.find(c=>states[c.quest_key].state==='in_progress')||[...cats].filter(c=>states[c.quest_key].state==='available'&&!c.scarce&&!c.locked&&c.quest_key!=='oct_host').sort((a,b)=>(doneSkills.has(qskill(a))?1:0)-(doneSkills.has(qskill(b))?1:0)||b.xp_value-a.xp_value)[0];
   const recState=rec?states[rec.quest_key].state:null;
   const pn=periodNow(q); const H=halfCtx(q,r);
-  return `${ph('Quests',`Reward period <b>${PERIOD_LABEL(q.period_now)}</b> · ${pn?`XP, quests and cash tiers reset ${fmt.date(pn.ends_at)} 12:00 am CT`:''}${(q.max_xp_period||q.max_xp_month)?` · ${q.max_xp_period||q.max_xp_month} XP possible this half`:''}`,{eyebrow:'October 2026',acts:`<button class="btn gh" onclick="openRewardRules()">📜 Rules</button><button class="btn gh" onclick="go('rewards')">${ico('gift')} View rewards</button>`})}
+  return `${ph('Quests',`Build better videos. Complete challenges. Unlock rewards.<span class="qdates">Reward period ${PERIOD_LABEL(q.period_now)}${pn?` · resets ${fmt.date(pn.ends_at)}, 12:00 am CT`:''}${(q.max_xp_period||q.max_xp_month)?` · ${q.max_xp_period||q.max_xp_month} XP possible`:''}</span>`,{eyebrow:'October 2026',acts:`<button class="btn gh" onclick="openRewardRules()">${ico('book')} Rules</button><button class="btn gh" onclick="go('rewards')">${ico('gift')} View rewards</button>`})}
   ${questHero(q,r,insts)}
-  ${rec?`<div class="card hi featured qrec" style="margin:16px 0 0"><div class="art">${photoFrame(questPhoto(rec),rec.image_key,rec.category)}</div><div><div class="lbl">${recState==='needs_changes'?'Fix this first':recState==='in_progress'?'Pick up where you left off':'Recommended for you'}</div><h2 style="margin-top:6px">${esc(rec.title)}</h2><p style="margin-top:6px">${esc(rec.outcome)}</p>
-    <div class="qrec-why">💡 ${esc(recState==='needs_changes'?'Austin left notes. Apply them and resubmit, it keeps your slot.':recState==='in_progress'?'Finish what you started before the reset.':recReason(rec,cats,states))}</div>${questImpact(rec,states[rec.quest_key],H)}
-    <div class="row" style="margin-top:12px"><span class="xp">+${rec.xp_value} XP</span><span class="chip">${esc(qskill(rec))}</span>${badge(QSTATE[recState]?.[0]||'n',QSTATE[recState]?.[1]||'Available')}<button class="btn" onclick="openQuest('${rec.quest_key}')">${questCta(states[rec.quest_key])}</button></div></div></div>`:''}
+  ${rec?(()=>{ const cur=states[rec.quest_key].cur; const note=recState==='needs_changes'&&cur?.review_note?String(cur.review_note):''; const ex=note.length>140?note.slice(0,140).replace(/\s+\S*$/,'')+'…':note;
+    const why=recState==='needs_changes'?'':recState==='in_progress'?'Finish what you started before the reset.':recReason(rec,cats,states);
+    const cta=recState==='needs_changes'?'Continue revision':recState==='in_progress'?'Continue quest':'Start quest';
+    return `<div class="card featured qrec"><div class="art ph">${photoFrame(questPhoto(rec),rec.image_key,rec.category)}</div><div class="qrec-b">
+    <div class="row" style="gap:8px"><span class="lbl">${recState==='needs_changes'?'Fix this first':recState==='in_progress'?'Pick up where you left off':'Recommended for you'}</span>${badge(QSTATE[recState]?.[0]||'n',QSTATE[recState]?.[1]||'Available')}</div>
+    <h2>${esc(rec.title)}</h2>
+    ${note?`<div class="qrec-fb">💬 ${esc(ex)}${note.length>ex.length?` <a href="#" onclick="openQuest('${rec.quest_key}');return false">View full feedback</a>`:''}</div>`:`<p>${esc(rec.outcome)}</p>`}
+    ${why?`<div class="qrec-why">💡 ${esc(why)}</div>`:''}
+    <div class="qrec-foot"><span class="qrec-xp"><b>${rec.xp_value} XP</b> after approval · ${esc(qskill(rec))}</span><button class="btn" onclick="openQuest('${rec.quest_key}')">${cta}</button></div></div></div>`; })():''}
   <div class="note" style="margin:16px 0"><b>🔁 Resets on the 1st and 16th.</b> XP, approved videos and every quest start fresh each half. <b>🚫 No stacking:</b> your highest cash tier is your total for the half. <a href="#" onclick="openRewardRules();return false">Read the rules</a></div>
   <div class="filters"><div class="tabs" role="tablist">${QF.map(f=>`<button role="tab" aria-selected="${S.ui.qf===f}" class="${S.ui.qf===f?'on':''}" onclick="go('quests',{f:'${f}'})">${QF_LABEL[f]}<i>${cnt(f)}</i></button>`).join('')}</div>
     <select aria-label="Category" onchange="go('quests',{f:S.ui.qf,c:this.value})">${cats_.map(c=>`<option ${S.ui.qcat===c?'selected':''}>${esc(c)}</option>`).join('')}</select>
@@ -1756,22 +1793,23 @@ window.addEventListener('pageshow',e=>{ if(e.persisted&&S.me){ API.bust(); if(!S
 function halfCtx(q,r){ const tiers=r?.tiers||[]; const xp=r?.xp??q.xp_earned??0; const pending=q.xp_pending||r?.xp_pending||0; const cc=r?.concepts||0; const nt=nextTier(r||{}); return {xp,pending,cc,tiers,nt,sales:r?.sales_cents||0}; }
 function questHero(q,r,insts){ const H=halfCtx(q,r); const top=H.tiers[H.tiers.length-1]; const max=Math.max(top?.xp_required||100,H.xp+H.pending,1);
   const pc=x=>clamp(x/max*100,0,100).toFixed(1);
-  const cur=q.period_now; const hs=periodNow(q)?.starts_at; const mine=(insts||[]).filter(i=>i.period_key===cur||(hs&&new Date(i.created_at)>=new Date(hs)));
-  const nDone=mine.filter(i=>i.state==='approved').length, nRev=mine.filter(i=>i.state==='submitted').length, nOpen=(insts||[]).filter(i=>['in_progress','needs_changes'].includes(i.state)).length;
+  const cur=q.period_now; const pn=periodNow(q); const hs=pn?.starts_at; const mine=(insts||[]).filter(i=>i.period_key===cur||(hs&&new Date(i.created_at)>=new Date(hs)));
+  const nDone=mine.filter(i=>i.state==='approved').length, nRev=mine.filter(i=>i.state==='submitted').length, nFix=(insts||[]).filter(i=>i.state==='needs_changes').length, nOpen=(insts||[]).filter(i=>['in_progress','needs_changes'].includes(i.state)).length;
   const marks=H.tiers.map(t=>{ const hit=['eligible','claim_submitted','approved_for_payment','paid','included'].includes(t.status); return `<div class="qh-mk ${hit?'on':''}" style="left:${pc(t.xp_required)}%"><i></i><span><b>${fmt.usd(t.cash_total_cents,{cents:true})}</b>${t.xp_required} XP</span></div>`; }).join('');
   let next='';
   if(H.nt){ const nx=Math.max(0,H.nt.xp_required-H.xp), nv=Math.max(0,H.nt.concepts_required-H.cc), ns=H.nt.sales_required_cents>0?Math.max(0,H.nt.sales_required_cents-H.sales):0;
-    const parts=[nx?`<b>${nx} XP</b>`:'',nv?`<b>${nv} approved video${nv===1?'':'s'}</b>`:'',ns?`<b>${usd0(ns)}</b> in Trybe sales`:''].filter(Boolean);
-    next=`<div class="qh-next"><span class="qh-tag">Next</span> <b>${esc(H.nt.name)} · ${fmt.usd(H.nt.cash_total_cents,{cents:true})}</b> ${parts.length?`needs ${parts.join(' + ')} more`:'is unlocked once your numbers update'}${H.pending&&nx?`<span class="mini"> · ${H.pending>=nx?`your ${H.pending} XP in review covers the XP once approved`:`${H.pending} XP in review counts once approved`}</span>`:''}</div>`; }
+    const more=[nx?`<b>${nx}</b> more approved XP`:'',nv?`<b>${nv}</b> more approved video${nv===1?'':'s'}`:'',ns?`<b>${usd0(ns)}</b> more in Trybe sales`:''].filter(Boolean);
+    next=`<div class="qh-next"><div class="qh-nr">Next reward: <b>${esc(H.nt.name)} · ${fmt.usd(H.nt.cash_total_cents,{cents:true})}</b></div><div class="qh-need">${more.length?more.join(' · ')+' needed.':'Unlocks once your numbers update.'}${H.pending&&nx?`<span class="qh-pend"> ${H.pending} XP awaiting approval is not counted yet.</span>`:''}</div></div>`; }
   else next=`<div class="qh-next good">🏆 Every tier reached for ${esc(halfLabel(cur))}. Claim it on Rewards.</div>`;
-  const vidBar=H.nt?`<div style="margin-top:12px">${pbar(Math.min(H.cc,H.nt.concepts_required),H.nt.concepts_required,{label:`Approved videos for ${H.nt.name}`,cls:'green'})}</div>`:'';
-  return `<div class="card hi qhero"><div class="qh-l"><div class="lbl">Your half · ${esc(halfLabel(cur))}${q.prestige_name?` · ${q.prestige_emblem||'🎯'} ${esc(q.prestige_name)}`:''}</div>
-      <div class="kpi" style="margin-top:6px"><span class="big" style="color:var(--gold)">${H.xp}<span style="font-size:18px;color:var(--tx3)"> XP</span></span>${H.pending?`<span class="badge r">+${H.pending} XP in review</span>`:''}</div>
-      <div class="qh-bar" role="img" aria-label="${H.xp} XP earned, ${H.pending} in review, out of ${max}"><i class="e" style="width:${pc(H.xp)}%"></i><i class="p" style="left:${pc(H.xp)}%;width:${(pc(H.xp+H.pending)-pc(H.xp)).toFixed(1)}%"></i>${marks}</div>
-      ${next}${vidBar}
-      <div class="qh-chips"><span>✅ <b>${nDone}</b> approved</span><span>⏳ <b>${nRev}</b> in review</span><span>✏️ <b>${nOpen}</b> started, not sent</span></div></div>
-    <div class="qh-r">${resetBig()}</div></div>
-    ${nOpen?`<div class="note warn" style="margin:12px 0 0"><b>✏️ ${nOpen} quest${nOpen===1?'':'s'} started but not submitted.</b> Get ${nOpen===1?'it':'them'} in before the reset. <a href="#" onclick="go('quests',{f:'in_progress'});return false">Finish ${nOpen===1?'it':'them'}</a></div>`:''}`; }
+  const vidReq=H.nt?(H.cc>=H.nt.concepts_required?`<div class="qh-vid done">${ico('check',14)} Video requirement complete · ${H.nt.concepts_required}/${H.nt.concepts_required}</div>`:`<div class="qh-vid">${pbar(Math.min(H.cc,H.nt.concepts_required),H.nt.concepts_required,{label:`Approved videos for ${esc(H.nt.name)}`,cls:'green'})}</div>`):'';
+  const dl=pn?daysLeft(pn.ends_at):null;
+  const prest=q.prestige_name?`<span class="qh-prest">${q.prestige_emblem||'🎯'} ${esc(q.prestige_name)}</span>`:'';
+  const chips=`<div class="qh-chips"><span><b>${nDone}</b> quest${nDone===1?'':'s'} approved</span><span><b>${nRev}</b> quest${nRev===1?'':'s'} in review</span><span><b>${nOpen}</b> unfinished quest${nOpen===1?'':'s'}</span></div>`;
+  const unfinished=nOpen?`<div class="qh-row ${nFix||(dl!=null&&dl<=2)?'amber':''}"><span>${nFix?`<b>${nFix}</b> quest${nFix===1?'':'s'} returned for changes${nOpen-nFix?` and <b>${nOpen-nFix}</b> unfinished`:''}.`:`You have <b>${nOpen}</b> unfinished quest${nOpen===1?'':'s'}.`}${dl!=null&&dl<=2?` <b>${dl} day${dl===1?'':'s'} left.</b>`:''}</span><a href="#" onclick="go('quests',{f:'${nFix?'needs_changes':'in_progress'}'});return false">Continue →</a></div>`:'';
+  return `<div class="card qhero2"><div class="qh-top"><div class="row" style="gap:8px"><span class="lbl">Your progress</span>${prest}</div>${pn?`<div class="qh-reset">Resets ${fmt.date(pn.ends_at)} · ${dl} day${dl===1?'':'s'} left <a href="#" onclick="openRewardRules();return false">How resets work</a></div>`:''}</div>
+      <div class="qh-xp"><span class="big">${H.xp}<small> XP earned</small></span>${H.pending?`<span class="qh-pending">${H.pending} XP awaiting approval</span>`:''}</div>
+      <div class="qh-bar" role="img" aria-label="${H.xp} XP earned, ${H.pending} awaiting approval, out of ${max}"><i class="e" style="width:${pc(H.xp)}%"></i><i class="p" style="left:${pc(H.xp)}%;width:${(pc(H.xp+H.pending)-pc(H.xp)).toFixed(1)}%"></i>${marks}</div>
+      ${next}${vidReq}${chips}</div>${unfinished}`; }
 /* what one quest adds toward the next tier */
 function questImpact(c,st,H){ if(!H||!H.nt||c.locked||!['available','in_progress','needs_changes'].includes(st.state)) return '';
   const need=H.nt.xp_required-H.xp-H.pending; if(need<=0) return '';
