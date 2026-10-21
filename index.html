@@ -964,6 +964,9 @@ button.actrow:hover{background:var(--sf2)}
   .lib{padding-bottom:calc(16px + env(safe-area-inset-bottom))}
 }
 @media (max-width:360px){ .lib{margin:0 -4px} .ltool{margin:0 -12px} }
+.lbme-below{margin-top:10px;padding-top:8px;border-top:1px solid var(--ln);font-size:13px;color:var(--tx2)}
+.lbme-below .lbl{margin-right:6px}
+.lbme-below b{color:var(--gr)}
 </style>
 </head>
 <body>
@@ -983,7 +986,7 @@ button.actrow:hover{background:var(--sf2)}
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261020-184414";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261021-182919";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1157,9 +1160,9 @@ const FX={
     return {...p,cohort_size:p.cohort_size||121,ranked:L.length,my_rank:me?.rank||null,median_posting:5,avg_posting:6.1,top:L.slice(0,10),above:me?[...L].filter(x=>x.n>me.n).sort((a,b)=>a.n-b.n)[0]||null:L[L.length-1]}; },
   leaderboardOf(m){ const c=m.contest?.campaign||{}; const pop=/Populated/.test(m.home?.creator?.display_name||''); const meName=m.home?.creator?.display_name||'You';
     const g=[9120,7450,6020,4880,3910,3300,2710,2150,1780,1210,980,640,410,220]; let L=FX.FAKE.map((n,i)=>({name:n,v:g[i]})); const myV=pop?2930:0; if(myV) L.push({name:meName,v:myV,me:true});
-    L.sort((a,b)=>b.v-a.v); L.forEach((x,i)=>{ x.rank=i+1; x.tied=false; x.me=!!x.me; }); const me=L.find(x=>x.me); const above=me?L[me.rank-2]:L[L.length-1];
+    L.sort((a,b)=>b.v-a.v); L.forEach((x,i)=>{ x.rank=i+1; x.tied=false; x.me=!!x.me; }); const me=L.find(x=>x.me); const above=me?L[me.rank-2]:L[L.length-1]; const below=me?L[me.rank]:null;
     return {campaign:c,now:new Date().toISOString(),rows:L.map(({rank,name,tied,me})=>({rank,name,tied,me})),ranked:L.length,not_ranked:7,
-      me:{rank:me?.rank??null,tied:false,gmv:myV,next_rank:above?.rank??null,next_name:above?.name??null,gap:above?+(above.v-myV+0.01).toFixed(2):null},total_gmv:L.reduce((n,x)=>n+x.v,0),data_through:new Date(Date.now()-2*3600e3).toISOString()}; },
+      me:{rank:me?.rank??null,tied:false,gmv:myV,next_rank:above?.rank??null,next_name:above?.name??null,gap:above?+(above.v-myV+0.01).toFixed(2):null,below_rank:below?.rank??null,below_name:below?.name??null,lead:below?+(myV-below.v).toFixed(2):null},total_gmv:L.reduce((n,x)=>n+x.v,0),data_through:new Date(Date.now()-2*3600e3).toISOString()}; },
   homeOf(m){ const h=m.home; const q=FX.questsOf(m); h.quests={xp_earned:q.xp_earned,xp_pending:q.xp_pending,period_now:q.period_now,
       in_progress:q.instances.filter(i=>['in_progress','needs_changes'].includes(i.state)).length, in_review:q.instances.filter(i=>i.state==='submitted').length, needs_changes:q.instances.filter(i=>i.state==='needs_changes').length};
     const r=FX.rewardsOf(m); h.rewards={xp:r.xp,concepts:r.concepts,tiers:r.tiers}; return h; },
@@ -1879,6 +1882,7 @@ route('compete',async()=>{
     ${metric('My October GMV (videos posted in October only)',money(me.gmv||0),{cls:'gold',sub:'Only you can see this'})}
     ${metric('My place',me.rank==null?'—':'#'+me.rank+(me.tied?' · tied':''),{sub:me.rank==null?'Get an October video approved and selling':`of ${lb.ranked} ranked creators`})}
     ${metric(me.rank===1?'You are in first':'To pass the next place',me.rank===1?'👑':(me.gap==null?'—':money(me.gap)),{cls:'orange',sub:me.rank===1?'Hold it to Oct 31':(me.next_name?`#${me.next_rank} ${esc(me.next_name)}`:'')})}
+    ${me.rank!=null?metric(me.below_name?'Your lead on the next place down':'Nobody below you yet',me.below_name?money(me.lead||0):'—',{cls:'green',sub:me.below_name?`#${me.below_rank} ${esc(me.below_name)} is this close`:'You are last on the board'}):''}
     ${metric('October videos',used,{sub:`${appr} approved · ${rev} in review`})}</div></div>
   <div class="sec"><h2>Top of the board</h2><a href="#/leaderboard" class="mini">See every place →</a></div>
   <div class="card" style="padding:8px">${top.length?top.map(r=>lbRow(r,lb)).join(''):`<div class="mini" style="padding:10px">No October video has made a sale yet. The board fills in as soon as one does.</div>`}</div>
@@ -1894,7 +1898,7 @@ async function openRules(){ const lb=await API.page('my_leaderboard'); const c=l
   openDrawer(`<h2>October incentive rules</h2><p>${esc(c.name||'October 2026')} · ${fmt.dt(c.starts_at)} to ${fmt.dt(new Date(new Date(c.ends_at)-1))}, ${esc(c.tz||'America/Chicago')}.</p>
    <section><h3>Prizes</h3><ul>${(c.prizes||[]).map(p=>`<li>${esc(p.label)} place: ${fmt.usd(p.cents,{cents:true})}</li>`).join('')}<li>Total ${fmt.usd(c.prize_total_cents,{cents:true})}</li></ul></section>
    <section><h3>How you are ranked</h3><ul><li>By October GMV: sales between Oct 1, 12:00 am and Nov 1, 12:00 am Central on videos you submitted and got approved in October.</li><li>Your first 20 October videos count. Videos from September or earlier don't count, even if they're still selling.</li><li>Your Home page shows all your October sales. The leaderboard only counts your October videos, so it can be lower.</li>${row('tie_display_only','Ties',esc(TIE_TEXT(c.tie_rule)))}${row('payout_terms_unset','Payout',c.payout_terms?esc(c.payout_terms):'timing and method to be confirmed')}</ul></section>
-   <section><h3>Privacy</h3><ul><li>Everyone sees names and places.</li><li>Only you see your own GMV. You also see how much more you need to pass the place right above you.</li></ul></section>`); }
+   <section><h3>Privacy</h3><ul><li>Everyone sees names and places.</li><li>Only you see your own GMV. You also see how much more you need to pass the place right above you, and how far ahead you are of the place right below you.</li></ul></section>`); }
 
 /* ---------------- Leaderboard */
 function lbRow(r,lb,{big=false}={}){ const m=r.me; const g=lb.me||{};
@@ -1914,7 +1918,8 @@ route('leaderboard',async(p)=>{
    <div class="lbme-b"><div class="lbl">Your October GMV <span class="gmvq">(videos posted in October only)</span></div><div class="lbme-gmv">${money(me.gmv||0)}</div><div class="mini">only you can see this</div></div>
    <div class="lbme-c">${me.rank===1?`<div class="lbl">Status</div><div class="lbme-next">👑 You are in first.</div><div class="mini">Keep posting. Everyone below you can see how far behind they are, not your number.</div>`
      :me.gap!=null?`<div class="lbl">To pass ${me.next_rank?'#'+me.next_rank:''} ${esc(me.next_name||'')}</div><div class="lbme-next"><b>${money(me.gap)}</b> more GMV</div><div class="bar gold" style="margin-top:8px"><i style="width:${pct.toFixed(1)}%"></i></div>`
-     :`<div class="lbl">Get on the board</div><div class="lbme-next">Make your first October sale</div>`}</div>
+     :`<div class="lbl">Get on the board</div><div class="lbme-next">Make your first October sale</div>`}
+     ${me.rank!=null?`<div class="lbme-below">${me.below_name?`<span class="lbl">Behind you</span> #${me.below_rank} ${esc(me.below_name)} is <b>${money(me.lead||0)}</b> back${(me.lead||0)<500?' · they are close, keep posting':''}`:`<span class="lbl">Behind you</span> nobody yet`}</div>`:''}</div>
   </div>
   ${pod.length?`<div class="sec"><h2>Top 3</h2><span class="mini">Prize places right now</span></div>
   <div class="podium2">${[pod[1],pod[0],pod[2]].filter(Boolean).map(r=>`<div class="pc2 p${r.rank} ${r.me?'me':''}">${r.rank===1?'<div class="crown">👑</div>':''}${avatar(r.name,r.rank===1?64:52)}<div class="n">${esc(r.name)}${r.me?' <span class="you">YOU</span>':''}</div><div class="pl">${['1st','2nd','3rd'][r.rank-1]} place</div><div class="amt">${fmt.usd((c.prizes||[])[r.rank-1]?.cents,{cents:true})}</div>${r.me?`<div class="mini" style="margin-top:4px">Your GMV ${money(me.gmv)}</div>`:''}</div>`).join('')}</div>`:''}
@@ -1923,7 +1928,7 @@ route('leaderboard',async(p)=>{
     ${meHidden?`<div class="lbgap">⋯</div>${lbRow(myRow,lb)}`:''}
     ${rows.length>10?`<button class="btn gh" style="width:100%;margin-top:8px" onclick="go('leaderboard',${all?'{}':"{all:'1'}"})">${all?'Show top 10 only':`Show all ${rows.length} places`}</button>`:''}</div>`
    :emptyState('Nobody is on the board yet','The first October sale puts someone in first place.','','leader')}
-  ${myRow&&all&&myRow.rank>10?`<div class="mestick"><div class="rn">#${myRow.rank}</div>${avatar(myRow.name,30)}<div style="min-width:0;flex:1"><div class="nm">${esc(myRow.name)} <span class="you">YOU</span></div><div class="mini">${me.gap!=null?`${money(me.gap)} to pass #${me.next_rank}`:''}</div></div><div style="text-align:right"><div style="font-family:var(--mono);font-weight:800;color:var(--gold)">${money(me.gmv)}</div><div class="mini">your GMV</div></div></div>`:''}
+  ${myRow&&all&&myRow.rank>10?`<div class="mestick"><div class="rn">#${myRow.rank}</div>${avatar(myRow.name,30)}<div style="min-width:0;flex:1"><div class="nm">${esc(myRow.name)} <span class="you">YOU</span></div><div class="mini">${me.gap!=null?`${money(me.gap)} to pass #${me.next_rank}`:''}${me.below_name?` · #${me.below_rank} is ${money(me.lead||0)} behind you`:''}</div></div><div style="text-align:right"><div style="font-family:var(--mono);font-weight:800;color:var(--gold)">${money(me.gmv)}</div><div class="mini">your GMV</div></div></div>`:''}
   <div class="note" style="margin-top:14px">Updated with each Trybe refresh${lb.data_through?` · last one ${fmt.dt(lb.data_through)}`:''}. GMV here only counts videos you submitted and got approved in October, so it can be lower than the October sales on your Home page.</div>`;
 });
 
