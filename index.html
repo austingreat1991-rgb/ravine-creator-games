@@ -967,52 +967,6 @@ button.actrow:hover{background:var(--sf2)}
 .lbme-below{margin-top:10px;padding-top:8px;border-top:1px solid var(--ln);font-size:13px;color:var(--tx2)}
 .lbme-below .lbl{margin-right:6px}
 .lbme-below b{color:var(--gr)}
-
-/* ===== Quests facelift (Oct 21) ===== */
-.qcard.v2{grid-template-columns:1fr;gap:0;padding:0;overflow:hidden}
-.qcard.v2 .art{width:100%;height:auto;aspect-ratio:16/8;border-radius:0;position:relative}
-.qcard.v2 .art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,8,10,0) 40%,rgba(7,8,10,.75) 100%)}
-.qcard.v2 .qbadge{position:absolute;top:10px;left:10px;z-index:1}
-.qcard.v2 .qbody{padding:12px 14px 14px}
-.qcard.v2 .foot{margin-top:10px}
-.qm{display:inline-flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:8px;font-size:11.5px;color:var(--tx3)}
-.qm>span{padding:2px 8px;border-radius:99px;background:var(--sf3)}
-.qm .qm-skill{font-weight:700;color:var(--tx)}
-.qm .s-hooks{background:rgba(255,110,32,.16);color:var(--o2)}.qm .s-storytelling{background:rgba(91,157,255,.16);color:var(--bl)}.qm .s-editing{background:rgba(181,123,255,.16);color:#B57BFF}.qm .s-conversion{background:rgba(61,220,132,.16);color:var(--gr)}.qm .s-research{background:rgba(232,182,74,.16);color:var(--gold)}
-.qm .xp{background:transparent;padding:0;margin-left:auto}
-.qfb{margin-top:8px;padding:8px 10px;border-radius:10px;background:var(--warn-soft);color:var(--tx);font-size:13px;line-height:1.4}
-.qrec .qrec-why{margin-top:8px;font-size:13.5px;color:var(--o2)}
-.qsec{margin-top:22px}.qsec .sec h2 .qn{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--tx3);margin-left:6px;font-weight:600}
-.qsec-needs_changes .sec h2{color:var(--warn)}
-details.qsec-done>summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:10px}details.qsec-done>summary::-webkit-details-marker{display:none}
-details.qsec-done>summary h2{font-size:22px}details.qsec-done>summary::after{content:"Show";margin-left:auto;font-size:13px;color:var(--tx3)}details.qsec-done[open]>summary::after{content:"Hide"}
-.refcard{display:flex;gap:12px;align-items:flex-start;border-color:rgba(255,110,32,.4)}
-.refcard .ref-th{width:56px;aspect-ratio:9/16;border-radius:8px;overflow:hidden;background:var(--sf3);flex:none}.refcard .ref-th img,.refcard .ref-th svg{width:100%;height:100%;object-fit:cover}
-.refcard .ref-hook{font-weight:600;margin-top:2px}
-.refcard.mini-ref{padding:10px;background:var(--sf);border:1px solid var(--ln);border-radius:12px;margin-bottom:10px}
-.qmeta-row{margin:8px 0 12px}
-.qflow{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 6px;position:sticky;top:0;z-index:2;background:var(--bg2);padding:8px 0}
-.qflow a{font-size:12px;padding:5px 10px;border-radius:99px;background:var(--sf2);border:1px solid var(--ln);color:var(--tx2);text-decoration:none}
-.qflow a:hover{border-color:var(--ln2);color:var(--tx)}
-.qstep{margin-top:22px;scroll-margin-top:56px}
-.qstep-h{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}.qstep-h h3{margin:0}
-.qstep-n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--o);color:var(--o-ink);font-weight:800;display:grid;place-items:center;font-size:13px}
-.qdeliver{font-size:15.5px;color:var(--tx);line-height:1.5}
-.qcrit{margin-top:10px;padding:12px 14px;background:var(--sf);border:1px solid var(--ln);border-radius:12px}.qcrit b{display:block;margin-bottom:4px;color:var(--gold);font-size:12px;letter-spacing:.08em;text-transform:uppercase}.qcrit ul{margin:0;padding-left:18px}
-details.qmore{margin-top:10px}details.qmore>summary{cursor:pointer;font-size:13px;color:var(--tx3);font-weight:600}details.qmore>summary:hover{color:var(--tx)}details.qmore p{margin-top:8px}
-.qreturn{margin-top:14px}
-.savestate.good{color:var(--gr)}.savestate.bad{color:var(--bad)}
-.qsticky{display:none}
-@media (max-width:900px){ .qsticky{display:flex;gap:10px;align-items:center;position:sticky;bottom:0;margin:16px -22px -40px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:var(--bg2);border-top:1px solid var(--ln)} .qsticky .btn{flex:1} }
-.pickwrap{margin-top:14px}.picker{padding:14px;background:var(--sf);border:1px solid var(--o);border-radius:14px}
-.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:12px;max-height:50vh;overflow:auto}
-.pv{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:4px;border-radius:10px;padding:4px}.pv:hover{background:var(--sf2)}
-.pv .pth{position:relative;display:block;aspect-ratio:9/16;border-radius:8px;overflow:hidden;background:var(--sf3);border:2px solid transparent}.pv .pth img,.pv .pth svg{width:100%;height:100%;object-fit:cover}
-.pv .pck{position:absolute;top:6px;right:6px;width:20px;height:20px;border-radius:50%;background:var(--o);color:var(--o-ink);display:none;place-items:center}
-.pv.on .pth{border-color:var(--o)}.pv.on .pck{display:grid}
-.pv .pt{font-size:12px;font-weight:600;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pcmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.pcmp{padding:12px;background:var(--sf);border:1px solid var(--ln);border-radius:12px}.pcmp .em{font-size:28px}
-@media (max-width:640px){ .qgrid{grid-template-columns:1fr} .pcmp-grid{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
@@ -1032,7 +986,7 @@ details.qmore{margin-top:10px}details.qmore>summary{cursor:pointer;font-size:13p
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261021-231416";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261021-233146";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1441,14 +1395,7 @@ async function openPrestige(level){ const r=await API.page('my_rewards'); const 
    ${(l.boss||[]).length?`<section><h3>⚔️ Boss quests that open here</h3><ul>${l.boss.map(b=>`<li><b>${esc(b.title)}</b> · +${b.xp_value} XP</li>`).join('')}</ul><div class="mini">Boss quests from lower levels stay open too.</div></section>`:''}
    <section><h3>How to get here</h3><p>${level===0?'Everyone starts here.':`Hit the top tier (${esc((PLV(r,level-1).tiers||[]).slice(-1)[0]?.name||'Elite')}) of ${esc(PLV(r,level-1).name)} in a half. Once unlocked it stays unlocked.`}</p></section>
    ${canPick&&level!==chosen?`<section><button class="btn gold" id="pickbtn" onclick="pickPrestige(${level})">${l.emblem} Play ${esc(l.name)}</button><div class="mini" style="margin-top:8px">Applies ${esc(pickWhen(r))}.</div></section>`:''}`); }
-/* Oct 21: choosing a level opens a comparison first; the actual choice is sent only from the confirm button */
-async function pickPrestige(level){ const r=await API.page('my_rewards'); const P=r.prestige||{}; const cur=PLV(r,P.level), nx=PLV(r,level); if(level===P.level) return;
-  const row=(l)=>`<div class="pcmp"><div class="em">${l.emblem}</div><b>${esc(l.name)}</b><div class="mini">${(l.tiers||[]).map(t=>`${usd0(t.cash_total_cents)} = ${esc(tierReq(t))}`).join('<br>')||'—'}</div>${(l.boss||[]).length?`<div class="mini">⚔️ ${l.boss.length} boss quest${l.boss.length===1?'':'s'}</div>`:''}</div>`;
-  openDrawer(`<div class="lbl">Prestige</div><h2>${level>P.level?'Prestige up to':'Drop back to'} ${nx.emblem} ${esc(nx.name)}?</h2>
-   <div class="pcmp-grid"><div><div class="lbl">Now</div>${row(cur)}</div><div><div class="lbl">Selected</div>${row(nx)}</div></div>
-   <section><h3>When it applies</h3><p>${esc(pickWhen(r)||'At the next reset.')} Your highest unlocked level stays unlocked whatever you pick.</p></section>
-   <section><div class="row" style="gap:8px"><button class="btn gold" id="pickbtn" onclick="confirmPrestige(${level})">${nx.emblem} Confirm ${esc(nx.name)}</button><button class="btn gh" onclick="closeDrawer()">Not now</button></div></section>`); }
-async function confirmPrestige(level){ const b=$('#pickbtn'); if(b){ b.classList.add('pending'); b.disabled=true; }
+async function pickPrestige(level){ const b=$('#pickbtn'); if(b){ b.classList.add('pending'); b.disabled=true; }
   try{ const r=await API.rpc('choose_prestige',{p_level:level}); toast(r.why||(r.ok?'Saved':'Not saved'),r.ok?'good':'bad'); if(r.ok){ API.bust(); closeDrawer(true); render(); } }
   catch(e){ toast(e.message,'bad'); } finally{ if(b){ b.classList.remove('pending'); b.disabled=false; } } }
 function rulesHtml(tiers){ const T=(tiers||[]).length?tiers:[{cash_total_cents:10000,xp_required:50,concepts_required:5},{cash_total_cents:25000,xp_required:100,concepts_required:10},{cash_total_cents:50000,xp_required:200,concepts_required:15}];
@@ -1591,23 +1538,6 @@ function syncLine(src,vids){ const at=src?.last_run; const pend=(vids||[]).filte
 function activityText(a){ const k={submission:{imported:'Video added to your records',approved:'Video approved',rejected:'Video rejected',changes_requested:'Changes requested on a video',funnel_set:'Video stage classified',revision_linked:'Revision linked to its original',corrected:'Video record corrected'},quest:{started:'Started a quest',submitted:'Submitted quest evidence',changes_requested:'Quest returned with notes',approved:'Quest approved',rejected:'Quest not approved',reversed:'Quest award reversed'},claim:{requested:'Reward claim submitted',approved_for_payment:'Reward claim approved for payment',paid:'Reward recorded as paid',rejected:'Reward claim rejected',review_issue:'Review issue opened'}}; return (k[a.kind]||{})[a.event]||`${a.kind}: ${a.event}`; }
 
 /* ---------------- Quests */
-/* Skill, difficulty and working time per quest (Oct 21 facelift). Keys not listed fall back to their category. */
-const QSKILL={oct_review3:['Storytelling',1,'1-2 hrs'],oct_recreate:['Research',2,'2-3 hrs'],oct_unaware:['Hooks',2,'2-3 hrs'],oct_hooks3:['Hooks',2,'1-2 hrs'],oct_improve:['Editing',2,'1-2 hrs'],
-  oct_objection:['Conversion',2,'1-2 hrs'],oct_concepts5:['Storytelling',3,'1 week'],oct_sprint3:['Storytelling',2,'3 days'],oct_field:['Storytelling',2,'2-3 hrs'],oct_broll:['Editing',1,'30 min'],oct_gift:['Conversion',2,'1-2 hrs'],
-  oct_comment:['Research',1,'45 min'],oct_win_post:['Research',1,'20 min'],oct_call:['Research',1,'1 hr'],oct_host:['Research',2,'1 hr'],oct_coach:['Editing',1,'30 min'],oct_feedback:['Research',1,'10 min'],oct_streak7:['Research',1,'7 days'],oct_leader:['Research',2,'7 days'],
-  oct_boss_hook:['Hooks',3,'2-3 hrs'],oct_boss_format:['Research',3,'3-4 hrs'],oct_boss_angle:['Storytelling',3,'1 week'],oct_boss_1k:['Conversion',3,'1 week'],oct_boss_5k:['Conversion',3,'2 weeks'],oct_boss_10k:['Conversion',3,'2 weeks'],
-  oct_boss_scale:['Conversion',3,'2 weeks'],oct_boss_25in5:['Storytelling',3,'5 days'],oct_boss_top5:['Conversion',3,'2 weeks'],oct_boss_refer:['Research',2,'1 hr'],oct_boss_speaker:['Research',2,'2 hrs'],oct_boss_mentor:['Research',2,'1 week']};
-const QSKILL_CAT={Film:['Storytelling',2,'1-2 hrs'],Improve:['Editing',2,'1-2 hrs'],Community:['Research',1,'30 min'],Boss:['Conversion',3,'1 week']};
-const DIFF=['','Easy','Medium','Hard'];
-function qmeta(c){ const m=QSKILL[c.quest_key]||QSKILL_CAT[c.category]||['Storytelling',2,'1-2 hrs']; return {skill:m[0],diff:m[1],time:m[2]}; }
-function qmetaChips(c){ const m=qmeta(c); return `<span class="qm"><span class="qm-skill s-${m.skill.toLowerCase()}">${m.skill}</span><span>${DIFF[m.diff]}</span><span>${m.time}</span><span class="xp">+${c.xp_value} XP</span></span>`; }
-/* one line explaining the recommendation: what they have done this half and which skill to grow next */
-function recReason(c,cats,states){ const done=new Set(cats.filter(x=>['approved','approved_period','submitted'].includes(states[x.quest_key].state)).map(x=>qmeta(x).skill)); const m=qmeta(c);
-  if(!done.size) return `A good first quest. ${m.skill} first, the rest follows.`;
-  if(done.has(m.skill)) return `You are on a roll with ${m.skill.toLowerCase()}. Keep it going.`;
-  return `You have done ${[...done].map(x=>x.toLowerCase()).join(' and ')}. Try ${m.skill.toLowerCase()} next.`; }
-/* quests that take a reference video from the Angle Library */
-const REF_QUESTS=['oct_recreate','oct_boss_format','oct_boss_angle','oct_hooks3','oct_unaware'];
 const QF=['all','available','in_progress','submitted','approved','needs_changes'];
 const QF_LABEL={all:'All',available:'Available',in_progress:'In progress',submitted:'In review',approved:'Completed',needs_changes:'Changes needed'};
 function questState(cat,insts){ const mine=insts.filter(i=>i.quest_key===cat.quest_key); const cur=mine.find(i=>i.period_key===cat.period_now&&['in_progress','needs_changes','submitted'].includes(i.state));
@@ -1619,92 +1549,60 @@ function reqProgress(cat,inst){ const req=cat.requirement||{}; const n=req.count
   return {have:Math.min(have,n),need:n,unit:req.unit||''}; }
 route('quests',async(p)=>{
   const q=await API.page('my_quests'); const cats=q.catalog||[]; const insts=q.instances||[]; const r=await API.page('my_rewards'); const nt=nextTier(r);
-  if(p.ref){ S.ui.qref=p.ref; } S.ui.qcat=p.c||S.ui.qcat||'All'; S.ui.qs=p.s!=null?p.s:(S.ui.qs||''); saveUI();
+  S.ui.qf=p.f||S.ui.qf||'all'; S.ui.qcat=p.c||S.ui.qcat||'All'; S.ui.qs=p.s!=null?p.s:(S.ui.qs||''); saveUI();
   const states=Object.fromEntries(cats.map(c=>[c.quest_key,questState(c,insts)]));
+  const cnt=f=>cats.filter(c=>f==='all'||(f==='approved'?['approved','approved_period'].includes(states[c.quest_key].state):states[c.quest_key].state===f)).length;
   const cats_=['All',...new Set(cats.map(c=>c.category))];
-  // recommended: returned work first, then something started, then the best available quest in a skill they have not covered yet
-  const avail=cats.filter(c=>states[c.quest_key].state==='available'&&!c.scarce&&!c.locked&&c.quest_key!=='oct_host');
-  const doneSkills=new Set(cats.filter(x=>['approved','approved_period','submitted'].includes(states[x.quest_key].state)).map(x=>qmeta(x).skill));
-  const rec=cats.find(c=>states[c.quest_key].state==='needs_changes')||cats.find(c=>states[c.quest_key].state==='in_progress')||[...avail].sort((a,b)=>(doneSkills.has(qmeta(a).skill)?1:0)-(doneSkills.has(qmeta(b).skill)?1:0)||b.xp_value-a.xp_value)[0];
+  const list=cats.filter(c=>{ const st=states[c.quest_key].state; const f=S.ui.qf; const okF=f==='all'||(f==='approved'?['approved','approved_period'].includes(st):st===f); const okC=S.ui.qcat==='All'||c.category===S.ui.qcat; const s=S.ui.qs.toLowerCase(); const okS=!s||(c.title+' '+c.outcome+' '+c.category).toLowerCase().includes(s); return okF&&okC&&okS; });
+  // recommended: needs_changes first, then in-progress, then highest XP available
+  const rec=cats.find(c=>states[c.quest_key].state==='needs_changes')||cats.find(c=>states[c.quest_key].state==='in_progress')||[...cats].filter(c=>states[c.quest_key].state==='available'&&!c.scarce&&!c.locked&&c.quest_key!=='oct_host').sort((a,b)=>b.xp_value-a.xp_value)[0];
   const pn=periodNow(q); const H=halfCtx(q,r);
-  let ref=null; if(S.ui.qref){ try{ ref=await libRefInfo(S.ui.qref); }catch(e){} if(!ref){ S.ui.qref=null; saveUI(); } }
-  setTimeout(()=>{ $('#qlist')&&($('#qlist').innerHTML=questSections()); },0);
   return `${ph('Quests',`Reward period <b>${PERIOD_LABEL(q.period_now)}</b> · ${pn?`XP, quests and cash tiers reset ${fmt.date(pn.ends_at)} 12:00 am CT`:''}${(q.max_xp_period||q.max_xp_month)?` · ${q.max_xp_period||q.max_xp_month} XP possible this half`:''}`,{eyebrow:'October 2026',acts:`<button class="btn gh" onclick="openRewardRules()">📜 Rules</button><button class="btn gh" onclick="go('rewards')">${ico('gift')} View rewards</button>`})}
   ${questHero(q,r,insts)}
-  ${ref?refBanner(ref,cats,states):''}
-  ${rec?`<div class="card hi featured qrec" style="margin:16px 0 18px"><div class="art">${photoFrame(questPhoto(rec),rec.image_key,rec.category)}</div><div><div class="lbl">${states[rec.quest_key].state==='needs_changes'?'Fix this first':states[rec.quest_key].state==='in_progress'?'Pick up where you left off':'Recommended for you'}</div><h2 style="margin-top:6px">${esc(rec.title)}</h2><p style="margin-top:6px">${esc(rec.outcome)}</p><div class="qrec-why">${esc(states[rec.quest_key].state==='needs_changes'?'Austin left notes. Apply them and resubmit, it keeps your slot.':states[rec.quest_key].state==='in_progress'?'Finish what you started before the reset.':recReason(rec,cats,states))}</div>${questImpact(rec,states[rec.quest_key],H)}
-    <div class="row" style="margin-top:12px;gap:10px;flex-wrap:wrap">${qmetaChips(rec)}<button class="btn" onclick="openQuest('${rec.quest_key}')">${questCta(states[rec.quest_key])}</button></div></div></div>`:''}
-  <div class="filters"><select aria-label="Category" onchange="S.ui.qcat=this.value;saveUI();$('#qlist').innerHTML=questSections()">${cats_.map(c=>`<option ${S.ui.qcat===c?'selected':''}>${esc(c)}</option>`).join('')}</select>
-    <input type="search" placeholder="Search quests" value="${esc(S.ui.qs)}" aria-label="Search quests" oninput="S.ui.qs=this.value;saveUI();$('#qlist').innerHTML=questSections()"></div>
-  <div id="qlist">${questSections()}</div>
-  <div class="note" style="margin:18px 0 0"><b>🔁 Resets on the 1st and 16th.</b> XP, approved videos and every quest start fresh each half. <b>🚫 No stacking:</b> your highest cash tier is your total for the half. <a href="#" onclick="openRewardRules();return false">Read the rules</a></div>
+  <div class="note" style="margin:16px 0"><b>🔁 Resets on the 1st and 16th.</b> XP, approved videos and every quest start fresh each half. <b>🚫 No stacking:</b> your highest cash tier is your total for the half. <a href="#" onclick="openRewardRules();return false">Read the rules</a></div>
+  ${rec?`<div class="card hi featured" style="margin-bottom:18px"><div class="art">${photoFrame(questPhoto(rec),rec.image_key,rec.category)}</div><div><div class="lbl">Recommended now</div><h2 style="margin-top:6px">${esc(rec.title)}</h2><p style="margin-top:6px">${esc(rec.outcome)}</p>${questImpact(rec,states[rec.quest_key],H)}
+    <div class="row" style="margin-top:12px"><span class="xp">+${rec.xp_value} XP</span>${badge(QSTATE[states[rec.quest_key].state]?.[0]||'n',QSTATE[states[rec.quest_key].state]?.[1]||'Available')}<button class="btn" onclick="openQuest('${rec.quest_key}')">${questCta(states[rec.quest_key])}</button></div></div></div>`:''}
+  <div class="filters"><div class="tabs" role="tablist">${QF.map(f=>`<button role="tab" aria-selected="${S.ui.qf===f}" class="${S.ui.qf===f?'on':''}" onclick="go('quests',{f:'${f}'})">${QF_LABEL[f]}<i>${cnt(f)}</i></button>`).join('')}</div>
+    <select aria-label="Category" onchange="go('quests',{f:S.ui.qf,c:this.value})">${cats_.map(c=>`<option ${S.ui.qcat===c?'selected':''}>${esc(c)}</option>`).join('')}</select>
+    <input type="search" placeholder="Search quests" value="${esc(S.ui.qs)}" aria-label="Search quests" oninput="S.ui.qs=this.value;saveUI();$('#qlist').innerHTML=questList()"></div>
+  <div id="qlist" class="grid g2">${questList()}</div>
   <div class="sec"><h2>Reward periods</h2><span class="mini">XP, quests and cash tiers reset at 12:00 am CT on the 1st and 16th</span></div>
   <div class="grid g2">${(q.periods||[]).map(pp=>`<div class="metric ${pp.key===q.period_now?'orange':''}"><div class="k">${pp.key===q.period_now?'Now · ':''}${esc(pp.label)}</div><div class="v" style="font-size:16px;font-family:var(--f);font-weight:600">${fmt.date(pp.starts_at)} to ${fmt.date(new Date(new Date(pp.ends_at)-1))}</div></div>`).join('')}</div>`;
-  function questSections(){ const s_=(S.ui.qs||'').toLowerCase();
-    const L=cats.filter(c=>{ const okC=S.ui.qcat==='All'||c.category===S.ui.qcat; const okS=!s_||(c.title+' '+c.outcome+' '+c.category+' '+qmeta(c).skill).toLowerCase().includes(s_); return okC&&okS; });
-    if(!L.length) return `<div class="empty"><h3>No quests match</h3><p>Try another category or clear the search.</p></div>`;
-    const by=st=>L.filter(c=>states[c.quest_key].state===st);
-    const groups=[['needs_changes','Needs changes','Austin left notes. Fix and resubmit.',by('needs_changes')],['in_progress','In progress','Started, not sent yet.',by('in_progress')],['submitted','In review','Waiting on Austin. XP shows as pending.',by('submitted')],
-      ['available','Available','Pick one and start.',by('available').sort((a,b)=>(a.locked?1:0)-(b.locked?1:0)||(a.category==='Boss'?1:0)-(b.category==='Boss'?1:0)||b.xp_value-a.xp_value)]];
-    const done=L.filter(c=>['approved','approved_period','rejected'].includes(states[c.quest_key].state));
-    return groups.filter(g=>g[3].length).map(([k,t,sub,arr])=>`<section class="qsec qsec-${k}"><div class="sec"><h2>${t} <i class="qn">${arr.length}</i></h2><span class="mini">${sub}</span></div><div class="grid g2 qgrid">${arr.map(c=>questCard(c,states[c.quest_key],H)).join('')}</div></section>`).join('')
-      +(done.length?`<details class="qsec qsec-done"><summary><h2>Completed <i class="qn">${done.length}</i></h2><span class="mini">This half and this campaign</span></summary><div class="grid g2 qgrid" style="margin-top:10px">${done.map(c=>questCard(c,states[c.quest_key],H)).join('')}</div></details>`:''); }
-  window.questSections=questSections;
+  function questList(){ const s=(S.ui.qs||'').toLowerCase(); const L=cats.filter(c=>{ const st=states[c.quest_key].state; const f=S.ui.qf; const okF=f==='all'||(f==='approved'?['approved','approved_period'].includes(st):st===f); const okC=S.ui.qcat==='All'||c.category===S.ui.qcat; const okS=!s||(c.title+' '+c.outcome+' '+c.category).toLowerCase().includes(s); return okF&&okC&&okS; });
+    if(!L.length) return `<div class="empty" style="grid-column:1/-1"><h3>No quests match</h3><p>Try another filter or clear the search.</p></div>`;
+    return L.map(c=>questCard(c,states[c.quest_key],H)).join(''); }
+  window.questList=questList;
 });
-/* ---- Angle Library handoff: the reference stays attached (S.ui.qref) through filtering, saving and submitting ---- */
-async function libRefInfo(id){ if(typeof loadLib==='function'){ await loadLib(); const v=(window.ANGLE_LIBRARY?.videos||[]).find(x=>x.id===id); if(v) return {id,th:v.th,hook:v.h||v.t,c:v.c}; } return {id,th:null,hook:id,c:''}; }
-function refBanner(ref,cats,states){ const ok=REF_QUESTS.map(k=>cats.find(c=>c.quest_key===k)).filter(c=>c&&!c.locked&&['available','in_progress','needs_changes'].includes(states[c.quest_key].state));
-  return `<div class="card refcard" style="margin-top:16px"><div class="ref-th">${thumb(ref.th,'tile','neutral')}</div><div style="min-width:0;flex:1"><div class="lbl">Reference from the Angle Library</div><div class="ref-hook">“${esc(ref.hook)}”</div><div class="mini">${esc(ref.c)} · stays attached until you start a quest with it</div>
-    <div class="row" style="margin-top:10px;gap:6px;flex-wrap:wrap">${ok.map(c=>`<button class="btn sm ${c===ok[0]?'':'gh'}" onclick="openQuest('${c.quest_key}')">${esc(c.title)}</button>`).join('')||'<span class="mini">No open quest takes a reference right now.</span>'}</div></div><button class="licon" aria-label="Drop the reference" onclick="S.ui.qref=null;saveUI();render()">${ico('x',16)}</button></div>`; }
 function nextPeriodDate(st){ const q=S.cache['my_quests{}']; const i=(q?.periods||[]).findIndex(p=>p.key===q.period_now); const n=q?.periods?.[i+1]; return n?fmt.date(n.starts_at):'next month'; }
 function levelName(xp){ return xp>=200?'Elite':xp>=100?'Operator':xp>=50?'Builder':xp>=25?'Rookie II':'Rookie'; }
 function questCta(st){ return {available:'Start quest',approved_period:'Next period opens '+nextPeriodDate(st),in_progress:'Continue quest',needs_changes:'Fix and resubmit',submitted:'View submission',approved:'View',rejected:'View'}[st.state]||'Open'; }
-function questCard(c,st,H){ const s=st.state; const [k,label]=QSTATE[s]||QSTATE.available; const rp=reqProgress(c,st.cur); const lk=!!c.locked;
-  const capText=c.period_kind==='reward_period'?`${st.done}/${st.maxThis} this half`:c.period_kind==='day'?`${(c.xp_this_period??c.xp_this_month)||0}/${c.monthly_xp_cap} XP this half`:`${st.total}/${st.maxTotal} done`;
-  const prog=st.cur&&['in_progress','needs_changes'].includes(st.cur.state)?(rp.need>1?`<div class="prog">${pbar(rp.have,rp.need,{label:`${rp.have} of ${rp.need} ${rp.unit||'items'} attached`,fmtv:x=>x})}</div>`:`<div class="prog"><div class="plabel"><span>${rp.have?'Evidence attached':'Nothing attached yet'}</span></div></div>`)
-    :(st.cur&&st.cur.state==='submitted'?`<div class="prog"><div class="plabel"><span>Sent ${fmt.ago(st.cur.submitted_at)}</span><b>+${c.xp_value} XP pending</b></div><div class="bar"><i style="width:100%;background:var(--warn)"></i></div></div>`:'');
-  const fb=s==='needs_changes'&&st.cur?.review_note?`<div class="qfb">💬 ${esc(st.cur.review_note)}</div>`:'';
-  const action={available:'Start',in_progress:'Continue',needs_changes:'Fix',submitted:'View submission',approved:'View',approved_period:'View',rejected:'View'}[s]||'Open';
-  return `<button class="qcard v2 ${s==='approved'?'done':''} ${lk?'lock':''}" onclick="openQuest('${c.quest_key}')" aria-label="${esc(c.title)}: ${lk?'locked':label}"><div class="art ph">${thumb(questPhoto(c),c.image_key,c.category)}<span class="qbadge badge ${lk?'n':k}">${lk?'🔒 '+esc(c.min_prestige_name||'Prestige'):label}</span></div><div class="qbody"><div class="ttl">${c.category==='Boss'?'⚔️ ':''}${esc(c.title)}</div><div class="out">${esc(c.outcome)}</div>${qmetaChips(c)}${fb}${questImpact(c,st,H)}${prog}<div class="foot"><span class="mini">${lk?`Unlock ${esc(c.min_prestige_name||'a higher level')} first`:capText}</span><span class="btn sm ${['approved','approved_period','submitted'].includes(s)||lk?'gh':''}">${lk?'Preview':action}</span></div></div></button>`; }
+function questCard(c,st,H){ const s=st.state; const [k,label]=QSTATE[s]||QSTATE.available; const rp=reqProgress(c,st.cur);
+  const capText=c.period_kind==='reward_period'?`${doneDots(st.done,st.maxThis)}${st.done}/${st.maxThis} done this half · ${st.total}/${st.maxTotal} this month`:c.period_kind==='day'?`${(c.xp_this_period??c.xp_this_month)||0}/${c.monthly_xp_cap} XP this half · max ${c.per_period_limit}/day`:`${st.total}/${st.maxTotal} completed`;
+  const prog=st.cur&&['in_progress','needs_changes'].includes(st.cur.state)&&rp.need>1?`<div class="prog">${pbar(rp.have,rp.need,{label:`${rp.have} of ${rp.need} ${rp.unit} attached`,fmtv:x=>x})}</div>`:(st.cur&&st.cur.state==='submitted'?`<div class="prog"><div class="plabel"><span>Submitted ${fmt.dt(st.cur.submitted_at)}</span><b>+${c.xp_value} XP pending</b></div><div class="bar"><i style="width:100%;background:var(--warn)"></i></div></div>`:'');
+  const lk=!!c.locked;
+  return `<button class="qcard ${s==='approved'?'done':''} ${lk?'lock':''}" onclick="openQuest('${c.quest_key}')" aria-label="${esc(c.title)}: ${lk?'locked':label}"><div class="art ph">${thumb(questPhoto(c),c.image_key,c.category)}</div><div style="min-width:0"><div class="row between">${lk?`<span class="badge n">🔒 Unlock ${esc(c.min_prestige_name||'Prestige')}</span>`:`<span class="badge ${k}">${label}</span>`}<span class="xp">+${c.xp_value} XP</span></div><div class="ttl" style="margin-top:6px">${c.category==='Boss'?'⚔️ ':''}${esc(c.title)}</div><div class="out">${esc(c.outcome)}</div>${questImpact(c,st,H)}${prog}<div class="foot"><span class="mini">${lk?`Unlock ${esc(c.min_prestige_name||'a higher level')} to unlock this quest`:capText}</span><span class="btn sm ${s==='approved'||s==='approved_period'||lk?'gh':''}">${lk?'Preview':questCta(st)}</span></div></div></button>`; }
 
 async function openQuest(key,instId){
   const q=await API.page('my_quests'); let rw=null; try{ rw=await API.page('my_rewards'); }catch(e){} const c=q.catalog.find(x=>x.quest_key===key); if(!c) return; const st=questState(c,q.instances); const inst=instId?q.instances.find(i=>i.id===instId):st.cur;
   const history=q.instances.filter(i=>i.quest_key===key&&i!==inst);
-  const canStart=st.state==='available'&&!inst&&!c.locked; const editable=inst&&['in_progress','needs_changes'].includes(inst.state); const m=qmeta(c);
-  const ref=S.ui.qref&&REF_QUESTS.includes(key)&&canStart?await libRefInfo(S.ui.qref).catch(()=>null):null;
-  const stepN=(n,t,sub)=>`<div class="qstep-h"><span class="qstep-n">${n}</span><div><h3>${t}</h3>${sub?`<div class="mini">${sub}</div>`:''}</div></div>`;
-  const example=(c.examples||[]).length||ref||REF_QUESTS.includes(key);
-  openDrawer(`<div class="row">${c.locked&&!inst?`<span class="badge n">🔒 Unlock ${esc(c.min_prestige_name||'Prestige')}</span>`:`<span class="badge ${QSTATE[inst?.state||'available'][0]}">${QSTATE[inst?.state||'available'][1]}</span>`}<span class="mini">${esc(c.category)}</span></div>
+  const canStart=st.state==='available'&&!inst&&!c.locked;
+  openDrawer(`<div class="row">${c.locked&&!inst?`<span class="badge n">🔒 Unlock ${esc(c.min_prestige_name||'Prestige')}</span>`:`<span class="badge ${QSTATE[inst?.state||'available'][0]}">${QSTATE[inst?.state||'available'][1]}</span>`}<span class="xp">+${c.xp_value} XP</span><span class="mini">${esc(c.category)}</span></div>
    <h2>${c.category==='Boss'?'⚔️ ':''}${esc(c.title)}</h2><div class="art">${photoFrame(questPhoto(c),c.image_key,c.category)}</div>
-   <div class="qmeta-row">${qmetaChips(c)}</div>
-   <nav class="qflow" aria-label="Steps">${['The assignment','Watch an example','Create your version','Attach evidence','Submit'].map((t,i)=>`<a href="#qs${i+1}" onclick="document.getElementById('qs${i+1}')?.scrollIntoView({behavior:'smooth',block:'start'});return false">${i+1}. ${t}</a>`).join('')}</nav>
+   <p>${esc(c.outcome)}</p>
    ${c.locked?`<div class="note" style="margin-top:8px"><b>🔒 Unlock ${esc(c.min_prestige_name||'a higher level')} to unlock this quest.</b> It opens in any half you play ${esc(c.min_prestige_name||'that level')} or higher. <a href="#" onclick="closeDrawer();go('rewards');return false">See Prestige</a></div>`:''}
-   ${inst?.review_note&&inst.state!=='approved'?`<section class="qreturn"><h3>${inst.state==='rejected'?'Why it was not approved':'What Austin wants changed'}</h3><div class="note ${inst.state==='rejected'?'bad':'warn'}">${esc(inst.review_note)}</div></section>`:''}
-   <section id="qs1" class="qstep">${stepN(1,'The assignment','What to make and what gets it approved')}<p class="qdeliver">${esc(c.outcome)}</p>
-     <div class="qcrit"><b>Approved when</b><ul>${(c.criteria||[]).map(e=>`<li>${esc(e)}</li>`).join('')}</ul></div>
-     <details class="qmore"><summary>Why it helps, award and reuse rule</summary><p>${esc(c.why)}</p><div class="mini" style="margin-top:8px">${c.xp_value} XP per completion · ${c.period_kind==='reward_period'?`up to ${st.maxThis} per half, resets the 1st and 16th (${st.done}/${st.maxThis} this half, ${st.total}/${st.maxTotal} this month)`:c.period_kind==='day'?`up to ${c.per_period_limit} per Central day, ${c.monthly_xp_cap} XP per half (${(c.xp_this_period??c.xp_this_month)||0} earned this half)`:`up to ${st.maxTotal} this campaign (${st.total} done)`}${c.scarce?' · scarce bonus award':''}</div>${c.reuse_rule?`<div class="note" style="margin-top:8px"><b>Reuse rule.</b> ${esc(c.reuse_rule)}</div>`:''}${questImpact(c,st,rw?halfCtx(q,rw):null)}</details></section>
-   <section id="qs2" class="qstep">${stepN(2,'Watch an example','Steal the structure, never the video')}
-     ${ref?`<div class="refcard mini-ref"><div class="ref-th">${thumb(ref.th,'tile','neutral')}</div><div style="min-width:0"><div class="lbl">Your reference</div><div class="ref-hook">“${esc(ref.hook)}”</div><div class="mini">${esc(ref.c)} · attached when you start</div></div></div>`:''}
-     ${inst?.inspiration_ref?`<div class="note" style="margin-bottom:8px">Started from <b>${esc(inst.inspiration_ref)}</b>. <a href="#/library?id=${encodeURIComponent(inst.inspiration_ref)}">Open it in the Angle Library</a></div>`:''}
-     ${(c.examples||[]).length?`<ul>${c.examples.map(e=>`<li>${esc(e)}</li>`).join('')}</ul>`:''}
-     ${!(c.examples||[]).length&&!ref&&!inst?.inspiration_ref?`<p class="mini">No set example for this one. <a href="#/library">Browse the Angle Library</a> for a video in the same spirit, then come back.</p>`:''}
-     ${REF_QUESTS.includes(key)&&!inst?`<div style="margin-top:8px"><a class="btn gh sm" href="#/library">${ico('grid',13)} Pick a reference in the Angle Library</a></div>`:''}</section>
-   <section id="qs3" class="qstep">${stepN(3,'Create your version','Tick a step when you have done it')}
-     ${inst&&editable?`<div id="chk">${(c.steps||[]).map((s_,i)=>`<label class="chk ${inst.checklist?.[i]?'on':''}"><input type="checkbox" ${inst.checklist?.[i]?'checked':''} onchange="tickStep('${inst.id}',${i},this.checked)"><span>${esc(s_)}</span></label>`).join('')}</div><div class="mini" style="margin-top:6px">Ticks are for you. XP comes only after Austin verifies the entry.</div>`:`<ol class="ol">${(c.steps||[]).map(s_=>`<li>${esc(s_)}</li>`).join('')}</ol>`}</section>
-   <section id="qs4" class="qstep">${stepN(4,'Attach evidence',inst?'':'Start the quest to open the form')}${inst?evidenceForm(c,inst):`<p class="mini">You will attach: ${(c.proof||[]).map(f=>esc(f.label)).join(' · ')||'nothing extra'}.</p>`}</section>
-   <section id="qs5" class="qstep qsubmit">${stepN(5,'Submit','')}
-   ${canStart?`<button class="btn" id="startbtn" onclick="startQuest('${key}')">${ico('bolt')} Start quest${ref?' with this reference':''}</button><div class="mini" style="margin-top:8px">Starting creates your entry for ${c.period_kind==='reward_period'?PERIOD_LABEL(c.period_now):c.period_kind==='day'?'today':'this campaign'}. Drafts save on their own.</div>`:''}
-   ${inst&&editable?`<div class="mini">Use the Submit button in the form above. Austin reviews it, then the XP lands.</div>`:''}
-   ${inst&&inst.state==='submitted'?`<div class="row" style="gap:8px;flex-wrap:wrap"><span class="badge r">In review</span><span class="mini">Sent ${fmt.dt(inst.submitted_at)} · +${c.xp_value} XP pending</span><button class="btn gh sm" onclick="refreshQuest('${key}','${inst.id}')">${ico('refresh',13)} Refresh status</button></div>`:''}
-   ${!canStart&&!inst&&(st.state==='approved'||st.state==='approved_period')?`<div class="note good">Completed for ${st.state==='approved_period'?'this half':'this campaign'}.${st.state==='approved_period'?' Opens again '+nextPeriodDate(st)+'.':''}</div>`:''}
-   ${inst&&inst.state==='approved'?`<div class="note good">Approved · +${inst.xp||c.xp_value} XP</div>`:''}</section>
-   ${history.length||inst?.history?.length?`<details class="qmore"><summary>History</summary>${history.length?`<div class="timeline" style="margin-top:8px">${history.map(i=>`<div><time>${fmt.date(i.created_at)}</time><span>${PERIOD_LABEL(i.period_key)} · ${QSTATE[i.state][1]}${i.xp?` · +${i.xp} XP`:''} <a href="#" onclick="openQuest('${key}','${i.id}');return false">open</a></span></div>`).join('')}</div>`:''}
-   ${inst?.history?.length?`<div class="timeline" style="margin-top:8px">${inst.history.map(h=>`<div><time>${fmt.dt(h.at)}</time><span>${esc(({started:'Started',submitted:'Submitted for review',changes_requested:'Returned with notes',approved:'Approved',rejected:'Not approved',reversed:'Award reversed'})[h.event]||h.event)}${h.detail?.xp?` · +${h.detail.xp} XP`:''}</span></div>`).join('')}</div>`:''}</details>`:''}
-   ${canStart||editable?`<div class="qsticky">${canStart?`<button class="btn" onclick="startQuest('${key}')">${ico('bolt')} Start quest</button>`:`<button class="btn" onclick="$('#subbtn')?.click()">${inst.state==='needs_changes'?'Resubmit for review':'Submit for review'}</button><span class="mini" id="savestate2"></span>`}</div>`:''}`);
+   <section><h3>Why it helps</h3><p>${esc(c.why)}</p></section>
+   <section><h3>Steps</h3>${inst&&['in_progress','needs_changes'].includes(inst.state)?`<div id="chk">${(c.steps||[]).map((s,i)=>`<label class="chk ${inst.checklist?.[i]?'on':''}"><input type="checkbox" ${inst.checklist?.[i]?'checked':''} onchange="tickStep('${inst.id}',${i},this.checked)"><span>${esc(s)}</span></label>`).join('')}</div><div class="mini" style="margin-top:6px">Ticks are for you. XP comes only from verified completion.</div>`:`<ol class="ol">${(c.steps||[]).map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`}</section>
+   ${(c.examples||[]).length?`<section><h3>Examples</h3><ul>${c.examples.map(e=>`<li>${esc(e)}</li>`).join('')}</ul></section>`:''}
+   <section><h3>Completion criteria</h3><ul>${(c.criteria||[]).map(e=>`<li>${esc(e)}</li>`).join('')}</ul>${c.reuse_rule?`<div class="note" style="margin-top:8px"><b>Reuse rule.</b> ${esc(c.reuse_rule)}</div>`:''}</section>
+   <section><h3>Award</h3><div class="mini">${c.xp_value} XP per completion · ${c.period_kind==='reward_period'?`up to ${st.maxThis} per half, resets the 1st and 16th (${st.done}/${st.maxThis} this half, ${st.total}/${st.maxTotal} this month)`:c.period_kind==='day'?`up to ${c.per_period_limit} per Central day, ${c.monthly_xp_cap} XP per half (${(c.xp_this_period??c.xp_this_month)||0} earned this half)`:`up to ${st.maxTotal} this campaign (${st.total} done)`}${c.scarce?' · scarce bonus award':''}</div>${questImpact(c,st,rw?halfCtx(q,rw):null)}</section>
+   ${inst?.review_note?`<section><h3>${inst.state==='rejected'?'Reason':'Reviewer feedback'}</h3><div class="note ${inst.state==='rejected'?'bad':'warn'}">${esc(inst.review_note)}</div></section>`:''}
+   ${inst?evidenceForm(c,inst):''}
+   ${canStart?`<section><button class="btn" id="startbtn" onclick="startQuest('${key}')">${ico('bolt')} ${questCta(st)}</button><div class="mini" style="margin-top:8px">Starting creates your entry for ${c.period_kind==='reward_period'?PERIOD_LABEL(c.period_now):c.period_kind==='day'?'today':'this campaign'}. You can save a draft and come back.</div></section>`:''}
+   ${!canStart&&!inst&&(st.state==='approved'||st.state==='approved_period')?`<section><div class="note good">Completed for ${st.state==='approved_period'?'this half':'this campaign'}.${st.state==='approved_period'?' Opens again '+nextPeriodDate(st)+'.':''}</div></section>`:''}
+   ${history.length?`<section><h3>History</h3><div class="timeline">${history.map(i=>`<div><time>${fmt.date(i.created_at)}</time><span>${PERIOD_LABEL(i.period_key)} · ${QSTATE[i.state][1]}${i.xp?` · +${i.xp} XP`:''} <a href="#" onclick="openQuest('${key}','${i.id}');return false">open</a></span></div>`).join('')}</div></section>`:''}
+   ${inst?.history?.length?`<section><h3>Timeline</h3><div class="timeline">${inst.history.map(h=>`<div><time>${fmt.dt(h.at)}</time><span>${esc(({started:'Started',submitted:'Submitted for review',changes_requested:'Returned with notes',approved:'Approved',rejected:'Not approved',reversed:'Award reversed'})[h.event]||h.event)}${h.detail?.xp?` · +${h.detail.xp} XP`:''}</span></div>`).join('')}</div></section>`:''}`);
   hydrateShots($('#drawer'));
 }
-/* re-pull the entry after Austin approves without clearing unfinished edits elsewhere */
-async function refreshQuest(key,id){ API.bust(); try{ await API.page('my_quests'); }catch(e){} toast('Status refreshed'); openQuest(key,id); }
 function evidenceForm(c,inst){ const editable=['in_progress','needs_changes'].includes(inst.state); const d=inst.draft||{};
   S.shots={}; S.shotField={}; const canPaste=editable&&!!(navigator.clipboard&&navigator.clipboard.readText);
   const field=f=>{ const sp=splitShots(f,d[f.field]); S.shots[f.field]=[...sp.shots]; S.shotField[f.field]=f; const v=sp.text; const id='f_'+f.field; const dis=editable?'':'disabled'; const oi=`oninput="draftChanged('${inst.id}')"`; let input='';
@@ -1716,46 +1614,25 @@ function evidenceForm(c,inst){ const editable=['in_progress','needs_changes'].in
     const isLink=f.type==='url'||f.type==='url_list'; const nLines=Array.isArray(v)?v.length:0;
     const full=(f.type==='url'&&sp.shots.length>0)||(f.type==='url_list'&&f.max&&nLines+sp.shots.length>=f.max);
     const paste=canPaste&&isLink?`<button type="button" class="btn gh sm" onclick="pasteInto('${f.field}','${inst.id}')">📋 Paste</button>`:'';
-    const pick=editable&&(f.type==='submission_list'||(isLink&&/video|clip|submission/i.test(f.label||'')))?`<button type="button" class="btn soft sm" onclick="openVideoPicker('${f.field}','${inst.id}','${c.quest_key}')">🎬 Choose my videos</button>`:'';
     const shot=editable&&canShot(f)?`<label class="btn gh sm shotbtn" id="sb_${f.field}" ${full?'hidden':''}><input type="file" accept="image/*" hidden onchange="addShot(event,'${f.field}','${inst.id}')">📷 ${f.type==='url'?'Upload a screenshot instead':'Add a screenshot'}</label>`:'';
     const help=editable?proofHelp(f):'';
-    return `<div class="field" data-field="${f.field}"><label for="${id}">${esc(f.label)}${f.required?' *':''}</label>${input}${help?`<div class="help">👉 ${esc(help)}</div>`:''}<div class="shots" id="sh_${f.field}">${shotChips(f.field,editable,inst.id)}</div>${pick||paste||shot?`<div class="shotrow">${pick}${paste}${shot}</div>`:''}<div class="ferr" id="e_${f.field}"></div></div>`; };
+    return `<div class="field" data-field="${f.field}"><label for="${id}">${esc(f.label)}${f.required?' *':''}</label>${input}${help?`<div class="help">👉 ${esc(help)}</div>`:''}<div class="shots" id="sh_${f.field}">${shotChips(f.field,editable,inst.id)}</div>${paste||shot?`<div class="shotrow">${paste}${shot}</div>`:''}<div class="ferr" id="e_${f.field}"></div></div>`; };
   return `<section><h3>${editable?'Your evidence':'Submitted evidence'}</h3>
     ${inst.inspiration_ref?`<div class="note" style="margin-bottom:8px">Started from inspiration <b>${esc(inst.inspiration_ref)}</b>. <a href="#/library?id=${encodeURIComponent(inst.inspiration_ref)}">Open it</a></div>`:''}
     <form id="evform" onsubmit="return submitQuest(event,'${inst.id}')">${(c.proof||[]).map(field).join('')}
     <div id="everr" class="ferr" style="margin-top:8px"></div>
-    ${editable?`<div class="row" style="margin-top:14px"><button type="submit" class="btn" id="subbtn">${inst.state==='needs_changes'?'Resubmit for review':'Submit for review'}</button><button type="button" class="btn gh" id="savebtn" onclick="saveDraft('${inst.id}')">Save draft</button><span class="mini savestate" id="savestate">${inst.updated_at?'Saved '+fmt.ago(inst.updated_at):''}</span></div>`:`<div class="mini" style="margin-top:8px">Submitted ${fmt.dt(inst.submitted_at)}. ${inst.state==='submitted'?'An admin will verify it. XP shows as pending until then.':''}</div>`}
+    ${editable?`<div class="row" style="margin-top:14px"><button type="submit" class="btn" id="subbtn">${inst.state==='needs_changes'?'Resubmit for review':'Submit for review'}</button><button type="button" class="btn gh" id="savebtn" onclick="saveDraft('${inst.id}')">Save draft</button><span class="mini" id="savestate">${inst.updated_at?'Saved '+fmt.ago(inst.updated_at):''}</span></div>`:`<div class="mini" style="margin-top:8px">Submitted ${fmt.dt(inst.submitted_at)}. ${inst.state==='submitted'?'An admin will verify it. XP shows as pending until then.':''}</div>`}
     </form></section>`; }
 function readDraft(c){ const d={}; (c.proof||[]).forEach(f=>{ const el=$('#f_'+f.field); if(!el) return; let v=el.value; const shots=(S.shotField&&S.shotField[f.field]&&S.shots[f.field])||[];
     if(f.type==='url_list'||f.type==='submission_list'){ v=v.split(/\n+/).map(x=>f.type==='url_list'?normUrl(x):x.trim()).filter(Boolean); if(f.type==='url_list') v=[...v,...shots]; }
     else if(f.type==='url'){ v=el.disabled&&shots.length?shots[0]:(normUrl(v)||shots[0]||''); }
     else if(f.type==='text'&&shots.length){ v=[String(v||'').trim(),...shots].filter(Boolean).join('\n'); }
     d[f.field]=v; }); return d; }
-let draftTimer, draftFor=null;
-function setSaveState(t,cls,id){ $$('.savestate,#savestate2').forEach(e=>{ e.className=(e.id==='savestate2'?'mini ':'mini savestate ')+(cls||''); e.innerHTML=t+(cls==='bad'&&id?` <a href="#" onclick="saveDraft('${id}');return false">Retry</a>`:''); }); }
-function draftChanged(id){ setSaveState('Unsaved changes'); clearTimeout(draftTimer); draftFor=id; draftTimer=setTimeout(()=>{ if(draftFor===id) saveDraft(id,true); },1200); }
-async function saveDraft(id,auto){ const form=$('#evform'); if(!form||!form.getAttribute('onsubmit')?.includes(id)) return;   // the open form must belong to this instance
-  const q=await API.page('my_quests'); const inst=q.instances.find(i=>i.id===id); if(!inst) return; const c=q.catalog.find(x=>x.quest_key===inst.quest_key); const d=readDraft(c);
-  setSaveState('Saving…');
-  try{ const r=await API.rpc('save_quest_draft',{p_instance:id,p_draft:d}); if(r.ok){ inst.draft=d; inst.updated_at=new Date().toISOString(); setSaveState('Saved','good'); if(!auto) toast('Draft saved'); } else setSaveState('Couldn’t save: '+esc(r.why||''),'bad',id); }
-  catch(e){ setSaveState('Couldn’t save','bad',id); } }
-/* Choose my videos: tap thumbnails instead of copying IDs. Shows date, status, and whether the clip is already used on this quest. */
-async function openVideoPicker(field,instId,questKey){ let SP={}; try{ SP=await API.page('my_submissions'); }catch(e){} const vids=(SP.videos||[]).filter(v=>v.media_type!=='IMAGE'&&!v.ad_only);
-  const q=await API.page('my_quests'); const c=q.catalog.find(x=>x.quest_key===questKey); const f=(c.proof||[]).find(p=>p.field===field); const inst=q.instances.find(i=>i.id===instId);
-  const cur=readDraft(c)[field]; const curList=Array.isArray(cur)?cur:(cur?[cur]:[]); const sel=new Set(curList.map(String));
-  const usedElsewhere=new Set(); q.instances.filter(i=>i.quest_key===questKey&&i.id!==instId).forEach(i=>{ const v=i.draft?.[field]; (Array.isArray(v)?v:[v]).forEach(x=>x&&usedElsewhere.add(String(x))); });
-  const byVal=v=>f.type==='submission_list'?v.id:(v.media_url||v.id); const max=f.max||(f.type==='url'?1:99);
-  const html=`<div class="picker" id="vpick"><div class="row between"><div><div class="lbl">Choose my videos</div><h3 style="margin:0">${esc(f.label)}</h3><div class="mini">Tap to select${max>1?` · up to ${max}`:''}${c.reuse_rule?' · '+esc(c.reuse_rule):''}</div></div><button class="licon" aria-label="Close" onclick="closeVideoPicker()">${ico('x',18)}</button></div>
-    <div class="pgrid">${vids.map(v=>{ const val=String(byVal(v)); const on=sel.has(val); const used=usedElsewhere.has(val); const [bk,bl]=SSTATE[v.status]||['n',v.status]; return `<button class="pv ${on?'on':''}" data-val="${esc(val)}" onclick="toggleVid(this,${max})"><span class="pth">${thumb(v.thumb_url,'tile','Film')}<span class="pck">${ico('check',12)}</span></span><span class="pt">${esc(v.title||'')}</span><span class="mini">${fmt.date(v.submitted_at)} · <span class="badge ${bk}">${bl}</span>${used?' · used on this quest before':''}</span></button>`; }).join('')||'<p class="mini">No videos on your Trybe account yet.</p>'}</div>
-    <div class="row" style="margin-top:12px;gap:8px"><button class="btn" onclick="applyVids('${field}','${instId}','${f.type}')">Attach selected</button><button class="btn gh" onclick="closeVideoPicker()">Cancel</button><span class="mini">Pasting a link still works too.</span></div></div>`;
-  const d=$('#drawer'); const box=document.createElement('div'); box.className='pickwrap'; box.innerHTML=html; d.appendChild(box); box.scrollIntoView({behavior:'smooth',block:'start'}); }
-function toggleVid(btn,max){ const on=btn.classList.contains('on'); if(!on&&max===1) $$('#vpick .pv.on').forEach(b=>b.classList.remove('on')); if(!on&&$$('#vpick .pv.on').length>=max){ toast(`Up to ${max} for this one`,'bad'); return; } btn.classList.toggle('on',!on); }
-function applyVids(field,instId,type){ const vals=$$('#vpick .pv.on').map(b=>b.dataset.val); const el=$('#f_'+field); if(!el) return;
-  if(type==='url'){ el.value=vals[0]||''; } else { const cur=el.value.split(/\n+/).map(x=>x.trim()).filter(Boolean); const merged=[...new Set([...cur,...vals])]; el.value=merged.join('\n'); }
-  closeVideoPicker(); draftChanged(instId); toast(vals.length?`${vals.length} attached`:'Nothing selected'); }
-function closeVideoPicker(){ $$('.pickwrap').forEach(e=>e.remove()); }
+let draftTimer; function draftChanged(id){ $('#savestate')&&($('#savestate').textContent='Unsaved changes'); clearTimeout(draftTimer); draftTimer=setTimeout(()=>saveDraft(id,true),1200); }
+async function saveDraft(id,auto){ if(!$('#evform')) return; const q=await API.page('my_quests'); const inst=q.instances.find(i=>i.id===id); const c=q.catalog.find(x=>x.quest_key===inst.quest_key); const d=readDraft(c);
+  const r=await API.rpc('save_quest_draft',{p_instance:id,p_draft:d}); if(r.ok){ inst.draft=d; inst.updated_at=new Date().toISOString(); $('#savestate')&&($('#savestate').textContent='Saved just now'); if(!auto) toast('Draft saved'); } else toast(r.why,'bad'); }
 async function tickStep(id,i,on){ const q=await API.page('my_quests'); const inst=q.instances.find(x=>x.id===id); const ck=[...(inst.checklist||[])]; ck[i]=on; const r=await API.rpc('save_quest_draft',{p_instance:id,p_draft:null,p_checklist:ck}); if(r.ok) inst.checklist=ck; }
-async function startQuest(key){ const b=$('#startbtn'); if(b){ b.classList.add('pending'); b.disabled=true; } try{ const useRef=(REF_QUESTS.includes(key)?(S.ui.qref||S.params.ref):null)||null; const r=await API.rpc('start_quest',{p_quest:key,p_inspiration_ref:useRef}); if(!r.ok){ toast(r.why,'bad'); return; } if(useRef){ S.ui.qref=null; saveUI(); } API.bust(); await API.page('my_quests'); openQuest(key,r.instance_id); toast(r.why==='resumed'?'Resumed your entry':'Quest started'); render(); } catch(e){ toast(e.message,'bad'); } finally{ if(b){ b.classList.remove('pending'); b.disabled=false; } } }
+async function startQuest(key){ const b=$('#startbtn'); b.classList.add('pending'); b.disabled=true; try{ const r=await API.rpc('start_quest',{p_quest:key,p_inspiration_ref:S.params.ref||null}); if(!r.ok){ toast(r.why,'bad'); return; } API.bust(); await API.page('my_quests'); openQuest(key,r.instance_id); toast(r.why==='resumed'?'Resumed your entry':'Quest started'); render(); } catch(e){ toast(e.message,'bad'); } finally{ b.classList.remove('pending'); b.disabled=false; } }
 async function submitQuest(ev,id){ ev.preventDefault(); const q=await API.page('my_quests'); const inst=q.instances.find(i=>i.id===id); const c=q.catalog.find(x=>x.quest_key===inst.quest_key); const d=readDraft(c);
   $$('.ferr').forEach(e=>e.textContent=''); $$('.field').forEach(e=>e.classList.remove('err'));
   const errs=validateEvidence(c.proof,d); if(errs.length){ errs.forEach(e=>{ const f=(c.proof||[]).find(p=>e.startsWith(p.label)); if(f){ $('#e_'+f.field).textContent=e; $(`.field[data-field="${f.field}"]`).classList.add('err'); } else $('#everr').textContent=e; }); $('#everr').textContent=$('#everr').textContent||'Fix the fields above, then submit again.'; return false; }
@@ -1884,8 +1761,7 @@ function questHero(q,r,insts){ const H=halfCtx(q,r); const top=H.tiers[H.tiers.l
 function questImpact(c,st,H){ if(!H||!H.nt||c.locked||!['available','in_progress','needs_changes'].includes(st.state)) return '';
   const need=H.nt.xp_required-H.xp-H.pending; if(need<=0) return '';
   const vids=Math.max(0,H.nt.concepts_required-H.cc);
-  const sales=H.nt.sales_required_cents>0?Math.max(0,H.nt.sales_required_cents-H.sales):0; const rest=[vids?`${vids} approved video${vids===1?'':'s'}`:'',sales?`${usd0(sales)} in Trybe sales`:''].filter(Boolean);
-  if(c.xp_value>=need) return `<div class="qimpact hit">🔓 Completes your XP requirement for ${esc(H.nt.name)} · ${fmt.usd(H.nt.cash_total_cents,{cents:true})}${rest.length?`. Still needed: ${rest.join(' + ')}`:'. Nothing else needed.'}</div>`;
+  if(c.xp_value>=need) return `<div class="qimpact hit">🔓 Covers the last ${need} XP for ${esc(H.nt.name)} · ${fmt.usd(H.nt.cash_total_cents,{cents:true})}${vids?` (plus ${vids} approved video${vids===1?'':'s'})`:''}</div>`;
   return `<div class="qimpact">+${c.xp_value} XP toward ${esc(H.nt.name)} · ${need-c.xp_value} XP left after this</div>`; }
 function doneDots(n,max){ if(!max||max>8) return ''; return `<span class="dots" aria-hidden="true">${Array.from({length:max},(_,i)=>`<i class="${i<n?'on':''}"></i>`).join('')}</span>`; }
 
@@ -2595,8 +2471,7 @@ async function runApproveAll(){ const go_=$('#aa_go'); if(!go_||go_.disabled) re
     <div class="row" style="margin-top:14px"><button class="btn" onclick="closeDrawer();render()">Done</button></div>`;
   if(ok) xpPop(xp); render(); }
 async function adminAct(fn,id,extra={}){ try{ const r=await API.rpc(fn,{p_instance:id,...extra}); if(r.ok||r.awarded){ toast(fn==='approve_quest'?`Awarded ${r.xp} XP`:r.why,'good'); if(fn==='approve_quest') xpPop(r.xp); } else toast(r.why,'bad'); API.bust(); render(); }catch(e){ toast(e.message,'bad'); } }
-function adminNote(fn,id){ const label=fn==='return_quest'?'Feedback for the creator':'Reason for rejection'; const QUICK=['Hooks are too similar. Make the three openings clearly different.','Show the bundle clearly: what is in it and the total price.','The product shows up too late. Bring it in earlier.','Attach the actual video link from Trybe, not a screenshot.','This uses someone else’s structure 1:1. Change the setting and the story.','Missing the on-screen caption we asked for.','Keep the firearm incidental. Frame on ears, woods, reaction.','No hearing-loss or medical claims. Stick to what the product does.'];
-  openDrawer(`<h2>${fn==='return_quest'?'Request changes':'Reject entry'}</h2><div class="field"><label for="anote">${label}</label><div class="chips" style="margin-bottom:8px">${QUICK.map(x=>`<button type="button" class="chip" onclick="const a=$('#anote');a.value=(a.value?a.value.trim()+'\n':'')+${JSON.stringify(x).replace(/"/g,'&quot;')};a.focus()">${esc(x.split('.')[0])}</button>`).join('')}</div><textarea id="anote"></textarea><div class="help">${fn==='return_quest'?'The creator edits the same entry and resubmits. Rejection is a different event.':'The entry closes. The creator can start a new one if the cap allows.'}</div></div><div class="row" style="margin-top:12px"><button class="btn ${fn==='reject_quest'?'danger':''}" onclick="(async()=>{const n=$('#anote').value.trim(); if(!n){toast('A note is required','bad');return;} closeDrawer(true); await adminAct('${fn}','${id}',${fn==='return_quest'?'{p_note:n}':'{p_reason:n}'});})()">Send</button><button class="btn gh" onclick="closeDrawer()">Cancel</button></div>`); }
+function adminNote(fn,id){ const label=fn==='return_quest'?'Feedback for the creator':'Reason for rejection'; openDrawer(`<h2>${fn==='return_quest'?'Request changes':'Reject entry'}</h2><div class="field"><label for="anote">${label}</label><textarea id="anote"></textarea><div class="help">${fn==='return_quest'?'The creator edits the same entry and resubmits. Rejection is a different event.':'The entry closes. The creator can start a new one if the cap allows.'}</div></div><div class="row" style="margin-top:12px"><button class="btn ${fn==='reject_quest'?'danger':''}" onclick="(async()=>{const n=$('#anote').value.trim(); if(!n){toast('A note is required','bad');return;} closeDrawer(true); await adminAct('${fn}','${id}',${fn==='return_quest'?'{p_note:n}':'{p_reason:n}'});})()">Send</button><button class="btn gh" onclick="closeDrawer()">Cancel</button></div>`); }
 
 route('admin_contest',async()=>{ const A=await API.page('admin'); const c=A.campaign||{}; const snaps=A.snapshots||[]; const fin=snaps.find(x=>x.final); const ended=new Date()>=new Date(c.ends_at);
   const rules=[['Window',`${fmt.dt(c.starts_at)} → ${fmt.dt(c.ends_at)} (exclusive), ${esc(c.tz||'')}`],['Ranked by','October GMV from October videos only: Oct 1–31 (CT) sales on each creator\'s first 20 videos submitted and approved in October. Older videos never count. Creators see everyone\'s place, only their own GMV.'],
