@@ -1000,6 +1000,20 @@ button.actrow:hover{background:var(--sf2)}
 .qrec .btn{min-height:44px;border-radius:12px;padding:10px 20px}
 .qhero2 .btn,.qh-row .btn{min-height:44px;border-radius:12px}
 @media (max-width:800px){ .qhero2{padding:16px} .qh-xp .big{font-size:38px} .qrec{grid-template-columns:1fr;gap:0} .qrec .art{min-height:0;aspect-ratio:16/8} .qrec .qrec-b{padding:16px} .qrec h2{font-size:22px} .qh-row{flex-direction:column;align-items:flex-start} }
+/* Draft saving + refresh status + reward progress (Oct 21) */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.savestate{display:inline-flex;align-items:center;gap:5px;min-height:20px}
+.savestate.good{color:var(--gr)}.savestate.bad{color:var(--warn)}.savestate.dirty{color:var(--tx3)}.savestate.saving{color:var(--tx2)}
+.savestate small{color:var(--tx4)}
+.spin{display:inline-block;width:11px;height:11px;border:2px solid var(--tx4);border-right-color:transparent;border-radius:50%;animation:spin .8s linear infinite}
+.refrow{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px}.refrow .bad{color:var(--warn)}
+.rp{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--sf2);border:1px solid var(--ln)}
+.rp-l{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);font-weight:700}
+.rp-m{font-size:13.5px;color:var(--tx);margin-top:3px}.rp-s{font-size:12.5px;color:var(--tx2);margin-top:2px}.rp-p{font-size:12px;color:var(--tx3);margin-top:4px}
+.rp.ok .rp-m{color:var(--gr)}
+.recov{margin-bottom:10px}
+@media (max-width:900px){ #evform .row{position:sticky;bottom:calc(64px + env(safe-area-inset-bottom));background:var(--bg2);padding:10px 0;margin-top:14px;border-top:1px solid var(--ln);z-index:2} }
+@media (prefers-reduced-motion:reduce){ .spin{animation:none;border-right-color:var(--tx4)} }
 </style>
 </head>
 <body>
@@ -1019,7 +1033,7 @@ button.actrow:hover{background:var(--sf2)}
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261021-234302";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261022-000617";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1160,6 +1174,7 @@ const FX={
       case 'my_ads': return d(FX.adsOf(m,a.p_range||'2026-10'));
       case 'start_quest': return FX.start(m,a);
       case 'save_quest_draft': return FX.save(m,a);
+      case 'my_quest_instance': return FX.instance(m,a);
       case 'submit_quest': return FX.submit(m,a);
       case 'request_claim': return FX.claim(m,a);
       case 'admin': return d(FX.data.admin);
@@ -1209,7 +1224,10 @@ const FX={
     const id=uid(); q.instances.unshift({id,quest_key:a.p_quest,period_key:cat.period_now,seq:done+1,state:'in_progress',draft:{},checklist:[],evidence:[],review_note:null,submitted_at:null,created_at:new Date().toISOString(),updated_at:new Date().toISOString(),inspiration_ref:a.p_inspiration_ref||null,history:[{at:new Date().toISOString(),event:'started'}],xp:null});
     return {ok:true,instance_id:id,state:'in_progress',why:'started'}; },
   save(m,a){ const i=m.quests.instances.find(x=>x.id===a.p_instance); if(!i) return {ok:false,why:'not your quest instance'}; if(!['in_progress','needs_changes'].includes(i.state)) return {ok:false,why:'cannot edit while '+i.state};
-    if(a.p_draft) i.draft=a.p_draft; if(a.p_checklist) i.checklist=a.p_checklist; i.updated_at=new Date().toISOString(); return {ok:true,why:'saved'}; },
+    if(window.__FX_FAIL_SAVE) throw new Error('network down (simulated)');
+    if(a.p_rev!=null&&a.p_draft&&a.p_rev<(i.draft_rev||0)) return {ok:false,why:'stale',rev:i.draft_rev||0,saved_at:i.updated_at};
+    if(a.p_draft){ i.draft=a.p_draft; i.draft_rev=(i.draft_rev||0)+1; } if(a.p_checklist) i.checklist=a.p_checklist; i.updated_at=new Date().toISOString(); return {ok:true,why:'saved',rev:i.draft_rev||0,saved_at:i.updated_at}; },
+  instance(m,a){ const i=m.quests.instances.find(x=>x.id===a.p_instance); if(!i) return null; if(window.__FX_FAIL_REFRESH) throw new Error('network down (simulated)'); if(window.__FX_RETURN_ON_REFRESH&&i.state==='submitted'){ i.state='needs_changes'; i.review_note=window.__FX_RETURN_ON_REFRESH; i.history=[...(i.history||[]),{event:'changes_requested',at:new Date().toISOString(),detail:{note:i.review_note}}]; } if(window.__FX_APPROVE_ON_REFRESH&&i.state==='submitted'){ i.state='approved'; i.xp=(m.quests.catalog.find(c=>c.quest_key===i.quest_key)||{}).xp_value; i.history=[...(i.history||[]),{event:'approved',at:new Date().toISOString(),detail:{xp:i.xp}}]; } return {...i,checked_at:new Date().toISOString()}; },
   submit(m,a){ const i=m.quests.instances.find(x=>x.id===a.p_instance); if(!i) return {ok:false,errors:[],why:'not your quest instance'};
     if(i.submit_request_id===a.p_request_id&&['submitted','approved'].includes(i.state)) return {ok:true,state:i.state,errors:[],why:'already received'};
     if(!['in_progress','needs_changes'].includes(i.state)) return {ok:false,state:i.state,errors:[],why:'cannot submit while '+i.state};
@@ -1653,7 +1671,7 @@ async function openQuest(key,instId){
    ${!canStart&&!inst&&(st.state==='approved'||st.state==='approved_period')?`<section><div class="note good">Completed for ${st.state==='approved_period'?'this half':'this campaign'}.${st.state==='approved_period'?' Opens again '+nextPeriodDate(st)+'.':''}</div></section>`:''}
    ${history.length?`<section><h3>History</h3><div class="timeline">${history.map(i=>`<div><time>${fmt.date(i.created_at)}</time><span>${PERIOD_LABEL(i.period_key)} · ${QSTATE[i.state][1]}${i.xp?` · +${i.xp} XP`:''} <a href="#" onclick="openQuest('${key}','${i.id}');return false">open</a></span></div>`).join('')}</div></section>`:''}
    ${inst?.history?.length?`<section><h3>Timeline</h3><div class="timeline">${inst.history.map(h=>`<div><time>${fmt.dt(h.at)}</time><span>${esc(({started:'Started',submitted:'Submitted for review',changes_requested:'Returned with notes',approved:'Approved',rejected:'Not approved',reversed:'Award reversed'})[h.event]||h.event)}${h.detail?.xp?` · +${h.detail.xp} XP`:''}</span></div>`).join('')}</div></section>`:''}`);
-  hydrateShots($('#drawer'));
+  hydrateShots($('#drawer')); const f=$('#evform'); if(f&&inst){ f._cat=c; const st=dstate(inst.id); if(st.rev==null) st.rev=inst.draft_rev??null; if(!st.lastSaved&&inst.updated_at) st.lastSaved=inst.updated_at; renderSaveState(inst.id); }
 }
 function evidenceForm(c,inst){ const editable=['in_progress','needs_changes'].includes(inst.state); const d=inst.draft||{};
   S.shots={}; S.shotField={}; const canPaste=editable&&!!(navigator.clipboard&&navigator.clipboard.readText);
@@ -1671,30 +1689,85 @@ function evidenceForm(c,inst){ const editable=['in_progress','needs_changes'].in
     return `<div class="field" data-field="${f.field}"><label for="${id}">${esc(f.label)}${f.required?' *':''}</label>${input}${help?`<div class="help">👉 ${esc(help)}</div>`:''}<div class="shots" id="sh_${f.field}">${shotChips(f.field,editable,inst.id)}</div>${paste||shot?`<div class="shotrow">${paste}${shot}</div>`:''}<div class="ferr" id="e_${f.field}"></div></div>`; };
   return `<section><h3>${editable?'Your evidence':'Submitted evidence'}</h3>
     ${inst.inspiration_ref?`<div class="note" style="margin-bottom:8px">Started from inspiration <b>${esc(inst.inspiration_ref)}</b>. <a href="#/library?id=${encodeURIComponent(inst.inspiration_ref)}">Open it</a></div>`:''}
-    <form id="evform" onsubmit="return submitQuest(event,'${inst.id}')">${(c.proof||[]).map(field).join('')}
+    ${editable?offerRecovery(inst):''}
+    <form id="evform" data-inst="${inst.id}" onsubmit="return submitQuest(event,'${inst.id}')">${(c.proof||[]).map(field).join('')}
     <div id="everr" class="ferr" style="margin-top:8px"></div>
-    ${editable?`<div class="row" style="margin-top:14px"><button type="submit" class="btn" id="subbtn">${inst.state==='needs_changes'?'Resubmit for review':'Submit for review'}</button><button type="button" class="btn gh" id="savebtn" onclick="saveDraft('${inst.id}')">Save draft</button><span class="mini" id="savestate">${inst.updated_at?'Saved '+fmt.ago(inst.updated_at):''}</span></div>`:`<div class="mini" style="margin-top:8px">Submitted ${fmt.dt(inst.submitted_at)}. ${inst.state==='submitted'?'An admin will verify it. XP shows as pending until then.':''}</div>`}
+    ${editable?`<div class="row" style="margin-top:14px"><button type="submit" class="btn" id="subbtn">${inst.state==='needs_changes'?'Resubmit for review':'Submit for review'}</button><button type="button" class="btn gh" id="savebtn" onclick="saveDraft('${inst.id}')">Save draft</button><span class="mini savestate" id="savestate" data-inst="${inst.id}" aria-live="off">${inst.updated_at?'<span aria-hidden="true">✓</span> Saved '+esc(fmt.ago(inst.updated_at)):''}</span></div>`:`<div class="mini" style="margin-top:8px">Submitted ${fmt.dt(inst.submitted_at)}. ${inst.state==='submitted'?'An admin will verify it. XP shows as pending until then.':''}</div>${inst.state==='submitted'?refreshRow(inst):''}`}
     </form></section>`; }
 function readDraft(c){ const d={}; (c.proof||[]).forEach(f=>{ const el=$('#f_'+f.field); if(!el) return; let v=el.value; const shots=(S.shotField&&S.shotField[f.field]&&S.shots[f.field])||[];
     if(f.type==='url_list'||f.type==='submission_list'){ v=v.split(/\n+/).map(x=>f.type==='url_list'?normUrl(x):x.trim()).filter(Boolean); if(f.type==='url_list') v=[...v,...shots]; }
     else if(f.type==='url'){ v=el.disabled&&shots.length?shots[0]:(normUrl(v)||shots[0]||''); }
     else if(f.type==='text'&&shots.length){ v=[String(v||'').trim(),...shots].filter(Boolean).join('\n'); }
     d[f.field]=v; }); return d; }
-let draftTimer; function draftChanged(id){ $('#savestate')&&($('#savestate').textContent='Unsaved changes'); clearTimeout(draftTimer); draftTimer=setTimeout(()=>saveDraft(id,true),1200); }
-async function saveDraft(id,auto){ if(!$('#evform')) return; const q=await API.page('my_quests'); const inst=q.instances.find(i=>i.id===id); const c=q.catalog.find(x=>x.quest_key===inst.quest_key); const d=readDraft(c);
-  const r=await API.rpc('save_quest_draft',{p_instance:id,p_draft:d}); if(r.ok){ inst.draft=d; inst.updated_at=new Date().toISOString(); $('#savestate')&&($('#savestate').textContent='Saved just now'); if(!auto) toast('Draft saved'); } else toast(r.why,'bad'); }
-async function tickStep(id,i,on){ const q=await API.page('my_quests'); const inst=q.instances.find(x=>x.id===id); const ck=[...(inst.checklist||[])]; ck[i]=on; const r=await API.rpc('save_quest_draft',{p_instance:id,p_draft:null,p_checklist:ck}); if(r.ok) inst.checklist=ck; }
+/* ---- Draft saving (Oct 21). One state record per quest entry. Every save snapshots the creator, entry id, field values
+   and the revision it was based on at the moment the timer fires, so a late callback never reads a different form.
+   Responses are applied in order: an older request can never overwrite newer edits or mark them as saved. ---- */
+const DS={};                                              // entry id -> {timer, seq, acked, rev, dirty, lastSaved, err}
+const RKEY=id=>`rcg_draft_${S.me?.code||S.me?.id||'me'}_${id}`;
+function dstate(id){ return DS[id]||(DS[id]={timer:null,seq:0,acked:0,rev:null,dirty:false,lastSaved:null,err:null,inflight:0}); }
+function recoverySave(id,d){ try{ sessionStorage.setItem(RKEY(id),JSON.stringify({d,at:Date.now()})); }catch(e){} }   // text and links only, never files; sessionStorage like the rest of the app's per-session state
+function recoveryLoad(id){ try{ const x=JSON.parse(sessionStorage.getItem(RKEY(id))||'null'); return x&&x.d?x:null; }catch(e){ return null; } }
+function recoveryClear(id){ try{ sessionStorage.removeItem(RKEY(id)); }catch(e){} }
+/* until Part 1 of the Oct 21 SQL is run, the live save function has no p_rev argument; fall back to the old call so saving keeps working (no revision check until then) */
+async function saveRpc(a){ try{ return await API.rpc('save_quest_draft',a); }catch(e){ if(a.p_rev!==undefined&&/PGRST202|Could not find the function|p_rev/i.test(e.message||'')){ const {p_rev,...rest}=a; return API.rpc('save_quest_draft',rest); } throw e; } }
+function formFor(id){ const f=$('#evform'); return f&&f.dataset.inst===id?f:null; }
+function renderSaveState(id){ const st=dstate(id); const el=$('#savestate'); if(!el||el.dataset.inst!==id) return;
+  let cls='',html='';
+  if(st.inflight) { cls='saving'; html=`<i class="spin" aria-hidden="true"></i> Saving…`; }
+  else if(st.err) { cls='bad'; html=`<span aria-hidden="true">⚠</span> Couldn’t save · <a href="#" onclick="saveDraft('${id}');return false">Retry</a>${st.lastSaved?`<small> · last saved ${esc(fmt.ago(st.lastSaved))}</small>`:''}`; }
+  else if(st.dirty) { cls='dirty'; html='Unsaved changes'; }
+  else if(st.lastSaved) { cls='good'; const age=Date.now()-new Date(st.lastSaved); html=`<span aria-hidden="true">✓</span> Saved ${age<15000?'just now':esc(fmt.ago(st.lastSaved))}`; }
+  else html='';
+  el.className='mini savestate '+cls; el.innerHTML=html; const m=$('#savestate2'); if(m){ m.className='mini savestate '+cls; m.innerHTML=html; }
+  if(cls==='good'||cls==='bad') announce(cls==='good'?'Draft saved':'Draft could not be saved'); }
+let ANN_T; function announce(t){ let a=$('#a11y-live'); if(!a){ a=document.createElement('div'); a.id='a11y-live'; a.setAttribute('role','status'); a.setAttribute('aria-live','polite'); a.className='sr'; document.body.appendChild(a); } clearTimeout(ANN_T); ANN_T=setTimeout(()=>{ a.textContent=t; },300); }
+function draftChanged(id){ const form=formFor(id); if(!form) return; const st=dstate(id); st.dirty=true; st.err=null; renderSaveState(id);
+  const c=form._cat; const snap=readDraft(c); recoverySave(id,snap);               // recovery copy, kept until the server acknowledges
+  clearTimeout(st.timer); st.timer=setTimeout(()=>saveDraft(id,true,snap),1000); }
+async function saveDraft(id,auto,snapshot){ const st=dstate(id); const form=formFor(id);
+  const d=snapshot||(form?readDraft(form._cat):null); if(!d){ const r=recoveryLoad(id); if(!r) return; return saveDraft(id,auto,r.d); }   // form closed: save what was captured
+  const seq=++st.seq; st.inflight++; st.err=null; renderSaveState(id);
+  try{ const r=await saveRpc({p_instance:id,p_draft:d,p_rev:st.rev});
+    st.inflight--;
+    if(seq<st.acked){ renderSaveState(id); return; }                               // an older response arrived after a newer one: ignore it
+    if(r.ok){ st.acked=seq; st.rev=r.rev??st.rev; st.lastSaved=r.saved_at||new Date().toISOString(); if(seq===st.seq) st.dirty=false;   // only the latest request clears 'unsaved'
+      const q=S.cache['my_quests{}']; const inst=q?.instances?.find(i=>i.id===id); if(inst){ inst.draft=d; inst.updated_at=st.lastSaved; inst.draft_rev=st.rev; }
+      if(seq===st.seq) recoveryClear(id); if(!auto) toast('Draft saved'); }
+    else if(r.why==='stale'){ st.rev=r.rev; if(seq===st.seq){ st.timer=setTimeout(()=>saveDraft(id,true),300); } }   // rebase on the server revision and resend the latest values
+    else { st.err=r.why||'not saved'; }
+  }catch(e){ st.inflight--; if(seq>=st.acked) st.err=e.message||'network'; }
+  renderSaveState(id); }
+/* reopening an entry: offer the local recovery copy when it is newer than what the server acknowledged */
+function offerRecovery(inst){ const r=recoveryLoad(inst.id); if(!r) return ''; const same=JSON.stringify(r.d)===JSON.stringify(inst.draft||{}); const older=inst.updated_at&&r.at<new Date(inst.updated_at).getTime()-1000;   // a recovery record only survives while a save is unacknowledged
+  if(same||older){ recoveryClear(inst.id); return ''; }                                         // identical, or the server has a newer save than this copy: nothing to recover
+  return `<div class="note warn recov" id="recov"><b>You have unsaved work on this entry from ${esc(fmt.ago(new Date(r.at).toISOString()))}.</b> <button class="btn sm" onclick="applyRecovery('${inst.id}')">Restore it</button> <button class="btn gh sm" onclick="recoveryClear('${inst.id}');$('#recov')?.remove()">Keep the saved version</button></div>`; }
+function applyRecovery(id){ const r=recoveryLoad(id); const form=formFor(id); if(!r||!form) return; (form._cat.proof||[]).forEach(f=>{ const el=$('#f_'+f.field); const v=r.d[f.field]; if(!el||v==null) return; el.value=Array.isArray(v)?v.join('\n'):String(v); }); $('#recov')?.remove(); draftChanged(id); toast('Restored. Saving…'); }
+async function tickStep(id,i,on){ const q=await API.page('my_quests'); const inst=q.instances.find(x=>x.id===id); const ck=[...(inst.checklist||[])]; ck[i]=on; try{ const r=await API.rpc('save_quest_draft',{p_instance:id,p_draft:null,p_checklist:ck}); if(r.ok) inst.checklist=ck; else toast('Could not save the tick','bad'); }catch(e){ toast('Could not save the tick. Try again.','bad'); } }
 async function startQuest(key){ const b=$('#startbtn'); b.classList.add('pending'); b.disabled=true; try{ const r=await API.rpc('start_quest',{p_quest:key,p_inspiration_ref:S.params.ref||null}); if(!r.ok){ toast(r.why,'bad'); return; } API.bust(); await API.page('my_quests'); openQuest(key,r.instance_id); toast(r.why==='resumed'?'Resumed your entry':'Quest started'); render(); } catch(e){ toast(e.message,'bad'); } finally{ b.classList.remove('pending'); b.disabled=false; } }
 async function submitQuest(ev,id){ ev.preventDefault(); const q=await API.page('my_quests'); const inst=q.instances.find(i=>i.id===id); const c=q.catalog.find(x=>x.quest_key===inst.quest_key); const d=readDraft(c);
   $$('.ferr').forEach(e=>e.textContent=''); $$('.field').forEach(e=>e.classList.remove('err'));
   const errs=validateEvidence(c.proof,d); if(errs.length){ errs.forEach(e=>{ const f=(c.proof||[]).find(p=>e.startsWith(p.label)); if(f){ $('#e_'+f.field).textContent=e; $(`.field[data-field="${f.field}"]`).classList.add('err'); } else $('#everr').textContent=e; }); $('#everr').textContent=$('#everr').textContent||'Fix the fields above, then submit again.'; return false; }
-  const b=$('#subbtn'); b.classList.add('pending'); b.disabled=true;
-  try{ const s=await API.rpc('save_quest_draft',{p_instance:id,p_draft:d}); if(!s.ok){ $('#everr').textContent=s.why; return false; }
+  const b=$('#subbtn'); if(b.disabled) return false; b.classList.add('pending'); b.disabled=true;
+  try{ const st=dstate(id); clearTimeout(st.timer); const s=await saveRpc({p_instance:id,p_draft:d,p_rev:st.rev}); if(!s.ok&&s.why==='stale'){ st.rev=s.rev; const s2=await saveRpc({p_instance:id,p_draft:d,p_rev:st.rev}); if(!s2.ok){ $('#everr').textContent='Could not save your evidence before submitting: '+(s2.why||'')+'. Your draft is kept.'; return false; } st.rev=s2.rev; }
+    else if(!s.ok){ $('#everr').textContent='Could not save your evidence before submitting: '+(s.why||'')+'. Your draft is kept.'; return false; } else st.rev=s.rev??st.rev;
+    st.lastSaved=new Date().toISOString(); st.dirty=false; recoveryClear(id);
     inst._req=inst._req||uid(); const r=await API.rpc('submit_quest',{p_instance:id,p_request_id:inst._req});
     if(!r.ok){ (r.errors||[]).forEach(e=>{ const f=(c.proof||[]).find(p=>e.startsWith(p.label)); if(f){ $('#e_'+f.field).textContent=e; $(`.field[data-field="${f.field}"]`).classList.add('err'); } }); $('#everr').textContent=(r.errors||[]).find(e=>!(c.proof||[]).some(p=>e.startsWith(p.label)))||r.why||'Could not submit. Your draft is kept.'; return false; }
     API.bust(); toast(r.why==='already received'?'Already received. Nothing was sent twice.':'Submitted. An admin will verify it.','good'); await API.page('my_quests'); openQuest(c.quest_key,id); render(); }
   catch(e){ $('#everr').textContent='Could not reach the server: '+e.message+'. Your draft is kept, try again.'; }
   finally{ b.classList.remove('pending'); b.disabled=false; } return false; }
+
+/* ---- Refresh status (Oct 21): one entry, fresh from the server, cache bypassed. Never reloads the page or touches other drafts. ---- */
+const RS={};   // entry id -> {at, busy, err}
+function refreshRow(inst){ const r=RS[inst.id]||{}; const t=r.busy?'Checking…':r.err?`<span class="bad">Couldn’t check status</span> · <a href="#" onclick="refreshStatus('${inst.quest_key}','${inst.id}');return false">Retry</a>${r.at?` <small>· last checked ${esc(fmt.ago(r.at))}</small>`:''}`:r.at?(r.changed?'':`Still in review · checked ${Date.now()-new Date(r.at)<15000?'just now':esc(fmt.ago(r.at))}`):'';
+  return `<div class="refrow" id="refrow_${inst.id}"><button class="btn gh sm" ${r.busy?'disabled':''} onclick="refreshStatus('${inst.quest_key}','${inst.id}')">${ico('refresh',13)} ${r.busy?'Checking…':'Refresh status'}</button><span class="mini">${t}</span></div>`; }
+async function refreshStatus(key,id){ const r=RS[id]||(RS[id]={}); if(r.busy) return; r.busy=true; r.err=null; const row=$('#refrow_'+id); if(row){ const q0=S.cache['my_quests{}']; const i0=q0?.instances?.find(x=>x.id===id); if(i0) row.outerHTML=refreshRow(i0); }
+  try{ const fresh=await API.rpc('my_quest_instance',{p_instance:id}); r.busy=false; if(!fresh) throw new Error('not found');
+    r.at=fresh.checked_at||new Date().toISOString(); const q=S.cache['my_quests{}']; const i=q?.instances?.find(x=>x.id===id); const before=i?.state;
+    if(i){ Object.assign(i,fresh); } r.changed=before!==fresh.state;
+    if(r.changed){ API.bust(); try{ await API.page('my_quests'); await API.page('my_rewards'); }catch(e){} announce(fresh.state==='approved'?'Quest approved':'Quest returned for changes'); toast(fresh.state==='approved'?`Approved · +${fresh.xp||''} XP`:fresh.state==='needs_changes'?'Returned with feedback':'Status updated',fresh.state==='approved'?'good':''); openQuest(key,id); if(S.view==='quests'||S.view==='submissions') render(); }
+    else { const row2=$('#refrow_'+id); if(row2&&i) row2.outerHTML=refreshRow(i); announce('Still in review'); }
+  }catch(e){ r.busy=false; r.err=e.message||'failed'; const q=S.cache['my_quests{}']; const i=q?.instances?.find(x=>x.id===id); const row2=$('#refrow_'+id); if(row2&&i) row2.outerHTML=refreshRow(i); } }
 
 /* ---------------- Rewards
    Half-month rewards (Austin, Oct 9): XP, approved videos and the cash tiers reset at 12:00 am CT on the 1st and the 16th.
@@ -1790,18 +1863,20 @@ document.addEventListener('visibilitychange',()=>{ if(document.hidden){ HIDDEN_A
 window.addEventListener('pageshow',e=>{ if(e.persisted&&S.me){ API.bust(); if(!S.drawer) render(); } });
 
 /* ---- Quest progress: where this half stands and what the next tier needs */
-function halfCtx(q,r){ const tiers=r?.tiers||[]; const xp=r?.xp??q.xp_earned??0; const pending=q.xp_pending||r?.xp_pending||0; const cc=r?.concepts||0; const nt=nextTier(r||{}); return {xp,pending,cc,tiers,nt,sales:r?.sales_cents||0}; }
+function halfCtx(q,r){ const tiers=r?.tiers||[]; const xp=r?.xp??q.xp_earned??0; const pending=q.xp_pending||r?.xp_pending||0; const cc=r?.concepts||0; const nt=nextTier(r||{}); return {xp,pending,cc,tiers,nt,sales:r?(r.sales_cents??null):null}; }
 function questHero(q,r,insts){ const H=halfCtx(q,r); const top=H.tiers[H.tiers.length-1]; const max=Math.max(top?.xp_required||100,H.xp+H.pending,1);
   const pc=x=>clamp(x/max*100,0,100).toFixed(1);
   const cur=q.period_now; const pn=periodNow(q); const hs=pn?.starts_at; const mine=(insts||[]).filter(i=>i.period_key===cur||(hs&&new Date(i.created_at)>=new Date(hs)));
   const nDone=mine.filter(i=>i.state==='approved').length, nRev=mine.filter(i=>i.state==='submitted').length, nFix=(insts||[]).filter(i=>i.state==='needs_changes').length, nOpen=(insts||[]).filter(i=>['in_progress','needs_changes'].includes(i.state)).length;
   const marks=H.tiers.map(t=>{ const hit=['eligible','claim_submitted','approved_for_payment','paid','included'].includes(t.status); return `<div class="qh-mk ${hit?'on':''}" style="left:${pc(t.xp_required)}%"><i></i><span><b>${fmt.usd(t.cash_total_cents,{cents:true})}</b>${t.xp_required} XP</span></div>`; }).join('');
   let next='';
-  if(H.nt){ const nx=Math.max(0,H.nt.xp_required-H.xp), nv=Math.max(0,H.nt.concepts_required-H.cc), ns=H.nt.sales_required_cents>0?Math.max(0,H.nt.sales_required_cents-H.sales):0;
+  if(H.nt){ const nx=Math.max(0,H.nt.xp_required-H.xp), nv=Math.max(0,H.nt.concepts_required-H.cc), ns=H.nt.sales_required_cents>0?Math.max(0,H.nt.sales_required_cents-(H.sales||0)):0;
     const more=[nx?`<b>${nx}</b> more approved XP`:'',nv?`<b>${nv}</b> more approved video${nv===1?'':'s'}`:'',ns?`<b>${usd0(ns)}</b> more in Trybe sales`:''].filter(Boolean);
     next=`<div class="qh-next"><div class="qh-nr">Next reward: <b>${esc(H.nt.name)} · ${fmt.usd(H.nt.cash_total_cents,{cents:true})}</b></div><div class="qh-need">${more.length?more.join(' · ')+' needed.':'Unlocks once your numbers update.'}${H.pending&&nx?`<span class="qh-pend"> ${H.pending} XP awaiting approval is not counted yet.</span>`:''}</div></div>`; }
   else next=`<div class="qh-next good">🏆 Every tier reached for ${esc(halfLabel(cur))}. Claim it on Rewards.</div>`;
-  const vidReq=H.nt?(H.cc>=H.nt.concepts_required?`<div class="qh-vid done">${ico('check',14)} Video requirement complete · ${H.nt.concepts_required}/${H.nt.concepts_required}</div>`:`<div class="qh-vid">${pbar(Math.min(H.cc,H.nt.concepts_required),H.nt.concepts_required,{label:`Approved videos for ${esc(H.nt.name)}`,cls:'green'})}</div>`):'';
+  const reqRow=(ok,label,bar)=>ok?`<div class="qh-vid done">${ico('check',14)} ${label}</div>`:`<div class="qh-vid">${bar}</div>`;
+  const vidReq=H.nt?reqRow(H.cc>=H.nt.concepts_required,`Video requirement complete · ${H.nt.concepts_required}/${H.nt.concepts_required}`,pbar(Math.min(H.cc,H.nt.concepts_required),H.nt.concepts_required,{label:`Approved videos for ${esc(H.nt.name)}`,cls:'green'}))
+    +(H.nt.sales_required_cents>0?(H.sales==null?`<div class="qh-vid"><span class="mini">Sales requirement: waiting for updated numbers.</span></div>`:reqRow(H.sales>=H.nt.sales_required_cents,`Sales requirement complete · ${usd0(H.nt.sales_required_cents)}`,pbar(Math.min(H.sales,H.nt.sales_required_cents)/100,H.nt.sales_required_cents/100,{label:`Trybe sales for ${esc(H.nt.name)}`,cls:'gold',fmtv:x=>'$'+Math.round(x).toLocaleString()}))):''):'';
   const dl=pn?daysLeft(pn.ends_at):null;
   const prest=q.prestige_name?`<span class="qh-prest">${q.prestige_emblem||'🎯'} ${esc(q.prestige_name)}</span>`:'';
   const chips=`<div class="qh-chips"><span><b>${nDone}</b> quest${nDone===1?'':'s'} approved</span><span><b>${nRev}</b> quest${nRev===1?'':'s'} in review</span><span><b>${nOpen}</b> unfinished quest${nOpen===1?'':'s'}</span></div>`;
@@ -1810,8 +1885,24 @@ function questHero(q,r,insts){ const H=halfCtx(q,r); const top=H.tiers[H.tiers.l
       <div class="qh-xp"><span class="big">${H.xp}<small> XP earned</small></span>${H.pending?`<span class="qh-pending">${H.pending} XP awaiting approval</span>`:''}</div>
       <div class="qh-bar" role="img" aria-label="${H.xp} XP earned, ${H.pending} awaiting approval, out of ${max}"><i class="e" style="width:${pc(H.xp)}%"></i><i class="p" style="left:${pc(H.xp)}%;width:${(pc(H.xp+H.pending)-pc(H.xp)).toFixed(1)}%"></i>${marks}</div>
       ${next}${vidReq}${chips}</div>${unfinished}`; }
-/* what one quest adds toward the next tier */
-function questImpact(c,st,H){ if(!H||!H.nt||c.locked||!['available','in_progress','needs_changes'].includes(st.state)) return '';
+/* ---- Reward progress wording (Oct 21). One calculation everywhere: approved XP only; pending XP is always labeled as conditional.
+   Evaluates every requirement the tier actually has (XP, approved videos, Trybe sales). Omits zero deficits. */
+function qTierNeeds(H){ const t=H.nt; if(!t) return null; const unavail=H.xp==null||H.cc==null||(t.sales_required_cents>0&&H.sales==null);
+  const xp=Math.max(0,(t.xp_required||0)-(H.xp||0)), vids=Math.max(0,(t.concepts_required||0)-(H.cc||0)), sales=t.sales_required_cents>0?Math.max(0,t.sales_required_cents-(H.sales||0)):0;
+  const rest=[vids?`${vids} approved video${vids===1?'':'s'}`:'',sales?`${usd0(sales)} in Trybe sales`:''].filter(Boolean);
+  return {t,unavail,xp,vids,sales,rest}; }
+function rewardProgress(c,st,H,{compact=true}={}){ if(!H||!H.nt||c.locked) return ''; const n=qTierNeeds(H); const s_=st.state; if(!['available','in_progress','needs_changes','submitted'].includes(s_)) return '';
+  const lbl=`<div class="rp-l">Progress toward ${esc(n.t.name)}</div>`; let main='', sub='';
+  if(n.unavail){ main='Waiting for updated numbers.'; }
+  else if(n.xp<=0){ main='XP requirement complete.'; sub=n.rest.length?`Still needed: ${n.rest.join(' + ')}.`:'All requirements met. <a href="#/rewards">View reward</a>'; }
+  else { const after=Math.max(0,n.xp-c.xp_value); const cond=s_==='submitted'?'once approved':'once approved';
+    if(after<=0){ main=`Completes your XP requirement ${cond}.`; sub=n.rest.length?`Still needed: ${n.rest.join(' + ')}.`:'No other requirement for this tier.'; }
+    else { main=`Adds ${c.xp_value} XP toward ${esc(n.t.name)}.`; sub=`${after} XP still needed after approval${n.rest.length?` · ${n.rest.join(' + ')}`:''}.`; } }
+  const pend=H.pending&&n.xp>0?`<div class="rp-p">${H.pending} additional XP awaiting approval.</div>`:'';
+  return `<div class="rp ${n.xp<=0&&!n.rest.length&&!n.unavail?'ok':''}">${lbl}<div class="rp-m">${main}</div>${sub?`<div class="rp-s">${sub}</div>`:''}${pend}</div>`; }
+/* what one quest adds toward the next tier (kept for the fixture and older callers; renders the shared block) */
+function questImpact(c,st,H){ return rewardProgress(c,st,H); }
+function questImpact_old(c,st,H){ if(!H||!H.nt||c.locked||!['available','in_progress','needs_changes'].includes(st.state)) return '';
   const need=H.nt.xp_required-H.xp-H.pending; if(need<=0) return '';
   const vids=Math.max(0,H.nt.concepts_required-H.cc);
   if(c.xp_value>=need) return `<div class="qimpact hit">🔓 Covers the last ${need} XP for ${esc(H.nt.name)} · ${fmt.usd(H.nt.cash_total_cents,{cents:true})}${vids?` (plus ${vids} approved video${vids===1?'':'s'})`:''}</div>`;
@@ -2030,7 +2121,7 @@ function videoCard(v){ const [k,label]=SSTATE[v.status]||['n',v.status]; const o
    <div class="chips">${v.media_type==='IMAGE'?'<span class="chip">Image</span>':''}<span class="chip ${oc[0]==='g'?'o':''}">${v.media_type==='IMAGE'?'Not a contest entry':oc[1]}</span>${(v.quests||[]).map(qk=>`<span class="chip">${esc(qk.replace('oct_',''))}</span>`).join('')}${v.revisions?.length?`<span class="chip">${v.revisions.length} revision${v.revisions.length>1?'s':''}</span>`:''}</div>
    ${hasAds?`<div class="kv"><span>Spend <b>${money(v.spend)}</b></span><span>Sales <b>${money(v.sales)}</b></span><span>ROAS <b style="color:${BANDC[b]}">${roasX(vr)}</b></span><span>Hook <b>${v.hook_rate==null?'—':Math.round(v.hook_rate)+'%'}</b></span></div>`:`<div class="mini" style="margin-top:8px">${v.status==='approved'?'No ad spend on this video yet':'Ad numbers show once it is approved and running'}</div>`}</div></button>`; }
 function questEntries(entries){ if(!entries.length) return emptyState('No quest entries yet','Start a quest and your drafts, submissions and feedback show here.',`<button class="btn" onclick="go('quests')">Open quests</button>`,'review');
-  return `<div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Quest</th><th>Period</th><th>Status</th><th>Updated</th><th class="num">XP</th><th></th></tr></thead><tbody>${entries.map(({i,c})=>`<tr><td><b>${esc(c?.title||i.quest_key)}</b>${i.review_note?`<div class="mini">${esc(i.review_note.slice(0,80))}${i.review_note.length>80?'…':''}</div>`:''}</td><td class="mono">${PERIOD_LABEL(i.period_key)}</td><td>${badge(QSTATE[i.state][0],QSTATE[i.state][1])}</td><td class="mono">${fmt.date(i.updated_at)}</td><td class="num">${i.xp!=null?'+'+i.xp:(i.state==='submitted'?`<span class="muted">+${c?.xp_value} pending</span>`:'')}</td><td><button class="btn gh sm" onclick="openQuest('${i.quest_key}','${i.id}')">${i.state==='needs_changes'?'Fix':i.state==='in_progress'?'Resume':'Open'}</button></td></tr>`).join('')}</tbody></table></div></div>
+  return `<div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Quest</th><th>Period</th><th>Status</th><th>Updated</th><th class="num">XP</th><th></th></tr></thead><tbody>${entries.map(({i,c})=>`<tr><td><b>${esc(c?.title||i.quest_key)}</b>${i.review_note?`<div class="mini">${esc(i.review_note.slice(0,80))}${i.review_note.length>80?'…':''}</div>`:''}</td><td class="mono">${PERIOD_LABEL(i.period_key)}</td><td>${badge(QSTATE[i.state][0],QSTATE[i.state][1])}</td><td class="mono">${fmt.date(i.updated_at)}</td><td class="num">${i.xp!=null?'+'+i.xp:(i.state==='submitted'?`<span class="muted">+${c?.xp_value} awaiting approval</span>`:'')}</td><td><div class="row" style="gap:6px;flex-wrap:wrap"><button class="btn gh sm" onclick="openQuest('${i.quest_key}','${i.id}')">${i.state==='needs_changes'?'Continue revision':i.state==='in_progress'?'Resume':'Open'}</button>${i.state==='submitted'?refreshRow(i):''}</div></td></tr>`).join('')}</tbody></table></div></div>
   <div class="mini" style="margin-top:8px">A Skool link attached to a quest is not a Trybe submission. Videos for the contest go through Trybe.</div>`; }
 
 /* one video, everything about it: preview, October and all-time ad numbers, review record, contest treatment */
