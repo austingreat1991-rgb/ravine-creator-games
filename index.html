@@ -1060,6 +1060,7 @@ details.qmore{margin-top:10px}details.qmore>summary{cursor:pointer;font-size:13p
 @media (max-width:640px){ .qgrid{grid-template-columns:1fr} .pcmp-grid{grid-template-columns:1fr} }
 .rp-c{margin-top:8px;font-size:12.5px;color:var(--tx2);line-height:1.45}.rp-c .rp-s{color:var(--tx3)}.rp-c.ok span:first-child{color:var(--gr)}
 .picker>.row.between{flex-wrap:nowrap;align-items:flex-start}.picker>.row.between .licon{flex:none}
+.qres{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 12px}
 </style>
 </head>
 <body>
@@ -1079,7 +1080,7 @@ details.qmore{margin-top:10px}details.qmore>summary{cursor:pointer;font-size:13p
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261024-070132";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261024-161056";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1159,7 +1160,7 @@ function art(key,cat='Film',extra='',{wide=false}={}){ const [a,b]=PAL[cat]||PAL
   if(wide) return `<svg viewBox="0 0 240 100" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(key)} illustration" ${extra}><rect width="240" height="100" fill="${a}"/><g transform="translate(70 0)">${f(a,b)}</g><g stroke="${b}" stroke-opacity=".18" stroke-width="2"><path d="M14 20h30M14 32h18M196 68h30M208 80h18"/></g></svg>`;
   return `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(key)} illustration" ${extra}>${f(a,b)}</svg>`; }
 /* brand photos (Ravine b-roll stills, served from ./ph) */
-const QPHOTO={oct_review3:'qa-review',oct_recreate:'qa-recreate',oct_unaware:'qa-unaware',oct_hooks3:'qa-hooks',oct_improve:'qa-improve',oct_call:'qa-call',oct_host:'qa-host',oct_coach:'qa-coach',oct_objection:'qa-objection',oct_concepts5:'qa-concepts',oct_feedback:'qa-feedback',oct_streak7:'qa-streak',oct_leader:'qa-leader',oct_boss_refer:'qa-host',oct_boss_format:'qa-recreate',oct_boss_1k:'qa-concepts',oct_boss_hook:'qa-hooks',oct_boss_scale:'qa-leader',oct_boss_top5:'qa-leader',oct_sprint3:'qa-concepts',oct_field:'qa-unaware',oct_broll:'qa-review',oct_gift:'qa-objection',oct_comment:'qa-feedback',oct_win_post:'qa-streak',oct_boss_25in5:'qa-streak',oct_boss_speaker:'qa-host',oct_boss_5k:'qa-concepts',oct_boss_mentor:'qa-coach',oct_boss_10k:'qa-leader',oct_boss_angle:'qa-recreate'};
+const QPHOTO={oct_weakspot:'qa-improve',oct_newangle3:'qa-concepts',oct_replay:'qa-call',oct_ai_kb9:'qa-recreate',oct_boss_ai1k:'qa-leader',oct_review3:'qa-review',oct_recreate:'qa-recreate',oct_unaware:'qa-unaware',oct_hooks3:'qa-hooks',oct_improve:'qa-improve',oct_call:'qa-call',oct_host:'qa-host',oct_coach:'qa-coach',oct_objection:'qa-objection',oct_concepts5:'qa-concepts',oct_feedback:'qa-feedback',oct_streak7:'qa-streak',oct_leader:'qa-leader',oct_boss_refer:'qa-host',oct_boss_format:'qa-recreate',oct_boss_1k:'qa-concepts',oct_boss_hook:'qa-hooks',oct_boss_scale:'qa-leader',oct_boss_top5:'qa-leader',oct_sprint3:'qa-concepts',oct_field:'qa-unaware',oct_broll:'qa-review',oct_gift:'qa-objection',oct_comment:'qa-feedback',oct_win_post:'qa-streak',oct_boss_25in5:'qa-streak',oct_boss_speaker:'qa-host',oct_boss_5k:'qa-concepts',oct_boss_mentor:'qa-coach',oct_boss_10k:'qa-leader',oct_boss_angle:'qa-recreate'};
 const questPhoto=c=>QPHOTO[c.quest_key]?`./ph/${QPHOTO[c.quest_key]}.jpg`:null;
 const tierPhoto=t=>{ const k=String(t.id||t.name||'').split(':').pop().toLowerCase(); return ['builder','operator','elite'].includes(k)?`./ph/tier-${k}.jpg`:null; };
 /* wide frame for a portrait photo: blurred fill behind, sharp photo in front (stays crisp at any width) */
@@ -1635,7 +1636,8 @@ function syncLine(src,vids){ const at=src?.last_run; const pend=(vids||[]).filte
 function activityText(a){ const k={submission:{imported:'Video added to your records',approved:'Video approved',rejected:'Video rejected',changes_requested:'Changes requested on a video',funnel_set:'Video stage classified',revision_linked:'Revision linked to its original',corrected:'Video record corrected'},quest:{started:'Started a quest',submitted:'Submitted quest evidence',changes_requested:'Quest returned with notes',approved:'Quest approved',rejected:'Quest not approved',reversed:'Quest award reversed'},claim:{requested:'Reward claim submitted',approved_for_payment:'Reward claim approved for payment',paid:'Reward recorded as paid',rejected:'Reward claim rejected',review_issue:'Review issue opened'}}; return (k[a.kind]||{})[a.event]||`${a.kind}: ${a.event}`; }
 
 /* ---------------- Quests */
-const QSKILL={oct_review3:['Storytelling',1,'1-2 hrs'],oct_recreate:['Research',2,'2-3 hrs'],oct_unaware:['Hooks',2,'2-3 hrs'],oct_hooks3:['Hooks',2,'1-2 hrs'],oct_improve:['Editing',2,'1-2 hrs'],
+const QSKILL={oct_weakspot:['Editing',2,'1-2 hrs'],oct_newangle3:['Storytelling',3,'1 week'],oct_replay:['Research',1,'45 min'],oct_ai_kb9:['Editing',2,'2-3 hrs'],oct_boss_ai1k:['Conversion',3,'2 weeks'],
+  oct_review3:['Storytelling',1,'1-2 hrs'],oct_recreate:['Research',2,'2-3 hrs'],oct_unaware:['Hooks',2,'2-3 hrs'],oct_hooks3:['Hooks',2,'1-2 hrs'],oct_improve:['Editing',2,'1-2 hrs'],
   oct_objection:['Conversion',2,'1-2 hrs'],oct_concepts5:['Storytelling',3,'1 week'],oct_sprint3:['Storytelling',2,'3 days'],oct_field:['Storytelling',2,'2-3 hrs'],oct_broll:['Editing',1,'30 min'],oct_gift:['Conversion',2,'1-2 hrs'],
   oct_comment:['Research',1,'45 min'],oct_win_post:['Research',1,'20 min'],oct_call:['Research',1,'1 hr'],oct_host:['Research',2,'1 hr'],oct_coach:['Editing',1,'30 min'],oct_feedback:['Research',1,'10 min'],oct_streak7:['Research',1,'7 days'],oct_leader:['Research',2,'7 days'],
   oct_boss_hook:['Hooks',3,'2-3 hrs'],oct_boss_format:['Research',3,'3-4 hrs'],oct_boss_angle:['Storytelling',3,'1 week'],oct_boss_1k:['Conversion',3,'1 week'],oct_boss_5k:['Conversion',3,'2 weeks'],oct_boss_10k:['Conversion',3,'2 weeks'],
@@ -1646,7 +1648,16 @@ function qmeta(c){ const m=QSKILL[c.quest_key]||QSKILL_CAT[c.category]||['Storyt
 function qmetaChips(c){ const m=qmeta(c); return `<span class="qm"><span class="qm-skill s-${m.skill.toLowerCase()}">${m.skill}</span><span>${DIFF[m.diff]}</span><span>${m.time}</span><span class="xp">+${c.xp_value} XP</span></span>`; }
 const qskill=c=>qmeta(c).skill;
 /* quests that take a reference video from the Angle Library */
-const REF_QUESTS=['oct_recreate','oct_boss_format','oct_boss_angle','oct_hooks3','oct_unaware'];
+const REF_QUESTS=['oct_recreate','oct_boss_format','oct_boss_angle','oct_hooks3','oct_unaware','oct_ai_kb9'];
+/* Oct 24: learning links shown in a quest's "Watch an example" step. KB9_URL points at the Skool classroom until Austin sends the direct Knowledge Bomb #9 link. */
+const KB9_URL='https://www.skool.com/ravine/classroom', KB9_DIRECT=false;
+const QRES={
+  oct_ai_kb9:[{icon:'📺',label:KB9_DIRECT?"Watch Chris's Knowledge Bomb #9":"Chris's Knowledge Bomb #9 (Skool classroom)",url:KB9_URL,ext:true},{icon:'🤖',label:'Browse AI videos in the Angle Library',hash:'#/library?f=AI'}],
+  oct_boss_ai1k:[{icon:'📺',label:KB9_DIRECT?"Watch Chris's Knowledge Bomb #9":"Chris's Knowledge Bomb #9 (Skool classroom)",url:KB9_URL,ext:true},{icon:'🤖',label:'Browse AI videos in the Angle Library',hash:'#/library?f=AI'}],
+  oct_newangle3:[{icon:'🧭',label:'Pick your 3 angles in the Angle Library',hash:'#/library'}],
+  oct_weakspot:[{icon:'📊',label:'Open My submissions to find your stat sheets',hash:'#/submissions'}],
+};
+function qresHtml(key){ const L=QRES[key]; if(!L) return ''; return `<div class="qres">${L.map(r=>r.ext?`<a class="btn gh sm" ${openExt(r.url)}>${r.icon} ${esc(r.label)} ${ico('ext',12)}</a>`:`<a class="btn gh sm" href="${r.hash}" onclick="closeDrawer(true)">${r.icon} ${esc(r.label)}</a>`).join('')}</div>`; }
 function recReason(c,cats,states){ const done=[...new Set(cats.filter(x=>['approved','approved_period','submitted'].includes(states[x.quest_key].state)).map(qskill))]; const sk=qskill(c);
   if(!done.length) return `A good first quest. ${sk} first, the rest follows.`;
   if(done.includes(sk)) return `You are on a roll with ${sk.toLowerCase()}. Keep it going.`;
@@ -1739,12 +1750,12 @@ async function openQuest(key,instId){
    <section id="qs1" class="qstep">${stepN(1,'The assignment','What to make and what gets it approved')}<p class="qdeliver">${esc(c.outcome)}</p>
      <div class="qcrit"><b>Approved when</b><ul>${(c.criteria||[]).map(e=>`<li>${esc(e)}</li>`).join('')}</ul></div>
      <details class="qmore"><summary>Why it helps, award and reuse rule</summary><p>${esc(c.why)}</p><div class="mini" style="margin-top:8px">${c.xp_value} XP per completion · ${c.period_kind==='reward_period'?`up to ${st.maxThis} per half, resets the 1st and 16th (${st.done}/${st.maxThis} this half, ${st.total}/${st.maxTotal} this month)`:c.period_kind==='day'?`up to ${c.per_period_limit} per Central day, ${c.monthly_xp_cap} XP per half (${(c.xp_this_period??c.xp_this_month)||0} earned this half)`:`up to ${st.maxTotal} this campaign (${st.total} done)`}${c.scarce?' · scarce bonus award':''}</div>${c.reuse_rule?`<div class="note" style="margin-top:8px"><b>Reuse rule.</b> ${esc(c.reuse_rule)}</div>`:''}</details>${questImpact(c,st,rw?halfCtx(q,rw):null)}</section>
-   <section id="qs2" class="qstep">${stepN(2,'Watch an example','Steal the structure, never the video')}
+   <section id="qs2" class="qstep">${stepN(2,'Watch an example','Steal the structure, never the video')}${qresHtml(key)}
      ${ref?`<div class="refcard mini-ref"><div class="ref-th">${thumb(ref.th,'tile','neutral')}</div><div style="min-width:0"><div class="lbl">Your reference</div><div class="ref-hook">“${esc(ref.hook)}”</div><div class="mini">${esc(ref.c)} · attached when you start</div></div></div>`:''}
      ${inst?.inspiration_ref?`<div class="note" style="margin-bottom:8px">Started from <b>${esc(inst.inspiration_ref)}</b>. <a href="#/library?id=${encodeURIComponent(inst.inspiration_ref)}">Open it in the Angle Library</a></div>`:''}
      ${(c.examples||[]).length?`<ul>${c.examples.map(e=>`<li>${esc(e)}</li>`).join('')}</ul>`:''}
-     ${!(c.examples||[]).length&&!ref&&!inst?.inspiration_ref?`<p class="mini">No set example for this one. <a href="#/library">Browse the Angle Library</a> for a video in the same spirit, then come back.</p>`:''}
-     ${REF_QUESTS.includes(key)&&!inst?`<div style="margin-top:8px"><a class="btn gh sm" href="#/library">${ico('grid',13)} Pick a reference in the Angle Library</a></div>`:''}</section>
+     ${!(c.examples||[]).length&&!ref&&!inst?.inspiration_ref&&!QRES[key]?`<p class="mini">No set example for this one. <a href="#/library">Browse the Angle Library</a> for a video in the same spirit, then come back.</p>`:''}
+     ${REF_QUESTS.includes(key)&&!inst&&!QRES[key]?`<div style="margin-top:8px"><a class="btn gh sm" href="#/library">${ico('grid',13)} Pick a reference in the Angle Library</a></div>`:''}</section>
    <section id="qs3" class="qstep">${stepN(3,'Create your version','Tick a step when you have done it')}
      ${inst&&editable?`<div id="chk">${(c.steps||[]).map((s_,i)=>`<label class="chk ${inst.checklist?.[i]?'on':''}"><input type="checkbox" ${inst.checklist?.[i]?'checked':''} onchange="tickStep('${inst.id}',${i},this.checked)"><span>${esc(s_)}</span></label>`).join('')}</div><div class="mini" style="margin-top:6px">Ticks are for you. XP comes only after Austin verifies the entry.</div>`:`<ol class="ol">${(c.steps||[]).map(s_=>`<li>${esc(s_)}</li>`).join('')}</ol>`}</section>
    <section id="qs4" class="qstep">${stepN(4,'Attach evidence',inst?'':'Start the quest to open the form')}${inst?evidenceForm(c,inst):`<p class="mini">You will attach: ${(c.proof||[]).map(f=>esc(f.label)).join(' · ')||'nothing extra'}.</p>`}</section>
@@ -2504,7 +2515,7 @@ function libList(){ return libSpread(libSort(libFilter())); }
 
 /* ---------- page ---------- */
 route('library',async(p)=>{ await loadLib(); const D=LIB(); const M=D.meta||{};
-  if(p.a&&(p.a==='All'||angleOf(p.a))) S.ui.la=p.a; if(p.view&&VIEWS.some(v=>v[0]===p.view)) S.ui.lview=p.view;
+  if(p.a&&(p.a==='All'||angleOf(p.a))) S.ui.la=p.a; if(p.f&&(p.f==='All'||FORMATS.includes(p.f))) S.ui.lf=p.f;   // Oct 24: quests link straight to a format (AI) if(p.view&&VIEWS.some(v=>v[0]===p.view)) S.ui.lview=p.view;
   if(p.id){ const v=D.videos.find(x=>x.id===p.id); if(v) setTimeout(()=>openLibVideo(v.id),80); }
   S.ui.lpage=1; saveUI(); const st=libLS(); const saved=libSaved();
   setTimeout(()=>{ libRail(); libToolbar(); libGrid(); libRestoreScroll(); },0);
