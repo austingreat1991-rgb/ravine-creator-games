@@ -1071,6 +1071,81 @@ details.qmore{margin-top:10px}details.qmore>summary{cursor:pointer;font-size:13p
 @media (max-width:640px){ .qtile{flex:0 0 132px;height:80px} .qacad{flex-direction:column;align-items:flex-start} }
 .qtile .ltile-sh{background:linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,.92) 100%)}
 .qtile .ltile-tx b{font-size:13.5px;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+/* Your Elite spot (Oct 24) */
+.es{margin:14px 0}
+.es-hero{display:flex;flex-direction:column;gap:4px;margin:10px 0 12px}
+.es-big{font-family:var(--fh,inherit);font-size:44px;line-height:1;font-weight:800;color:var(--tx)}
+.es-big small{font-size:18px;color:var(--tx3);font-weight:600}
+.es-big.bad{color:var(--bad,#FF5A5F)}
+.es-sub{color:var(--tx2);font-size:14px}
+.es-rule{padding:10px 12px;border-radius:10px;background:var(--sf2);border:1px solid var(--ln);font-size:13px;color:var(--tx2)}
+.es-rule b{color:var(--tx)}
+.es-in .es-rule,.es-line .es-rule{border-color:rgba(255,90,95,.45);background:rgba(255,90,95,.08)}
+.es-close .es-rule{border-color:rgba(232,179,65,.45);background:rgba(232,179,65,.08)}
+.es-in{border-color:rgba(255,90,95,.5)}.es-line{border-color:rgba(255,90,95,.5)}.es-close{border-color:rgba(232,179,65,.5)}
+.es-list{margin-top:12px}
+.es-row{display:grid;grid-template-columns:20px 1fr auto auto;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--ln);font-size:14px}
+.es-row .es-ic{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;color:var(--tx3);background:var(--sf3);font-size:12px}
+.es-row.ok .es-ic{background:var(--gr);color:#0B0D11}
+.es-l{color:var(--tx2)}.es-v{color:var(--tx);text-align:right}
+.es-a{font-size:12.5px;font-weight:600;color:var(--o2);white-space:nowrap}
+.es-bar{grid-column:2/-1;height:6px;border-radius:99px;background:var(--sf3);overflow:hidden}
+.es-bar i{display:block;height:100%;background:var(--o)}
+.es-row.ok .es-bar i{background:var(--gr)}
+@media (max-width:640px){ .es-big{font-size:38px} .es-row{grid-template-columns:20px 1fr auto} .es-a{grid-column:2/-1} }
+/* Weekly pace (Oct 24) */
+.pace{margin:14px 0}
+.pace-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:8px;flex-wrap:wrap}
+.pace-n{font-size:15px;color:var(--tx2)}.pace-n b{font-size:34px;color:var(--tx);font-weight:800;margin-right:4px}
+.pace-days{display:flex;gap:6px}
+.pd{display:flex;flex-direction:column;align-items:center;gap:3px}
+.pd i{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-style:normal;font-weight:700;font-size:13px;background:var(--sf3);color:var(--tx3);border:1px solid var(--ln)}
+.pd.on i{background:var(--o);color:#0B0D11;border-color:var(--o)}
+.pd.today i{box-shadow:0 0 0 2px var(--tx2)}
+.pd.future i{opacity:.45}
+.pd small{font-size:10.5px;color:var(--tx3)}
+.pace-bar{height:6px;border-radius:99px;background:var(--sf3);overflow:hidden;margin-top:10px}.pace-bar i{display:block;height:100%;background:var(--o)}
+.pace.done .pace-bar i{background:var(--gr)}.pace.done{border-color:rgba(61,220,151,.4)}
+@media (max-width:640px){ .pd i{width:28px;height:28px} .pace-n b{font-size:30px} }
+/* Featured quest of the week (Oct 24) */
+.fq{display:grid;grid-template-columns:minmax(0,38%) 1fr;gap:0;padding:0;overflow:hidden;margin:16px 0;border-color:rgba(255,110,32,.55);background:linear-gradient(135deg,rgba(255,110,32,.10),rgba(255,110,32,0) 55%),var(--sf)}
+.fq .art{position:relative;min-height:170px}
+.fq .art img,.fq .art svg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fq-x{position:absolute;top:10px;left:10px;padding:5px 10px;border-radius:99px;background:var(--o);color:#0B0D11;font-weight:800;font-size:13px}
+.fq-b{padding:16px 18px}.fq-b h2{margin:6px 0 4px}.fq-b p{margin:0;color:var(--tx2)}
+.fq-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;flex-wrap:wrap}
+.fq-xp{font-size:14px;color:var(--tx2)}.fq-xp s{color:var(--tx3)}.fq-xp b{color:var(--gold);font-size:16px}
+.qbadge2{position:absolute;top:10px;right:10px;z-index:1;padding:4px 9px;border-radius:99px;background:var(--o);color:#0B0D11;font-weight:800;font-size:11.5px}
+@media (max-width:640px){ .fq{grid-template-columns:1fr} .fq .art{min-height:140px} }
+/* Milestone badges (Oct 24) */
+.bdg{margin:14px 0}
+.bdg-row{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:10px 2px 4px}
+.bdg-row::-webkit-scrollbar{display:none}
+.bd{all:unset;cursor:pointer;flex:0 0 96px;display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center}
+.bd:focus-visible{outline:2px solid var(--o);outline-offset:3px;border-radius:12px}
+.bd-m{position:relative;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-size:28px;background:var(--sf3);border:2px solid var(--ln2);filter:grayscale(1);opacity:.45}
+.bd.got .bd-m{filter:none;opacity:1;background:radial-gradient(circle at 30% 25%,rgba(232,179,65,.35),rgba(232,179,65,.05) 70%),var(--sf2);border-color:#E8B341;box-shadow:0 0 0 3px rgba(232,179,65,.15)}
+.bd-t{font-size:12px;font-weight:700;color:var(--tx);line-height:1.2}
+.bd small{font-size:11px;color:var(--tx3)}
+.bd:not(.got) .bd-t{color:var(--tx3)}
+.bd-new{position:absolute;top:-4px;right:-10px;font-style:normal;font-size:10px;font-weight:800;padding:2px 6px;border-radius:99px;background:var(--o);color:#0B0D11}
+.bdg-d{text-align:center;padding-top:10px}.bdg-d .row{justify-content:center}
+.bd-m.big{width:110px;height:110px;font-size:52px;margin:0 auto 12px}
+.bdg-d.got .bd-m.big{filter:none;opacity:1;background:radial-gradient(circle at 30% 25%,rgba(232,179,65,.35),rgba(232,179,65,.05) 70%),var(--sf2);border-color:#E8B341;box-shadow:0 0 0 4px rgba(232,179,65,.15)}
+/* Faster review queue (Oct 24) */
+.aq-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:6px 0 12px}
+.aq-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.aq-tabs button{all:unset;cursor:pointer;padding:6px 12px;border-radius:99px;border:1px solid var(--ln2);font-size:13px;color:var(--tx2);display:inline-flex;gap:6px;align-items:center}
+.aq-tabs button i{font-style:normal;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
+.aq-tabs button.on{background:var(--o);border-color:var(--o);color:#0B0D11}.aq-tabs button.on i{color:#0B0D11}
+.aq-keys kbd{font-family:var(--mono);font-size:11px;padding:1px 6px;border-radius:5px;border:1px solid var(--ln2);background:var(--sf2);color:var(--tx)}
+.card.aq{margin-bottom:10px;outline:none;transition:opacity .4s,transform .4s}
+.card.aq:focus{box-shadow:0 0 0 2px var(--o)}
+.card.aq-done{opacity:.45}
+.aq-ok{display:inline-flex;gap:6px;align-items:center;font-weight:700;color:var(--gr)}.aq-ok.muted{color:var(--tx2)}
+.aq-sv{display:inline-flex;align-items:center;gap:2px;padding:0}.aq-sv button{all:unset;cursor:pointer;padding:5px 8px}.aq-sv .aq-x{padding:5px 7px;color:var(--tx3)}
+@media (max-width:640px){ .aq-keys{display:none} }
+@media (prefers-reduced-motion:reduce){ .card.aq{transition:none} }
 </style>
 </head>
 <body>
@@ -1090,7 +1165,7 @@ details.qmore{margin-top:10px}details.qmore>summary{cursor:pointer;font-size:13p
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261024-163440";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261024-171328";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1226,6 +1301,12 @@ const FX={
       case 'my_pace': return d(FX.paceOf(m));
       case 'my_leaderboard': return d(FX.leaderboardOf(m));
       case 'my_numbers': return d(FX.numbersOf(m));
+      case 'my_featured_quest': { const rot=['oct_newangle3','oct_field','oct_gift','oct_buddy','oct_comment','oct_spanish','oct_objection','oct_unaware','oct_ai_kb9','oct_recreate','oct_weakspot','oct_sprint3'];
+        const have=new Set((m.quests?.catalog||[]).map(c=>c.quest_key)); const L=rot.filter(k=>have.has(k)); if(!L.length) return null;
+        const w=ctWeek(); return {quest_key:L[0],multiplier:2,week_start:w[0],ends_at:new Date(new Date(w[6]+'T12:00:00Z').getTime()+17*3600e3).toISOString(),next:{quest_key:L[1]||L[0],week_start:null,multiplier:2}}; }
+      case 'my_elite_spot': { const n=FX.numbersOf(m); const sold=(n.month_sales||0)>0;   // fixture: synthetic roster of 94, never real creators
+        return {on_roster:true,roster:94,move_down:20,place:sold?31:40,tied:sold?1:55,gmv:sold?n.month_sales:0,videos:n.month_submissions||0,videos_target:20,
+          calls:sold?1:0,calls_pending:0,coach:0,coach_pending:0,ends_at:'2026-11-01T05:00:00Z',data_through:new Date(Date.now()-2*3600e3).toISOString()}; }
       case 'my_team_goal': return d(FX.teamGoalOf(m));
       case 'admin_team_goal': return d(FX.teamGoalAdmin());
       case 'my_ads': return d(FX.adsOf(m,a.p_range||'2026-10'));
@@ -1526,6 +1607,88 @@ async function openRewardRules(){ let tiers=[]; try{ tiers=rookieTiers(await API
 /* Sales numbers card: October (all-time minus the Sept 30 snapshot) + all-time, from app.my_numbers.
    Degrades to a quiet "syncing" card if the numbers have not been loaded yet. */
 async function myNumbers(){ try{ return await API.page('my_numbers'); }catch(e){ return null; } }
+/* ---- Your Elite spot (Austin, Oct 24): where you stand against the monthly move-down line. Own numbers only. ---- */
+async function myEliteSpot(){ try{ return await API.page('my_elite_spot'); }catch(e){ return null; } }   // missing until the Oct 24 SQL is run: card stays hidden
+function eliteStatus(E){ const N=E.roster||0, D=E.move_down||20, line=N-D+1, place=E.place||N, worst=place+(E.tied||1)-1, zero=!(Number(E.gmv)>0);
+  if(N<=D) return {k:'safe',line,place,worst,zero,above:null};
+  if(place>=line||(zero&&worst>=line)) return {k:'in',line,place,worst,zero,above:0};
+  if(worst>=line) return {k:'line',line,place,worst,zero,above:0};
+  const above=line-1-worst; return {k:above<=5?'close':'safe',line,place,worst,zero,above}; }
+function eliteSpotCard(E){ if(!E||!E.on_roster) return '';
+  const st=eliteStatus(E), N=E.roster, D=E.move_down||20;
+  const pill={safe:['g','Safe'],close:['r','Close to the line'],line:['x','On the line'],in:['x','In the bottom 20']}[st.k];
+  const lastDay=E.ends_at?fmt.date(new Date(new Date(E.ends_at)-1)):'the end of the month';
+  const hero=st.k==='in'||st.k==='line'
+    ? `<div class="es-big bad">Bottom ${D}</div><div class="es-sub">${st.zero?`No ${monthName(E)} sales from ${monthName(E)} videos yet. You're tied with ${fmt.int((E.tied||1)-1)} other creator${(E.tied||1)-1===1?'':'s'} at the bottom of the board.`:`You're #${st.place} of ${N}. The move-down zone starts at #${st.line}.`}</div>`
+    : `<div class="es-big">#${st.place}<small> of ${N}</small></div><div class="es-sub">${st.above==null?'':`<b>${fmt.int(st.above)} place${st.above===1?'':'s'}</b> above the move-down zone (#${st.line} and below).`}</div>`;
+  const v=E.videos||0, vt=E.videos_target||20, calls=(E.calls||0), cp=E.calls_pending||0, coach=(E.coach||0)>0, coachP=(E.coach_pending||0)>0;
+  const row=(ok,label,val,extra='')=>`<div class="es-row ${ok?'ok':''}"><span class="es-ic" aria-hidden="true">${ok?ico('check',14):'•'}</span><span class="es-l">${label}</span><span class="es-v">${val}</span>${extra}</div>`;
+  return `<div class="card es es-${st.k}" role="region" aria-label="Your Elite spot">
+   <div class="row between"><div class="lbl">Your Elite spot · ${esc(monthName(E))}</div>${badge(pill[0],pill[1])}</div>
+   <div class="es-hero">${hero}</div>
+   <div class="es-rule">⚠️ <b>The bottom ${D} in Ravine Elite move down to the Ravine Creator Academy</b> at the end of each month, and the top ${D} Academy creators move up. You keep your running ads if you move down.</div>
+   <div class="es-list"><div class="lbl" style="margin-bottom:6px">What keeps your spot · ${esc(monthName(E))} so far</div>
+    ${row(v>=vt,'Videos posted',`<b>${v}</b> / ${vt}`,`<div class="es-bar"><i style="width:${Math.min(100,Math.round(v/vt*100))}%"></i></div>`)}
+    ${row(calls>0,'Weekly calls',calls||cp?`<b>${calls}</b> attended${cp?` · ${cp} in review`:''}`:'None yet',`<a class="es-a" href="#/quests" onclick="S.ui.qcat='Community';saveUI()">Claim a call</a>`)}
+    ${row(coach,'1:1 with Austin',coach?'Done':coachP?'In review':'Not yet',coach?'':`<a class="es-a" ${openExt(BOOK_CALL)}>Book a 1:1</a>`)}
+    ${row(!(st.k==='in'||st.k==='line'),'Sales rank',st.zero?'No sales yet':`#${st.place} of ${N}`)}
+   </div>
+   <div class="mini" style="margin-top:10px">Ranked by ${esc(monthName(E))} sales from videos posted in ${esc(monthName(E))}, same as the leaderboard. Last day: ${esc(lastDay)}. Only you see your own sales.</div></div>`; }
+/* ---- Weekly pace (Austin, Oct 24): 5 videos a week minimum. Monday to Sunday, Central. Originals only, no revisions or statics. ---- */
+const WEEK_MIN=5;
+const ctDay=d=>new Date(d).toLocaleDateString('en-CA',{timeZone:TZ});
+function ctWeek(now=new Date()){ const today=ctDay(now); const [y,m,dd]=today.split('-').map(Number); const base=new Date(Date.UTC(y,m-1,dd,12)); const dow=(base.getUTCDay()+6)%7;   // 0 = Monday
+  return [...Array(7)].map((_,i)=>{ const x=new Date(base); x.setUTCDate(base.getUTCDate()-dow+i); return x.toISOString().slice(0,10); }); }
+function paceCard(vids,src){ if(!Array.isArray(vids)) return ''; const days=ctWeek(); const today=ctDay(new Date()); const ti=days.indexOf(today);
+  const mine=vids.filter(v=>v.submitted_at&&!v.is_revision&&!v.parent_id&&v.media_type!=='IMAGE');
+  const per=days.map(d=>mine.filter(v=>ctDay(v.submitted_at)===d).length); const n=per.reduce((a,b)=>a+b,0);
+  const left=6-ti, need=Math.max(0,WEEK_MIN-n), done=n>=WEEK_MIN;
+  const DN=['M','T','W','T','F','S','S'];
+  const msg=done?`You hit the ${WEEK_MIN}-a-week minimum. Anything more is a bonus.`
+    :left===0?`Last day of the week. ${need} more today keeps you on pace.`
+    :`${need} more by Sunday keeps you on pace. ${left+1} day${left+1===1?'':'s'} left, today included.`;
+  return `<div class="card pace ${done?'done':''}" role="region" aria-label="This week's pace"><div class="row between"><div class="lbl">This week · ${fmt.date(days[0]+'T12:00:00Z')} to ${fmt.date(days[6]+'T12:00:00Z')}</div>${done?badge('g','On pace'):''}</div>
+   <div class="pace-row"><div class="pace-n"><b>${n}</b> of ${WEEK_MIN} videos</div>
+    <div class="pace-days" aria-hidden="true">${per.map((c,i)=>`<span class="pd ${c?'on':''} ${i===ti?'today':''} ${i>ti?'future':''}"><i>${c||''}</i><small>${DN[i]}</small></span>`).join('')}</div></div>
+   <div class="pace-bar"><i style="width:${Math.min(100,Math.round(n/WEEK_MIN*100))}%"></i></div>
+   <div class="mini" style="margin-top:8px">${esc(msg)}${src?.last_run?` Updated ${esc(fmt.ago(src.last_run))}.`:''}</div></div>`; }
+/* ---- Milestone badges (Austin, Oct 24). Worked out from the creator's own videos; nothing new is stored. ---- */
+function badgesOf(vids){ const V=(vids||[]).filter(v=>v.media_type!=='IMAGE');
+  const orig=V.filter(v=>!v.is_revision&&!v.parent_id&&v.submitted_at);
+  const appr=V.filter(v=>v.status==='approved'&&v.approved_at).sort((a,b)=>new Date(a.approved_at)-new Date(b.approved_at));
+  const nth=n=>appr.length>=n?appr[n-1].approved_at:null;
+  const salesV=t=>V.filter(v=>Number(v.sales)>=t).sort((a,b)=>Number(b.sales)-Number(a.sales))[0];
+  const hookV=V.filter(v=>Number(v.hook_rate)>=30&&Number(v.spend)>=50).sort((a,b)=>Number(b.hook_rate)-Number(a.hook_rate))[0];
+  const days=[...new Set(orig.map(v=>ctDay(v.submitted_at)))].sort(); let run=0,best=0,bestEnd=null,prev=null;
+  for(const d of days){ const p=prev&&new Date(Date.parse(prev+'T12:00:00Z')+864e5).toISOString().slice(0,10); run=(p===d)?run+1:1; if(run>best){best=run;bestEnd=d;} prev=d; }
+  const weeks={}; orig.forEach(v=>{ const w=ctWeek(new Date(v.submitted_at))[0]; weeks[w]=(weeks[w]||0)+1; }); const bestWeek=Math.max(0,...Object.values(weeks));
+  const B=[
+    {k:'appr1',ic:'✅',t:'First approval',d:'Your first Ravine video approved.',got:appr.length>=1,at:nth(1),prog:[appr.length,1]},
+    {k:'appr10',ic:'🔟',t:'10 approved',d:'Ten approved videos.',got:appr.length>=10,at:nth(10),prog:[appr.length,10]},
+    {k:'appr25',ic:'🏅',t:'25 approved',d:'Twenty-five approved videos.',got:appr.length>=25,at:nth(25),prog:[appr.length,25]},
+    {k:'appr50',ic:'🏆',t:'50 approved',d:'Fifty approved videos.',got:appr.length>=50,at:nth(50),prog:[appr.length,50]},
+    {k:'k1',ic:'💵',t:'First $1K video',d:'One video past $1,000 in Trybe sales.',got:!!salesV(1000),vid:salesV(1000),money:true},
+    {k:'k5',ic:'💰',t:'First $5K video',d:'One video past $5,000 in Trybe sales.',got:!!salesV(5000),vid:salesV(5000),money:true},
+    {k:'hook30',ic:'🎣',t:'Hook master',d:'A 30%+ hook rate on a video with $50+ in ad spend.',got:!!hookV,vid:hookV},
+    {k:'week5',ic:'📅',t:'5-video week',d:'Five original videos in one week (Monday to Sunday).',got:bestWeek>=5,prog:[Math.min(bestWeek,5),5]},
+    {k:'streak7',ic:'🔥',t:'7-day streak',d:'A video posted 7 days in a row.',got:best>=7,at:best>=7?bestEnd+'T18:00:00Z':null,prog:[Math.min(best,7),7]},
+  ];
+  return B; }
+const BADGE_SEEN='rcg_badges_seen';
+function badgesSeen(){ try{ return new Set(JSON.parse(localStorage.getItem(BADGE_SEEN+'_'+(S.me?.code||S.me?.id||'me'))||'[]')); }catch(e){ return new Set(); } }
+function badgesMarkSeen(keys){ try{ localStorage.setItem(BADGE_SEEN+'_'+(S.me?.code||S.me?.id||'me'),JSON.stringify(keys)); }catch(e){} }
+function badgesCard(vids){ if(!Array.isArray(vids)) return ''; const B=badgesOf(vids); const got=B.filter(b=>b.got); const seen=badgesSeen(); window.__badges=B;
+  const html=`<div class="card bdg"><div class="row between"><div class="lbl">Your badges · ${got.length} of ${B.length}</div><span class="mini">Tap one to share it</span></div>
+   <div class="bdg-row">${B.map((b,i)=>`<button class="bd ${b.got?'got':''}" onclick="openBadge(${i})" aria-label="${esc(b.t)}${b.got?', earned':', locked'}"><span class="bd-m">${b.ic}${b.got&&!seen.has(b.k)?'<i class="bd-new">New</i>':''}</span><span class="bd-t">${esc(b.t)}</span><small>${b.got?(b.at?esc(fmt.date(b.at)):'Earned'):b.prog?`${b.prog[0]} of ${b.prog[1]}`:'Locked'}</small></button>`).join('')}</div></div>`;
+  setTimeout(()=>badgesMarkSeen(got.map(b=>b.k)),1500); return html; }
+window.openBadge=i=>{ const b=(window.__badges||[])[i]; if(!b) return;
+  openDrawer(`<div class="bdg-d ${b.got?'got':''}"><div class="bd-m big">${b.ic}</div><h2>${esc(b.t)}</h2><p>${esc(b.d)}</p>
+    ${b.got?`<div class="mini">${b.at?'Earned '+esc(fmt.date(b.at,{year:'numeric'})):'Earned'}${b.vid?` · ${esc(b.vid.title||'your video')}`:''}</div>
+      <div class="note" style="margin-top:14px"><b>Share this win.</b> A screenshot of this badge counts for the Share a win quest.</div>
+      <div class="row" style="gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn" onclick="closeDrawer(true);go('quests');setTimeout(()=>openQuest('oct_win_post'),300)">Share in Ravine Elite</button>${b.money?'':`<button class="btn gh" onclick="closeDrawer(true);go('quests');setTimeout(()=>openQuest('oct_acad_win'),300)">Share in the Academy</button>`}</div>
+      ${b.money?'<div class="mini" style="margin-top:8px">Sales badges are for Ravine Elite only. Academy posts leave out sales numbers.</div>':''}`
+    :`<div class="note" style="margin-top:10px">${b.prog?`<b>${b.prog[0]} of ${b.prog[1]}</b> so far.`:'Not earned yet.'} Keep going.</div>`}</div>`); };
+function monthName(E){ const d=E&&E.ends_at?new Date(new Date(E.ends_at)-1):new Date(); return d.toLocaleDateString('en-US',{month:'long',timeZone:TZ}); }
 function numbersCard(N){
   if(!N||N.all_sales==null) return `<div class="card" style="margin-bottom:12px"><div class="lbl">Your numbers</div><p style="margin-top:6px">Your sales numbers are syncing from Trybe. Check back shortly.</p></div>`;
   const rk='';
@@ -1588,7 +1751,7 @@ function tgAnimate(){ const els=[...document.querySelectorAll('.tg [data-countup
   requestAnimationFrame(step); }
 route('home',async()=>{
   const h=await API.page('my_home'); const c=h.campaign||{}; const ct=h.contest||{}; const q=h.quests||{}; const r=h.rewards||{}; const sub=h.submissions||{};
-  const N=await myNumbers(); const TG=await teamGoal(); let SP={}; try{ SP=await API.page('my_submissions'); }catch(e){} const SUBS=SP.videos||[]; try{ await API.page('my_quests'); }catch(e){}
+  const N=await myNumbers(); const TG=await teamGoal(); const ES=await myEliteSpot(); let SP={}; try{ SP=await API.page('my_submissions'); }catch(e){} const SUBS=SP.videos||[]; try{ await API.page('my_quests'); }catch(e){}
   const nt=nextTier(r); const dl=daysLeft(c.ends_at);
   // one practical next action, from real state
   let action;
@@ -1602,6 +1765,9 @@ route('home',async()=>{
   return `${ph('Home','',{eyebrow:`October 2026 · ${dl} day${dl===1?'':'s'} left · ends Oct 31, 11:59 pm CT`,acts:`<button class="btn" onclick="go('${action.go}',${JSON.stringify(action.p||{}).replace(/"/g,'&quot;')})">${esc(action.t)}</button>`})}
   ${teamGoalCard(TG)}
   ${numbersCard(N)}
+  ${paceCard(SUBS,SP.source)}
+  ${eliteSpotCard(ES)}
+  ${badgesCard(SUBS)}
   <div class="grid g3">
     <div class="card hi" style="cursor:pointer" onclick="go('leaderboard')"><div class="lbl">October incentive</div>
       <div class="kpi" style="margin-top:6px"><span class="big" style="color:var(--gold)">${fmt.usd(c.prize_total_cents,{cents:true})}</span><span class="small">1st ${fmt.usd(c.prizes?.[0]?.cents,{cents:true})} · 2nd ${fmt.usd(c.prizes?.[1]?.cents,{cents:true})} · 3rd ${fmt.usd(c.prizes?.[2]?.cents,{cents:true})}</span></div>
@@ -1676,6 +1842,16 @@ function questRail(cats,states){ const seen=[...new Set(cats.map(c=>c.category))
 function academyBanner(){ if(S.ui.qcat!=='Academy') return '';
   return `<div class="card qacad"><div style="min-width:0"><div class="lbl" style="color:#E8B341">Ravine Creator Academy</div><p>Earn XP by helping the Academy: share your wins, give feedback, answer questions and break down what worked for you. You were where they are now.</p></div><a class="btn" ${openExt(ACADEMY_URL)}>Open the Academy ${ico('ext',13)}</a></div>`; }
 window.qPickTab=k=>{ S.ui.qcat=(k!=='All'&&S.ui.qcat===k)?'All':k; saveUI(); window.__qtabs&&window.__qtabs(); };
+/* ---- Featured quest of the week: Double XP (Austin, Oct 24). The server decides and awards it; the app only shows it. ---- */
+async function myFeatured(){ try{ return await API.page('my_featured_quest'); }catch(e){ return null; } }   // missing until the Oct 24 SQL is run
+function markFeatured(cats,FQ){ (cats||[]).forEach(c=>{ if(c.xp_base==null) c.xp_base=c.xp_value; const on=!!FQ&&c.quest_key===FQ.quest_key&&!c.locked; c.featured=on; c.xp_mult=on?(FQ.multiplier||2):1; c.xp_value=c.xp_base*c.xp_mult; }); }
+function featuredBanner(FQ,cats,states){ if(!FQ) return ''; const c=(cats||[]).find(x=>x.quest_key===FQ.quest_key); if(!c) return ''; const st=states[c.quest_key]; const nx=FQ.next&&(cats||[]).find(x=>x.quest_key===FQ.next.quest_key);
+  const end=FQ.ends_at?fmt.date(new Date(new Date(FQ.ends_at)-1)):'Sunday'; const cta=st?.state==='in_progress'?'Continue quest':st?.state==='needs_changes'?'Fix and resubmit':st?.state==='available'?'Start quest':'Open';
+  return `<div class="card fq"><div class="art ph">${thumb(questPhoto(c),c.image_key,c.category)}<span class="fq-x">${c.xp_mult}x XP</span></div><div class="fq-b">
+    <div class="lbl" style="color:var(--o2)">🔥 Double XP this week · ends ${esc(end)}, 11:59 pm CT</div>
+    <h2>${esc(c.title)}</h2><p>${esc(c.outcome)}</p>
+    <div class="fq-foot"><span class="fq-xp"><s>+${c.xp_base} XP</s> <b>+${c.xp_value} XP</b> if you start or submit it this week</span><button class="btn" onclick="openQuest('${c.quest_key}')">${cta}</button></div>
+    ${nx&&nx.quest_key!==c.quest_key?`<div class="mini" style="margin-top:8px">Next week: ${esc(nx.title)}</div>`:''}</div></div>`; }
 /* quests that take a reference video from the Angle Library */
 const REF_QUESTS=['oct_recreate','oct_boss_format','oct_boss_angle','oct_hooks3','oct_unaware','oct_ai_kb9'];
 /* Oct 24: learning links shown in a quest's "Watch an example" step. KB9_URL points at the Skool classroom until Austin sends the direct Knowledge Bomb #9 link. */
@@ -1703,6 +1879,7 @@ function reqProgress(cat,inst){ const req=cat.requirement||{}; const n=req.count
   return {have:Math.min(have,n),need:n,unit:req.unit||''}; }
 route('quests',async(p)=>{
   const q=await API.page('my_quests'); const cats=q.catalog||[]; const insts=q.instances||[]; const r=await API.page('my_rewards'); const nt=nextTier(r);
+  const FQ=await myFeatured(); markFeatured(cats,FQ);
   if(p.ref){ S.ui.qref=p.ref; } S.ui.qcat=p.c||S.ui.qcat||'All'; S.ui.qs=p.s!=null?p.s:(S.ui.qs||''); saveUI();
   const states=Object.fromEntries(cats.map(c=>[c.quest_key,questState(c,insts)]));
   const cats_=['All',...new Set(cats.map(c=>c.category))]; if(!cats_.includes(S.ui.qcat)) S.ui.qcat='All';
@@ -1727,6 +1904,7 @@ route('quests',async(p)=>{
     ${note?`<div class="qrec-fb">💬 ${esc(ex)}${note.length>ex.length?` <a href="#" onclick="openQuest('${rec.quest_key}');return false">View full feedback</a>`:''}</div>`:`<p>${esc(rec.outcome)}</p>`}
     ${why?`<div class="qrec-why">💡 ${esc(why)}</div>`:''}
     <div class="qrec-foot"><span class="qrec-xp"><b>${rec.xp_value} XP</b> after approval · ${esc(qskill(rec))}</span><button class="btn" onclick="openQuest('${rec.quest_key}')">${cta}</button></div></div></div>`; })():''}
+  ${featuredBanner(FQ,cats,states)}
   <div class="sec qtabs-h"><h2>Browse quests</h2><span class="mini">Pick a type. Tap it again to see all.</span></div>
   <div class="lrail-wrap qrail-wrap" id="qrailbox">${questRail(cats,states)}</div>
   <div id="qacad">${academyBanner()}</div>
@@ -1765,7 +1943,7 @@ function questCard(c,st,H){ const s=st.state; const [k,label]=QSTATE[s]||QSTATE.
     :(st.cur&&st.cur.state==='submitted'?`<div class="prog"><div class="plabel"><span>Sent ${fmt.ago(st.cur.submitted_at)}</span><b>+${c.xp_value} XP pending</b></div><div class="bar"><i style="width:100%;background:var(--warn)"></i></div></div>`:'');
   const fb=s==='needs_changes'&&st.cur?.review_note?`<div class="qfb">💬 ${esc(st.cur.review_note)}</div>`:'';
   const action={available:'Start',in_progress:'Continue',needs_changes:'Fix',submitted:'View submission',approved:'View',approved_period:'View',rejected:'View'}[s]||'Open';
-  return `<button class="qcard v2 ${s==='approved'?'done':''} ${lk?'lock':''}" onclick="openQuest('${c.quest_key}')" aria-label="${esc(c.title)}: ${lk?'locked':label}"><div class="art ph">${thumb(questPhoto(c),c.image_key,c.category)}<span class="qbadge badge ${lk?'n':k}">${lk?'🔒 '+esc(c.min_prestige_name||'Prestige'):label}</span></div><div class="qbody"><div class="ttl">${c.category==='Boss'?'⚔️ ':''}${esc(c.title)}</div><div class="out">${esc(c.outcome)}</div>${qmetaChips(c)}${fb}${rewardProgress(c,st,H,{card:true})}${prog}<div class="foot"><span class="mini">${lk?`Unlock ${esc(c.min_prestige_name||'a higher level')} first`:capText}</span><span class="btn sm ${['approved','approved_period','submitted'].includes(s)||lk?'gh':''}">${lk?'Preview':action}</span></div></div></button>`; }
+  return `<button class="qcard v2 ${s==='approved'?'done':''} ${lk?'lock':''}" onclick="openQuest('${c.quest_key}')" aria-label="${esc(c.title)}: ${lk?'locked':label}"><div class="art ph">${thumb(questPhoto(c),c.image_key,c.category)}<span class="qbadge badge ${lk?'n':k}">${lk?'🔒 '+esc(c.min_prestige_name||'Prestige'):label}</span>${c.featured?`<span class="qbadge2">🔥 ${c.xp_mult}x XP this week</span>`:''}</div><div class="qbody"><div class="ttl">${c.category==='Boss'?'⚔️ ':''}${esc(c.title)}</div><div class="out">${esc(c.outcome)}</div>${qmetaChips(c)}${fb}${rewardProgress(c,st,H,{card:true})}${prog}<div class="foot"><span class="mini">${lk?`Unlock ${esc(c.min_prestige_name||'a higher level')} first`:capText}</span><span class="btn sm ${['approved','approved_period','submitted'].includes(s)||lk?'gh':''}">${lk?'Preview':action}</span></div></div></button>`; }
 
 async function openQuest(key,instId){
   const q=await API.page('my_quests'); let rw=null; try{ rw=await API.page('my_rewards'); }catch(e){} const c=q.catalog.find(x=>x.quest_key===key); if(!c) return; const st=questState(c,q.instances); const inst=instId?q.instances.find(i=>i.id===instId):st.cur;
@@ -1776,7 +1954,7 @@ async function openQuest(key,instId){
   const example=(c.examples||[]).length||ref||REF_QUESTS.includes(key);
   openDrawer(`<div class="row">${c.locked&&!inst?`<span class="badge n">🔒 Unlock ${esc(c.min_prestige_name||'Prestige')}</span>`:`<span class="badge ${QSTATE[inst?.state||'available'][0]}">${QSTATE[inst?.state||'available'][1]}</span>`}<span class="mini">${esc(c.category)}</span></div>
    <h2>${c.category==='Boss'?'⚔️ ':''}${esc(c.title)}</h2><div class="art">${photoFrame(questPhoto(c),c.image_key,c.category)}</div>
-   <div class="qmeta-row">${qmetaChips(c)}</div>
+   <div class="qmeta-row">${qmetaChips(c)}</div>${c.featured?`<div class="note" style="margin:0 0 10px;border-color:rgba(255,110,32,.5)">🔥 <b>Double XP this week:</b> ${c.xp_value} XP instead of ${c.xp_base} if you start or submit it before Sunday 11:59 pm CT.</div>`:''}
    <nav class="qflow" aria-label="Steps">${['The assignment','Watch an example','Create your version','Attach evidence','Submit'].map((t,i)=>`<a href="#qs${i+1}" onclick="document.getElementById('qs${i+1}')?.scrollIntoView({behavior:'smooth',block:'start'});return false">${i+1}. ${t}</a>`).join('')}</nav>
    ${c.locked?`<div class="note" style="margin-top:8px"><b>🔒 Unlock ${esc(c.min_prestige_name||'a higher level')} to unlock this quest.</b> It opens in any half you play ${esc(c.min_prestige_name||'that level')} or higher. <a href="#" onclick="closeDrawer();go('rewards');return false">See Prestige</a></div>`:''}
    ${inst?.review_note&&inst.state!=='approved'?`<section class="qreturn"><h3>${inst.state==='rejected'?'Why it was not approved':'What Austin wants changed'}</h3><div class="note ${inst.state==='rejected'?'bad':'warn'}">${esc(inst.review_note)}</div></section>`:''}
@@ -2737,15 +2915,42 @@ route('trial',async()=>{ const h=await API.page('my_home'); const c=h.creator||{
   <div class="card" style="margin-top:12px"><p style="font-size:14px">You have ${TRIAL.days} days from the day you were added to hit ${fmt.usd(TRIAL.bar)} in attributed sales. It is not a video count: one video that sells beats ten that do not. Clear it and you are on the roster like everyone else.</p></div>`; });
 
 /* ---------------- Admin */
-route('admin',async()=>{ const A=await API.page('admin'); const Q=(A.queue||[]).filter(q=>q.state==='submitted'); const other=(A.queue||[]).filter(q=>q.state!=='submitted');
-  let LBL={}; try{ const mq=await API.page('my_quests'); (mq.catalog||[]).forEach(c=>(c.proof||[]).forEach(f=>{ LBL[c.quest_key+':'+f.field]=f.label; })); }catch(e){}
-  const xpAll=Q.reduce((n,q)=>n+(q.requested_xp||0),0);
-  return `${ph('Review queue',`${Q.length} quest entr${Q.length===1?'y':'ies'} waiting${Q.length?` · +${xpAll} XP requested`:''}. Approve awards XP once; the database enforces caps and duplicates.`,{eyebrow:'Admin',acts:Q.length>1?`<button class="btn" onclick="approveAll()">${ico('check')} Approve all ${Q.length}</button>`:''})}
-  ${Q.length?Q.map(q=>`<div class="card" style="margin-bottom:10px"><div class="admin-row"><div><div class="row"><b>${esc(q.display_name)}</b><span class="mini">· ${esc(q.title)} · ${PERIOD_LABEL(q.period_key)} · entry ${q.seq}</span>${q.duplicate_registration?badge('v','Duplicate registration'):''}${q.same_evidence_elsewhere?badge('x','Same evidence as another creator'):''}</div>
-     <div class="mini" style="margin-top:4px">Submitted ${fmt.dt(q.submitted_at)||'—'} · requests +${q.requested_xp} XP · ${q.done_in_period}/${q.per_period_limit} already awarded this period</div>
-     <div class="proofv" style="margin-top:8px;font-size:13.5px">${Object.entries(q.draft||{}).map(([k,v])=>`<div><b>${esc(LBL[q.quest_key+':'+k]||k)}:</b> ${proofValueHtml(v)}</div>`).join('')}</div></div>
-     <div class="stack"><button class="btn sm" onclick="adminAct('approve_quest','${q.id}')">Approve +${q.requested_xp} XP</button><button class="btn gh sm" onclick="adminNote('return_quest','${q.id}')">Request changes</button><button class="btn danger sm" onclick="adminNote('reject_quest','${q.id}')">Reject</button></div></div></div>`).join(''):emptyState('Queue is empty','Nothing is waiting for review.','','review')}
+route('admin',async()=>{ const A=await API.page('admin'); const Q=(A.queue||[]).filter(q=>q.state==='submitted').sort((a,b)=>new Date(a.submitted_at||0)-new Date(b.submitted_at||0)); const other=(A.queue||[]).filter(q=>q.state!=='submitted');
+  let LBL={}, CAT={}; try{ const mq=await API.page('my_quests'); (mq.catalog||[]).forEach(c=>{ CAT[c.quest_key]=c.category; (c.proof||[]).forEach(f=>{ LBL[c.quest_key+':'+f.field]=f.label; }); }); }catch(e){}
+  window.__AQ={Q,LBL,CAT}; S.ui.aqf=S.ui.aqf||'All'; if(S.ui.aqf!=='All'&&!Q.some(q=>CAT[q.quest_key]===S.ui.aqf)) S.ui.aqf='All';
+  setTimeout(adminKeysOn,0);
+  return `${ph('Review queue',`<span id="aq_head">${aqHead()}</span>`,{eyebrow:'Admin',acts:Q.length>1?`<button class="btn" onclick="approveAll()">${ico('check')} Approve all ${Q.length}</button>`:''})}
+  ${Q.length?`<div class="aq-bar"><div class="aq-tabs" role="tablist" aria-label="Quest type" id="aq_tabs">${aqTabs()}</div><span class="mini aq-keys">Shortcuts: <kbd>J</kbd> <kbd>K</kbd> move · <kbd>A</kbd> approve · <kbd>C</kbd> request changes</span></div>`:''}
+  <div id="aq_list">${Q.length?aqList():emptyState('Queue is empty','Nothing is waiting for review.','','review')}</div>
   <div class="sec"><h2>Recently decided</h2></div><div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Creator</th><th>Quest</th><th>Period</th><th>State</th><th>Note</th></tr></thead><tbody>${other.slice(0,30).map(q=>`<tr><td>${esc(q.display_name)}</td><td>${esc(q.title)}</td><td class="mono">${PERIOD_LABEL(q.period_key)}</td><td>${badge((QSTATE[q.state]||['n',q.state])[0],(QSTATE[q.state]||['n',q.state])[1])}</td><td class="mini">${esc(q.review_note||'')}</td></tr>`).join('')||'<tr><td colspan="5" class="mini">None yet</td></tr>'}</tbody></table></div></div>`; });
+/* ---- Faster reviews (Austin, Oct 24): oldest first, filter by quest type, one-tap approve that clears the entry in place,
+   reusable notes, keyboard shortcuts. Every decision still goes through approve_quest / return_quest / reject_quest. ---- */
+const aqLeft=()=>(window.__AQ?.Q||[]).filter(q=>!q._done);
+function aqHead(){ const L=aqLeft(); const xp=L.reduce((n,q)=>n+(q.requested_xp||0),0); return `${L.length} quest entr${L.length===1?'y':'ies'} waiting${L.length?` · +${xp} XP requested · oldest first`:''}. Approve awards XP once; the database enforces caps and duplicates.`; }
+function aqTabs(){ const {CAT}=window.__AQ; const L=aqLeft(); const cats=[...new Set(L.map(q=>CAT[q.quest_key]||'Other'))]; const keys=['All',...['Film','Improve','Community','Academy','Boss','Other'].filter(k=>cats.includes(k))];
+  return keys.map(k=>{ const n=k==='All'?L.length:L.filter(q=>(CAT[q.quest_key]||'Other')===k).length; const on=S.ui.aqf===k; return `<button role="tab" aria-selected="${on}" class="${on?'on':''}" onclick="S.ui.aqf='${k}';saveUI();aqRefresh()">${esc(k==='Academy'?'Academy':k)}<i>${n}</i></button>`; }).join(''); }
+function aqList(){ const {LBL,CAT}=window.__AQ; const L=aqLeft().filter(q=>S.ui.aqf==='All'||(CAT[q.quest_key]||'Other')===S.ui.aqf);
+  if(!L.length) return emptyState('Nothing here','No entries of this type are waiting.','','review');
+  return L.map(q=>`<div class="card aq" id="aq_${q.id}" tabindex="0" data-id="${q.id}" onfocus="aqFocus('${q.id}')"><div class="admin-row"><div><div class="row"><b>${esc(q.display_name)}</b><span class="mini">· ${esc(q.title)} · ${PERIOD_LABEL(q.period_key)} · entry ${q.seq}</span>${q.duplicate_registration?badge('v','Duplicate registration'):''}${q.same_evidence_elsewhere?badge('x','Same evidence as another creator'):''}</div>
+     <div class="mini" style="margin-top:4px">Submitted ${fmt.dt(q.submitted_at)||'—'} (${esc(fmt.ago(q.submitted_at)||'')}) · requests +${q.requested_xp} XP · ${q.done_in_period}/${q.per_period_limit} already awarded this period</div>
+     <div class="proofv" style="margin-top:8px;font-size:13.5px">${Object.entries(q.draft||{}).map(([k,v])=>`<div><b>${esc(LBL[q.quest_key+':'+k]||k)}:</b> ${proofValueHtml(v)}</div>`).join('')}</div></div>
+     <div class="stack aq-acts"><button class="btn sm" onclick="aqApprove('${q.id}')">${ico('check',14)} Approve +${q.requested_xp} XP</button><button class="btn gh sm" onclick="adminNote('return_quest','${q.id}')">Request changes</button><button class="btn danger sm" onclick="adminNote('reject_quest','${q.id}')">Reject</button></div></div></div>`).join(''); }
+function aqRefresh(){ const h=$('#aq_head'); if(h) h.innerHTML=aqHead(); const t=$('#aq_tabs'); if(t) t.innerHTML=aqTabs(); const l=$('#aq_list'); if(l) l.innerHTML=aqLeft().length?aqList():emptyState('Queue is empty','Nothing is waiting for review.','','review'); }
+let AQ_FOCUS=null; window.aqFocus=id=>{ AQ_FOCUS=id; };
+function aqDone(id,html){ const q=(window.__AQ?.Q||[]).find(x=>x.id===id); if(q) q._done=true; const el=$('#aq_'+id); API.bust();
+  const next=el?.nextElementSibling?.dataset?.id||el?.previousElementSibling?.dataset?.id||null;
+  if(el){ const a=el.querySelector('.aq-acts'); if(a) a.innerHTML=html; el.classList.add('aq-done'); setTimeout(()=>{ aqRefresh(); if(next) $('#aq_'+next)?.focus({preventScroll:false}); },900); } else aqRefresh(); }
+window.aqApprove=async id=>{ const el=$('#aq_'+id); const btns=el?[...el.querySelectorAll('.aq-acts button')]:[]; if(btns[0]?.disabled) return; btns.forEach(b=>b.disabled=true); btns[0]?.classList.add('pending');
+  try{ const r=await API.rpc('approve_quest',{p_instance:id}); if(r&&(r.awarded||r.ok)){ xpPop(r.xp); aqDone(id,`<span class="aq-ok">${ico('check',14)} Approved · +${r.xp} XP</span>`); }
+    else { toast(r?.why||'Not approved','bad'); btns.forEach(b=>b.disabled=false); btns[0]?.classList.remove('pending'); } }
+  catch(e){ toast(e.message,'bad'); btns.forEach(b=>b.disabled=false); btns[0]?.classList.remove('pending'); } };
+/* keyboard: only on the admin queue, never while typing or with a drawer open */
+function adminKeysOn(){ if(window.__aqKeys) return; window.__aqKeys=true;
+  document.addEventListener('keydown',e=>{ if(S.view!=='admin'||e.metaKey||e.ctrlKey||e.altKey) return; const t=e.target; if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.tagName==='SELECT'||t.isContentEditable)) return; if($('#drawer')?.classList.contains('open')) return;
+    const cards=[...document.querySelectorAll('#aq_list .aq:not(.aq-done)')]; if(!cards.length) return; let i=cards.findIndex(c=>c.dataset.id===AQ_FOCUS); const k=e.key.toLowerCase();
+    if(k==='j'||k==='k'){ e.preventDefault(); i=k==='j'?Math.min(cards.length-1,i+1):Math.max(0,(i<0?0:i)-1); cards[i].focus(); cards[i].scrollIntoView({block:'center',behavior:'smooth'}); }
+    else if(k==='a'&&i>=0){ e.preventDefault(); aqApprove(cards[i].dataset.id); }
+    else if(k==='c'&&i>=0){ e.preventDefault(); adminNote('return_quest',cards[i].dataset.id); } }); }
 /* Approve all (Austin, Oct 14): one click approves every entry in review, one at a time through the same approve_quest
    call, so caps and duplicate checks still apply. Flagged entries are left out unless Austin ticks the box. */
 async function approveAll(){ const A=await API.page('admin',{},{force:true}); const Q=(A.queue||[]).filter(q=>q.state==='submitted'); if(!Q.length){ toast('Nothing is waiting'); render(); return; }
@@ -2766,8 +2971,22 @@ async function runApproveAll(){ const go_=$('#aa_go'); if(!go_||go_.disabled) re
     ${bad.length?`<div class="note warn" style="margin-top:10px"><b>${bad.length} not approved</b> (still in the queue):<ul style="margin-top:6px">${bad.map(b=>`<li>${esc(b.q.display_name)} · ${esc(b.q.title)}: ${esc(b.why)}</li>`).join('')}</ul></div>`:''}
     <div class="row" style="margin-top:14px"><button class="btn" onclick="closeDrawer();render()">Done</button></div>`;
   if(ok) xpPop(xp); render(); }
-async function adminAct(fn,id,extra={}){ try{ const r=await API.rpc(fn,{p_instance:id,...extra}); if(r.ok||r.awarded){ toast(fn==='approve_quest'?`Awarded ${r.xp} XP`:r.why,'good'); if(fn==='approve_quest') xpPop(r.xp); } else toast(r.why,'bad'); API.bust(); render(); }catch(e){ toast(e.message,'bad'); } }
-function adminNote(fn,id){ const label=fn==='return_quest'?'Feedback for the creator':'Reason for rejection'; openDrawer(`<h2>${fn==='return_quest'?'Request changes':'Reject entry'}</h2><div class="field"><label for="anote">${label}</label><textarea id="anote"></textarea><div class="help">${fn==='return_quest'?'The creator edits the same entry and resubmits. Rejection is a different event.':'The entry closes. The creator can start a new one if the cap allows.'}</div></div><div class="row" style="margin-top:12px"><button class="btn ${fn==='reject_quest'?'danger':''}" onclick="(async()=>{const n=$('#anote').value.trim(); if(!n){toast('A note is required','bad');return;} closeDrawer(true); await adminAct('${fn}','${id}',${fn==='return_quest'?'{p_note:n}':'{p_reason:n}'});})()">Send</button><button class="btn gh" onclick="closeDrawer()">Cancel</button></div>`); }
+async function adminAct(fn,id,extra={}){ try{ const r=await API.rpc(fn,{p_instance:id,...extra}); if(r.ok||r.awarded){ toast(fn==='approve_quest'?`Awarded ${r.xp} XP`:fn==='return_quest'?'Sent back with your note':'Rejected','good'); if(fn==='approve_quest') xpPop(r.xp); if(S.view==='admin'&&$('#aq_'+id)){ aqDone(id,`<span class="aq-ok ${fn==='approve_quest'?'':'muted'}">${fn==='return_quest'?'Sent back':fn==='reject_quest'?'Rejected':'Approved · +'+r.xp+' XP'}</span>`); return; } } else toast(r.why,'bad'); API.bust(); render(); }catch(e){ toast(e.message,'bad'); } }
+const AQ_QUICK=['Too similar to another video of yours. One concept per video: change the angle, setting or story.','Add an on-screen caption in the first second.','The product shows up too late. Bring it in within the first 5 seconds.','Paste the single link to the video from Trybe, not a folder or library page.','Keep the firearm in the background. Frame on ears, woods, reaction.','No hearing-loss or medical claims. Stick to what the product does.','Someone else is on camera. Ravine needs their OK, or film without them.','Recreate the structure, not the video. Change the setting and the story.'];
+const AQ_KEY='rcg_admin_notes';
+function aqSaved(){ try{ return JSON.parse(localStorage.getItem(AQ_KEY)||'[]'); }catch(e){ return []; } }
+function aqSave(n){ try{ const L=aqSaved().filter(x=>x!==n); L.unshift(n); localStorage.setItem(AQ_KEY,JSON.stringify(L.slice(0,12))); }catch(e){} }
+window.aqForget=i=>{ try{ const L=aqSaved(); L.splice(i,1); localStorage.setItem(AQ_KEY,JSON.stringify(L)); }catch(e){} const box=$('#aq_saved'); if(box) box.innerHTML=aqSavedChips(); };
+window.aqPick=t=>{ const a=$('#anote'); if(!a) return; a.value=(a.value.trim()?a.value.trim()+'\n':'')+t; a.focus(); };
+function aqSavedChips(){ const L=aqSaved(); return L.length?`<div class="lbl" style="margin:10px 0 6px">Your saved notes</div><div class="chips">${L.map((x,i)=>`<span class="chip aq-sv"><button type="button" onclick="aqPick(${JSON.stringify(x).replace(/"/g,'&quot;')})">${esc(x.length>60?x.slice(0,58)+'…':x)}</button><button type="button" class="aq-x" aria-label="Forget this note" onclick="aqForget(${i})">${ico('x',11)}</button></span>`).join('')}</div>`:''; }
+function adminNote(fn,id){ const label=fn==='return_quest'?'Feedback for the creator':'Reason for rejection'; const q=(window.__AQ?.Q||[]).find(x=>x.id===id);
+  openDrawer(`<h2>${fn==='return_quest'?'Request changes':'Reject entry'}</h2>${q?`<div class="mini" style="margin:4px 0 12px">${esc(q.display_name)} · ${esc(q.title)}</div>`:''}
+   <div class="lbl" style="margin-bottom:6px">Quick notes · tap to add</div><div class="chips">${AQ_QUICK.map(x=>`<button type="button" class="chip" onclick="aqPick(${JSON.stringify(x).replace(/"/g,'&quot;')})">${esc(x.split('.')[0])}</button>`).join('')}</div>
+   <div id="aq_saved">${aqSavedChips()}</div>
+   <div class="field" style="margin-top:12px"><label for="anote">${label}</label><textarea id="anote" rows="4"></textarea><div class="help">${fn==='return_quest'?'The creator edits the same entry and resubmits. Rejection is a different event.':'The entry closes. The creator can start a new one if the cap allows.'}</div></div>
+   <label class="chk" style="margin-top:8px"><input type="checkbox" id="anote_save"><span>Save this note for next time</span></label>
+   <div class="row" style="margin-top:12px"><button class="btn ${fn==='reject_quest'?'danger':''}" onclick="(async()=>{const n=$('#anote').value.trim(); if(!n){toast('A note is required','bad');return;} if($('#anote_save')?.checked&&!AQ_QUICK.includes(n)) aqSave(n); closeDrawer(true); await adminAct('${fn}','${id}',${fn==='return_quest'?'{p_note:n}':'{p_reason:n}'});})()">Send</button><button class="btn gh" onclick="closeDrawer()">Cancel</button></div>`);
+  setTimeout(()=>$('#anote')?.focus(),60); }
 
 route('admin_contest',async()=>{ const A=await API.page('admin'); const c=A.campaign||{}; const snaps=A.snapshots||[]; const fin=snaps.find(x=>x.final); const ended=new Date()>=new Date(c.ends_at);
   const rules=[['Window',`${fmt.dt(c.starts_at)} → ${fmt.dt(c.ends_at)} (exclusive), ${esc(c.tz||'')}`],['Ranked by','October GMV from October videos only: Oct 1–31 (CT) sales on each creator\'s first 20 videos submitted and approved in October. Older videos never count. Creators see everyone\'s place, only their own GMV.'],
