@@ -1148,6 +1148,42 @@ details.qmore{margin-top:10px}details.qmore>summary{cursor:pointer;font-size:13p
 @media (prefers-reduced-motion:reduce){ .card.aq{transition:none} }
 .vstips div.vskb{background:none;border:0;padding:2px 0 0;margin:0}
 .qkb{margin-top:10px}
+/* ---- Limited-time quest: 48-hour AI sprint (Oct 25) ---- */
+.sprint{position:relative;overflow:hidden;margin:16px 0;padding:18px 20px 16px;border:1px solid rgba(255,110,32,.6);
+  background:radial-gradient(120% 140% at 100% 0%,rgba(255,110,32,.22),rgba(255,110,32,0) 55%),var(--sf);
+  box-shadow:inset 0 0 0 1px rgba(255,110,32,.10),0 18px 50px rgba(255,110,32,.10)}
+.sprint::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:22px 22px;
+  -webkit-mask-image:linear-gradient(90deg,transparent 35%,#000 100%);mask-image:linear-gradient(90deg,transparent 35%,#000 100%)}
+.sp-head,.sp-main,.sp-foot,.sp-bar{position:relative}
+.sp-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sp-live{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--o2)}
+.sp-live i{width:8px;height:8px;border-radius:50%;background:var(--o);animation:sppulse 1.6s infinite}
+@keyframes sppulse{0%{box-shadow:0 0 0 0 rgba(255,110,32,.7)}70%{box-shadow:0 0 0 9px rgba(255,110,32,0)}100%{box-shadow:0 0 0 0 rgba(255,110,32,0)}}
+@media (prefers-reduced-motion:reduce){.sp-live i{animation:none}}
+.sp-x{padding:5px 12px;border-radius:99px;background:var(--o);color:var(--o-ink);font-weight:800;font-size:14px;font-family:var(--disp);letter-spacing:.5px}
+.sp-main{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center;margin-top:10px}
+.sp-copy h2{font-size:26px;margin:0 0 6px}
+.sp-copy p{margin:0;color:var(--tx2);max-width:58ch}
+.sp-xp{margin-top:10px;font-size:14px;color:var(--tx2);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.sp-xp s{color:var(--tx3)}.sp-xp b{color:var(--gold);font-family:var(--disp);font-size:22px;letter-spacing:.3px}
+.sp-clock{display:flex;align-items:flex-start;gap:6px}
+.sp-seg{display:flex;flex-direction:column;align-items:center;min-width:64px;padding:9px 6px 7px;border-radius:12px;background:rgba(0,0,0,.38);border:1px solid var(--ln2)}
+.sp-seg b{font-family:var(--disp);font-weight:800;font-size:36px;line-height:1;font-variant-numeric:tabular-nums;color:var(--tx)}
+.sp-seg span{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--tx3);margin-top:5px}
+.sp-clock>i{font-style:normal;font-family:var(--disp);font-size:28px;line-height:1;color:var(--o);margin-top:12px}
+.sp-bar{height:5px;border-radius:99px;background:rgba(255,255,255,.08);margin:16px 0 12px;overflow:hidden}
+.sp-bar i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:linear-gradient(90deg,var(--o),var(--gold));transition:width 1s linear}
+.sp-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.sp-when{font-size:13.5px;color:var(--tx3)}.sp-when b{color:var(--tx);font-weight:600}
+.sp-st{font-weight:700;color:var(--o2)}.sp-st.sp-submitted{color:var(--warn)}.sp-st.sp-needs_changes{color:var(--bad)}
+.sp-acts{display:flex;gap:8px;flex-wrap:wrap}
+@media (max-width:640px){.sprint{padding:16px 14px 14px}.sp-main{grid-template-columns:1fr;gap:14px}.sp-seg{min-width:0;flex:1}.sp-copy h2{font-size:22px}.sp-acts{width:100%}.sp-acts>*{flex:1;justify-content:center}}
+.qbadge2.sp{top:auto;bottom:10px;right:10px;background:rgba(11,13,17,.88);color:var(--o2);border:1px solid rgba(255,110,32,.6)}
+.sp-left{color:var(--o2);font-weight:700;font-variant-numeric:tabular-nums}
+.sp-note{margin:0 0 10px;border-color:rgba(255,110,32,.5)}
+.qslop{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--bad-soft);border:1px solid rgba(255,92,77,.3)}
+.qslop b{display:block;margin-bottom:4px;font-size:13.5px}.qslop ul{margin:0 0 0 18px}.qslop li{font-size:13.5px;color:var(--tx2)}
 </style>
 </head>
 <body>
@@ -1167,7 +1203,7 @@ details.qmore{margin-top:10px}details.qmore>summary{cursor:pointer;font-size:13p
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261024-174330";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261025-153146";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1247,7 +1283,7 @@ function art(key,cat='Film',extra='',{wide=false}={}){ const [a,b]=PAL[cat]||PAL
   if(wide) return `<svg viewBox="0 0 240 100" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(key)} illustration" ${extra}><rect width="240" height="100" fill="${a}"/><g transform="translate(70 0)">${f(a,b)}</g><g stroke="${b}" stroke-opacity=".18" stroke-width="2"><path d="M14 20h30M14 32h18M196 68h30M208 80h18"/></g></svg>`;
   return `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(key)} illustration" ${extra}>${f(a,b)}</svg>`; }
 /* brand photos (Ravine b-roll stills, served from ./ph) */
-const QPHOTO={oct_spanish:'qa-streak',oct_buddy:'qa-unaware',oct_acad_win:'qa-host',oct_acad_feedback:'qa-feedback',oct_acad_answer:'qa-coach',oct_acad_breakdown:'qa-review',oct_weakspot:'qa-improve',oct_newangle3:'qa-concepts',oct_replay:'qa-call',oct_ai_kb9:'qa-recreate',oct_boss_ai1k:'qa-leader',oct_review3:'qa-review',oct_recreate:'qa-recreate',oct_unaware:'qa-unaware',oct_hooks3:'qa-hooks',oct_improve:'qa-improve',oct_call:'qa-call',oct_host:'qa-host',oct_coach:'qa-coach',oct_objection:'qa-objection',oct_concepts5:'qa-concepts',oct_feedback:'qa-feedback',oct_streak7:'qa-streak',oct_leader:'qa-leader',oct_boss_refer:'qa-host',oct_boss_format:'qa-recreate',oct_boss_1k:'qa-concepts',oct_boss_hook:'qa-hooks',oct_boss_scale:'qa-leader',oct_boss_top5:'qa-leader',oct_sprint3:'qa-concepts',oct_field:'qa-unaware',oct_broll:'qa-review',oct_gift:'qa-objection',oct_comment:'qa-feedback',oct_win_post:'qa-streak',oct_boss_25in5:'qa-streak',oct_boss_speaker:'qa-host',oct_boss_5k:'qa-concepts',oct_boss_mentor:'qa-coach',oct_boss_10k:'qa-leader',oct_boss_angle:'qa-recreate'};
+const QPHOTO={oct_ai48:'qa-ai48',oct_spanish:'qa-streak',oct_buddy:'qa-unaware',oct_acad_win:'qa-host',oct_acad_feedback:'qa-feedback',oct_acad_answer:'qa-coach',oct_acad_breakdown:'qa-review',oct_weakspot:'qa-improve',oct_newangle3:'qa-concepts',oct_replay:'qa-call',oct_ai_kb9:'qa-recreate',oct_boss_ai1k:'qa-leader',oct_review3:'qa-review',oct_recreate:'qa-recreate',oct_unaware:'qa-unaware',oct_hooks3:'qa-hooks',oct_improve:'qa-improve',oct_call:'qa-call',oct_host:'qa-host',oct_coach:'qa-coach',oct_objection:'qa-objection',oct_concepts5:'qa-concepts',oct_feedback:'qa-feedback',oct_streak7:'qa-streak',oct_leader:'qa-leader',oct_boss_refer:'qa-host',oct_boss_format:'qa-recreate',oct_boss_1k:'qa-concepts',oct_boss_hook:'qa-hooks',oct_boss_scale:'qa-leader',oct_boss_top5:'qa-leader',oct_sprint3:'qa-concepts',oct_field:'qa-unaware',oct_broll:'qa-review',oct_gift:'qa-objection',oct_comment:'qa-feedback',oct_win_post:'qa-streak',oct_boss_25in5:'qa-streak',oct_boss_speaker:'qa-host',oct_boss_5k:'qa-concepts',oct_boss_mentor:'qa-coach',oct_boss_10k:'qa-leader',oct_boss_angle:'qa-recreate'};
 const questPhoto=c=>QPHOTO[c.quest_key]?`./ph/${QPHOTO[c.quest_key]}.jpg`:null;
 const tierPhoto=t=>{ const k=String(t.id||t.name||'').split(':').pop().toLowerCase(); return ['builder','operator','elite'].includes(k)?`./ph/tier-${k}.jpg`:null; };
 /* wide frame for a portrait photo: blurred fill behind, sharp photo in front (stays crisp at any width) */
@@ -1504,7 +1540,7 @@ function xpPop(n){ const e=document.createElement('div'); e.className='xppop'; e
 
 /* ---- shared components */
 const badge=(kind,text)=>`<span class="badge ${kind}">${esc(text)}</span>`;
-const QSTATE={approved_period:['g','Done this half'],available:['n','Available'],in_progress:['p','In progress'],submitted:['r','In review'],needs_changes:['c','Changes needed'],approved:['g','Completed'],rejected:['x','Not approved'],expired:['x','Expired']};
+const QSTATE={ended:['x','Closed'],soon:['n','Opens soon'],approved_period:['g','Done this half'],available:['n','Available'],in_progress:['p','In progress'],submitted:['r','In review'],needs_changes:['c','Changes needed'],approved:['g','Completed'],rejected:['x','Not approved'],expired:['x','Expired']};
 const SSTATE={pending:['r','Pending review'],approved:['g','Approved'],changes_requested:['c','Changes requested'],rejected:['x','Rejected']};
 const OUTCOME={qualifies:['g','Eligible'],awaiting_review:['r','In review'],rejected:['x','Excluded: rejected'],funnel_not_eligible:['x','Excluded: BOF'],funnel_unverified:['v','Verification needed: stage'],approved_after_window:['x','Excluded: approved after October'],beyond_slot_limit:['x','Outside first 20'],not_qualified:['x','Not eligible'],verification_needed:['v','Verification needed'],other_campaign:['n','Not an October entry'],not_in_contest:['n','Not in contest']};
 const RSTATE={locked:['n','Locked'],eligible:['g','Eligible'],claim_submitted:['r','Claim submitted'],approved_for_payment:['p','Approved for payment'],paid:['d','Paid'],included:['g','Included']};
@@ -1765,6 +1801,7 @@ route('home',async()=>{
   const tierHtml=nt?`<div class="plabel"><span>Next reward: <b>${esc(nt.name)} · ${fmt.usd(nt.cash_total_cents,{cents:true})}</b></span>${nt.draft||!nt.published?badge('d','Draft terms'):badge('g','Live')}</div>
      ${pbar(Math.min(r.xp||0,nt.xp_required),nt.xp_required,{label:'XP · '+halfLabel(q.period_now),cls:'gold'})}<div style="height:8px"></div>${pbar(Math.min(r.concepts||0,nt.concepts_required),nt.concepts_required,{label:'Approved videos · '+halfLabel(q.period_now),cls:'green'})}`:`<div class="note good">Every tier reached for ${esc(halfLabel(q.period_now))}. Nice.</div>`;
   return `${ph('Home','',{eyebrow:`October 2026 · ${dl} day${dl===1?'':'s'} left · ends Oct 31, 11:59 pm CT`,acts:`<button class="btn" onclick="go('${action.go}',${JSON.stringify(action.p||{}).replace(/"/g,'&quot;')})">${esc(action.t)}</button>`})}
+  ${(()=>{ const QQ=S.cache['my_quests{}']; if(!QQ) return ''; const ins=QQ.instances||[]; return sprintBanner(QQ.catalog,Object.fromEntries((QQ.catalog||[]).map(c=>[c.quest_key,questState(c,ins)]))); })()}
   ${teamGoalCard(TG)}
   ${numbersCard(N)}
   ${paceCard(SUBS,SP.source)}
@@ -1814,7 +1851,7 @@ function syncLine(src,vids){ const at=src?.last_run; const pend=(vids||[]).filte
 function activityText(a){ const k={submission:{imported:'Video added to your records',approved:'Video approved',rejected:'Video rejected',changes_requested:'Changes requested on a video',funnel_set:'Video stage classified',revision_linked:'Revision linked to its original',corrected:'Video record corrected'},quest:{started:'Started a quest',submitted:'Submitted quest evidence',changes_requested:'Quest returned with notes',approved:'Quest approved',rejected:'Quest not approved',reversed:'Quest award reversed'},claim:{requested:'Reward claim submitted',approved_for_payment:'Reward claim approved for payment',paid:'Reward recorded as paid',rejected:'Reward claim rejected',review_issue:'Review issue opened'}}; return (k[a.kind]||{})[a.event]||`${a.kind}: ${a.event}`; }
 
 /* ---------------- Quests */
-const QSKILL={oct_spanish:['Storytelling',2,'1-2 hrs'],oct_buddy:['Storytelling',2,'2-3 hrs'],oct_acad_win:['Research',1,'15 min'],oct_acad_feedback:['Research',1,'10 min'],oct_acad_answer:['Research',1,'15 min'],oct_acad_breakdown:['Storytelling',2,'45 min'],
+const QSKILL={oct_ai48:['Storytelling',2,'2-4 hrs'],oct_spanish:['Storytelling',2,'1-2 hrs'],oct_buddy:['Storytelling',2,'2-3 hrs'],oct_acad_win:['Research',1,'15 min'],oct_acad_feedback:['Research',1,'10 min'],oct_acad_answer:['Research',1,'15 min'],oct_acad_breakdown:['Storytelling',2,'45 min'],
   oct_weakspot:['Editing',2,'1-2 hrs'],oct_newangle3:['Storytelling',3,'1 week'],oct_replay:['Research',1,'45 min'],oct_ai_kb9:['Editing',2,'2-3 hrs'],oct_boss_ai1k:['Conversion',3,'2 weeks'],
   oct_review3:['Storytelling',1,'1-2 hrs'],oct_recreate:['Research',2,'2-3 hrs'],oct_unaware:['Hooks',2,'2-3 hrs'],oct_hooks3:['Hooks',2,'1-2 hrs'],oct_improve:['Editing',2,'1-2 hrs'],
   oct_objection:['Conversion',2,'1-2 hrs'],oct_concepts5:['Storytelling',3,'1 week'],oct_sprint3:['Storytelling',2,'3 days'],oct_field:['Storytelling',2,'2-3 hrs'],oct_broll:['Editing',1,'30 min'],oct_gift:['Conversion',2,'1-2 hrs'],
@@ -1854,6 +1891,45 @@ function featuredBanner(FQ,cats,states){ if(!FQ) return ''; const c=(cats||[]).f
     <h2>${esc(c.title)}</h2><p>${esc(c.outcome)}</p>
     <div class="fq-foot"><span class="fq-xp"><s>+${c.xp_base} XP</s> <b>+${c.xp_value} XP</b> if you start or submit it this week</span><button class="btn" onclick="openQuest('${c.quest_key}')">${cta}</button></div>
     ${nx&&nx.quest_key!==c.quest_key?`<div class="mini" style="margin-top:8px">Next week: ${esc(nx.title)}</div>`:''}</div></div>`; }
+/* ---- Limited-time quests (Austin, Oct 25: the 48-hour AI sprint). The quest row carries opens_at / closes_at and
+   xp_normal (XP before the boost). The server enforces the window; the app shows the clock. ---- */
+const KB9_POST_URL='https://www.skool.com/ravine/knowledge-bomb-9-how-to-make-ai-animation-ads?p=39b83dbe';   // Austin, Oct 25
+const QBAR={oct_ai48:{h:'🚫 No AI slop. Austin sends these back for a new video:',items:['Warped hands, faces or product','Flicker, glitches or melting backgrounds','A robotic voice reading a script with no story','The same idea twice','Opening on a pitch, price or discount']}};
+function qWin(c){ if(!c||!c.closes_at) return null; const n=Date.now(), e=Date.parse(c.closes_at), o=c.opens_at?Date.parse(c.opens_at):e-1728e5; if(!isFinite(e)) return null;
+  return {open:n>=o&&n<e, ended:n>=e, soon:n<o, ms:Math.max(0,e-n), end:e, start:o, hrs:Math.max(1,Math.round((e-o)/36e5))}; }
+const qMult=c=>c&&c.xp_normal&&c.xp_value>c.xp_normal?Math.round(c.xp_value/c.xp_normal):0;
+function hm(ms){ ms=Math.max(0,ms); return `${Math.floor(ms/36e5)}h ${String(Math.floor(ms%36e5/6e4)).padStart(2,'0')}m`; }
+function ctWhen(ts){ try{ const p=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:TZ,weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',hour12:true}).formatToParts(new Date(ts)).map(x=>[x.type,x.value]));
+  return `${p.weekday} ${p.month} ${p.day}, ${p.hour}:${p.minute} ${String(p.dayPeriod||'').toLowerCase()} CT`; }catch(e){ return fmt.date(ts); } }
+function clockHtml(ms){ ms=Math.max(0,ms); const z=n=>String(n).padStart(2,'0'); const h=Math.floor(ms/36e5), m=Math.floor(ms%36e5/6e4), s=Math.floor(ms%6e4/1e3);
+  return `<div class="sp-seg"><b>${z(h)}</b><span>hrs</span></div><i>:</i><div class="sp-seg"><b>${z(m)}</b><span>min</span></div><i>:</i><div class="sp-seg"><b>${z(s)}</b><span>sec</span></div>`; }
+function liveQuest(cats){ return (cats||[]).filter(c=>{ const w=qWin(c); return w&&w.open&&!c.locked; }).sort((a,b)=>Date.parse(a.closes_at)-Date.parse(b.closes_at))[0]||null; }
+function sprintBanner(cats,states){ const c=liveQuest(cats); if(!c) return ''; const st=states?.[c.quest_key]||{state:'available'}; if(!['available','in_progress','needs_changes','submitted'].includes(st.state)) return '';
+  const w=qWin(c), mult=qMult(c), rp=st.cur?reqProgress(c,st.cur):null, kb=(QRES[c.quest_key]||[]).find(r=>r.ext);
+  const cta={available:'Start quest',in_progress:'Continue',needs_changes:'Fix and resubmit',submitted:'View entry'}[st.state];
+  const status={in_progress:rp?`${rp.have} of ${rp.need} ${rp.unit||'items'} attached`:'Started',submitted:'Sent. Austin is reviewing it.',needs_changes:'Austin asked for a fix'}[st.state]||'';
+  return `<section class="card sprint" aria-label="${esc(c.title)}">
+    <div class="sp-head"><span class="sp-live"><i></i>Live now · ${w.hrs}-hour quest</span>${mult?`<span class="sp-x">${mult}x XP</span>`:''}</div>
+    <div class="sp-main"><div class="sp-copy"><h2>${esc(c.title)}</h2><p>${esc(c.outcome)}</p>
+      <div class="sp-xp">${mult?`<s>${c.xp_normal} XP</s>`:''}<b>${c.xp_value} XP</b> after approval</div></div>
+      <div class="sp-clock" data-qend="${w.end}" role="timer" aria-label="Time left: ${hm(w.ms)}">${clockHtml(w.ms)}</div></div>
+    <div class="sp-bar" aria-hidden="true"><i data-qbar="${w.end}" data-qstart="${w.start}" style="width:${Math.max(0,Math.min(100,w.ms/(w.end-w.start)*100)).toFixed(1)}%"></i></div>
+    <div class="sp-foot"><span class="sp-when">Send it before <b>${esc(ctWhen(w.end))}</b>${status?` · <span class="sp-st sp-${st.state}">${esc(status)}</span>`:''}</span>
+      <div class="sp-acts">${kb?`<a class="btn gh sm" ${openExt(kb.url)}>${kb.icon} Knowledge Bomb #9 ${ico('ext',12)}</a>`:''}<button class="btn" onclick="openQuest('${c.quest_key}')">${cta}</button></div></div>
+  </section>`; }
+function qWinNote(c,inst){ const w=qWin(c); if(!w) return ''; const mult=qMult(c);
+  if(w.ended) return `<div class="note sp-note ${inst?.state==='needs_changes'?'warn':''}">⏱️ <b>This ${w.hrs}-hour quest closed ${esc(ctWhen(w.end))}.</b> ${inst?.state==='needs_changes'?'You can still send the fix Austin asked for.':inst?.state==='submitted'?'Your entry made it in. Austin is reviewing it.':inst?.state==='in_progress'?'This entry was not sent in time, so it cannot be submitted now.':''}</div>`;
+  if(w.soon) return `<div class="note sp-note">⏱️ <b>Opens ${esc(ctWhen(w.start))}.</b></div>`;
+  return `<div class="note sp-note">⏱️ <b>${w.hrs}-hour quest${mult?` · ${mult}x XP`:''}.</b> ${mult?`${c.xp_value} XP instead of ${c.xp_normal}. `:''}Send it before <b>${esc(ctWhen(w.end))}</b> · <span data-qend="${w.end}" data-qfmt="left">${hm(w.ms)} left</span></div>`; }
+function qbarHtml(key){ const B=QBAR[key]; return B?`<div class="qslop"><b>${esc(B.h)}</b><ul>${B.items.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''; }
+function qTick(){ const now=Date.now(); let hit=false;
+  $$('[data-qend]').forEach(el=>{ const ms=+el.dataset.qend-now; if(ms<=0&&el.isConnected) hit=true;
+    if(el.classList.contains('sp-clock')){ el.innerHTML=clockHtml(ms); el.setAttribute('aria-label','Time left: '+hm(ms)); }
+    else if(el.dataset.qfmt==='chip') el.textContent=ms>0?`⏱️ ${hm(ms)} left`:'⏱️ Closed';
+    else el.textContent=ms>0?`${hm(ms)} left`:'closed'; });
+  $$('[data-qbar]').forEach(el=>{ const e=+el.dataset.qbar, s=+el.dataset.qstart; el.style.width=Math.max(0,Math.min(100,(e-now)/(e-s)*100)).toFixed(2)+'%'; });
+  if(hit&&!qTick.done){ qTick.done=true; try{ API.bust(); }catch(e){} if(typeof render==='function') render(); } }
+if(typeof window!=='undefined'&&!window.__qTimer) window.__qTimer=setInterval(qTick,1000);
 /* quests that take a reference video from the Angle Library */
 const REF_QUESTS=['oct_recreate','oct_boss_format','oct_boss_angle','oct_hooks3','oct_unaware','oct_ai_kb9'];
 /* Oct 24: learning links shown in a quest's "Watch an example" step. KB9_URL = Chris's Knowledge Bomb #9 lesson; KB_COURSE_URL = the full Knowledge Bomb course (Austin sent both, Oct 24). */
@@ -1864,6 +1940,7 @@ const QRES={
   oct_boss_ai1k:[{icon:'📺',label:KB9_DIRECT?"Watch Chris's Knowledge Bomb #9":"Chris's Knowledge Bomb #9 (Skool classroom)",url:KB9_URL,ext:true},{icon:'🤖',label:'Browse AI videos in the Angle Library',hash:'#/library?f=AI'}],
   oct_newangle3:[{icon:'🧭',label:'Pick your 3 angles in the Angle Library',hash:'#/library'}],
   oct_spanish:[{icon:'🇪🇸',label:'Watch Spanish videos in the Angle Library',hash:'#/library?f=Spanish'}],
+  oct_ai48:[{icon:'📺',label:"Watch Chris's Knowledge Bomb #9",url:KB9_POST_URL,ext:true},{icon:'🤖',label:'Browse AI videos in the Angle Library',hash:'#/library?f=AI'}],
   oct_weakspot:[{icon:'📊',label:'Open My submissions to find your stat sheets',hash:'#/submissions'},{icon:'📚',label:'Knowledge Bombs: learn the fix',url:KB_COURSE_URL,ext:true}],
 };
 function qresHtml(key){ const L=QRES[key]; if(!L) return ''; return `<div class="qres">${L.map(r=>r.ext?`<a class="btn gh sm" ${openExt(r.url)}>${r.icon} ${esc(r.label)} ${ico('ext',12)}</a>`:`<a class="btn gh sm" href="${r.hash}" onclick="closeDrawer(true)">${r.icon} ${esc(r.label)}</a>`).join('')}</div>`; }
@@ -1876,6 +1953,7 @@ const QF_LABEL={all:'All',available:'Available',in_progress:'In progress',submit
 function questState(cat,insts){ const mine=insts.filter(i=>i.quest_key===cat.quest_key); const cur=mine.find(i=>i.period_key===cat.period_now&&['in_progress','needs_changes','submitted'].includes(i.state));
   const done=cat.done_in_period||0; const maxThis=cat.per_period_limit; const total=cat.completions_total||0; const maxTotal=cat.max_xp&&cat.xp_value?Math.round(cat.max_xp/cat.xp_value):(cat.period_kind==='reward_period'?maxThis*2:(cat.period_kind==='day'?Math.floor(cat.monthly_xp_cap/cat.xp_value):maxThis));
   let state='available'; if(cur) state=cur.state; else if(cat.period_kind==='day'&&((cat.xp_this_period??cat.xp_this_month)||0)>=cat.monthly_xp_cap) state='approved'; else if(done>=maxThis&&(cat.period_kind!=='reward_period'||total>=maxTotal)) state='approved'; else if(done>=maxThis) state='approved_period';
+  if(cat.closes_at){ const w=qWin(cat); if(state==='approved_period') state='approved'; if(state==='available'&&w&&!w.open) state=w.ended?'ended':'soon'; }   // limited-time quests have no next half
   return {cur,mine,done,maxThis,total,maxTotal,state}; }
 function reqProgress(cat,inst){ const req=cat.requirement||{}; const n=req.count||1; if(!inst||!inst.draft) return {have:0,need:n,unit:req.unit||''}; const p=(cat.proof||[]).find(f=>f.type==='url_list'||f.type==='submission_list'); let have=0;
   if(p){ const v=inst.draft[p.field]; have=Array.isArray(v)?v.filter(x=>String(x).trim()).length:(v?String(v).split(/\n+/).filter(Boolean).length:0); } else { have=(cat.proof||[]).filter(f=>{ const v=inst.draft[f.field]; return v!=null&&String(v).trim()!==''; }).length?1:0; }
@@ -1896,6 +1974,7 @@ route('quests',async(p)=>{
   setTimeout(()=>{ $('#qlist')&&($('#qlist').innerHTML=questSections()); },0);
   window.__qtabs=()=>{ const b=$('#qrailbox'); if(b){ const x=$('#qrail')?.scrollLeft||0; b.innerHTML=questRail(cats,states); const g=$('#qrail'); if(g) g.scrollLeft=x; } const a=$('#qacad'); if(a) a.innerHTML=academyBanner(); const l=$('#qlist'); if(l) l.innerHTML=questSections(); };
   return `${ph('Quests',`Build better videos. Complete challenges. Unlock rewards.<span class="qdates">Reward period ${PERIOD_LABEL(q.period_now)}${pn?` · resets ${fmt.date(pn.ends_at)}, 12:00 am CT`:''}${(q.max_xp_period||q.max_xp_month)?` · ${q.max_xp_period||q.max_xp_month} XP possible`:''}</span>`,{eyebrow:'October 2026',acts:`<button class="btn gh" onclick="openRewardRules()">${ico('book')} Rules</button><button class="btn gh" onclick="go('rewards')">${ico('gift')} View rewards</button>`})}
+  ${sprintBanner(cats,states)}
   ${questHero(q,r,insts)}
   ${ref?refBanner(ref,cats,states):''}
   ${rec?(()=>{ const cur=states[rec.quest_key].cur; const note=recState==='needs_changes'&&cur?.review_note?String(cur.review_note):''; const ex=note.length>140?note.slice(0,140).replace(/\s+\S*$/,'')+'…':note;
@@ -1934,7 +2013,7 @@ function refBanner(ref,cats,states){ const ok=REF_QUESTS.map(k=>cats.find(c=>c.q
     <div class="row" style="margin-top:10px;gap:6px;flex-wrap:wrap">${ok.map(c=>`<button class="btn sm ${c===ok[0]?'':'gh'}" onclick="openQuest('${c.quest_key}')">${esc(c.title)}</button>`).join('')||'<span class="mini">No open quest takes a reference right now.</span>'}</div></div><button class="licon" aria-label="Drop the reference" onclick="S.ui.qref=null;saveUI();render()">${ico('x',16)}</button></div>`; }
 function nextPeriodDate(st){ const q=S.cache['my_quests{}']; const i=(q?.periods||[]).findIndex(p=>p.key===q.period_now); const n=q?.periods?.[i+1]; return n?fmt.date(n.starts_at):'next month'; }
 function levelName(xp){ return xp>=200?'Elite':xp>=100?'Operator':xp>=50?'Builder':xp>=25?'Rookie II':'Rookie'; }
-function questCta(st){ return {available:'Start quest',approved_period:'Next period opens '+nextPeriodDate(st),in_progress:'Continue quest',needs_changes:'Fix and resubmit',submitted:'View submission',approved:'View',rejected:'View'}[st.state]||'Open'; }
+function questCta(st){ return {ended:'Closed',soon:'Opens soon',available:'Start quest',approved_period:'Next period opens '+nextPeriodDate(st),in_progress:'Continue quest',needs_changes:'Fix and resubmit',submitted:'View submission',approved:'View',rejected:'View'}[st.state]||'Open'; }
 /* ---- Angle Library handoff: the reference stays attached (S.ui.qref) through filtering, saving and submitting ---- */
 async function libRefInfo(id){ if(typeof loadLib==='function'){ await loadLib(); const v=(window.ANGLE_LIBRARY?.videos||[]).find(x=>x.id===id); if(v) return {id,th:v.th,hook:v.h||v.t,c:v.c}; } return {id,th:null,hook:id,c:''}; }
 function refBanner(ref,cats,states){ const ok=REF_QUESTS.map(k=>cats.find(c=>c.quest_key===k)).filter(c=>c&&!c.locked&&['available','in_progress','needs_changes'].includes(states[c.quest_key].state));
@@ -1946,7 +2025,7 @@ function questCard(c,st,H){ const s=st.state; const [k,label]=QSTATE[s]||QSTATE.
     :(st.cur&&st.cur.state==='submitted'?`<div class="prog"><div class="plabel"><span>Sent ${fmt.ago(st.cur.submitted_at)}</span><b>+${c.xp_value} XP pending</b></div><div class="bar"><i style="width:100%;background:var(--warn)"></i></div></div>`:'');
   const fb=s==='needs_changes'&&st.cur?.review_note?`<div class="qfb">💬 ${esc(st.cur.review_note)}</div>`:'';
   const action={available:'Start',in_progress:'Continue',needs_changes:'Fix',submitted:'View submission',approved:'View',approved_period:'View',rejected:'View'}[s]||'Open';
-  return `<button class="qcard v2 ${s==='approved'?'done':''} ${lk?'lock':''}" onclick="openQuest('${c.quest_key}')" aria-label="${esc(c.title)}: ${lk?'locked':label}"><div class="art ph">${thumb(questPhoto(c),c.image_key,c.category)}<span class="qbadge badge ${lk?'n':k}">${lk?'🔒 '+esc(c.min_prestige_name||'Prestige'):label}</span>${c.featured?`<span class="qbadge2">🔥 ${c.xp_mult}x XP this week</span>`:''}</div><div class="qbody"><div class="ttl">${c.category==='Boss'?'⚔️ ':''}${esc(c.title)}</div><div class="out">${esc(c.outcome)}</div>${qmetaChips(c)}${fb}${rewardProgress(c,st,H,{card:true})}${prog}<div class="foot"><span class="mini">${lk?`Unlock ${esc(c.min_prestige_name||'a higher level')} first`:capText}</span><span class="btn sm ${['approved','approved_period','submitted'].includes(s)||lk?'gh':''}">${lk?'Preview':action}</span></div></div></button>`; }
+  return `<button class="qcard v2 ${s==='approved'?'done':''} ${lk?'lock':''}" onclick="openQuest('${c.quest_key}')" aria-label="${esc(c.title)}: ${lk?'locked':label}"><div class="art ph">${thumb(questPhoto(c),c.image_key,c.category)}<span class="qbadge badge ${lk?'n':k}">${lk?'🔒 '+esc(c.min_prestige_name||'Prestige'):label}</span>${c.featured?`<span class="qbadge2">🔥 ${c.xp_mult}x XP this week</span>`:''}${qWin(c)&&qWin(c).open?`<span class="qbadge2 sp">⏱️ ${qWin(c).hrs}h quest${qMult(c)?` · ${qMult(c)}x XP`:''}</span>`:''}</div><div class="qbody"><div class="ttl">${c.category==='Boss'?'⚔️ ':''}${esc(c.title)}</div><div class="out">${esc(c.outcome)}</div>${qmetaChips(c)}${fb}${rewardProgress(c,st,H,{card:true})}${prog}<div class="foot"><span class="mini">${lk?`Unlock ${esc(c.min_prestige_name||'a higher level')} first`:qWin(c)&&qWin(c).open?`<span class="sp-left" data-qend="${qWin(c).end}" data-qfmt="chip">⏱️ ${hm(qWin(c).ms)} left</span>`:capText}</span><span class="btn sm ${['approved','approved_period','submitted'].includes(s)||lk?'gh':''}">${lk?'Preview':action}</span></div></div></button>`; }
 
 async function openQuest(key,instId){
   const q=await API.page('my_quests'); let rw=null; try{ rw=await API.page('my_rewards'); }catch(e){} const c=q.catalog.find(x=>x.quest_key===key); if(!c) return; const st=questState(c,q.instances); const inst=instId?q.instances.find(i=>i.id===instId):st.cur;
@@ -1957,12 +2036,12 @@ async function openQuest(key,instId){
   const example=(c.examples||[]).length||ref||REF_QUESTS.includes(key);
   openDrawer(`<div class="row">${c.locked&&!inst?`<span class="badge n">🔒 Unlock ${esc(c.min_prestige_name||'Prestige')}</span>`:`<span class="badge ${QSTATE[inst?.state||'available'][0]}">${QSTATE[inst?.state||'available'][1]}</span>`}<span class="mini">${esc(c.category)}</span></div>
    <h2>${c.category==='Boss'?'⚔️ ':''}${esc(c.title)}</h2><div class="art">${photoFrame(questPhoto(c),c.image_key,c.category)}</div>
-   <div class="qmeta-row">${qmetaChips(c)}</div>${c.featured?`<div class="note" style="margin:0 0 10px;border-color:rgba(255,110,32,.5)">🔥 <b>Double XP this week:</b> ${c.xp_value} XP instead of ${c.xp_base} if you start or submit it before Sunday 11:59 pm CT.</div>`:''}
+   <div class="qmeta-row">${qmetaChips(c)}</div>${c.featured?`<div class="note" style="margin:0 0 10px;border-color:rgba(255,110,32,.5)">🔥 <b>Double XP this week:</b> ${c.xp_value} XP instead of ${c.xp_base} if you start or submit it before Sunday 11:59 pm CT.</div>`:''}${qWinNote(c,inst)}
    <nav class="qflow" aria-label="Steps">${['The assignment','Watch an example','Create your version','Attach evidence','Submit'].map((t,i)=>`<a href="#qs${i+1}" onclick="document.getElementById('qs${i+1}')?.scrollIntoView({behavior:'smooth',block:'start'});return false">${i+1}. ${t}</a>`).join('')}</nav>
    ${c.locked?`<div class="note" style="margin-top:8px"><b>🔒 Unlock ${esc(c.min_prestige_name||'a higher level')} to unlock this quest.</b> It opens in any half you play ${esc(c.min_prestige_name||'that level')} or higher. <a href="#" onclick="closeDrawer();go('rewards');return false">See Prestige</a></div>`:''}
    ${inst?.review_note&&inst.state!=='approved'?`<section class="qreturn"><h3>${inst.state==='rejected'?'Why it was not approved':'What Austin wants changed'}</h3><div class="note ${inst.state==='rejected'?'bad':'warn'}">${esc(inst.review_note)}</div></section>`:''}
    <section id="qs1" class="qstep">${stepN(1,'The assignment','What to make and what gets it approved')}<p class="qdeliver">${esc(c.outcome)}</p>
-     <div class="qcrit"><b>Approved when</b><ul>${(c.criteria||[]).map(e=>`<li>${esc(e)}</li>`).join('')}</ul></div>
+     <div class="qcrit"><b>Approved when</b><ul>${(c.criteria||[]).map(e=>`<li>${esc(e)}</li>`).join('')}</ul></div>${qbarHtml(key)}
      <details class="qmore"><summary>Why it helps, award and reuse rule</summary><p>${esc(c.why)}</p><div class="mini" style="margin-top:8px">${c.xp_value} XP per completion · ${c.period_kind==='reward_period'?`up to ${st.maxThis} per half, resets the 1st and 16th (${st.done}/${st.maxThis} this half, ${st.total}/${st.maxTotal} this month)`:c.period_kind==='day'?`up to ${c.per_period_limit} per Central day, ${c.monthly_xp_cap} XP per half (${(c.xp_this_period??c.xp_this_month)||0} earned this half)`:`up to ${st.maxTotal} this campaign (${st.total} done)`}${c.scarce?' · scarce bonus award':''}</div>${c.reuse_rule?`<div class="note" style="margin-top:8px"><b>Reuse rule.</b> ${esc(c.reuse_rule)}</div>`:''}</details>${questImpact(c,st,rw?halfCtx(q,rw):null)}</section>
    <section id="qs2" class="qstep">${stepN(2,'Watch an example','Steal the structure, never the video')}${qresHtml(key)}
      ${ref?`<div class="refcard mini-ref"><div class="ref-th">${thumb(ref.th,'tile','neutral')}</div><div style="min-width:0"><div class="lbl">Your reference</div><div class="ref-hook">“${esc(ref.hook)}”</div><div class="mini">${esc(ref.c)} · attached when you start</div></div></div>`:''}
