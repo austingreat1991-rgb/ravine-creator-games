@@ -1203,7 +1203,7 @@ details.qmore{margin-top:10px}details.qmore>summary{cursor:pointer;font-size:13p
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261025-153146";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261025-155129";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1894,7 +1894,7 @@ function featuredBanner(FQ,cats,states){ if(!FQ) return ''; const c=(cats||[]).f
 /* ---- Limited-time quests (Austin, Oct 25: the 48-hour AI sprint). The quest row carries opens_at / closes_at and
    xp_normal (XP before the boost). The server enforces the window; the app shows the clock. ---- */
 const KB9_POST_URL='https://www.skool.com/ravine/knowledge-bomb-9-how-to-make-ai-animation-ads?p=39b83dbe';   // Austin, Oct 25
-const QBAR={oct_ai48:{h:'🚫 No AI slop. Austin sends these back for a new video:',items:['Warped hands, faces or product','Flicker, glitches or melting backgrounds','A robotic voice reading a script with no story','The same idea twice','Opening on a pitch, price or discount']}};
+const QBAR={oct_ai48:{h:'🚫 No AI slop. Austin sends these back for a new video:',items:['The wrong product: it has to look like the real Ravine earbuds','No CTA in the video','Videos made before this quest opened','Warped hands or faces, flicker or glitches','A robotic voice reading a script with no story','The same idea twice']}};   // Austin, Oct 25 post
 function qWin(c){ if(!c||!c.closes_at) return null; const n=Date.now(), e=Date.parse(c.closes_at), o=c.opens_at?Date.parse(c.opens_at):e-1728e5; if(!isFinite(e)) return null;
   return {open:n>=o&&n<e, ended:n>=e, soon:n<o, ms:Math.max(0,e-n), end:e, start:o, hrs:Math.max(1,Math.round((e-o)/36e5))}; }
 const qMult=c=>c&&c.xp_normal&&c.xp_value>c.xp_normal?Math.round(c.xp_value/c.xp_normal):0;
