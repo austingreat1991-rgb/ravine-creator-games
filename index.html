@@ -1203,7 +1203,7 @@ details.qmore{margin-top:10px}details.qmore>summary{cursor:pointer;font-size:13p
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261025-155129";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261028-032606";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1897,6 +1897,8 @@ const KB9_POST_URL='https://www.skool.com/ravine/knowledge-bomb-9-how-to-make-ai
 const QBAR={oct_ai48:{h:'🚫 No AI slop. Austin sends these back for a new video:',items:['The wrong product: it has to look like the real Ravine earbuds','No CTA in the video','Videos made before this quest opened','Warped hands or faces, flicker or glitches','A robotic voice reading a script with no story','The same idea twice']}};   // Austin, Oct 25 post
 function qWin(c){ if(!c||!c.closes_at) return null; const n=Date.now(), e=Date.parse(c.closes_at), o=c.opens_at?Date.parse(c.opens_at):e-1728e5; if(!isFinite(e)) return null;
   return {open:n>=o&&n<e, ended:n>=e, soon:n<o, ms:Math.max(0,e-n), end:e, start:o, hrs:Math.max(1,Math.round((e-o)/36e5))}; }
+/* Oct 27: Austin can reopen a closed quest for one creator (catalog late_until, set only while it is still in the future) */
+const qLate=c=>{ const t=c&&c.late_until?Date.parse(c.late_until):NaN; return isFinite(t)&&t>Date.now()?t:0; };
 const qMult=c=>c&&c.xp_normal&&c.xp_value>c.xp_normal?Math.round(c.xp_value/c.xp_normal):0;
 function hm(ms){ ms=Math.max(0,ms); return `${Math.floor(ms/36e5)}h ${String(Math.floor(ms%36e5/6e4)).padStart(2,'0')}m`; }
 function ctWhen(ts){ try{ const p=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:TZ,weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',hour12:true}).formatToParts(new Date(ts)).map(x=>[x.type,x.value]));
@@ -1918,7 +1920,9 @@ function sprintBanner(cats,states){ const c=liveQuest(cats); if(!c) return ''; c
       <div class="sp-acts">${kb?`<a class="btn gh sm" ${openExt(kb.url)}>${kb.icon} Knowledge Bomb #9 ${ico('ext',12)}</a>`:''}<button class="btn" onclick="openQuest('${c.quest_key}')">${cta}</button></div></div>
   </section>`; }
 function qWinNote(c,inst){ const w=qWin(c); if(!w) return ''; const mult=qMult(c);
-  if(w.ended) return `<div class="note sp-note ${inst?.state==='needs_changes'?'warn':''}">⏱️ <b>This ${w.hrs}-hour quest closed ${esc(ctWhen(w.end))}.</b> ${inst?.state==='needs_changes'?'You can still send the fix Austin asked for.':inst?.state==='submitted'?'Your entry made it in. Austin is reviewing it.':inst?.state==='in_progress'?'This entry was not sent in time, so it cannot be submitted now.':''}</div>`;
+  const late=qLate(c);
+  if(w.ended&&late&&(!inst||['in_progress','needs_changes'].includes(inst.state))) return `<div class="note sp-note">⏱️ <b>Reopened for you until ${esc(ctWhen(late))}.</b> Austin confirmed your AI videos were sent on Trybe before the timer ended. Attach them and send.</div>`;
+  if(w.ended) return `<div class="note sp-note ${inst?.state==='needs_changes'?'warn':''}">⏱️ <b>This ${w.hrs}-hour quest closed ${esc(ctWhen(w.end))}.</b> ${inst?.state==='needs_changes'?'You can still send the fix Austin asked for.':inst?.state==='submitted'?'Your entry made it in. Austin is reviewing it.':inst?.state==='in_progress'?`You started this before the timer ended, so you can still send it. Only AI videos you sent on Trybe before ${esc(ctWhen(w.end))} count.`:''}</div>`;
   if(w.soon) return `<div class="note sp-note">⏱️ <b>Opens ${esc(ctWhen(w.start))}.</b></div>`;
   return `<div class="note sp-note">⏱️ <b>${w.hrs}-hour quest${mult?` · ${mult}x XP`:''}.</b> ${mult?`${c.xp_value} XP instead of ${c.xp_normal}. `:''}Send it before <b>${esc(ctWhen(w.end))}</b> · <span data-qend="${w.end}" data-qfmt="left">${hm(w.ms)} left</span></div>`; }
 function qbarHtml(key){ const B=QBAR[key]; return B?`<div class="qslop"><b>${esc(B.h)}</b><ul>${B.items.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''; }
@@ -1953,7 +1957,7 @@ const QF_LABEL={all:'All',available:'Available',in_progress:'In progress',submit
 function questState(cat,insts){ const mine=insts.filter(i=>i.quest_key===cat.quest_key); const cur=mine.find(i=>i.period_key===cat.period_now&&['in_progress','needs_changes','submitted'].includes(i.state));
   const done=cat.done_in_period||0; const maxThis=cat.per_period_limit; const total=cat.completions_total||0; const maxTotal=cat.max_xp&&cat.xp_value?Math.round(cat.max_xp/cat.xp_value):(cat.period_kind==='reward_period'?maxThis*2:(cat.period_kind==='day'?Math.floor(cat.monthly_xp_cap/cat.xp_value):maxThis));
   let state='available'; if(cur) state=cur.state; else if(cat.period_kind==='day'&&((cat.xp_this_period??cat.xp_this_month)||0)>=cat.monthly_xp_cap) state='approved'; else if(done>=maxThis&&(cat.period_kind!=='reward_period'||total>=maxTotal)) state='approved'; else if(done>=maxThis) state='approved_period';
-  if(cat.closes_at){ const w=qWin(cat); if(state==='approved_period') state='approved'; if(state==='available'&&w&&!w.open) state=w.ended?'ended':'soon'; }   // limited-time quests have no next half
+  if(cat.closes_at){ const w=qWin(cat); if(state==='approved_period') state='approved'; if(state==='available'&&w&&!w.open&&!(w.ended&&qLate(cat))) state=w.ended?'ended':'soon'; }   // limited-time quests have no next half
   return {cur,mine,done,maxThis,total,maxTotal,state}; }
 function reqProgress(cat,inst){ const req=cat.requirement||{}; const n=req.count||1; if(!inst||!inst.draft) return {have:0,need:n,unit:req.unit||''}; const p=(cat.proof||[]).find(f=>f.type==='url_list'||f.type==='submission_list'); let have=0;
   if(p){ const v=inst.draft[p.field]; have=Array.isArray(v)?v.filter(x=>String(x).trim()).length:(v?String(v).split(/\n+/).filter(Boolean).length:0); } else { have=(cat.proof||[]).filter(f=>{ const v=inst.draft[f.field]; return v!=null&&String(v).trim()!==''; }).length?1:0; }
@@ -2390,14 +2394,14 @@ const SLOT_SHORT={qualifies:'Eligible',awaiting_review:'In review',rejected:'Rej
 /* money: cents under $100 so small October numbers are exact, whole dollars above */
 const money=v=>v==null?'—':(Math.abs(Number(v))<100?fmt.usd2(v):fmt.usd(v));
 const roasX=r=>r==null?'—':Number(r).toFixed(2)+'x';
-/* Austin, Oct 24: ROAS is Meta's ROAS = Meta purchase value ÷ ad spend (both from the same Trybe pull).
+/* Oct 27: ROAS = the ROAS column Trybe shows (ad purchase value ÷ ad spend), verified against Trybe's export on 2,016 videos.
    Sales stay Trybe-attributed everywhere (what creators are paid on). Shows '—' until the backend carries ad_sales. */
 const MROAS=(pv,sp)=>sp>0&&pv!=null?+((Number(pv)||0)/sp).toFixed(2):null;
 const TROAS=(s,sp)=>sp>0?+((Number(s)||0)/sp).toFixed(2):null;   // previous rule, used only until the database carries ad_sales
 /* Until the Oct 24 SQL is run, payloads have no ad_sales key: keep the old ROAS and the plain label so nothing goes blank or mislabelled. */
 function roasOf(o,pvk='ad_sales',sk='sales',spk='spend'){ if(o&&Object.prototype.hasOwnProperty.call(o,pvk)){ S.mroas=true; return MROAS(o[pvk],o[spk]); } return TROAS(o?.[sk],o?.[spk]); }
-const RL=()=>S.mroas?'Meta ROAS':'ROAS';
-const RDEF=()=>S.mroas?'ROAS is Meta ROAS: Meta purchase value divided by ad spend.':'ROAS is Trybe sales divided by ad spend.';
+const RL=()=>'ROAS';   // Oct 27: plain ROAS everywhere, same number as Trybe's ROAS column
+const RDEF=()=>S.mroas?'ROAS is the same number Trybe shows: ad purchase value divided by ad spend, so it will not always equal sales divided by spend.':'ROAS is Trybe sales divided by ad spend.';
 const BAND=r=>r==null?'none':r>=2?'good':(r>=1?'warn':'bad');
 const BANDC={good:'var(--gr)',warn:'var(--warn)',bad:'var(--bad)',none:'var(--tx3)'};
 const BANDHEX={good:'#3DDC84',warn:'#FFB020',bad:'#FF5C4D',none:'#848C99'};
@@ -2632,7 +2636,7 @@ function roasChart(rows){
     return `<g class="cdot" data-i="${i}" onmouseenter="roasTip(this)" onmouseleave="roasTipHide()" onclick="openVideo('${esc(p.id)}')">${top}<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${r.toFixed(1)}" fill="${BANDHEX[b]}" fill-opacity=".85"/>${img}<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${r.toFixed(1)}" fill="none" stroke="${BANDHEX[b]}" stroke-width="2.5"/><circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${(r+1.6).toFixed(1)}" fill="none" stroke="#111419" stroke-width="1.5"/></g>`; }).join('');
   window.__rpts=pts;
   return `<div class="card" style="margin-top:14px"><div class="row between"><h3>Where your money is going</h3><span class="mini">${pts.length} videos</span></div>
-   <div class="mini" style="margin:4px 0 10px">Each dot is one video. Further right = more ad spend behind it. Higher = ${S.mroas?'higher Meta ROAS':'more Trybe sales per dollar'}. Tap one to open it.</div>
+   <div class="mini" style="margin:4px 0 10px">Each dot is one video. Further right = more ad spend behind it. Higher = ${S.mroas?'higher ROAS':'more Trybe sales per dollar'}. Tap one to open it.</div>
    <div class="chartwrap" id="cw"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Spend against return for each of your videos"><defs>${defs}</defs>${grid}${refs}${xax}${dots}</svg><div class="ctip" id="ctip"></div></div>
    <div class="clg"><span><i style="background:${BANDHEX.good}"></i>2x and up · winning</span><span><i style="background:${BANDHEX.warn}"></i>1–2x · working</span><span><i style="background:${BANDHEX.bad}"></i>under 1x · costing money</span></div></div>`;
 }
@@ -2646,7 +2650,7 @@ function roasTipHide(){ $('#ctip')?.classList.remove('on'); $$('#cw .cdot').forE
 async function copyText(t){ try{ await navigator.clipboard.writeText(t); toast('Copied'); }catch(e){ const a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select(); try{ document.execCommand('copy'); toast('Copied'); }catch(e2){ toast('Could not copy. Long-press to select it.','bad'); } a.remove(); } }
 
 /* ---------------- Video stat sheet (Austin, Oct 14): every number from Trybe's video panel, next to your average.
-   Every sales number is Trybe-attributed. ROAS is Meta's ROAS (Oct 24); Meta also supplies hold rate and add-to-cart rate. */
+   Every sales number is Trybe-attributed. ROAS matches Trybe's ROAS column (Oct 27); Meta also supplies hold rate and add-to-cart rate. */
 const VS_GROUPS=[
   ['💰 Results',[['sales','Sales (Trybe)','money',1],['roas','ROAS','x',1],['spend','Ad spend','money',0]]],
   ['👀 Hook and watch time',[['thumbstop','Thumbstop (hook rate)','pct1',1],['avg_watch_s','Avg watched','watch',1],['v3s','3-sec views','int',0]]],
