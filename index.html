@@ -1184,9 +1184,128 @@ details.qmore{margin-top:10px}details.qmore>summary{cursor:pointer;font-size:13p
 .sp-note{margin:0 0 10px;border-color:rgba(255,110,32,.5)}
 .qslop{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--bad-soft);border:1px solid rgba(255,92,77,.3)}
 .qslop b{display:block;margin-bottom:4px;font-size:13.5px}.qslop ul{margin:0 0 0 18px}.qslop li{font-size:13.5px;color:var(--tx2)}
+
+/* ================= Armory (Oct 29): prestige name colors + camo backgrounds ================= */
+.nmc{font-weight:inherit}
+.nmc.p0{color:#F4EBDD}
+.nmc.p1{color:#FF7A2E}
+.nmc.p2{color:#FF5050}
+.nmc.p3{color:#B98CFF}
+.nmc.p4{background:linear-gradient(90deg,#ff5f6d,#ffb347,#ffe66d,#5fe3a1,#53c7ff,#8e7dff,#ff6ad5,#ff5f6d);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:rcgRainbow 5s linear infinite;filter:drop-shadow(0 0 6px rgba(255,255,255,.12))}
+@keyframes rcgRainbow{to{background-position:300% 0}}
+.cm-carbon{background-image:url(./ph/camo-carbon.jpg)}.cm-army{background-image:url(./ph/camo-army.jpg)}.cm-desert{background-image:url(./ph/camo-desert.jpg)}
+.cm-woodland{background-image:url(./ph/camo-woodland.jpg)}.cm-blaze{background-image:url(./ph/camo-blaze.jpg)}.cm-opening{background-image:url(./ph/camo-opening.jpg);background-size:400px 400px!important}
+.cm-gold{background-image:url(./ph/camo-gold.jpg)}.cm-nv{background-image:url(./ph/camo-nv.jpg)}.cm-thermal{background-image:url(./ph/camo-thermal.jpg);background-size:380px 380px!important}
+[class*="cm-"]{background-size:360px 360px;background-repeat:repeat}
+/* the equipped camo sits behind the whole app; a dark wash keeps every card readable */
+#camo{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity .5s var(--ease);overflow:hidden}
+#camo.on{opacity:1}
+#camo.on::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 90% 70% at 50% 35%,rgba(7,8,10,.42),rgba(7,8,10,.78)),linear-gradient(180deg,rgba(7,8,10,.15),rgba(7,8,10,.55))}
+body.has-camo .main{background:transparent}
+/* animated camos */
+.fx-gold,.fx-nv,.fx-thermal{position:relative;overflow:hidden}
+.fx-gold::before{content:"";position:absolute;inset:-20%;background:linear-gradient(115deg,transparent 38%,rgba(255,240,190,.55) 50%,transparent 62%);background-size:260% 100%;animation:rcgSheen 4.5s ease-in-out infinite;mix-blend-mode:screen;pointer-events:none}
+@keyframes rcgSheen{0%{background-position:140% 0}60%,100%{background-position:-60% 0}}
+.fx-nv::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.32) 0 2px,transparent 2px 4px),radial-gradient(ellipse at 50% 50%,rgba(80,255,140,.16),transparent 70%);animation:rcgScan 6s linear infinite,rcgFlicker 3.2s steps(1) infinite;pointer-events:none}
+@keyframes rcgScan{to{background-position:0 120px,0 0}}
+@keyframes rcgFlicker{0%,100%{opacity:1}47%{opacity:.82}48%{opacity:1}83%{opacity:.9}}
+.fx-thermal{animation:rcgDrift 38s linear infinite}
+.fx-thermal::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,rgba(255,210,63,.35),transparent 40%),radial-gradient(circle at 75% 65%,rgba(255,90,31,.3),transparent 45%);animation:rcgHeat 7s ease-in-out infinite alternate;mix-blend-mode:screen;pointer-events:none}
+@keyframes rcgDrift{to{background-position:380px 190px}}
+@keyframes rcgHeat{0%{opacity:.35;transform:scale(1)}100%{opacity:.85;transform:scale(1.12)}}
+@media (prefers-reduced-motion:reduce){.nmc.p4,.fx-gold::before,.fx-nv::before,.fx-thermal,.fx-thermal::before{animation:none}}
+/* Armory page */
+.arm-hero{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--ln2);min-height:184px;display:flex;align-items:flex-end;box-shadow:var(--sh)}
+.arm-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,8,10,.88) 0%,rgba(7,8,10,.55) 55%,rgba(7,8,10,.15) 100%);z-index:1}
+.arm-in{position:relative;z-index:2;padding:22px 24px}
+.arm-name{font-family:var(--disp);font-size:40px;font-weight:800;line-height:1.05;letter-spacing:.4px;margin:6px 0 6px;text-transform:uppercase}
+.arm-sub{color:var(--tx2);font-size:14px}
+.arm-count{margin-top:12px;display:inline-flex;gap:6px;align-items:baseline;background:rgba(7,8,10,.6);border:1px solid var(--ln2);border-radius:99px;padding:5px 12px;font-size:13px;color:var(--tx2)}
+.arm-count b{font-family:var(--mono);color:var(--o);font-size:15px}
+.arm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.camo-tile{background:var(--sf);border:1px solid var(--ln);border-radius:var(--r2);padding:0;text-align:left;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s var(--ease),border-color .2s,box-shadow .2s}
+.camo-tile:hover{transform:translateY(-2px);border-color:var(--ln2)}
+.camo-tile.eq{border-color:var(--o);box-shadow:0 0 0 1px var(--o),0 8px 24px rgba(255,110,32,.18)}
+.ct-sw{position:relative;height:118px;overflow:hidden}
+.ct-bg{position:absolute;inset:0}
+.camo-tile.lk .ct-bg{filter:saturate(.7) brightness(.5)}
+.ct-lock{position:absolute;inset:0;display:grid;place-items:center;color:rgba(255,255,255,.9);z-index:2}
+.ct-lock svg{background:rgba(7,8,10,.55);border-radius:50%;padding:9px;width:42px;height:42px;border:1px solid var(--ln2)}
+.ct-badge{position:absolute;top:8px;left:8px;z-index:3;font-size:10.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:rgba(7,8,10,.78);color:var(--tx)}
+.ct-badge.eq{background:var(--o);color:var(--o-ink)}
+.ct-badge.lim{left:auto;right:8px;background:#E8A33D;color:#1A0A00}
+.ct-anim{position:absolute;bottom:8px;left:8px;z-index:3;font-size:10.5px;font-weight:700;letter-spacing:.4px;padding:2px 7px;border-radius:99px;background:rgba(7,8,10,.7);color:var(--tx2)}
+.ct-b{padding:11px 12px 13px;display:flex;flex-direction:column;gap:4px}
+.ct-b b{font-family:var(--disp);font-size:17px;letter-spacing:.3px;text-transform:uppercase}
+.ct-b>span{font-size:12.5px;color:var(--tx3);line-height:1.35}
+.ct-b em{font-style:normal;font-size:12px;color:var(--o);font-weight:700;margin-top:2px}
+.ct-prog{margin-top:4px}.ct-prog .bar{height:5px}.ct-prog span{display:block;margin-top:4px;font-size:11.5px;color:var(--tx2);font-family:var(--mono)}
+.nc{display:flex;align-items:center;gap:14px;padding:11px 12px;border-radius:var(--r3)}
+.nc+.nc{border-top:1px solid var(--ln)}
+.nc.yours{background:var(--o-soft)}
+.nc-n{flex:1;min-width:0;font-family:var(--disp);font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nc.lk .nc-n{opacity:.4}
+.nc-m{display:flex;flex-direction:column;min-width:118px}.nc-m b{font-size:13px}.nc-m span{font-size:12px;color:var(--tx3)}
+.nc-s{min-width:120px;text-align:right}
+@media (max-width:640px){.arm-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.ct-sw{height:92px}.arm-name{font-size:30px}.nc{flex-wrap:wrap;gap:6px 12px}.nc-n{flex-basis:100%;font-size:20px}.nc-m{min-width:0;flex:1}.nc-s{min-width:0}}
+
+/* ================= My pace facelift (Oct 29): your Elite spot ================= */
+.pvs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.pv{background:var(--sf);border:1px solid var(--ln);border-radius:var(--r2);padding:14px 16px}
+.pv.on{border-color:rgba(255,110,32,.55);background:linear-gradient(135deg,rgba(255,110,32,.12),var(--sf) 60%)}
+.pv-k{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--tx3)}
+.pv.on .pv-k{color:var(--o)}
+.pv>b{display:block;font-family:var(--disp);font-size:20px;letter-spacing:.3px;margin:6px 0 4px}
+.pv p{font-size:13.5px;color:var(--tx2);line-height:1.45}.pv p b{color:var(--tx)}
+.phero{display:grid;grid-template-columns:1fr auto;gap:18px 24px;padding:22px 24px;position:relative;overflow:hidden;border-width:1px}
+.phero::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.9}
+.phero.ph-clear{border-color:rgba(61,220,132,.4)}.phero.ph-clear::before{background:radial-gradient(ellipse 70% 90% at 0% 0%,rgba(61,220,132,.14),transparent 60%)}
+.phero.ph-close{border-color:rgba(255,176,32,.5)}.phero.ph-close::before{background:radial-gradient(ellipse 70% 90% at 0% 0%,rgba(255,176,32,.16),transparent 60%)}
+.phero.ph-in{border-color:rgba(255,92,77,.55)}.phero.ph-in::before{background:radial-gradient(ellipse 70% 90% at 0% 0%,rgba(255,92,77,.18),transparent 60%)}
+.phero>*{position:relative}
+.phero-h{font-family:var(--disp);font-size:38px;line-height:1.05;letter-spacing:.3px;text-transform:uppercase;margin:12px 0 8px}
+.ph-clear .phero-h{color:var(--gr)}.ph-close .phero-h{color:var(--warn)}.ph-in .phero-h{color:var(--bad)}
+.phero-s{color:var(--tx2);font-size:15px;max-width:560px}.phero-s b{color:var(--tx)}
+.phero-place{margin-top:16px;display:flex;align-items:baseline;gap:10px}
+.phero-place b{font-family:var(--disp);font-size:44px;line-height:1}.phero-place span{color:var(--tx3);font-size:13.5px}
+.phero-r{display:flex;align-items:center}
+.phero-t{grid-column:1/-1}
+.pring{position:relative;width:150px;height:150px}
+.pring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.pr-bg{fill:none;stroke:var(--sf3);stroke-width:9}
+.pr-fg{fill:none;stroke-width:9;stroke-linecap:round;stroke:var(--o);transition:stroke-dasharray .8s var(--ease)}
+.ph-clear .pr-fg{stroke:var(--gr)}.ph-close .pr-fg{stroke:var(--warn)}.ph-in .pr-fg{stroke:var(--bad)}
+.pr-in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.pr-in b{font-family:var(--disp);font-size:40px;line-height:1}.pr-in span{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--tx3);margin-top:4px}
+.pt{margin-top:4px}
+.pt-bar{position:relative;height:14px;border-radius:99px;background:linear-gradient(90deg,rgba(61,220,132,.35),rgba(61,220,132,.12));margin:30px 0 8px}
+.pt-zone{position:absolute;top:0;bottom:0;right:0;border-radius:0 99px 99px 0;background:repeating-linear-gradient(135deg,rgba(255,92,77,.55) 0 6px,rgba(255,92,77,.3) 6px 12px)}
+.pt-z{color:var(--bad);font-weight:700}
+.pt-line{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--bad);border-radius:2px}
+.pt-me{position:absolute;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center}
+.pt-me i{width:22px;height:22px;border-radius:50%;background:var(--tx);border:4px solid var(--gr);box-shadow:0 0 0 4px rgba(7,8,10,.8),0 0 18px rgba(61,220,132,.6)}
+.pt-me.close i{border-color:var(--warn);box-shadow:0 0 0 4px rgba(7,8,10,.8),0 0 18px rgba(255,176,32,.6)}
+.pt-me.in i{border-color:var(--bad);box-shadow:0 0 0 4px rgba(7,8,10,.8),0 0 18px rgba(255,92,77,.6)}
+.pt-me b{position:absolute;top:-22px;font-size:10.5px;font-weight:900;letter-spacing:1px;background:var(--tx);color:var(--bg);padding:1px 6px;border-radius:5px}
+.pt-ax{display:flex;justify-content:space-between;font-size:11.5px;color:var(--tx3);font-family:var(--mono)}
+.pfs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.pf{background:var(--sf);border:1px solid var(--ln);border-radius:var(--r2);padding:16px}
+.pf-h{display:flex;align-items:center;gap:8px}.pf-h>b{font-size:14px;flex:1}
+.pf-ic{font-size:18px}
+.pf-pts{font-size:12px;color:var(--tx3);font-family:var(--mono)}.pf-pts b{color:var(--o);font-size:15px}
+.pf-big{font-family:var(--disp);font-size:34px;line-height:1.1;margin-top:12px}.pf-big small{font-size:18px;color:var(--tx3)}
+.pf-sub{font-size:12.5px;color:var(--tx3);margin-bottom:10px}
+.pf .bar{height:7px}
+.pf-tip{font-size:12.5px;color:var(--tx2);margin-top:10px;line-height:1.4}
+.pway{margin-top:12px;display:grid;grid-template-columns:1fr 1.2fr auto;gap:14px 20px;align-items:center;border-color:rgba(255,92,77,.4)}
+.pway.ok{grid-template-columns:auto 1fr;border-color:rgba(61,220,132,.3)}
+.pway h3{font-family:var(--disp);font-size:22px;margin-top:4px}.pway ul{padding-left:18px;font-size:13.5px;color:var(--tx2);display:grid;gap:4px}.pway ul b{color:var(--tx)}.pway p{font-size:13.5px;color:var(--tx2)}
+@media (max-width:900px){.pway{grid-template-columns:1fr}.pway.ok{grid-template-columns:1fr}}
+@media (max-width:640px){.pvs{grid-template-columns:1fr;gap:8px}.pv{padding:12px 14px}.phero{grid-template-columns:1fr;padding:18px}.phero-r{justify-content:center;order:-1}.phero-h{font-size:30px}.pring{width:132px;height:132px}.pfs{grid-template-columns:1fr}.pt-ax span:nth-child(2){display:none}}
 </style>
 </head>
 <body>
+<div id="camo" aria-hidden="true"></div>
 <div class="mobtop"><div class="brand"><img src="./mark-96.png" alt=""><div><b>Ravine</b><small>Creator Games</small></div></div><button class="qtimer m" id="qtimer-m" onclick="go('quests')" hidden></button><button class="menu" onclick="openSheet()" aria-label="Menu">Menu</button></div>
 <div class="shell">
   <aside class="side" aria-label="Navigation">
@@ -1203,7 +1322,7 @@ details.qmore{margin-top:10px}details.qmore>summary{cursor:pointer;font-size:13p
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261028-032606";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261029-080449";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1252,6 +1371,7 @@ const ICO={
  refresh:'<path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/>',
  star:'<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/>',
  book:'<path d="M4 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4zM20 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/>',
+ shield:'<path d="M12 3 5 6v6c0 4.2 2.9 7.6 7 9 4.1-1.4 7-4.8 7-9V6z"/><path d="m9 12 2 2 4-4"/>',
  lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
  info:'<circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/>',
 };
@@ -1297,7 +1417,7 @@ const S={
   ui:(()=>{ try{ return JSON.parse(sessionStorage.getItem('rcg_ui')||'{}'); }catch(e){ return {}; } })(),
 };
 function saveUI(){ try{ sessionStorage.setItem('rcg_ui',JSON.stringify(S.ui)); }catch(e){} }
-function clearPrivate(){ S.cache={}; S.cacheAt={}; S.me=null; S.admin=false; S.ui={}; try{ sessionStorage.removeItem('rcg_ui'); }catch(e){} }
+function clearPrivate(){ S.camoSynced=false; try{ localStorage.removeItem('rcg_camo_v1'); }catch(e){} if(typeof paintCamo==='function') paintCamo(''); S.cache={}; S.cacheAt={}; S.me=null; S.admin=false; S.ui={}; try{ sessionStorage.removeItem('rcg_ui'); }catch(e){} }
 
 /* ---- data layer: fixture | live. Every page reads through API.* so screens agree. */
 const API={
@@ -1342,10 +1462,12 @@ const FX={
       case 'my_featured_quest': { const rot=['oct_newangle3','oct_field','oct_gift','oct_buddy','oct_comment','oct_spanish','oct_objection','oct_unaware','oct_ai_kb9','oct_recreate','oct_weakspot','oct_sprint3'];
         const have=new Set((m.quests?.catalog||[]).map(c=>c.quest_key)); const L=rot.filter(k=>have.has(k)); if(!L.length) return null;
         const w=ctWeek(); return {quest_key:L[0],multiplier:2,week_start:w[0],ends_at:new Date(new Date(w[6]+'T12:00:00Z').getTime()+17*3600e3).toISOString(),next:{quest_key:L[1]||L[0],week_start:null,multiplier:2}}; }
-      case 'my_elite_spot': { const n=FX.numbersOf(m); const sold=(n.month_sales||0)>0;   // fixture: synthetic roster of 94, never real creators
-        return {on_roster:true,roster:94,move_down:20,place:sold?31:40,tied:sold?1:55,gmv:sold?n.month_sales:0,videos:n.month_submissions||0,videos_target:20,
-          calls:sold?1:0,calls_pending:0,coach:0,coach_pending:0,ends_at:'2026-11-01T05:00:00Z',data_through:new Date(Date.now()-2*3600e3).toISOString()}; }
+      case 'my_elite_spot': { const n=FX.numbersOf(m); const P=FX.paceOf(m);   // fixture: synthetic roster of 90, never real creators; same score as My Pace
+        return {on_roster:true,roster:P.roster,move_down:P.move_down,place:P.me.place,tied:1,score:P.me.score,ranked_by:'elite_score',gmv:n.month_sales||0,videos:P.me.approved,videos_target:20,xp:P.me.xp,
+          calls:P.me.status==='in'?0:1,calls_pending:0,coach:0,coach_pending:0,ends_at:'2026-11-01T05:00:00Z',data_through:new Date(Date.now()-2*3600e3).toISOString()}; }
       case 'my_team_goal': return d(FX.teamGoalOf(m));
+      case 'my_armory': return d(FX.armoryOf(m));
+      case 'set_camo': { const A=FX.armoryOf(m); const c=A.camos.find(x=>x.key===a.p_key); if(!c) return {ok:false,why:'unknown camo'}; if(!c.unlocked) return {ok:false,why:'locked: '+c.how}; FX.camo=a.p_key; return {ok:true,equipped:a.p_key}; }
       case 'admin_team_goal': return d(FX.teamGoalAdmin());
       case 'my_ads': return d(FX.adsOf(m,a.p_range||'2026-10'));
       case 'start_quest': return FX.start(m,a);
@@ -1376,17 +1498,38 @@ const FX={
     const S_=k=>rows.reduce((n,r)=>n+(r[k]||0),0); const sp=S_('spend'), ss=S_('sales'), pv=S_('ad_sales');
     return {range,rows,agg:rows.length?{spend:sp,sales:ss,ad_sales:pv,vids:rows.length,roas:sp?+(pv/sp).toFixed(2):null,hook:sp?+(rows.reduce((n,r)=>n+r.hook*r.spend,0)/sp).toFixed(1):null}:null,
       program:{spend:oct?15954.96:459467.87,vids:oct?622:1670,hook:oct?28.3:31.2},counts:{submitted:vids.length,approved:vids.filter(v=>v.status==='approved').length},data_through:new Date(Date.now()-3*3600e3).toISOString()}; },
+  /* Armory fixture: the populated creator plays Prestige II with 4 camos unlocked */
+  camo:null,
+  armoryOf(m){ const pop=/Populated/.test(m.home?.creator?.display_name||''); const lv=pop?2:0; const C=(k,how,un,have,need,unit,extra)=>({key:k,how,unlocked:un,have,need,unit,...(extra||{})});
+    const camos=[C('carbon','Everyone starts with it',true),C('army','Get your first November quest approved',pop,pop?1:0,1,'quest'),C('desert','Get 3 quests approved in one half',pop,pop?3:1,3,'quests'),
+      C('woodland','Get 3 shoot-in-the-field videos approved',pop,pop?3:0,3,'videos'),C('blaze','Gift-wrapped reveal + one gifting-angle quest approved',false,pop?1:0,2,'quests'),
+      C('opening','Submit 10 videos from Nov 1 to Nov 7',false,pop?6:0,10,'videos',{limited:{label:'Nov 1–7 only',starts_at:'2026-11-01T05:00:00Z',ends_at:'2026-11-08T06:00:00Z',closed:false}}),
+      C('gold','$5,000 in Trybe sales in November',false,pop?2930:0,5000,'usd'),C('nv','Reach Prestige III',false,lv,3,'level'),C('thermal','Reach Prestige Master',false,lv,4,'level')];
+    const eq=FX.camo&&camos.find(c=>c.key===FX.camo&&c.unlocked)?FX.camo:(pop?'woodland':'carbon'); return {level:lv,level_name:['Rookie','Prestige I','Prestige II','Prestige III','Prestige Master'][lv],equipped:eq,camos,data_through:new Date(Date.now()-2*3600e3).toISOString()}; },
+  FAKE_LV:[4,3,2,3,1,2,1,0,1,0,2,0,1,0],
   /* synthetic boards for the preview: invented names, never real creators */
   FAKE:['Avery Stone','Jordan Pike','Casey Brooks','Riley Hart','Morgan Lake','Quinn Ellis','Drew Carter','Sam Rivers','Taylor Reed','Jamie Fox','Parker Lane','Cameron Hale','Reese Ward','Blake Moss'],
-  paceOf(m){ const p=JSON.parse(JSON.stringify(m.pace||{})); const mine=p.my_originals||0; const names=FX.FAKE.slice(0,11); const ns=[14,11,9,9,7,6,5,4,4,3,2];
-    const meName=m.home?.creator?.display_name||'You'; let L=names.map((n,i)=>({name:n,n:ns[i]})); if(mine>0) L.push({name:meName,n:mine,me:true}); L.sort((a,b)=>b.n-a.n||a.name.localeCompare(b.name));
-    let rk=0,prev=null; L.forEach((x,i)=>{ if(x.n!==prev){rk=i+1;prev=x.n;} x.rank=rk; x.me=!!x.me; }); const me=L.find(x=>x.me);
-    return {...p,cohort_size:p.cohort_size||121,ranked:L.length,my_rank:me?.rank||null,median_posting:5,avg_posting:6.1,top:L.slice(0,10),above:me?[...L].filter(x=>x.n>me.n).sort((a,b)=>a.n-b.n)[0]||null:L[L.length-1]}; },
+  /* My pace fixture (Oct 29): synthetic Elite roster of 90 with composite scores; never real creators.
+     window.__FX_PACE = 'clear' | 'close' | 'in' moves the populated creator for previews. */
+  paceOf(m){ const pop=/Populated/.test(m.home?.creator?.display_name||''); const meName=m.home?.creator?.display_name||'You'; const N=90, D=20, line=N-D+1;
+    const want=window.__FX_PACE||(pop?'clear':'in'); const place=want==='in'?78:want==='close'?69:34;
+    const sc=r=>+(92-(r-1)*0.92).toFixed(1); const score=sc(place);
+    const parts=want==='in'?{sales:4.5,videos:6,quests:2}:want==='close'?{sales:12.5,videos:9,quests:3}:{sales:30.5,videos:21,quests:9};
+    const tot=parts.sales+parts.videos+parts.quests; const k=score/tot; Object.keys(parts).forEach(x=>parts[x]=+(parts[x]*k).toFixed(1));
+    const approved=Math.round(parts.videos/1.5), xp=Math.round(parts.quests*5);
+    const names=FX.FAKE.slice(0,10); const ns=[38,31,27,24,22,20,19,17,16,15];
+    let L=names.map((n,i)=>({name:n,n:ns[i],lvl:FX.FAKE_LV[i]})); const meIn=approved>=15; if(meIn) L.push({name:meName,n:approved,me:true,lvl:pop?2:0});
+    L.sort((a,b)=>b.n-a.n||a.name.localeCompare(b.name)); L.forEach((x,i)=>{ x.rank=i+1; x.me=!!x.me; });
+    const lineScore=sc(line-1); const days=Math.max(0,Math.ceil((Date.parse('2026-11-01T05:00:00Z')-Date.now())/864e5));
+    return {campaign:'2026-10',month_label:'October',ends_at:'2026-11-01T05:00:00Z',days_left:days,roster:N,move_down:D,line_place:line,
+      me:{place,tied:1,score,status:want,spots_above_line:Math.max(0,line-place),pts:parts,sales_zero:want==='in'&&false,sales_top_pct:want==='in'?88:want==='close'?72:36,approved,xp,lvl:pop?2:0},
+      line_score:lineScore,points_to_safe:place>=line?+(lineScore-score+0.1).toFixed(1):null,cushion:place<line?+(score-sc(line)).toFixed(1):null,
+      top:L.slice(0,10),my_approved_rank:meIn?L.find(x=>x.me).rank:24,weights:{sales:50,videos:30,quests:20,videos_cap:20,xp_cap:100},data_through:new Date(Date.now()-2*3600e3).toISOString()}; },
   leaderboardOf(m){ const c=m.contest?.campaign||{}; const pop=/Populated/.test(m.home?.creator?.display_name||''); const meName=m.home?.creator?.display_name||'You';
-    const g=[9120,7450,6020,4880,3910,3300,2710,2150,1780,1210,980,640,410,220]; let L=FX.FAKE.map((n,i)=>({name:n,v:g[i]})); const myV=pop?2930:0; if(myV) L.push({name:meName,v:myV,me:true});
+    const g=[9120,7450,6020,4880,3910,3300,2710,2150,1780,1210,980,640,410,220]; let L=FX.FAKE.map((n,i)=>({name:n,v:g[i],lvl:FX.FAKE_LV[i]})); const myV=pop?2930:0; if(myV) L.push({name:meName,v:myV,me:true,lvl:2});
     L.sort((a,b)=>b.v-a.v); L.forEach((x,i)=>{ x.rank=i+1; x.tied=false; x.me=!!x.me; }); const me=L.find(x=>x.me); const above=me?L[me.rank-2]:L[L.length-1]; const below=me?L[me.rank]:null;
-    return {campaign:c,now:new Date().toISOString(),rows:L.map(({rank,name,tied,me})=>({rank,name,tied,me})),ranked:L.length,not_ranked:7,
-      me:{rank:me?.rank??null,tied:false,gmv:myV,next_rank:above?.rank??null,next_name:above?.name??null,gap:above?+(above.v-myV+0.01).toFixed(2):null,below_rank:below?.rank??null,below_name:below?.name??null,lead:below?+(myV-below.v).toFixed(2):null},total_gmv:L.reduce((n,x)=>n+x.v,0),data_through:new Date(Date.now()-2*3600e3).toISOString()}; },
+    return {campaign:c,now:new Date().toISOString(),rows:L.map(({rank,name,tied,me,lvl})=>({rank,name,tied,me,lvl})),ranked:L.length,not_ranked:7,
+      me:{rank:me?.rank??null,tied:false,gmv:myV,next_rank:above?.rank??null,next_name:above?.name??null,next_lvl:above?.lvl??null,gap:above?+(above.v-myV+0.01).toFixed(2):null,below_rank:below?.rank??null,below_name:below?.name??null,below_lvl:below?.lvl??null,lead:below?+(myV-below.v).toFixed(2):null},total_gmv:L.reduce((n,x)=>n+x.v,0),data_through:new Date(Date.now()-2*3600e3).toISOString()}; },
   homeOf(m){ const h=m.home; const q=FX.questsOf(m); h.quests={xp_earned:q.xp_earned,xp_pending:q.xp_pending,period_now:q.period_now,
       in_progress:q.instances.filter(i=>['in_progress','needs_changes'].includes(i.state)).length, in_review:q.instances.filter(i=>i.state==='submitted').length, needs_changes:q.instances.filter(i=>i.state==='needs_changes').length};
     const r=FX.rewardsOf(m); h.rewards={xp:r.xp,concepts:r.concepts,tiers:r.tiers}; return h; },
@@ -1473,7 +1616,7 @@ const REDIRECT={adlib:'analytics',winners:'library',angles:'library',board:'lead
 const NAV=[
  ['Home',[['home','Home','home']]],
  ['Create',[['library','Angle Library','grid'],['spy','Spyboard','eye'],['broll','B-roll','film']]],
- ['Progress',[['quests','Quests','target'],['rewards','Rewards','gift'],['submissions','My submissions','check'],['analytics','Analytics','chart']]],
+ ['Progress',[['quests','Quests','target'],['rewards','Rewards','gift'],['armory','Armory','shield'],['submissions','My submissions','check'],['analytics','Analytics','chart']]],
  ['Compete',[['leaderboard','Leaderboard','star'],['compete','October competition','trophy'],['pace','My pace','gauge']]],
  ['Profile',[['profile','My profile','user']]],
  ['Admin',[['admin','Review queue','check'],['admin_contest','Contest & imports','gear'],['admin_rewards','Rewards & claims','gift']]],
@@ -1485,6 +1628,7 @@ const BOOK_CALL='https://calendly.com/whitelistwealth/ravine-1-1-with-austin';
 const bookCta=(cls='')=>`<a class="bookcta ${cls}" ${openExt(BOOK_CALL)}><span class="bk-ic">${ico('cal',20)}</span><span class="bk-tx"><b>Book a 1:1 call</b><small>${cls==='bk-side'?'With Austin · pick a time':'With Austin: your content, your numbers, your next video'}</small></span><span class="bk-go">${ico('arrow',16)}</span></a>`;
 function renderShell(){
   const c=S.me; const admin=S.admin;
+  if(!S.camoSynced&&typeof syncCamo==='function'){ S.camoSynced=true; paintCamo(savedCamo()); syncCamo().catch(()=>{}); }   // Armory camo: paint the saved one now, then confirm with the server
   const pips=admin?(S.pips||{}):{};
   const navHtml=NAV.filter(g=>g[0]!=='Admin'||admin).map(g=>`<div class="ngrp"><div class="nlbl">${g[0]}</div>${g[1].map(n=>`<button class="nitm ${S.view===n[0]?'on':''}" onclick="go('${n[0]}')">${ico(n[2])}<span>${esc(n[1])}</span>${pips[n[0]]?`<span class="pip">${pips[n[0]]}</span>`:''}</button>`).join('')}</div>`).join('');
   $('#nav').innerHTML=navHtml+bookCta('bk-side');
@@ -1579,6 +1723,54 @@ window.addEventListener('DOMContentLoaded',async()=>{
   if(!window.NO_SW&&'serviceWorker' in navigator&&location.protocol==='https:'){ navigator.serviceWorker.register('./sw.js').catch(()=>{}); }
 });
 
+/* Armory (Austin, Oct 29): camos unlocked by challenges change your own app background (only you see it);
+   your name color follows your prestige level and shows wherever other creators see your name. */
+'use strict';
+const CAMO_KEYS=['carbon','army','desert','woodland','blaze','opening','gold','nv','thermal'];
+const CAMO_NAME={carbon:'Carbon Black',army:'Army Green',desert:'Desert',woodland:'Woodland',blaze:'Blaze Orange',opening:'Opening Day',gold:'Gold',nv:'Night Vision',thermal:'Thermal'};
+const CAMO_FX={gold:'Animated sheen',nv:'Animated night vision',thermal:'Animated heat map'};
+const NAME_LV=[{level:0,name:'Rookie',color:'Cream'},{level:1,name:'Prestige I',color:'Orange'},{level:2,name:'Prestige II',color:'Red'},{level:3,name:'Prestige III',color:'Purple'},{level:4,name:'Prestige Master',color:'Rainbow, animated'}];
+/* name in its prestige color: lvl missing (older server) falls back to the default color */
+const nmc=(name,lvl)=>`<span class="nmc ${lvl==null?'':'p'+Math.max(0,Math.min(4,+lvl||0))}">${esc(name)}</span>`;
+const CAMO_LS='rcg_camo_v1';
+function paintCamo(k){ const el=$('#camo'); if(!el) return; const key=CAMO_KEYS.includes(k)&&k!=='carbon'?k:'';
+  el.className=key?`on cm-${key} fx-${key}`:''; document.body.classList.toggle('has-camo',!!key); }
+function savedCamo(){ try{ return localStorage.getItem(CAMO_LS)||''; }catch(e){ return ''; } }
+async function myArmory(){ try{ return await API.page('my_armory'); }catch(e){ return null; } }   // missing until the November SQL runs: page explains, nothing breaks
+async function syncCamo(){ const a=await myArmory(); const k=a?.equipped||'carbon'; try{ localStorage.setItem(CAMO_LS,k); }catch(e){} paintCamo(k); }
+async function equipCamo(k){ const a=await myArmory(); const c=(a?.camos||[]).find(x=>x.key===k); if(!c) return;
+  if(!c.unlocked){ toast(`Locked. ${c.how}`); return; }
+  try{ const r=await API.rpc('set_camo',{p_key:k}); if(r&&r.ok===false){ toast(r.why||'Could not equip that camo','bad'); return; } }catch(e){ toast('Could not equip that camo: '+e.message,'bad'); return; }
+  try{ localStorage.setItem(CAMO_LS,k); }catch(e){} API.bust(); paintCamo(k); toast(`${CAMO_NAME[k]} equipped`); render(); }
+function camoProg(c){ if(c.unlocked||c.need==null) return '';
+  const have=Math.min(c.have||0,c.need), pct=Math.max(3,Math.min(100,have/c.need*100));
+  const t=c.unit==='usd'?`${fmt.usd(c.have||0)} of ${fmt.usd(c.need)}`:c.unit==='level'?`${NAME_LV[c.have||0]?.name||'Rookie'} now`:`${have} of ${c.need}`;
+  return `<div class="ct-prog"><div class="bar"><i style="width:${pct.toFixed(1)}%"></i></div><span>${esc(t)}</span></div>`; }
+function camoTile(c,eq){ const lk=!c.unlocked; const lim=c.limited;
+  const limTxt=lim?(lim.closed?'Window closed':lim.label):'';
+  return `<button class="camo-tile ${lk?'lk':''} ${eq?'eq':''}" onclick="equipCamo('${c.key}')" aria-label="${esc(CAMO_NAME[c.key])}${lk?', locked':eq?', equipped':', tap to equip'}">
+    <div class="ct-sw"><div class="ct-bg cm-${c.key} fx-${c.key}"></div>${lk?`<span class="ct-lock">${ico('lock',22)}</span>`:''}${eq?'<span class="ct-badge eq">Equipped</span>':''}${lim?`<span class="ct-badge lim">${esc(limTxt)}</span>`:''}${CAMO_FX[c.key]?'<span class="ct-anim">Animated</span>':''}</div>
+    <div class="ct-b"><b>${esc(CAMO_NAME[c.key])}</b><span>${esc(c.how)}</span>${camoProg(c)}${!lk&&!eq?'<em>Tap to equip</em>':''}</div></button>`; }
+route('armory',async()=>{
+  const a=await myArmory();
+  if(!a) return `${ph('Armory','',{eyebrow:'Progress'})}${emptyState('The Armory is almost ready','It turns on with the next numbers update.','','star')}`;
+  const cams=a.camos||[]; const eq=a.equipped||'carbon'; const got=cams.filter(c=>c.unlocked).length; const lv=a.level||0; const me=S.me?.display_name||'You';
+  const nameRow=L=>{ const yours=L.level===lv, open=L.level<=lv;
+    return `<div class="nc ${yours?'yours':''} ${open?'':'lk'}"><div class="nc-n">${nmc(me,L.level)}</div><div class="nc-m"><b>${esc(L.name)}</b><span>${esc(L.color)}</span></div>
+      <div class="nc-s">${yours?'<span class="badge g">Yours</span>':open?'<span class="badge n">Unlocked</span>':`<span class="mini">${ico('lock',12)} Reach ${esc(L.name)}</span>`}</div></div>`; };
+  return `${ph('Armory','Unlock camos and name colors. Your camo is only on your screen. Your name color shows on the leaderboard and My Pace for everyone.',{eyebrow:'Progress'})}
+  <section class="arm-hero cm-${eq} fx-${eq}"><div class="arm-in">
+    <div class="lbl">Your loadout</div>
+    <div class="arm-name">${nmc(me,lv)}</div>
+    <div class="arm-sub">${esc(NAME_LV[lv]?.name||'Rookie')} name color · ${esc(CAMO_NAME[eq])} camo</div>
+    <div class="arm-count"><b>${got}</b> of ${cams.length} camos unlocked</div></div></section>
+  <div class="sec"><h2>Camos</h2><span class="mini">Only you see your camo. Tap one you have unlocked to equip it.</span></div>
+  <div class="arm-grid">${cams.map(c=>camoTile(c,c.key===eq)).join('')}</div>
+  <div class="sec"><h2>Name color</h2><span class="mini">Changes when you prestige. Everyone sees it on the leaderboard and My Pace.</span></div>
+  <div class="card" style="padding:8px">${NAME_LV.map(nameRow).join('')}</div>
+  <div class="note" style="margin-top:14px">Camos you unlock stay unlocked. Opening Day can only be unlocked from Nov 1 to Nov 7. Sales use Trybe numbers from the latest refresh${a.data_through?` (${fmt.dt(a.data_through)})`:''}.</div>`;
+});
+
 /* Home · Quests · Rewards */
 'use strict';
 const PERIOD_LABEL=k=>((S.cache['my_quests{}']?.periods||[]).find(p=>p.key===k)?.label)||({'2026-10-P1':'Oct 1–15','2026-10-P2':'Oct 16–31','2026-10':'October'})[k]||(/^\d{4}-\d{2}-\d{2}$/.test(k||'')?fmt.date(k+'T12:00:00Z'):k);
@@ -1648,15 +1840,20 @@ async function myNumbers(){ try{ return await API.page('my_numbers'); }catch(e){
 /* ---- Your Elite spot (Austin, Oct 24): where you stand against the monthly move-down line. Own numbers only. ---- */
 async function myEliteSpot(){ try{ return await API.page('my_elite_spot'); }catch(e){ return null; } }   // missing until the Oct 24 SQL is run: card stays hidden
 function eliteStatus(E){ const N=E.roster||0, D=E.move_down||20, line=N-D+1, place=E.place||N, worst=place+(E.tied||1)-1, zero=!(Number(E.gmv)>0);
+  if(E.ranked_by==='elite_score'){ if(N<=D) return {k:'safe',line,place,worst,zero,above:null}; if(place>=line) return {k:'in',line,place,worst,zero,above:0};   // Oct 29: same score and status as My Pace
+    const above=line-place; return {k:above<=3?'close':'safe',line,place,worst,zero,above}; }
   if(N<=D) return {k:'safe',line,place,worst,zero,above:null};
   if(place>=line||(zero&&worst>=line)) return {k:'in',line,place,worst,zero,above:0};
   if(worst>=line) return {k:'line',line,place,worst,zero,above:0};
   const above=line-1-worst; return {k:above<=5?'close':'safe',line,place,worst,zero,above}; }
 function eliteSpotCard(E){ if(!E||!E.on_roster) return '';
-  const st=eliteStatus(E), N=E.roster, D=E.move_down||20;
+  const st=eliteStatus(E), N=E.roster, D=E.move_down||20, sc=E.ranked_by==='elite_score';
   const pill={safe:['g','Safe'],close:['r','Close to the line'],line:['x','On the line'],in:['x','In the bottom 20']}[st.k];
   const lastDay=E.ends_at?fmt.date(new Date(new Date(E.ends_at)-1)):'the end of the month';
-  const hero=st.k==='in'||st.k==='line'
+  const hero=sc
+    ? (st.k==='in'?`<div class="es-big bad">Bottom ${D}</div><div class="es-sub">You're #${st.place} of ${N} on your Elite score (${fmtPts(E.score)}/100). Pick it up: approved videos and quests move you up fastest.</div>`
+       :`<div class="es-big">#${st.place}<small> of ${N}</small></div><div class="es-sub"><b>${fmt.int(st.above)} spot${st.above===1?'':'s'}</b> above the move-down zone · Elite score ${fmtPts(E.score)}/100${st.k==='close'?'. Step it up this month.':''}</div>`)
+    : st.k==='in'||st.k==='line'
     ? `<div class="es-big bad">Bottom ${D}</div><div class="es-sub">${st.zero?`No ${monthName(E)} sales from ${monthName(E)} videos yet. You're tied with ${fmt.int((E.tied||1)-1)} other creator${(E.tied||1)-1===1?'':'s'} at the bottom of the board.`:`You're #${st.place} of ${N}. The move-down zone starts at #${st.line}.`}</div>`
     : `<div class="es-big">#${st.place}<small> of ${N}</small></div><div class="es-sub">${st.above==null?'':`<b>${fmt.int(st.above)} place${st.above===1?'':'s'}</b> above the move-down zone (#${st.line} and below).`}</div>`;
   const v=E.videos||0, vt=E.videos_target||20, calls=(E.calls||0), cp=E.calls_pending||0, coach=(E.coach||0)>0, coachP=(E.coach_pending||0)>0;
@@ -1666,12 +1863,12 @@ function eliteSpotCard(E){ if(!E||!E.on_roster) return '';
    <div class="es-hero">${hero}</div>
    <div class="es-rule">⚠️ <b>The bottom ${D} in Ravine Elite move down to the Ravine Creator Academy</b> at the end of each month, and the top ${D} Academy creators move up. You keep your running ads if you move down.</div>
    <div class="es-list"><div class="lbl" style="margin-bottom:6px">What keeps your spot · ${esc(monthName(E))} so far</div>
-    ${row(v>=vt,'Videos posted',`<b>${v}</b> / ${vt}`,`<div class="es-bar"><i style="width:${Math.min(100,Math.round(v/vt*100))}%"></i></div>`)}
+    ${row(v>=vt,sc?'Approved videos':'Videos posted',`<b>${v}</b> / ${vt}`,`<div class="es-bar"><i style="width:${Math.min(100,Math.round(v/vt*100))}%"></i></div>`)}
     ${row(calls>0,'Weekly calls',calls||cp?`<b>${calls}</b> attended${cp?` · ${cp} in review`:''}`:'None yet',`<a class="es-a" href="#/quests" onclick="S.ui.qcat='Community';saveUI()">Claim a call</a>`)}
     ${row(coach,'1:1 with Austin',coach?'Done':coachP?'In review':'Not yet',coach?'':`<a class="es-a" ${openExt(BOOK_CALL)}>Book a 1:1</a>`)}
-    ${row(!(st.k==='in'||st.k==='line'),'Sales rank',st.zero?'No sales yet':`#${st.place} of ${N}`)}
+    ${sc?row(!(st.k==='in'),'Elite score',`<b>${fmtPts(E.score)}</b> / 100`,`<a class="es-a" href="#/pace">See My Pace</a>`):row(!(st.k==='in'||st.k==='line'),'Sales rank',st.zero?'No sales yet':`#${st.place} of ${N}`)}
    </div>
-   <div class="mini" style="margin-top:10px">Ranked by ${esc(monthName(E))} sales from videos posted in ${esc(monthName(E))}, same as the leaderboard. Last day: ${esc(lastDay)}. Only you see your own sales.</div></div>`; }
+   <div class="mini" style="margin-top:10px">${sc?`Ranked by your Elite score: ${esc(monthName(E))} sales, approved videos and quests. Same as My Pace.`:`Ranked by ${esc(monthName(E))} sales from videos posted in ${esc(monthName(E))}, same as the leaderboard.`} Last day: ${esc(lastDay)}. Only you see your own sales.</div></div>`; }
 /* ---- Weekly pace (Austin, Oct 24): 5 videos a week minimum. Monday to Sunday, Central. Originals only, no revisions or statics. ---- */
 const WEEK_MIN=5;
 const ctDay=d=>new Date(d).toLocaleDateString('en-CA',{timeZone:TZ});
@@ -2464,7 +2661,7 @@ async function openRules(){ const lb=await API.page('my_leaderboard'); const c=l
 /* ---------------- Leaderboard */
 function lbRow(r,lb,{big=false}={}){ const m=r.me; const g=lb.me||{};
   return `<div class="lbrow ${m?'me':''} ${r.rank<=3?'p'+r.rank:''}"><div class="rn">${r.rank<=3?['🥇','🥈','🥉'][r.rank-1]:'#'+r.rank}</div>${avatar(r.name,big?40:34)}
-    <div style="min-width:0;flex:1"><div class="nm">${esc(r.name)}${m?' <span class="you">YOU</span>':''}${r.tied?' <span class="mini">tie</span>':''} ${moveTag(r)}</div>
+    <div style="min-width:0;flex:1"><div class="nm">${nmc(r.name,r.lvl)}${m?' <span class="you">YOU</span>':''}${r.tied?' <span class="mini">tie</span>':''} ${moveTag(r)}</div>
      ${r.rank<=3?`<div class="mini" style="color:var(--gold)">${fmt.usd((lb.campaign?.prizes||[])[r.rank-1]?.cents,{cents:true})} prize place</div>`:''}</div>
     <div class="rv">${m?`<b>${money(g.gmv)}</b><span>your GMV</span>`:`<b class="priv">${ico('lock',13)}</b><span>private</span>`}</div></div>`; }
 route('leaderboard',async(p)=>{
@@ -2478,34 +2675,69 @@ route('leaderboard',async(p)=>{
    <div class="lbme-a"><div class="lbl">You are</div><div class="lbme-rank">${me.rank==null?'—':'#'+me.rank}</div><div class="mini">${me.rank==null?'not on the board yet':`of ${lb.ranked} ranked${me.tied?' · tied':''}`}</div>${me.move?`<div class="mvline ${me.move>0?'up':'dn'}">${me.move>0?'▲':'▼'} ${Math.abs(me.move)} since ${fmt.date(lb.since)}</div>`:''}</div>
    <div class="lbme-b"><div class="lbl">Your October GMV <span class="gmvq">(videos posted in October only)</span></div><div class="lbme-gmv">${money(me.gmv||0)}</div><div class="mini">only you can see this</div></div>
    <div class="lbme-c">${me.rank===1?`<div class="lbl">Status</div><div class="lbme-next">👑 You are in first.</div><div class="mini">Keep posting. Everyone below you can see how far behind they are, not your number.</div>`
-     :me.gap!=null?`<div class="lbl">To pass ${me.next_rank?'#'+me.next_rank:''} ${esc(me.next_name||'')}</div><div class="lbme-next"><b>${money(me.gap)}</b> more GMV</div><div class="bar gold" style="margin-top:8px"><i style="width:${pct.toFixed(1)}%"></i></div>`
+     :me.gap!=null?`<div class="lbl">To pass ${me.next_rank?'#'+me.next_rank:''} ${nmc(me.next_name||'',me.next_lvl)}</div><div class="lbme-next"><b>${money(me.gap)}</b> more GMV</div><div class="bar gold" style="margin-top:8px"><i style="width:${pct.toFixed(1)}%"></i></div>`
      :`<div class="lbl">Get on the board</div><div class="lbme-next">Make your first October sale</div>`}
-     ${me.rank!=null?`<div class="lbme-below">${me.below_name?`<span class="lbl">Behind you</span> #${me.below_rank} ${esc(me.below_name)} is <b>${money(me.lead||0)}</b> back${(me.lead||0)<500?' · they are close, keep posting':''}`:`<span class="lbl">Behind you</span> nobody yet`}</div>`:''}</div>
+     ${me.rank!=null?`<div class="lbme-below">${me.below_name?`<span class="lbl">Behind you</span> #${me.below_rank} ${nmc(me.below_name,me.below_lvl)} is <b>${money(me.lead||0)}</b> back${(me.lead||0)<500?' · they are close, keep posting':''}`:`<span class="lbl">Behind you</span> nobody yet`}</div>`:''}</div>
   </div>
   ${pod.length?`<div class="sec"><h2>Top 3</h2><span class="mini">Prize places right now</span></div>
-  <div class="podium2">${[pod[1],pod[0],pod[2]].filter(Boolean).map(r=>`<div class="pc2 p${r.rank} ${r.me?'me':''}">${r.rank===1?'<div class="crown">👑</div>':''}${avatar(r.name,r.rank===1?64:52)}<div class="n">${esc(r.name)}${r.me?' <span class="you">YOU</span>':''}</div><div class="pl">${['1st','2nd','3rd'][r.rank-1]} place</div><div class="amt">${fmt.usd((c.prizes||[])[r.rank-1]?.cents,{cents:true})}</div>${r.me?`<div class="mini" style="margin-top:4px">Your GMV ${money(me.gmv)}</div>`:''}</div>`).join('')}</div>`:''}
+  <div class="podium2">${[pod[1],pod[0],pod[2]].filter(Boolean).map(r=>`<div class="pc2 p${r.rank} ${r.me?'me':''}">${r.rank===1?'<div class="crown">👑</div>':''}${avatar(r.name,r.rank===1?64:52)}<div class="n">${nmc(r.name,r.lvl)}${r.me?' <span class="you">YOU</span>':''}</div><div class="pl">${['1st','2nd','3rd'][r.rank-1]} place</div><div class="amt">${fmt.usd((c.prizes||[])[r.rank-1]?.cents,{cents:true})}</div>${r.me?`<div class="mini" style="margin-top:4px">Your GMV ${money(me.gmv)}</div>`:''}</div>`).join('')}</div>`:''}
   <div class="sec"><h2>Every ranked creator</h2><span class="mini">${lb.ranked} ranked${lb.not_ranked?` · ${lb.not_ranked} still at $0`:''}${lb.since?` · ▲▼ = places moved since ${fmt.date(lb.since)}`:''}</span></div>
   ${rows.length?`<div class="card" style="padding:8px">${shown.map(r=>lbRow(r,lb)).join('')}
     ${meHidden?`<div class="lbgap">⋯</div>${lbRow(myRow,lb)}`:''}
     ${rows.length>10?`<button class="btn gh" style="width:100%;margin-top:8px" onclick="go('leaderboard',${all?'{}':"{all:'1'}"})">${all?'Show top 10 only':`Show all ${rows.length} places`}</button>`:''}</div>`
    :emptyState('Nobody is on the board yet','The first October sale puts someone in first place.','','leader')}
-  ${myRow&&all&&myRow.rank>10?`<div class="mestick"><div class="rn">#${myRow.rank}</div>${avatar(myRow.name,30)}<div style="min-width:0;flex:1"><div class="nm">${esc(myRow.name)} <span class="you">YOU</span></div><div class="mini">${me.gap!=null?`${money(me.gap)} to pass #${me.next_rank}`:''}${me.below_name?` · #${me.below_rank} is ${money(me.lead||0)} behind you`:''}</div></div><div style="text-align:right"><div style="font-family:var(--mono);font-weight:800;color:var(--gold)">${money(me.gmv)}</div><div class="mini">your GMV</div></div></div>`:''}
+  ${myRow&&all&&myRow.rank>10?`<div class="mestick"><div class="rn">#${myRow.rank}</div>${avatar(myRow.name,30)}<div style="min-width:0;flex:1"><div class="nm">${nmc(myRow.name,myRow.lvl)} <span class="you">YOU</span></div><div class="mini">${me.gap!=null?`${money(me.gap)} to pass #${me.next_rank}`:''}${me.below_name?` · #${me.below_rank} is ${money(me.lead||0)} behind you`:''}</div></div><div style="text-align:right"><div style="font-family:var(--mono);font-weight:800;color:var(--gold)">${money(me.gmv)}</div><div class="mini">your GMV</div></div></div>`:''}
   <div class="note" style="margin-top:14px">Updated with each Trybe refresh${lb.data_through?` · last one ${fmt.dt(lb.data_through)}`:''}. GMV here only counts videos you submitted and got approved in October, so it can be lower than the October sales on your Home page.</div>`;
 });
 
-/* ---------------- My pace */
+/* ---------------- My pace (Austin, Oct 29): your Ravine Elite spot. One score out of 100 built from this month's
+   sales, approved videos and quests. The bottom 20 on the roster move down to the Academy. Own numbers only. */
+const PACE_ST={clear:{k:'clear',t:'Safe',c:'g'},close:{k:'close',t:'Close to the line',c:'r'},in:{k:'in',t:'Move-down zone',c:'x'}};
+function paceHead(p){ const m=p.me||{}; const D=p.move_down||20, sp=m.spots_above_line;
+  if(m.status==='in') return {h:`You're in the bottom ${D}`,s:`Pick it up. ${p.points_to_safe!=null?`<b>${fmtPts(p.points_to_safe)} more points</b> gets you out of the move-down zone.`:'Every approved video and quest moves you up.'}`};
+  if(m.status==='close') return {h:`${sp} spot${sp===1?'':'s'} from the bottom ${D}`,s:`Step it up this month. You're just above the move-down line, and one slow week drops you into it.`};
+  return {h:"You're clear",s:`You're doing really good. <b>${sp} spots</b> above the move-down line. Keep doing what you're doing.`}; }
+const fmtPts=v=>v==null?'—':(Math.round(v*10)/10).toLocaleString('en-US',{maximumFractionDigits:1});
+function paceTrack(p){ const N=p.roster||1, D=p.move_down||20, line=p.line_place||N-D+1, me=p.me?.place;
+  const x=r=>((r-1)/Math.max(1,N-1)*100); const z=x(line)-(50/Math.max(1,N-1));
+  return `<div class="pt"><div class="pt-bar"><div class="pt-zone" style="left:${Math.max(0,z).toFixed(2)}%"></div>
+    <div class="pt-line" style="left:${Math.max(0,z).toFixed(2)}%"></div>${me?`<div class="pt-me ${p.me.status}" style="left:${x(me).toFixed(2)}%"><b>YOU</b><i></i></div>`:''}</div>
+    <div class="pt-ax"><span>#1</span><span>#${line-1} is the last safe spot</span><span class="pt-z">Bottom ${D} · #${line}–${N}</span></div></div>`; }
+function paceRing(score){ const v=Math.max(0,Math.min(100,score||0)); const C=2*Math.PI*44;
+  return `<div class="pring"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="44" class="pr-bg"/><circle cx="50" cy="50" r="44" class="pr-fg" stroke-dasharray="${(C*v/100).toFixed(1)} ${C.toFixed(1)}"/></svg>
+    <div class="pr-in"><b>${fmtPts(v)}</b><span>Elite score</span></div></div>`; }
+function paceFactor(ic,title,pts,max,big,sub,tip,pct){ const w=Math.max(2,Math.min(100,pct));
+  return `<div class="pf"><div class="pf-h"><span class="pf-ic">${ic}</span><b>${title}</b><span class="pf-pts"><b>${fmtPts(pts)}</b>/${max} pts</span></div>
+    <div class="pf-big">${big}</div><div class="pf-sub">${sub}</div><div class="bar"><i style="width:${w.toFixed(1)}%"></i></div><div class="pf-tip">${tip}</div></div>`; }
 route('pace',async()=>{
-  const p=await API.page('my_pace'); const top=p.top||[]; const mine=p.my_originals??0; const mx=Math.max(1,...top.map(t=>t.n));
-  const inTop=top.some(t=>t.me);
-  const row=t=>`<div class="lbrow ${t.me?'me':''}"><div class="rn">#${t.rank}</div>${avatar(t.name,34)}<div style="min-width:0;flex:1"><div class="nm">${esc(t.name)}${t.me?' <span class="you">YOU</span>':''}</div><div class="bar" style="margin-top:6px;height:5px"><i style="width:${(t.n/mx*100).toFixed(1)}%"></i></div></div><div class="rv"><b>${t.n}</b><span>video${t.n===1?'':'s'}</span></div></div>`;
-  return `${ph('My pace','How many videos you have posted in October, next to the rest of the roster.',{eyebrow:'Compete'})}
-  <div class="grid g4" style="margin-bottom:16px">${metric('My October videos',mine,{cls:'orange',sub:p.my_rank?`#${p.my_rank} of ${p.ranked} creators posting`:'Not posting yet this month'})}${metric('Most on the roster',top[0]?.n??0,{sub:top[0]?esc(top[0].name):'Nobody yet'})}${metric('Typical creator',p.median_posting==null?'—':Math.round(p.median_posting*10)/10,{sub:'median of creators posting'})}${metric('Roster',p.cohort_size,{sub:`${p.ranked} have posted in October`})}</div>
-  <div class="card hi" style="margin-bottom:16px"><h3>${mine===0?'Post your first October video to get on the board':p.above?`Post ${p.above.n-mine+1} more to pass ${esc(p.above.name)} (#${p.above.rank})`:'You are leading the roster on October videos 🔥'}</h3>
-   <p style="margin-top:4px">${mine===0?`${p.ranked} creators have already posted this month.`:`You have ${mine} October video${mine===1?'':'s'}. The typical creator who is posting has ${p.median_posting==null?'—':Math.round(p.median_posting*10)/10}.`} Your approved October videos: <b>${p.my_approved_concepts??0}</b>.</p></div>
-  <div class="sec"><h2>Top 10 this month</h2><span class="mini">October videos, originals only</span></div>
-  <div class="card" style="padding:8px">${top.length?top.map(row).join(''):`<div class="mini" style="padding:10px">Nobody has posted an October video yet.</div>`}
-   ${!inTop&&p.my_rank?`<div class="lbgap">⋯</div>${row({rank:p.my_rank,name:S.me?.display_name||'You',n:mine,me:true})}`:''}</div>
-  <div class="note" style="margin-top:14px"><b style="color:var(--tx)">How this is counted.</b> Original videos submitted on Trybe from Oct 1 to Oct 31 (Central), whatever their review status. Revisions and image posts do not count. Creators with two Trybe accounts count once. Snapshot ${fmt.dt(p.snapshot_at)||'pending'}.</div>`;
+  const p=await API.page('my_pace'); const m=p.me||{}; const W=p.weights||{sales:50,videos:30,quests:20,videos_cap:20,xp_cap:100};
+  const mon=p.month_label||'October'; const top=p.top||[]; const mx=Math.max(1,...top.map(t=>t.n)); const st=PACE_ST[m.status]||PACE_ST.clear; const H=paceHead(p);
+  const perVid=W.videos/W.videos_cap, perXp=W.quests/W.xp_cap;
+  const need=p.points_to_safe; const vidsLeft=Math.max(0,W.videos_cap-(m.approved||0)), xpLeft=Math.max(0,W.xp_cap-(m.xp||0));
+  const way=need!=null&&need>0?[vidsLeft?`<li><b>${Math.min(vidsLeft,Math.ceil(need/perVid))} more approved video${Math.ceil(need/perVid)===1?'':'s'}</b> (${fmtPts(perVid)} pts each)</li>`:'',
+      xpLeft?`<li><b>${Math.min(xpLeft,Math.ceil(need/perXp))} more quest XP</b> (${fmtPts(perXp*10)} pts per 10 XP)</li>`:'',`<li><b>More ${esc(mon)} sales</b>. Every creator you pass in sales adds points</li>`].filter(Boolean).join(''):'';
+  const row=t=>`<div class="lbrow ${t.me?'me':''}"><div class="rn">#${t.rank}</div>${avatar(t.name,34)}<div style="min-width:0;flex:1"><div class="nm">${nmc(t.name,t.lvl)}${t.me?' <span class="you">YOU</span>':''}</div><div class="bar" style="margin-top:6px;height:5px"><i style="width:${(t.n/mx*100).toFixed(1)}%"></i></div></div><div class="rv"><b>${t.n}</b><span>approved</span></div></div>`;
+  if(!p.weights) return `${ph('My pace','Your Ravine Elite spot this month.',{eyebrow:'Compete'})}${emptyState('My Pace is updating','The new Elite score turns on in a few minutes. Check back soon.','','leader')}`;   // server SQL not run yet
+  if(!m.place) return `${ph('My pace','Your Ravine Elite spot this month.',{eyebrow:'Compete'})}${emptyState('Not on the Elite roster yet','My Pace shows your Elite spot once you are on the Ravine Elite roster.','','leader')}`;
+  return `${ph('My pace',`Your Ravine Elite spot for ${esc(mon)}. It is not the leaderboard: it scores your whole month.`,{eyebrow:'Compete',acts:`<button class="btn gh" onclick="go('leaderboard')">${ico('star')} Leaderboard</button>`})}
+  <div class="pvs"><div class="pv"><div class="pv-k">${ico('star',16)} Leaderboard</div><b>The sales race</b><p>Ranks ${esc(mon)} Trybe sales from videos posted in ${esc(mon)}. Decides prizes.</p></div>
+    <div class="pv on"><div class="pv-k">${ico('gauge',16)} My pace</div><b>Your Elite spot</b><p>Scores your whole month: <b>sales</b>, <b>approved videos</b> and <b>quests</b>. The bottom ${p.move_down} move down to the Ravine Creator Academy.</p></div></div>
+  <section class="card phero ph-${st.k}">
+    <div class="phero-l"><div class="row" style="gap:8px;align-items:center"><span class="badge ${st.c}">${esc(st.t)}</span><span class="mini">${esc(mon)} · ${p.days_left!=null?`${p.days_left} day${p.days_left===1?'':'s'} left`:''}</span></div>
+      <h2 class="phero-h">${H.h}</h2><p class="phero-s">${H.s}</p>
+      <div class="phero-place"><b>#${m.place}</b><span>of ${p.roster} on the Elite roster${m.tied>1?` · tied with ${m.tied-1}`:''}</span></div></div>
+    <div class="phero-r">${paceRing(m.score)}</div>
+    <div class="phero-t">${paceTrack(p)}</div></section>
+  <div class="sec"><h2>What makes your score</h2><span class="mini">100 points: sales ${W.sales} · approved videos ${W.videos} · quests ${W.quests}</span></div>
+  <div class="pfs">${paceFactor('💰','Sales',m.pts?.sales,W.sales,m.sales_zero?'No sales yet':m.sales_top_pct<=50?`Top ${m.sales_top_pct}%`:`Bottom ${Math.max(1,100-m.sales_top_pct)}%`,m.sales_zero?`No ${esc(mon)} sales yet. Your first sale starts this score.`:`of the Elite roster in ${esc(mon)} sales`,`Pass people in ${esc(mon)} sales to climb. Only you see your sales.`,(m.pts?.sales||0)/W.sales*100)}
+    ${paceFactor('🎬','Approved videos',m.pts?.videos,W.videos,`${m.approved||0}<small>/${W.videos_cap}</small>`,`approved in ${esc(mon)}`,`${fmtPts(perVid)} points per approved video, up to ${W.videos_cap}.`,(m.approved||0)/W.videos_cap*100)}
+    ${paceFactor('🎯','Quests',m.pts?.quests,W.quests,`${m.xp||0}<small>/${W.xp_cap} XP</small>`,`quest XP in ${esc(mon)}`,`${fmtPts(perXp*10)} points per 10 quest XP, up to ${W.xp_cap}. Calls and 1:1s count.`,(m.xp||0)/W.xp_cap*100)}</div>
+  ${need!=null&&need>0?`<div class="card pway"><div><div class="lbl">Fastest way out of the zone</div><h3>${fmtPts(need)} points gets you to #${p.line_place-1}</h3></div><ul>${way}</ul><div class="row" style="gap:8px"><button class="btn" onclick="go('quests')">${ico('target')} Open quests</button><a class="btn gh" ${openExt(BOOK_CALL)}>${ico('cal')} Book a 1:1</a></div></div>`
+    :`<div class="card pway ok"><div><div class="lbl">Your cushion</div><h3>${fmtPts(p.cushion)} points above the move-down line</h3></div><p>Scores move every Trybe refresh. Keep posting, keep doing quests, and the cushion grows.</p></div>`}
+  <div class="sec"><h2>Most approved videos in ${esc(mon)}</h2><span class="mini">${p.my_approved_rank?`You are #${p.my_approved_rank}`:'Get your first video approved to show here'}</span></div>
+  <div class="card" style="padding:8px">${top.length?top.map(row).join(''):`<div class="mini" style="padding:10px">Nobody has an approved ${esc(mon)} video yet.</div>`}
+   ${!top.some(t=>t.me)&&p.my_approved_rank?`<div class="lbgap">⋯</div>${row({rank:p.my_approved_rank,name:S.me?.display_name||'You',n:m.approved||0,me:true,lvl:m.lvl})}`:''}</div>
+  <div class="note" style="margin-top:14px"><b style="color:var(--tx)">How your score works.</b> Sales points come from where you rank in ${esc(mon)} Trybe sales across the Elite roster, from all your videos (the most sales gets ${W.sales}, no sales gets 0). Approved videos are originals approved on Trybe in ${esc(mon)}. Quest points are the quest XP Austin approved in ${esc(mon)}. The bottom ${p.move_down} by score move down to the Academy at the end of the month, and the top ${p.move_down} Academy creators move up. Only you see your own sales. Updated ${fmt.dt(p.data_through)||'with each Trybe refresh'}.</div>`;
 });
 
 /* ---------------- My submissions */
