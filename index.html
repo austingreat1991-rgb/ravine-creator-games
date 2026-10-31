@@ -1308,6 +1308,17 @@ body.has-camo .main{background:transparent}
 .bookcta.locked:hover{transform:none;box-shadow:none;border-color:var(--ln2);opacity:1}
 .bookcta.locked .bk-ic{background:var(--sf3);color:var(--tx3);box-shadow:none}
 .bookcta.locked b{color:var(--tx2)}
+
+/* Oct 30: top tier hit card (Rewards) */
+.toptier{border-color:color-mix(in srgb,var(--gold) 45%,var(--ln2));background:linear-gradient(160deg,color-mix(in srgb,var(--gold) 10%,transparent),transparent 60%),var(--sf)}
+.toptier .tt-h{display:flex;gap:12px;align-items:flex-start}
+.toptier .tt-ic{font-size:28px;line-height:1}
+.toptier .tt-h .lbl{color:var(--gold);margin-bottom:2px}
+.toptier .tt-wait{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline;margin:12px 0 4px;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--gold) 8%,transparent)}
+.toptier .tt-wait b{font-size:20px;color:var(--gold)}
+.toptier .tt-wait span{font-size:13px;opacity:.8}
+.toptier .tt-pr{margin:8px 0 4px;font-weight:600}
+.toptier-n a{white-space:nowrap}
 </style>
 </head>
 <body>
@@ -1328,7 +1339,7 @@ body.has-camo .main{background:transparent}
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261029-194631";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261031-002444";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1847,6 +1858,35 @@ async function openPrestige(level){ const r=await API.page('my_rewards'); const 
 async function pickPrestige(level){ const b=$('#pickbtn'); if(b){ b.classList.add('pending'); b.disabled=true; }
   try{ const r=await API.rpc('choose_prestige',{p_level:level}); toast(r.why||(r.ok?'Saved':'Not saved'),r.ok?'good':'bad'); if(r.ok){ API.bust(); closeDrawer(true); render(); } }
   catch(e){ toast(e.message,'bad'); } finally{ if(b){ b.classList.remove('pending'); b.disabled=false; } } }
+/* ---- Top tier hit (Austin, Oct 30): once a creator reaches the top cash tier of the half, say where the payout stands,
+   how long until the reset, and which prestige level they can move up to at that reset. Shown on Home, Quests and Rewards. */
+function topTierHit(r){ const T=r?.tiers||[]; const top=T[T.length-1]; return !!top&&['eligible','claim_submitted','approved_for_payment','paid','included'].includes(top.status); }
+function waitWords(ends){ const ms=new Date(ends)-Date.now(); if(!(ms>0)) return ''; const d=Math.floor(ms/864e5), h=Math.floor(ms%864e5/36e5), m=Math.floor(ms%36e5/6e4), w=(n,u)=>`${n} ${u}${n===1?'':'s'}`;
+  return d>=3?w(d,'day'):d>=1?w(d,'day')+(h?', '+w(h,'hour'):''):h?w(h,'hour'):w(Math.max(1,m),'minute'); }
+function topTierInfo(r){ if(!topTierHit(r)) return null;
+  const T=r.tiers, top=T[T.length-1], P=r.prestige||{}, lbl=r.period?.label||halfLabel(), ends=r.period?.ends_at;
+  const amt=fmt.usd(top.cash_total_cents,{cents:true}), pd=payday(r), reset=ends?fmt.date(ends):halfReset(r), wait=ends?waitWords(ends):'';
+  const pay={eligible:`Claim your ${amt} now so it can be paid on ${pd}.`,
+    claim_submitted:`Your ${amt} claim is submitted and waiting for Austin's approval. It gets paid on ${pd}.`,
+    approved_for_payment:`Your ${amt} claim is approved. It gets paid on ${pd}.`,
+    paid:`Your ${amt} is paid.`, included:`Your ${amt} is covered by your claim. It gets paid on ${pd}.`}[top.status]||'';
+  const lv=P.level??r.level??0, unl=Math.max(P.unlocked??0,lv), nx=P.next, upL=Math.min(Math.max(unl,lv+1),4), up=PLV(r,upL), upTop=(up.tiers||[]).slice(-1)[0];
+  const when=wait?`In ${wait} (${reset})`:`At the ${reset} reset`;
+  let pr='', pick=null, set=false; const mk=w=>lv>=4?`You play 👑 Prestige Master, the top level. ${w} a new half starts and you can go again.`:`${w} you can prestige up to ${up.emblem} ${up.name}${upTop?`, where the top tier pays ${usd0(upTop.cash_total_cents)} a half`:''}.`;
+  if(lv>=4) pr=mk(when);
+  else if(nx&&nx.picked&&nx.level>lv){ set=true; pr=`You're set to play ${PLV(r,nx.level).emblem} ${PLV(r,nx.level).name} starting ${fmt.date(nx.starts_at)}.`; }
+  else { pr=mk(when);
+    if(unl>lv&&nx&&nx.has_prestige) pick=upL; }
+  const how=lv>=4||set?'':pick!=null?`Pick it now and it starts ${fmt.date(nx.starts_at)}. Or stay where you are. You can still switch during the first 3 days of the new half, until you claim.`:`Pick it on Rewards when the new half starts. You have the first 3 days of the half, until you claim.`;
+  const prCard=set?pr:mk(`On ${reset}`);   // the card shows the countdown right above, so it just names the day
+  return {lbl,amt,pay,reset,wait,pr,prCard,how,pick,up,status:top.status}; }
+function topTierCard(r){ const I=topTierInfo(r); if(!I) return '';
+  return `<div class="card toptier" style="margin-bottom:16px"><div class="tt-h"><span class="tt-ic" aria-hidden="true">🏆</span><div><div class="lbl">Top tier hit · ${esc(I.lbl)}</div><b>${esc(I.pay)}</b></div></div>
+    ${I.wait?`<div class="tt-wait"><span>⏳ Reset in</span><b>${esc(I.wait)}</b><span>${esc(I.reset)}, 12:00 am CT</span></div>`:''}
+    <p class="tt-pr">${esc(I.prCard)}</p>${I.how?`<div class="mini">${esc(I.how)}</div>`:''}
+    ${I.pick!=null?`<button class="btn gold sm" style="margin-top:10px" onclick="pickPrestige(${I.pick})">${I.up.emblem} Play ${esc(I.up.name)} from ${esc(I.reset)}</button>`:''}</div>`; }
+function topTierNote(r,{link=true}={}){ const I=topTierInfo(r); if(!I) return '';
+  return `<div class="note good toptier-n">🏆 <b>Top tier hit for ${esc(I.lbl)}.</b> ${esc(I.pay)} ${esc(I.pr)}${link?` <a href="#" onclick="go('rewards');return false">${I.pick!=null?'Prestige up on Rewards →':'See Rewards →'}</a>`:''}</div>`; }
 function rulesHtml(tiers){ const T=(tiers||[]).length?tiers:[{cash_total_cents:10000,xp_required:50,concepts_required:5},{cash_total_cents:25000,xp_required:100,concepts_required:10},{cash_total_cents:50000,xp_required:200,concepts_required:15}];
   const u=c=>fmt.usd(c,{cents:true}); const low=T[0], mid=T[1]||T[0], top=T[T.length-1];
   return `<ul class="rules">
@@ -2017,7 +2057,7 @@ function tgAnimate(){ const els=[...document.querySelectorAll('.tg [data-countup
 route('home',async()=>{
   const h=await API.page('my_home'); const c=h.campaign||{}; const ct=h.contest||{}; const q=h.quests||{}; const r=h.rewards||{}; const sub=h.submissions||{};
   const N=await myNumbers(); const TG=await teamGoal(); const ES=await myEliteSpot(); let SP={}; try{ SP=await API.page('my_submissions'); }catch(e){} const SUBS=SP.videos||[]; try{ await API.page('my_quests'); }catch(e){}
-  const nt=nextTier(r); const dl=daysLeft(c.ends_at);
+  const nt=nextTier(r); const dl=daysLeft(c.ends_at); let RW=null; try{ RW=await API.page('my_rewards'); }catch(e){}
   // one practical next action, from real state
   let action;
   if(q.needs_changes>0) action={t:'Address review feedback',d:`${q.needs_changes} quest entr${q.needs_changes>1?'ies were':'y was'} returned with notes.`,go:'quests',p:{f:'needs_changes'}};
@@ -2026,7 +2066,7 @@ route('home',async()=>{
   else if((sub.pending||0)>0&&(sub.approved||0)===0) action={t:'Pick a quest while your video is in review',d:'Posting three videos for feedback is the fastest 15 XP.',go:'quests'};
   else action={t:'Start the recommended quest',d:'Quests put most XP behind filming. One a week keeps you on pace.',go:'quests'};
   const tierHtml=nt?`<div class="plabel"><span>Next reward: <b>${esc(nt.name)} · ${fmt.usd(nt.cash_total_cents,{cents:true})}</b></span>${nt.draft||!nt.published?badge('d','Draft terms'):badge('g','Live')}</div>
-     ${pbar(Math.min(r.xp||0,nt.xp_required),nt.xp_required,{label:'XP · '+halfLabel(q.period_now),cls:'gold'})}<div style="height:8px"></div>${pbar(Math.min(r.concepts||0,nt.concepts_required),nt.concepts_required,{label:'Approved videos · '+halfLabel(q.period_now),cls:'green'})}`:`<div class="note good">Every tier reached for ${esc(halfLabel(q.period_now))}. Nice.</div>`;
+     ${pbar(Math.min(r.xp||0,nt.xp_required),nt.xp_required,{label:'XP · '+halfLabel(q.period_now),cls:'gold'})}<div style="height:8px"></div>${pbar(Math.min(r.concepts||0,nt.concepts_required),nt.concepts_required,{label:'Approved videos · '+halfLabel(q.period_now),cls:'green'})}`:(topTierNote(RW)||`<div class="note good">Every tier reached for ${esc(halfLabel(q.period_now))}. Nice.</div>`);
   return `${ph('Home','',{eyebrow:`October 2026 · ${dl} day${dl===1?'':'s'} left · ends Oct 31, 11:59 pm CT`,acts:`<button class="btn" onclick="go('${action.go}',${JSON.stringify(action.p||{}).replace(/"/g,'&quot;')})">${esc(action.t)}</button>`})}
   ${(()=>{ const QQ=S.cache['my_quests{}']; if(!QQ) return ''; const ins=QQ.instances||[]; return sprintBanner(QQ.catalog,Object.fromEntries((QQ.catalog||[]).map(c=>[c.quest_key,questState(c,ins)]))); })()}
   ${teamGoalCard(TG)}
@@ -2419,6 +2459,7 @@ route('rewards',async()=>{
   <div class="rwhero" style="margin-bottom:16px"><div class="rwhero-photo" style="background-image:url(./ph/hero-rewards.jpg)"></div><div class="rwhero-in"><div class="lbl" style="color:var(--gold)">${r.prestige?`${PLV(r,r.level||0).emblem} ${esc(PLV(r,r.level||0).name)} · `:''}Cash rewards · ${esc(lbl)}</div>
     <div class="rwhero-amt">Up to ${fmt.usd(topT?.cash_total_cents,{cents:true})||'$0'}</div><div class="rwhero-sub">${reached?`You have unlocked <b>${esc(reached.name)} · ${fmt.usd(reached.cash_total_cents,{cents:true})}</b> for ${esc(lbl)}. Paid on <b>${esc(payday(r))}</b>, after this half closes.`:`Earn XP from quests and get videos approved to unlock cash. Everything resets ${esc(reset)}.`}</div>
     <div class="rwhero-steps">${tiers.map(t=>`<span class="${R_DONE.includes(t.status)?'on':''}">${fmt.usd(t.cash_total_cents,{cents:true})} <i>${esc(tierReq(t))}</i></span>`).join('')}</div></div></div>
+  ${topTierCard(r)}
   ${anyDraft?`<div class="note draft" style="margin-bottom:16px"><b>Draft terms.</b> These tiers are the proposed rewards. Amounts and thresholds are not final until Austin publishes them, and claims open then.</div>`:''}
   <div class="note" style="margin-bottom:16px"><b>🔁 Resets on the 1st and 16th.</b> Each half starts at 0 XP and 0 approved videos. <b>🚫 No stacking:</b> your highest tier is your total for the half. <b>💸 Payday:</b> ${esc(payday(r))}, once this half closes. <a href="#" onclick="openRewardRules();return false">Read the rules</a></div>
   <div class="grid ${tiers.some(t=>t.sales_required_cents>0)?'g4':'g3'}" style="margin-bottom:16px">${metric('XP this half',r.xp||0,{cls:'gold',sub:r.xp_pending?`+${r.xp_pending} XP in review`:'Earned, verified'})}${metric('Approved videos this half',r.concepts||0,{cls:'green',sub:`Original videos submitted ${lbl} and approved (not marked BOF)`})}${tiers.some(t=>t.sales_required_cents>0)?metric('Trybe sales this half',usd0(r.sales_cents||0),{sub:'From your videos, not marked BOF'}):''}${metric('Resets',reset,{sub:'12:00 am CT · back to 0 XP and 0 videos'})}</div>
@@ -2510,7 +2551,7 @@ function questHero(q,r,insts){ const H=halfCtx(q,r); const top=H.tiers[H.tiers.l
   if(H.nt){ const nx=Math.max(0,H.nt.xp_required-H.xp), nv=Math.max(0,H.nt.concepts_required-H.cc), ns=H.nt.sales_required_cents>0?Math.max(0,H.nt.sales_required_cents-(H.sales||0)):0;
     const more=[nx?`<b>${nx}</b> more approved XP`:'',nv?`<b>${nv}</b> more approved video${nv===1?'':'s'}`:'',ns?`<b>${usd0(ns)}</b> more in Trybe sales`:''].filter(Boolean);
     next=`<div class="qh-next"><div class="qh-nr">Next reward: <b>${esc(H.nt.name)} · ${fmt.usd(H.nt.cash_total_cents,{cents:true})}</b></div><div class="qh-need">${more.length?more.join(' · ')+' needed.':'Unlocks once your numbers update.'}${H.pending&&nx?`<span class="qh-pend"> ${H.pending} XP awaiting approval is not counted yet.</span>`:''}</div></div>`; }
-  else next=`<div class="qh-next good">🏆 Every tier reached for ${esc(halfLabel(cur))}. Claim it on Rewards.</div>`;
+  else next=topTierInfo(r)?`<div class="qh-next good">${topTierNote(r).replace(/^<div class="note good toptier-n">|<\/div>$/g,'')}</div>`:`<div class="qh-next good">🏆 Every tier reached for ${esc(halfLabel(cur))}. Claim it on Rewards.</div>`;
   const reqRow=(ok,label,bar)=>ok?`<div class="qh-vid done">${ico('check',14)} ${label}</div>`:`<div class="qh-vid">${bar}</div>`;
   const vidReq=H.nt?reqRow(H.cc>=H.nt.concepts_required,`Video requirement complete · ${H.nt.concepts_required}/${H.nt.concepts_required}`,pbar(Math.min(H.cc,H.nt.concepts_required),H.nt.concepts_required,{label:`Approved videos for ${esc(H.nt.name)}`,cls:'green'}))
     +(H.nt.sales_required_cents>0?(H.sales==null?`<div class="qh-vid"><span class="mini">Sales requirement: waiting for updated numbers.</span></div>`:reqRow(H.sales>=H.nt.sales_required_cents,`Sales requirement complete · ${usd0(H.nt.sales_required_cents)}`,pbar(Math.min(H.sales,H.nt.sales_required_cents)/100,H.nt.sales_required_cents/100,{label:`Trybe sales for ${esc(H.nt.name)}`,cls:'gold',fmtv:x=>'$'+Math.round(x).toLocaleString()}))):''):'';
@@ -3373,7 +3414,7 @@ route('admin_rewards',async()=>{ const A=await API.page('admin'); let TG=null; t
   const pst=x=>x.claim_state==='approved_for_payment'&&isOpen(x.period_key)?['p',`Approved · pay ${PD(x.period_key)}`]:(PST[x.claim_state]||['n','Reached · not claimed yet']);
   return `${ph('Rewards and claims','Who reached a reward tier, what to pay, and the claim ledger.',{eyebrow:'Admin'})}
   ${teamGoalAdmin(TG)}
-  <div class="sec"><h2>Ready to pay</h2><span class="mini">${due.length?`${due.length} creator${due.length===1?'':'s'} reached a tier and ${due.length===1?'is':'are'} not paid yet`:'Nobody is waiting on a payout'}</span></div>
+  <div class="sec"><h2>Ready to pay</h2><span class="mini">${due.length?`${due.length} creator${due.length===1?'':'s'} reached a tier and ${due.length===1?'is':'are'} not paid yet`:'Nobody is waiting on a payout'}</span>${approveAllBtn(A)}</div>
   <div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Creator</th><th>Tier reached</th><th class="num">Tier total</th><th class="num">XP (that half)</th><th class="num">Approved videos (that half)</th><th class="num">Trybe sales (that half)</th><th>Status</th><th></th></tr></thead><tbody>${PAY.map(x=>{ const st=pst(x); return `<tr><td><b>${esc(x.display_name)}</b></td><td>${esc(x.tier)}${x.claim_state!=='paid'&&PD(x.period_key)?`<div class="mini">${isOpen(x.period_key)?'Payday':'Was due'} ${PD(x.period_key)}</div>`:''}</td><td class="num">${fmt.usd(x.tier_cents,{cents:true})}${x.paid_cents>0&&x.claim_state!=='paid'?`<div class="mini">${fmt.usd(x.paid_cents,{cents:true})} already paid</div>`:''}</td><td class="num">${x.xp}</td><td class="num">${x.concepts}</td><td class="num">${x.sales_cents!=null?fmt.usd(x.sales_cents,{cents:true}):'—'}</td><td>${badge(st[0],st[1])}</td>
     <td>${x.claim_state==='claim_requested'?`<button class="btn sm" onclick="claimAct('${x.claim_id}','approve')">Approve</button>`:x.claim_state==='approved_for_payment'?`<button class="btn sm" onclick="claimAsk('${x.claim_id}','paid')">Mark paid</button>`:''}</td></tr>`; }).join('')||`<tr><td colspan="8" class="mini">Nobody has reached a tier yet. Builder needs ${M[0]?M[0].xp_required:50} XP and ${M[0]?M[0].concepts_required:5} approved videos inside one half.</td></tr>`}</tbody></table></div></div>
   <div class="note" style="margin-top:10px"><b>💸 Payday is after the half closes.</b> Oct 1–15 is paid on <b>Oct 16</b>, Oct 16–31 on <b>Nov 1</b>. A creator can still climb a tier until the half ends, so approve claims any time but send money on payday, at the highest tier they reached.</div>
@@ -3391,9 +3432,26 @@ route('admin_rewards',async()=>{ const A=await API.page('admin'); let TG=null; t
     <div class="mini" style="margin-top:6px">Hitting the top tier of a level unlocks the next. Creators pick their level at each reset (first 3 days of a half, until they claim). Sales = Trybe sales in that half from videos not marked BOF.</div>
     <div class="sec"><h2>Who has prestige</h2><span class="mini">${who.length} creator${who.length===1?'':'s'} unlocked a level</span></div>
     <div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Creator</th><th>Highest unlocked</th><th>Playing now</th><th>Picked for next half</th></tr></thead><tbody>${who.map(w=>`<tr><td><b>${esc(w.display_name)}</b></td><td>${nm(w.unlocked)}</td><td>${nm(w.level_now)}</td><td>${w.next_pick!=null?nm(w.next_pick):'<span class="muted">same as now</span>'}</td></tr>`).join('')||'<tr><td colspan="4" class="mini">Nobody has unlocked Prestige I yet. It unlocks when a creator hits the top Rookie tier in a half.</td></tr>'}</tbody></table></div></div>`; })()}
-  <div class="sec"><h2>Claims</h2><span class="mini">Approve, then mark paid once it goes out</span></div><div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Creator</th><th>Tier</th><th class="num">Amount</th><th>State</th><th>Requested</th><th></th></tr></thead><tbody>${(A.claims||[]).map(c=>`<tr><td>${esc(c.display_name)}</td><td>${esc(c.milestone)}</td><td class="num">${fmt.usd(c.amount_cents,{cents:true})}</td><td>${badge(CL[c.state]||'n',c.state.replace(/_/g,' '))}${c.payment_ref?`<div class="mini">${esc(c.payment_ref)}</div>`:''}</td><td class="mono">${fmt.dt(c.requested_at)}</td>
+  <div class="sec"><h2>Claims</h2><span class="mini">Approve, then mark paid once it goes out</span>${approveAllBtn(A)}</div><div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Creator</th><th>Tier</th><th class="num">Amount</th><th>State</th><th>Requested</th><th></th></tr></thead><tbody>${(A.claims||[]).map(c=>`<tr><td>${esc(c.display_name)}</td><td>${esc(c.milestone)}</td><td class="num">${fmt.usd(c.amount_cents,{cents:true})}</td><td>${badge(CL[c.state]||'n',c.state.replace(/_/g,' '))}${c.payment_ref?`<div class="mini">${esc(c.payment_ref)}</div>`:''}</td><td class="mono">${fmt.dt(c.requested_at)}</td>
     <td>${c.state==='claim_requested'?`<div class="row" style="gap:6px;flex-wrap:nowrap"><button class="btn sm" onclick="claimAct('${c.id}','approve')">Approve</button><button class="btn danger sm" onclick="claimAsk('${c.id}','reject')">Reject</button></div>`:c.state==='approved_for_payment'?`<button class="btn sm" onclick="claimAsk('${c.id}','paid')">Mark paid</button>`:''}</td></tr>`).join('')||'<tr><td colspan="6" class="mini">No claims yet. Creators claim from Rewards once both bars are full.</td></tr>'}</tbody></table></div></div>
   <div class="sec"><h2>Exposure</h2></div><div class="card"><p style="font-size:14px">No stacking: at most ${fmt.usd(top.cash_total_cents,{cents:true})} per creator per half at Rookie, ${fmt.usd(top.cash_total_cents*2,{cents:true})} per month.${(()=>{ const mx=Math.max(0,...ALLM.map(m=>m.cash_total_cents||0)); return mx>top.cash_total_cents?` From Oct 16, a Prestige Master creator can earn up to ${fmt.usd(mx,{cents:true})} in a half, gated by Trybe sales.`:''; })()} ${on} creators on the roster → at most ${fmt.usd(on*top.cash_total_cents/100*2)} in reward payouts this month if every single one hit Elite in both halves, plus the separate $25,000 GMV incentive.</p></div>`; });
+/* Oct 30 (Austin): approve every claim that is waiting, in one go. Approving only marks claims ready to pay; no money moves. */
+const claimsWaiting=A=>(A?.claims||[]).filter(c=>c.state==='claim_requested');
+function approveAllBtn(A){ const L=claimsWaiting(A); if(!L.length) return ''; const tot=L.reduce((n,c)=>n+(Number(c.amount_cents)||0),0);
+  return `<button class="btn sm aa-btn" onclick="approveAllAsk()">${ico('check',14)} Approve all ${L.length} · ${fmt.usd(tot,{cents:true})}</button>`; }
+async function approveAllAsk(){ const L=claimsWaiting(await API.page('admin')); if(!L.length){ toast('No claims waiting for approval','good'); return; }
+  const tot=L.reduce((n,c)=>n+(Number(c.amount_cents)||0),0);
+  openDrawer(`<h2>Approve all claims</h2><p>Approve <b>${L.length}</b> claim${L.length===1?'':'s'} for <b>${fmt.usd(tot,{cents:true})}</b> total. This marks them approved for payment. It does not send any money.</p>
+   <div class="tblwrap" style="max-height:48vh;overflow:auto;margin:12px 0"><table class="tbl"><thead><tr><th>Creator</th><th>Tier</th><th class="num">Amount</th></tr></thead><tbody>${L.map(c=>`<tr><td><b>${esc(c.display_name)}</b></td><td>${esc(c.milestone||'')}</td><td class="num">${fmt.usd(c.amount_cents,{cents:true})}</td></tr>`).join('')}</tbody></table></div>
+   <div id="aaprog" class="mini" aria-live="polite"></div>
+   <div class="row" style="margin-top:12px"><button class="btn" id="aabtn" onclick="approveAllGo()">${ico('check',14)} Approve all ${L.length}</button><button class="btn gh" onclick="closeDrawer()">Cancel</button></div>`); }
+async function approveAllGo(){ const b=$('#aabtn'); if(b){ b.disabled=true; b.classList.add('pending'); }
+  const L=claimsWaiting(await API.page('admin')); let ok=0; const bad=[];
+  for(let i=0;i<L.length;i++){ const c=L[i]; const pr=$('#aaprog'); if(pr) pr.textContent=`Approving ${i+1} of ${L.length}: ${c.display_name}`;
+    try{ const r=await API.rpc('decide_claim',{p_claim:c.id,p_action:'approve',p_note:null,p_payment_ref:null}); if(r&&r.ok) ok++; else bad.push(`${c.display_name} (${r?.why||'not approved'})`); }
+    catch(e){ bad.push(`${c.display_name} (${e.message})`); } }
+  API.bust(); closeDrawer(true);
+  toast(bad.length?`Approved ${ok} of ${L.length}. Not approved: ${bad.slice(0,3).join(', ')}${bad.length>3?` and ${bad.length-3} more`:''}`:`Approved all ${ok} claim${ok===1?'':'s'}`, bad.length?'bad':'good'); render(); }
 function claimAsk(id,action){ const paid=action==='paid'; openDrawer(`<h2>${paid?'Mark claim paid':'Reject claim'}</h2><div class="field"><label for="cnote">${paid?'Payment reference':'Reason (the creator sees this)'}</label>${paid?`<input id="cnote" value="Paid through Trybe">`:`<textarea id="cnote"></textarea>`}</div>
   <div class="row" style="margin-top:12px"><button class="btn ${paid?'':'danger'}" onclick="(async()=>{const n=$('#cnote').value.trim(); if(!n){toast('Required','bad');return;} closeDrawer(true); await claimAct('${id}','${action}',n);})()">${paid?'Mark paid':'Reject'}</button><button class="btn gh" onclick="closeDrawer()">Cancel</button></div>`); }
 async function claimAct(id,action,txt){ try{ const r=await API.rpc('decide_claim',{p_claim:id,p_action:action,p_note:action==='reject'?txt:null,p_payment_ref:action==='paid'?txt:null}); toast(r.why||r.state,r.ok?'good':'bad'); API.bust(); render(); }catch(e){ toast(e.message,'bad'); } }
