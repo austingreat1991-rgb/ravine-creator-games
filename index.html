@@ -1319,6 +1319,7 @@ body.has-camo .main{background:transparent}
 .toptier .tt-wait span{font-size:13px;opacity:.8}
 .toptier .tt-pr{margin:8px 0 4px;font-weight:600}
 .toptier-n a{white-space:nowrap}
+.anim.still{animation:none}
 </style>
 </head>
 <body>
@@ -1339,7 +1340,7 @@ body.has-camo .main{background:transparent}
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261031-002444";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261031-005050";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1434,7 +1435,7 @@ const S={
   ui:(()=>{ try{ return JSON.parse(sessionStorage.getItem('rcg_ui')||'{}'); }catch(e){ return {}; } })(),
 };
 function saveUI(){ try{ sessionStorage.setItem('rcg_ui',JSON.stringify(S.ui)); }catch(e){} }
-function clearPrivate(){ S.coach=null; S.camoSynced=false; try{ localStorage.removeItem('rcg_camo_v1'); }catch(e){} if(typeof paintCamo==='function') paintCamo(''); S.cache={}; S.cacheAt={}; S.me=null; S.admin=false; S.ui={}; try{ sessionStorage.removeItem('rcg_ui'); }catch(e){} }
+function clearPrivate(){ S.coach=null; S.camoSynced=false; try{ localStorage.removeItem('rcg_camo_v1'); }catch(e){} if(typeof paintCamo==='function') paintCamo(''); S.cache={}; S.cacheAt={}; API.inflight={}; API.gen++; S.me=null; S.admin=false; S.ui={}; try{ sessionStorage.removeItem('rcg_ui'); }catch(e){} }
 
 /* ---- data layer: fixture | live. Every page reads through API.* so screens agree. */
 const API={
@@ -1445,17 +1446,36 @@ const API={
   get:(name,args)=>API.rpc(name,args),
   // page payloads; cached per view until a write invalidates
   async page(name,args={},{force=false}={}){
-    const k=name+JSON.stringify(args);
+    const k=name+JSON.stringify(args); const has=Object.prototype.hasOwnProperty.call(S.cache,k);
     // Oct 14: entries expire after 2 minutes, so a phone that keeps the app open in the background never shows an old status
-    if(!force&&S.cache[k]&&Date.now()-(S.cacheAt[k]||0)<API.TTL) return S.cache[k];
-    const v=await API.rpc(name,args);
-    if(name==='my_quests'&&v&&Array.isArray(v.catalog)&&!S.admin){ let have=0; try{ const N=await API.page('my_numbers'); have=Number(N?.month_sales)||0; }catch(e){}
-      if(have<COACH_MIN) v.catalog.forEach(c=>{ if(/_coach$/.test(c.quest_key)&&!c.locked){ c.locked=true; c.lock_sales=true; } }); }   // Oct 29: 1:1 quest locked under $5K this month
-    S.cache[k]=v; S.cacheAt[k]=Date.now(); return v;
+    if(!force&&has&&Date.now()-(S.cacheAt[k]||0)<API.TTL) return S.cache[k];
+    // Oct 30 (speed): an expired copy still shows right away; a fresh one loads in the background and the page redraws only if something changed
+    if(!force&&has&&S.mode==='live'){ const old=S.cache[k], view=S.view, was=JSON.stringify(old);
+      API.load(name,args).then(v=>{ if(S.view===view&&JSON.stringify(v)!==was) quietRender(); }).catch(()=>{}); return old; }
+    return API.load(name,args);
   },
+  /* Oct 30 (speed): one request per payload at a time. Two parts of a screen asking for the same thing share it,
+     and a write (bust) drops answers that were already on the way so nothing old lands after it. */
+  inflight:{}, gen:0,
+  load(name,args={}){ const k=name+JSON.stringify(args); if(API.inflight[k]) return API.inflight[k]; const g=API.gen;
+    const p=(async()=>{ try{ const v=await API.rpc(name,args);
+        if(name==='my_quests'&&v&&Array.isArray(v.catalog)&&!S.admin){ let have=0; try{ const N=await API.page('my_numbers'); have=Number(N?.month_sales)||0; }catch(e){}
+          if(have<COACH_MIN) v.catalog.forEach(c=>{ if(/_coach$/.test(c.quest_key)&&!c.locked){ c.locked=true; c.lock_sales=true; } }); }   // Oct 29: 1:1 quest locked under $5K this month
+        if(g===API.gen){ S.cache[k]=v; S.cacheAt[k]=Date.now(); } return v; }
+      finally{ if(API.inflight[k]===p) delete API.inflight[k]; } })();
+    API.inflight[k]=p; return p; },
+  /* Oct 30 (speed): load what every screen needs at once, in parallel, instead of one call after another */
+  WARM:['my_home','my_quests','my_rewards','my_numbers','my_team_goal','my_elite_spot','my_submissions','my_coach_link','my_featured_quest','my_armory'],
+  warm(always){ if(!always&&!S.me) return; (S.admin?API.WARM.concat(['admin']):API.WARM).forEach(n=>{ API.page(n).catch(()=>{}); }); },
   TTL:120000,
-  bust(){ S.cache={}; S.cacheAt={}; },
+  bust(){ S.cache={}; S.cacheAt={}; API.inflight={}; API.gen++; if(S.me) setTimeout(()=>API.warm(),0); },
 };
+/* redraw the current page with new data, without the loading skeleton and without moving the scroll */
+let QR_T=null;
+function quietRender(){ clearTimeout(QR_T); QR_T=setTimeout(async()=>{
+  if(!S.me||S.drawer||$('#sheet')?.classList.contains('open')) return; const a=document.activeElement; if(a&&/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)) return;
+  const view=S.view, fn=ROUTES[S.view]||ROUTES.home, main=$('#main'), y=window.scrollY;
+  try{ const html=await fn(S.params); if(html==null||S.view!==view||S.drawer) return; main.innerHTML=`<div class="anim still">${html}</div>`; main.querySelectorAll('[data-chart]').forEach(drawChart); afterRender(); window.scrollTo(0,y); }catch(e){} },150); }
 
 /* fixture backend: mirrors the server RPC semantics closely enough to exercise every
    creator flow in the preview. Clearly labelled; nothing is saved. */
@@ -1608,6 +1628,10 @@ const LIVE={
   hdr(){ return {'apikey':LIVE.key,'Authorization':'Bearer '+(LIVE.session?.access_token||LIVE.key),'Content-Type':'application/json','Accept-Profile':'app','Content-Profile':'app'}; },
   async ensureSession(){
     if(LIVE.session&&LIVE.session.expires_at*1000>Date.now()+60000) return LIVE.session;
+    // Oct 30 (speed): calls that start together share one sign-in refresh instead of each doing its own
+    if(LIVE._sp) return LIVE._sp; LIVE._sp=LIVE._ensure().finally(()=>{ LIVE._sp=null; }); return LIVE._sp;
+  },
+  async _ensure(){
     try{ const saved=JSON.parse(localStorage.getItem('rcg_session')||'null'); if(saved?.refresh_token){ const r=await fetch(`${LIVE.url}/auth/v1/token?grant_type=refresh_token`,{method:'POST',headers:{'apikey':LIVE.key,'Content-Type':'application/json'},body:JSON.stringify({refresh_token:saved.refresh_token})}); if(r.ok){ LIVE.session=await r.json(); localStorage.setItem('rcg_session',JSON.stringify(LIVE.session)); return LIVE.session; } } }catch(e){}
     const r=await fetch(`${LIVE.url}/auth/v1/signup`,{method:'POST',headers:{'apikey':LIVE.key,'Content-Type':'application/json'},body:'{}'});
     if(!r.ok){ const t=await r.text(); throw new Error('anonymous sign-in is not enabled on this project ('+r.status+'): '+t.slice(0,120)); }
@@ -1709,7 +1733,7 @@ function renderLogin(){
 }
 async function doLogin(ev){ if(ev) ev.preventDefault(); const code=$('#code').value.trim(); const b=$('#loginbtn'); b.classList.add('pending'); b.disabled=true; $('#loginerr').textContent='';
   try{ clearPrivate(); const r=S.mode==='fixture'?FX.login(code):await LIVE.login(code); if(!r.ok){ $('#loginerr').textContent=r.why||'That code did not work.'; return; }
-    S.me={id:r.creator_id,display_name:r.display_name}; S.admin=!!r.is_admin; if(location.search){ try{ history.replaceState(null,'',location.pathname+location.hash); }catch(e){} }
+    S.me={id:r.creator_id,display_name:r.display_name}; S.admin=!!r.is_admin; API.warm(); if(location.search){ try{ history.replaceState(null,'',location.pathname+location.hash); }catch(e){} }
     const p=parseHash(); S.view=p.view; S.params=p.params; render(); }
   catch(e){ $('#loginerr').textContent=e.message; }
   finally{ b.classList.remove('pending'); b.disabled=false; }
@@ -1759,7 +1783,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
   $('#drawerbg').addEventListener('click',()=>closeDrawer());
   $('#sheet').addEventListener('click',e=>{ if(e.target.id==='sheet') closeSheet(); });
   const p=parseHash(); S.view=p.view; S.params=p.params;
-  if(S.mode==='live'&&!new URLSearchParams(location.search).get('k')){ try{ const saved=JSON.parse(localStorage.getItem('rcg_session')||'null'); if(saved){ const r=await LIVE.rpc('my_home'); if(r?.creator){ S.me={id:r.creator.id,display_name:r.creator.display_name}; S.admin=!!r.is_admin; } } }catch(e){} }
+  if(S.mode==='live'&&!new URLSearchParams(location.search).get('k')){ try{ const saved=JSON.parse(localStorage.getItem('rcg_session')||'null'); if(saved){ API.warm(true); const r=await API.page('my_home'); if(r?.creator){ S.me={id:r.creator.id,display_name:r.creator.display_name}; S.admin=!!r.is_admin; } } }catch(e){} }
   render();
   if(!window.NO_SW&&'serviceWorker' in navigator&&location.protocol==='https:'){ navigator.serviceWorker.register('./sw.js').catch(()=>{}); }
 });
