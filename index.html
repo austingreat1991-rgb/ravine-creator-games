@@ -1331,6 +1331,128 @@ body.has-camo .main{background:transparent}
 .chpool{margin-top:12px}.chp-amt{font-family:var(--disp);font-size:30px;color:var(--gold)}.chp-split{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.chp-split>div{background:var(--sf2);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column}
 .chp-split span{font-size:12px;color:var(--tx3)}.chp-split b{font-size:20px}.chp-split i{font-style:normal;font-size:12px;color:var(--tx2)}.chp-me{font-size:15px}
 @media (max-width:420px){.chlist .chrow{grid-template-columns:24px 1fr;}.chlist .chrow span:last-child{grid-column:2}}
+
+/* ================= November facelift (Nov 2) =================
+   Near-black base, charcoal surfaces, orange = actions/active nav, gold = prizes/completed.
+   Presentation only: no data, formula or rule changes. */
+:root{--bg:#090B0D;--bg2:#0D1013;--sf:#13171B;--sf2:#1B2026;--sf3:#222830;--ln:rgba(255,255,255,.08);--ln2:rgba(255,255,255,.13);
+  --tx:#F2F3F1;--tx2:#A4ADB5;--tx3:#7F8992;--tx4:#5B646D;--r:18px;--r2:14px;--gut:20px;
+  --t-fast:160ms;--t:190ms}
+body{background-color:var(--bg);
+  background-image:radial-gradient(ellipse 70% 38% at 50% -6%,rgba(232,150,60,.10),transparent 70%),
+   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='560' viewBox='0 0 560 560'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.022' stroke-width='1'%3E%3Cpath d='M-20 120c80-40 160 30 240-10s150-60 230-20 120 40 140 20'/%3E%3Cpath d='M-20 170c90-30 150 40 240 0s160-50 240-10 110 30 130 10'/%3E%3Cpath d='M-20 230c70-50 170 20 250-20s140-40 220 0 120 50 140 30'/%3E%3Cpath d='M-20 300c100-20 150 50 250 10s150-70 230-30 110 40 130 20'/%3E%3Cpath d='M-20 380c80-40 170 40 250 0s150-50 230-10 120 40 140 20'/%3E%3Cpath d='M-20 450c90-30 160 30 240-10s160-60 240-20 110 30 130 10'/%3E%3Cpath d='M-20 520c70-40 170 30 250-10s140-50 220-10 120 40 140 20'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment:fixed,scroll;font-feature-settings:"tnum" 0}
+.tnum,.kpi .big,.metric b,.plabel b,.lb-row .v,.cd b{font-variant-numeric:tabular-nums}
+.main{width:100%;max-width:1220px;margin-inline:auto;padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+.card{padding:20px;border-radius:var(--r);background:var(--sf);border-color:var(--ln)}
+@media (min-width:901px){.card{padding:22px}}
+.sec{margin:28px 0 12px}.sec h2{font-family:var(--disp);font-size:22px;letter-spacing:.4px;text-transform:uppercase;font-weight:700}
+.lbl{color:var(--tx2);letter-spacing:1.5px}.lbl.gold{color:var(--gold)}
+.btn,.bar i,.hbar i,.tbar i,.fl-task,.nitm,.mobbar a,.mobbar button{transition:background var(--t-fast),color var(--t-fast),border-color var(--t-fast),transform var(--t-fast),width var(--t) var(--ease)}
+.btn:active{transform:scale(.98)}
+:focus-visible{outline:2px solid var(--o);outline-offset:2px;border-radius:8px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+/* header: compact; quest timer is quiet */
+@media (max-width:900px){
+  .mobtop{background:rgba(9,11,13,.9);padding:10px var(--gut);border-bottom-color:var(--ln)}
+  .mobtop .brand img{width:30px;height:30px}
+  .mobtop .menu{min-height:38px;padding:0 14px;border-radius:10px;border:1px solid var(--ln2);color:var(--tx2);font-weight:700;font-size:13px}
+  .main{padding:18px var(--gut) calc(112px + env(safe-area-inset-bottom))}
+  .mobbar{background:rgba(13,16,19,.97);padding:8px 6px calc(10px + env(safe-area-inset-bottom));border-top-color:var(--ln)}
+  .mobbar a,.mobbar button{min-height:54px;border-radius:12px;color:var(--tx3)}
+  .mobbar .on{color:var(--o)}
+}
+.qtimer{background:rgba(19,23,27,.92);border-color:var(--ln2);color:var(--tx2);font-weight:600;font-size:12px;padding:5px 11px;box-shadow:none}
+.qtimer b,.qtimer .cd{color:var(--tx)}
+.qtimer .qt-l{color:var(--tx3);font-weight:700}.qtimer .qt-l::before{content:""}.qtimer:hover{border-color:var(--ln2);color:var(--tx)}.qtimer.soon .qt-l{color:var(--bad)}
+
+/* camo backgrounds stay (Armory) but sit further back */
+#camo.on{opacity:.5}
+#camo.on::after{background:radial-gradient(ellipse 90% 70% at 50% 35%,rgba(9,11,13,.62),rgba(9,11,13,.9)),linear-gradient(180deg,rgba(9,11,13,.3),rgba(9,11,13,.7))}
+
+/* page heads */
+.fl-head{margin:2px 0 16px}
+.fl-head h1{font-family:var(--disp);font-size:40px;line-height:1;letter-spacing:.3px;text-transform:uppercase;margin-top:6px}
+.fl-eyebrow{font-size:11px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--o)}
+.fl-cd{margin-top:6px;font-size:13px;color:var(--tx2);font-weight:600}
+.fl-head.home{display:flex;justify-content:space-between;align-items:baseline;gap:8px 16px;flex-wrap:wrap}
+.fl-head.home .fl-cd{margin-top:0}
+
+/* hero + pool */
+.fl-duo{display:grid;gap:16px}
+@media (min-width:1100px){.fl-duo{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);align-items:stretch}}
+.fl-hero{position:relative;overflow:hidden;padding:24px;background:
+  radial-gradient(ellipse 80% 60% at 100% 0%,rgba(232,182,74,.10),transparent 60%),linear-gradient(180deg,#171B20,#121519);
+  border-color:rgba(232,182,74,.22);box-shadow:0 18px 40px -24px rgba(0,0,0,.8)}
+.fl-hero::before{content:"";position:absolute;left:24px;right:24px;top:0;height:2px;background:linear-gradient(90deg,transparent,rgba(232,182,74,.75),transparent)}
+.fl-big{font-family:var(--disp);font-weight:800;font-size:clamp(52px,15vw,72px);line-height:.95;letter-spacing:.5px;margin-top:8px;color:var(--tx);word-break:break-word}
+.fl-sub{margin-top:8px;font-size:14px;color:var(--tx2);max-width:44ch}
+.fl-next{margin-top:20px;background:var(--sf2);border:1px solid var(--ln);border-radius:var(--r2);padding:18px}
+.fl-prize{font-family:var(--disp);font-weight:700;font-size:26px;line-height:1.1;margin-top:6px;color:var(--tx)}
+.fl-prize span{display:block;font-family:var(--f);font-size:14px;font-weight:600;color:var(--tx2);margin-top:4px}
+.fl-meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:8px;font-size:14px;color:var(--tx2)}
+.fl-meta b{color:var(--tx)}
+.hbar{height:12px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden;margin-top:14px}
+.hbar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#B98A2E,var(--gold));min-width:6px}
+.fl-scale{display:flex;justify-content:space-between;margin-top:6px;font-size:12px;color:var(--tx3)}
+.fl-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px;font-size:13px;color:var(--tx2)}
+.fl-got i{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--gold-soft);color:var(--gold);font-style:normal;font-size:11px;font-weight:800;margin-right:4px}
+.fl-got b{color:var(--tx)}
+.fl-link{font-weight:700;color:var(--o);display:inline-flex;align-items:center;gap:6px;min-height:36px}
+.fl-pool{background:var(--sf);border-color:var(--ln2)}
+.fl-pool .lbl{color:var(--tx2)}
+.fl-pool-amt{font-family:var(--disp);font-weight:800;font-size:46px;line-height:1;margin:10px 0 8px;color:var(--tx)}
+.fl-pool.open .fl-pool-amt{color:var(--gold)}
+.fl-lock{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;padding:5px 10px;border-radius:99px;border:1px solid var(--ln2);color:var(--tx2);background:rgba(255,255,255,.04)}
+.fl-lock::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--tx3)}
+.fl-lock.on{color:var(--gold);border-color:rgba(232,182,74,.45);background:var(--gold-soft)}.fl-lock.on::before{background:var(--gold)}
+.fl-frac{margin-top:12px;font-size:15px;color:var(--tx2)}.fl-frac b{color:var(--tx);font-size:17px}
+.tbar{height:8px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden;margin:10px 0 12px}
+.tbar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#6F7A85,#C9D0D6);min-width:4px}
+.fl-alloc{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.fl-alloc>div{background:var(--sf2);border:1px solid var(--ln);border-radius:12px;padding:12px 14px;display:grid;gap:2px;align-content:start}
+.fl-alloc span{font-size:12px;color:var(--tx3);font-weight:700;letter-spacing:.4px}
+.fl-alloc b{font-family:var(--disp);font-size:26px;font-weight:800}
+.fl-alloc i{font-style:normal;font-size:12px;color:var(--tx2)}
+.fl-share{margin-top:12px;font-size:14px;color:var(--tx2)}.fl-share b{color:var(--tx)}.fl-share span{color:var(--tx3)}
+
+/* next action */
+.fl-tasks{padding:6px 8px}
+.fl-task{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;padding:14px 12px;border-radius:12px;color:var(--tx2)}
+.fl-task+.fl-task{border-top:1px solid var(--ln)}
+.fl-task:hover{background:rgba(255,255,255,.03)}
+.fl-task-b{display:grid;gap:2px}.fl-task-b b{color:var(--tx);font-size:15px}.fl-task-b span{font-size:13px}
+.fl-task.hot .fl-task-b b{color:var(--o2)}
+.fl-task>svg{color:var(--o);flex:none}
+.fl-task-x{padding:4px 12px 10px}.fl-task-x:empty{display:none}
+.fl-pair{margin-top:16px}
+
+/* prize ladder */
+.fl-ladder-card{padding:8px 20px}
+.fl-ladder{list-style:none;margin:0;padding:0}
+.fl-step{display:grid;grid-template-columns:28px 1fr;gap:14px;padding:16px 0;position:relative;color:var(--tx3)}
+.fl-step+.fl-step{border-top:1px solid var(--ln)}
+.fl-dot{width:24px;height:24px;border-radius:50%;border:2px solid var(--tx4);display:grid;place-items:center;font-size:12px;font-weight:900;margin-top:2px}
+.fl-step.done .fl-dot{border-color:var(--gold);background:var(--gold-soft);color:var(--gold)}
+.fl-step.next .fl-dot{border-color:var(--o);box-shadow:0 0 0 4px rgba(255,110,32,.14)}
+.fl-step-t{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.fl-step-t b{font-size:15px;color:var(--tx2)}
+.fl-step-p{font-family:var(--disp);font-size:21px;font-weight:700;line-height:1.15;margin-top:2px;color:var(--tx2)}
+.fl-step-p span{display:block;font-family:var(--f);font-size:13px;font-weight:600;color:var(--tx3);margin-top:2px}
+.fl-step.done .fl-step-t b,.fl-step.done .fl-step-p{color:var(--tx)}
+.fl-step.next{background:linear-gradient(90deg,rgba(255,110,32,.07),transparent 70%);margin:0 -14px;padding:18px 14px;border-radius:12px}
+.fl-step.next+.fl-step{border-top-color:transparent}
+.fl-step.next .fl-step-t b,.fl-step.next .fl-step-p{color:var(--tx)}
+.fl-step.next .fl-step-p{font-size:24px}
+.fl-tag{font-size:10.5px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;padding:3px 8px;border-radius:99px}
+.fl-tag.gold{color:var(--gold);background:var(--gold-soft)}.fl-tag.o{color:var(--o);background:var(--o-soft)}
+.fl-step-go .hbar{margin-top:10px}
+@media (max-width:380px){.fl-alloc{grid-template-columns:1fr}.fl-head h1{font-size:34px}}
+
+/* Nov 2 (Austin): team goal thermometer leads Home, bonus pool under it, then your prize */
+.fl-tg{margin-bottom:16px}
+@media (min-width:1100px){.fl-duo.flpf{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)}}
 </style>
 </head>
 <body>
@@ -1351,7 +1473,7 @@ body.has-camo .main{background:transparent}
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261101-152852";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261102-142407";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -2107,6 +2229,35 @@ route('home',async()=>{
   else action={t:'Start the recommended quest',d:'Quests put most XP behind filming. One a week keeps you on pace.',go:'quests'};
   const tierHtml=nt?`<div class="plabel"><span>Next reward: <b>${esc(nt.name)} · ${fmt.usd(nt.cash_total_cents,{cents:true})}</b></span>${nt.draft||!nt.published?badge('d','Draft terms'):badge('g','Live')}</div>
      ${pbar(Math.min(r.xp||0,nt.xp_required),nt.xp_required,{label:'XP · '+halfLabel(q.period_now),cls:'gold'})}<div style="height:8px"></div>${pbar(Math.min(r.concepts||0,nt.concepts_required),nt.concepts_required,{label:'Approved videos · '+halfLabel(q.period_now),cls:'green'})}`:(topTierNote(RW)||`<div class="note good">Every tier reached for ${esc(halfLabel(q.period_now))}. Nice.</div>`);
+  if(NOV){ const C=await myChallenge();
+    const tasks=[];
+    if(q.needs_changes>0) tasks.push({t:'Address review feedback',d:`${q.needs_changes} quest entr${q.needs_changes>1?'ies were':'y was'} returned with notes.`,go:'quests',p:{f:'needs_changes'},hot:1});
+    if(sub.changes>0) tasks.push({t:`${sub.changes} video${sub.changes>1?'s':''} need${sub.changes>1?'':'s'} changes`,d:'Open the notes, fix it, and resubmit.',go:'submissions',p:{f:'changes_requested'},hot:1});
+    if(q.in_progress>0) tasks.push({t:'Finish a quest you started',d:`${q.in_progress} in progress. Pick up where you left off.`,go:'quests',p:{f:'in_progress'}});
+    if(!tasks.length) tasks.push(action);
+    const taskRow=a=>`<button class="fl-task ${a.hot?'hot':''}" onclick="go('${a.go}',${JSON.stringify(a.p||{}).replace(/"/g,'&quot;')})"><span class="fl-task-b"><b>${esc(a.t)}</b><span>${esc(a.d)}</span></span>${ico('arrow',16)}</button>`;
+    return `<div class="fl-head home"><div class="fl-eyebrow">November Creator Games</div><div class="fl-cd tnum">${esc(chCountdown(C))}</div></div>
+    ${(()=>{ const QQ=S.cache['my_quests{}']; if(!QQ) return ''; const ins=QQ.instances||[]; return sprintBanner(QQ.catalog,Object.fromEntries((QQ.catalog||[]).map(c=>[c.quest_key,questState(c,ins)]))); })()}
+    ${TG&&TG.month_key===CAMP?`<section class="card tg fl-tg">${teamGoalHead(TG)}</section>`:''}
+    ${C&&C.tiers?`<div class="fl-duo flpf">${chPool(C,{bar:!(TG&&TG.month_key===CAMP)})}${chHero(C)}</div>`:`<div class="card"><p>Your November challenge shows here once the first November numbers are in.</p></div>`}
+    <div class="sec"><h2>Your next action</h2></div>
+    <section class="card fl-tasks">${tasks.slice(0,3).map(taskRow).join('')}<div class="fl-task-x">${bookCta('mini')}</div></section>
+    ${N&&N.campaign_key===CAMP?numbersCard(N):''}
+    <div class="grid g2 fl-pair">
+      <section class="card"><div class="lbl">Quest XP${q.prestige_name?` · ${q.prestige_emblem||''} ${esc(q.prestige_name)}`:''}</div>
+        <div class="kpi" style="margin-top:6px"><span class="big tnum">${q.xp_earned||0}<span style="font-size:18px;color:var(--tx3)"> XP</span></span>${q.xp_pending?`<span class="badge r">+${q.xp_pending} XP in review</span>`:''}</div>
+        <div class="mini" style="margin-top:4px">This half (${esc(halfLabel(q.period_now))}) · resets ${esc(halfReset(null,q.period_now))}, 12:00 am CT</div>
+        <div style="margin-top:14px">${tierHtml}</div>
+        <div class="row" style="margin-top:14px"><button class="btn soft sm" onclick="go('quests')">Quests</button><button class="btn gh sm" onclick="go('rewards')">Quest rewards</button></div></section>
+      <section class="card"><div class="lbl">My videos</div><div class="grid g2" style="gap:10px;margin-top:10px">${metric('This November',sub.this_campaign??0)}${metric('Approved, all time',sub.approved??0)}</div>
+        <div class="row" style="margin-top:14px"><button class="btn gh sm" onclick="go('submissions')">My submissions</button><button class="btn gh sm" onclick="go('leaderboard')">Leaderboard</button></div></section>
+    </div>
+    ${paceCard(SUBS,SP.source)}
+    ${eliteSpotCard(ES)}
+    ${badgesCard(SUBS)}
+    <div class="sec"><h2>Recent activity</h2><a class="mini" href="#/submissions">All my videos →</a></div>
+    ${syncLine(SP.source,SUBS)}
+    ${activityFeed(h.activity||[],SUBS)}`; }
   return `${ph('Home','',{eyebrow:`${MONTH_NAME} 2026 · ${dl} day${dl===1?'':'s'} left · ends ${NOV?'Nov 30':'Oct 31'}, 11:59 pm CT`,acts:`<button class="btn" onclick="go('${action.go}',${JSON.stringify(action.p||{}).replace(/"/g,'&quot;')})">${esc(action.t)}</button>`})}
   ${(()=>{ const QQ=S.cache['my_quests{}']; if(!QQ) return ''; const ins=QQ.instances||[]; return sprintBanner(QQ.catalog,Object.fromEntries((QQ.catalog||[]).map(c=>[c.quest_key,questState(c,ins)]))); })()}
   ${NOV?challengeCard(await myChallenge()):teamGoalCard(TG)}
@@ -3048,34 +3199,70 @@ async function myChallenge(){ try{ return await API.page('my_challenge'); }catch
 const kUSD=n=>{ n=+n||0; return n>=1e6?'$'+(n/1e6).toFixed(n%1e6?1:0)+'M':n>=1e3?'$'+Math.round(n/1e3)+'K':'$'+Math.round(n); };
 function chTier(C){ const T=C.tiers||[], g=+C.gmv||0; let i=-1; T.forEach((t,j)=>{ if(g>=t.gmv) i=j; }); return {T,g,i,cur:i>=0?T[i]:null,next:T[i+1]||null}; }
 function chPrize(t){ return t.gmv===5000?`${fmt.usd(t.cash)} cash`:`${esc(t.prize)} or ${fmt.usd(t.cash)} cash`; }
-function chBar(C){ const {T,g,i,next}=chTier(C); const n=T.length||1; const prev=i>=0?T[i].gmv:0;
-  const frac=next?Math.max(0,Math.min(1,(g-prev)/(next.gmv-prev))):1; const pct=Math.min(100,((i+1)+(next?frac:0))/n*100);
-  return `<div class="chbar" role="img" aria-label="${esc(fmt.usd(g))} of November GMV"><i style="width:${pct.toFixed(1)}%"></i>${T.map((t,j)=>`<div class="chmk ${g>=t.gmv?'on':''}" style="left:${((j+1)/n*100).toFixed(2)}%"><b>${g>=t.gmv?'✓':''}</b><span>${kUSD(t.gmv)}</span></div>`).join('')}</div>`; }
-function chPool(C){ const t=C.team||{}, goal=+C.goal||2e6, pool=+C.pool||25000, sp=+(C.share||{}).sales_pct||0, vp=+(C.share||{}).video_pct||0, pct=0.6*sp+0.4*vp, hit=(+t.sales||0)>=goal;
-  const p=x=>(x*100).toFixed(x>0&&x<0.01?2:1)+'%';
-  return `<div class="card chpool"><div class="row between"><div><div class="lbl">Bonus pool</div><div class="chp-amt">${fmt.usd(pool)}</div></div>${hit?badge('g','Unlocked'):badge('n','Locked')}</div>
-   <p class="small">Unlocks only if we hit <b>${fmt.usd(goal)}</b> in team sales this month. If we finish under it, nobody gets the pool.</p>
-   ${pbar(Math.min(+t.sales||0,goal),goal,{label:'Team sales this month',cls:'gold',fmtv:x=>'$'+Math.round(x).toLocaleString('en-US')})}
-   <div class="chp-split"><div><span>60% on sales</span><b>${p(sp)}</b><i>Your ${fmt.usd(C.sales||0)} of ${fmt.usd(t.sales||0)}</i></div><div><span>40% on videos</span><b>${p(vp)}</b><i>Your ${C.videos||0} of ${t.videos||0} approved videos</i></div></div>
-   <div class="chp-me">Your share right now: <b>${p(pct)}</b> = <b>${fmt.usd(pool*pct)}</b> if we hit ${kUSD(goal)}</div></div>`; }
-function challengeCard(C){ if(!C||!C.tiers) return ''; const {g,cur,next}=chTier(C);
-  return `<div class="card chcard"><div class="row between"><span class="lbl">November challenge</span><a href="#" onclick="go('compete');return false" class="small">See every prize →</a></div>
-   <div class="chg"><b>${fmt.usd(g)}</b><span>Trybe GMV from videos posted in November</span></div>${chBar(C)}
-   <div class="chnext">${next?`Next: <b>${kUSD(next.gmv)} · ${chPrize(next)}</b> · ${fmt.usd(next.gmv-g)} to go`:'Top prize reached. Keep going.'}${cur?`<br>Reached: <b>${chPrize(cur)}</b>`:''}</div></div>${chPool(C)}`; }
+/* November facelift (Nov 2): Home answers "how am I doing / what prize next / how close is the team".
+   Same data and formulas as before (my_challenge): prize tiers on GMV from November-posted videos,
+   $25K pool on team sales vs the goal, 60% share of sales + 40% share of approved videos. */
+const dol=n=>'$'+Math.round(+n||0).toLocaleString('en-US');
+function chCountdown(C){ const e=new Date((C&&C.campaign&&C.campaign.ends_at)||'2026-12-01T06:00:00Z'); const ms=e-Date.now();
+  if(ms<=0) return 'Challenge closed · final numbers Dec 1';
+  const d=Math.floor(ms/864e5), h=Math.floor(ms%864e5/36e5);
+  return `${d}d ${h}h left · ends ${fmt.date(new Date(e-60000))}, 11:59 PM CT`; }
+function chPct(C){ const {g,i,T,next}=chTier(C); const prev=i>=0?T[i].gmv:0; return next?Math.max(0,Math.min(1,(g-prev)/(next.gmv-prev))):1; }
+function chPrizeName(t){ return t.gmv===5000?`${fmt.usd(t.cash)} cash`:esc(t.prize); }
+function chCashAlt(t){ return t.gmv===5000?'':`or ${fmt.usd(t.cash)} cash`; }
+function chBar(C){ const p=chPct(C); return `<div class="hbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(p*100)}"><i style="width:${(p*100).toFixed(1)}%"></i></div>`; }
+function chHero(C,{link=true}={}){ const {g,cur,next,T,i}=chTier(C); const prev=i>=0?T[i].gmv:0;
+  return `<section class="card fl-hero">
+   <div class="fl-hero-top">
+     <div class="lbl">Your November GMV</div>
+     <div class="fl-big tnum">${dol(g)}</div>
+     <p class="fl-sub">Trybe sales from videos you posted in November. BOF and gifting videos count.</p>
+   </div>
+   <div class="fl-next">
+     ${next?`<div class="lbl gold">Next reward</div>
+     <div class="fl-prize">${chPrizeName(next)}${chCashAlt(next)?` <span>${chCashAlt(next)}</span>`:''}</div>
+     <div class="fl-meta tnum"><span>at <b>${dol(next.gmv)}</b> GMV</span><span><b>${dol(next.gmv-g)}</b> to go</span></div>
+     ${chBar(C)}
+     <div class="fl-scale tnum"><span>${dol(prev)}</span><span>${dol(next.gmv)}</span></div>`
+     :`<div class="lbl gold">Top prize reached</div><div class="fl-prize">${chPrizeName(T[T.length-1])}</div>${chBar(C)}`}
+   </div>
+   <div class="fl-foot">${cur?`<span class="fl-got"><i aria-hidden="true">✓</i> Unlocked: <b>${chPrizeName(cur)}</b>${chCashAlt(cur)?` ${chCashAlt(cur)}`:''}</span>`:`<span class="mini">No reward unlocked yet. First one is ${dol((T[0]||{}).gmv||5000)}.</span>`}
+     ${link?`<a href="#/compete" onclick="go('compete');return false" class="fl-link">View all rewards ${ico('arrow',14)}</a>`:''}</div>
+  </section>`; }
+function chPool(C,{bar=true}={}){ const t=C.team||{}, goal=+C.goal||2e6, pool=+C.pool||25000, sp=+(C.share||{}).sales_pct||0, vp=+(C.share||{}).video_pct||0, pct=0.6*sp+0.4*vp, ts=+t.sales||0, hit=ts>=goal;
+  const p=x=>(x*100).toFixed(x>0&&x<0.01?2:1)+'%'; const tp=Math.max(0,Math.min(100,ts/goal*100));
+  return `<section class="card fl-pool ${hit?'open':''}">
+   <div class="row between"><div class="lbl">Team bonus pool</div><span class="fl-lock ${hit?'on':''}">${hit?'Unlocked':'Locked'}</span></div>
+   <div class="fl-pool-amt tnum">${dol(pool)}</div>
+   ${bar?`<div class="fl-frac tnum"><b>${dol(ts)}</b> <span>/ ${dol(goal)} team sales</span></div>
+   <div class="tbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(tp)}"><i style="width:${tp.toFixed(1)}%"></i></div>`:''}
+   <p class="small">${hit?`The team hit ${dol(goal)} in November sales. The pool pays out on the split below.`:`Unlocks only if the team hits ${dol(goal)} in November sales. Finish under it and nobody gets the pool.`}</p>
+   <div class="fl-alloc">
+     <div><span>60% by sales</span><b class="tnum">${p(sp)}</b><i>Your ${dol(C.sales||0)} of ${dol(ts)}</i></div>
+     <div><span>40% by videos</span><b class="tnum">${p(vp)}</b><i>Your ${C.videos||0} of ${t.videos||0} approved videos</i></div>
+   </div>
+   <div class="fl-share">${hit?'Your share':'Projected share'}: <b class="tnum">${p(pct)}</b> ≈ <b class="tnum">${dol(pool*pct)}</b>${hit?'':` <span>only if the team hits ${kUSD(goal)}</span>`}</div>
+  </section>`; }
+function challengeCard(C){ if(!C||!C.tiers) return ''; return `<div class="fl-duo">${chHero(C)}${chPool(C)}</div>`; }
 async function challengePage(){ const C=await myChallenge();
-  const head=ph('November challenge','Hit the GMV. Unlock the prize.',{eyebrow:'Ravine Elite'});
+  const head=`<div class="fl-head"><div class="fl-eyebrow">Ravine Elite · November Creator Games</div><h1>November Challenge</h1><div class="fl-cd tnum">${esc(chCountdown(C))}</div></div>`;
   if(!C||!C.tiers) return head+`<div class="card"><p>The November challenge shows here once the first November numbers are in.</p></div>`;
   const {g,next}=chTier(C);
-  return `${head}<div class="card chcard"><div class="chg"><b>${fmt.usd(g)}</b><span>Your Trybe GMV from videos posted in November</span></div>${chBar(C)}
-   <div class="chnext">${next?`Next: <b>${kUSD(next.gmv)} · ${chPrize(next)}</b> · ${fmt.usd(next.gmv-g)} to go`:'Every tier reached.'}</div></div>
-   <div class="sec"><h2>Prize ladder</h2><span class="mini">Pick the tier you reach or any tier below it</span></div>
-   <div class="card pad0"><div class="chlist">${C.tiers.map(t=>`<div class="chrow ${g>=t.gmv?'on':''}"><span class="chk">${g>=t.gmv?'✓':''}</span><b>${fmt.usd(t.gmv)} GMV</b><span>${chPrize(t)}</span></div>`).join('')}</div></div>
-   <div class="sec"><h2>$25,000 bonus pool</h2><span class="mini">Split 60% on sales, 40% on approved videos</span></div>${chPool(C)}
-   <div class="sec"><h2>Rules</h2></div><div class="card"><ul class="rules">
+  const ladder=C.tiers.map((t,j)=>{ const done=g>=t.gmv, isNext=next&&t.gmv===next.gmv;
+    return `<li class="fl-step ${done?'done':''} ${isNext?'next':''}">
+      <span class="fl-dot" aria-hidden="true">${done?'✓':''}</span>
+      <div class="fl-step-b"><div class="fl-step-t"><b class="tnum">${dol(t.gmv)} GMV</b>${done?'<span class="fl-tag gold">Unlocked</span>':isNext?'<span class="fl-tag o">Next</span>':''}</div>
+        <div class="fl-step-p">${chPrizeName(t)}${chCashAlt(t)?` <span>${chCashAlt(t)}</span>`:''}</div>
+        ${isNext?`<div class="fl-step-go">${chBar(C)}<div class="fl-meta tnum"><span>${dol(g)} so far</span><span><b>${dol(t.gmv-g)}</b> to go</span></div></div>`:''}</div></li>`; }).join('');
+  return `${head}${chHero(C,{link:false})}
+   <div class="sec"><h2>Prize ladder</h2><span class="mini">Rewards don't stack. Pick the tier you reach or any tier below it.</span></div>
+   <section class="card fl-ladder-card"><ol class="fl-ladder">${ladder}</ol></section>
+   <div class="sec"><h2>Team bonus</h2><span class="mini">Split 60% by sales, 40% by approved videos</span></div>${chPool(C)}
+   <div class="sec"><h2>Rules</h2></div><section class="card"><ul class="rules">
     <li>Ravine Elite only.</li><li>Only Trybe GMV from videos posted in November counts toward your prize.</li>
     <li>Rewards don't stack. Pick the tier you reach or any tier below it.</li><li>BOF and gifting videos count this month. Tag them when you upload.</li>
-    <li>Final GMV is calculated December 1.</li><li>The bonus pool only pays out if the team hits ${fmt.usd(C.goal||2e6)} in November sales.</li></ul>
-    <div class="mini" style="margin-top:8px">Numbers update with each Trybe refresh${C.data_through?`, last ${esc(fmt.dt(C.data_through))}`:''}.</div></div>`; }
+    <li>Final GMV is calculated December 1.</li><li>The bonus pool only pays out if the team hits ${dol(C.goal||2e6)} in November sales.</li></ul>
+    <div class="mini" style="margin-top:10px">Numbers update with each Trybe refresh${C.data_through?`, last ${esc(fmt.dt(C.data_through))}`:''}.</div></section>`; }
 /* fixture preview: an example creator a third of the way to $25K */
 function fxChallenge(){ return {campaign:{key:'2026-11',name:'November 2026'},gmv:12450,videos:9,sales:15800,team:{gmv:410000,videos:640,sales:520000},goal:2000000,pool:25000,
   share:{sales_pct:15800/520000,video_pct:9/640},data_through:new Date().toISOString(),
