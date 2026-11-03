@@ -1453,6 +1453,13 @@ body{background-color:var(--bg);
 /* Nov 2 (Austin): team goal thermometer leads Home, bonus pool under it, then your prize */
 .fl-tg{margin-bottom:16px}
 @media (min-width:1100px){.fl-duo.flpf{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)}}
+
+/* Nov 2: admin payouts list (one row per creator per half), readable on a phone */
+.payl{display:flex;flex-direction:column}
+.payr{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 16px;border-top:1px solid var(--ln)}
+.payr-l{min-width:0;flex:1}.payr-l b{display:block;margin-bottom:2px}
+.payr-r{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none;text-align:right}
+.payr-amt{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:18px;color:var(--gold)}
 </style>
 </head>
 <body>
@@ -1473,7 +1480,7 @@ body{background-color:var(--bg);
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261102-142407";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261102-234341";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1572,7 +1579,7 @@ function clearPrivate(){ S.coach=null; S.camoSynced=false; try{ localStorage.rem
 
 /* Oct 31: which month the app runs. The November build sets window.CAMP='2026-11'; everything month-specific reads these. */
 const CAMP=window.CAMP||'2026-10', NOV=CAMP>='2026-11', MONTH_NAME=NOV?'November':'October';
-const CAMP_FNS=new Set(['my_contest_status','my_elite_spot','my_home','my_leaderboard','my_pace','my_quests','my_rewards','my_submissions','my_video_stats','my_challenge']);
+const CAMP_FNS=new Set(['admin','my_contest_status','my_elite_spot','my_home','my_leaderboard','my_pace','my_quests','my_rewards','my_submissions','my_video_stats','my_challenge']);
 /* ---- data layer: fixture | live. Every page reads through API.* so screens agree. */
 const API={
   async rpc(name,args={}){
@@ -1598,6 +1605,7 @@ const API={
     const p=(async()=>{ try{ const v=await API.rpc(name,args);
         if(name==='my_quests'&&v&&Array.isArray(v.catalog)&&!S.admin){ let have=0; try{ const N=await API.page('my_numbers'); have=Number(N?.month_sales)||0; }catch(e){}
           if(have<COACH_MIN) v.catalog.forEach(c=>{ if(/_coach$/.test(c.quest_key)&&!c.locked){ c.locked=true; c.lock_sales=true; } }); }   // Oct 29: 1:1 quest locked under $5K this month
+        if(name==='my_rewards'&&NOV&&v) onePayout(v);
         if(g===API.gen){ S.cache[k]=v; S.cacheAt[k]=Date.now(); } return v; }
       finally{ if(API.inflight[k]===p) delete API.inflight[k]; } })();
     API.inflight[k]=p; return p; },
@@ -1802,7 +1810,7 @@ const NAV=[
  ['Progress',[['quests','Quests','target'],['rewards','Rewards','gift'],['armory','Armory','shield'],['submissions','My submissions','check'],['analytics','Analytics','chart']]],
  ['Compete',[['leaderboard','Leaderboard','star'],['compete',NOV?'November challenge':'October competition','trophy'],['pace','My pace','gauge']]],
  ['Profile',[['profile','My profile','user']]],
- ['Admin',[['admin','Review queue','check'],['admin_contest','Contest & imports','gear'],['admin_rewards','Rewards & claims','gift']]],
+ ['Admin',[['admin','Review queue','check'],['admin_contest','Contest & imports','gear'],['admin_rewards',NOV?'Rewards & payouts':'Rewards & claims','gift']]],
 ];
 const MOB=[['home','Home','home'],['quests','Quests','target'],['compete','Compete','trophy'],['submissions','Videos','check'],['more','More','menu']];
 const TITLES=Object.fromEntries(NAV.flatMap(g=>g[1]).map(n=>[n[0],n[1]]));
@@ -1848,7 +1856,7 @@ async function render(){
   if(REDIRECT[S.view]){ const to=REDIRECT[S.view]; try{ history.replaceState(null,'','#/'+to); }catch(e){} S.view=to; }
   if(S.view.startsWith('admin')&&!S.admin){ S.view='home'; }
   renderShell();
-  if(S.admin) API.page('admin').then(A=>{ const q=(A.queue||[]).filter(x=>x.state==='submitted').length, pay=(A.payouts||[]).filter(x=>x.claim_state!=='paid').length; const n={admin:q||0,admin_rewards:pay||0}; if(JSON.stringify(n)!==JSON.stringify(S.pips||{})){ S.pips=n; renderShell(); } }).catch(()=>{});
+  if(S.admin) adminPay().then(P=>{ const A=P.A; const q=(A.queue||[]).filter(x=>x.state==='submitted').length, pay=payDue(P).length; const n={admin:q||0,admin_rewards:pay||0}; if(JSON.stringify(n)!==JSON.stringify(S.pips||{})){ S.pips=n; renderShell(); } }).catch(()=>{});
   const fn=ROUTES[S.view]||ROUTES.home; const main=$('#main');
   main.innerHTML=`<div class="stack"><div class="sk" style="height:34px;width:40%"></div><div class="sk" style="height:120px"></div><div class="sk" style="height:200px"></div></div>`;
   document.title=(TITLES[S.view]||'Ravine')+' · Ravine Creator Games';
@@ -1890,7 +1898,7 @@ const badge=(kind,text)=>`<span class="badge ${kind}">${esc(text)}</span>`;
 const QSTATE={ended:['x','Closed'],soon:['n','Opens soon'],approved_period:['g','Done this half'],available:['n','Available'],in_progress:['p','In progress'],submitted:['r','In review'],needs_changes:['c','Changes needed'],approved:['g','Completed'],rejected:['x','Not approved'],expired:['x','Expired']};
 const SSTATE={pending:['r','Pending review'],approved:['g','Approved'],changes_requested:['c','Changes requested'],rejected:['x','Rejected']};
 const OUTCOME={qualifies:['g','Eligible'],awaiting_review:['r','In review'],rejected:['x','Excluded: rejected'],funnel_not_eligible:['x','Excluded: BOF'],funnel_unverified:['v','Verification needed: stage'],approved_after_window:['x','Excluded: approved after October'],beyond_slot_limit:['x','Outside first 20'],not_qualified:['x','Not eligible'],verification_needed:['v','Verification needed'],other_campaign:['n','Not an October entry'],not_in_contest:['n','Not in contest']};
-const RSTATE={locked:['n','Locked'],eligible:['g','Eligible'],claim_submitted:['r','Claim submitted'],approved_for_payment:['p',NOV?'Needs payment':'Approved for payment'],paid:['d','Paid'],included:['g','Included']};
+const RSTATE={locked:['n','Locked'],eligible:['g','Eligible'],claim_submitted:['r','Claim submitted'],approved_for_payment:['p',NOV?'Your payout':'Approved for payment'],paid:['d','Paid'],included:['g','Included']};
 function metric(k,v,{sub='',cls=''}={}){ return `<div class="metric ${cls}"><div class="k">${esc(k)}</div><div class="v ${v==null?'na':''}">${v==null?'Not available':v}</div>${sub?`<div class="sub">${sub}</div>`:''}</div>`; }
 function pbar(cur,max,{label='',cls='',fmtv=x=>x}={}){ const p=max>0?clamp(cur/max*100,0,100):0; return `<div class="plabel"><span>${esc(label)}</span><b>${fmtv(cur)} / ${fmtv(max)}</b></div><div class="bar ${cls}"><i style="width:${p.toFixed(1)}%"></i></div>`; }
 function ph(title,sub,{eyebrow='',acts=''}={}){ return `<div class="ph"><div>${eyebrow?`<div class="eyebrow">${esc(eyebrow)}</div>`:''}<h1>${esc(title)}</h1>${sub?`<p>${sub}</p>`:''}</div>${acts?`<div class="acts">${acts}</div>`:''}</div>`; }
@@ -2039,7 +2047,7 @@ function topTierInfo(r){ if(!topTierHit(r)) return null;
   else if(nx&&nx.picked&&nx.level>lv){ set=true; pr=`You're set to play ${PLV(r,nx.level).emblem} ${PLV(r,nx.level).name} starting ${fmt.date(nx.starts_at)}.`; }
   else { pr=mk(when);
     if(unl>lv&&nx&&nx.has_prestige) pick=upL; }
-  const how=lv>=4||set?'':pick!=null?`Pick it now and it starts ${fmt.date(nx.starts_at)}. Or stay where you are. You can still switch during the first 3 days of the new half, until you claim.`:`Pick it on Rewards when the new half starts. You have the first 3 days of the half, until you claim.`;
+  const how=lv>=4||set?'':pick!=null?`Pick it now and it starts ${fmt.date(nx.starts_at)}. Or stay where you are. You can still switch during the first 3 days of the new half${NOV?'':', until you claim'}.`:`Pick it on Rewards when the new half starts. You have the first 3 days of the half${NOV?'':', until you claim'}.`;
   const prCard=set?pr:mk(`On ${reset}`);   // the card shows the countdown right above, so it just names the day
   return {lbl,amt,pay,reset,wait,pr,prCard,how,pick,up,status:top.status}; }
 function topTierCard(r){ const I=topTierInfo(r); if(!I) return '';
@@ -2055,12 +2063,12 @@ function rulesHtml(tiers){ const T=(tiers||[]).length?tiers:[{cash_total_cents:1
    <li><b>🔁 Resets twice a month.</b> At 12:00 am Central on the <b>16th</b> and the <b>1st</b>. ${NOV?'Nov 1–15 and Nov 16–30':'Oct 1–15 and Oct 16–31'} are separate.</li>
    <li><b>🎯 Fresh start each half.</b> XP and approved videos go back to 0, and every quest opens again.</li>
    <li><b>💰 Rookie tiers every half:</b> ${T.map(t=>`${u(t.cash_total_cents)} = ${t.xp_required} XP + ${t.concepts_required} approved videos`).join(' · ')}.</li>
-   <li><b>🚫 No stacking.</b> Your highest tier is your total for that half. Hit ${u(mid.cash_total_cents)} and you get ${u(mid.cash_total_cents)}, not ${u(low.cash_total_cents)} + ${u(mid.cash_total_cents)}. Already claimed ${u(low.cash_total_cents)}? Claiming ${u(mid.cash_total_cents)} pays the other ${u(mid.cash_total_cents-low.cash_total_cents)}.</li>
+   <li><b>🚫 One payout per half.</b> Your highest tier is your total for that half. Hit ${u(mid.cash_total_cents)} and you get ${u(mid.cash_total_cents)}, not ${u(low.cash_total_cents)} + ${u(mid.cash_total_cents)}.${NOV?` Hit ${u(top.cash_total_cents)} and you get ${u(top.cash_total_cents)}, once.`:` Already claimed ${u(low.cash_total_cents)}? Claiming ${u(mid.cash_total_cents)} pays the other ${u(mid.cash_total_cents-low.cash_total_cents)}.`}</li>
    <li><b>📅 What counts where.</b> Quests count in the half you start them. Videos count in the half you submit them, once approved, even if the review lands after the reset.</li>
    <li><b>💸 Payday.</b> Rewards are paid <b>after the half closes</b>, since you can still climb to a higher tier until then: ${NOV?'<b>Nov 1–15 is paid on Nov 16</b> and <b>Nov 16–30 is paid on Dec 1</b>':'<b>Oct 1–15 is paid on Oct 16</b> and <b>Oct 16–31 is paid on Nov 1</b>'}. You get paid your highest tier.</li>
    ${NOV?'<li><b>✅ Payouts.</b> No claim needed. Your highest tier each half is your payout, and it pays once, automatically, after the half closes. Hit Elite and you get the Elite amount, not every tier below it.</li>':'<li><b>✅ Claiming.</b> Claim as soon as a tier unlocks. Austin approves claims during the half and pays on payday. A finished half stays claimable after the reset.</li>'}
    <li><b>🎖️ Prestige (from Oct 16).</b> Hit the top tier of your level in a half to unlock the next one: Rookie → Prestige I → II → III → Prestige Master. Higher levels pay more, up to $2,000 a half, and ask for more: more XP, more approved videos, boss quests, and from Prestige II, Trybe sales in the half.</li>
-   <li><b>🔄 Stay or prestige.</b> At each reset, play any level you have unlocked. You can change it during the first 3 days of a half, until you claim. No pick means you keep your last level. Dropping back is always allowed.</li>
+   <li><b>🔄 Stay or prestige.</b> At each reset, play any level you have unlocked. You can change it during the first 3 days of a half${NOV?'':', until you claim'}. No pick means you keep your last level. Dropping back is always allowed.</li>
    <li><b>🏆 Max:</b> ${u(top.cash_total_cents)} per half at Rookie (${u(top.cash_total_cents*2)} a month). Up to $2,000 per half at Prestige Master.</li></ul>`; }
 async function openRewardRules(){ let tiers=[]; try{ tiers=rookieTiers(await API.page('my_rewards')); }catch(e){}
   openDrawer(`<div class="lbl">Rules</div><h2>How quests and rewards reset</h2>${rulesHtml(tiers)}<section><button class="btn gh" onclick="go('rewards')">${ico('gift')} View rewards</button></section>`); }
@@ -2306,7 +2314,7 @@ function activityFeed(acts,vids){
 function syncLine(src,vids){ const at=src?.last_run; const pend=(vids||[]).filter(v=>v.status==='pending').length;
   if(!at) return '';
   return `<div class="syncline"><span class="dot"></span><span>Video statuses from Trybe · updated <b>${esc(fmt.ago(at))}</b> (${esc(fmt.dt(at))})${pend?`. ${pend} still pending. If Austin approved ${pend===1?'it':'them'} in Trybe after that, ${pend===1?'it':'they'} turn${pend===1?'s':''} green here with the next update.`:'.'}</span></div>`; }
-function activityText(a){ const k={submission:{imported:'Video added to your records',approved:'Video approved',rejected:'Video rejected',changes_requested:'Changes requested on a video',funnel_set:'Video stage classified',revision_linked:'Revision linked to its original',corrected:'Video record corrected'},quest:{started:'Started a quest',submitted:'Submitted quest evidence',changes_requested:'Quest returned with notes',approved:'Quest approved',rejected:'Quest not approved',reversed:'Quest award reversed'},claim:{requested:'Reward claim submitted',approved_for_payment:'Reward claim approved for payment',paid:'Reward recorded as paid',rejected:'Reward claim rejected',review_issue:'Review issue opened'}}; return (k[a.kind]||{})[a.event]||`${a.kind}: ${a.event}`; }
+function activityText(a){ const k={submission:{imported:'Video added to your records',approved:'Video approved',rejected:'Video rejected',changes_requested:'Changes requested on a video',funnel_set:'Video stage classified',revision_linked:'Revision linked to its original',corrected:'Video record corrected'},quest:{started:'Started a quest',submitted:'Submitted quest evidence',changes_requested:'Quest returned with notes',approved:'Quest approved',rejected:'Quest not approved',reversed:'Quest award reversed'},claim:NOV?{requested:'Reward claim submitted',approved_for_payment:'Payout recorded for your top tier',paid:'Payout sent',rejected:'Payout combined into one per half',review_issue:'Review issue opened'}:{requested:'Reward claim submitted',approved_for_payment:'Reward claim approved for payment',paid:'Reward recorded as paid',rejected:'Reward claim rejected',review_issue:'Review issue opened'}}; return (k[a.kind]||{})[a.event]||`${a.kind}: ${a.event}`; }
 
 /* ---------------- Quests */
 const QSKILL={oct_ai48:['Storytelling',2,'2-4 hrs'],oct_spanish:['Storytelling',2,'1-2 hrs'],oct_buddy:['Storytelling',2,'2-3 hrs'],oct_acad_win:['Research',1,'15 min'],oct_acad_feedback:['Research',1,'10 min'],oct_acad_answer:['Research',1,'15 min'],oct_acad_breakdown:['Storytelling',2,'45 min'],
@@ -2641,6 +2649,22 @@ async function refreshStatus(key,id){ const r=RS[id]||(RS[id]={}); if(r.busy) re
    Half-month rewards (Austin, Oct 9): XP, approved videos and the cash tiers reset at 12:00 am CT on the 1st and the 16th.
    No stacking: the highest tier hit in a half is that half's total. A finished half stays claimable after the reset. */
 const R_DONE=['eligible','claim_submitted','approved_for_payment','paid','included'];
+/* Nov 2 (Austin): one payout per half. Whatever tier you hit is what you get (hit $750, get $750, not $250 + $500).
+   No claim button: the top tier reached is your payout, tiers under it are included. The server says the same once
+   payouts_fix.sql is in; this keeps the app right before and after. */
+function onePayoutTiers(T){ if(!Array.isArray(T)||!T.length) return T; let top=-1; T.forEach((t,i)=>{ if(R_DONE.includes(t.status)) top=i; });
+  T.forEach((t,i)=>{ if(top<0||i>top){ if(t.status==='eligible'||t.status==='claim_submitted') t.status='locked'; return; }
+    if(i<top){ if(t.status!=='paid') t.status='included'; return; }
+    if(t.status==='eligible'||t.status==='claim_submitted'||t.status==='included') t.status='approved_for_payment'; }); return T; }
+function onePayout(r){ onePayoutTiers(r.tiers); (r.periods||[]).forEach(p=>onePayoutTiers(p.tiers)); return r; }
+function histLabel(h){ if(!NOV) return ({requested:'Claim submitted',approved_for_payment:'Approved for payment',paid:'Paid',rejected:'Rejected',review_issue:'Review issue'})[h.event]||h.event;
+  if(h.event==='rejected'&&/one payout|merged|paid in full/i.test(h.note||'')) return 'Combined into one payout';
+  return ({requested:'Claim submitted',approved_for_payment:'Payout recorded',paid:'Paid',rejected:'Not approved',review_issue:'Review issue'})[h.event]||h.event; }
+function novStatusNote(t,ctx){ const pd=payday(ctx); const amt=fmt.usd(t.cash_total_cents,{cents:true});
+  if(t.status==='paid') return `<div class="note good">Paid.${t.claim&&t.claim.paid_at?` Sent ${fmt.dt(t.claim.paid_at)}.`:''}</div>`;
+  if(t.status==='approved_for_payment') return `<div class="note good">Reached. This is your payout for the half: ${amt}. No claim needed. It gets paid on ${esc(pd)}${t.half_closed?'':', at the highest tier you reach by then'}.${t.owed_cents!=null&&t.paid_cents>0?` Already paid ${fmt.usd(t.paid_cents,{cents:true})}, so ${fmt.usd(t.owed_cents,{cents:true})} more.`:''}</div>`;
+  if(t.status==='included') return `<div class="note good">${esc(statusText(t))}.</div>`;
+  return `<div class="note">Locked. Needs ${esc(tierNeeds(t,ctx).join(' and '))}.</div>`; }
 route('rewards',async()=>{
   const r=await API.page('my_rewards'); const tiers=r.tiers||[]; const anyDraft=tiers.some(t=>t.draft||!t.published);
   const lbl=r.period?.label||halfLabel(); const reset=halfReset(r);
@@ -2652,14 +2676,14 @@ route('rewards',async()=>{
     <div class="rwhero-steps">${tiers.map(t=>`<span class="${R_DONE.includes(t.status)?'on':''}">${fmt.usd(t.cash_total_cents,{cents:true})} <i>${esc(tierReq(t))}</i></span>`).join('')}</div></div></div>
   ${topTierCard(r)}
   ${anyDraft?`<div class="note draft" style="margin-bottom:16px"><b>Draft terms.</b> These tiers are the proposed rewards. Amounts and thresholds are not final until Austin publishes them, and claims open then.</div>`:''}
-  <div class="note" style="margin-bottom:16px"><b>🔁 Resets on the 1st and 16th.</b> Each half starts at 0 XP and 0 approved videos. <b>🚫 No stacking:</b> your highest tier is your total for the half. <b>💸 Payday:</b> ${esc(payday(r))}, once this half closes. <a href="#" onclick="openRewardRules();return false">Read the rules</a></div>
+  <div class="note" style="margin-bottom:16px"><b>🔁 Resets on the 1st and 16th.</b> Each half starts at 0 XP and 0 approved videos. <b>🚫 ${NOV?'One payout per half':'No stacking'}:</b> your highest tier is your total for the half${NOV?', paid once, no claim needed':''}. <b>💸 Payday:</b> ${esc(payday(r))}, once this half closes. <a href="#" onclick="openRewardRules();return false">Read the rules</a></div>
   <div class="grid ${tiers.some(t=>t.sales_required_cents>0)?'g4':'g3'}" style="margin-bottom:16px">${metric('XP this half',r.xp||0,{cls:'gold',sub:r.xp_pending?`+${r.xp_pending} XP in review`:'Earned, verified'})}${metric('Approved videos this half',r.concepts||0,{cls:'green',sub:`Original videos submitted ${lbl} and approved (not marked BOF)`})}${tiers.some(t=>t.sales_required_cents>0)?metric('Trybe sales this half',usd0(r.sales_cents||0),{sub:'From your videos, not marked BOF'}):''}${metric('Resets',reset,{sub:'12:00 am CT · back to 0 XP and 0 videos'})}</div>
   <div class="grid g3">${tiers.map(t=>rewardCard(t,r)).join('')}</div>
   ${prestigeSection(r)}
-  ${past.map(p=>`<div class="sec"><h2>${esc(p.label)} · finished</h2><span class="mini">Still claimable after the reset</span></div><div class="grid g3">${(p.tiers||[]).map(t=>rewardCard(t,p)).join('')}</div>`).join('')}
+  ${past.map(p=>`<div class="sec"><h2>${esc(p.label)} · finished</h2><span class="mini">${NOV?'Your highest tier here pays once, after the half closes':'Still claimable after the reset'}</span></div><div class="grid g3">${(p.tiers||[]).map(t=>rewardCard(t,p)).join('')}</div>`).join('')}
   <div class="sec"><h2>How it works</h2></div>
-  <div class="card">${rulesHtml(rookieTiers(r))}<div class="mini" style="margin-top:12px">Claim states: Locked, Eligible, Claim submitted, Approved for payment, Paid. Your claim history stays on this page.</div></div>
-  ${(r.history||[]).length?`<div class="sec"><h2>Claim history</h2></div><div class="card"><div class="timeline">${r.history.map(h=>`<div><time>${fmt.dt(h.at)}</time><span>${esc(({requested:'Claim submitted',approved_for_payment:'Approved for payment',paid:'Paid',rejected:'Rejected',review_issue:'Review issue'})[h.event]||h.event)}${h.tier?' · '+esc(h.tier+(h.period?' · '+h.period:'')):''} · ${fmt.usd(h.amount_cents,{cents:true})||''} ${h.note?'· '+esc(h.note):''}</span></div>`).join('')}</div></div>`:''}`;
+  <div class="card">${rulesHtml(rookieTiers(r))}<div class="mini" style="margin-top:12px">${NOV?'Tier states: Locked, Reached (your payout for the half), Included (covered by your higher tier), Paid. No claim needed. Your payout history stays on this page.':'Claim states: Locked, Eligible, Claim submitted, Approved for payment, Paid. Your claim history stays on this page.'}</div></div>
+  ${(r.history||[]).length?`<div class="sec"><h2>${NOV?'Payout history':'Claim history'}</h2></div><div class="card"><div class="timeline">${r.history.map(h=>`<div><time>${fmt.dt(h.at)}</time><span>${esc(histLabel(h))}${h.tier?' · '+esc(h.tier+(h.period?' · '+h.period:'')):''} · ${fmt.usd(h.amount_cents,{cents:true})||''} ${h.note?'· '+esc(h.note):''}</span></div>`).join('')}</div></div>`:''}`;
 });
 /* ctx = the half the tier belongs to: {xp, concepts} (the current half is the my_rewards payload itself) */
 function tierNeeds(t,ctx){ const xp=ctx.xp||0, cc=ctx.concepts||0, sl=ctx.sales_cents||0, miss=[]; if(!t.xp_met) miss.push(`${t.xp_required-xp} more XP`); if(!t.concepts_met) miss.push(`${t.concepts_required-cc} more approved video${t.concepts_required-cc===1?'':'s'}`); if(t.sales_met===false) miss.push(`${usd0(t.sales_required_cents-sl)} more in Trybe sales`); return miss; }
@@ -2673,11 +2697,11 @@ async function openReward(id){ const r=await API.page('my_rewards'); let ctx=r, 
   if(!t) for(const p of (r.periods||[])){ const f=(p.tiers||[]).find(x=>x.id===id); if(f&&!p.current){ t=f; ctx=p; break; } }
   if(!t) return; const [k,label]=RSTATE[t.status]||RSTATE.locked; const lbl=(ctx===r?r.period?.label:ctx.label)||halfLabel(); const xp=ctx.xp||0, cc=ctx.concepts||0;
   openDrawer(`<div class="row"><span class="badge ${k}">${label}</span>${t.draft||!t.published?badge('d','Draft terms'):''}</div><h2>${t.prestige_level>0?esc(PNAMES[t.prestige_level])+' · ':''}${esc(t.name)} · ${fmt.usd(t.cash_total_cents,{cents:true})}</h2><div class="art">${photoFrame(tierPhoto(t),'reward','gold')}</div>
-   <p>${fmt.usd(t.cash_total_cents,{cents:true})} total for <b>${esc(lbl)}</b> at this tier. No stacking: your highest tier is your total for the half. If you already claimed a lower tier, this pays the difference.</p>
+   <p>${fmt.usd(t.cash_total_cents,{cents:true})} total for <b>${esc(lbl)}</b> at this tier. ${NOV?'One payout per half: you get paid for the highest tier you reach, once. Lower tiers are not added on top. No claim needed.':'No stacking: your highest tier is your total for the half. If you already claimed a lower tier, this pays the difference.'}</p>
    <div class="note" style="margin-top:10px"><b>💸 ${esc(paydayText(ctx).replace(/^p/,'P'))}.</b> Rewards are paid after the half closes (${NOV?'Nov 1–15 on Nov 16, Nov 16–30 on Dec 1':'Oct 1–15 on Oct 16, Oct 16–31 on Nov 1'}), so you get paid your highest tier.</div>
    <section><h3>Requirements</h3>${pbar(Math.min(xp,t.xp_required),t.xp_required,{label:`XP earned ${lbl}`,cls:'gold'})}<div style="height:10px"></div>${pbar(Math.min(cc,t.concepts_required),t.concepts_required,{label:`Approved original videos submitted ${lbl} (not marked BOF)`,cls:'green'})}${t.sales_required_cents>0?`<div style="height:10px"></div>${salesBar(t,ctx,`Trybe sales in ${lbl} (videos not marked BOF)`)}`:''}
      <div class="mini" style="margin-top:8px">${ctx===r?`Pending XP (${r.xp_pending||0}) does not count until verified. `:''}A revision never counts as a new video.</div></section>
-   <section><h3>Status</h3>${t.claim?`<div class="note">${esc(statusText(t,ctx))}. Submitted ${fmt.dt(t.claim.requested_at)}${t.claim.approved_at?`, approved ${fmt.dt(t.claim.approved_at)}`:''}${t.claim.paid_at?`, paid ${fmt.dt(t.claim.paid_at)}`:''}. Amount reserved: ${fmt.usd(t.claim.amount_cents,{cents:true})}.${t.claim.note?' Note: '+esc(t.claim.note):''}</div>`:
+   <section><h3>Status</h3>${NOV?novStatusNote(t,ctx):t.claim?`<div class="note">${esc(statusText(t,ctx))}. Submitted ${fmt.dt(t.claim.requested_at)}${t.claim.approved_at?`, approved ${fmt.dt(t.claim.approved_at)}`:''}${t.claim.paid_at?`, paid ${fmt.dt(t.claim.paid_at)}`:''}. Amount reserved: ${fmt.usd(t.claim.amount_cents,{cents:true})}.${t.claim.note?' Note: '+esc(t.claim.note):''}</div>`:
      t.status==='included'?`<div class="note good">${esc(statusText(t))}.</div>`:
      t.status==='eligible'?(t.published?`<button class="btn gold" id="claimbtn" onclick="claimReward('${t.id}')">${ico('gift')} Submit claim</button><div class="mini" style="margin-top:8px">One claim per tier. Austin approves it and pays on ${esc(payday(ctx))}, after the half closes. Claiming does not move money by itself.</div>`:`<div class="note draft">All gates are met. Claims open once Austin publishes the reward terms.</div>`):
      `<div class="note">Locked. Needs ${esc(tierNeeds(t,ctx).join(' and '))}.</div>`}
@@ -2709,7 +2733,7 @@ function tickReset(){ const at=nextResetAt(); const ms=at-Date.now(); const on=!
 setInterval(tickReset,1000);
 
 /* ---- Claim banner: any unlocked cash tier that still needs a claim, on every page */
-function claimables(r){ const out=[]; const add=(tiers,ctx,label,current)=>{ const el=(tiers||[]).filter(t=>t.status==='eligible'&&t.published!==false&&!t.draft); if(!el.length) return;
+function claimables(r){ const out=[]; if(NOV) return out; const add=(tiers,ctx,label,current)=>{ const el=(tiers||[]).filter(t=>t.status==='eligible'&&t.published!==false&&!t.draft); if(!el.length) return;
     const t=el.reduce((a,b)=>(b.cash_total_cents||0)>(a.cash_total_cents||0)?b:a);
     // no stacking: a lower tier already claimed this half is part of the total, so only the difference is new
     const before=(tiers||[]).filter(x=>x.claim&&['claim_submitted','approved_for_payment','paid'].includes(x.status)).reduce((n,x)=>n+(Number(x.claim.amount_cents)||0),0);
@@ -3649,7 +3673,7 @@ function adminNote(fn,id){ const label=fn==='return_quest'?'Feedback for the cre
    <div class="row" style="margin-top:12px"><button class="btn ${fn==='reject_quest'?'danger':''}" onclick="(async()=>{const n=$('#anote').value.trim(); if(!n){toast('A note is required','bad');return;} if($('#anote_save')?.checked&&!AQ_QUICK.includes(n)) aqSave(n); closeDrawer(true); await adminAct('${fn}','${id}',${fn==='return_quest'?'{p_note:n}':'{p_reason:n}'});})()">Send</button><button class="btn gh" onclick="closeDrawer()">Cancel</button></div>`);
   setTimeout(()=>$('#anote')?.focus(),60); }
 
-route('admin_contest',async()=>{ const A=await API.page('admin'); const c=A.campaign||{}; const snaps=A.snapshots||[]; const fin=snaps.find(x=>x.final); const ended=new Date()>=new Date(c.ends_at);
+route('admin_contest',async()=>{ const A=await API.page('admin',NOV?{p_campaign:'2026-10'}:{}); const c=A.campaign||{}; const snaps=A.snapshots||[]; const fin=snaps.find(x=>x.final); const ended=new Date()>=new Date(c.ends_at);
   const rules=[['Window',`${fmt.dt(c.starts_at)} → ${fmt.dt(c.ends_at)} (exclusive), ${esc(c.tz||'')}`],['Ranked by','October GMV from October videos only: Oct 1–31 (CT) sales on each creator\'s first 20 videos submitted and approved in October. Older videos never count. Creators see everyone\'s place, only their own GMV.'],
     ['Ties',TIE_TEXT(c.tie_rule)],['Prizes',`${(c.prizes||[]).map(p=>`${p.label} ${fmt.usd(p.cents,{cents:true})}`).join(' · ')} = ${fmt.usd(c.prize_total_cents,{cents:true})}`],['Payout',esc(c.payout_terms||'Not set')],['First 20 videos','Each creator\'s first 20 October submissions are their entries; approved ones count toward GMV.']];
   return `${ph('Contest, campaign and imports','The rules every creator sees, the live standings, and the final freeze.',{eyebrow:'Admin'})}
@@ -3672,27 +3696,31 @@ function freezeAsk(final){ openDrawer(`<h2>${final?'Freeze final standings':'Sav
   <div class="row" style="margin-top:14px"><button class="btn" onclick="freezeDo(${final})">${final?'Yes, freeze final standings':'Save snapshot'}</button><button class="btn gh" onclick="closeDrawer()">Cancel</button></div>`); }
 async function freezeDo(final){ closeDrawer(true); try{ await API.rpc('snapshot_contest',{p_campaign:'2026-10',p_final:final}); toast(final?'Final standings frozen':'Snapshot saved','good'); API.bust(); render(); }catch(e){ toast(e.message,'bad'); } }
 
-route('admin_rewards',async()=>{ await syncPayouts(); const A=await API.page('admin'); let TG=null; try{ TG=await API.page('admin_team_goal'); }catch(e){} const ALLM=A.milestones||[]; const on=(A.roster||[]).length;
-  /* half-month rewards: the same 3 tiers run in each half (Oct 1-15, Oct 16-31), so show one ladder, not one card per half */
+route('admin_rewards',async()=>{ await syncPayouts(); const P=await adminPay(); const A=P.A; let TG=null; try{ TG=await API.page('admin_team_goal'); }catch(e){} const ALLM=A.milestones||[]; const on=(A.roster||[]).length;
+  /* half-month rewards: the same 3 tiers run in each half, so show one ladder, not one card per half */
   const PER=A.periods||[]; const nowT=Date.now(); const curP=PER.find(p=>new Date(p.starts_at)<=nowT&&nowT<new Date(p.ends_at))||PER[0]||{};
   const M=(ALLM.some(m=>m.period_key)?ALLM.filter(m=>m.period_key===(curP.period_key||ALLM[0].period_key)&&!(m.prestige_level>0)):ALLM).slice().sort((a,b)=>a.sort_order-b.sort_order);
   const top=M[M.length-1]||{cash_total_cents:50000,xp_required:200}; const maxHalfXp=(A.catalog||[]).filter(q=>!(q.min_prestige>0)&&q.category!=='Boss').reduce((n,q)=>n+(q.period_kind==='day'?(q.monthly_xp_cap||0):q.xp_value*q.per_period_limit),0);
   const CL={claim_requested:'r',approved_for_payment:'p',paid:'d',rejected:'x'};
-  const PAY=(A.payouts||[]); const due=PAY.filter(x=>x.claim_state!=='paid');
-  /* payday = the day the half closes; pay after it because a creator can still climb a tier until then (no stacking) */
-  const perOf=k=>PER.find(p=>p.period_key===k); const PD=k=>{const p=perOf(k); return p?fmt.date(p.ends_at):'';}; const isOpen=k=>{const p=perOf(k); return !!p&&nowT<new Date(p.ends_at);};
-  const PST={claim_requested:['r','Claimed · approve it'],approved_for_payment:['p','Approved · pay now'],paid:['g','Paid']};
-  const pst=x=>x.claim_state==='approved_for_payment'&&isOpen(x.period_key)?['p',`Approved · pay ${PD(x.period_key)}`]:(PST[x.claim_state]||['n','Reached · not claimed yet']);
-  return `${ph('Rewards and claims','Who reached a reward tier, what to pay, and the claim ledger.',{eyebrow:'Admin'})}
+  const R=payRows(P), due=R.filter(x=>x.closed&&x.owed>0), live=R.filter(x=>!x.closed), done=R.filter(x=>x.closed&&x.owed<=0);
+  const halves=[...new Set(due.map(x=>x.period_key))].sort();
+  const dueTot=due.reduce((n,x)=>n+x.owed,0);
+  const row=x=>`<div class="payr"><div class="payr-l"><b>${esc(x.display_name)}</b><div class="mini">${esc(x.tier)} · tier ${fmt.usd(x.tier_cents,{cents:true})}${x.paid_cents>0?` · ${fmt.usd(x.paid_cents,{cents:true})} already paid`:''}</div><div class="mini">${x.xp} XP · ${x.concepts} approved video${x.concepts===1?'':'s'}${x.sales_cents!=null?` · ${fmt.usd(x.sales_cents,{cents:true})} Trybe sales`:''}</div>${x.ready?'':`<div class="mini" style="color:var(--warn)">Payout record not created yet. Run payouts_fix.sql once, then refresh.</div>`}</div>
+    <div class="payr-r"><span class="mini">Send</span><b class="payr-amt">${fmt.usd(x.owed,{cents:true})}</b>${x.ready?`<button class="btn sm" onclick="payRowAsk(${esc(JSON.stringify(x.key))})">Mark paid</button>`:''}</div></div>`;
+  return `${ph('Rewards and payouts','One payout per creator per half: the top tier they reached. Pay it once the half closes.',{eyebrow:'Admin'})}
   ${teamGoalAdmin(TG)}
-  <div class="sec"><h2>Ready to pay</h2><span class="mini">${due.length?`${due.length} creator${due.length===1?'':'s'} reached a tier and ${due.length===1?'is':'are'} not paid yet`:'Nobody is waiting on a payout'}</span>${approveAllBtn(A)}${payAllBtn(A)}</div>
-  <div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Creator</th><th>Tier reached</th><th class="num">Tier total</th><th class="num">XP (that half)</th><th class="num">Approved videos (that half)</th><th class="num">Trybe sales (that half)</th><th>Status</th><th></th></tr></thead><tbody>${PAY.map(x=>{ const st=pst(x); return `<tr><td><b>${esc(x.display_name)}</b></td><td>${esc(x.tier)}${x.claim_state!=='paid'&&PD(x.period_key)?`<div class="mini">${isOpen(x.period_key)?'Payday':'Was due'} ${PD(x.period_key)}</div>`:''}</td><td class="num">${fmt.usd(x.tier_cents,{cents:true})}${x.paid_cents>0&&x.claim_state!=='paid'?`<div class="mini">${fmt.usd(x.paid_cents,{cents:true})} already paid</div>`:''}</td><td class="num">${x.xp}</td><td class="num">${x.concepts}</td><td class="num">${x.sales_cents!=null?fmt.usd(x.sales_cents,{cents:true}):'—'}</td><td>${badge(st[0],st[1])}</td>
-    <td>${x.claim_state==='claim_requested'?`<button class="btn sm" onclick="claimAct('${x.claim_id}','approve')">Approve</button>`:x.claim_state==='approved_for_payment'?`<button class="btn sm" onclick="claimAsk('${x.claim_id}','paid')">Mark paid</button>`:''}</td></tr>`; }).join('')||`<tr><td colspan="8" class="mini">Nobody has reached a tier yet. Builder needs ${M[0]?M[0].xp_required:50} XP and ${M[0]?M[0].concepts_required:5} approved videos inside one half.</td></tr>`}</tbody></table></div></div>
-  <div class="note" style="margin-top:10px"><b>💸 Payday is after the half closes.</b> Oct 1–15 is paid on <b>Oct 16</b>, Oct 16–31 on <b>Nov 1</b>. A creator can still climb a tier until the half ends, so approve claims any time but send money on payday, at the highest tier they reached.</div>
-  <div class="mini" style="margin-top:6px">A creator shows here as soon as both bars fill. "Not claimed yet" means they have not pressed Claim on their Rewards page; you can still pay them, or nudge them to claim so it is on record.</div>
+  <div class="sec"><h2>Needs payment</h2><span class="mini">${due.length?`${due.length} payout${due.length===1?'':'s'} · ${fmt.usd(dueTot,{cents:true})} total · finished halves only`:'Nothing owed right now'}</span></div>
+  ${halves.map(k=>{ const L=due.filter(x=>x.period_key===k), lab=L[0]?.label||k, tot=L.reduce((n,x)=>n+x.owed,0), ready=L.filter(x=>x.ready);
+    return `<div class="card pad0" style="margin-bottom:14px"><div class="row between" style="padding:14px 16px 4px;gap:10px;flex-wrap:wrap"><div><b>${esc(lab)}</b> <span class="mini">· ${L.length} creator${L.length===1?'':'s'} · ${fmt.usd(tot,{cents:true})}</span></div>${ready.length?`<button class="btn gh sm" onclick="payAllAsk('${esc(k)}')">${ico('check',14)} Mark all ${esc(lab)} paid · ${fmt.usd(ready.reduce((n,x)=>n+x.owed,0),{cents:true})}</button>`:''}</div>
+      <div class="payl">${L.map(row).join('')}</div></div>`; }).join('')||`<div class="card"><p class="mini">Everyone who reached a tier in a finished half is paid in full.</p></div>`}
+  <div class="note" style="margin-top:4px"><b>💸 How payouts work now.</b> Creators do not claim anything. When a half closes, each creator who reached a tier shows up here once, with the amount still owed: their top tier minus anything already paid for that half. Hit $750, send $750. Already sent $250 of it, send $500. A half that is still running cannot be marked paid.</div>
+  <div class="sec"><h2>This half so far</h2><span class="mini">${live.length?`${live.length} creator${live.length===1?'':'s'} reached a tier · pays after ${esc(live[0].endsText)}`:'Nobody has reached a tier yet this half'}</span></div>
+  ${live.length?`<div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Creator</th><th>Top tier so far</th><th class="num">Payout so far</th><th class="num">XP</th><th class="num">Approved videos</th><th class="num">Trybe sales</th></tr></thead><tbody>${live.map(x=>`<tr><td><b>${esc(x.display_name)}</b></td><td>${esc(x.tier)}</td><td class="num">${fmt.usd(x.tier_cents,{cents:true})}</td><td class="num">${x.xp}</td><td class="num">${x.concepts}</td><td class="num">${x.sales_cents!=null?fmt.usd(x.sales_cents,{cents:true}):'—'}</td></tr>`).join('')}</tbody></table></div></div>
+  <div class="mini" style="margin-top:6px">Not payable yet. These can still climb until the half ends. Each creator gets one payout for the half, at the top tier they reach.</div>`:`<div class="card"><p class="mini">Builder needs ${M[0]?M[0].xp_required:50} XP and ${M[0]?M[0].concepts_required:5} approved videos inside one half.</p></div>`}
+  ${done.length?`<div class="mini" style="margin-top:10px">Paid in full: ${done.map(x=>esc(x.display_name)+' ('+esc(x.label)+')').join(', ')}.</div>`:''}
   <div class="sec"><h2>The 3 tiers</h2><span class="mini">Same ladder every half · resets 12:00 am CT on the 1st and 16th</span></div>
   <div class="grid g3">${M.map((m,i)=>`<div class="card"><div class="row between"><b>${i+1}. ${esc(m.name)}</b>${m.published?badge('g','Live'):badge('d','Draft')}</div><div class="disp" style="font-size:28px;font-weight:800;color:var(--gold);margin-top:6px">${fmt.usd(m.cash_total_cents,{cents:true})}</div><div class="mini">${m.xp_required} XP + ${m.concepts_required} approved videos, earned inside one half</div></div>`).join('')}</div>
-  <div class="note" style="margin-top:10px"><b>How it pays.</b> ${PER.map(p=>esc(p.label)).join(' and ')} each pay out on their own, after the half closes (${PER.map(p=>`${esc(p.label)} on ${fmt.date(p.ends_at)}`).join(', ')}). No stacking: the highest tier a creator hits in a half is their total for that half (claimed $100 then hit $250 = $150 more). Max ${fmt.usd(top.cash_total_cents,{cents:true})} per half, ${fmt.usd(top.cash_total_cents*2,{cents:true})} per month. Quests can earn up to ${maxHalfXp} XP in a half, so Elite (${top.xp_required} XP) is reachable.</div>
+  <div class="note" style="margin-top:10px"><b>How it pays.</b> ${PER.map(p=>esc(p.label)).join(' and ')} each pay out on their own, after the half closes (${PER.map(p=>`${esc(p.label)} on ${fmt.date(p.ends_at)}`).join(', ')}). One payout per half: the highest tier a creator hits in a half is the whole payout for that half (hit $500, pay $500 once, not $100 + $250 + $500). Max ${fmt.usd(top.cash_total_cents,{cents:true})} per half, ${fmt.usd(top.cash_total_cents*2,{cents:true})} per month. Quests can earn up to ${maxHalfXp} XP in a half, so Elite (${top.xp_required} XP) is reachable.</div>
   ${(()=>{ const PL=A.prestige_levels||[]; const lvM=ALLM.filter(m=>m.prestige_level>0); if(!PL.length||!lvM.length) return '';
     const pk=(PER.find(p=>lvM.some(m=>m.period_key===p.period_key))||{}).period_key; const nm=l=>{const x=PL.find(y=>y.level===l); return x?`${x.emblem} ${esc(x.name)}`:'L'+l;};
     const lad=[0,1,2,3,4].map(l=>({l,ts:ALLM.filter(m=>m.period_key===pk&&(m.prestige_level||0)===l).sort((a,b)=>a.sort_order-b.sort_order)})).filter(x=>x.ts.length);
@@ -3700,50 +3728,51 @@ route('admin_rewards',async()=>{ await syncPayouts(); const A=await API.page('ad
     const who=A.prestige||[];
     return `<div class="sec"><h2>🎖️ Prestige ladders</h2><span class="mini">From the ${fmt.date((PER.find(p=>p.period_key===pk)||{}).starts_at)} reset · per half, no stacking</span></div>
     <div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Level</th>${(lad[0]?.ts||[]).map(t=>`<th>${esc(t.name)}</th>`).join('')}</tr></thead><tbody>${lad.map(x=>`<tr><td><b>${nm(x.l)}</b></td>${x.ts.map(t=>`<td>${cell(t)}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>
-    <div class="mini" style="margin-top:6px">Hitting the top tier of a level unlocks the next. Creators pick their level at each reset (first 3 days of a half, until they claim). Sales = Trybe sales in that half from videos not marked BOF.</div>
+    <div class="mini" style="margin-top:6px">Hitting the top tier of a level unlocks the next. Creators pick their level at each reset (first 3 days of a half). Sales = Trybe sales in that half from videos not marked BOF.</div>
     <div class="sec"><h2>Who has prestige</h2><span class="mini">${who.length} creator${who.length===1?'':'s'} unlocked a level</span></div>
     <div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Creator</th><th>Highest unlocked</th><th>Playing now</th><th>Picked for next half</th></tr></thead><tbody>${who.map(w=>`<tr><td><b>${esc(w.display_name)}</b></td><td>${nm(w.unlocked)}</td><td>${nm(w.level_now)}</td><td>${w.next_pick!=null?nm(w.next_pick):'<span class="muted">same as now</span>'}</td></tr>`).join('')||'<tr><td colspan="4" class="mini">Nobody has unlocked Prestige I yet. It unlocks when a creator hits the top Rookie tier in a half.</td></tr>'}</tbody></table></div></div>`; })()}
-  <div class="sec"><h2>Claims</h2><span class="mini">Approve, then mark paid once it goes out</span>${approveAllBtn(A)}${payAllBtn(A)}</div><div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Creator</th><th>Tier</th><th class="num">Amount</th><th>State</th><th>Requested</th><th></th></tr></thead><tbody>${(A.claims||[]).map(c=>`<tr><td>${esc(c.display_name)}</td><td>${esc(c.milestone)}</td><td class="num">${fmt.usd(c.amount_cents,{cents:true})}</td><td>${badge(CL[c.state]||'n',c.state.replace(/_/g,' '))}${c.payment_ref?`<div class="mini">${esc(c.payment_ref)}</div>`:''}</td><td class="mono">${fmt.dt(c.requested_at)}</td>
-    <td>${c.state==='claim_requested'?`<div class="row" style="gap:6px;flex-wrap:nowrap"><button class="btn sm" onclick="claimAct('${c.id}','approve')">Approve</button><button class="btn danger sm" onclick="claimAsk('${c.id}','reject')">Reject</button></div>`:c.state==='approved_for_payment'?`<button class="btn sm" onclick="claimAsk('${c.id}','paid')">Mark paid</button>`:''}</td></tr>`).join('')||'<tr><td colspan="6" class="mini">No claims yet. Creators claim from Rewards once both bars are full.</td></tr>'}</tbody></table></div></div>
-  <div class="sec"><h2>Exposure</h2></div><div class="card"><p style="font-size:14px">No stacking: at most ${fmt.usd(top.cash_total_cents,{cents:true})} per creator per half at Rookie, ${fmt.usd(top.cash_total_cents*2,{cents:true})} per month.${(()=>{ const mx=Math.max(0,...ALLM.map(m=>m.cash_total_cents||0)); return mx>top.cash_total_cents?` From Oct 16, a Prestige Master creator can earn up to ${fmt.usd(mx,{cents:true})} in a half, gated by Trybe sales.`:''; })()} ${on} creators on the roster → at most ${fmt.usd(on*top.cash_total_cents/100*2)} in reward payouts this month if every single one hit Elite in both halves, plus the separate $25,000 GMV incentive.</p></div>`; });
-/* Oct 30 (Austin): approve every claim that is waiting, in one go. Approving only marks claims ready to pay; no money moves. */
-const claimsWaiting=A=>(A?.claims||[]).filter(c=>c.state==='claim_requested');
-function approveAllBtn(A){ const L=claimsWaiting(A); if(!L.length) return ''; const tot=L.reduce((n,c)=>n+(Number(c.amount_cents)||0),0);
-  return `<button class="btn sm aa-btn" onclick="approveAllAsk()">${ico('check',14)} Approve all ${L.length} · ${fmt.usd(tot,{cents:true})}</button>`; }
-async function approveAllAsk(){ const L=claimsWaiting(await API.page('admin')); if(!L.length){ toast('No claims waiting for approval','good'); return; }
-  const tot=L.reduce((n,c)=>n+(Number(c.amount_cents)||0),0);
-  openDrawer(`<h2>Approve all claims</h2><p>Approve <b>${L.length}</b> claim${L.length===1?'':'s'} for <b>${fmt.usd(tot,{cents:true})}</b> total. This marks them approved for payment. It does not send any money.</p>
-   <div class="tblwrap" style="max-height:48vh;overflow:auto;margin:12px 0"><table class="tbl"><thead><tr><th>Creator</th><th>Tier</th><th class="num">Amount</th></tr></thead><tbody>${L.map(c=>`<tr><td><b>${esc(c.display_name)}</b></td><td>${esc(c.milestone||'')}</td><td class="num">${fmt.usd(c.amount_cents,{cents:true})}</td></tr>`).join('')}</tbody></table></div>
-   <div id="aaprog" class="mini" aria-live="polite"></div>
-   <div class="row" style="margin-top:12px"><button class="btn" id="aabtn" onclick="approveAllGo()">${ico('check',14)} Approve all ${L.length}</button><button class="btn gh" onclick="closeDrawer()">Cancel</button></div>`); }
-async function approveAllGo(){ const b=$('#aabtn'); if(b){ b.disabled=true; b.classList.add('pending'); }
-  const L=claimsWaiting(await API.page('admin')); let ok=0; const bad=[];
-  for(let i=0;i<L.length;i++){ const c=L[i]; const pr=$('#aaprog'); if(pr) pr.textContent=`Approving ${i+1} of ${L.length}: ${c.display_name}`;
-    try{ const r=await API.rpc('decide_claim',{p_claim:c.id,p_action:'approve',p_note:null,p_payment_ref:null}); if(r&&r.ok) ok++; else bad.push(`${c.display_name} (${r?.why||'not approved'})`); }
-    catch(e){ bad.push(`${c.display_name} (${e.message})`); } }
-  API.bust(); closeDrawer(true);
-  toast(bad.length?`Approved ${ok} of ${L.length}. Not approved: ${bad.slice(0,3).join(', ')}${bad.length>3?` and ${bad.length-3} more`:''}`:`Approved all ${ok} claim${ok===1?'':'s'}`, bad.length?'bad':'good'); render(); }
-/* Nov 1 (Austin): mark every approved claim as paid in one go, once the money has gone out. Same server step as Mark paid. */
-const claimsToPay=A=>(A?.claims||[]).filter(c=>c.state==='approved_for_payment');
-function payAllBtn(A){ const L=claimsToPay(A); if(!L.length) return ''; const tot=L.reduce((n,c)=>n+(Number(c.amount_cents)||0),0);
-  return `<button class="btn gh sm" onclick="payAllAsk()">${ico('check',14)} Mark all paid ${L.length} · ${fmt.usd(tot,{cents:true})}</button>`; }
-async function payAllAsk(){ const L=claimsToPay(await API.page('admin')); if(!L.length){ toast('Nothing waiting to be marked paid','good'); return; }
-  const tot=L.reduce((n,c)=>n+(Number(c.amount_cents)||0),0);
-  openDrawer(`<h2>Mark all paid</h2><p>Mark <b>${L.length}</b> approved claim${L.length===1?'':'s'} for <b>${fmt.usd(tot,{cents:true})}</b> as paid. Only do this once the money has gone out.</p>
+  <div class="sec"><h2>Payout ledger</h2><span class="mini">Every payout record, newest first</span></div><div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Creator</th><th>Tier</th><th class="num">Amount</th><th>State</th><th>Recorded</th></tr></thead><tbody>${P.claims.slice().sort((a,b)=>new Date(b.requested_at)-new Date(a.requested_at)).slice(0,250).map(c=>`<tr><td>${esc(c.display_name)}</td><td>${esc(c.milestone)}</td><td class="num">${fmt.usd(c.amount_cents,{cents:true})}</td><td>${badge(CL[c.state]||'n',({claim_requested:'claimed',approved_for_payment:'needs payment',paid:'paid',rejected:'closed'})[c.state]||c.state)}${c.payment_ref?`<div class="mini">${esc(c.payment_ref)}</div>`:c.state==='rejected'&&c.note?`<div class="mini">${esc(c.note)}</div>`:''}</td><td class="mono">${fmt.dt(c.paid_at||c.approved_at||c.requested_at)}</td></tr>`).join('')||'<tr><td colspan="5" class="mini">No payout records yet.</td></tr>'}</tbody></table></div></div>
+  <div class="sec"><h2>Exposure</h2></div><div class="card"><p style="font-size:14px">One payout per half: at most ${fmt.usd(top.cash_total_cents,{cents:true})} per creator per half at Rookie, ${fmt.usd(top.cash_total_cents*2,{cents:true})} per month.${(()=>{ const mx=Math.max(0,...ALLM.map(m=>m.cash_total_cents||0)); return mx>top.cash_total_cents?` From Oct 16, a Prestige Master creator can earn up to ${fmt.usd(mx,{cents:true})} in a half, gated by Trybe sales.`:''; })()} ${on} creators on the roster → at most ${fmt.usd(on*top.cash_total_cents/100*2)} in reward payouts this month if every single one hit Elite in both halves, plus the separate $25,000 GMV incentive.</p></div>`; });
+/* Nov 2 (Austin): payouts read this month and last month together, so a half that just closed still shows
+   (Oct 16-31 is paid in November). One row per creator per half, owed = top tier reached minus what was already paid. */
+/* the old decide_claim answered with two rows (its result, then "unknown action"); read the first */
+const one=r=>Array.isArray(r)?r[0]:r;
+function prevCamp(c){ const [y,m]=String(c).split('-').map(Number); const d=new Date(Date.UTC(y,m-2,1)); return d.getUTCFullYear()+'-'+String(d.getUTCMonth()+1).padStart(2,'0'); }
+async function adminPay(force){ const o=force?{force:true}:{}; const A=await API.page('admin',{},o); let O=null;
+  if(NOV){ try{ O=await API.page('admin',{p_campaign:prevCamp(CAMP)},o); }catch(e){} }
+  return {A,O,periods:[...(O?.periods||[]),...(A.periods||[])],payouts:[...(O?.payouts||[]),...(A.payouts||[])],claims:[...(A.claims||[]),...(O?.claims||[])]}; }
+function payRows(P){ const now=Date.now(); const per=k=>P.periods.find(p=>p.period_key===k)||{}; const out=[];
+  (P.payouts||[]).forEach(x=>{ const p=per(x.period_key); const closed=!!p.ends_at&&new Date(p.ends_at)<=now;
+    const open=(P.claims||[]).filter(c=>c.display_name===x.display_name&&c.period_key===x.period_key&&(c.state==='approved_for_payment'||c.state==='claim_requested'));
+    const owed=Math.max(0,(+x.tier_cents||0)-(+x.paid_cents||0)), waiting=open.reduce((n,c)=>n+(+c.amount_cents||0),0);
+    out.push({...x,key:x.period_key+'|'+x.display_name,closed,label:p.label||x.period,endsText:p.ends_at?fmt.date(new Date(new Date(p.ends_at)-1)):'',owed,waiting,open,ready:closed&&owed>0&&open.length>0&&waiting===owed}); });
+  S._payRows=out; return out; }
+const payDue=P=>payRows(P).filter(x=>x.closed&&x.owed>0);
+async function payRowAsk(key){ const x=(S._payRows||[]).find(r=>r.key===key); if(!x||!x.ready){ toast('Refresh the page and try again','bad'); return; }
+  openDrawer(`<h2>Mark paid</h2><p><b>${esc(x.display_name)}</b> · ${esc(x.tier)}</p><p>Send <b>${fmt.usd(x.owed,{cents:true})}</b>${x.paid_cents>0?` (tier ${fmt.usd(x.tier_cents,{cents:true})}, ${fmt.usd(x.paid_cents,{cents:true})} already paid)`:''}. Only mark it once the money has gone out.</p>
    <div class="field"><label for="payref">Payment reference</label><input id="payref" value="Paid through Trybe"></div>
-   <div class="tblwrap" style="max-height:44vh;overflow:auto;margin:12px 0"><table class="tbl"><thead><tr><th>Creator</th><th>Tier</th><th class="num">Amount</th></tr></thead><tbody>${L.map(c=>`<tr><td><b>${esc(c.display_name)}</b></td><td>${esc(c.milestone||'')}</td><td class="num">${fmt.usd(c.amount_cents,{cents:true})}</td></tr>`).join('')}</tbody></table></div>
    <div id="aaprog" class="mini" aria-live="polite"></div>
-   <div class="row" style="margin-top:12px"><button class="btn" id="aabtn" onclick="payAllGo()">${ico('check',14)} Mark all ${L.length} paid</button><button class="btn gh" onclick="closeDrawer()">Cancel</button></div>`); }
-async function payAllGo(){ const ref=($('#payref')?.value||'').trim()||'Paid through Trybe'; const b=$('#aabtn'); if(b){ b.disabled=true; b.classList.add('pending'); }
-  const L=claimsToPay(await API.page('admin')); let ok=0; const bad=[];
-  for(let i=0;i<L.length;i++){ const c=L[i]; const pr=$('#aaprog'); if(pr) pr.textContent=`Marking ${i+1} of ${L.length}: ${c.display_name}`;
-    try{ const r=await API.rpc('decide_claim',{p_claim:c.id,p_action:'paid',p_note:null,p_payment_ref:ref}); if(r&&r.ok) ok++; else bad.push(`${c.display_name} (${r?.why||'not marked'})`); }
-    catch(e){ bad.push(`${c.display_name} (${e.message})`); } }
+   <div class="row" style="margin-top:12px"><button class="btn" id="aabtn" onclick="payGo(${esc(JSON.stringify([x.key]))})">${ico('check',14)} Mark ${fmt.usd(x.owed,{cents:true})} paid</button><button class="btn gh" onclick="closeDrawer()">Cancel</button></div>`); }
+async function payAllAsk(k){ const P=await adminPay(true); const L=payDue(P).filter(x=>x.ready&&(!k||x.period_key===k)); if(!L.length){ toast('Nothing waiting to be marked paid','good'); return; }
+  const tot=L.reduce((n,x)=>n+x.owed,0), lab=L[0].label;
+  openDrawer(`<h2>Mark all ${esc(lab)} paid</h2><p>Mark <b>${L.length}</b> payout${L.length===1?'':'s'} for <b>${fmt.usd(tot,{cents:true})}</b> as paid. Only do this once the money has gone out.</p>
+   <div class="field"><label for="payref">Payment reference</label><input id="payref" value="Paid through Trybe"></div>
+   <div class="tblwrap" style="max-height:44vh;overflow:auto;margin:12px 0"><table class="tbl"><thead><tr><th>Creator</th><th>Tier</th><th class="num">Send</th></tr></thead><tbody>${L.map(x=>`<tr><td><b>${esc(x.display_name)}</b></td><td>${esc(x.tier)}</td><td class="num">${fmt.usd(x.owed,{cents:true})}</td></tr>`).join('')}</tbody></table></div>
+   <div id="aaprog" class="mini" aria-live="polite"></div>
+   <div class="row" style="margin-top:12px"><button class="btn" id="aabtn" onclick="payGo(${esc(JSON.stringify(L.map(x=>x.key)))})">${ico('check',14)} Mark all ${L.length} paid</button><button class="btn gh" onclick="closeDrawer()">Cancel</button></div>`); }
+async function payGo(keys){ const ref=($('#payref')?.value||'').trim()||'Paid through Trybe'; const b=$('#aabtn'); if(b){ b.disabled=true; b.classList.add('pending'); }
+  const P=await adminPay(true); const R=payRows(P).filter(x=>keys.includes(x.key)&&x.ready); let ok=0; const bad=[];
+  for(let i=0;i<R.length;i++){ const x=R[i]; const pr=$('#aaprog'); if(pr) pr.textContent=`Marking ${i+1} of ${R.length}: ${x.display_name}`;
+    let good=true;
+    for(const c of x.open){ try{ if(c.state==='claim_requested'){ const a=one(await API.rpc('decide_claim',{p_claim:c.id,p_action:'approve',p_note:null,p_payment_ref:null})); if(!a||!a.ok){ good=false; bad.push(`${x.display_name} (${a?.why||'not approved'})`); break; } }
+        const r=one(await API.rpc('decide_claim',{p_claim:c.id,p_action:'paid',p_note:null,p_payment_ref:ref})); if(!r||!r.ok){ good=false; bad.push(`${x.display_name} (${r?.why||'not marked'})`); break; } }
+      catch(e){ good=false; bad.push(`${x.display_name} (${e.message})`); break; } }
+    if(good) ok++; }
   API.bust(); closeDrawer(true);
-  toast(bad.length?`Marked ${ok} of ${L.length} paid. Not marked: ${bad.slice(0,3).join(', ')}${bad.length>3?` and ${bad.length-3} more`:''}`:`Marked all ${ok} paid`, bad.length?'bad':'good'); render(); }
+  toast(bad.length?`Marked ${ok} of ${R.length} paid. Not marked: ${bad.slice(0,3).join(', ')}${bad.length>3?` and ${bad.length-3} more`:''}`:`Marked ${ok} paid`, bad.length?'bad':'good'); render(); }
 function claimAsk(id,action){ const paid=action==='paid'; openDrawer(`<h2>${paid?'Mark claim paid':'Reject claim'}</h2><div class="field"><label for="cnote">${paid?'Payment reference':'Reason (the creator sees this)'}</label>${paid?`<input id="cnote" value="Paid through Trybe">`:`<textarea id="cnote"></textarea>`}</div>
   <div class="row" style="margin-top:12px"><button class="btn ${paid?'':'danger'}" onclick="(async()=>{const n=$('#cnote').value.trim(); if(!n){toast('Required','bad');return;} closeDrawer(true); await claimAct('${id}','${action}',n);})()">${paid?'Mark paid':'Reject'}</button><button class="btn gh" onclick="closeDrawer()">Cancel</button></div>`); }
-async function claimAct(id,action,txt){ try{ const r=await API.rpc('decide_claim',{p_claim:id,p_action:action,p_note:action==='reject'?txt:null,p_payment_ref:action==='paid'?txt:null}); toast(r.why||r.state,r.ok?'good':'bad'); API.bust(); render(); }catch(e){ toast(e.message,'bad'); } }
+async function claimAct(id,action,txt){ try{ const r=one(await API.rpc('decide_claim',{p_claim:id,p_action:action,p_note:action==='reject'?txt:null,p_payment_ref:action==='paid'?txt:null})); toast(r.why||r.state||'Done',r.ok?'good':'bad'); API.bust(); render(); }catch(e){ toast(e.message,'bad'); } }
 
 // Nov 1: closed halves get one payout row per creator for the full tier reached (server side), before Rewards loads.
 let _syncAt=0; async function syncPayouts(){ if(!NOV||Date.now()-_syncAt<60000) return; _syncAt=Date.now(); try{ const r=await API.rpc('sync_payouts',{}); if(r&&r.changed>0) API.bust(); }catch(e){} }
