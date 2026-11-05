@@ -1480,7 +1480,7 @@ body{background-color:var(--bg);
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261104-150543";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261105-124729";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -2444,6 +2444,9 @@ route('quests',async(p)=>{
   setTimeout(()=>{ $('#qlist')&&($('#qlist').innerHTML=questSections()); },0);
   window.__qtabs=()=>{ const b=$('#qrailbox'); if(b){ const x=$('#qrail')?.scrollLeft||0; b.innerHTML=questRail(cats,states); const g=$('#qrail'); if(g) g.scrollLeft=x; } const a=$('#qacad'); if(a) a.innerHTML=academyBanner(); const l=$('#qlist'); if(l) l.innerHTML=questSections(); };
   return `${ph('Quests',`Build better videos. Complete challenges. Unlock rewards.<span class="qdates">Reward period ${PERIOD_LABEL(q.period_now)}${pn?` · resets ${fmt.date(pn.ends_at)}, 12:00 am CT`:''}${(q.max_xp_period||q.max_xp_month)?` · ${q.max_xp_period||q.max_xp_month} XP possible`:''}</span>`,{eyebrow:MONTH_NAME+' 2026',acts:`<button class="btn gh" onclick="openRewardRules()">${ico('book')} Rules</button><button class="btn gh" onclick="go('rewards')">${ico('gift')} View rewards</button>`})}
+  ${(()=>{ const P=r&&r.prestige, nx=P&&P.next; if(!P||!nx||!nx.picked||!(nx.level>(P.level||0))) return '';   // Nov 5: a pick made after the 3-day window starts next half, so say so on Quests
+    const to=PLV(r,nx.level), now=PLV(r,P.level||0);
+    return `<div class="card hi" style="margin-bottom:14px"><b>${to.emblem} ${esc(to.name)} starts ${esc(fmt.date(nx.starts_at))}.</b> You picked it after the first 3 days of this half, so it kicks in at the next reset. Until then you're playing ${now.emblem} ${esc(now.name)} quests and payouts.</div>`; })()}
   ${sprintBanner(cats,states)}
   ${questHero(q,r,insts)}
   ${ref?refBanner(ref,cats,states):''}
