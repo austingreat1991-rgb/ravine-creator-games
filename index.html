@@ -1480,7 +1480,7 @@ body{background-color:var(--bg);
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261105-124729";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261106-100500";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1810,7 +1810,7 @@ const NAV=[
  ['Progress',[['quests','Quests','target'],['rewards','Rewards','gift'],['armory','Armory','shield'],['submissions','My submissions','check'],['analytics','Analytics','chart']]],
  ['Compete',[['leaderboard','Leaderboard','star'],['compete',NOV?'November challenge':'October competition','trophy'],['pace','My pace','gauge']]],
  ['Profile',[['profile','My profile','user']]],
- ['Admin',[['admin','Review queue','check'],['admin_contest','Contest & imports','gear'],['admin_rewards',NOV?'Rewards & payouts':'Rewards & claims','gift']]],
+ ['Admin',[['admin','Review queue','check'],['admin_pace','Elite cut line','gauge'],['admin_contest','Contest & imports','gear'],['admin_rewards',NOV?'Rewards & payouts':'Rewards & claims','gift']]],
 ];
 const MOB=[['home','Home','home'],['quests','Quests','target'],['compete','Compete','trophy'],['submissions','Videos','check'],['more','More','menu']];
 const TITLES=Object.fromEntries(NAV.flatMap(g=>g[1]).map(n=>[n[0],n[1]]));
@@ -3680,6 +3680,76 @@ function adminNote(fn,id){ const label=fn==='return_quest'?'Feedback for the cre
    <div class="row" style="margin-top:12px"><button class="btn ${fn==='reject_quest'?'danger':''}" onclick="(async()=>{const n=$('#anote').value.trim(); if(!n){toast('A note is required','bad');return;} if($('#anote_save')?.checked&&!AQ_QUICK.includes(n)) aqSave(n); closeDrawer(true); await adminAct('${fn}','${id}',${fn==='return_quest'?'{p_note:n}':'{p_reason:n}'});})()">Send</button><button class="btn gh" onclick="closeDrawer()">Cancel</button></div>`);
   setTimeout(()=>$('#anote')?.focus(),60); }
 
+/* ---------------- Admin: Elite cut line (Austin, Nov 6). Everyone on the Elite roster from #1 to last, ranked by the same
+   Elite score as My Pace, with the move-down line, the bottom 20 marked, and who moved since the last numbers refresh.
+   Reads app.admin_pace_board (admin only). The server keeps a copy of the board for every refresh. Admin only, never creators. */
+const APB_PICK=(o,ks)=>{ for(const k of ks){ if(o&&o[k]!=null) return o[k]; } return null; };
+function apbRows(raw){ let L=Array.isArray(raw)?raw:[]; if(L.length===1&&Array.isArray(L[0])) L=L[0];
+  if(L.length===1&&L[0]&&typeof L[0]==='object'&&!Array.isArray(L[0])){ const v=Object.values(L[0]); if(v.length===1&&Array.isArray(v[0])) L=v[0]; }
+  const R=L.filter(x=>x&&typeof x==='object').map(x=>{ const pts=x.pts||{};
+    return {id:String(APB_PICK(x,['creator_id','reward_identity','identity','id','cid'])??APB_PICK(x,['display_name','name'])),
+      name:APB_PICK(x,['display_name','name','trybe_name'])||'Unknown',lvl:APB_PICK(x,['lvl','level','prestige_level']),
+      score:Number(APB_PICK(x,['score','elite_score','total','points']))||0,place:APB_PICK(x,['place','rank','pos']),tied:Number(APB_PICK(x,['tied']))||1,
+      ps:APB_PICK(pts,['sales'])??APB_PICK(x,['pts_sales','sales_pts','p_sales','sales_points']),
+      pv:APB_PICK(pts,['videos'])??APB_PICK(x,['video_pts','pts_videos','videos_pts','p_videos','video_points']),
+      pq:APB_PICK(pts,['quests'])??APB_PICK(x,['quest_pts','pts_quests','quests_pts','p_quests','quest_points']),
+      approved:APB_PICK(x,['approved','approved_videos','videos','originals']),xp:APB_PICK(x,['xp','quest_xp']),
+      gmv:APB_PICK(x,['gmv','month_sales','sales','nov_sales'])}; });
+  R.sort((a,b)=>(a.place!=null&&b.place!=null?a.place-b.place:0)||b.score-a.score||a.name.localeCompare(b.name));
+  if(R.some(r=>r.place==null)){ let p=0,prev=null; R.forEach((r,i)=>{ if(prev===null||r.score!==prev){ p=i+1; prev=r.score; } r.place=p; }); }
+  R.forEach(r=>{ r.place=Number(r.place); }); return R; }
+const apbMove=(r,P)=>{ const o=P[r.id]; if(!o) return {k:'new',d:null}; const d=o.place-r.place; return {k:d>0?'up':d<0?'down':'same',d:Math.abs(d),was:o.place}; };
+function apbMoveHtml(m,hasPrev){ if(!hasPrev) return '<span class="mini">·</span>';
+  if(m.k==='new') return '<span class="apb-mv new">NEW</span>'; if(m.k==='same') return '<span class="apb-mv same">–</span>';
+  return `<span class="apb-mv ${m.k}" title="Was #${m.was}">${m.k==='up'?'▲':'▼'}${m.d}</span>`; }
+route('admin_pace',async(p)=>{
+  let B; try{ B=await API.page('admin_pace_board',{p_campaign:CAMP}); }catch(e){
+    if(e.code==='NO_BACKEND') return `${ph('Elite cut line','Everyone on the Elite roster, #1 to last.',{eyebrow:'Admin'})}${emptyState('One SQL paste needed','Run the admin pace board SQL in Supabase, then refresh this page.','','leader')}`;
+    throw e; }
+  const pc=B.pace||{}; const R=apbRows(B.board); const N=Number(pc.roster)||R.length, D=Number(pc.move_down)||20, line=Number(pc.line_place)||(N-D+1);
+  const prevR=B.prev?apbRows(B.prev):null; const hasPrev=!!(prevR&&prevR.length); const P=Object.fromEntries((prevR||[]).map(r=>[r.id,r]));
+  const pN=Number(Array.isArray(B.prev)&&B.prev[0]&&B.prev[0].roster)||(prevR||[]).length; const pline=hasPrev?pN-D+1:null; const mon=pc.month_label||MONTH_NAME;
+  R.forEach(r=>{ r.mv=apbMove(r,P); r.cut=r.place>=line; r.tie=!r.cut&&r.place+r.tied-1>=line; r.wasCut=hasPrev&&P[r.id]?P[r.id].place>=pline:null; });
+  const intoCut=hasPrev?R.filter(r=>r.cut&&r.wasCut===false):[], outOfCut=hasPrev?R.filter(r=>!r.cut&&r.wasCut===true):[];
+  const newCut=hasPrev?R.filter(r=>r.cut&&r.mv.k==='new'):[];
+  const gone=hasPrev?prevR.filter(o=>!R.some(r=>r.id===o.id)):[];
+  const ups=hasPrev?R.filter(r=>r.mv.k==='up').sort((a,b)=>b.mv.d-a.mv.d).slice(0,5):[], downs=hasPrev?R.filter(r=>r.mv.k==='down').sort((a,b)=>b.mv.d-a.mv.d).slice(0,5):[];
+  const lineScore=pc.line_score!=null?pc.line_score:(R.find(r=>r.place===line-1)||{}).score;
+  S.ui.apbf=p.f||S.ui.apbf||'all'; saveUI(); const f=S.ui.apbf;
+  const shown=f==='cut'?R.filter(r=>r.cut):f==='near'?R.filter(r=>r.place>=line-8&&r.place<line+8):R;
+  const nm=r=>`${esc(r.name)}`; const lst=(L,fn)=>L.length?L.map(fn).join(''):'<li class="mini">Nobody</li>';
+  const num=v=>v==null?'—':fmtPts(Number(v));
+  const row=r=>`<tr class="${r.cut?'apb-cut':''}"><td class="num"><b>#${r.place}</b>${r.tied>1?'<span class="mini"> =</span>':''}</td><td>${apbMoveHtml(r.mv,hasPrev)}</td><td><div class="row" style="gap:8px;flex-wrap:nowrap">${avatar(r.name,26)}<span>${nmc(r.name,r.lvl)}</span></div></td>
+    <td class="num"><b>${fmtPts(r.score)}</b></td><td class="num">${num(r.ps)}</td><td class="num">${r.approved==null?num(r.pv):r.approved}</td><td class="num">${r.xp==null?num(r.pq):r.xp}</td><td class="num">${r.gmv==null?'—':fmt.usd(r.gmv)}</td>
+    <td>${r.cut?badge('x','Bottom '+D):r.tie?badge('r','Tied at the line'):r.place>=line-5?badge('r','Close'):badge('g','Safe')}</td></tr>`;
+  const ties=R.filter(r=>r.tie); const tieTxt=ties.length?`${ties.map(r=>r.name).join(' and ')} are tied at #${ties[0].place} for the last safe spot`:'';
+  const divider=`<tr class="apb-line"><td colspan="9"><span>Move-down line · #${line} to #${N} move down${lineScore!=null?` · last safe score ${fmtPts(lineScore)} pts`:''}</span></td></tr>`;
+  let body=''; let drew=false; shown.forEach(r=>{ if(!drew&&r.cut){ body+=divider; drew=true; } body+=row(r); });
+  const cutTxt=()=>`Bottom ${D} · ${mon} Elite pace · ${fmt.dt(B.data_through)}\n`+R.filter(r=>r.cut).map(r=>`#${r.place} ${r.name} (${fmtPts(r.score)} pts)`).join('\n')+(tieTxt?`\n${tieTxt} (${fmtPts(ties[0].score)} pts)`:'');
+  window.__apbCopy=()=>copyText(cutTxt());
+  const tabs=[['all',`Everyone · ${R.length}`],['cut',`Bottom ${D} · ${R.filter(r=>r.cut).length}`],['near','Around the line']];
+  return `<style>.apb-mv{font:700 12px var(--mono);white-space:nowrap}.apb-mv.up{color:var(--gr)}.apb-mv.down{color:var(--bad)}.apb-mv.same{color:var(--tx3)}.apb-mv.new{color:var(--o2)}
+    tr.apb-cut td{background:var(--bad-soft)}tr.apb-line td{padding:6px 10px;background:transparent;border-bottom:2px solid var(--bad)}tr.apb-line span{color:var(--bad);font-weight:800;font-size:12px;letter-spacing:1px;text-transform:uppercase}
+    .apb-k{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px}.apb-k .card{padding:14px 16px}.apb-k b{font-size:24px;display:block;margin-top:4px}
+    .apb-ch{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}.apb-ch ul{margin:6px 0 0;padding-left:18px;font-size:13.5px;line-height:1.7}
+    .apb-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 10px}.apb-tabs button{all:unset;cursor:pointer;padding:7px 14px;border-radius:99px;border:1px solid var(--ln2);font-size:13px;font-weight:600}.apb-tabs button.on{background:var(--o-soft);border-color:var(--o2);color:var(--o2)}</style>
+  ${ph('Elite cut line',`Everyone on the Elite roster, #1 to last, by Elite score (the same score creators see on My Pace). The bottom ${D} move down to the Academy at the end of ${esc(mon)}.`,{eyebrow:'Admin',acts:`<button class="btn gh" onclick="__apbCopy()">${ico('check')} Copy bottom ${D}</button>`})}
+  <div class="apb-k"><div class="card"><div class="lbl">On the Elite roster</div><b>${N}</b></div><div class="card"><div class="lbl">Move-down zone</div><b>#${line} to #${N}</b></div>
+    <div class="card"><div class="lbl">Last safe spot</div><b>#${line-1}${lineScore!=null?` · ${fmtPts(lineScore)} pts`:''}</b></div><div class="card"><div class="lbl">${pc.days_left!=null?'Days left':'Updated'}</div><b>${pc.days_left!=null?pc.days_left:''}</b><div class="mini">Numbers from ${esc(fmt.dt(B.data_through)||'—')}</div></div></div>
+  ${tieTxt?`<div class="note" style="margin-bottom:12px;border-color:var(--warn)"><b style="color:var(--warn)">Tie at the line.</b> ${esc(tieTxt)}, ${fmtPts(ties[0].score)} pts each.</div>`:''}
+  <div class="card"><div class="row between"><h3 style="margin:0">Since the last update</h3><span class="mini">${hasPrev?`Compared with the ${esc(fmt.dt(B.prev_through))} numbers`:''}</span></div>
+    ${hasPrev?`<div class="apb-ch" style="margin-top:8px">
+      <div><div class="lbl" style="color:var(--bad)">Dropped into the bottom ${D} · ${intoCut.length+newCut.length}</div><ul>${lst([...intoCut,...newCut],r=>`<li>${nm(r)} · now #${r.place}${r.mv.was?` (was #${r.mv.was})`:' (new)'}</li>`)}</ul></div>
+      <div><div class="lbl" style="color:var(--gr)">Climbed out · ${outOfCut.length}</div><ul>${lst(outOfCut,r=>`<li>${nm(r)} · now #${r.place} (was #${r.mv.was})</li>`)}</ul></div>
+      <div><div class="lbl">Biggest climbs</div><ul>${lst(ups,r=>`<li>${nm(r)} · ▲${r.mv.d} to #${r.place}</li>`)}</ul></div>
+      <div><div class="lbl">Biggest drops</div><ul>${lst(downs,r=>`<li>${nm(r)} · ▼${r.mv.d} to #${r.place}</li>`)}</ul></div>
+      ${gone.length?`<div><div class="lbl">Off the roster</div><ul>${lst(gone,r=>`<li>${nm(r)} (was #${r.place})</li>`)}</ul></div>`:''}</div>`
+    :`<p class="mini" style="margin:8px 0 0">This is the first saved board. After the next numbers refresh, this shows who dropped into the bottom ${D}, who climbed out and the biggest moves.</p>`}</div>
+  <div class="apb-tabs" role="tablist">${tabs.map(([k,t])=>`<button role="tab" aria-selected="${f===k}" class="${f===k?'on':''}" onclick="go('admin_pace',{f:'${k}'})">${esc(t)}</button>`).join('')}</div>
+  <div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>#</th><th>Move</th><th>Creator</th><th style="text-align:right">Score</th><th style="text-align:right">Sales pts</th><th style="text-align:right">Approved</th><th style="text-align:right">Quest XP</th><th style="text-align:right">${esc(mon)} sales</th><th></th></tr></thead>
+    <tbody>${body||'<tr><td colspan="9" class="mini">Nobody to show</td></tr>'}</tbody></table></div></div>
+  <div class="note" style="margin-top:14px">Same Elite score as My Pace: sales rank on the Elite roster, approved originals and quest XP for ${esc(mon)}. Ties share a place (marked =). Movement compares this board with the board saved at the previous numbers refresh. Only admins see this page.</div>`;
+});
 route('admin_contest',async()=>{ const A=await API.page('admin',NOV?{p_campaign:'2026-10'}:{}); const c=A.campaign||{}; const snaps=A.snapshots||[]; const fin=snaps.find(x=>x.final); const ended=new Date()>=new Date(c.ends_at);
   const rules=[['Window',`${fmt.dt(c.starts_at)} → ${fmt.dt(c.ends_at)} (exclusive), ${esc(c.tz||'')}`],['Ranked by','October GMV from October videos only: Oct 1–31 (CT) sales on each creator\'s first 20 videos submitted and approved in October. Older videos never count. Creators see everyone\'s place, only their own GMV.'],
     ['Ties',TIE_TEXT(c.tie_rule)],['Prizes',`${(c.prizes||[]).map(p=>`${p.label} ${fmt.usd(p.cents,{cents:true})}`).join(' · ')} = ${fmt.usd(c.prize_total_cents,{cents:true})}`],['Payout',esc(c.payout_terms||'Not set')],['First 20 videos','Each creator\'s first 20 October submissions are their entries; approved ones count toward GMV.']];
