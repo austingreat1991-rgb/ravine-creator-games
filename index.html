@@ -1480,7 +1480,7 @@ body{background-color:var(--bg);
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261107-140000";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261107-165000";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -2108,7 +2108,7 @@ function eliteSpotCard(E){ if(!E||!E.on_roster) return '';
     ${row(coach,'1:1 with Austin',coach?'Done':coachP?'In review':coachGate().open?'Not yet':'Unlocks at $5K',coach?'':coachUrl()?`<a class="es-a" ${openExt(coachUrl())}>Book a 1:1</a>`:`<a class="es-a" href="#" onclick="coachLocked();return false">🔒 Locked</a>`)}
     ${sc?row(!(st.k==='in'),'Elite score',`<b>${fmtPts(E.score)}</b> / 100`,`<a class="es-a" href="#/pace">See My Pace</a>`):row(!(st.k==='in'||st.k==='line'),'Sales rank',st.zero?'No sales yet':`#${st.place} of ${N}`)}
    </div>
-   <div class="mini" style="margin-top:10px">${sc?`Ranked by your Elite score: ${esc(monthName(E))} sales, approved videos and quests. Same as My Pace.`:`Ranked by your ${esc(monthName(E))} Trybe sales from all your videos, same as the leaderboard.`} Last day: ${esc(lastDay)}. Only you see your own sales.</div></div>`; }
+   <div class="mini" style="margin-top:10px">${sc?`Ranked by your Elite score: ${esc(monthName(E))} sales, approved videos and quests. Same as My Pace.`:`Ranked by ${esc(monthName(E))} sales from videos posted in ${esc(monthName(E))}, same as the leaderboard.`} Last day: ${esc(lastDay)}. Only you see your own sales.</div></div>`; }
 /* ---- Weekly pace (Austin, Oct 24): 5 videos a week minimum. Monday to Sunday, Central. Originals only, no revisions or statics. ---- */
 const WEEK_MIN=5;
 const ctDay=d=>new Date(d).toLocaleDateString('en-CA',{timeZone:TZ});
@@ -2943,11 +2943,11 @@ route('compete',async()=>{ if(NOV) return challengePage();
   <div class="sec"><h2>Rules in short</h2></div>
   <div class="card"><ol class="ol"><li>Prizes go to the top 3 creators by October GMV: ${(c.prizes||[]).map(p=>fmt.usd(p.cents,{cents:true})).join(', ')}.</li><li>October GMV = sales from Oct 1 to Oct 31 (Central) on videos you submitted and got approved in October, up to your first 20.</li><li>Videos from September or earlier don't count, even if they're still selling.</li><li>Everyone sees names and places. Only you see your own GMV, plus what it takes to pass the place above you.</li><li>Standings update with every data refresh from Trybe. Final standings are taken after Oct 31.</li><li>${esc(TIE_TEXT(c.tie_rule||lb.campaign?.tie_rule))}</li>${(lb.campaign?.payout_terms)?`<li>${esc(lb.campaign.payout_terms)}</li>`:''}</ol><div style="margin-top:12px"><button class="btn gh sm" onclick="openRules()">Full rules</button></div></div>`;
 });
-function slotInfo(i){ openDrawer(`<h2>Slot ${i}</h2><p>Open. Your next October video on Trybe fills this spot, in the order you submit.</p><section><h3>Good to know</h3><ul><li>${NOV?'Every November sale counts toward your rank, from any of your videos, old or new.':'Only October videos count toward your rank. Older videos don\'t, even if they\'re still selling.'}</li><li>Every new October video that gets approved and sells adds to your GMV. Need an idea? Open the Angle Library.</li></ul></section><section><button class="btn" onclick="closeDrawer();go('library')">Find an angle</button></section>`); }
+function slotInfo(i){ openDrawer(`<h2>Slot ${i}</h2><p>Open. Your next October video on Trybe fills this spot, in the order you submit.</p><section><h3>Good to know</h3><ul><li>${NOV?'Only November videos count toward your rank, resubmits included. Older videos don\'t, even if they\'re still selling.':'Only October videos count toward your rank. Older videos don\'t, even if they\'re still selling.'}</li><li>Every new October video that gets approved and sells adds to your GMV. Need an idea? Open the Angle Library.</li></ul></section><section><button class="btn" onclick="closeDrawer();go('library')">Find an angle</button></section>`); }
 async function openRules(){ const lb=await API.page('my_leaderboard'); const c=lb.campaign||{}; const d=new Set(c.draft_decisions||[]);
   if(NOV){ openDrawer(`<h2>${esc(MONTH_NAME)} leaderboard rules</h2><p>${esc(c.name||'November 2026')} · ${fmt.dt(c.starts_at)} to ${fmt.dt(new Date(new Date(c.ends_at)-1))}, ${esc(c.tz||'America/Chicago')}.</p>
-   <section><h3>How you are ranked</h3><ul><li>By your ${esc(MONTH_NAME)} Trybe sales: every sale between Nov 1, 12:00 am and Dec 1, 12:00 am Central, from all your videos. Old or new, top of the funnel to bottom, revised videos too.</li><li>It is the same ${esc(MONTH_NAME)} number Trybe shows you, so the app and Trybe match.</li><li>Prizes unlock by your own sales on the prize ladder. Rewards don't stack.</li><li>Ties share a place.</li></ul></section>
-   <section><h3>Privacy</h3><ul><li>Everyone sees names and places.</li><li>Only you see your own sales. You also see how much more you need to pass the place right above you, and how far ahead you are of the place right below you.</li></ul></section>`); return; }
+   <section><h3>How you are ranked</h3><ul><li>By ${esc(MONTH_NAME)} GMV: Trybe sales between Nov 1, 12:00 am and Dec 1, 12:00 am Central on videos you posted in ${esc(MONTH_NAME)}. BOF and gifting videos count.</li><li>A video you resubmit after a revision counts from the day you resubmit it.</li><li>Videos from October or earlier don't count, even if they're still selling. Your Home page and Trybe show all your sales, so they can be higher.</li><li>Prizes unlock by your own GMV on the prize ladder. Rewards don't stack.</li><li>Ties share a place.</li></ul></section>
+   <section><h3>Privacy</h3><ul><li>Everyone sees names and places.</li><li>Only you see your own GMV. You also see how much more you need to pass the place right above you, and how far ahead you are of the place right below you.</li></ul></section>`); return; }
   const row=(k,label,text)=>`<li>${label}: ${text} ${d.has(k)?badge('d','Being finalized'):''}</li>`;
   openDrawer(`<h2>October incentive rules</h2><p>${esc(c.name||'October 2026')} · ${fmt.dt(c.starts_at)} to ${fmt.dt(new Date(new Date(c.ends_at)-1))}, ${esc(c.tz||'America/Chicago')}.</p>
    <section><h3>Prizes</h3><ul>${(c.prizes||[]).map(p=>`<li>${esc(p.label)} place: ${fmt.usd(p.cents,{cents:true})}</li>`).join('')}<li>Total ${fmt.usd(c.prize_total_cents,{cents:true})}</li></ul></section>
@@ -2959,18 +2959,18 @@ function lbRow(r,lb,{big=false}={}){ const m=r.me; const g=lb.me||{};
   return `<div class="lbrow ${m?'me':''} ${r.rank<=3?'p'+r.rank:''}"><div class="rn">${r.rank<=3?['🥇','🥈','🥉'][r.rank-1]:'#'+r.rank}</div>${avatar(r.name,big?40:34)}
     <div style="min-width:0;flex:1"><div class="nm">${nmc(r.name,r.lvl)}${m?' <span class="you">YOU</span>':''}${r.tied?' <span class="mini">tie</span>':''} ${moveTag(r)}</div>
      ${r.rank<=3&&(lb.campaign?.prizes||[])[r.rank-1]?`<div class="mini" style="color:var(--gold)">${fmt.usd((lb.campaign?.prizes||[])[r.rank-1].cents,{cents:true})} prize place</div>`:''}</div>
-    <div class="rv">${m?`<b>${money(g.gmv)}</b><span>${NOV?'your sales':'your GMV'}</span>`:`<b class="priv">${ico('lock',13)}</b><span>private</span>`}</div></div>`; }
+    <div class="rv">${m?`<b>${money(g.gmv)}</b><span>your GMV</span>`:`<b class="priv">${ico('lock',13)}</b><span>private</span>`}</div></div>`; }
 route('leaderboard',async(p)=>{
   const lb=await API.page('my_leaderboard'); const c=lb.campaign||{}; const me=lb.me||{}; const rows=lb.rows||[];
   const all=p.all==='1'; const shown=all?rows:rows.slice(0,10); const myRow=rows.find(r=>r.me); const meHidden=myRow&&!shown.includes(myRow);
   const pct=me.gap!=null&&me.gmv!=null?clamp(me.gmv/(me.gmv+me.gap)*100,2,99):0;
   const pod=rows.filter(r=>r.rank<=3).slice(0,3);
   const CH=NOV?await myChallenge():null;
-  return `${ph(NOV?`${MONTH_NAME} leaderboard`:'October leaderboard',NOV?`Ranked by your ${MONTH_NAME} Trybe sales from all your videos. Everyone sees the order; only you see your own number.`:'Ranked by GMV from October videos. Everyone sees the order; only you see your own number.',{eyebrow:'Compete',acts:`<button class="btn gh" onclick="openRules()">${ico('book')} Rules</button>`})}
+  return `${ph(NOV?`${MONTH_NAME} leaderboard`:'October leaderboard',NOV?`Ranked by GMV from videos you posted in ${MONTH_NAME}. Everyone sees the order; only you see your own number.`:'Ranked by GMV from October videos. Everyone sees the order; only you see your own number.',{eyebrow:'Compete',acts:`<button class="btn gh" onclick="openRules()">${ico('book')} Rules</button>`})}
   ${NOV?(CH?chHero(CH):''):incentiveHero(c)}
   <div class="lbme">
    <div class="lbme-a"><div class="lbl">You are</div><div class="lbme-rank">${me.rank==null?'—':'#'+me.rank}</div><div class="mini">${me.rank==null?'not on the board yet':`of ${lb.ranked} ranked${me.tied?' · tied':''}`}</div>${me.move?`<div class="mvline ${me.move>0?'up':'dn'}">${me.move>0?'▲':'▼'} ${Math.abs(me.move)} since ${fmt.date(lb.since)}</div>`:''}</div>
-   <div class="lbme-b"><div class="lbl">${NOV?`Your ${MONTH_NAME} sales <span class="gmvq">(all videos)</span>`:'Your October GMV <span class="gmvq">(videos posted in October only)</span>'}</div><div class="lbme-gmv">${money(me.gmv||0)}</div><div class="mini">only you can see this</div></div>
+   <div class="lbme-b"><div class="lbl">${NOV?`Your ${MONTH_NAME} GMV <span class="gmvq">(videos posted in ${MONTH_NAME} only)</span>`:'Your October GMV <span class="gmvq">(videos posted in October only)</span>'}</div><div class="lbme-gmv">${money(me.gmv||0)}</div><div class="mini">only you can see this</div></div>
    <div class="lbme-c">${me.rank===1?`<div class="lbl">Status</div><div class="lbme-next">👑 You are in first.</div><div class="mini">Keep posting. Everyone below you can see how far behind they are, not your number.</div>`
      :me.gap!=null?`<div class="lbl">To pass ${me.next_rank?'#'+me.next_rank:''} ${nmc(me.next_name||'',me.next_lvl)}</div><div class="lbme-next"><b>${money(me.gap)}</b> more GMV</div><div class="bar gold" style="margin-top:8px"><i style="width:${pct.toFixed(1)}%"></i></div>`
      :`<div class="lbl">Get on the board</div><div class="lbme-next">Make your first ${NOV?MONTH_NAME:'October'} sale</div>`}
@@ -2984,7 +2984,7 @@ route('leaderboard',async(p)=>{
     ${rows.length>10?`<button class="btn gh" style="width:100%;margin-top:8px" onclick="go('leaderboard',${all?'{}':"{all:'1'}"})">${all?'Show top 10 only':`Show all ${rows.length} places`}</button>`:''}</div>`
    :emptyState('Nobody is on the board yet',`The first ${NOV?MONTH_NAME:'October'} sale puts someone in first place.`,'','leader')}
   ${myRow&&all&&myRow.rank>10?`<div class="mestick"><div class="rn">#${myRow.rank}</div>${avatar(myRow.name,30)}<div style="min-width:0;flex:1"><div class="nm">${nmc(myRow.name,myRow.lvl)} <span class="you">YOU</span></div><div class="mini">${me.gap!=null?`${money(me.gap)} to pass #${me.next_rank}`:''}${me.below_name?` · #${me.below_rank} is ${money(me.lead||0)} behind you`:''}</div></div><div style="text-align:right"><div style="font-family:var(--mono);font-weight:800;color:var(--gold)">${money(me.gmv)}</div><div class="mini">your GMV</div></div></div>`:''}
-  <div class="note" style="margin-top:14px">Updated with each Trybe refresh${lb.data_through?` · last one ${fmt.dt(lb.data_through)}`:''}. ${NOV?`This counts all your ${MONTH_NAME} sales on Trybe, from every video, so it matches Trybe and your Home page.`:'GMV here only counts videos you submitted and got approved in October, so it can be lower than the October sales on your Home page.'}</div>`;
+  <div class="note" style="margin-top:14px">Updated with each Trybe refresh${lb.data_through?` · last one ${fmt.dt(lb.data_through)}`:''}. ${NOV?`GMV here only counts videos you posted in ${MONTH_NAME}, resubmits included, so it can be lower than the ${MONTH_NAME} sales on your Home page and in Trybe.`:'GMV here only counts videos you submitted and got approved in October, so it can be lower than the October sales on your Home page.'}</div>`;
 });
 
 /* ---------------- My pace (Austin, Oct 29): your Ravine Elite spot. One score out of 100 built from this month's
@@ -3017,7 +3017,7 @@ route('pace',async()=>{
   if(!p.weights) return `${ph('My pace','Your Ravine Elite spot this month.',{eyebrow:'Compete'})}${emptyState('My Pace is updating','The new Elite score turns on in a few minutes. Check back soon.','','leader')}`;   // server SQL not run yet
   if(!m.place) return `${ph('My pace','Your Ravine Elite spot this month.',{eyebrow:'Compete'})}${emptyState('Not on the Elite roster yet','My Pace shows your Elite spot once you are on the Ravine Elite roster.','','leader')}`;
   return `${ph('My pace',`Your Ravine Elite spot for ${esc(mon)}. It is not the leaderboard: it scores your whole month.`,{eyebrow:'Compete',acts:`<button class="btn gh" onclick="go('leaderboard')">${ico('star')} Leaderboard</button>`})}
-  <div class="pvs"><div class="pv"><div class="pv-k">${ico('star',16)} Leaderboard</div><b>The sales race</b><p>Ranks your ${esc(mon)} Trybe sales from all your videos. Decides prizes.</p></div>
+  <div class="pvs"><div class="pv"><div class="pv-k">${ico('star',16)} Leaderboard</div><b>The sales race</b><p>Ranks ${esc(mon)} Trybe sales from videos posted in ${esc(mon)}. Decides prizes.</p></div>
     <div class="pv on"><div class="pv-k">${ico('gauge',16)} My pace</div><b>Your Elite spot</b><p>Scores your whole month: <b>sales</b>, <b>approved videos</b> and <b>quests</b>. The bottom ${p.move_down} move down to the Ravine Creator Academy.</p></div></div>
   <section class="card phero ph-${st.k}">
     <div class="phero-l"><div class="row" style="gap:8px;align-items:center"><span class="badge ${st.c}">${esc(st.t)}</span><span class="mini">${esc(mon)} · ${p.days_left!=null?`${p.days_left} day${p.days_left===1?'':'s'} left`:''}</span></div>
@@ -3228,14 +3228,14 @@ function renderVideoStats(){ const box=$('#vstats'); const c=VSC.cur; if(!box||!
   box.innerHTML=vsHtml(c.d,rk,c.v); const old=$('#oldnums'); if(old) old.hidden=!!(c.d.all?.video||c.d.month?.video); }
 
 /* ================= November challenge (Austin, Oct 31) =================
-   Prize ladder on the creator's November Trybe sales from all videos (Nov 7 rule; no stacking, final GMV Dec 1), and the $25,000 bonus pool
+   Prize ladder on Trybe GMV from videos posted in November, resubmits included (server wrapper since Nov 7; no stacking, final GMV Dec 1), and the $25,000 bonus pool
    that unlocks only at $2M team sales: 60% by share of sales, 40% by share of approved videos (BOF counts half). */
 async function myChallenge(){ try{ return await API.page('my_challenge'); }catch(e){ return null; } }
 const kUSD=n=>{ n=+n||0; return n>=1e6?'$'+(n/1e6).toFixed(n%1e6?1:0)+'M':n>=1e3?'$'+Math.round(n/1e3)+'K':'$'+Math.round(n); };
 function chTier(C){ const T=C.tiers||[], g=+C.gmv||0; let i=-1; T.forEach((t,j)=>{ if(g>=t.gmv) i=j; }); return {T,g,i,cur:i>=0?T[i]:null,next:T[i+1]||null}; }
 function chPrize(t){ return t.gmv===5000?`${fmt.usd(t.cash)} cash`:`${esc(t.prize)} or ${fmt.usd(t.cash)} cash`; }
 /* November facelift (Nov 2): Home answers "how am I doing / what prize next / how close is the team".
-   my_challenge: prize tiers on November Trybe sales from all videos (server wrapper since Nov 7),
+   my_challenge: prize tiers on GMV from November-posted videos, resubmits included (server wrapper since Nov 7),
    $25K pool on team sales vs the goal, 60% share of sales + 40% share of approved videos. */
 const dol=n=>'$'+Math.round(+n||0).toLocaleString('en-US');
 function chCountdown(C){ const e=new Date((C&&C.campaign&&C.campaign.ends_at)||'2026-12-01T06:00:00Z'); const ms=e-Date.now();
@@ -3251,7 +3251,7 @@ function chHero(C,{link=true}={}){ const {g,cur,next,T,i}=chTier(C); const prev=
    <div class="fl-hero-top">
      <div class="lbl">Your November GMV</div>
      <div class="fl-big tnum">${dol(g)}</div>
-     <p class="fl-sub">All your November sales on Trybe, from every video. Old or new, top of the funnel to bottom.</p>
+     <p class="fl-sub">Trybe sales from videos you posted in November, resubmits included. BOF and gifting videos count.</p>
    </div>
    <div class="fl-next">
      ${next?`<div class="lbl gold">Next reward</div>
@@ -3294,8 +3294,8 @@ async function challengePage(){ const C=await myChallenge();
    <section class="card fl-ladder-card"><ol class="fl-ladder">${ladder}</ol></section>
    <div class="sec"><h2>Team bonus</h2><span class="mini">Split 60% by sales, 40% by approved videos</span></div>${chPool(C)}
    <div class="sec"><h2>Rules</h2></div><section class="card"><ul class="rules">
-    <li>Ravine Elite only.</li><li>All your November Trybe sales count toward your prize, from every video you have on Ravine, old or new, TOF to BOF. It is the same November number Trybe shows you.</li>
-    <li>Rewards don't stack. Pick the tier you reach or any tier below it.</li><li>BOF, gifting and revised videos all count.</li>
+    <li>Ravine Elite only.</li><li>Only Trybe GMV from videos posted in November counts toward your prize. Videos from October or earlier don't count, even if they're still selling.</li><li>A video you resubmit after a revision counts from the day you resubmit it.</li>
+    <li>Rewards don't stack. Pick the tier you reach or any tier below it.</li><li>BOF and gifting videos count this month. Tag them when you upload.</li>
     <li>Final GMV is calculated December 1.</li><li>The bonus pool only pays out if the team hits ${dol(C.goal||2e6)} in November sales.</li></ul>
     <div class="mini" style="margin-top:10px">Numbers update with each Trybe refresh${C.data_through?`, last ${esc(fmt.dt(C.data_through))}`:''}.</div></section>`; }
 /* fixture preview: an example creator a third of the way to $25K */
@@ -3767,7 +3767,7 @@ route('admin_contest',async()=>{ const A=await API.page('admin',NOV?{p_campaign:
        <div class="row" style="margin-top:12px"><button class="btn" ${ended?'':'disabled'} onclick="freezeAsk(true)">Freeze final standings</button><button class="btn gh" onclick="freezeAsk(false)">Save a snapshot now</button></div>
        ${ended?'':`<div class="mini" style="margin-top:8px">Final freeze unlocks when October ends (${fmt.dt(c.ends_at)}).</div>`}`}
     ${snaps.filter(x=>!x.final).length?`<div class="hr"></div><div class="lbl">Saved snapshots</div><div class="timeline" style="margin-top:8px">${snaps.filter(x=>!x.final).slice(0,5).map(x=>`<div><time>${fmt.dt(x.taken_at)}</time><span>${(x.top3||[]).map(t=>`#${t.rank} ${esc(t.name)}`).join(' · ')||'no ranked creators'}</span></div>`).join('')}</div>`:''}</div></div>
-  <div class="sec"><h2>Standings (admin view)</h2><span class="mini">Creators only ever see their own GMV</span></div><div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Rank</th><th>Creator</th><th class="num">${NOV?'Nov sales (all videos)':'GMV (Oct videos)'}</th><th class="num">${NOV?'Approved Nov videos':'Approved Oct videos'}</th></tr></thead><tbody>${(A.standings||[]).filter(s=>s.rank!=null).map(s=>`<tr><td class="mono">${s.rank}${s.tied?' tie':''}</td><td>${esc(s.display_name)}</td><td class="num">${fmt.usd2(s.score_sales)}</td><td class="num">${s.entries}</td></tr>`).join('')||'<tr><td colspan="4" class="mini">No October video sales yet</td></tr>'}</tbody></table></div></div>
+  <div class="sec"><h2>Standings (admin view)</h2><span class="mini">Creators only ever see their own GMV</span></div><div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Rank</th><th>Creator</th><th class="num">${NOV?'GMV (Nov videos)':'GMV (Oct videos)'}</th><th class="num">${NOV?'Approved Nov videos':'Approved Oct videos'}</th></tr></thead><tbody>${(A.standings||[]).filter(s=>s.rank!=null).map(s=>`<tr><td class="mono">${s.rank}${s.tied?' tie':''}</td><td>${esc(s.display_name)}</td><td class="num">${fmt.usd2(s.score_sales)}</td><td class="num">${s.entries}</td></tr>`).join('')||'<tr><td colspan="4" class="mini">No October video sales yet</td></tr>'}</tbody></table></div></div>
   <div class="mini" style="margin-top:6px">${(A.standings||[]).filter(s=>s.rank==null).length} more creators on the roster are still at $0 for October.</div>
   <div class="sec"><h2>Data refreshes</h2><span class="mini">Each Trybe refresh paste logs a run here</span></div>
   <div class="card pad0"><div class="tblwrap"><table class="tbl"><thead><tr><th>Run</th><th>Source</th><th>Status</th><th class="num">Read</th><th class="num">Added</th><th class="num">Updated</th><th>Reports through</th></tr></thead><tbody>${(A.imports||[]).map(r=>`<tr><td class="mono">${fmt.dt(r.started_at)}</td><td>${esc(r.source)}</td><td>${badge(r.status==='complete'?'g':r.status==='failed'?'x':'r',r.status)}</td><td class="num">${r.rows_read??''}</td><td class="num">${r.rows_added??''}</td><td class="num">${r.rows_updated??''}</td><td>${fmt.date(r.reporting_through,{year:'numeric'})||''}</td></tr>`).join('')||'<tr><td colspan="7" class="mini">No runs</td></tr>'}</tbody></table></div></div>
