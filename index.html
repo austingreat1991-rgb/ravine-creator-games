@@ -1610,7 +1610,17 @@ button.lk-row:hover{background:rgba(255,255,255,.035);color:var(--o2)}
 .lk-tl .done i{background:var(--gr);border-color:var(--gr)}.lk-tl .now i{border-color:var(--warn);box-shadow:0 0 0 4px var(--warn-soft)}
 .lk-tl b{display:block;font-size:14px;color:var(--tx3)}.lk-tl .done b,.lk-tl .now b{color:var(--tx)}.lk-tl span{display:block;font-size:12.5px;color:var(--tx4);margin-top:1px}
 .anim.still .lkc-col b,.anim.still .lk-pbar i,.anim.still .lk-sbar i,.anim.still .lk-ring-p{animation:none}
-@media (max-width:1040px){.lk-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.lk-two,.lk-two.b{grid-template-columns:1fr}}
+/* faq */
+.lk-faq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}
+.lk-q{border-radius:16px;border:1px solid var(--ln);background:linear-gradient(180deg,rgba(255,255,255,.025),transparent 50%),var(--sf);transition:border-color .2s,background .2s}
+.lk-q:hover{border-color:var(--ln2)}.lk-q[open]{border-color:rgba(255,110,32,.38);background:radial-gradient(120% 120% at 0% 0%,rgba(255,110,32,.10),transparent 60%),var(--sf)}
+.lk-q summary{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 18px;cursor:pointer;list-style:none;font-weight:700;font-size:15px;color:var(--tx)}
+.lk-q summary::-webkit-details-marker{display:none}
+.lk-q summary svg{flex:none;color:var(--tx4);transform:rotate(90deg);transition:transform .2s var(--ease),color .2s}
+.lk-q[open] summary svg{transform:rotate(-90deg);color:var(--o2)}
+.lk-a{padding:0 18px 17px;font-size:14px;line-height:1.6;color:var(--tx2)}.lk-a b{color:var(--tx)}
+.lk-foot{margin-top:14px}
+@media (max-width:1040px){.lk-faq{grid-template-columns:1fr}.lk-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.lk-two,.lk-two.b{grid-template-columns:1fr}}
 @media (max-width:760px){
   .lk-pass{grid-template-columns:1fr;grid-template-rows:auto 1px auto}.lk-pass-l,.lk-pass-r{padding:20px}
   .lk-perf{background:repeating-linear-gradient(90deg,rgba(255,255,255,.22) 0 6px,transparent 6px 13px)}
@@ -1645,7 +1655,7 @@ button.lk-row:hover{background:rgba(255,255,255,.035);color:var(--o2)}
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261111-151500";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261111-170000";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -3877,6 +3887,22 @@ function lkKit(L){
   return `<section class="card lk-kit"><div class="lk-card-h"><h3>Ready to post</h3><span class="mini">Tap to copy, then paste</span></div>
     <div class="lk-kit-g">${K.map((k,i)=>`<button class="lk-kit-c" onclick="lkCopy(this,'kit',${i})"><span class="lk-kit-k">${ico(k[1],14)} ${k[0]}</span><span class="lk-kit-t">${esc(k[2])}</span><span class="lk-kit-a">${ico('copy',13)}<em>Copy</em></span></button>`).join('')}</div></section>`;
 }
+function lkFaq(L){
+  const P=L.program, rate=+L.affiliate.rate||+P.rate||15, disc=P.discount||'a discount', cd=+P.cookie_days||0, shop=P.shop||'tryravine.com';
+  const Q=[
+   ['How does my link track a sale?',`When someone taps your link, Social Snowball (the app Ravine uses for affiliates) saves a small cookie in their browser that says they came from you. If they order on ${esc(shop)} while that cookie is still active, the order is credited to you and shows up here. Your discount is also applied for them at checkout automatically.`],
+   ['How long does the cookie last?',cd?`<b>${cd} days.</b> If they tap your link today and buy any time in the next ${cd} days on the same device and browser, you get the credit.`:`Ravine sets the window inside Social Snowball, and it can be anywhere from 1 to 365 days. The exact number will show right here once the program is live. Until they buy, the click stays saved on the same device and browser they tapped from.`],
+   ['What if they use my code but never tapped my link?',`You still get the credit. A code used at checkout counts for you with no click needed. That is why it is smart to share both: the link for taps, the code as the backup.`],
+   ['Why did someone buy and I do not see it?',`The most common reasons: they tapped on one device and bought on another, they cleared their cookies or used private browsing, they bought after the cookie window ended, or the order has not synced yet. If they type your code at checkout, none of that matters. Still missing after a day? Send Austin the order date and he will look into it.`],
+   ['When do I get paid?',`${esc(P.payout_note||'Commission is approved after the return window closes, then paid out by Ravine.')} On this page that is Pending, then Approved, then Paid. Your commission is ${rate}% of the order.`],
+   ['What happens if an order is refunded?',`The commission for that order is removed. It shows crossed out in your orders as Refunded.`],
+   ['How often do these numbers update?',`They sync from Social Snowball through the day. A brand new order can take a few hours to show up.`],
+   ['Do these sales count toward my Trybe numbers?',`No. Link and code sales are organic sales. They are tracked and paid separately from Trybe and do not change your Trybe sales, your rank or any challenge.`],
+   ['Where should I share my link?',`Anywhere organic: your bio, stories, captions, texts and DMs. It is for your own posts, not your Trybe ad videos. Stick to what is on the Ravine page when you describe the product or the deal.`],
+   ['Do I need to say it is an affiliate link?',`Yes. Add #ad or say it is your affiliate link whenever you post it. It keeps you and Ravine in the clear.`]];
+  return `<div class="sec"><h2>Questions</h2><span class="mini">How tracking, cookies and payouts work</span></div>
+  <section class="lk-faq">${Q.map((q,i)=>`<details class="lk-q"${i===0?' open':''}><summary><span>${q[0]}</span>${ico('arrow',16)}</summary><div class="lk-a">${q[1]}</div></details>`).join('')}</section>`;
+}
 function lkHow(o){ return o.via==='code'?'Code':o.via==='link'?('Link'+(o.source?' · '+lkSrcName(o.source):'')):(o.source?lkSrcName(o.source):'Link or code'); }
 function lkOrders(L){
   const O=L.orders; if(!O.length) return `<div class="lk-none">${ico('cart',24)}<b>No orders yet</b><span>The first order with your link or code shows up here after the next sync.</span></div>`;
@@ -3963,6 +3989,7 @@ route('links',async()=>{
   <div class="lk-two b">${lkMilestone(L)}${lkKit(L)}</div>
   <section class="card lk-list"><div class="lk-card-h pad"><div class="tabs"><button class="${LKS.tab==='orders'?'on':''}" onclick="lkSet('tab','orders')">Orders<i>${L.orders.length}</i></button><button class="${LKS.tab==='payouts'?'on':''}" onclick="lkSet('tab','payouts')">Payouts<i>${L.payouts.length}</i></button></div><span class="mini">${LKS.tab==='orders'&&L.orders.length?'Tap an order for details':''}</span></div>
     ${LKS.tab==='payouts'?lkPayouts(L):lkOrders(L)}</section>
+  ${lkFaq(L)}
   <div class="lk-foot">${ico('info',15)}<span>Link and code sales are organic sales, tracked by Social Snowball and paid separately from Trybe. They do not count toward your Trybe numbers or the ${NOV?'November challenge':'monthly competition'}. Only you can see your numbers.${L.synced_at?` Updated ${esc(fmt.dt(L.synced_at)||'')}.`:''}</span></div>
   ${await lkAdmin()}`;
 });
