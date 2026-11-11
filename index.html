@@ -1460,33 +1460,171 @@ body{background-color:var(--bg);
 .payr-l{min-width:0;flex:1}.payr-l b{display:block;margin-bottom:2px}
 .payr-r{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none;text-align:right}
 .payr-amt{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:18px;color:var(--gold)}
-/* ---- My links (Nov 11) */
-.lk-top{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px;margin-bottom:16px}
-.lk-hero{position:relative;overflow:hidden;display:flex;flex-direction:column;background:radial-gradient(120% 90% at 0% 0%,rgba(255,110,32,.16),transparent 60%),var(--sf)}
-.lk-hero::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(232,182,74,.12),transparent 70%);pointer-events:none}
-.lk-big{font-size:clamp(40px,6vw,58px);font-weight:800;letter-spacing:-1.5px;line-height:1.05;margin-top:6px;background:linear-gradient(180deg,#fff,var(--o2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.lk-sub{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:8px;color:var(--tx3);font-size:13.5px}.lk-sub b{color:var(--tx)}
-.lk-chart{display:block;width:100%;height:140px;margin-top:auto;padding-top:18px}
-.lk-chart rect{fill:rgba(255,255,255,.07);transition:fill .15s}.lk-chart rect.on{fill:url(#lkg)}.lk-chart rect:hover{fill:var(--gold)}
-.lk-axis{display:flex;justify-content:space-between;font-size:11px;color:var(--tx4);margin-top:6px;letter-spacing:.3px}
-.lk-side{display:grid;gap:16px}
-.lk-codev{font-size:30px;font-weight:800;letter-spacing:2px;margin:8px 0 6px;color:var(--gold);font-variant-numeric:tabular-nums;border:1px dashed rgba(232,182,74,.45);border-radius:12px;padding:8px 14px;display:inline-block;background:var(--gold-soft)}
-.lk-linkv{font-size:15px;font-weight:600;margin:10px 0 2px;padding:10px 12px;border-radius:10px;background:var(--sf2);border:1px solid var(--ln);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--tx2)}
-.grid.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
-.lk-stats{gap:12px}.lk-stats .metric.lk-ready .v{color:var(--gr)}
-.lk-list{padding:6px 0!important;overflow:hidden}.lk-list .tblwrap{margin:0}.lk-tbl td,.lk-tbl th{padding:12px 18px}
-.lk-tbl tr.void td{opacity:.5;text-decoration:line-through}.lk-tbl tr.void td:last-child{text-decoration:none}
-.lk-c{color:var(--gr)}
-.lk-none{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:34px 20px;color:var(--tx3)}.lk-none svg{color:var(--o)}.lk-none b{color:var(--tx);font-size:15px}
-.lk-fresh{margin:10px 2px 0;color:var(--tx4)}
-.lk-how .card{position:relative}.lk-how b{display:block;font-size:15px;margin-top:10px}.lk-how p{font-size:13.5px;color:var(--tx3);margin-top:6px}
-.lk-n{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:14px;color:var(--o-ink);background:linear-gradient(135deg,var(--o2),var(--o))}
-.lk-wait{display:flex;gap:18px;align-items:flex-start;background:radial-gradient(120% 90% at 0% 0%,rgba(255,110,32,.12),transparent 60%),var(--sf)}
-.lk-wait h3{font-size:20px;margin:6px 0 8px}.lk-wait p{color:var(--tx2);font-size:14px;max-width:640px}.lk-wait .mini{margin-top:10px}
-.lk-wait-i{flex:none;width:54px;height:54px;border-radius:16px;display:grid;place-items:center;color:var(--o);background:var(--o-soft);border:1px solid rgba(255,110,32,.3)}
-.lk-adm{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--tx3);border:1px solid var(--ln2);border-radius:999px;padding:3px 9px;margin-left:8px;vertical-align:middle}
-@media (max-width:900px){.lk-top{grid-template-columns:1fr}.grid.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:520px){.lk-tbl td,.lk-tbl th{padding:10px 12px}.lk-codev{font-size:24px}.lk-wait{flex-direction:column}}
+/* ---- My links v2 (Nov 11) */
+.lk-pv{display:flex;align-items:center;gap:12px;margin:-4px 0 16px;padding:10px 14px;border-radius:12px;border:1px dashed rgba(232,182,74,.4);background:rgba(232,182,74,.06);color:var(--tx2);font-size:13.5px;line-height:1.45}
+.lk-pv-b{flex:none;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--gold);padding:4px 9px;border-radius:7px;border:1px dashed rgba(232,182,74,.6);background:rgba(232,182,74,.1)}
+/* the link + code "pass": one card, perforated like a ticket */
+.lk-pass{position:relative;display:grid;grid-template-columns:minmax(0,1.45fr) 1px minmax(0,1fr);border-radius:22px;border:1px solid var(--ln2);overflow:hidden;
+  background:radial-gradient(90% 140% at 0% 0%,rgba(255,110,32,.20),transparent 58%),radial-gradient(70% 120% at 100% 100%,rgba(232,182,74,.10),transparent 60%),linear-gradient(180deg,#171B20,#111418);
+  box-shadow:0 24px 60px -30px rgba(255,110,32,.35),inset 0 1px 0 rgba(255,255,255,.06)}
+.lk-pass::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.05) 46%,transparent 60%);background-size:260% 100%;animation:lksheen 7s ease-in-out infinite;pointer-events:none}
+@keyframes lksheen{0%,55%{background-position:120% 0}100%{background-position:-60% 0}}
+.lk-pass-l,.lk-pass-r{position:relative;padding:24px 26px;min-width:0;display:flex;flex-direction:column}
+.lk-pass .lbl{color:var(--o2)}
+.lk-pass .mini{margin-top:8px;max-width:440px}
+.lk-pass-a{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto;padding-top:18px}
+.lk-url{display:flex;align-items:center;gap:10px;margin-top:10px;font-family:var(--mono);font-size:clamp(17px,2.1vw,23px);font-weight:700;letter-spacing:-.2px;color:var(--tx);min-width:0}
+.lk-url svg{flex:none;color:var(--o)}.lk-url span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lk-cta{padding:12px 22px;min-height:46px;font-size:15px;border-radius:13px;background:linear-gradient(180deg,#FF8A3D,#FF6E20);box-shadow:0 10px 26px -8px rgba(255,110,32,.65),inset 0 1px 0 rgba(255,255,255,.35)}
+.lk-cta:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn.ok{background:var(--gr-soft)!important;color:var(--gr)!important;border-color:rgba(61,220,132,.4)!important;box-shadow:none!important}
+.lk-perf{position:relative;background:repeating-linear-gradient(180deg,rgba(255,255,255,.22) 0 6px,transparent 6px 13px)}
+.lk-perf::before,.lk-perf::after{content:"";position:absolute;left:50%;width:26px;height:26px;border-radius:50%;background:var(--bg);border:1px solid var(--ln2);transform:translateX(-50%)}
+.lk-perf::before{top:-14px}.lk-perf::after{bottom:-14px}
+.lk-code{margin-top:10px;font-family:var(--mono);font-size:clamp(26px,3.3vw,38px);font-weight:800;letter-spacing:3px;line-height:1.05;background:linear-gradient(180deg,#FFE7A8,#E8B64A);-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* performance */
+.lk-sec{margin-top:30px;align-items:center}
+.lk-seg{display:inline-flex;padding:4px;border-radius:99px;background:var(--sf);border:1px solid var(--ln)}
+.lk-seg button{padding:7px 14px;border-radius:99px;font-size:13px;font-weight:700;color:var(--tx3);transition:color .15s,background .15s}
+.lk-seg button:hover{color:var(--tx)}
+.lk-seg button.on{background:linear-gradient(180deg,#FF8A3D,#FF6E20);color:var(--o-ink);box-shadow:0 6px 16px -6px rgba(255,110,32,.7)}
+.lk-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.lk-kpi{position:relative;overflow:hidden;padding:16px 18px 44px;border-radius:var(--r);background:linear-gradient(180deg,rgba(255,255,255,.03),transparent 45%),var(--sf);border:1px solid var(--ln);transition:border-color .2s,transform .2s var(--ease)}
+.lk-kpi:hover{border-color:var(--ln2);transform:translateY(-2px)}
+.lk-kpi-h{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:20px}
+.lk-kpi-h>span:first-child{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--tx3)}
+.lk-kpi-v{margin-top:8px;font-family:var(--mono);font-size:clamp(22px,2.5vw,30px);font-weight:800;letter-spacing:-.6px;line-height:1.1;color:var(--tx)}
+.lk-kpi-s{margin-top:5px;font-size:12.5px;color:var(--tx3)}.lk-kpi-s b{color:var(--tx2)}
+.lk-kpi.earn{border-color:rgba(61,220,132,.28);background:radial-gradient(120% 100% at 100% 0%,rgba(61,220,132,.13),transparent 60%),var(--sf)}
+.lk-kpi.earn .lk-kpi-v{color:var(--gr)}.lk-kpi.earn .lk-kpi-h>span:first-child{color:var(--gr)}
+.lk-spark{position:absolute;left:0;right:0;bottom:0;width:100%;height:36px;display:block;opacity:.95}
+.lk-dl{display:inline-flex;align-items:center;gap:3px;font-family:var(--mono);font-size:11px;font-weight:700;padding:2px 7px;border-radius:99px;white-space:nowrap}
+.lk-dl.up{color:var(--gr);background:var(--gr-soft)}.lk-dl.dn{color:var(--bad);background:var(--bad-soft)}
+/* cards */
+.lk-card-h{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.lk-card-h h3{font-size:17px;letter-spacing:.2px}
+.lk-card-h.pad{padding:16px 18px 0;margin-bottom:10px}
+.lk-pipe{margin-top:12px}
+.lk-pbar{display:flex;gap:4px;height:10px;margin-bottom:16px}
+.lk-pbar i{display:block;border-radius:99px;min-width:10px;transform-origin:left;animation:lkw .7s var(--ease) both}
+.lk-pbar i.a{background:linear-gradient(90deg,#FFB020,#FFC95C)}.lk-pbar i.b{background:linear-gradient(90deg,#2FBF71,#3DDC84)}.lk-pbar i.c{background:linear-gradient(90deg,#C99A32,#E8B64A)}.lk-pbar i.z{background:rgba(255,255,255,.07)}
+@keyframes lkw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.lk-steps{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:10px}
+.lk-step{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:14px;background:var(--sf2);border:1px solid var(--ln);min-width:0}
+.lk-step-i{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center}
+.lk-step.a .lk-step-i{color:var(--warn);background:var(--warn-soft)}.lk-step.b .lk-step-i{color:var(--gr);background:var(--gr-soft)}.lk-step.c .lk-step-i{color:var(--gold);background:var(--gold-soft)}
+.lk-step-n{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--tx3)}
+.lk-step-v{font-family:var(--mono);font-size:21px;font-weight:800;letter-spacing:-.4px;margin-top:2px}
+.lk-step-d{font-size:12.5px;color:var(--tx3);margin-top:2px}
+.lk-step-arr{color:var(--tx4);display:grid;place-items:center}
+.lk-pipe-n{display:flex;gap:8px;align-items:flex-start;margin-top:14px;font-size:13px;color:var(--tx3)}.lk-pipe-n svg{flex:none;margin-top:2px}
+.lk-two{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:12px;margin-top:12px;align-items:stretch}
+.lk-two.one{grid-template-columns:1fr}.lk-two.b{grid-template-columns:minmax(0,1fr) minmax(0,1.65fr)}
+/* chart */
+.lk-leg{display:flex;gap:6px}
+.lk-leg button{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:99px;border:1px solid var(--ln);background:var(--sf2);font-size:12.5px;font-weight:700;color:var(--tx4);transition:color .15s,border-color .15s}
+.lk-leg button.on{color:var(--tx);border-color:var(--ln2)}
+.lk-leg i{width:10px;height:10px;border-radius:3px;background:var(--tx4)}.lk-leg i.k{height:3px;border-radius:2px;width:14px}
+.lk-leg button.on i.s{background:var(--o)}.lk-leg button.on i.k{background:#6FA8FF}
+.lk-chartc{display:flex;flex-direction:column}.lkc{flex:1;display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:minmax(240px,1fr) auto;column-gap:10px;row-gap:8px}
+.lkc.nok{grid-template-columns:auto minmax(0,1fr) 0}
+.lkc-y{display:flex;flex-direction:column;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--tx4);text-align:right;min-width:8px}
+.lkc-y.r{text-align:left;color:#5F8BD0}.lkc-y span{line-height:1;transform:translateY(-50%)}.lkc-y span:last-child{transform:translateY(50%)}
+.lkc-plot{position:relative}
+.lkc-grid{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none}
+.lkc-grid i{display:block;height:1px;background:rgba(255,255,255,.06)}.lkc-grid i:last-child{background:rgba(255,255,255,.14)}
+.lkc-cols{position:absolute;inset:0;display:flex;align-items:stretch}
+.lkc-col{flex:1;min-width:0;display:flex;align-items:flex-end;justify-content:center;cursor:pointer;border-radius:8px 8px 0 0;transition:background .12s}
+.lkc-col:hover,.lkc-col.on{background:rgba(255,255,255,.05)}
+.lkc-col b{display:block;width:62%;max-width:34px;min-width:3px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#FFA25C,#FF6E20);box-shadow:0 0 18px -4px rgba(255,110,32,.55);transform-origin:bottom;animation:lkgrow .7s var(--ease) both}
+.lkc-col:hover b,.lkc-col.on b{background:linear-gradient(180deg,#FFD08A,#FF8A3D)}
+@keyframes lkgrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.lkc-line{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;filter:drop-shadow(0 0 6px rgba(91,157,255,.45))}
+.lkc-x{display:flex;font-family:var(--mono);font-size:10.5px;color:var(--tx4)}.lkc-x span{flex:1;min-width:0;text-align:center;white-space:nowrap;overflow:visible}
+.lkc-tip{position:absolute;top:6px;z-index:3;min-width:150px;padding:10px 12px;border-radius:12px;background:rgba(14,17,21,.96);border:1px solid var(--ln2);box-shadow:0 14px 34px rgba(0,0,0,.55);font-size:12.5px;opacity:0;transform:translateY(4px);transition:opacity .12s,transform .12s;pointer-events:none}
+.lkc-tip.on{opacity:1;transform:none}
+.lkc-tip b{display:block;margin-bottom:6px;font-size:12px;color:var(--tx)}
+.lkc-tip div{display:flex;align-items:center;gap:7px;color:var(--tx3);padding:2px 0}.lkc-tip div span{margin-left:auto;padding-left:14px;font-family:var(--mono);font-weight:700;color:var(--tx)}
+.lkc-tip i{width:8px;height:8px;border-radius:2px}.lkc-tip i.s{background:var(--o)}.lkc-tip i.e{background:var(--gr)}.lkc-tip i.o{background:var(--gold)}.lkc-tip i.k{background:#6FA8FF}
+/* sources */
+.lk-srow{padding:10px 0;border-top:1px solid var(--ln)}.lk-srow:first-of-type{border-top:0;padding-top:0}
+.lk-srow-t{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px;font-weight:600}
+.lk-srow-t span{display:inline-flex;align-items:center;gap:9px}.lk-srow-t span i{width:9px;height:9px;border-radius:50%;box-shadow:0 0 10px currentColor}
+.lk-srow-t b{font-family:var(--mono);font-size:14px}.lk-srow-t em{font-style:normal;font-weight:600;font-size:11.5px;color:var(--tx4);margin-left:8px}
+.lk-sbar{height:7px;border-radius:99px;background:rgba(255,255,255,.06);margin-top:8px;overflow:hidden}
+.lk-sbar i{display:block;height:100%;border-radius:99px;transform-origin:left;animation:lkw .8s var(--ease) both}
+.lk-srow-s{margin-top:6px;font-size:12px;color:var(--tx3)}
+/* milestone */
+.lk-mile-b{display:flex;align-items:center;gap:20px}
+.lk-ring{position:relative;flex:none;width:128px;height:128px}.lk-ring svg{width:100%;height:100%;display:block;filter:drop-shadow(0 0 10px rgba(255,150,60,.3))}
+.lk-ring-p{stroke-dashoffset:var(--lko);animation:lkring 1.1s var(--ease) both}
+@keyframes lkring{from{stroke-dashoffset:var(--lkc)}to{stroke-dashoffset:var(--lko)}}
+.lk-ring-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.lk-ring-c b{font-family:var(--mono);font-size:24px;font-weight:800;letter-spacing:-.5px}.lk-ring-c span{font-size:11.5px;color:var(--tx3);margin-top:1px}
+.lk-mile-t{min-width:0}.lk-mile-v{font-family:var(--mono);font-size:24px;font-weight:800;letter-spacing:-.5px;color:var(--gold)}
+.lk-mile-t p{font-size:13.5px;color:var(--tx3);margin-top:6px}.lk-mile-t p b{color:var(--tx)}
+.lk-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.lk-chips span{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:99px;border:1px solid var(--ln);color:var(--tx4)}
+.lk-chips span.on{color:var(--gold);border-color:rgba(232,182,74,.4);background:var(--gold-soft)}
+/* share kit */
+.lk-kit-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.lk-kit-c{display:flex;flex-direction:column;gap:10px;text-align:left;padding:14px;border-radius:14px;background:var(--sf2);border:1px solid var(--ln);transition:border-color .15s,transform .15s var(--ease),background .15s;min-width:0}
+.lk-kit-c:hover{border-color:rgba(255,110,32,.45);transform:translateY(-2px);background:var(--sf3)}
+.lk-kit-k{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--o2)}
+.lk-kit-t{font-size:13px;line-height:1.5;color:var(--tx2);overflow-wrap:anywhere}
+.lk-kit-a{display:inline-flex;align-items:center;gap:6px;margin-top:auto;font-size:12px;font-weight:700;color:var(--tx3)}.lk-kit-a em{font-style:normal}
+.lk-kit-c.ok{border-color:rgba(61,220,132,.45)}.lk-kit-c.ok .lk-kit-a{color:var(--gr)}
+/* orders */
+.lk-list{padding:0!important;overflow:hidden;margin-top:12px}
+.lk-rows{border-top:1px solid var(--ln)}
+.lk-row{display:grid;grid-template-columns:38px minmax(0,1.5fr) minmax(88px,.7fr) minmax(96px,.7fr) 118px 16px;align-items:center;gap:14px;width:100%;padding:13px 18px;text-align:left;border-bottom:1px solid var(--ln);color:var(--tx4);transition:background .12s}
+.lk-row:last-child{border-bottom:0}
+button.lk-row:hover{background:rgba(255,255,255,.035);color:var(--o2)}
+.lk-row-i{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;--c:#FFA25C;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);border:1px solid color-mix(in srgb,var(--c) 30%,transparent)}
+.lk-row-i.code{--c:#E8B64A}.lk-row-i.pay{--c:#3DDC84}
+.lk-row-m{display:flex;flex-direction:column;min-width:0}.lk-row-m b{color:var(--tx);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lk-row-m span{font-size:12.5px;color:var(--tx3);margin-top:1px}
+.lk-row-o,.lk-row-e{display:flex;flex-direction:column;align-items:flex-end;font-family:var(--mono);font-size:14px;font-weight:700;color:var(--tx)}
+.lk-row-o em,.lk-row-e em{font-family:var(--f);font-style:normal;font-weight:600;font-size:11px;color:var(--tx4);margin-top:1px}
+.lk-row-e{color:var(--gr)}.lk-row-s{display:flex;justify-content:flex-end}
+.lk-row.void .lk-row-o,.lk-row.void .lk-row-e{color:var(--tx4);text-decoration:line-through}.lk-row.void em{text-decoration:none}
+.lk-more{display:block;width:100%;padding:14px;border-top:1px solid var(--ln);font-weight:700;font-size:13.5px;color:var(--o2);transition:background .12s}.lk-more:hover{background:rgba(255,110,32,.07)}
+.lk-none{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:38px 20px;color:var(--tx3);border-top:1px solid var(--ln)}.lk-none svg{color:var(--o)}.lk-none b{color:var(--tx);font-size:15px}
+.lk-foot{display:flex;gap:10px;align-items:flex-start;margin-top:12px;padding:13px 16px;border-radius:14px;border:1px solid var(--ln);background:var(--sf);font-size:13px;line-height:1.5;color:var(--tx3)}.lk-foot svg{flex:none;margin-top:2px;color:var(--tx4)}
+.lk-adm{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--tx3);border:1px solid var(--ln2);border-radius:999px;padding:3px 9px;margin-left:8px;font-family:var(--f)}
+/* order sheet */
+.lk-modal{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(4,5,7,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .2s}
+.lk-modal.open{opacity:1;pointer-events:auto}
+.lk-sheet{position:relative;width:100%;max-width:440px;max-height:90vh;overflow:auto;padding:26px;border-radius:22px;border:1px solid var(--ln2);background:radial-gradient(120% 70% at 0% 0%,rgba(61,220,132,.10),transparent 60%),#14181D;box-shadow:0 40px 90px rgba(0,0,0,.7);transform:translateY(14px) scale(.98);transition:transform .25s var(--ease)}
+.lk-modal.open .lk-sheet{transform:none}
+.lk-x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:var(--tx3);background:var(--sf2);border:1px solid var(--ln)}.lk-x:hover{color:var(--tx)}
+.lk-sheet-v{font-family:var(--mono);font-size:40px;font-weight:800;letter-spacing:-1px;color:var(--gr);margin-top:8px}
+.lk-sheet-s{display:flex;align-items:center;gap:10px;margin-top:8px;font-size:13px;color:var(--tx3)}
+.lk-kv{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.lk-kv div{padding:12px 14px;border-radius:12px;background:var(--sf2);border:1px solid var(--ln);min-width:0}
+.lk-kv span{display:block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--tx4)}.lk-kv b{display:block;margin-top:4px;font-size:14px;overflow-wrap:anywhere}
+.lk-tl{margin-top:20px;display:grid;gap:0}
+.lk-tl div{position:relative;padding:0 0 16px 32px}.lk-tl div:last-child{padding-bottom:0}
+.lk-tl div::before{content:"";position:absolute;left:9px;top:20px;bottom:0;width:2px;background:var(--ln2)}.lk-tl div:last-child::before{display:none}
+.lk-tl div.done::before{background:var(--gr)}
+.lk-tl i{position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--ln2);background:var(--sf);color:#06210F}
+.lk-tl .done i{background:var(--gr);border-color:var(--gr)}.lk-tl .now i{border-color:var(--warn);box-shadow:0 0 0 4px var(--warn-soft)}
+.lk-tl b{display:block;font-size:14px;color:var(--tx3)}.lk-tl .done b,.lk-tl .now b{color:var(--tx)}.lk-tl span{display:block;font-size:12.5px;color:var(--tx4);margin-top:1px}
+.anim.still .lkc-col b,.anim.still .lk-pbar i,.anim.still .lk-sbar i,.anim.still .lk-ring-p{animation:none}
+@media (max-width:1040px){.lk-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.lk-two,.lk-two.b{grid-template-columns:1fr}}
+@media (max-width:760px){
+  .lk-pass{grid-template-columns:1fr;grid-template-rows:auto 1px auto}.lk-pass-l,.lk-pass-r{padding:20px}
+  .lk-perf{background:repeating-linear-gradient(90deg,rgba(255,255,255,.22) 0 6px,transparent 6px 13px)}
+  .lk-perf::before,.lk-perf::after{top:50%;left:auto;transform:translateY(-50%)}.lk-perf::before{left:-14px}.lk-perf::after{right:-14px;bottom:auto}
+  .lk-pass-a .btn{flex:1}
+  .lk-sec{align-items:flex-start}.lk-seg{width:100%;display:flex}.lk-seg button{flex:1;padding:8px 4px}
+  .lk-steps{grid-template-columns:1fr}.lk-step-arr{transform:rotate(90deg);height:14px}
+  .lk-kit-g{grid-template-columns:1fr}
+  .lkc{grid-template-rows:190px auto}
+  .lk-row{grid-template-columns:36px minmax(0,1fr) auto;gap:12px;padding:12px 14px}.lk-row-o,.lk-row>svg{display:none}.lk-row-s{grid-column:2/4;justify-content:flex-start;margin-top:-4px}
+  .lk-mile-b{gap:14px}.lk-ring{width:104px;height:104px}.lk-ring-c b{font-size:20px}
+  .lk-pv{flex-direction:column;align-items:flex-start;gap:8px}
+}
+@media (max-width:420px){.lk-kpi{padding:14px 14px 40px}.lk-kpi-h>span:first-child{letter-spacing:.8px}.lk-code{letter-spacing:2px}}
 </style>
 </head>
 <body>
@@ -1507,7 +1645,7 @@ body{background-color:var(--bg);
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261111-120000";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261111-151500";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1560,6 +1698,10 @@ const ICO={
  lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
  info:'<circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/>',
  link:'<path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/>',
+ copy:'<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/>',
+ tag:'<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="7.5" r="1.5"/>',
+ pointer:'<path d="M5 3l14 8-6 2-2 6z"/>',
+ wallet:'<rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18M16 15h2"/>',
 };
 const ico=(n,s=18)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICO[n]||ICO.info}</svg>`;
 
@@ -1681,11 +1823,8 @@ const FX={
       case 'my_team_goal': return d(FX.teamGoalOf(m));
       case 'my_challenge': return d(typeof fxChallenge==='function'?fxChallenge(m):{});
       case 'my_armory': return d(FX.armoryOf(m));
-      case 'my_links': return d({linked:true,program:{rate:15,discount:'10% off',shop:'tryravine.com',payout_note:'Commission is approved after the return window closes, then paid out by Ravine.'},synced_at:new Date(Date.now()-2*3600e3).toISOString(),
-        affiliate:{name:'Fixture',code:'FIXTURE-10',link:'https://tryravine.com/?ref=fixture',rate:15,status:'active'},month:{label:'November',orders:3,sales:198.4,commission:29.76},
-        totals:{orders:5,sales:297.6,commission:44.64,pending:29.76,approved:7.44,paid:7.44},daily:[...Array(30)].map((_,i)=>({d:new Date(Date.now()-(29-i)*864e5).toISOString().slice(0,10),n:i%9===0?1:0,c:i%9===0?7.44:0})),
-        orders:[{ref:'#1001',at:new Date().toISOString(),subtotal:49.6,commission:7.44,status:'pending'}],payouts:[]});
-      case 'admin_links': return d({rows:[]});
+      case 'my_links': return {linked:false,program:{rate:15,discount:'10% off',shop:'tryravine.com'}};
+      case 'admin_links': return {rows:[]};
       case 'my_coach_link': { const n=FX.numbersOf(m); const have=Number(n.month_sales)||0; const open=FX.who==='admin'||have>=5000; return {open,have,need:5000,url:open?'https://calendly.com/example/fixture-1-1':null}; }
       case 'set_camo': { const A=FX.armoryOf(m); const c=A.camos.find(x=>x.key===a.p_key); if(!c) return {ok:false,why:'unknown camo'}; if(!c.unlocked) return {ok:false,why:'locked: '+c.how}; FX.camo=a.p_key; return {ok:true,equipped:a.p_key}; }
       case 'admin_team_goal': return d(FX.teamGoalAdmin());
@@ -1840,9 +1979,8 @@ const REDIRECT={adlib:'analytics',winners:'library',angles:'library',board:'lead
 const NAV=[
  ['Home',[['home','Home','home']]],
  ['Create',[['library','Angle Library','grid'],['spy','Spyboard','eye'],['broll','B-roll','film']]],
- ['Progress',[['quests','Quests','target'],['rewards','Rewards','gift'],['armory','Armory','shield'],['submissions','My submissions','check'],['analytics','Analytics','chart']]],
+ ['Progress',[['quests','Quests','target'],['rewards','Rewards','gift'],['armory','Armory','shield'],['submissions','My submissions','check'],['analytics','Analytics','chart'],['links','My links','link']]],
  ['Compete',[['leaderboard','Leaderboard','star'],['compete',NOV?'November challenge':'October competition','trophy'],['pace','My pace','gauge']]],
- ['Earn',[['links','My links','link']]],
  ['Profile',[['profile','My profile','user']]],
  ['Admin',[['admin','Review queue','check'],['admin_pace','Elite cut line','gauge'],['admin_contest','Contest & imports','gear'],['admin_rewards',NOV?'Rewards & payouts':'Rewards & claims','gift']]],
 ];
@@ -2784,7 +2922,7 @@ function openClaim(id){ if(S.view!=='rewards') go('rewards'); openReward(id); }
 let BANNER_SEQ=0;
 async function topBanner(){ const seq=++BANNER_SEQ; const view=S.view; if(!S.me||view.startsWith('admin')) return; let r; try{ r=await API.page('my_rewards'); }catch(e){ return; }
   if(seq!==BANNER_SEQ||S.view!==view) return; const html=claimBannerHtml(r); const a=$('#main .anim'); if(!a) return; $('#main .claimwrap')?.remove(); if(html) a.insertAdjacentHTML('afterbegin',`<div class="claimwrap">${html}</div>`); }
-function afterRender(){ tickReset(); topBanner(); hydrateShots($('#main')); tgAnimate(); }
+function afterRender(){ tickReset(); topBanner(); hydrateShots($('#main')); tgAnimate(); if(S.view==='links') lkAfter(); }
 
 /* ---- refresh when the app comes back to the screen (phones keep it open for days) */
 let HIDDEN_AT=0;
@@ -3614,83 +3752,219 @@ function closeLibVideo(fromHistory){ const lv=$('#lviewer'); if(!lv||lv.hidden) 
   if(!fromHistory&&history.state&&history.state.lviewer){ LIB_SKIP_POP=true; history.back(); }
   const f=LV_FOCUS; LV_FOCUS=null; if(f&&f.isConnected&&f.focus) f.focus(); }
 
-/* ---- My links (Nov 11, Austin): the Ravine affiliate dashboard inside Creator Games.
-   Same login as the rest of the app, no second password. Numbers come only from app.my_links(), which returns
-   the signed-in creator's own row. Admins also see every affiliate from app.admin_links(). */
-const LK_ST={pending:['r','Pending'],approved:['g','Ready to pay'],paid:['d','Paid'],void:['x','Refunded']};
-const lkUsd=v=>'$'+Number(v||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
-const lkUsd0=v=>'$'+Math.round(Number(v||0)).toLocaleString('en-US');
-function lkChart(days){
-  const D=(days||[]).slice(-30); if(!D.length) return '';
-  const W=600,H=120,pad=4,bw=(W-pad*2)/D.length, mx=Math.max(1,...D.map(d=>+d.c||0));
-  const bars=D.map((d,i)=>{ const v=+d.c||0, h=v>0?Math.max(4,(v/mx)*(H-18)):2, x=pad+i*bw+1.5, y=H-h;
-    const lab=`${fmt.date(d.d)}: ${lkUsd(v)} from ${d.n||0} order${(d.n||0)===1?'':'s'}`;
-    return `<rect class="${v>0?'on':''}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${Math.max(2,bw-3).toFixed(1)}" height="${h.toFixed(1)}" rx="3"><title>${esc(lab)}</title></rect>`; }).join('');
-  return `<svg class="lk-chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Commission per day, last 30 days">
-    <defs><linearGradient id="lkg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--o2)"/><stop offset="1" stop-color="var(--o)"/></linearGradient></defs>${bars}</svg>
-    <div class="lk-axis"><span>${esc(fmt.date(D[0].d)||'')}</span><span>Last 30 days</span><span>Today</span></div>`;
+/* ---- My links v2 (Nov 11, Austin): the Ravine affiliate dashboard inside Creator Games.
+   Same login as the rest of the app. Real numbers come only from app.my_links(), which returns the signed-in
+   creator's own row. Until a creator's link is live the page shows a clearly labelled SAMPLE preview.
+   Admins also see every affiliate from app.admin_links(). Presentation only: nothing here moves money. */
+const LKS={r:'month',tab:'orders',all:false,sales:true,clicks:true};
+const LKT={pending:['r','Pending','In the return window'],approved:['g','Approved','Cleared for the next payout'],paid:['d','Paid','Sent to you'],void:['x','Refunded','This order was refunded']};
+const LK_MILES=[50,100,250,500,1000,2500,5000,10000,25000];
+const LK_SRC={instagram:['Instagram','#F0569A'],tiktok:['TikTok','#38E8E0'],youtube:['YouTube','#FF5C4D'],facebook:['Facebook','#5B9DFF'],direct:['Text / direct','#E8B64A'],other:['Other','#848C99']};
+const lkM=v=>'$'+Number(v||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const lkM0=v=>'$'+Math.round(Number(v||0)).toLocaleString('en-US');
+const lkToday=()=>new Date().toLocaleDateString('en-CA',{timeZone:TZ});
+const lkCT=s=>new Date(s).toLocaleDateString('en-CA',{timeZone:TZ});
+function lkDay(off){ const t=lkToday().split('-').map(Number); return new Date(Date.UTC(t[0],t[1]-1,t[2]-off)).toISOString().slice(0,10); }
+function lkNice(m){ if(!(m>0)) return 4; const p=Math.pow(10,Math.floor(Math.log10(m))); const f=m/p; return (f<=1?1:f<=2?2:f<=4?4:f<=5?5:f<=8?8:10)*p; }
+function lkSrcName(k){ return (LK_SRC[String(k||'').toLowerCase()]||[k?String(k):'Other'])[0]; }
+function lkSrcColor(k){ return (LK_SRC[String(k||'').toLowerCase()]||LK_SRC.other)[1]; }
+
+/* sample numbers for the preview: fixed seed, so it looks the same every visit; never a real creator */
+function lkSample(sd){
+  let seed=sd||264; const rnd=()=>{ seed=(seed*1103515245+12345)%2147483648; return seed/2147483648; };
+  const SRC=['instagram','tiktok','youtube','facebook','direct'], W=[.46,.27,.12,.08,.07];
+  const prices=[179.99,239.98,359.97,199.99,479.96,239.98,179.99,359.97];
+  const daily=[], orders=[], src={}; SRC.forEach(s=>src[s]={source:s,clicks:0,orders:0,sales:0});
+  for(let i=59;i>=0;i--){ const d=lkDay(i), wk=new Date(d+'T12:00:00Z').getUTCDay(), base=1.2-i/59*.8;
+    const k=Math.round((36+rnd()*44+(wk===0||wk===6?24:0))*base); let n=0,s=0;
+    const hits=rnd()<(.36*base+.06)?(rnd()<.22?2:1):0;
+    for(let j=0;j<hits;j++){ const p=prices[Math.floor(rnd()*prices.length)], code=rnd()<.2; let sc='direct';
+      if(!code){ const x=rnd(); let a=0; for(let q=0;q<SRC.length;q++){ a+=W[q]; if(x<=a){ sc=SRC[q]; break; } } }
+      let at=new Date(d+'T'+String(9+Math.floor(rnd()*10)).padStart(2,'0')+':'+String(Math.floor(rnd()*60)).padStart(2,'0')+':00-06:00'); if(at.getTime()>Date.now()) at=new Date(Date.now()-48*6e4);
+      orders.push({ref:'#'+(48210+orders.length*7),at:at.toISOString(),subtotal:p,commission:+(p*.15).toFixed(2),status:i>34?'paid':i>16?'approved':'pending',via:code?'code':'link',source:code?null:sc});
+      n++; s+=p; if(!code&&i<30){ src[sc].orders++; src[sc].sales+=p; } }
+    if(i<30) SRC.forEach((x,q)=>{ src[x].clicks+=Math.round(k*W[q]); });
+    daily.push({d,k,n,s:+s.toFixed(2),c:+(s*.15).toFixed(2)}); }
+  const by=st=>orders.filter(o=>o.status===st), sum=(A,k)=>+A.reduce((t,o)=>t+o[k],0).toFixed(2);
+  const paid=by('paid'), half=Math.ceil(paid.length/2);
+  const payouts=[paid.slice(half),paid.slice(0,half)].filter(a=>a.length).map((a,i)=>({at:new Date(new Date(a[a.length-1].at).getTime()+32*864e5).toISOString(),amount:sum(a,'commission'),method:'PayPal',status:'paid'})).filter(p=>new Date(p.at).getTime()<Date.now());
+  return {linked:true,preview:true,program:{rate:15,discount:'10% off',shop:'tryravine.com',payout_note:'Commission is approved after the return window closes, then paid out by Ravine.'},synced_at:new Date(Date.now()-18*6e4).toISOString(),
+    affiliate:{code:'SAMPLE-10',link:'https://go.tryravine.com/sample',rate:15,status:'active'},daily,orders:orders.reverse(),payouts,sources:Object.values(src),
+    totals:{orders:orders.length,sales:sum(orders,'subtotal'),commission:sum(orders,'commission'),pending:sum(by('pending'),'commission'),approved:sum(by('approved'),'commission'),paid:+payouts.reduce((t,p)=>t+p.amount,0).toFixed(2),clicks:daily.reduce((t,x)=>t+x.k,0)}};
 }
-function lkShare(link,code,disc){
-  const t=`Use my code ${code}${disc?` for ${disc}`:''} at Ravine: ${link}`;
-  if(navigator.share){ navigator.share({text:t}).catch(()=>{}); } else copyText(t);
+/* older server payloads have no per-day sales: fill them from the order list so the chart still works */
+function lkNorm(L){
+  L.daily=(L.daily||[]).map(x=>({...x})); L.orders=L.orders||[]; L.payouts=L.payouts||[]; L.totals=L.totals||{}; L.program=L.program||{}; L.affiliate=L.affiliate||{};
+  if(L.daily.some(x=>x.s==null)){ const m={}; L.orders.forEach(o=>{ if(o.status!=='void'){ const d=lkCT(o.at); m[d]=(m[d]||0)+(+o.subtotal||0); } }); L.daily.forEach(x=>{ if(x.s==null) x.s=m[x.d]||0; }); }
+  L.hasClicks=L.daily.some(x=>x.k!=null); return L;
 }
+function lkStats(L,r){
+  const D=L.daily, today=lkToday(); let cur, prev=null, label, vs='';
+  if(r==='7'){ cur=D.slice(-7); prev=D.length>=14?D.slice(-14,-7):null; label='Last 7 days'; vs='the 7 days before'; }
+  else if(r==='30'){ cur=D.slice(-30); prev=D.length>=60?D.slice(-60,-30):null; label='Last 30 days'; vs='the 30 days before'; }
+  else if(r==='all'){ cur=D; label='All time'; }
+  else { const ym=today.slice(0,7); cur=D.filter(x=>String(x.d).slice(0,7)===ym); const n=cur.length, i0=D.length-n; prev=n&&i0-n>=0?D.slice(i0-n,i0):null;
+    label=new Date(today+'T12:00:00').toLocaleDateString('en-US',{month:'long'}); vs='the '+n+' days before'; }
+  const sum=(A,k)=>A.reduce((s,x)=>s+(+x[k]||0),0), pack=A=>A?{sales:sum(A,'s'),comm:sum(A,'c'),orders:sum(A,'n'),clicks:sum(A,'k')}:null;
+  const c=pack(cur), p=pack(prev);
+  if(!L.preview){   // the server's own totals win over anything added up on the page
+    if(r==='month'&&L.month){ c.sales=+L.month.sales||0; c.comm=+L.month.commission||0; c.orders=+L.month.orders||0; }
+    if(r==='all'){ c.sales=+L.totals.sales||0; c.comm=+L.totals.commission||0; c.orders=+L.totals.orders||0; if(L.totals.clicks!=null) c.clicks=+L.totals.clicks; } }
+  else if(r==='all'){ c.sales=L.totals.sales; c.comm=L.totals.commission; c.orders=L.totals.orders; }
+  return {cur,c,p,label,vs};
+}
+function lkDelta(a,b,vs){ if(b==null||!(b>0)) return ''; const pct=(a-b)/b*100; if(!isFinite(pct)) return ''; const up=pct>=0;
+  return `<span class="lk-dl ${up?'up':'dn'}" title="Compared with ${esc(vs)}">${up?'&#9650;':'&#9660;'} ${Math.abs(pct)>=100?Math.round(Math.abs(pct)):Math.abs(pct).toFixed(Math.abs(pct)<10?1:0)}%</span>`; }
+function lkSpark(vals,color){ const n=vals.length; if(n<2) return ''; const mx=Math.max(1e-9,...vals);
+  const pts=vals.map((v,i)=>[(i/(n-1)*100).toFixed(2),(30-(v/mx)*26-2).toFixed(2)]);
+  const line=pts.map((p,i)=>(i?'L':'M')+p[0]+' '+p[1]).join(' ');
+  return `<svg class="lk-spark" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path d="${line} L100 30 L0 30 Z" fill="${color}" fill-opacity=".12"/><path d="${line}" fill="none" stroke="${color}" stroke-width="1.6" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/></svg>`; }
+function lkKpi(icon,label,val,cu,cf,sub,delta,spark,cls){ return `<div class="lk-kpi ${cls||''}"><div class="lk-kpi-h"><span>${ico(icon,14)} ${esc(label)}</span>${delta||''}</div><div class="lk-kpi-v tnum" data-cu="${cu}" data-cf="${cf}">${val}</div><div class="lk-kpi-s">${sub||'&nbsp;'}</div>${spark||''}</div>`; }
+
+/* daily chart: bars = link sales (left axis), line = clicks (right axis). HTML bars + one SVG line, so it stays crisp at any width */
+function lkChart(days,hasClicks){
+  const n=days.length; if(!n) return `<div class="lk-none">${ico('chart',22)}<b>No days to show yet</b></div>`;
+  const showS=LKS.sales, showK=hasClicks&&LKS.clicks;
+  const mxS=lkNice(Math.max(1,...days.map(d=>+d.s||0))), mxK=lkNice(Math.max(1,...days.map(d=>+d.k||0)));
+  const cols=days.map((d,i)=>{ const h=showS&&d.s>0?Math.max(2.5,d.s/mxS*100):0;
+    return `<div class="lkc-col" onmouseenter="lkTip(this)" onclick="lkTip(this)" data-d="${esc(fmt.date(d.d,{weekday:'short'})||'')}" data-s="${lkM(d.s)}" data-n="${d.n||0}" data-c="${lkM(d.c)}"${hasClicks?` data-k="${d.k||0}"`:''}><b style="height:${h.toFixed(1)}%;animation-delay:${Math.min(i*14,500)}ms"></b></div>`; }).join('');
+  let line=''; if(showK&&n>1){ const P=days.map((d,i)=>[(i+.5)/n*100,100-((+d.k||0)/mxK*100)]);
+    let dd='M'+P[0][0].toFixed(2)+' '+P[0][1].toFixed(2); for(let i=0;i<P.length-1;i++){ const p0=P[i-1]||P[i],p1=P[i],p2=P[i+1],p3=P[i+2]||p2; const t=.18;
+      dd+=` C${(p1[0]+(p2[0]-p0[0])*t).toFixed(2)} ${Math.min(100,Math.max(0,p1[1]+(p2[1]-p0[1])*t)).toFixed(2)} ${(p2[0]-(p3[0]-p1[0])*t).toFixed(2)} ${Math.min(100,Math.max(0,p2[1]-(p3[1]-p1[1])*t)).toFixed(2)} ${p2[0].toFixed(2)} ${p2[1].toFixed(2)}`; }
+    line=`<svg class="lkc-line" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="lkkg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5B9DFF" stop-opacity=".13"/><stop offset="1" stop-color="#5B9DFF" stop-opacity="0"/></linearGradient></defs><path d="${dd} L${P[P.length-1][0].toFixed(2)} 100 L${P[0][0].toFixed(2)} 100 Z" fill="url(#lkkg)"/><path d="${dd}" fill="none" stroke="#6FA8FF" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/></svg>`; }
+  const step=Math.max(1,Math.ceil(n/7));
+  const xl=days.map((d,i)=>`<span>${(n-1-i)%step===0?esc(fmt.date(d.d)||''):''}</span>`).join('');
+  const yl=[1,.75,.5,.25,0].map(f=>`<span>${lkM0(mxS*f)}</span>`).join(''), yr=[1,.75,.5,.25,0].map(f=>`<span>${fmt.int(Math.round(mxK*f))}</span>`).join('');
+  return `<div class="lkc ${showK?'':'nok'}" role="img" aria-label="Link sales${hasClicks?' and clicks':''} per day">
+    <div class="lkc-y">${showS?yl:''}</div>
+    <div class="lkc-plot" onmouseleave="lkTip(null)"><div class="lkc-grid"><i></i><i></i><i></i><i></i><i></i></div><div class="lkc-cols">${cols}</div>${line}<div class="lkc-tip" id="lktip"></div></div>
+    <div class="lkc-y r">${showK?yr:''}</div><div></div><div class="lkc-x">${xl}</div><div></div></div>`;
+}
+function lkTip(el){ const t=$('#lktip'); if(!t) return; document.querySelectorAll('.lkc-col.on').forEach(x=>x.classList.remove('on')); if(!el){ t.classList.remove('on'); return; }
+  const d=el.dataset; el.classList.add('on');
+  t.innerHTML=`<b>${d.d}</b><div><i class="s"></i>Sales<span>${d.s}</span></div><div><i class="e"></i>You earned<span>${d.c}</span></div><div><i class="o"></i>Orders<span>${d.n}</span></div>${d.k!=null?`<div><i class="k"></i>Clicks<span>${d.k}</span></div>`:''}`;
+  const plot=el.closest('.lkc-plot'), x=el.offsetLeft+el.offsetWidth/2, w=t.offsetWidth||150; t.style.left=Math.max(4,Math.min(plot.clientWidth-w-4,x-w/2))+'px'; t.classList.add('on'); }
+function lkSources(L){
+  const R=(L.sources||[]).filter(s=>(+s.clicks||0)>0||(+s.orders||0)>0).sort((a,b)=>(+b.clicks||0)-(+a.clicks||0)); if(!R.length) return '';
+  const mx=Math.max(1,...R.map(s=>+s.clicks||0)), tot=R.reduce((t,s)=>t+(+s.clicks||0),0)||1;
+  return `<section class="card lk-src"><div class="lk-card-h"><h3>Where clicks come from</h3><span class="mini">Last 30 days</span></div>
+    ${R.map((s,i)=>{ const c=lkSrcColor(s.source), k=+s.clicks||0, o=+s.orders||0;
+      return `<div class="lk-srow"><div class="lk-srow-t"><span><i style="background:${c}"></i>${esc(lkSrcName(s.source))}</span><b class="tnum">${fmt.int(k)}<em>${Math.round(k/tot*100)}%</em></b></div>
+        <div class="lk-sbar"><i style="width:${(k/mx*100).toFixed(1)}%;background:linear-gradient(90deg,${c}99,${c});animation-delay:${i*70}ms"></i></div>
+        <div class="lk-srow-s">${o?`${o} order${o===1?'':'s'} · ${lkM0(s.sales)}${k?` · ${(o/k*100).toFixed(1)}% buy`:''}`:'No orders yet'}</div></div>`; }).join('')}</section>`;
+}
+function lkPipeline(L){
+  const T=L.totals, a=+T.pending||0, b=+T.approved||0, c=+T.paid||0, tot=a+b+c;
+  const seg=(v,cls)=>tot>0&&v>0?`<i class="${cls}" style="flex:${(v/tot*100).toFixed(2)}"></i>`:'';
+  const step=(cls,icon,name,v,desc)=>`<div class="lk-step ${cls}"><div class="lk-step-i">${ico(icon,16)}</div><div><div class="lk-step-n">${name}</div><div class="lk-step-v tnum">${lkM(v)}</div><div class="lk-step-d">${desc}</div></div></div>`;
+  return `<section class="card lk-pipe"><div class="lk-card-h"><h3>Your payouts</h3><span class="mini">All time · ${lkM(tot)} earned</span></div>
+    <div class="lk-pbar">${seg(a,'a')}${seg(b,'b')}${seg(c,'c')||''}${tot>0?'':'<i class="z" style="flex:1"></i>'}</div>
+    <div class="lk-steps">${step('a','timer','Pending',a,'In the return window')}<div class="lk-step-arr">${ico('arrow',16)}</div>${step('b','check','Approved',b,'Cleared for the next payout')}<div class="lk-step-arr">${ico('arrow',16)}</div>${step('c','wallet','Paid',c,'Sent to you')}</div>
+    ${L.program.payout_note?`<p class="lk-pipe-n">${ico('info',14)} ${esc(L.program.payout_note)}</p>`:''}</section>`;
+}
+function lkMilestone(L){
+  const v=+L.totals.commission||0; let i=LK_MILES.findIndex(m=>v<m); if(i<0) i=LK_MILES.length-1;
+  const next=LK_MILES[i], done=v>=next, p=done?1:Math.max(0,Math.min(1,v/next)), R=52, C=2*Math.PI*R;
+  const chips=LK_MILES.slice(Math.max(0,i-2),i+2).map(m=>`<span class="${v>=m?'on':''}">${v>=m?ico('check',11):''}${lkM0(m)}</span>`).join('');
+  return `<section class="card lk-mile"><div class="lk-card-h"><h3>Next milestone</h3><span class="mini">All-time earned</span></div>
+    <div class="lk-mile-b"><div class="lk-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="lkrg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFA25C"/><stop offset="1" stop-color="#E8B64A"/></linearGradient></defs><circle cx="60" cy="60" r="${R}" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="9"/><circle class="lk-ring-p" cx="60" cy="60" r="${R}" fill="none" stroke="url(#lkrg)" stroke-width="9" stroke-linecap="round" stroke-dasharray="${C.toFixed(1)}" style="--lkc:${C.toFixed(1)};--lko:${(C*(1-p)).toFixed(1)}" transform="rotate(-90 60 60)"/></svg><div class="lk-ring-c"><b class="tnum">${Math.round(p*100)}%</b><span>to ${lkM0(next)}</span></div></div>
+      <div class="lk-mile-t"><div class="lk-mile-v tnum">${lkM(v)}</div><p>${done?'Top milestone reached. Keep it going.':`<b>${lkM(next-v)}</b> to go until ${lkM0(next)} earned from your link and code.`}</p><div class="lk-chips">${chips}</div></div></div></section>`;
+}
+function lkKit(L){
+  const A=L.affiliate, P0=L.program.discount, disc=P0||'a discount', link=String(A.link||'').replace(/^https?:\/\//,''), code=A.code||'';
+  const K=[['Bio','user',`${P0?disc+' Ravine with code '+code:'Ravine discount code '+code}: ${link}`],['Story','film',`These are the Ravine earbuds I keep posting about. Code ${code} takes ${disc}: ${link}`],['Text a friend','link',`Here is the link for the Ravine earbuds I was telling you about. Use code ${code} for ${disc}: ${link}`]];
+  window.LKK=K.map(k=>k[2]);
+  return `<section class="card lk-kit"><div class="lk-card-h"><h3>Ready to post</h3><span class="mini">Tap to copy, then paste</span></div>
+    <div class="lk-kit-g">${K.map((k,i)=>`<button class="lk-kit-c" onclick="lkCopy(this,'kit',${i})"><span class="lk-kit-k">${ico(k[1],14)} ${k[0]}</span><span class="lk-kit-t">${esc(k[2])}</span><span class="lk-kit-a">${ico('copy',13)}<em>Copy</em></span></button>`).join('')}</div></section>`;
+}
+function lkHow(o){ return o.via==='code'?'Code':o.via==='link'?('Link'+(o.source?' · '+lkSrcName(o.source):'')):(o.source?lkSrcName(o.source):'Link or code'); }
 function lkOrders(L){
-  const O=L.orders||[]; if(!O.length) return `<div class="lk-none">${ico('cart',22)}<b>No orders yet</b><span>The first order with your code or link shows up here after the next sync.</span></div>`;
-  return `<div class="tblwrap"><table class="tbl lk-tbl"><thead><tr><th>Order</th><th>Date</th><th class="num">Order total</th><th class="num">Your commission</th><th>Status</th></tr></thead><tbody>${O.map(o=>{ const s=LK_ST[o.status]||['n',o.status||'']; return `<tr class="${o.status==='void'?'void':''}"><td><b>${esc(String(o.ref||'').startsWith('#')?o.ref:'#'+(o.ref||''))}</b></td><td>${esc(fmt.date(o.at,{year:'numeric'})||'')}</td><td class="num">${lkUsd(o.subtotal)}</td><td class="num"><b class="lk-c">${lkUsd(o.commission)}</b></td><td>${badge(s[0],s[1])}</td></tr>`; }).join('')}</tbody></table></div>`;
+  const O=L.orders; if(!O.length) return `<div class="lk-none">${ico('cart',24)}<b>No orders yet</b><span>The first order with your link or code shows up here after the next sync.</span></div>`;
+  const show=LKS.all?O:O.slice(0,8);
+  return `<div class="lk-rows">${show.map((o,i)=>{ const s=LKT[o.status]||['n',o.status||'','']; const isCode=o.via==='code';
+    return `<button class="lk-row ${o.status==='void'?'void':''}" onclick="lkOpen(${i})"><span class="lk-row-i ${isCode?'code':''}" ${!isCode&&o.source?`style="--c:${lkSrcColor(o.source)}"`:''}>${ico(isCode?'tag':'link',15)}</span>
+      <span class="lk-row-m"><b>${esc(lkHow(o))}</b><span>${esc(fmt.dt(o.at)||'')}</span></span>
+      <span class="lk-row-o tnum">${lkM(o.subtotal)}<em>order</em></span>
+      <span class="lk-row-e tnum">${o.status==='void'?'$0.00':'+'+lkM(o.commission)}<em>you earn</em></span>
+      <span class="lk-row-s">${badge(s[0],s[1])}</span>${ico('arrow',15)}</button>`; }).join('')}</div>
+    ${O.length>8?`<button class="lk-more" onclick="lkSet('all',${!LKS.all})">${LKS.all?'Show fewer':`Show all ${O.length} orders`}</button>`:''}`;
 }
 function lkPayouts(L){
-  const P=L.payouts||[]; if(!P.length) return `<div class="lk-none">${ico('gift',22)}<b>No payouts yet</b><span>${esc(L.program?.payout_note||'Payouts show here once Ravine sends them.')}</span></div>`;
-  return `<div class="tblwrap"><table class="tbl lk-tbl"><thead><tr><th>Paid on</th><th>Method</th><th class="num">Amount</th><th>Status</th></tr></thead><tbody>${P.map(p=>`<tr><td><b>${esc(fmt.date(p.at,{year:'numeric'})||'')}</b></td><td>${esc(p.method||'Payout')}</td><td class="num"><b class="lk-c">${lkUsd(p.amount)}</b></td><td>${badge(p.status==='paid'?'d':'r',p.status==='paid'?'Paid':'Processing')}</td></tr>`).join('')}</tbody></table></div>`;
+  const P=L.payouts; if(!P.length) return `<div class="lk-none">${ico('wallet',24)}<b>No payouts yet</b><span>${esc(L.program.payout_note||'Payouts show here once Ravine sends them.')}</span></div>`;
+  return `<div class="lk-rows">${P.map(p=>`<div class="lk-row static"><span class="lk-row-i pay">${ico('wallet',15)}</span><span class="lk-row-m"><b>${esc(p.method||'Payout')}</b><span>${esc(fmt.date(p.at,{year:'numeric'})||'')}</span></span><span class="lk-row-o"></span><span class="lk-row-e tnum">${lkM(p.amount)}<em>paid to you</em></span><span class="lk-row-s">${badge(p.status==='paid'?'d':'r',p.status==='paid'?'Paid':'Processing')}</span></div>`).join('')}</div>`;
 }
+function lkOpen(i){
+  const L=window.LKD, o=L&&L.orders[i]; if(!o) return; const s=LKT[o.status]||['n',o.status||'',''], at={pending:1,approved:2,paid:3}[o.status]||0, rate=+L.affiliate.rate||+L.program.rate||15;
+  const tl=o.status==='void'?`<div class="note warn" style="margin-top:14px">This order was refunded, so no commission is paid on it.</div>`
+    :`<div class="lk-tl">${[['Ordered',fmt.dt(o.at)||''],['Return window','Commission is pending'],['Approved','Cleared for the next payout'],['Paid','Sent to you']].map((x,j)=>`<div class="${j<at||(j===at&&at===3)?'done':j===at?'now':''}"><i>${j<at||(j===at&&at===3)?ico('check',11):''}</i><b>${x[0]}</b><span>${esc(x[1])}</span></div>`).join('')}</div>`;
+  let m=$('#lkmodal'); if(!m){ m=document.createElement('div'); m.id='lkmodal'; m.className='lk-modal'; m.addEventListener('click',e=>{ if(e.target===m) lkClose(); }); document.body.appendChild(m); }
+  m.innerHTML=`<div class="lk-sheet" role="dialog" aria-label="Order details"><button class="lk-x" onclick="lkClose()" aria-label="Close">${ico('x',18)}</button>
+    <div class="lbl">Order ${esc(String(o.ref||''))}${L.preview?' · sample':''}</div><div class="lk-sheet-v tnum">${o.status==='void'?'$0.00':'+'+lkM(o.commission)}</div><div class="lk-sheet-s">${badge(s[0],s[1])}<span>${esc(s[2])}</span></div>
+    <div class="lk-kv"><div><span>When</span><b>${esc(fmt.dt(o.at)||'')}</b></div><div><span>How they found you</span><b>${esc(lkHow(o))}</b></div><div><span>Order total</span><b class="tnum">${lkM(o.subtotal)}</b></div><div><span>Your rate</span><b class="tnum">${rate}%</b></div></div>${tl}</div>`;
+  requestAnimationFrame(()=>m.classList.add('open'));
+}
+function lkClose(){ const m=$('#lkmodal'); if(m){ m.classList.remove('open'); setTimeout(()=>{ if(!m.classList.contains('open')) m.innerHTML=''; },220); } }
+function lkSet(k,v){ LKS[k]=v; quietRender(); }
+function lkCopy(btn,kind,i){
+  const L=window.LKD; if(!L) return; if(L.preview){ toast('This is the sample. Your own shows here as soon as your link is live.'); return; }
+  const t=kind==='kit'?(window.LKK||[])[i]:kind==='code'?L.affiliate.code:L.affiliate.link; if(!t) return; copyText(t);
+  const lab=btn.querySelector('span:not([class]),em'); if(lab){ const was=lab.textContent; lab.textContent='Copied'; btn.classList.add('ok'); setTimeout(()=>{ lab.textContent=was; btn.classList.remove('ok'); },1600); }
+}
+function lkShare(){ const L=window.LKD; if(!L) return; if(L.preview){ toast('This is the sample. Your own shows here as soon as your link is live.'); return; }
+  const t=`Use my code ${L.affiliate.code}${L.program.discount?` for ${L.program.discount}`:''} at Ravine: ${L.affiliate.link}`; if(navigator.share){ navigator.share({text:t}).catch(()=>{}); } else copyText(t); }
+/* count the big numbers up on a fresh page open (never on a quiet refresh) */
+function lkAfter(){ const root=$('#main .anim'); if(!root||root.classList.contains('still')||matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  const F={usd2:lkM,usd0:lkM0,int:v=>fmt.int(Math.round(v)),pct:v=>v.toFixed(1)+'%'};
+  root.querySelectorAll('[data-cu]').forEach(el=>{ const to=+el.dataset.cu, f=F[el.dataset.cf]; if(!f||!(to>0)) return; const t0=performance.now(), dur=800;
+    const tick=t=>{ if(!el.isConnected) return; const p=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-p,3); el.textContent=f(to*e); if(p<1) requestAnimationFrame(tick); else el.textContent=f(to); }; requestAnimationFrame(tick); }); }
 async function lkAdmin(){
   if(!S.admin) return ''; let A=null; try{ A=await API.page('admin_links'); }catch(e){ return ''; }
   const R=A?.rows||[]; const tot=R.reduce((s,r)=>s+(+r.month_commission||0),0), owed=R.reduce((s,r)=>s+(+r.owed||0),0);
   return `<div class="sec"><h2>All affiliates <span class="lk-adm">Admin only</span></h2></div>
-  <section class="card"><div class="grid g3" style="gap:10px">${metric('Affiliates',fmt.int(R.length))}${metric('Commission this month',lkUsd0(tot))}${metric('Owed (pending + ready)',lkUsd0(owed))}</div>
-  ${R.length?`<div class="tblwrap" style="margin-top:14px"><table class="tbl lk-tbl"><thead><tr><th>Creator</th><th>Code</th><th class="num">Orders this month</th><th class="num">This month</th><th class="num">All time</th><th class="num">Owed</th></tr></thead><tbody>${R.map(r=>`<tr><td><b>${esc(r.name||'')}</b>${r.in_games?'':' <span class="muted">· Academy</span>'}</td><td><code>${esc(r.code||'')}</code></td><td class="num">${fmt.int(r.month_orders||0)}</td><td class="num">${lkUsd(r.month_commission)}</td><td class="num">${lkUsd(r.all_commission)}</td><td class="num">${lkUsd(r.owed)}</td></tr>`).join('')}</tbody></table></div>`:`<p class="mini" style="margin-top:12px">No affiliates yet. They show here after the first Social Snowball sync.</p>`}</section>`;
+  <section class="card"><div class="grid g3" style="gap:10px">${metric('Affiliates',fmt.int(R.length))}${metric('Commission this month',lkM0(tot))}${metric('Owed (pending + approved)',lkM0(owed))}</div>
+  ${R.length?`<div class="tblwrap" style="margin-top:14px"><table class="tbl"><thead><tr><th>Creator</th><th>Code</th><th class="num">Orders this month</th><th class="num">This month</th><th class="num">All time</th><th class="num">Owed</th></tr></thead><tbody>${R.map(r=>`<tr><td><b>${esc(r.name||'')}</b>${r.in_games?'':' <span class="muted">· Academy</span>'}</td><td><code>${esc(r.code||'')}</code></td><td class="num">${fmt.int(r.month_orders||0)}</td><td class="num">${lkM(r.month_commission)}</td><td class="num">${lkM(r.all_commission)}</td><td class="num">${lkM(r.owed)}</td></tr>`).join('')}</tbody></table></div>`:`<p class="mini" style="margin-top:12px">No affiliates yet. They show here after the first Social Snowball sync.</p>`}</section>`;
 }
 route('links',async()=>{
-  const head=(acts='')=>ph('My links','Your Ravine affiliate code and link. Every order and every dollar of commission, in one place.',{eyebrow:'Earn',acts});
-  let L; try{ L=await API.page('my_links'); }catch(e){
-    if(e.code==='NO_BACKEND') return `${head()}${emptyState('My Links is almost ready','Your affiliate code, link and commission will show here as soon as the Ravine affiliate program goes live.','','leader')}${await lkAdmin()}`;
-    throw e; }
-  const P=L.program||{}, rate=+P.rate||15, disc=P.discount||'', shop=P.shop||'tryravine.com';
-  const how=`<div class="sec"><h2>How it works</h2></div><div class="grid g3 lk-how">
-    <div class="card"><div class="lk-n">1</div><b>Share your link or code</b><p>Put it in your bio, your captions and your DMs. It works on ${esc(shop)}.</p></div>
-    <div class="card"><div class="lk-n">2</div><b>They save${disc?` ${esc(disc)}`:''}</b><p>Your code gives them ${esc(disc||'a discount')} at checkout, so it is an easy yes.</p></div>
-    <div class="card"><div class="lk-n">3</div><b>You earn ${rate}%</b><p>${esc(P.payout_note||'Commission is approved after the return window, then paid out by Ravine.')}</p></div></div>`;
-  if(!L.linked) return `${head()}
-    <section class="card lk-wait"><div class="lk-wait-i">${ico('link',26)}</div><div><div class="lbl">Almost there</div><h3>Your affiliate link is on the way</h3>
-      <p>We match your Creator Games account to the Ravine affiliate program by email. Once you are set up, your code (like <b>YOURNAME-10</b>), your link and every order show up right here. Nothing else to log in to.</p>
-      <p class="mini">Signed up already and still seeing this? Message Austin in Ravine Elite with the email you used, and he will connect it.</p></div></section>${how}${await lkAdmin()}`;
-  const A=L.affiliate||{}, M=L.month||{}, T=L.totals||{}, mon=M.label||'This month';
-  const days=L.daily||[]; const last7=days.slice(-7).reduce((s,d)=>s+(+d.c||0),0);
-  const tab=S.params.t==='payouts'?'payouts':'orders';
-  return `${head(`<button class="btn gh" onclick="copyText(${esc(JSON.stringify(A.link||''))})">${ico('link')} Copy link</button>`)}
-  ${A.status&&A.status!=='active'?`<div class="note warn" style="margin-bottom:14px">Your affiliate account is ${esc(A.status)}. Orders still track, and Ravine will reach out if anything is needed.</div>`:''}
-  <div class="lk-top">
-    <section class="card lk-hero"><div class="lbl">Commission in ${esc(mon)}</div>
-      <div class="lk-big tnum">${lkUsd(M.commission)}</div>
-      <div class="lk-sub"><span><b class="tnum">${fmt.int(M.orders||0)}</b> order${(M.orders||0)===1?'':'s'}</span><span><b class="tnum">${lkUsd0(M.sales)}</b> in sales</span><span><b class="tnum">${lkUsd0(last7)}</b> last 7 days</span></div>
-      ${lkChart(days)}</section>
-    <div class="lk-side">
-      <section class="card lk-code"><div class="lbl">Your code</div><div class="lk-codev">${esc(A.code||'Coming soon')}</div>
-        <div class="mini">${disc?`Gives your buyer ${esc(disc)}. `:''}You earn ${A.rate||rate}% of every order.</div>
-        <div class="row" style="margin-top:12px"><button class="btn soft sm" onclick="copyText(${esc(JSON.stringify(A.code||''))})">Copy code</button></div></section>
-      <section class="card lk-link"><div class="lbl">Your link</div><div class="lk-linkv" title="${esc(A.link||'')}">${esc((A.link||'Coming soon').replace(/^https?:\/\//,''))}</div>
-        <div class="row" style="margin-top:12px"><button class="btn soft sm" onclick="copyText(${esc(JSON.stringify(A.link||''))})">Copy link</button><button class="btn gh sm" onclick="lkShare(${esc(JSON.stringify(A.link||''))},${esc(JSON.stringify(A.code||''))},${esc(JSON.stringify(disc))})">${ico('ext',15)} Share</button></div></section>
-    </div>
+  let L=null; try{ L=await API.page('my_links'); }catch(e){ if(e.code!=='NO_BACKEND') throw e; }
+  if(!(L&&L.linked)){ const P=L&&L.program; L=lkSample(); if(P) Object.entries(P).forEach(([k,v])=>{ if(v!=null&&v!=='') L.program[k]=v; }); }
+  else L=JSON.parse(JSON.stringify(L));
+  lkNorm(L); window.LKD=L;
+  const pv=!!L.preview, A=L.affiliate, P=L.program, rate=+A.rate||+P.rate||15, disc=P.discount||'', link=String(A.link||'').replace(/^https?:\/\//,'');
+  const r=['7','30','month','all'].includes(LKS.r)?LKS.r:'month', St=lkStats(L,r), c=St.c, p=St.p, hk=L.hasClicks;
+  const conv=hk&&c.clicks>0?c.orders/c.clicks*100:null, aov=c.orders>0?c.sales/c.orders:0;
+  const seg=[['7','7 days'],['30','30 days'],['month','This month'],['all','All time']].map(x=>`<button class="${r===x[0]?'on':''}" onclick="lkSet('r','${x[0]}')">${x[1]}</button>`).join('');
+  const sp=(k,col)=>lkSpark(St.cur.map(d=>+d[k]||0),col);
+  const kpis=[
+    hk?lkKpi('pointer','Clicks',fmt.int(c.clicks),c.clicks,'int',esc(St.label),lkDelta(c.clicks,p&&p.clicks,St.vs),sp('k','#6FA8FF')):lkKpi('cart','Average order',lkM(aov),aov,'usd2',esc(St.label),'',''),
+    lkKpi('cart','Orders',fmt.int(c.orders),c.orders,'int',conv!=null?`<b>${conv.toFixed(1)}%</b> of clicks buy`:esc(St.label),lkDelta(c.orders,p&&p.orders,St.vs),sp('n','#E8B64A')),
+    lkKpi('chart','Link sales',lkM(c.sales),c.sales,'usd2',esc(St.label),lkDelta(c.sales,p&&p.sales,St.vs),sp('s','#FFA25C')),
+    lkKpi('wallet','You earned',lkM(c.comm),c.comm,'usd2',`${rate}% of every order`,lkDelta(c.comm,p&&p.comm,St.vs),sp('c','#3DDC84'),'earn')].join('');
+  const src=lkSources(L);
+  return `${ph('My links','Your own Ravine link and discount code for organic sales: bio, stories, texts, word of mouth.',{eyebrow:'Earn'})}
+  ${pv?`<div class="lk-pv"><span class="lk-pv-b">Sample data</span><span>This is a preview of your affiliate dashboard. Your real link, code and numbers replace it as soon as your Ravine link is live. Nothing new to log in to.</span></div>`:''}
+  ${!pv&&A.status&&A.status!=='active'?`<div class="note warn" style="margin-bottom:14px">Your affiliate account is ${esc(A.status)}. Orders still track, and Ravine will reach out if anything is needed.</div>`:''}
+  <section class="lk-pass">
+    <div class="lk-pass-l"><div class="lbl">Your link</div><div class="lk-url" title="${esc(A.link||'')}">${ico('link',20)}<span>${esc(link||'Coming soon')}</span></div>
+      <p class="mini">Put this in your bio, stories and texts. Every order through it counts for you.</p>
+      <div class="lk-pass-a"><button class="btn lk-cta" onclick="lkCopy(this,'link')">${ico('copy')}<span>Copy link</span></button><button class="btn gh" onclick="lkShare()">${ico('ext',16)} Share</button></div></div>
+    <div class="lk-perf" aria-hidden="true"></div>
+    <div class="lk-pass-r"><div class="lbl">Your code</div><div class="lk-code tnum">${esc(A.code||'Coming soon')}</div>
+      <p class="mini">${disc?`${esc(disc)} for anyone who uses it at checkout.`:'A discount for anyone who uses it at checkout.'}</p>
+      <div class="lk-pass-a"><button class="btn gh" onclick="lkCopy(this,'code')">${ico('copy',16)}<span>Copy code</span></button></div></div>
+  </section>
+  <div class="sec lk-sec"><h2>Performance</h2><div class="lk-seg" role="tablist">${seg}</div></div>
+  <div class="lk-kpis">${kpis}</div>
+  ${lkPipeline(L)}
+  <div class="lk-two ${src?'':'one'}">
+    <section class="card lk-chartc"><div class="lk-card-h"><h3>Daily link sales${hk?' and clicks':''}</h3><div class="lk-leg"><button class="${LKS.sales?'on':''}" onclick="lkSet('sales',${!LKS.sales})"><i class="s"></i>Sales</button>${hk?`<button class="${LKS.clicks?'on':''}" onclick="lkSet('clicks',${!LKS.clicks})"><i class="k"></i>Clicks</button>`:''}</div></div>
+      ${lkChart(St.cur,hk)}</section>
+    ${src}
   </div>
-  <div class="grid g4 lk-stats">
-    ${metric('All-time sales',lkUsd0(T.sales),{sub:`${fmt.int(T.orders||0)} orders`})}
-    ${metric('Pending',lkUsd(T.pending),{sub:'In the return window'})}
-    ${metric('Ready to pay',lkUsd(T.approved),{sub:'Approved, next payout',cls:'lk-ready'})}
-    ${metric('Paid to you',lkUsd(T.paid),{sub:'All time'})}
-  </div>
-  <div class="tabs" style="margin:22px 0 10px"><button class="${tab==='orders'?'on':''}" onclick="go('links',{t:'orders'})">Orders<i>${(L.orders||[]).length}</i></button><button class="${tab==='payouts'?'on':''}" onclick="go('links',{t:'payouts'})">Payouts<i>${(L.payouts||[]).length}</i></button></div>
-  <section class="card lk-list">${tab==='payouts'?lkPayouts(L):lkOrders(L)}</section>
-  <p class="mini lk-fresh">${L.synced_at?`Updated ${esc(fmt.ago(L.synced_at)||'')} from Social Snowball. New orders can take a few hours to show.`:'Orders sync from Social Snowball every few hours.'} Only you can see your numbers.</p>
-  ${how}${await lkAdmin()}`;
+  <div class="lk-two b">${lkMilestone(L)}${lkKit(L)}</div>
+  <section class="card lk-list"><div class="lk-card-h pad"><div class="tabs"><button class="${LKS.tab==='orders'?'on':''}" onclick="lkSet('tab','orders')">Orders<i>${L.orders.length}</i></button><button class="${LKS.tab==='payouts'?'on':''}" onclick="lkSet('tab','payouts')">Payouts<i>${L.payouts.length}</i></button></div><span class="mini">${LKS.tab==='orders'&&L.orders.length?'Tap an order for details':''}</span></div>
+    ${LKS.tab==='payouts'?lkPayouts(L):lkOrders(L)}</section>
+  <div class="lk-foot">${ico('info',15)}<span>Link and code sales are organic sales, tracked by Social Snowball and paid separately from Trybe. They do not count toward your Trybe numbers or the ${NOV?'November challenge':'monthly competition'}. Only you can see your numbers.${L.synced_at?` Updated ${esc(fmt.dt(L.synced_at)||'')}.`:''}</span></div>
+  ${await lkAdmin()}`;
 });
 
 /* Profile · Amazon · Onboarding · Trial · Admin */
