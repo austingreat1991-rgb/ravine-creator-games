@@ -1656,7 +1656,7 @@ button.lk-row:hover{background:rgba(255,255,255,.035);color:var(--o2)}
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261112-121500";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261113-143500";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -1990,7 +1990,7 @@ const REDIRECT={adlib:'analytics',winners:'library',angles:'library',board:'lead
 const NAV=[
  ['Home',[['home','Home','home']]],
  ['Create',[['library','Angle Library','grid'],['spy','Spyboard','eye'],['broll','B-roll','film']]],
- ['Progress',[['quests','Quests','target'],['rewards','Rewards','gift'],['armory','Armory','shield'],['submissions','My submissions','check'],['analytics','Analytics','chart'],['links','My links','link']]],
+ ['Progress',[['quests','Quests','target'],['rewards','Rewards','gift'],['armory','Armory','shield'],['submissions','My submissions','check'],['analytics','Analytics','chart'],['links','Snowball Affiliate Dashboard','link']]],
  ['Compete',[['leaderboard','Leaderboard','star'],['compete',NOV?'November challenge':'October competition','trophy'],['pace','My pace','gauge']]],
  ['Profile',[['profile','My profile','user']]],
  ['Admin',[['admin','Review queue','check'],['admin_pace','Elite cut line','gauge'],['admin_contest','Contest & imports','gear'],['admin_rewards',NOV?'Rewards & payouts':'Rewards & claims','gift']]],
@@ -1998,7 +1998,7 @@ const NAV=[
 const MOB=[['home','Home','home'],['quests','Quests','target'],['compete','Compete','trophy'],['submissions','Videos','check'],['more','More','menu']];
 const TITLES=Object.fromEntries(NAV.flatMap(g=>g[1]).map(n=>[n[0],n[1]]));
 /* Nov 12 (Austin): My links is grayed out until the Ravine affiliate program is live. Admins still see it. */
-const SOON=new Set(['links']); const isSoon=v=>SOON.has(v)&&!S.admin; function soonTap(){ toast('My links is coming soon.'); }
+const SOON=new Set([]); const isSoon=v=>SOON.has(v)&&!S.admin; function soonTap(){ toast('My links is coming soon.'); }
 
 const BOOK_CALL=null;   // Oct 29: the booking link now comes only from the server (app.my_coach_link), never from the app's code
 /* Oct 29 (Austin): 1:1 calls unlock at $5,000 in Trybe sales this month. Until then the button is grayed out,
@@ -3954,8 +3954,20 @@ async function lkAdmin(){
   ${R.length?`<div class="tblwrap" style="margin-top:14px"><table class="tbl"><thead><tr><th>Creator</th><th>Code</th><th class="num">Orders this month</th><th class="num">This month</th><th class="num">All time</th><th class="num">Owed</th></tr></thead><tbody>${R.map(r=>`<tr><td><b>${esc(r.name||'')}</b>${r.in_games?'':' <span class="muted">· Academy</span>'}</td><td><code>${esc(r.code||'')}</code></td><td class="num">${fmt.int(r.month_orders||0)}</td><td class="num">${lkM(r.month_commission)}</td><td class="num">${lkM(r.all_commission)}</td><td class="num">${lkM(r.owed)}</td></tr>`).join('')}</tbody></table></div>`:`<p class="mini" style="margin-top:12px">No affiliates yet. They show here after the first Social Snowball sync.</p>`}</section>`;
 }
 route('links',async()=>{
-  if(isSoon('links')) return `${ph('My links','Your own Ravine link and discount code for organic sales.',{eyebrow:'Earn'})}<div class="card" style="border-style:dashed"><h3 style="margin:0 0 6px">Coming soon</h3><p style="margin:0;color:var(--tx2)">This page is not open yet. When the Ravine link program launches, your link, your code and your sales will show here. Nothing is being tracked or owed on this page right now. Your real earnings are the ones in Trybe.</p></div>`;
-  let L=null; try{ L=await API.page('my_links'); }catch(e){ if(e.code!=='NO_BACKEND') throw e; }
+  /* Nov 13 (Austin): this tab is now just the door to Social Snowball's own affiliate dashboard. Sales, commission and payouts live there. */
+  const LOGIN='https://affiliates.socialsnowball.io/auth/affiliate/login', SIGNUP='https://tryravine.socialsnowball.io/signup/c4ee3e7b-c9e0-45b0-b9f7-7193a2e4a1cf';
+  return `${ph('Snowball Affiliate Dashboard','Your Ravine affiliate link, code, sales and payouts.',{eyebrow:'Earn'})}
+  <div class="card" style="max-width:560px">
+    <h3 style="margin:0 0 6px">Log in to your affiliate dashboard</h3>
+    <p style="margin:0 0 16px;color:var(--tx2)">Your link, your code, your sales and your payouts are all in Social Snowball. Log in with the email you signed up with.</p>
+    <a class="btn" href="${LOGIN}" target="_blank" rel="noopener" style="display:flex;justify-content:center;align-items:center;min-height:50px;font-size:16px">Open my affiliate dashboard</a>
+    <p style="margin:18px 0 8px;color:var(--tx2)">Not an affiliate yet?</p>
+    <a class="btn gh" href="${SIGNUP}" target="_blank" rel="noopener" style="display:flex;justify-content:center;align-items:center;min-height:46px">Sign up for the Ravine Affiliate Program</a>
+    <p class="mini" style="margin-top:16px">Affiliate sales are separate from Trybe. They don't count toward your Trybe numbers or the November challenge.</p>
+  </div>`;
+});
+/* old My links page, no longer reachable */
+route('links_old',async()=>{  let L=null; try{ L=await API.page('my_links'); }catch(e){ if(e.code!=='NO_BACKEND') throw e; }
   if(!(L&&L.linked)){ const P=L&&L.program; L=lkSample(); if(P) Object.entries(P).forEach(([k,v])=>{ if(v!=null&&v!=='') L.program[k]=v; }); }
   else L=JSON.parse(JSON.stringify(L));
   lkNorm(L); window.LKD=L;
