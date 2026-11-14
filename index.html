@@ -1656,7 +1656,7 @@ button.lk-row:hover{background:rgba(255,255,255,.035);color:var(--o2)}
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
 <button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.BUILD="20261113-143500";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261114-133000";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -2516,9 +2516,9 @@ function qmetaChips(c){ const m=qmeta(c); return `<span class="qm"><span class="
 const qskill=c=>qmeta(c).skill;
 /* Oct 24: Angle-Library-style photo tabs on Quests, including the Ravine Creator Academy tab */
 const ACADEMY_URL='https://www.skool.com/ravineacademy';
-const QTAB_ORDER=['Film','Improve','Community','Academy','Boss'];
+const QTAB_ORDER=['Film','Improve','Community','Academy','Affiliate','Boss'];
 const QTAB_META={Film:{name:'Film',ph:'qa-unaware',col:'#FF6E20'},Improve:{name:'Improve',ph:'qa-improve',col:'#5B9DFF'},Community:{name:'Community',ph:'qa-call',col:'#3DDC97'},
-  Academy:{name:'Ravine Creator Academy',ph:'qa-coach',col:'#E8B341'},Boss:{name:'Boss',ph:'qa-leader',col:'#FF4D6D'}};
+  Academy:{name:'Ravine Creator Academy',ph:'qa-coach',col:'#E8B341'},Affiliate:{name:'Affiliate',ph:'qa-concepts',col:'#E8B64A'},Boss:{name:'Boss',ph:'qa-leader',col:'#FF4D6D'}};
 const qtabName=k=>k==='All'?'All quests':(QTAB_META[k]?.name||k);
 function questRail(cats,states){ const seen=[...new Set(cats.map(c=>c.category))]; const keys=[...QTAB_ORDER.filter(k=>seen.includes(k)),...seen.filter(k=>!QTAB_ORDER.includes(k))];
   const inK=(c,k)=>k==='All'||c.category===k;
