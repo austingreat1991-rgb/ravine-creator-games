@@ -9,6 +9,7 @@ const Q=(k,cat,title,outcome,xp,o={})=>Object.assign({quest_key:k,category:cat,t
   done_in_period:0,xp_this_month:0,xp_this_period:0,completions_total:0,monthly_xp_cap:xp*4,max_xp:xp*4,reuse_rule:null,scarce:false,locked:false},o);
 const catalog=()=>[
   Q('oct_hooks3','Film','3 openings, same video','Three different openings for one core video, with the strongest one picked.',25,{proof:[proofV,proofT],image_key:'hooks'}),
+  Q('oct_concepts5','Film','5 hook concepts','Write five opening ideas before you film.',15),
   Q('oct_objection','Film','Answer a real objection','One video that answers a real question a buyer asked.',20),
   Q('oct_recreate','Film','Recreate a winner','Study a winning video in the Angle Library and make your own version.',30),
   Q('oct_feedback','Improve','Apply review feedback','Fix one reviewer note and resubmit the same video.',15,{proof:[proofL,proofT]}),
@@ -35,6 +36,7 @@ function creator(name,kind){
     I('oct_feedback','needs_changes',{review_note:'The product is out of frame during the demo. Reshoot the 0:06 to 0:12 section so the case stays visible, then resubmit this same entry.',history:[{at:iso(-3*D),event:'started'},{at:iso(-2*D),event:'submitted'},{at:iso(-1*D),event:'changes_requested',detail:{note:'Reshoot'}}]});
     I('oct_hooks3','in_progress',{draft:{videos:['fx000001abcd','fx000002abcd']}});
     I('oct_objection','submitted',{submitted_at:iso(-6*H)});
+    I('oct_concepts5','approved',{xp:15}); cat.find(c=>c.quest_key==='oct_concepts5').done_in_period=1;
     I('oct_recreate','approved',{xp:30}); I('oct_win_post','approved',{xp:10}); I('oct_weakspot','approved',{xp:20});
     cat.find(c=>c.quest_key==='oct_recreate').done_in_period=1; cat.find(c=>c.quest_key==='oct_win_post').done_in_period=1; cat.find(c=>c.quest_key==='oct_weakspot').done_in_period=1;
     cat.forEach(c=>{ c.completions_total=c.done_in_period; }); }
@@ -51,7 +53,7 @@ function creator(name,kind){
 }
 window.FIXTURES={codes:{RVFIXPOPUL:'populated',RVFIXEMPTY:'empty',RVFIXPENDG:'pending',RVFIXNOSRC:'nosrc',RVFIXADMIN:'admin'},
   creators:{populated:creator('Populated Creator','pop'),empty:creator('New Creator','empty'),pending:creator('Pending Creator','pend'),nosrc:creator('NoSource Creator','nosrc')},
-  admin:{queue:[],recent:[],campaign:{key:'2026-11',name:'November 2026'},standings:[],snapshots:[],runs:[],pending_videos:[],claims:[],payouts:[],ledger:[],tiers:[],creators:[]}};
+  admin:{queue:[{id:'in-oct_objection-submitted',state:'submitted',title:'Answer a real objection',quest_key:'oct_objection',display_name:'Populated Creator',creator_id:'fx-pop',requested_xp:20,submitted_at:iso(-6*H),period_key:P1.key,seq:1,per_period_limit:2,done_in_period:0,draft:{link:'https://example.com/fixture-video'},same_evidence_elsewhere:false,duplicate_registration:false,review_note:null}],recent:[],campaign:{key:'2026-11',name:'November 2026'},standings:[],snapshots:[],runs:[],pending_videos:[],claims:[],payouts:[],ledger:[],tiers:[],creators:[]}};
 window.FIXTURES.creators.admin=creator('Fixture Admin','empty');
 /* November preview patches on top of the October-era fixture backend */
 window.addEventListener('DOMContentLoaded',()=>{ try{
@@ -59,5 +61,17 @@ window.addEventListener('DOMContentLoaded',()=>{ try{
   const t0=FX.teamGoalOf; FX.teamGoalOf=m=>Object.assign(t0(m),{month_key:window.CAMP,label:'November',goal:2000000,bonus_pool:25000,ends_at:'2026-12-01T06:00:00Z',starts_at:'2026-11-01T05:00:00Z'});
   const r0=FX.rewardsOf; FX.rewardsOf=m=>{ const r=m.rewards; r.xp_pending=FX.questsOf(m).xp_pending; let top=null; r.tiers.forEach(t=>{ if(t.xp_met&&t.concepts_met) top=t; }); r.tiers.forEach(t=>{ t.status=!(t.xp_met&&t.concepts_met)?'locked':t===top?'approved_for_payment':'included'; }); return r; };
   const p0=FX.paceOf; FX.paceOf=m=>Object.assign(p0(m),{campaign:window.CAMP,month_label:'November',ends_at:'2026-12-01T06:00:00Z'});
+  /* identity extensions preview: frames, titles, season patch, guided paths, recognition. window.__FX_ID=false simulates a backend without them. */
+  const IDS={loadout:{frame:'frame_ravine_edge',title:null},owned:{frame_ravine_edge:'2026-11-02T18:00:00Z',title_feedback_pro:'2026-11-09T18:00:00Z'}};
+  const CAT=[['frame_ravine_edge','frame','Ravine Edge','Everyone starts with it'],['frame_night_ops','frame','Night Ops Frame','Finish the Hook Builder path'],['title_hook_builder','title','Hook Builder','Finish the Hook Builder path'],['title_feedback_pro','title','Feedback Pro','Finish the Feedback Loop path'],['patch_2026_11','season_patch','November 2026 Contender','Compete in the November season']];
+  const PATHS=[{key:'hook_builder',label:'Hook Builder',blurb:'Five steps to stronger openings.',unlocks:'frame_night_ops',steps:[['Study','book',['oct_recreate','oct_review3']],['Write','wrench',['oct_concepts5','oct_newangle3']],['Film','camera',['oct_hooks3']],['Test','target',['oct_improve','oct_weakspot']],['Debrief','check',['oct_feedback']]].map(([label,icon,quest_keys])=>({label,icon,quest_keys}))},
+    {key:'feedback_loop',label:'Feedback Loop',blurb:'Get notes, apply them, improve the video.',unlocks:'title_feedback_pro',steps:[['Get reviewed','people',['oct_review3']],['Apply it','wrench',['oct_feedback']],['Improve','star',['oct_improve','oct_weakspot']]].map(([label,icon,quest_keys])=>({label,icon,quest_keys}))}];
+  const x0=FX.rpc; FX.rpc=function(name,a){ if(name==='my_identity'||name==='set_loadout'){ FX.load(); if(window.__FX_ID===false||FX.who==='admin') throw Object.assign(new Error('backend not set up: app.'+name+' is missing'),{code:'NO_BACKEND'}); const pop=FX.who==='populated'; const own=pop?IDS.owned:{frame_ravine_edge:null};
+      if(name==='set_loadout'){ if(a.p_frame&&!(a.p_frame in own)) return {ok:false,why:'frame is locked'}; if(a.p_title&&!(a.p_title in own)) return {ok:false,why:'title is locked'}; IDS.loadout={frame:a.p_frame||null,title:a.p_title||null}; return {ok:true,frame:IDS.loadout.frame,title:IDS.loadout.title}; }
+      return JSON.parse(JSON.stringify({cosmetics:CAT.map(([key,kind,label,how])=>({key,kind,label,how,owned:key in own,earned_at:own[key]||null})),loadout:pop?IDS.loadout:{frame:null,title:null},paths:PATHS,
+        recognition:pop?[{kind:'rising',period:window.CAMP,name:'Sam Rivers',me:false,note:'First month on the board'},{kind:'rising',period:window.CAMP,name:'Taylor Reed',me:false,note:null},{kind:'most_improved',period:window.CAMP,name:'Populated Creator',me:true,note:'Hook rate up after two revisions'},{kind:'creative_of_week',period:window.CAMP,name:'Riley Hart',me:false,note:'Problem-first open, product at 0:03'}]:[]})); }
+    if(name==='admin_pace_board'){ FX.load(); const N=24, D=6, line=N-D+1; const board=Array.from({length:N},(_,i)=>{ const score=+(88-i*2.6).toFixed(1); return {creator_id:'fx-r'+i,display_name:FX.FAKE[i%FX.FAKE.length]+(i>=FX.FAKE.length?' II':''),place:i+1,tied:1,score,pts:{sales:+(score*.5).toFixed(1),videos:+(score*.3).toFixed(1),quests:+(score*.2).toFixed(1)},approved:Math.max(0,20-i),xp:Math.max(0,100-i*4),gmv:Math.max(0,9000-i*380),lvl:i%5}; });
+      return {pace:{roster:N,move_down:D,line_place:line,line_score:board[line-2].score,month_label:'November',days_left:16},board,prev:null,data_through:new Date(Date.now()-2*3600e3).toISOString()}; }
+    return x0.call(FX,name,a); };
 }catch(e){ console.error('fixture patch',e); } },{once:true,capture:true});
 })();

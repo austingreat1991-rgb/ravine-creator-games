@@ -78,7 +78,7 @@ assert.equal(asset.subarray(0, 8).toString('hex'), '89504e470d0a1a0a', 'Embedded
 const assetWidth = asset.readUInt32BE(16);
 const assetHeight = asset.readUInt32BE(20);
 assert.ok(assetWidth > 0 && assetHeight > 0, 'PNG must declare positive dimensions');
-assert.ok([4, 6].includes(asset[25]), 'PNG should have an alpha channel for its transparent patch silhouette');
+assert.ok([4, 6].includes(asset[25]) || (asset[25] === 3 && asset.includes(Buffer.from('tRNS'))), 'PNG should carry transparency (alpha channel, or palette with tRNS) for its patch silhouette');
 const svgRoot = wrapper.match(/<svg\b[^>]*>/i)?.[0];
 assert.ok(svgRoot, 'Artwork wrapper must have an SVG root');
 const viewBox = svgRoot.match(/\bviewBox\s*=\s*["']([^"']+)["']/i)?.[1]?.trim().split(/[\s,]+/).map(Number);

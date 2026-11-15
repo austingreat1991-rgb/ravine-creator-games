@@ -46,3 +46,35 @@ Intentional differences from the mockups
 - Browser visual comparison and interaction QA remain unverified for this patch. Finish full-size comparisons and the prior missing keyboard/zoom/draft-submit tests before calling the whole redesign complete.
 - New frames, titles, season patches, guided paths, draft quests and recognition still require implementation with real records. BOF wording needs authoritative existing-rule verification. Do not introduce new payouts or live data mutations to complete visual QA.
 - No main-branch or live preview deployment is part of these fixes. Pull current redesign-nov before continuing in Claude.
+
+
+## v4 (Nov 14, evening): remaining build, checks and speed
+Built on c327383. `main` is unchanged (f45836d). The live-data `next/` preview was removed from the branch.
+
+New, shown only when the database has them (it does not yet)
+- Frames, titles, season patches, guided paths, recognition picks. Schema and functions: `sql/identity_extensions_DRAFT.sql` (tested on a throwaway local Postgres only; every seed row is inactive). The app reads `app.my_identity`; when it is missing the app asks once per session and shows the existing skill coverage strip, closest camo and prestige/collection slots instead.
+- Quest drafts mapped to existing quests in `sql/QUEST-DRAFTS.md`. Three are new and need XP and limits.
+
+Unresolved earning rules (nothing is switched on until these are decided)
+1. Night Ops Frame and the Hook Builder title: granted automatically when the path completes, or hand-granted?
+2. Ravine Edge base frame: does everyone own it?
+3. November season patch: what counts as competing (one approved video, one sale, or ranked at close)?
+4. Rising creators, Most improved, Creative of the week: picked by Austin through `app.admin_recognize`. No automatic formula was built.
+5. XP and limits for B-roll With a Job, One Variable Test and Creator Debrief.
+6. Sales wording on Rewards still says "not marked BOF". Video wording now says BOF videos count as half.
+
+Other changes
+- Closing a drawer returns keyboard focus to what opened it.
+- Patch artwork file cut from 3.86 MB to 60 KB (same approved image, 380 px, palette PNG). Service worker now caches SVG.
+- Home loads armory, leaderboard and identity in parallel with the rest.
+- Angle Library toolbar wraps instead of overflowing between 600 and 1279 px.
+
+Checks (all isolated, test data only)
+- `node build/check-patch-artwork.cjs`, `node build/check-admin-contest-labels.cjs`: pass.
+- `node build/qa-flows.js`: 37 checks pass (draft, autosave failure and retry, validation, single submit, inspect vs equip, roles, admin J/K/A/C shortcuts, keyboard focus, 200% zoom on all 18 destinations, short window, sales privacy, no claim action, local logo).
+- `node build/qa-shot.js`: every destination at 1440, 1024, 768 and 390 wide, no sideways scroll, no script errors.
+- `node build/qa-perf.js`: phone Home first visit about 400 KB (live 235 KB), desktop 400 KB (live 656 KB); page HTML 184 KB gzipped (live 159 KB); every screen renders in under 0.15 s on a 4x-slowed CPU; no layout shift.
+
+Isolated preview: `preview.html` (built by `build/make-preview.sh`). Test accounts only, no backend calls, no service worker. Delete it or leave it out when merging to `main`.
+
+Not verified: real-account data on the new layouts, real phones, screen readers, and the SQL against the production schema.

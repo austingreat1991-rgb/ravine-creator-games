@@ -2,7 +2,7 @@
 const {chromium}=require('playwright'); const http=require('http'); const fs=require('fs'); const path=require('path');
 const ROOT='/home/claude/ravine-creator-games';
 const [,, out, code, size, ...routes]=process.argv; const [W,H]=size.split('x').map(Number);
-const mime={'.html':'text/html','.js':'text/javascript','.json':'application/json','.png':'image/png','.jpg':'image/jpeg','.woff2':'font/woff2','.mp4':'video/mp4','.webmanifest':'application/json'};
+const mime={'.html':'text/html','.js':'text/javascript','.json':'application/json','.png':'image/png','.jpg':'image/jpeg','.woff2':'font/woff2','.svg':'image/svg+xml','.mp4':'video/mp4','.webmanifest':'application/json'};
 const srv=http.createServer((q,s)=>{ let p=decodeURIComponent(q.url.split('?')[0]); if(p.endsWith('/')) p+='index.html'; const f=path.join(ROOT,p);
   fs.readFile(f,(e,b)=>{ if(e){ s.writeHead(404); return s.end(); } if(p.endsWith('index.html')) b=Buffer.from(b.toString().replace('window.APP_MODE="live"','window.APP_MODE="fixture";window.NO_SW=1').replace('<script>/* Ravine Creator Games · October build · core','<script src="./build/fixtures.js"></script><script>/* Ravine Creator Games · October build · core')); s.writeHead(200,{'content-type':mime[path.extname(f)]||'application/octet-stream'}); s.end(b); }); });
 srv.listen(0,async()=>{ const port=srv.address().port; const b=await chromium.launch(); const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,reducedMotion:'reduce'});
