@@ -1758,6 +1758,7 @@ input::placeholder,textarea::placeholder{color:var(--tx3)}
 .topbar .qtimer.d{position:static;box-shadow:none;background:transparent}
 .tb-av{margin-left:auto;width:44px;height:44px;border-radius:50%;border:2px solid var(--rg-bronze);background:#4B5637;color:var(--rg-paper);font:800 16px var(--disp);letter-spacing:.5px;display:grid;place-items:center;flex:none}
 .tb-av:hover{border-color:var(--gold)}
+.tb-av[hidden]{display:none}
 @media (max-width:900px){.topbar{display:none}}
 .ph h1,.dh{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:.5px;line-height:1.02}
 .ph h1{font-size:clamp(34px,4.3vw,60px)}
@@ -2160,7 +2161,7 @@ input::placeholder,textarea::placeholder{color:var(--tx3)}
 <aside class="drawer" id="drawer" tabindex="-1" aria-label="Details"></aside>
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
-<script>window.APP_MODE="live";window.BUILD="20261114-203126";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261114-203806";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -2787,7 +2788,7 @@ async function homeBriefing({h,q,sub,tasks,RW,C,SUBS,TG}){
   const img=lead?questPhoto(lead.c):retVid?.thumb_url||(SUBS.find(v=>v.thumb_url)||{}).thumb_url||'./ph/hero-board.jpg';
   const cta=lead?(lead.i.state==='needs_changes'?'Fix this quest':'Continue quest'):first?.go==='library'?'Open the Angle Library':first?.go==='submissions'?'Open the notes':'Open quests';
   const hero=first?`<section class="hb-hero" aria-label="Your next move">
-     <div class="hb-img">${img?`<img class="bg" src="${esc(img)}" alt="" aria-hidden="true" onerror="this.remove()"><img class="fg" src="${esc(img)}" alt="" loading="eager" onload="if(this.naturalHeight>this.naturalWidth*1.15)this.parentNode.classList.add('tall')" onerror="this.remove()">`:''}</div>
+     <div class="hb-img">${img?`<img class="bg" src="${esc(img)}" alt="" aria-hidden="true" onerror="this.onerror=null;this.src='./ph/hero-board.jpg'"><img class="fg" src="${esc(img)}" alt="" loading="eager" onload="if(this.naturalHeight>this.naturalWidth*1.15)this.parentNode.classList.add('tall')" onerror="this.onerror=null;this.src='./ph/hero-board.jpg'">`:''}</div>
      <div class="paper hb-brief"><div class="eyb">Your next move</div>
        <h2 class="dh">${esc(first.t)}</h2>
        ${ex?`<div class="hb-quote">“${esc(ex)}”</div>`:`<p style="font-size:17px">${esc(lead?lead.c.title+'. ':'')}${esc(first.d)}</p>`}
