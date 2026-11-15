@@ -2161,7 +2161,7 @@ input::placeholder,textarea::placeholder{color:var(--tx3)}
 <aside class="drawer" id="drawer" tabindex="-1" aria-label="Details"></aside>
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
-<script>window.APP_MODE="live";window.BUILD="20261114-203806";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261114-205041";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -3326,6 +3326,9 @@ route('quests',async(p)=>{
     return `<div class="card hi" style="margin-bottom:14px"><b>${to.emblem} ${esc(to.name)} starts ${esc(fmt.date(nx.starts_at))}.</b> You picked it after the first 3 days of this half, so it kicks in at the next reset. Until then you're playing ${now.emblem} ${esc(now.name)} quests and payouts.</div>`; })()}
   ${sprintBanner(cats,states)}
   ${ref?refBanner(ref,cats,states):''}
+  <div class="sec qtabs-h" style="margin-top:6px"><h2>Quest types</h2><span class="mini">Pick a type. Tap it again to see all.</span></div>
+  <div class="lrail-wrap qrail-wrap" id="qrailbox">${questRail(cats,states)}</div>
+  <div id="qacad">${academyBanner()}</div>
   <div class="qsplit"><div class="qboard"><div id="qtabsbox">${qTabs()}</div><div id="qlist">${questSections()}</div></div><div id="qbrief">${questBrief(selKey())}</div></div>
   <div style="height:16px"></div>
   ${questHero(q,r,insts)}
@@ -3339,9 +3342,7 @@ route('quests',async(p)=>{
     ${why?`<div class="qrec-why">💡 ${esc(why)}</div>`:''}
     <div class="qrec-foot"><span class="qrec-xp"><b>${rec.xp_value} XP</b> after approval · ${esc(qskill(rec))}</span><button class="btn" onclick="openQuest('${rec.quest_key}')">${cta}</button></div></div></div>`; })():''}
   ${featuredBanner(FQ,cats,states)}
-  <div class="sec qtabs-h"><h2>Browse by type</h2><span class="mini">Pick a type to filter the board above. Tap it again to see all.</span></div>
-  <div class="lrail-wrap qrail-wrap" id="qrailbox">${questRail(cats,states)}</div>
-  <div id="qacad">${academyBanner()}</div>
+
   <div class="note" style="margin:18px 0 0"><b>🔁 Resets on the 1st and 16th.</b> XP, approved videos and every quest start fresh each half. <b>🚫 No stacking:</b> your highest cash tier is your total for the half. <a href="#" onclick="openRewardRules();return false">Read the rules</a></div>
   <div class="sec"><h2>Reward periods</h2><span class="mini">XP, quests and cash tiers reset at 12:00 am CT on the 1st and 16th</span></div>
   <div class="grid g2">${(q.periods||[]).map(pp=>`<div class="metric ${pp.key===q.period_now?'orange':''}"><div class="k">${pp.key===q.period_now?'Now · ':''}${esc(pp.label)}</div><div class="v" style="font-size:16px;font-family:var(--f);font-weight:600">${fmt.date(pp.starts_at)} to ${fmt.date(new Date(new Date(pp.ends_at)-1))}</div></div>`).join('')}</div>`;
