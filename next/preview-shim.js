@@ -1,0 +1,3 @@
+/* Preview only: the app is served one folder down, so bare media names inside the bundled data files (in-000.jpg, bp/x.jpg, v/x.mp4) get a ../ prefix. */
+(function(){ const of=window.fetch; const fix=v=>{ if(typeof v==='string') return /^(?!https?:|\.|\/|data:)[\w\-\/]+\.(jpe?g|png|webp|mp4)$/i.test(v)?'../'+v:v; if(Array.isArray(v)) return v.map(fix); if(v&&typeof v==='object'){ for(const k in v) v[k]=fix(v[k]); } return v; };
+  window.fetch=async function(u,o){ const r=await of.call(this,u,o); if(typeof u==='string'&&/\/data\/[\w]+\.json/.test(u)&&r.ok){ const j=fix(await r.clone().json()); return new Response(JSON.stringify(j),{status:200,headers:{'content-type':'application/json'}}); } return r; }; })();
