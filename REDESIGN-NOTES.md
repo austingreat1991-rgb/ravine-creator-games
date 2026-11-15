@@ -36,3 +36,13 @@ Intentional differences from the mockups
 3. Proposed frames, titles, season patches, Rising Creators / Most Improved / Creative of the Week, guided paths and the eight draft quests are not built: each needs a server-side entitlement or selection record first.
 4. Admin Contest & imports still shows some November column headers over the October payload.
 5. BOF wording on Rewards is unchanged pending the policy decision.
+
+
+## v3 approved branch fixes
+- Original textured embroidered patch material is local in art/embroidered-patch-base.svg. It embeds the exact generated transparent PNG, so it has no external image dependency and is not a replacement brand logo.
+- Existing symbols use raised metallic overlays and explicit gold/silver/bronze variants. Legacy Home badge strip/detail emoji are replaced too. Badge conditions, category mappings, ownership and payouts are unchanged.
+- Historical admin contest headers now say GMV (Oct videos) and Approved Oct videos. Queries, snapshots and freeze behavior are unchanged.
+- Isolated checks pass: node build/check-patch-artwork.cjs (four inline JS blocks, 12 state/tone cases, accessibility/paint IDs, embedded transparent asset/fallback, unchanged badge eligibility pinned to9ced3a1) and node build/check-admin-contest-labels.cjs (four campaign/finalization fixtures).
+- Browser visual comparison and interaction QA remain unverified for this patch. Finish full-size comparisons and the prior missing keyboard/zoom/draft-submit tests before calling the whole redesign complete.
+- New frames, titles, season patches, guided paths, draft quests and recognition still require implementation with real records. BOF wording needs authoritative existing-rule verification. Do not introduce new payouts or live data mutations to complete visual QA.
+- No main-branch or live preview deployment is part of these fixes. Pull current redesign-nov before continuing in Claude.
