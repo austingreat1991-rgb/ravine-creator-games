@@ -2161,7 +2161,7 @@ input::placeholder,textarea::placeholder{color:var(--tx3)}
 <aside class="drawer" id="drawer" tabindex="-1" aria-label="Details"></aside>
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
-<script>window.APP_MODE="live";window.BUILD="20261114-205041";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261115-114225";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -2288,7 +2288,7 @@ const API={
      and a write (bust) drops answers that were already on the way so nothing old lands after it. */
   inflight:{}, gen:0,
   load(name,args={}){ const k=name+JSON.stringify(args); if(API.inflight[k]) return API.inflight[k]; const g=API.gen;
-    const p=(async()=>{ try{ const v=await API.rpc(name,args);
+    const p=(async()=>{ try{ const v=await API.rpc(name,args); if(name==='my_submissions') markReplaced(v);
         if(name==='my_quests'&&v&&Array.isArray(v.catalog)&&!S.admin){ let have=0; try{ const N=await API.page('my_numbers'); have=Number(N?.month_sales)||0; }catch(e){}
           if(have<COACH_MIN) v.catalog.forEach(c=>{ if(/_coach$/.test(c.quest_key)&&!c.locked){ c.locked=true; c.lock_sales=true; } }); }   // Oct 29: 1:1 quest locked under $5K this month
         if(name==='my_rewards'&&NOV&&v) onePayout(v);
@@ -2589,7 +2589,12 @@ function xpPop(n){ const e=document.createElement('div'); e.className='xppop'; e
 /* ---- shared components */
 const badge=(kind,text)=>`<span class="badge ${kind}">${esc(text)}</span>`;
 const QSTATE={ended:['x','Closed'],soon:['n','Opens soon'],approved_period:['g','Done this half'],available:['n','Available'],in_progress:['p','In progress'],submitted:['r','In review'],needs_changes:['c','Changes needed'],approved:['g','Completed'],rejected:['x','Not approved'],expired:['x','Expired']};
-const SSTATE={pending:['r','Pending review'],approved:['g','Approved'],changes_requested:['c','Changes requested'],rejected:['x','Rejected']};
+const SSTATE={pending:['r','Pending review'],approved:['g','Approved'],changes_requested:['c','Changes requested'],rejected:['x','Rejected'],replaced:['n','Replaced by revision']};
+/* Nov 15: when a creator uploads a revision in Trybe, Trybe marks the original "superseded" and the import files it as changes requested.
+   If a newer version of the same video exists, the original is done: show it as replaced and stop counting it as needing changes. */
+function markReplaced(v){ const L=v&&v.videos; if(!Array.isArray(L)) return v; const kids=new Set(L.filter(x=>x.parent_id).map(x=>x.parent_id)); let n=0;
+  L.forEach(x=>{ if(x.status==='changes_requested'&&kids.has(x.id)){ x.status='replaced'; n++; } });
+  if(n&&v.counts&&typeof v.counts.changes==='number') v.counts.changes=Math.max(0,v.counts.changes-n); return v; }
 const OUTCOME={qualifies:['g','Eligible'],awaiting_review:['r','In review'],rejected:['x','Excluded: rejected'],funnel_not_eligible:['x','Excluded: BOF'],funnel_unverified:['v','Verification needed: stage'],approved_after_window:['x','Excluded: approved after October'],beyond_slot_limit:['x','Outside first 20'],not_qualified:['x','Not eligible'],verification_needed:['v','Verification needed'],other_campaign:['n','Not an October entry'],not_in_contest:['n','Not in contest']};
 const RSTATE={locked:['n','Locked'],eligible:['g','Eligible'],claim_submitted:['r','Claim submitted'],approved_for_payment:['p',NOV?'Your payout':'Approved for payment'],paid:['d','Paid'],included:['g','Included']};
 function metric(k,v,{sub='',cls=''}={}){ return `<div class="metric ${cls}"><div class="k">${esc(k)}</div><div class="v ${v==null?'na':''}">${v==null?'Not available':v}</div>${sub?`<div class="sub">${sub}</div>`:''}</div>`; }
@@ -3068,7 +3073,7 @@ function tgAnimate(){ const els=[...document.querySelectorAll('.tg [data-countup
   requestAnimationFrame(step); }
 route('home',async()=>{
   const h=await API.page('my_home'); const c=h.campaign||{}; const ct=h.contest||{}; const q=h.quests||{}; const r=h.rewards||{}; const sub=h.submissions||{};
-  const N=await myNumbers(); const TG=await teamGoal(); const ES=await myEliteSpot(); let SP={}; try{ SP=await API.page('my_submissions'); }catch(e){} const SUBS=SP.videos||[]; try{ await API.page('my_quests'); }catch(e){}
+  const N=await myNumbers(); const TG=await teamGoal(); const ES=await myEliteSpot(); let SP={}; try{ SP=await API.page('my_submissions'); }catch(e){} const SUBS=SP.videos||[]; if(SUBS.length&&typeof sub.changes==='number') sub.changes=SUBS.filter(v=>v.status==='changes_requested').length; try{ await API.page('my_quests'); }catch(e){}
   const nt=nextTier(r); const dl=daysLeft(c.ends_at); let RW=null; try{ RW=await API.page('my_rewards'); }catch(e){}
   // one practical next action, from real state
   let action;

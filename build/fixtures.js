@@ -40,7 +40,7 @@ function creator(name,kind){
     I('oct_recreate','approved',{xp:30}); I('oct_win_post','approved',{xp:10}); I('oct_weakspot','approved',{xp:20});
     cat.find(c=>c.quest_key==='oct_recreate').done_in_period=1; cat.find(c=>c.quest_key==='oct_win_post').done_in_period=1; cat.find(c=>c.quest_key==='oct_weakspot').done_in_period=1;
     cat.forEach(c=>{ c.completions_total=c.done_in_period; }); }
-  const vids=pop?[vid(0,'approved',1210.5,410),vid(1,'approved',980,380),vid(2,'approved',5320.25,1900),vid(3,'changes_requested',0,0),vid(4,'pending',0,0),vid(5,'approved',310,150),vid(6,'approved',120,60),vid(7,'rejected',0,0),vid(8,'approved',44,30)]
+  const vids=pop?[vid(0,'approved',1210.5,410),vid(1,'approved',980,380),vid(2,'approved',5320.25,1900),vid(3,'changes_requested',0,0),vid(9,'approved',0,0,{parent_id:'fx000010abcd',version:2}),vid(10,'changes_requested',0,0),vid(4,'pending',0,0),vid(5,'approved',310,150),vid(6,'approved',120,60),vid(7,'rejected',0,0),vid(8,'approved',44,30)]
     :kind==='pend'?[vid(0,'pending',0,0)]:[];
   const cnt=s=>vids.filter(v=>v.status===s).length; const xp=pop?60:0, cc=pop?3:0;
   return {home:{creator:{id:'fx-'+kind,display_name:name,joined_at:pop?'2026-08-12T15:00:00Z':iso(-2*D),role:'creator'},is_admin:false,
