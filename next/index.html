@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><meta name="robots" content="noindex"><script src="./preview-shim.js"></script><script>window.CAMP='2026-11';function wmFallback(i){ if(!i.dataset.fb){ i.dataset.fb='1'; i.src='https://www.tryravine.com/cdn/shop/files/Gemini_Generated_Image_mnztj3mnztj3mnzt-removebg-preview_3.png?v=1789557310&width=500'; } else { i.onerror=null; i.classList.add('wm-missing'); } }</script>
+<head><meta name="robots" content="noindex"><script src="./preview-shim.js"></script><script>window.CAMP='2026-11';function wmFallback(i){ i.onerror=null; i.classList.add('wm-missing'); }</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
@@ -1821,6 +1821,362 @@ input::placeholder,textarea::placeholder{color:var(--tx3)}
 
 /* affiliate door and generic hero photos keep product visible */
 @media (prefers-reduced-motion:no-preference){.btn,.nitm,.card,.tr-card,.camo-tile,.qcard{transition-duration:.15s}}
+
+/* ===== REDESIGN v2 (Nov 14): composition matched to the five approved concept images ===== */
+/* shell: top context bar + display headings */
+.maincol{min-width:0;display:flex;flex-direction:column}
+.topbar{display:flex;align-items:center;gap:16px;min-height:64px;padding:10px 32px;border-bottom:1px solid var(--ln);position:sticky;top:0;z-index:44;background:rgba(20,25,22,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);flex-wrap:wrap}
+.tb-season{font:800 26px/1 var(--disp);letter-spacing:.6px;text-transform:uppercase;color:var(--tx)}
+.tb-sep{width:1px;height:26px;background:var(--ln2)}
+.tb-chip{font:700 14px var(--f);letter-spacing:.4px;padding:5px 12px;border-radius:6px;background:rgba(181,156,104,.22);color:#EADBB6;border:1px solid rgba(181,156,104,.4);white-space:nowrap}
+.topbar .qtimer.d{position:static;box-shadow:none;background:transparent}
+.tb-av{margin-left:auto;width:44px;height:44px;border-radius:50%;border:2px solid var(--rg-bronze);background:#4B5637;color:var(--rg-paper);font:800 16px var(--disp);letter-spacing:.5px;display:grid;place-items:center;flex:none}
+.tb-av:hover{border-color:var(--gold)}
+@media (max-width:900px){.topbar{display:none}}
+.ph h1,.dh{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:.5px;line-height:1.02}
+.ph h1{font-size:clamp(34px,4.3vw,60px)}
+.ph p{font-size:clamp(16px,1.5vw,21px);color:var(--tx);opacity:.92;margin-top:8px}
+.ph .eyebrow{display:none}
+.eyb{font:800 15px/1 var(--disp);letter-spacing:1.6px;text-transform:uppercase;color:var(--o)}
+.paper .eyb{color:#B8430A}
+.side-brand{align-items:center;padding:22px 16px 16px}
+.brand img.wm{width:168px}
+.side-brand small{letter-spacing:3.2px;padding:0}
+.nitm{font-size:16px;min-height:44px;gap:14px;color:var(--tx)}
+.nitm.on{background:linear-gradient(90deg,#3B4A30,#2C3828);box-shadow:inset 3px 0 0 var(--o)}
+.nitm.on::before{display:none}
+.who{display:grid;grid-template-columns:44px 1fr;gap:2px 12px;align-items:center}
+.who .who-av{grid-row:1/3;width:44px;height:44px;border-radius:50%;border:2px solid var(--rg-bronze);background:#4B5637;color:var(--rg-paper);font:800 16px var(--disp);display:grid;place-items:center}
+.who b{font-size:16px}
+.patch{display:block;flex:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,.45))}
+.av-ring{display:grid;place-items:center;border-radius:50%;background:#4B5637;color:var(--rg-paper);border:3px solid var(--rg-paper);font-family:var(--disp);font-weight:800;letter-spacing:1px;flex:none;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+.subnav{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--ln);padding:0 0 12px;margin:-6px 0 22px}
+.subnav button{min-height:44px;padding:8px 22px;border-radius:8px;font-size:17px;font-weight:600;color:var(--tx)}
+.subnav button:hover{background:var(--sf)}
+.subnav button[aria-current="page"]{background:var(--o);color:var(--o-ink);font-weight:800}
+
+/* ---- Home (01-home) */
+.hb{display:grid;grid-template-columns:minmax(0,68fr) minmax(0,32fr);gap:18px;align-items:stretch}
+.hb-hero{display:grid;grid-template-columns:minmax(0,56fr) minmax(0,44fr);border-radius:var(--r);overflow:hidden;border:1px solid rgba(238,230,213,.28);background:var(--rg-paper);min-height:300px}
+.hb-img{position:relative;background:#0f130f;min-height:240px;overflow:hidden}
+.hb-img img.bg{position:absolute;inset:-12px;width:calc(100% + 24px);height:calc(100% + 24px);object-fit:cover;filter:blur(14px) brightness(.55)}
+.hb-img img.fg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.hb-img.tall img.fg{object-fit:contain}
+.hb-img .hb-play{position:absolute;left:18px;bottom:16px;width:42px;height:42px;border-radius:50%;border:2px solid #fff;background:rgba(20,25,22,.6);color:#fff;display:grid;place-items:center}
+.hb-brief{border-radius:0;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:28px 26px}
+.hb-brief h2{font-size:clamp(30px,3.2vw,46px);color:var(--rg-paper-ink)}
+.hb-quote{font-style:italic;font-size:clamp(16px,1.4vw,20px);line-height:1.4;color:var(--rg-paper-ink)}
+.hb-acts{display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin-top:6px}
+.hb-acts .btn{min-height:54px;padding:12px 30px;font-size:20px;font-family:var(--disp);font-weight:700;letter-spacing:.4px}
+.hb-acts a{font-size:16px;font-weight:600;color:var(--rg-paper-ink);text-decoration:underline;text-underline-offset:4px}
+.hb-more{border-top:1px solid rgba(32,37,30,.18);padding-top:8px;display:flex;flex-direction:column}
+.hb-more button{all:unset;cursor:pointer;min-height:40px;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14.5px;font-weight:700;color:var(--rg-paper-ink);border-radius:6px;padding:0 6px;margin:0 -6px}
+.hb-more button:hover{background:rgba(32,37,30,.08)}.hb-more button:focus-visible{outline:2px solid #8A3A06}
+.hb-id{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid rgba(181,156,104,.45);background-color:#2A3327;background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:flex-end;padding:22px 24px;min-height:300px}
+.hb-id::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,25,22,.25),rgba(20,25,22,.72) 62%,rgba(20,25,22,.9))}
+.hb-id>*{position:relative}
+.hb-id-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:auto;padding-bottom:10px}
+.hb-name{font:800 clamp(28px,2.7vw,40px)/1.02 var(--disp);letter-spacing:.6px;text-transform:uppercase;overflow-wrap:anywhere}
+.hb-role{font:600 15px var(--f);letter-spacing:4px;text-transform:uppercase;color:var(--tx);opacity:.9;margin-top:6px}
+.hb-rank{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;border-top:1px solid rgba(238,230,213,.35);margin-top:14px;padding-top:12px}
+.hb-rank button{all:unset;cursor:pointer;display:flex;align-items:baseline;gap:10px;font-size:18px;color:var(--tx)}
+.hb-rank button b{font:800 36px/1 var(--disp)}.hb-rank button:focus-visible{outline:2px solid var(--o2);outline-offset:3px}
+.pill-up,.pill-dn,.pill-n{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:99px;font-size:15px;font-weight:700;white-space:nowrap}
+.pill-up{background:rgba(61,220,132,.16);color:#7BE8A8;border:1px solid rgba(61,220,132,.4)}
+.pill-dn{background:rgba(255,92,77,.14);color:#FF9A8F;border:1px solid rgba(255,92,77,.4)}
+.pill-n{background:rgba(238,230,213,.1);color:var(--tx2);border:1px solid var(--ln2)}
+.mstrip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:16px;border:1px solid var(--ln2);border-radius:var(--r);background:var(--sf)}
+.mstrip>button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:16px;padding:14px 22px;min-width:0;position:relative}
+.mstrip>button+button::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:1px;background:var(--ln2)}
+.mstrip>button:focus-visible{outline:2px solid var(--o2);outline-offset:-2px;border-radius:var(--r)}
+.mstrip svg{color:#D9B878;flex:none}
+.mstrip b{display:block;font:800 36px/1 var(--disp);font-variant-numeric:tabular-nums}
+.mstrip span span{display:block;font:600 13.5px var(--f);letter-spacing:2px;text-transform:uppercase;color:var(--tx);opacity:.92;margin-top:4px}
+.hb-two{display:grid;grid-template-columns:minmax(0,57fr) minmax(0,43fr);gap:18px;margin-top:16px}
+.hb-card{border:1px solid var(--ln2);border-radius:var(--r);background:var(--sf);padding:20px 24px;min-width:0}
+.hb-card h3{font:800 clamp(30px,3vw,42px)/1.02 var(--disp);text-transform:uppercase;letter-spacing:.5px;margin-top:8px}
+.hb-card .sub{font-size:19px;color:var(--tx);margin-top:6px}
+.hb-mis-row{display:flex;gap:14px;align-items:center;margin-top:14px;flex-wrap:wrap}
+.filmrow{display:flex;gap:12px;flex-wrap:wrap}
+.film{position:relative;width:150px;aspect-ratio:150/108;border-radius:6px;background:#12160F;border:1px solid rgba(181,156,104,.55);padding:11px 8px;box-sizing:border-box;background-image:radial-gradient(rgba(238,230,213,.55) 1.6px,transparent 2px),radial-gradient(rgba(238,230,213,.55) 1.6px,transparent 2px);background-size:11px 8px,11px 8px;background-position:3px 1px,3px calc(100% - 1px);background-repeat:repeat-x;flex:none}
+.film>i{position:absolute;inset:11px 8px;border-radius:3px;overflow:hidden;background:#252d24;display:grid;place-items:center;color:var(--tx3);font:600 12px var(--f);font-style:normal}
+.film img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.film .pl{position:absolute;left:8px;bottom:8px;color:#fff;filter:drop-shadow(0 1px 3px #000)}
+.film.empty>i{border:1px dashed rgba(238,230,213,.3);background:transparent}
+.hb-mis-side{flex:1 1 180px;min-width:160px;display:flex;flex-direction:column;gap:14px}
+.fatbar{height:14px;border-radius:99px;background:rgba(238,230,213,.2);overflow:hidden}.fatbar>i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#F2681D,#FF8A3D)}
+.paper .fatbar{background:rgba(32,37,30,.16)}
+.btn.line{background:transparent;color:var(--tx);border:1.5px solid var(--tx);min-height:46px;font-size:17px}
+.btn.line:hover{background:rgba(238,230,213,.1)}
+.hb-unl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:16px;align-items:center}
+.segbar{display:flex;gap:4px;margin-top:12px;max-width:190px}.segbar i{flex:1;height:12px;border-radius:99px;background:rgba(238,230,213,.2)}.segbar i.on{background:#D9A066}
+.nplate{position:relative;border-radius:14px;padding:9px;background:linear-gradient(135deg,#6E5A2E,#3B3320 40%,#7A6534);box-shadow:0 8px 22px rgba(0,0,0,.5),inset 0 0 0 1px rgba(232,182,74,.5)}
+.nplate::before{content:"";position:absolute;inset:4px;border:1.5px dashed rgba(238,230,213,.45);border-radius:11px;pointer-events:none}
+.nplate-in{position:relative;border-radius:8px;overflow:hidden;min-height:96px;display:flex;align-items:center;gap:12px;padding:14px 16px;background-size:cover;background-position:center}
+.nplate-in::before{content:"";position:absolute;inset:0;background:rgba(15,19,15,.5)}
+.nplate-in>*{position:relative}
+.nplate-in b{font:800 clamp(18px,1.7vw,26px)/1.05 var(--disp);text-transform:uppercase;letter-spacing:.6px;overflow-wrap:anywhere}
+.hb-three{display:grid;grid-template-columns:minmax(0,60fr) minmax(0,40fr);gap:18px;margin-top:16px}
+.hb-team{all:unset;box-sizing:border-box;cursor:pointer;position:relative;display:block;border-radius:var(--r);overflow:hidden;border:1px solid var(--ln2);min-height:124px;padding:18px 28px;background:#1b221d}
+.hb-team img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.hb-team::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(20,25,22,.92) 0%,rgba(20,25,22,.72) 45%,rgba(20,25,22,.15) 100%)}
+.hb-team>*:not(img){position:relative;z-index:2}
+.hb-team h3{font:800 clamp(28px,2.8vw,38px)/1.05 var(--disp);text-transform:uppercase;letter-spacing:.5px;margin-top:6px}
+.hb-team .tbar{position:relative;height:22px;border-radius:99px;background:rgba(238,230,213,.25);max-width:380px;margin-top:10px;overflow:hidden}
+.hb-team .tbar i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:linear-gradient(90deg,#F2681D,#FF8A3D);min-width:64px;display:grid;place-items:center;font:800 15px var(--f);font-style:normal;color:var(--o-ink)}
+.hb-team:focus-visible{outline:2px solid var(--o2);outline-offset:2px}
+.hb-ach{display:flex;align-items:center;gap:22px}
+.hb-ach .vr{width:1px;align-self:stretch;background:var(--ln2)}
+.hb-ach .t{font-size:clamp(20px,2vw,26px);font-weight:500;margin-top:6px}
+.hb-ach a{margin-left:auto;color:var(--tx);text-decoration:underline;text-underline-offset:4px;white-space:nowrap;font-size:15px}
+@media (max-width:1240px){.hb{grid-template-columns:1fr}.hb-id{min-height:230px}}
+@media (max-width:1000px){.hb-two,.hb-three{grid-template-columns:1fr}}
+@media (max-width:760px){.hb-hero{grid-template-columns:1fr;min-height:0}.hb-img{min-height:190px;max-height:220px}.hb-brief{padding:20px}.hb-acts .btn{min-height:48px;font-size:18px}
+  .mstrip{grid-template-columns:repeat(2,minmax(0,1fr))}.mstrip>button{padding:12px 14px;gap:10px}.mstrip>button:nth-child(3)::before{display:none}.mstrip>button:nth-child(n+3){border-top:1px solid var(--ln2)}.mstrip b{font-size:28px}.mstrip span span{font-size:11.5px;letter-spacing:1.2px}.mstrip svg{width:26px;height:26px}
+  .hb-unl{grid-template-columns:1fr}.film{width:calc(33.3% - 8px);min-width:86px}.hb-card{padding:16px}.hb,.hb-two,.hb-three{gap:14px}.hb-ach{flex-wrap:wrap;gap:14px}.hb-ach a{margin-left:0}}
+
+/* ---- page header with landscape photo */
+.ph.photo{position:relative;border-radius:var(--r);overflow:hidden;padding:18px 0 14px;margin-bottom:14px;align-items:flex-end}
+.ph.photo::before{content:"";position:absolute;right:0;top:0;bottom:0;width:46%;background:var(--phimg) center 30%/cover no-repeat;-webkit-mask-image:linear-gradient(90deg,transparent,#000 55%);mask-image:linear-gradient(90deg,transparent,#000 55%);opacity:.75}
+.ph.photo>*{position:relative}
+.ph.photo .acts{padding-right:16px}
+/* ---- Quests (02-quests) */
+.qpath{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 28px;align-items:center;border:1px solid var(--ln2);border-radius:var(--r);background:var(--sf);padding:16px 28px;margin-bottom:16px}
+.qpath-h{padding-right:28px;border-right:1px solid var(--ln2)}
+.qpath-h b{display:block;font:800 clamp(26px,2.6vw,36px)/1 var(--disp);text-transform:uppercase;letter-spacing:.5px}
+.qpath-h span{display:block;font-size:18px;color:var(--tx);margin-top:8px}
+.qpath-steps{display:flex;align-items:flex-start;justify-content:space-between;gap:0;min-width:0;overflow-x:auto;scrollbar-width:none;padding:2px}
+.qpath-steps::-webkit-scrollbar{display:none}
+.qstepb{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;flex:none;min-width:84px;position:relative;z-index:1;border-radius:10px;padding:2px 4px}
+.qstepb:focus-visible{outline:2px solid var(--o2);outline-offset:2px}
+.qstepb span{font-size:17px;font-weight:600;padding:2px 12px;border-radius:6px;white-space:nowrap}
+.qstepb.on span{background:var(--o);color:var(--o-ink);font-weight:800}
+.qstepb small{font-size:12px;color:var(--tx2)}
+.qpath-line{flex:1 1 20px;min-width:14px;height:0;border-top:3px solid var(--rg-bronze);margin-top:40px}
+.qpath-line.todo{border-top:2px dashed rgba(238,230,213,.35)}
+.qsplit{display:grid;grid-template-columns:1fr;gap:16px;align-items:start}
+.qboard{border:1px solid var(--ln2);border-radius:var(--r);background:rgba(32,40,33,.6);padding:8px 10px 12px;min-width:0}
+.qstabs{display:flex;align-items:center;gap:4px;flex-wrap:wrap;padding:4px 6px 10px}
+.qstabs button{min-height:44px;padding:8px 14px;font-size:16px;font-weight:600;color:var(--tx);border-bottom:3px solid transparent;display:inline-flex;align-items:center;gap:8px}
+.qstabs button[aria-selected="true"]{border-bottom-color:var(--o);font-weight:800}
+.qstabs button i{font-style:normal;font:800 13px var(--f);min-width:24px;height:24px;border-radius:6px;display:inline-grid;place-items:center;background:#C9A25A;color:#20251E}
+.qstabs button.hot i{background:#D5562A;color:#fff}
+.qstabs input{flex:1 1 170px;min-width:150px;margin-left:auto;max-width:260px}
+.qboard .qsec .sec{margin:10px 6px 8px}.qboard .qsec .sec h2{font-size:17px}
+.qboard .qgrid{grid-template-columns:1fr!important;gap:12px}
+.qboard .qcard.v2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,40%);border:1px solid var(--ln2);background:var(--sf);min-height:118px}
+.qboard .qcard.v2 .art{order:2;height:auto;min-height:118px;aspect-ratio:auto;margin:10px 10px 10px 0;border-radius:8px;overflow:hidden;position:relative}
+.qboard .qcard.v2 .art img,.qboard .qcard.v2 .art>svg,.qboard .qcard.v2 .art>div:not(.qbadge){position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.qboard .qcard.v2 .qbody{padding:14px 16px}
+.qboard .qcard.v2 .ttl{font:800 26px/1.05 var(--disp);text-transform:uppercase;letter-spacing:.4px}
+.qboard .qcard.v2 .out{font-size:14.5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.qboard .qcard.v2.sel{border:2px solid var(--o);box-shadow:0 0 0 1px rgba(255,110,32,.3)}
+.qboard .qfb{background:var(--rg-paper);color:var(--rg-paper-ink);border:0;border-radius:8px;padding:8px 12px;font-size:14px}
+#qbrief{display:none}
+.qbrief{position:sticky;top:80px;max-height:calc(100vh - 96px);overflow:auto;padding:22px 24px 18px;display:flex;flex-direction:column;gap:14px}
+.qb-head{display:flex;justify-content:space-between;gap:12px 18px;align-items:flex-start;flex-wrap:wrap}
+.qb-head h2{font:800 clamp(30px,2.9vw,44px)/1 var(--disp);text-transform:uppercase;letter-spacing:.5px;flex:1 1 200px}
+.qstage{display:flex;align-items:flex-start;gap:4px;list-style:none}
+.qstage li{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--rg-paper-ink2);min-width:58px;position:relative}
+.qstage li::before{content:"";width:20px;height:20px;border-radius:50%;border:2px solid var(--rg-paper-ink);background:transparent;box-sizing:border-box}
+.qstage li.done::before{background:var(--rg-paper-ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23EEE6D5' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/14px no-repeat}
+.qstage li.cur::before{border-color:#C94C0C;box-shadow:inset 0 0 0 4px var(--rg-paper),inset 0 0 0 20px #C94C0C}
+.qstage li.cur span{background:#C94C0C;color:#fff;padding:1px 8px;border-radius:5px}
+.qstage li+li::after{content:"→";position:absolute;left:-10px;top:-1px;font-size:15px;color:var(--rg-paper-ink)}
+.qbrief .filmrow{flex-wrap:nowrap}.qbrief .film{flex:1 1 0;width:auto;min-width:0;background-color:#12160F}
+.qb-cols{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:18px}
+.qb-cols>div+div{border-left:1px solid rgba(32,37,30,.25);padding-left:18px}
+.qb-h{display:flex;align-items:center;gap:10px;font:800 21px/1 var(--disp);text-transform:uppercase;letter-spacing:.5px;color:var(--rg-paper-ink);margin:0 0 8px}
+.qb-h svg{color:var(--rg-paper-ink)}
+.qb-list{list-style:none;display:flex;flex-direction:column;gap:8px;font-size:15.5px;color:var(--rg-paper-ink)}
+.qb-list li{display:flex;gap:10px;align-items:flex-start}
+.qb-list li::before{content:"";flex:none;width:18px;height:18px;margin-top:2px;border:2px solid var(--rg-paper-ink);border-radius:4px;box-sizing:border-box}
+.qb-list li.ok::before{background:#C94C0C url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/14px no-repeat;border-color:#C94C0C}
+.qb-ev li{border-bottom:1px solid rgba(32,37,30,.18);padding-bottom:8px}
+.qb-go{width:100%;max-width:360px;align-self:center;min-height:56px;font:700 23px var(--disp);letter-spacing:.4px}
+.qb-reward{display:flex;align-items:center;gap:12px;background:rgba(32,37,30,.08);border-radius:8px;padding:10px 14px;font-size:16px;color:var(--rg-paper-ink)}
+.qb-note{background:#fff7e6;border-left:4px solid #C94C0C;border-radius:6px;padding:10px 12px;font-size:15px;color:var(--rg-paper-ink)}
+@media (min-width:1280px){.qsplit{grid-template-columns:minmax(0,1.22fr) minmax(0,1fr)}#qbrief{display:block}.qrec.qrec-narrow{display:none}}
+@media (max-width:760px){.qpath{grid-template-columns:1fr;padding:14px}.qpath-h{border-right:0;padding-right:0}.qboard .qcard.v2{grid-template-columns:1fr}.qboard .qcard.v2 .art{order:0;margin:0;border-radius:0;min-height:150px}.qstabs input{max-width:none;flex-basis:100%;margin-left:0}}
+
+/* ---- Leaderboard (03-leaderboard) */
+.pcards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:end;margin-bottom:18px}
+.pcard{position:relative;border-radius:14px;overflow:hidden;min-height:164px;border:2px solid #9BA39A;display:flex;align-items:center;gap:16px;padding:44px 20px 18px;background:#1b221d}
+.pcard.p1{min-height:186px;border-color:var(--gold);box-shadow:0 0 0 2px rgba(232,182,74,.25),0 10px 30px rgba(0,0,0,.4)}
+.pcard.p3{border-color:#B0713F}
+.pcard img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pcard::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(20,25,22,.15),rgba(20,25,22,.78))}
+.pcard>*:not(img){position:relative;z-index:2}
+.pcard .rib{position:absolute;left:18px;top:0;z-index:3;min-width:58px;padding:8px 8px 16px;text-align:center;font:800 32px/1 var(--disp);color:#20251E;background:linear-gradient(180deg,#E3E5E0,#A9B0A8);clip-path:polygon(0 0,100% 0,100% 100%,50% 84%,0 100%)}
+.pcard.p1 .rib{background:linear-gradient(180deg,#F6D58E,#D29A2A)}.pcard.p3 .rib{background:linear-gradient(180deg,#E0A070,#A9622F)}
+.pcard .pn{flex:1;min-width:0}
+.pcard .pn b{display:block;font:800 clamp(24px,2.5vw,36px)/1.02 var(--disp);text-transform:uppercase;letter-spacing:.6px;overflow-wrap:anywhere}
+.pcard .pn small{display:block;font-size:14px;color:var(--tx);margin-top:4px}
+.pcard.me{outline:3px solid var(--o);outline-offset:2px}
+.race{display:grid;grid-template-columns:auto repeat(3,minmax(0,1fr));gap:18px;align-items:stretch;padding:18px 20px;margin-bottom:18px}
+.race-t{display:flex;flex-direction:column;justify-content:center;padding-right:22px;border-right:2px solid rgba(32,37,30,.6)}
+.race-t b{font:800 italic clamp(34px,3.4vw,52px)/1 var(--disp);text-transform:uppercase;letter-spacing:.5px;color:var(--rg-paper-ink)}
+.race-t span{font-size:13.5px;color:var(--rg-paper-ink2);margin-top:6px;max-width:170px}
+.rc{position:relative;border-radius:10px;overflow:hidden;min-height:112px;padding:34px 16px 14px;display:flex;align-items:center;gap:12px;background-color:#2A3327;background-size:cover;color:var(--tx)}
+.rc::before{content:"";position:absolute;inset:0;background:rgba(20,25,22,.62)}
+.rc>*{position:relative}
+.rc .rk{position:absolute;left:0;top:0;padding:4px 12px;font:800 22px/1.1 var(--disp);background:rgba(20,25,22,.85);border-radius:0 0 8px 0;color:var(--tx)}
+.rc b.nm{font:800 clamp(20px,2vw,28px)/1.02 var(--disp);text-transform:uppercase;letter-spacing:.5px;color:var(--tx);overflow-wrap:anywhere}
+.rc b.nm *{color:inherit}
+.rc.you{background:var(--rg-paper);border:3px solid #E0622A;color:var(--rg-paper-ink);flex-wrap:wrap;padding:34px 14px 10px}
+.rc.you::before{display:none}
+.rc.you .rk{background:#E0622A;color:#fff}
+.rc.you b.nm,.rc.you b.nm *{color:var(--rg-paper-ink)!important;animation:none!important;background:none!important;-webkit-text-fill-color:currentColor}
+.rc.you .mvp{position:absolute;right:8px;top:6px;background:#2F6B3F;color:#fff;font:800 12.5px var(--f);padding:3px 9px;border-radius:5px;letter-spacing:.4px}
+.rc.you .mvp.dn{background:#A53A2C}
+.rc.you .facts{flex-basis:100%;display:flex;gap:6px 14px;flex-wrap:wrap;justify-content:center;font-size:14px;color:var(--rg-paper-ink);border-top:1px solid rgba(32,37,30,.2);padding-top:6px}
+.rc.empty{display:grid;place-items:center;text-align:center;font-size:15px;padding:14px}
+.lbt{border:1px solid var(--ln2);border-radius:var(--r);overflow:hidden;background:var(--sf)}
+.lbt-h,.lbrow2{display:grid;grid-template-columns:84px minmax(0,1.6fr) 130px minmax(0,1fr);gap:10px;align-items:center;padding:0 22px}
+.lbt-h{min-height:38px;font:700 13.5px var(--f);letter-spacing:1px;text-transform:uppercase;color:var(--tx);border-bottom:1px solid var(--ln2);background:rgba(0,0,0,.18)}
+.lbrow2{min-height:46px;border-bottom:1px solid var(--ln);font-size:17px}
+.lbrow2:last-of-type{border-bottom:0}
+.lbrow2 .rk{font:800 22px/1 var(--disp);letter-spacing:.4px}
+.lbrow2 .cr{display:flex;align-items:center;gap:12px;min-width:0}
+.lbrow2 .cr .av-ring{border-width:2px}
+.lbrow2 .cr .nm{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lbrow2 .mvc{font-weight:700;font-variant-numeric:tabular-nums}
+.lbrow2 .mvc .up{color:#6FE0A0}.lbrow2 .mvc .dn{color:#FF8A7D}
+.lbrow2 .st{display:flex;justify-content:flex-start}
+.lbrow2 .st span{display:inline-flex;align-items:center;gap:6px;padding:3px 12px;border:1px solid var(--ln2);border-radius:99px;font-size:14px;white-space:nowrap}
+.lbrow2.me{background:linear-gradient(90deg,rgba(224,98,42,.38),rgba(224,98,42,.16));box-shadow:inset 0 0 0 2px #E0622A;border-radius:6px}
+.lbrow2.me .st span{border-color:rgba(238,230,213,.5)}
+@media (max-width:1100px){.race{grid-template-columns:repeat(3,minmax(0,1fr))}.race-t{grid-column:1/-1;border-right:0;padding:0 0 4px;flex-direction:row;align-items:baseline;gap:12px}}
+@media (max-width:760px){.pcards{grid-template-columns:1fr;gap:10px}.pcard,.pcard.p1{min-height:108px;padding:18px 16px 14px 92px}.pcard.p1{order:-1}.race{grid-template-columns:1fr;gap:10px;padding:14px}.rc.you{order:-1}
+  .lbt-h{display:none}.lbrow2{grid-template-columns:56px minmax(0,1fr) auto;padding:8px 12px;row-gap:2px;font-size:16px}.lbrow2 .st{grid-column:2/4}.lbrow2 .cr .av-ring{display:none}}
+
+/* ---- Armory (04-armory) */
+.arm-top{grid-template-columns:minmax(0,59fr) minmax(0,41fr);gap:20px}
+.arm-banner{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid rgba(181,156,104,.5);min-height:190px;display:flex;align-items:center;gap:22px;padding:22px 28px;background-color:#2A3327;background-size:cover;background-position:center}
+.arm-banner::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,25,22,.5),rgba(20,25,22,.28) 50%,rgba(20,25,22,.5))}
+.arm-banner>*{position:relative}
+.arm-banner .vr{width:2px;align-self:stretch;margin:14px 0;background:rgba(238,230,213,.55)}
+.arm-banner .an{font:800 clamp(30px,3.3vw,50px)/1 var(--disp);text-transform:uppercase;letter-spacing:.6px;overflow-wrap:anywhere}
+.arm-chip{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:6px;background:rgba(75,86,55,.92);border:1px solid rgba(238,230,213,.3);font:700 clamp(15px,1.4vw,20px) var(--disp);letter-spacing:1.6px;text-transform:uppercase;color:var(--rg-paper)}
+.arm-slots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:12px}
+.arm-slot{all:unset;box-sizing:border-box;cursor:pointer;border:1px solid var(--ln2);border-radius:10px;background:var(--sf);padding:12px 14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.arm-slot:hover{border-color:var(--rg-bronze)}.arm-slot:focus-visible{outline:2px solid var(--o2);outline-offset:2px}
+.arm-slot .h{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--tx)}
+.arm-slot .sw{width:100%;max-width:104px;height:50px;border-radius:8px;border:1px solid var(--ln2);background-size:cover;background-position:center;display:grid;place-items:center;font:800 24px var(--disp)}
+.arm-slot .f{display:flex;justify-content:space-between;gap:6px;font-size:16px;font-weight:600;color:var(--tx)}
+.arm-nu{display:flex;flex-direction:column;gap:12px;padding:18px 22px}
+.arm-nu .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;border-bottom:1px solid rgba(32,37,30,.25);padding-bottom:8px}
+.arm-nu .top b{font:800 28px/1 var(--disp);text-transform:uppercase;letter-spacing:.5px}
+.arm-nu .top i{font-size:14.5px;color:var(--rg-paper-ink2)}
+.arm-nu .ttl{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.arm-nu .ttl b{font:800 clamp(26px,2.6vw,34px)/1 var(--disp);text-transform:uppercase;letter-spacing:.5px}
+.arm-nu .ttl span{font-size:17px;color:var(--rg-paper-ink);white-space:nowrap}
+.arm-nu .pr{display:flex;align-items:center;gap:12px}.arm-nu .pr .fatbar{flex:1;height:16px}.arm-nu .pr span{font-size:17px;font-weight:600;color:var(--rg-paper-ink)}
+.arm-nu .ft{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.arm-nu .ft .req{display:flex;gap:10px;align-items:flex-start;font-size:16px;color:var(--rg-paper-ink);flex:1 1 180px}
+.arm-nu .ft .req::before{content:"";flex:none;width:18px;height:18px;margin-top:2px;border:2px solid var(--rg-paper-ink);border-radius:4px}
+.arm-nu .btn{font:700 19px var(--disp);letter-spacing:.4px;min-height:48px}
+.coll-h{display:flex;align-items:center;gap:10px 20px;flex-wrap:wrap;margin:26px 0 14px;padding-top:18px;border-top:1px solid var(--ln2)}
+.coll-h h2{font:800 clamp(30px,3vw,40px)/1 var(--disp);text-transform:uppercase;letter-spacing:.6px}
+.chips{display:flex;gap:10px;flex-wrap:wrap}
+.chips button{min-height:40px;padding:6px 20px;border-radius:8px;border:1px solid var(--ln2);font-size:16px;font-weight:600;color:var(--tx)}
+.chips button[aria-pressed="true"]{background:var(--o);border-color:var(--o);color:var(--o-ink);font-weight:800}
+.arm-grid{grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:16px}
+.camo-tile{border-radius:10px;border:1px solid var(--ln2)}
+.camo-tile.eq{border:2px solid #E9D9B0;box-shadow:0 0 0 1px rgba(233,217,176,.35)}
+.camo-tile .ct-sw{height:132px}
+.camo-tile .ct-b{padding:12px 14px 14px;gap:4px;display:flex;flex-direction:column}
+.camo-tile .ct-b b{font:800 24px/1.05 var(--disp);text-transform:uppercase;letter-spacing:.5px}
+.camo-tile .ct-b>span{font-size:14.5px;color:var(--tx);opacity:.9}
+.ct-state{margin-top:8px;min-height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;gap:8px;font:700 16px var(--disp);letter-spacing:1.2px;text-transform:uppercase;background:#3A4239;color:var(--tx)}
+.ct-state.eq{background:#5B6332;color:#F4EBC8}.ct-state.un{background:#2F4A35;color:#CFF3DA}
+.camo-tile .ct-prog{margin-top:8px}
+.arm-legend{display:flex;gap:10px 22px;flex-wrap:wrap;align-items:center;margin-top:20px;padding-top:14px;border-top:1px solid var(--ln2);font-size:16px;color:var(--tx)}
+.arm-legend span{display:inline-flex;gap:10px;align-items:center}
+@media (max-width:1100px){.arm-top{grid-template-columns:1fr}}
+@media (max-width:760px){.arm-banner{padding:16px;gap:14px;min-height:150px}.arm-banner .patch{width:64px;height:70px}.arm-banner .av-ring{width:64px!important;height:64px!important;font-size:26px!important}.arm-slots{grid-template-columns:repeat(2,minmax(0,1fr))}.arm-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.camo-tile .ct-sw{height:92px}.camo-tile .ct-b b{font-size:19px}}
+
+/* ---- Trophy Room (05-rewards-trophy-room) */
+.tr-top{display:grid;grid-template-columns:minmax(0,58fr) minmax(0,42fr);gap:18px;margin-bottom:8px}
+.tr-half{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.tr-half .bnr{position:relative;height:74px;background:var(--phimg) center 35%/cover no-repeat;-webkit-mask-image:linear-gradient(90deg,transparent 22%,#000 60%);mask-image:linear-gradient(90deg,transparent 22%,#000 60%)}
+.tr-half .tag{position:absolute;left:18px;top:14px;z-index:2;background:rgba(32,37,30,.12);padding:6px 14px;border-radius:6px;font:800 23px/1 var(--disp);letter-spacing:.8px;text-transform:uppercase;color:var(--rg-paper-ink)}
+.tr-half .in{padding:6px 24px 20px;display:flex;flex-direction:column;gap:14px}
+.tr-xp{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.tr-xp .n{font:800 56px/1 var(--disp);color:var(--rg-paper-ink);font-variant-numeric:tabular-nums}
+.tr-xp .l{font:800 18px/1.05 var(--disp);letter-spacing:.8px;text-transform:uppercase;color:var(--rg-paper-ink)}
+.tr-xp .fatbar{flex:1 1 200px;height:16px}
+.tr-vid{display:flex;align-items:center;gap:14px 18px;flex-wrap:wrap;border-top:1px solid rgba(32,37,30,.3);padding-top:12px}
+.fchk{width:56px;height:44px;border-radius:5px;background:#20251E url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23EEE6D5' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/26px no-repeat;border-top:5px dotted #EEE6D5;border-bottom:5px dotted #EEE6D5;box-sizing:border-box}
+.fchk.no{background-image:none;opacity:.25}
+.tr-pend{margin-left:auto;border-left:1px solid rgba(32,37,30,.3);padding-left:18px;font-size:16px;color:var(--rg-paper-ink);max-width:230px}
+.tr-pend span{display:inline-flex;gap:8px;align-items:center;margin-top:8px;background:rgba(32,37,30,.12);padding:6px 12px;border-radius:6px;font-weight:600}
+.btn.paper-line{background:transparent;border:2px solid #C94C0C;color:#A53E08;font:700 19px var(--disp);letter-spacing:.3px;align-self:flex-start}
+.btn.paper-line:hover{background:rgba(201,76,12,.08)}
+.tr-leg{border:1px solid rgba(181,156,104,.4);border-radius:var(--r);background:linear-gradient(160deg,#2C3828,#1F2720);padding:20px 24px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.tr-leg .who2{display:flex;gap:14px;align-items:center;border-bottom:1px solid rgba(238,230,213,.3);padding-bottom:14px}
+.tr-leg .who2 b{display:block;font:700 28px/1.05 var(--disp);letter-spacing:.4px}
+.tr-leg .tlc{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:center}
+.tr-leg ul{list-style:none;display:flex;flex-direction:column;gap:10px;font-size:17px}
+.tr-leg li{display:flex;gap:12px;align-items:center}.tr-leg li b{font:800 22px var(--disp);min-width:26px}
+.tr-leg li svg{color:#D9B878;flex:none}
+.tr-h{display:flex;align-items:center;gap:10px 22px;flex-wrap:wrap;margin:22px 0 12px}
+.tr-h h2{font:800 clamp(28px,3vw,38px)/1 var(--disp);text-transform:uppercase;letter-spacing:.6px}
+.tr-h span{font-size:16px;color:var(--tx);display:inline-flex;gap:8px;align-items:center}
+.shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.trophy{all:unset;box-sizing:border-box;cursor:pointer;position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 14px;align-items:center;padding:20px 16px 22px;border-radius:8px;min-width:0;
+  background:linear-gradient(180deg,#3A2A1C 0%,#2A1F16 70%,#4A3320 71%,#3A2718 100%);border:1px solid #5C4129;box-shadow:inset 0 14px 22px rgba(255,214,150,.07)}
+.trophy::before{content:"";position:absolute;left:50%;top:0;width:60px;height:5px;transform:translateX(-50%);border-radius:0 0 6px 6px;background:#FFD79A;box-shadow:0 0 22px 8px rgba(255,205,130,.35)}
+.trophy:focus-visible{outline:2px solid var(--o2);outline-offset:2px}
+.trophy .patch{grid-row:1/3}
+.trophy h3{font:800 23px/1.05 var(--disp);text-transform:uppercase;letter-spacing:.5px;color:var(--tx)}
+.trophy p{font-size:14.5px;color:var(--tx);opacity:.92;margin-top:4px}
+.trophy .tv{margin-top:8px;height:64px;border-radius:5px;overflow:hidden;position:relative;border:1px solid rgba(238,230,213,.4);background:#12160F}
+.trophy .tv img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.trophy .ftr{grid-column:1/-1;display:flex;align-items:center;gap:14px;margin-top:8px;font-size:15px;color:var(--tx)}
+.trophy .ftr .stt{display:inline-flex;gap:8px;align-items:center;padding:4px 14px;border-radius:99px;font:800 15px var(--disp);letter-spacing:1px;text-transform:uppercase;background:#D9B878;color:#20251E}
+.trophy:not(.got) .ftr .stt{background:#3A4239;color:var(--tx)}
+.trophy .ftr .sep{width:1px;height:20px;background:rgba(238,230,213,.4)}
+.tr-bot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px}
+.tr-bot .paper h3{font:800 28px/1 var(--disp);text-transform:uppercase;letter-spacing:.5px}
+.rstat{display:flex;list-style:none;margin:16px 0 4px}
+.rstat li{flex:1;position:relative;text-align:center;font-size:16px;font-weight:600;color:var(--rg-paper-ink);padding-top:34px}
+.rstat li::before{content:"";position:absolute;left:50%;top:0;width:24px;height:24px;margin-left:-12px;border-radius:50%;border:2px solid var(--rg-paper-ink);background:var(--rg-paper);box-sizing:border-box;z-index:1}
+.rstat li+li::after{content:"";position:absolute;right:50%;left:-50%;top:11px;border-top:2px solid var(--rg-paper-ink)}
+.rstat li.on::before{border-color:#C94C0C;box-shadow:inset 0 0 0 4px var(--rg-paper),inset 0 0 0 20px #C94C0C}
+.rstat li.on span{background:#C94C0C;color:#fff;padding:4px 12px;border-radius:6px}
+.rstat li.was::before{background:var(--rg-paper-ink)}
+@media (max-width:1100px){.tr-top,.tr-bot{grid-template-columns:1fr}}
+@media (max-width:760px){.shelf{grid-template-columns:1fr}.tr-xp .n{font-size:44px}.tr-pend{margin-left:0;border-left:0;padding-left:0;max-width:none}.tr-leg .tlc{grid-template-columns:1fr}.tr-leg .tlc .patch{display:none}.subnav button{padding:8px 14px;font-size:16px}}
+
+/* v2 tuning after side-by-side review */
+.main{padding-top:22px}
+.ph{margin-bottom:16px}
+.hb-hero,.hb-id{min-height:296px}
+.hb-brief{padding:22px 26px;gap:10px}
+.hb-brief h2{font-size:clamp(28px,2.9vw,42px)}
+.qstabs button{padding:8px 10px;font-size:15.5px}
+.qstabs input{flex:1 1 150px;min-width:130px;max-width:210px;min-height:40px}
+.qb-head h2{font-size:clamp(26px,2.3vw,36px)}
+.qbrief .film{height:150px;aspect-ratio:auto}
+.qbrief .film img{object-position:center 30%}
+.race{padding:14px 18px}
+.rc{min-height:104px}
+.rc.you{padding:30px 12px 8px;gap:8px 10px;align-content:center}
+.rc.you .av-ring{width:44px!important;height:44px!important;font-size:18px!important}
+.rc.you b.nm{font-size:clamp(17px,1.5vw,22px);flex:1;min-width:0}
+.rc.you .facts{font:400 13.5px/1.35 var(--f);letter-spacing:0;text-transform:none}
+.rc.you .facts b{font-weight:700;letter-spacing:0}
+.race-t span{letter-spacing:0}
+.lbgap{text-align:center;color:var(--tx3);padding:2px}
+.tr-half .bnr{opacity:.9}
+
+.qstabs{gap:0}.qstabs button{padding:8px 9px;font-size:15px}.qstabs input{max-width:180px;flex:1 1 120px;min-width:110px}
+
+@media (min-width:901px){.ltool{top:64px}}
+@media (min-width:600px) and (max-width:1279px){.ltool{flex-wrap:wrap;height:auto;min-height:56px;padding-top:8px;padding-bottom:8px}.lsel{max-width:160px}.lsearch{flex-basis:160px}}
+
+@media (max-width:760px){.pcard .patch{display:none}.pcard .pn b{font-size:24px}}
 </style>
 </head>
 <body>
@@ -1832,7 +2188,8 @@ input::placeholder,textarea::placeholder{color:var(--tx3)}
     <nav id="nav" aria-label="All pages"></nav>
     <div class="who" id="who"></div>
   </aside>
-  <main class="main" id="main" tabindex="-1"></main>
+  <div class="maincol"><header class="topbar" aria-label="Season context"><span class="tb-season" id="tb-season"></span><span class="tb-sep" aria-hidden="true"></span><span class="tb-chip" id="tb-half" hidden></span><button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button><button class="tb-av" id="tb-me" onclick="go('profile')" aria-label="My profile" hidden></button></header>
+  <main class="main" id="main" tabindex="-1"></main></div>
 </div>
 <nav class="mobbar" id="mobbar" aria-label="Quick navigation"></nav>
 <div class="sheet" id="sheet"><div class="inner"></div></div>
@@ -1840,8 +2197,7 @@ input::placeholder,textarea::placeholder{color:var(--tx3)}
 <aside class="drawer" id="drawer" tabindex="-1" aria-label="Details"></aside>
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
-<button class="qtimer d" id="qtimer" onclick="go('quests')" hidden></button>
-<script>window.APP_MODE="live";window.PREVIEW=1;window.BUILD="20261114-193000";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.PREVIEW=1;window.BUILD="20261114-203000";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -2213,7 +2569,8 @@ function renderShell(){
   const pips=admin?(S.pips||{}):{};
   const navHtml=NAV.filter(g=>g[0]!=='Admin'||admin).map(g=>`<div class="ngrp"><div class="nlbl">${g[0]}</div>${g[1].map(n=>isSoon(n[0])?`<button class="nitm soon" aria-disabled="true" onclick="soonTap()">${ico(n[2])}<span>${esc(n[1])}</span><span class="soontag">Soon</span></button>`:`<button class="nitm ${S.view===n[0]?'on':''}" onclick="go('${n[0]}')">${ico(n[2])}<span>${esc(n[1])}</span>${pips[n[0]]?`<span class="pip">${pips[n[0]]}</span>`:''}</button>`).join('')}</div>`).join('');
   $('#nav').innerHTML=navHtml+bookCta('bk-side');
-  $('#who').innerHTML=`<b>${esc(c?.display_name||'')}</b>${admin?'Admin':'Creator'} · <a href="#" onclick="logout();return false">Switch account</a>`;
+  $('#who').innerHTML=`<span class="who-av" aria-hidden="true">${esc(initials(c?.display_name||''))}</span><b>${esc(c?.display_name||'')}</b><span>${admin?'Admin':'Creator'} · <a href="#" onclick="logout();return false">Switch account</a></span>`;
+  { const ts=$('#tb-season'); if(ts) ts.textContent=MONTH_NAME+' season'; const th=$('#tb-half'); if(th){ const q=S.cache['my_quests{}']; const pn=q&&(q.periods||[]).find(x=>x.key===q.period_now); th.hidden=!pn; if(pn){ th.textContent=pn.label; th.title='Quest XP and cash tiers run in this half. Leaderboard and My Pace run the full month.'; } } const tm=$('#tb-me'); if(tm){ tm.hidden=false; tm.textContent=initials(c?.display_name||''); } }
   $('#mobbar').innerHTML=MOB.map(n=>`<button class="${S.view===n[0]?'on':''}" onclick="${n[0]==='more'?'openSheet()':`go('${n[0]}')`}">${ico(n[2],20)}<span>${n[1]}</span></button>`).join('');
   $('#sheet .inner').innerHTML=`<div class="row between" style="margin-bottom:8px"><b>All pages</b><button class="btn gh sm" onclick="closeSheet()">Close</button></div>`+bookCta('sheet')+NAV.filter(g=>g[0]!=='Admin'||admin).map(g=>`<div class="nlbl">${g[0]}</div>${g[1].map(n=>isSoon(n[0])?`<button class="nitm soon" aria-disabled="true" onclick="soonTap()">${ico(n[2])}<span>${esc(n[1])}</span><span class="soontag">Soon</span></button>`:`<button class="nitm" onclick="closeSheet();go('${n[0]}')">${ico(n[2])}<span>${esc(n[1])}</span></button>`).join('')}`).join('')+`<div class="hr"></div><button class="nitm" onclick="logout()">${ico('x')}<span>Switch account</span></button>`;
   $('#modebadge').textContent=S.mode==='fixture'?'Preview · fixture data · nothing is saved':window.PREVIEW?'Redesign preview · your real account':'Live';
@@ -2237,6 +2594,7 @@ function errorState(e){ const nb=e.code==='NO_BACKEND'; return `<div class="empt
 
 /* ---- login */
 function renderLogin(){
+  { const tm=$('#tb-me'); if(tm) tm.hidden=true; const th=$('#tb-half'); if(th) th.hidden=true; const ts=$('#tb-season'); if(ts) ts.textContent=MONTH_NAME+' season'; }
   $('#nav').innerHTML=''; $('#who').innerHTML=''; $('#mobbar').innerHTML=''; ['#qtimer','#qtimer-m'].forEach(x=>{ const e=$(x); if(e) e.hidden=true; });
   $('#main').innerHTML=`<div class="login"><div class="card"><div class="login-brand"><img class="wm" src="../official-ravine-logo.png" width="238" height="110" alt="Ravine" onerror="wmFallback(this)"><div class="login-sub"><img src="../mark-96.png" alt="" width="34" height="34"><span><b>Creator Games</b><small>${esc(MONTH_NAME)} 2026</small></span></div></div>
    <h2>Open your link</h2><p style="margin:6px 0 14px">Use the personal link Austin sent you, or paste your access code.</p>
@@ -2271,7 +2629,7 @@ const OUTCOME={qualifies:['g','Eligible'],awaiting_review:['r','In review'],reje
 const RSTATE={locked:['n','Locked'],eligible:['g','Eligible'],claim_submitted:['r','Claim submitted'],approved_for_payment:['p',NOV?'Your payout':'Approved for payment'],paid:['d','Paid'],included:['g','Included']};
 function metric(k,v,{sub='',cls=''}={}){ return `<div class="metric ${cls}"><div class="k">${esc(k)}</div><div class="v ${v==null?'na':''}">${v==null?'Not available':v}</div>${sub?`<div class="sub">${sub}</div>`:''}</div>`; }
 function pbar(cur,max,{label='',cls='',fmtv=x=>x}={}){ const p=max>0?clamp(cur/max*100,0,100):0; return `<div class="plabel"><span>${esc(label)}</span><b>${fmtv(cur)} / ${fmtv(max)}</b></div><div class="bar ${cls}"><i style="width:${p.toFixed(1)}%"></i></div>`; }
-function ph(title,sub,{eyebrow='',acts=''}={}){ return `<div class="ph"><div>${eyebrow?`<div class="eyebrow">${esc(eyebrow)}</div>`:''}<h1>${esc(title)}</h1>${sub?`<p>${sub}</p>`:''}</div>${acts?`<div class="acts">${acts}</div>`:''}</div>`; }
+function ph(title,sub,{eyebrow='',acts='',photo=''}={}){ return `<div class="ph ${photo?'photo':''}" ${photo?`style="--phimg:url(${photo})"`:''}><div>${eyebrow?`<div class="eyebrow">${esc(eyebrow)}</div>`:''}<h1>${esc(title)}</h1>${sub?`<p>${sub}</p>`:''}</div>${acts?`<div class="acts">${acts}</div>`:''}</div>`; }
 function emptyState(title,body,act='',key='empty'){ return `<div class="empty"><div class="ill">${art(key,'neutral')}</div><h3>${esc(title)}</h3><p>${body}</p>${act?`<div style="margin-top:14px">${act}</div>`:''}</div>`; }
 function freshness(src,stale){ if(!src||!src.last_run) return `<div class="state err"><span class="dot"></span>No data source has reported yet</div>`; return `<div class="state ${stale?'stale':''}"><span class="dot"></span>${stale?'Last import failed; showing the last good snapshot':'Data'} from ${fmt.dt(src.last_run)}${src.reporting_through?` · source reports through ${fmt.date(src.reporting_through,{year:'numeric'})}`:''}</div>`; }
 function openExt(url){ return `href="${esc(url)}" target="_blank" rel="noopener noreferrer"`; }
@@ -2331,7 +2689,7 @@ function camoTile(c,eq){ const lk=!c.unlocked; const lim=c.limited;
   const limTxt=lim?(lim.closed?'Window closed':lim.label):'';
   return `<button class="camo-tile ${lk?'lk':''} ${eq?'eq':''}" onclick="openCamo('${c.key}')" aria-label="${esc(CAMO_NAME[c.key])}${lk?', locked':eq?', equipped':', unlocked'}. Inspect.">
     <div class="ct-sw"><div class="ct-bg cm-${c.key} fx-${c.key}"></div>${lk?`<span class="ct-lock">${ico('lock',22)}</span>`:''}${eq?'<span class="ct-badge eq">Equipped</span>':''}${lim?`<span class="ct-badge lim">${esc(limTxt)}</span>`:''}${CAMO_FX[c.key]?'<span class="ct-anim">Animated</span>':''}</div>
-    <div class="ct-b"><b>${esc(CAMO_NAME[c.key])}</b><span>${esc(c.how)}</span>${camoProg(c)}<span class="ct-open">${lk?'See how to unlock':eq?'Equipped · inspect':'Inspect or equip'} →</span></div></button>`; }
+    <div class="ct-b"><b>${esc(CAMO_NAME[c.key])}</b><span>${esc(c.how)}</span>${lk&&c.need!=null?camoProg(c):''}<span class="ct-state ${eq?'eq':lk?'':'un'}">${eq?`${ico('check',16)} Equipped`:lk?`${ico('lock',15)} Locked`:`${ico('check',16)} Unlocked`}</span></div></button>`; }
 /* Inspect: read-only preview in the drawer. Only the Equip button inside it calls set_camo, and only for a camo you own. */
 async function openCamo(k){ const a=await myArmory(); const c=(a?.camos||[]).find(x=>x.key===k); if(!c) return; const eq=(a.equipped||'carbon')===k; const lim=c.limited;
   openDrawer(`<div class="camo-d"><div class="row"><span class="badge ${eq?'g':c.unlocked?'n':'x'}">${eq?'Equipped':c.unlocked?'Unlocked':'Locked'}</span>${lim?`<span class="badge d">${esc(lim.closed?'Window closed':lim.label)}</span>`:''}${CAMO_FX[k]?`<span class="mini">${esc(CAMO_FX[k])}</span>`:''}</div>
@@ -2346,19 +2704,30 @@ route('armory',async()=>{
   const nameRow=L=>{ const yours=L.level===lv, open=L.level<=lv;
     return `<div class="nc ${yours?'yours':''} ${open?'':'lk'}"><div class="nc-n">${nmc(me,L.level)}</div><div class="nc-m"><b>${esc(L.name)}</b><span>${esc(L.color)}</span></div>
       <div class="nc-s">${yours?'<span class="badge g">Yours</span>':open?'<span class="badge n">Unlocked</span>':`<span class="mini">${ico('lock',12)} Reach ${esc(L.name)}</span>`}</div></div>`; };
-  return `${ph('Armory','Unlock camos and name colors. Your camo is only on your screen. Your name color shows on the leaderboard and My Pace for everyone.',{eyebrow:'Progress'})}
-  <div class="arm-top"><section class="arm-hero cm-${eq} fx-${eq}"><div class="arm-in">
-    <div class="lbl">Your loadout</div>
-    <div class="arm-name">${nmc(me,lv)}</div>
-    <div class="arm-sub">${esc(NAME_LV[lv]?.name||'Rookie')} name color · ${esc(CAMO_NAME[eq])} camo</div>
-    <div class="arm-count"><b>${got}</b> of ${cams.length} camos unlocked</div></div></section>
-  ${(()=>{ const nx=cams.filter(c=>!c.unlocked&&!(c.limited&&c.limited.closed)&&c.need>0).map(c=>({c,r:Math.min(1,(c.have||0)/c.need)})).sort((a,b)=>b.r-a.r)[0];
-    return nx?`<section class="card arm-next"><div class="lbl">Closest unlock</div><div class="an-sw"><div class="cm-${nx.c.key} fx-${nx.c.key}"></div></div><h3>${esc(CAMO_NAME[nx.c.key])}</h3><p class="small">${esc(nx.c.how)}</p>${camoProg(nx.c)}<div class="row" style="margin-top:auto"><button class="btn gh sm" onclick="openCamo('${nx.c.key}')">Inspect</button></div></section>`
-      :`<section class="card arm-next"><div class="lbl">Collection</div><h3>${got===cams.length?'Every camo unlocked':'Nothing left to unlock right now'}</h3><p class="small">Camos you own stay yours after every reset.</p></section>`; })()}</div>
-  <div class="sec"><h2>Collection</h2><span class="mini">Only you see your camo. Tap a camo to inspect it. Equip is a separate button inside.</span></div>
-  <div class="arm-grid">${cams.map(c=>camoTile(c,c.key===eq)).join('')}</div>
-  <div class="sec"><h2>Name color</h2><span class="mini">Changes when you prestige. Everyone sees it on the leaderboard and My Pace.</span></div>
+  const NCOL=['#F4EBDD','#FF8A3D','#FF5A5F','#B98CFF','linear-gradient(90deg,#FF5A5F,#FFC95C,#5FE3A1,#53C7FF,#B57BFF)'];
+  const nx=cams.filter(c=>!c.unlocked&&!(c.limited&&c.limited.closed)&&c.need>0).map(c=>({c,r:Math.min(1,(c.have||0)/c.need)})).sort((a,b)=>b.r-a.r);
+  const f=S.ui.armf||'all'; const list=f==='unlocked'?cams.filter(c=>c.unlocked):f==='closest'?nx.map(x=>x.c):cams;
+  const n0=nx[0]; const t0=n0?(n0.c.unit==='usd'?`${fmt.usd(n0.c.have||0)} of ${fmt.usd(n0.c.need)}`:n0.c.unit==='level'?`${NAME_LV[n0.c.have||0]?.name||'Rookie'} now`:`${Math.min(n0.c.have||0,n0.c.need)} of ${n0.c.need} ${n0.c.unit||''}`):'';
+  return `${ph('Build your creator identity','Your collection. Your earned look.')}
+  ${progressNav('armory')}
+  <div class="arm-top"><div style="min-width:0"><section class="arm-banner cm-${eq} fx-${eq}" aria-label="Your loadout">${patch('trophy',{size:118,state:'cur'}).replace('#5A2E12','#5B4A1E').replace('#8A4317','#7B6428').replace('#FF6E20','#C9A25A')}<span class="vr" aria-hidden="true"></span>${avRing(me,112)}<div style="min-width:0"><div class="an">${nmc(me,lv)}</div><span class="arm-chip">${esc(CAMO_NAME[eq])} • Equipped</span></div></section>
+    <div class="arm-slots">
+      <button class="arm-slot" onclick="openCamo('${eq}')"><span class="h">${ico('grid',18)} Camo</span><span class="sw cm-${eq}"></span><span class="f">${esc(CAMO_NAME[eq])}<span aria-hidden="true">›</span></span></button>
+      <button class="arm-slot" onclick="document.getElementById('namecolors')?.scrollIntoView({behavior:'smooth'})"><span class="h">${ico('tag',18)} Name color</span><span class="sw" style="background:${NCOL[lv]||NCOL[0]};max-width:50px"></span><span class="f">${esc((NAME_LV[lv]?.color||'Cream').split(',')[0])}<span aria-hidden="true">›</span></span></button>
+      <button class="arm-slot" onclick="go('rewards')"><span class="h">${ico('shield',18)} Prestige</span><span class="sw" style="background:var(--sf2)">${PEMB[lv]||'🎯'}</span><span class="f">${esc(NAME_LV[lv]?.name||'Rookie')}<span aria-hidden="true">›</span></span></button>
+      <button class="arm-slot" onclick="go('rewards',{v:'trophies'})"><span class="h">${ico('trophy',18)} Collection</span><span class="sw" style="background:var(--sf2)">${got}/${cams.length}</span><span class="f">Camos unlocked<span aria-hidden="true">›</span></span></button>
+    </div></div>
+    ${n0?`<section class="paper arm-nu" aria-label="Closest unlock"><div class="top"><b>Next unlock</b><i>Closest camo you do not own yet</i></div>
+      <div class="nplate"><div class="nplate-in cm-${n0.c.key} fx-${n0.c.key}" style="min-height:112px">${avRing(me,64)}<b style="color:var(--tx)">${esc(me)}</b></div></div>
+      <div class="ttl"><b>${esc(CAMO_NAME[n0.c.key])}</b><span>${esc(t0)}</span></div>
+      <div class="pr"><div class="fatbar" role="img" aria-label="${Math.round(n0.r*100)} percent"><i style="width:${Math.max(3,n0.r*100).toFixed(0)}%"></i></div><span>${Math.round(n0.r*100)}%</span></div>
+      <div class="ft"><span class="req">${esc(n0.c.how)}</span><button class="btn" onclick="openCamo('${n0.c.key}')">Inspect camo</button></div></section>`
+    :`<section class="paper arm-nu"><div class="top"><b>Collection</b></div><div class="ttl"><b>${got===cams.length?'Every camo unlocked':'Nothing left to unlock right now'}</b></div><p>Camos you own stay yours after every reset.</p></section>`}</div>
+  <div class="coll-h" id="collection"><h2>Collection</h2><div class="chips" role="group" aria-label="Filter the collection">${[['all','All'],['unlocked','Unlocked'],['closest','Closest']].map(([k,t])=>`<button aria-pressed="${f===k}" onclick="S.ui.armf='${k}';render()">${t}</button>`).join('')}</div><span class="mini">Tap a camo to inspect it. Equip is a separate button inside.</span></div>
+  <div class="arm-grid">${list.map(c=>camoTile(c,c.key===eq)).join('')||'<div class="empty"><p>Nothing in this view.</p></div>'}</div>
+  <div class="sec" id="namecolors"><h2>Name color</h2><span class="mini">Changes when you prestige. Everyone sees it on the leaderboard and My Pace.</span></div>
   <div class="card" style="padding:8px">${NAME_LV.map(nameRow).join('')}</div>
+  <div class="arm-legend"><span>${ico('grid',20)} <b>Camo:</b> visible only to you</span><span aria-hidden="true">|</span><span>${ico('tag',20)} <b>Name color:</b> public</span></div>
   <div class="note" style="margin-top:14px">Camos you unlock stay unlocked. Opening Day can only be unlocked from Nov 1 to Nov 7. Sales use Trybe numbers from the latest refresh${a.data_through?` (${fmt.dt(a.data_through)})`:''}.</div>`;
 });
 
@@ -2366,57 +2735,68 @@ route('armory',async()=>{
 'use strict';
 /* ---- Home daily briefing (Nov redesign). Everything here is read from the same payloads the rest of Home uses;
    it only links to the real destinations and never starts, saves or submits anything. */
-async function homeBriefing({h,q,sub,tasks,RW,C}){
-  const QQ=S.cache['my_quests{}']||{}; const cats=QQ.catalog||[], ins=QQ.instances||[]; const me=S.me?.display_name||h.creator?.display_name||'You';
+/* Stitched hex patch artwork (original; decorative, never a brand mark). state: done | cur | lock */
+const PATCH_IC={check:'M6 12.5l4 4 8-9',film:'M4 6h16v12H4z M8 6v12 M16 6v12 M4 10h4 M4 14h4 M16 10h4 M16 14h4',trophy:'M8 4h8v5a4 4 0 0 1-8 0z M8 6H5a3 3 0 0 0 3 4 M16 6h3a3 3 0 0 1-3 4 M12 13v4 M9 20h6',
+  star:'M12 4l2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6-4.9 2.6.9-5.5-4-3.9 5.5-.8z',flame:'M12 3c1 3 4 4.5 4 8.5a4 4 0 0 1-8 0c0-1.5.6-2.6 1.5-3.5.2 1.2.8 2 1.5 2 0-2.5-.5-4.5 1-7z',
+  dollar:'M12 4v16 M16 8.5c0-1.7-1.8-2.5-4-2.5s-4 .8-4 2.5 1.8 2.5 4 3 4 1.3 4 3-1.8 2.5-4 2.5-4-.8-4-2.5',hook:'M14 4v10a4 4 0 1 1-8 0v-1 M14 4l2.5 2',cal:'M5 7h14v12H5z M5 11h14 M9 4v4 M15 4v4',
+  people:'M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M3 19c0-3 2.7-5 6-5s6 2 6 5 M17 11a2.5 2.5 0 1 0 0-5 M21 19c0-2.3-1.5-4-4-4.6',book:'M4 6c3-1.5 5-1.5 8 0v13c-3-1.5-5-1.5-8 0z M12 6c3-1.5 5-1.5 8 0v13c-3-1.5-5-1.5-8 0',
+  link:'M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1 M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1',sword:'M5 19l3-3 M7 13l4 4 M9 15L19 5V4h-1L8 14',wrench:'M14 6a4 4 0 0 0 5 5l-8 8a2 2 0 0 1-3-3z',
+  camera:'M4 8h3l2-2.5h6L17 8h3v11H4z M12 16.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6z',medal:'M12 21a6 6 0 1 0 0-12 6 6 0 0 0 0 12z M8.5 9.5L6 3h4l2 4 2-4h4l-2.500 6.500 M12 12.500v5'};
+PATCH_IC.medal='M12 21a6 6 0 1 0 0-12 6 6 0 0 0 0 12z M8.5 9.5L6 3h4l2 4 2-4h4l-2.5 6.5 M12 12.5v5';
+function patch(kind,{state='done',size=96,label=''}={}){ const C={done:['#3C4A31','#55663F','#B59C68','#F1E7CF'],cur:['#5A2E12','#8A4317','#FF6E20','#FFF3E2'],lock:['#262D27','#2F372F','#566052','#8B9484']}[state]||['#3C4A31','#55663F','#B59C68','#F1E7CF'];
+  return `<svg class="patch" width="${size}" height="${Math.round(size*1.1)}" viewBox="0 0 100 110" ${label?`role="img" aria-label="${esc(label)}"`:'aria-hidden="true"'}><polygon points="50,2 95,27 95,83 50,108 5,83 5,27" fill="${C[0]}" stroke="${C[2]}" stroke-width="3.5" stroke-linejoin="round"/><polygon points="50,10 88,31 88,79 50,100 12,79 12,31" fill="${C[1]}" opacity=".55"/><polygon points="50,10 88,31 88,79 50,100 12,79 12,31" fill="none" stroke="${C[3]}" stroke-opacity=".6" stroke-width="1.4" stroke-dasharray="3.2 3" stroke-linejoin="round"/><g transform="translate(24,29) scale(2.17)" fill="none" stroke="${C[3]}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="${PATCH_IC[kind]||PATCH_IC.star}"/></g>${state==='done'?'<circle cx="80" cy="88" r="12" fill="#EEE6D5" stroke="#20251E" stroke-width="2"/><path d="M74 88l4.500 4.500 8-9" transform="translate(0,0)" fill="none" stroke="#20251E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'.replace('4.500 4.500','4.5 4.5'):''}</svg>`; }
+const avRing=(n,s=64)=>`<span class="av-ring" style="width:${s}px;height:${s}px;font-size:${Math.round(s*.42)}px" aria-hidden="true">${esc(initials(n))}</span>`;
+const BADGE_PATCH={appr1:'check',appr10:'film',appr25:'medal',appr50:'trophy',k1:'dollar',k5:'dollar',hook30:'hook',week5:'cal',streak7:'flame'};
+const CAT_PATCH={Film:'camera',Improve:'wrench',Community:'people',Academy:'book',Affiliate:'link',Boss:'sword'};
+const progressNav=v=>`<nav class="subnav" aria-label="Progress views">${[['rewards','Rewards',{}],['armory','Armory',{}],['trophies','Trophy Room',{v:'trophies'}]].map(([k,t,p])=>`<button ${v===k?'aria-current="page"':''} onclick="go('${k==='trophies'?'rewards':k}',${JSON.stringify(p).replace(/"/g,'&quot;')})">${t}</button>`).join('')}</nav>`;
+/* ---- Home daily briefing (composition: 01-home). Reads the same payloads as the rest of Home; links only, no writes. */
+async function homeBriefing({h,q,sub,tasks,RW,C,SUBS,TG}){
+  const QQ=S.cache['my_quests{}']||{}; const cats=QQ.catalog||[], ins=QQ.instances||[]; const me=S.me?.display_name||h.creator?.display_name||'You'; SUBS=SUBS||[];
   let A=null, LB=null; try{ A=await myArmory(); }catch(e){} try{ LB=await API.page('my_leaderboard'); }catch(e){}
-  const lv=A?.level??RW?.prestige?.level??null; const lvName=lv==null?(q.prestige_name||''):(NAME_LV[lv]?.name||'Rookie');
+  const lv=A?.level??RW?.prestige?.level??null; const eq=A?.equipped||'carbon';
   const goArg=a=>`go('${a.go}',${JSON.stringify(a.p||{}).replace(/"/g,'&quot;')})`;
   const first=tasks[0]; const rest=tasks.slice(1,3);
-  // the entry behind the first task, when it is a quest: used for the photo and the reviewer's note
   const pick=st=>{ const i=ins.find(x=>x.state===st&&x.period_key===QQ.period_now)||ins.find(x=>x.state===st); const c=i&&cats.find(k=>k.quest_key===i.quest_key); return i&&c?{i,c}:null; };
   const ret=pick('needs_changes'), act=pick('in_progress');
   const lead=first&&first.go==='quests'&&first.p?.f==='needs_changes'?ret:first&&first.go==='quests'&&first.p?.f==='in_progress'?act:null;
-  const note=lead&&lead.i.state==='needs_changes'&&lead.i.review_note?String(lead.i.review_note):''; const ex=note.length>220?note.slice(0,220).replace(/\s+\S*$/,'')+'…':note;
-  const img=lead?questPhoto(lead.c):(first&&first.go==='library'?'../ph/hero-board.jpg':first&&first.go==='submissions'?'../ph/tier-operator.jpg':'../ph/hero-board.jpg');
-  const tag=first?.hot?'Needs your attention':first?.go==='library'?'Start here':'Up next';
-  const hero=first?`<section class="bf-hero" aria-label="Your next action">
-     <div class="bf-img">${img?`<img src="${esc(img)}" alt="" loading="eager" onerror="this.remove()">`:''}<span class="bf-tag">${esc(tag)}</span></div>
-     <div class="paper bf-brief"><div class="lbl">Next action${tasks.length>1?` · 1 of ${Math.min(tasks.length,3)}`:''}</div>
-       <h2>${esc(lead?lead.c.title:first.t)}</h2>
-       ${lead?`<p>${esc(first.t)}. ${esc(first.d)}</p>`:`<p>${esc(first.d)}</p>`}
-       ${ex?`<div class="bf-quote"><b>Reviewer note:</b> ${esc(ex)}</div>`:''}
-       <div class="bf-acts"><button class="btn" onclick="${lead?`go('quests',{f:'${lead.i.state}'});setTimeout(()=>openQuest('${lead.c.quest_key}'),350)`:goArg(first)}">${lead?(lead.i.state==='needs_changes'?'Open full feedback':'Continue quest'):esc(first.go==='library'?'Open the Angle Library':first.go==='submissions'?'Open my submissions':'Open quests')}</button>${lead?`<button class="btn paper-gh" onclick="${goArg(first)}">See all ${first.p?.f==='needs_changes'?'returned work':'started quests'}</button>`:''}</div>
-       ${rest.length?`<div class="bf-more">${rest.map(a=>`<button onclick="${goArg(a)}"><b>${esc(a.t)}</b><span>${esc(a.d)} →</span></button>`).join('')}</div>`:''}</div></section>`:'';
-  const lm=LB?.me||{}; const rankTxt=LB?(lm.rank==null?'Not on the board yet':`#${lm.rank}${lm.tied?' (tied)':''} of ${LB.ranked}`):'—';
-  const eq=A?.equipped; const got=A?(A.camos||[]).filter(c=>c.unlocked).length:null;
-  const ident=`<aside class="card bf-id" aria-label="Your creator card">
-     <div class="bf-who">${avatar(me,64)}<div style="min-width:0"><div class="lbl">${S.admin?'Admin':'Creator'}${h.creator?.joined_at?` · joined ${esc(fmt.date(h.creator.joined_at,{year:'numeric'}))}`:''}</div><div class="bf-name">${nmc(me,lv)}</div></div></div>
-     <div class="bf-rows">
-       <button onclick="go('rewards')"><span>Prestige level played this half</span><b>${lvName?esc(lvName):'—'}</b></button>
-       <button onclick="go('leaderboard')"><span>${MONTH_NAME} sales leaderboard</span><b>${esc(rankTxt)}</b></button>
-       <button onclick="go('armory')"><span>Camo equipped</span><b>${eq?esc(CAMO_NAME[eq]||eq):'—'}${got!=null?` · ${got} of ${(A.camos||[]).length}`:''}</b></button>
-       <button onclick="go('profile')"><span>Account</span><b>My profile →</b></button>
-     </div></aside>`;
-  const half=halfLabel(q.period_now);
-  const metrics=`<div class="bf-metrics">
-     ${metric(`Approved XP · ${half}`,q.xp_earned??null,{cls:'gold',sub:`Resets ${esc(halfReset(null,q.period_now))}, 12:00 am CT`})}
-     ${metric('XP in review',q.xp_pending??0,{sub:'Does not count until approved'})}
-     ${metric(`Approved videos · ${half}`,RW?(RW.concepts??null):null,{cls:'green',sub:'Originals that count for cash tiers'})}
-     ${metric(`Videos sent · ${MONTH_NAME}`,sub.this_campaign??null,{sub:`${sub.pending||0} waiting for review`})}</div>`;
-  // active mission = the entry you already started; nothing here creates one
+  const retVid=first&&first.go==='submissions'?SUBS.find(v=>v.status==='changes_requested'):null;
+  const note=lead&&lead.i.state==='needs_changes'&&lead.i.review_note?String(lead.i.review_note):''; const ex=note.length>120?note.slice(0,120).replace(/\s+\S*$/,'')+'…':note;
+  const img=lead?questPhoto(lead.c):retVid?.thumb_url||(SUBS.find(v=>v.thumb_url)||{}).thumb_url||'../ph/hero-board.jpg';
+  const cta=lead?(lead.i.state==='needs_changes'?'Fix this quest':'Continue quest'):first?.go==='library'?'Open the Angle Library':first?.go==='submissions'?'Open the notes':'Open quests';
+  const hero=first?`<section class="hb-hero" aria-label="Your next move">
+     <div class="hb-img">${img?`<img class="bg" src="${esc(img)}" alt="" aria-hidden="true" onerror="this.remove()"><img class="fg" src="${esc(img)}" alt="" loading="eager" onload="if(this.naturalHeight>this.naturalWidth*1.15)this.parentNode.classList.add('tall')" onerror="this.remove()">`:''}</div>
+     <div class="paper hb-brief"><div class="eyb">Your next move</div>
+       <h2 class="dh">${esc(first.t)}</h2>
+       ${ex?`<div class="hb-quote">“${esc(ex)}”</div>`:`<p style="font-size:17px">${esc(lead?lead.c.title+'. ':'')}${esc(first.d)}</p>`}
+       <div class="hb-acts"><button class="btn" onclick="${lead?`go('quests',{f:'${lead.i.state}'});setTimeout(()=>openQuest('${lead.c.quest_key}'),350)`:goArg(first)}">${esc(cta)}</button>${lead?`<a href="#/quests?f=${lead.i.state}">${lead.i.state==='needs_changes'?`View ${q.needs_changes>1?'all '+q.needs_changes+' notes':'the full note'}`:'See started quests'}</a>`:''}</div>
+       ${rest.length?`<div class="hb-more">${rest.map(a=>`<button onclick="${goArg(a)}"><span>${esc(a.t)}</span><span aria-hidden="true">→</span></button>`).join('')}</div>`:''}</div></section>`:'';
+  const lm=LB?.me||{}; const mv=lm.move;
+  const ident=`<aside class="hb-id cm-${eq}" aria-label="Your creator card">
+     <div class="hb-id-top">${avRing(me,104)}${patch('trophy',{size:104,state:'cur',label:''}).replace('#5A2E12','#6B4A1E').replace('#8A4317','#8C6A2C').replace('#FF6E20','#C9A25A')}</div>
+     <div class="hb-name">${nmc(me,lv)}</div><div class="hb-role">${S.admin?'Admin':'Creator'}${lv!=null?` · ${esc(NAME_LV[lv]?.name||'Rookie')}`:''}</div>
+     <div class="hb-rank"><button onclick="go('leaderboard')" aria-label="Open the ${MONTH_NAME} leaderboard"><b>${LB&&lm.rank!=null?'#'+lm.rank:'—'}</b><span>${LB&&lm.rank!=null?`of ${LB.ranked} · ${MONTH_NAME} sales race`:'not on the board yet'}</span></button>
+       ${mv?`<span class="${mv>0?'pill-up':'pill-dn'}">${mv>0?'▲':'▼'} ${Math.abs(mv)} place${Math.abs(mv)===1?'':'s'}<span class="sr"> ${mv>0?'up':'down'} since ${esc(fmt.date(LB.since))}</span></span>`:''}</div></aside>`;
+  const half=halfLabel(q.period_now); const dash=v=>v==null?'—':v;
+  const cell=(ic,v,l,to)=>`<button onclick="go('${to}')">${ico(ic,38)}<span><b>${v}</b><span>${l}</span></span></button>`;
+  const metrics=`<div class="mstrip" aria-label="Your numbers">${cell('star',dash(q.xp_earned),`Approved XP · ${esc(half)}`,'rewards')}${cell('play',dash(RW?RW.concepts:null),`Approved videos · ${esc(half)}`,'submissions')}${cell('trophy',LB&&lm.rank!=null?'#'+lm.rank:'—',`${MONTH_NAME} rank`,'leaderboard')}${cell('timer',dash((q.in_review||0)+(sub.pending||0)),'In review','submissions')}</div>`;
   const cur=ret||act; let mission;
-  if(cur){ const rp=reqProgress(cur.c,cur.i); mission=`<section class="card bf-card"><div class="bf-th">${thumb(questPhoto(cur.c),cur.c.image_key,cur.c.category)}</div><div style="min-width:0"><div class="lbl">Active mission · ${esc(QSTATE[cur.i.state][1])}</div><h3>${esc(cur.c.title)}</h3>
-      ${rp.need>1?pbar(rp.have,rp.need,{label:`${rp.unit||'items'} attached`,fmtv:x=>x}):`<div class="mini">${rp.have?'Evidence attached, not sent yet':'Nothing attached yet'}</div>`}
-      <div class="row"><button class="btn sm" onclick="go('quests');setTimeout(()=>openQuest('${cur.c.quest_key}'),350)">${cur.i.state==='needs_changes'?'Continue revision':'Resume'}</button><span class="mini">+${cur.c.xp_value} XP after approval</span></div></div></section>`; }
-  else mission=`<section class="card bf-card"><div class="bf-th"><img src="../ph/qa-hooks.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div style="min-width:0"><div class="lbl">Active mission</div><h3>No quest started</h3><p class="small">Pick one from the board. Starting it creates your entry; opening the brief does not.</p><div class="row"><button class="btn sm" onclick="go('quests')">Browse quests</button></div></div></section>`;
-  // next unlock = the closest camo you do not own yet, from the server's own have/need
+  if(cur){ const rp=reqProgress(cur.c,cur.i); const pf=(cur.c.proof||[]).find(f=>f.type==='submission_list'); const ids=pf?[].concat(cur.i.draft?.[pf.field]||[]):[]; const need=Math.min(Math.max(rp.need||1,ids.length),4);
+    const frames=pf?Array.from({length:need},(_,k)=>{ const v=SUBS.find(x=>x.id===ids[k]); return v?`<div class="film"><i>${v.thumb_url?`<img src="${esc(v.thumb_url)}" alt="Attached video ${k+1}" loading="lazy" onerror="this.remove()">`:''}</i><span class="pl">${ico('play',18)}</span></div>`:`<div class="film empty"><i>Empty</i></div>`; }).join(''):`<div class="film"><i>${thumb(questPhoto(cur.c),cur.c.image_key,cur.c.category)}</i></div>`;
+    const pct=rp.need>0?Math.max(4,Math.min(100,rp.have/rp.need*100)):4;
+    mission=`<section class="hb-card"><div class="eyb">Active mission · ${esc(QSTATE[cur.i.state][1])}</div><h3>${esc(cur.c.title)}</h3><div class="sub">${rp.need>1?`${rp.have} of ${rp.need} ${esc(rp.unit||'items')} attached`:rp.have?'Evidence attached, not sent yet':'Nothing attached yet'}</div>
+      <div class="hb-mis-row"><div class="filmrow">${frames}</div><div class="hb-mis-side"><div class="fatbar" role="img" aria-label="${rp.have} of ${rp.need} attached"><i style="width:${pct.toFixed(0)}%"></i></div><button class="btn line" onclick="go('quests');setTimeout(()=>openQuest('${cur.c.quest_key}'),350)">${cur.i.state==='needs_changes'?'Continue revision':'Continue mission'}</button></div></div></section>`; }
+  else mission=`<section class="hb-card"><div class="eyb">Active mission</div><h3>No quest started</h3><div class="sub">Pick one from the board. Starting it creates your entry; opening the brief does not.</div><div class="hb-mis-row"><div class="filmrow"><div class="film"><i><img src="../ph/qa-hooks.jpg" alt="" loading="lazy" onerror="this.remove()"></i></div></div><div class="hb-mis-side"><button class="btn line" onclick="go('quests')">Browse quests</button></div></div></section>`;
   let unlock='';
-  if(A){ const open=(A.camos||[]).filter(c=>!c.unlocked&&!(c.limited&&c.limited.closed)&&c.need>0).map(c=>({c,r:Math.min(1,(c.have||0)/c.need)})).sort((a,b)=>b.r-a.r)[0];
-    unlock=open?`<section class="card bf-card"><div class="bf-th"><div class="cm-${open.c.key} fx-${open.c.key}"></div></div><div style="min-width:0"><div class="lbl">Next unlock · camo</div><h3>${esc(CAMO_NAME[open.c.key])}</h3><p class="small">${esc(open.c.how)}</p>${camoProg(open.c)}
-      <div class="row"><button class="btn gh sm" onclick="go('armory');setTimeout(()=>openCamo('${open.c.key}'),350)">Inspect</button><span class="mini">Cosmetic only. No effect on rank or cash.</span></div></div></section>`
-    :`<section class="card bf-card"><div class="bf-th"><div class="cm-${eq||'carbon'} fx-${eq||'carbon'}"></div></div><div style="min-width:0"><div class="lbl">Armory</div><h3>${got===(A.camos||[]).length?'Every camo unlocked':'No open unlocks right now'}</h3><p class="small">Your collection stays yours after every reset.</p><div class="row"><button class="btn gh sm" onclick="go('armory')">View Armory</button></div></div></section>`; }
-  return `<div class="bf">${hero}${ident}</div>${metrics}<div class="bf-two">${mission}${unlock}</div>`; }
-
+  if(A){ const open=(A.camos||[]).filter(c=>!c.unlocked&&!(c.limited&&c.limited.closed)&&c.need>0).map(c=>({c,r:Math.min(1,(c.have||0)/c.need)})).sort((a,b)=>b.r-a.r)[0]; const got=(A.camos||[]).filter(c=>c.unlocked).length;
+    if(open){ const c=open.c; const seg=c.need<=6&&c.unit!=='usd'&&c.unit!=='level'; const t=c.unit==='usd'?`${fmt.usd(c.have||0)} of ${fmt.usd(c.need)}`:c.unit==='level'?`${NAME_LV[c.have||0]?.name||'Rookie'} now`:`${Math.min(c.have||0,c.need)} of ${c.need} ${esc(c.unit||'')}`;
+      unlock=`<section class="hb-card hb-unl"><div style="min-width:0"><div class="eyb">Next unlock · camo</div><h3>${esc(CAMO_NAME[c.key])}</h3><div class="sub">${t}</div>${seg?`<div class="segbar" aria-hidden="true">${Array.from({length:c.need},(_,k)=>`<i class="${k<(c.have||0)?'on':''}"></i>`).join('')}</div>`:`<div class="fatbar" style="margin-top:12px;max-width:190px"><i style="width:${Math.max(4,open.r*100).toFixed(0)}%"></i></div>`}<div class="mini" style="margin-top:10px">${esc(c.how)}</div></div>
+        <button style="all:unset;cursor:pointer;display:block" onclick="go('armory');setTimeout(()=>openCamo('${c.key}'),350)" aria-label="Inspect ${esc(CAMO_NAME[c.key])}"><div class="nplate"><div class="nplate-in cm-${c.key}">${avRing(me,52)}<b>${esc(me)}</b></div></div></button></section>`; }
+    else unlock=`<section class="hb-card hb-unl"><div><div class="eyb">Armory</div><h3>${got===(A.camos||[]).length?'Every camo unlocked':'No open unlocks'}</h3><div class="sub">Your collection stays yours after every reset.</div><button class="btn line" style="margin-top:14px" onclick="go('armory')">View Armory</button></div><div class="nplate"><div class="nplate-in cm-${eq}">${avRing(me,52)}<b>${esc(me)}</b></div></div></section>`; }
+  const tgOn=TG&&TG.month_key===CAMP&&Number(TG.goal)>0; const tp=tgOn?Math.max(0,Math.min(100,(Number(TG.team_sales)||0)/Number(TG.goal)*100)):null;
+  const team=tgOn?`<button class="hb-team" onclick="go('compete')" aria-label="${MONTH_NAME} team goal, ${tp.toFixed(0)} percent. Open the challenge rules."><img src="../ph/angle-hunting.jpg" alt="" loading="lazy" onerror="this.remove()"><div class="eyb">Team challenge</div><h3>${MONTH_NAME} team goal</h3><div class="tbar"><i style="width:${Math.max(18,tp).toFixed(0)}%">${tp.toFixed(0)}%</i></div></button>`:'';
+  const B=badgesOf(SUBS).filter(b=>b.got).sort((a,b)=>new Date(b.at||0)-new Date(a.at||0))[0];
+  const ach=`<section class="hb-card hb-ach">${patch(B?BADGE_PATCH[B.k]:'star',{size:84,state:B?'done':'lock'})}<span class="vr" aria-hidden="true"></span><div style="min-width:0"><div class="lbl" style="font-size:14px;letter-spacing:2px">${B?'Recent achievement':'Achievements'}</div><div class="t">${B?esc(B.t):'Your first approved video earns the first badge'}</div></div><a href="#/rewards?v=trophies">Trophy Room ›</a></section>`;
+  return `<div class="hb">${hero}${ident}</div>${metrics}<div class="hb-two">${mission}${unlock}</div><div class="hb-three" ${team?'':'style="grid-template-columns:1fr"'}>${team}${ach}</div>`; }
 const PERIOD_LABEL=k=>((S.cache['my_quests{}']?.periods||[]).find(p=>p.key===k)?.label)||({'2026-10-P1':'Oct 1–15','2026-10-P2':'Oct 16–31','2026-10':'October'})[k]||(/^\d{4}-\d{2}-\d{2}$/.test(k||'')?fmt.date(k+'T12:00:00Z'):k);
 function periodNow(q){ return (q.periods||[]).find(p=>p.key===q.period_now); }
 function daysLeft(ends){ return Math.max(0,Math.ceil((new Date(ends)-Date.now())/86400000)); }
@@ -2677,8 +3057,8 @@ route('home',async()=>{
     if(q.in_progress>0) tasks.push({t:'Finish a quest you started',d:`${q.in_progress} in progress. Pick up where you left off.`,go:'quests',p:{f:'in_progress'}});
     if(!tasks.length) tasks.push(action);
     const taskRow=a=>`<button class="fl-task ${a.hot?'hot':''}" onclick="go('${a.go}',${JSON.stringify(a.p||{}).replace(/"/g,'&quot;')})"><span class="fl-task-b"><b>${esc(a.t)}</b><span>${esc(a.d)}</span></span>${ico('arrow',16)}</button>`;
-    const BF=await homeBriefing({h,q,sub,tasks,RW,C});
-    return `${ph('Your daily briefing','',{eyebrow:`November Creator Games · ${chCountdown(C)}`})}
+    const BF=await homeBriefing({h,q,sub,tasks,RW,C,SUBS,TG});
+    return `${ph('Your daily briefing',`Your next move, your progress, your next unlock. <span class="mini" style="white-space:nowrap">${esc(chCountdown(C))}</span>`)}
     ${BF}
     ${(()=>{ const QQ=S.cache['my_quests{}']; if(!QQ) return ''; const ins=QQ.instances||[]; return sprintBanner(QQ.catalog,Object.fromEntries((QQ.catalog||[]).map(c=>[c.quest_key,questState(c,ins)]))); })()}
     <div class="sec"><h2>Team and challenge</h2><a class="mini" href="#/compete">Full challenge rules →</a></div>
@@ -2879,29 +3259,55 @@ route('quests',async(p)=>{
   const pn=periodNow(q); const H=halfCtx(q,r);
   let ref=null; if(S.ui.qref){ try{ ref=await libRefInfo(S.ui.qref); }catch(e){} if(!ref){ S.ui.qref=null; saveUI(); } }
   setTimeout(()=>{ $('#qlist')&&($('#qlist').innerHTML=questSections()); },0);
-  window.__qtabs=()=>{ const b=$('#qrailbox'); if(b){ const x=$('#qrail')?.scrollLeft||0; b.innerHTML=questRail(cats,states); const g=$('#qrail'); if(g) g.scrollLeft=x; } const a=$('#qacad'); if(a) a.innerHTML=academyBanner(); const l=$('#qlist'); if(l) l.innerHTML=questSections(); };
-  return `${ph('Quests',`Build better videos. Complete challenges. Unlock rewards.<span class="qdates">Reward period ${PERIOD_LABEL(q.period_now)}${pn?` · resets ${fmt.date(pn.ends_at)}, 12:00 am CT`:''}${(q.max_xp_period||q.max_xp_month)?` · ${q.max_xp_period||q.max_xp_month} XP possible`:''}</span>`,{eyebrow:MONTH_NAME+' 2026',acts:`<button class="btn gh" onclick="openRewardRules()">${ico('book')} Rules</button><button class="btn gh" onclick="go('rewards')">${ico('gift')} View rewards</button>`})}
+  window.__qtabs=()=>{ const tb=$('#qtabsbox'); if(tb) tb.innerHTML=qTabs(); const b=$('#qrailbox'); if(b){ const x=$('#qrail')?.scrollLeft||0; b.innerHTML=questRail(cats,states); const g=$('#qrail'); if(g) g.scrollLeft=x; } const a=$('#qacad'); if(a) a.innerHTML=academyBanner(); const l=$('#qlist'); if(l) l.innerHTML=questSections(); };
+  const selKey=()=>{ const k=S.ui.qsel; if(k&&cats.some(c=>c.quest_key===k)) return k; return rec?rec.quest_key:(cats[0]||{}).quest_key; };
+  window.qTabs=()=>{ const n=st=>cats.filter(c=>states[c.quest_key].state===st).length; const T=[['','All',cats.length,0],['needs_changes','Needs changes',n('needs_changes'),1],['in_progress','Active',n('in_progress'),0],['submitted','In review',n('submitted'),0],['available','Available',n('available'),0]];
+    return `<div class="qstabs" role="tablist" aria-label="Quest state">${T.map(([k,t,c,hot])=>`<button role="tab" class="${hot&&c?'hot':''}" aria-selected="${(S.ui.qf||'')===k}" onclick="S.ui.qf='${k}'||null;$('#qtabsbox').innerHTML=qTabs();$('#qlist').innerHTML=questSections()">${t}${k&&c?` <i>${c}</i>`:''}</button>`).join('')}<input type="search" placeholder="Find a quest" value="${esc(S.ui.qs)}" aria-label="Search quests" oninput="S.ui.qs=this.value;saveUI();$('#qlist').innerHTML=questSections()"></div>`; };
+  /* read-only brief beside the board at wide widths; the working brief (evidence form, save, submit) is still openQuest */
+  window.questBrief=(key)=>{ const c=cats.find(x=>x.quest_key===key); if(!c) return ''; const st=states[key]; const inst=st.cur; const s_=st.state;
+    const stage=inst?({in_progress:1,needs_changes:1,submitted:2}[inst.state]??0):(['approved','approved_period'].includes(s_)?3:-1);
+    const steps=['Started','Evidence','In review','Approved'];
+    const pf=(c.proof||[]).find(f=>f.type==='submission_list'); const ids=pf?[].concat(inst?.draft?.[pf.field]||[]):[]; const vids=(S.cache['my_submissions{}']?.videos)||[];
+    const frames=[`<div class="film"><i>${thumb(questPhoto(c),c.image_key,c.category)}</i></div>`].concat(ids.slice(0,2).map((id,k)=>{ const v=vids.find(x=>x.id===id); return v&&v.thumb_url?`<div class="film"><i><img src="${esc(v.thumb_url)}" alt="Attached video ${k+1}" loading="lazy" onerror="this.remove()"></i></div>`:''; })).join('');
+    const has=f=>{ const v=inst?.draft?.[f.field]; return !(v==null||v===''||(Array.isArray(v)&&!v.length)); };
+    const lk=!!c.locked&&!inst;
+    return `<div class="paper qbrief" aria-label="Quest brief: ${esc(c.title)}"><div class="qb-head"><h2>${esc(c.title)}</h2><ol class="qstage" aria-label="Where this quest stands">${steps.map((t,i)=>`<li class="${stage>i||stage===3?'done':stage===i?'cur':''}"><span>${t}</span></li>`).join('')}</ol></div>
+      <div class="filmrow">${frames}</div>
+      ${inst?.review_note&&inst.state==='needs_changes'?`<div class="qb-note"><b>Review note:</b> ${esc(inst.review_note)}</div>`:''}
+      <div class="qb-cols"><div><div class="qb-h">${ico('target',22)} The outcome</div><p style="font-size:15.5px;color:var(--rg-paper-ink);margin-bottom:14px">${esc(c.outcome)}</p>
+        <div class="qb-h">${ico('book',22)} Approval checklist</div><ul class="qb-list">${(c.criteria||[]).map(e=>`<li>${esc(e)}</li>`).join('')||'<li>See the full brief</li>'}</ul></div>
+        <div><div class="qb-h">${ico('check',22)} Evidence</div><ul class="qb-list qb-ev">${(c.proof||[]).map(f=>`<li class="${has(f)?'ok':''}">${esc(f.label)}${f.required?'':' (optional)'}</li>`).join('')||'<li>Nothing extra to attach</li>'}</ul></div></div>
+      <button class="btn qb-go" onclick="openQuest('${key}')">${lk?'Preview quest':esc({available:'Open brief to start',in_progress:'Continue mission',needs_changes:'Fix and resubmit',submitted:'View submission'}[s_]||'View quest')} →</button>
+      <div class="qb-reward">${patch(CAT_PATCH[c.category]||'star',{size:36,state:'lock'})}<span><b>Reward:</b> ${c.xp_value} XP after approval · ${esc(qskill(c))}${lk?` · ${c.lock_sales?'unlocks at $5K this month':'needs '+esc(c.min_prestige_name||'a higher level')}`:''}</span></div></div>`; };
+  window.pickQuest=(key)=>{ const b=$('#qbrief'); if(b&&b.offsetParent!==null){ S.ui.qsel=key; b.innerHTML=questBrief(key); document.querySelectorAll('#qlist .qcard').forEach(e=>e.classList.toggle('sel',e.dataset.q===key)); } else openQuest(key); };
+  const pathStrip=()=>{ const seen=[...new Set(cats.map(c=>c.category))]; const keys=[...QTAB_ORDER.filter(k=>seen.includes(k)),...seen.filter(k=>!QTAB_ORDER.includes(k))];
+    const info=keys.map(k=>{ const L=cats.filter(c=>c.category===k); const done=L.filter(c=>['approved','approved_period'].includes(states[c.quest_key].state)||(c.done_in_period||0)>0).length; const live=L.some(c=>['in_progress','needs_changes','submitted'].includes(states[c.quest_key].state)); return {k,n:L.length,done,st:done?'done':live?'cur':'lock'}; });
+    const cov=info.filter(x=>x.done).length;
+    return `<section class="qpath" aria-label="Quest types this half"><div class="qpath-h"><b>Skill coverage</b><span>${cov} of ${info.length} quest types approved · ${esc(PERIOD_LABEL(q.period_now))}</span></div>
+      <div class="qpath-steps">${info.map((x,i)=>`${i?`<span class="qpath-line ${x.done&&info[i-1].done?'':'todo'}" aria-hidden="true"></span>`:''}<button class="qstepb ${S.ui.qcat===x.k?'on':''}" onclick="S.ui.qcat=S.ui.qcat==='${x.k}'?'All':'${x.k}';saveUI();render()" aria-pressed="${S.ui.qcat===x.k}" aria-label="${esc(x.k)}: ${x.done} of ${x.n} approved this half${x.st==='cur'?', one in progress':''}. Filter the board.">${patch(CAT_PATCH[x.k]||'star',{size:80,state:x.st})}<span>${esc(x.k)}</span><small>${x.done} of ${x.n}</small></button>`).join('')}</div></section>`; };
+  return `${ph('Quests that make you better',`Build a skill. Make something useful. Earn your next unlock.<span class="qdates">Reward period ${PERIOD_LABEL(q.period_now)}${pn?` · resets ${fmt.date(pn.ends_at)}, 12:00 am CT`:''}${(q.max_xp_period||q.max_xp_month)?` · ${q.max_xp_period||q.max_xp_month} XP possible`:''}</span>`,{photo:'../ph/angle-hunting.jpg',acts:`<button class="btn gh" onclick="openRewardRules()">${ico('book')} Rules</button><button class="btn gh" onclick="go('rewards')">${ico('gift')} View rewards</button>`})}
+  ${pathStrip()}
   ${(()=>{ const P=r&&r.prestige, nx=P&&P.next; if(!P||!nx||!nx.picked||!(nx.level>(P.level||0))) return '';   // Nov 5: a pick made after the 3-day window starts next half, so say so on Quests
     const to=PLV(r,nx.level), now=PLV(r,P.level||0);
     return `<div class="card hi" style="margin-bottom:14px"><b>${to.emblem} ${esc(to.name)} starts ${esc(fmt.date(nx.starts_at))}.</b> You picked it after the first 3 days of this half, so it kicks in at the next reset. Until then you're playing ${now.emblem} ${esc(now.name)} quests and payouts.</div>`; })()}
   ${sprintBanner(cats,states)}
-  ${questHero(q,r,insts)}
   ${ref?refBanner(ref,cats,states):''}
+  <div class="qsplit"><div class="qboard"><div id="qtabsbox">${qTabs()}</div><div id="qlist">${questSections()}</div></div><div id="qbrief">${questBrief(selKey())}</div></div>
+  <div style="height:16px"></div>
+  ${questHero(q,r,insts)}
   ${rec?(()=>{ const cur=states[rec.quest_key].cur; const note=recState==='needs_changes'&&cur?.review_note?String(cur.review_note):''; const ex=note.length>140?note.slice(0,140).replace(/\s+\S*$/,'')+'…':note;
     const why=recState==='needs_changes'?'':recState==='in_progress'?'Finish what you started before the reset.':recReason(rec,cats,states);
     const cta=recState==='needs_changes'?'Continue revision':recState==='in_progress'?'Continue quest':'Start quest';
-    return `<div class="card featured qrec"><div class="art ph">${photoFrame(questPhoto(rec),rec.image_key,rec.category)}</div><div class="qrec-b">
+    return `<div class="card featured qrec qrec-narrow"><div class="art ph">${photoFrame(questPhoto(rec),rec.image_key,rec.category)}</div><div class="qrec-b">
     <div class="row" style="gap:8px"><span class="lbl">${recState==='needs_changes'?'Fix this first':recState==='in_progress'?'Pick up where you left off':'Recommended for you'}</span>${badge(QSTATE[recState]?.[0]||'n',QSTATE[recState]?.[1]||'Available')}</div>
     <h2>${esc(rec.title)}</h2>
     ${note?`<div class="qrec-fb">💬 ${esc(ex)}${note.length>ex.length?` <a href="#" onclick="openQuest('${rec.quest_key}');return false">View full feedback</a>`:''}</div>`:`<p>${esc(rec.outcome)}</p>`}
     ${why?`<div class="qrec-why">💡 ${esc(why)}</div>`:''}
     <div class="qrec-foot"><span class="qrec-xp"><b>${rec.xp_value} XP</b> after approval · ${esc(qskill(rec))}</span><button class="btn" onclick="openQuest('${rec.quest_key}')">${cta}</button></div></div></div>`; })():''}
   ${featuredBanner(FQ,cats,states)}
-  <div class="sec qtabs-h"><h2>Browse quests</h2><span class="mini">Pick a type. Tap it again to see all.</span></div>
+  <div class="sec qtabs-h"><h2>Browse by type</h2><span class="mini">Pick a type to filter the board above. Tap it again to see all.</span></div>
   <div class="lrail-wrap qrail-wrap" id="qrailbox">${questRail(cats,states)}</div>
   <div id="qacad">${academyBanner()}</div>
-  <div class="filters"><input type="search" placeholder="Search quests" value="${esc(S.ui.qs)}" aria-label="Search quests" oninput="S.ui.qs=this.value;saveUI();$('#qlist').innerHTML=questSections()"></div>
-  <div id="qlist">${questSections()}</div>
   <div class="note" style="margin:18px 0 0"><b>🔁 Resets on the 1st and 16th.</b> XP, approved videos and every quest start fresh each half. <b>🚫 No stacking:</b> your highest cash tier is your total for the half. <a href="#" onclick="openRewardRules();return false">Read the rules</a></div>
   <div class="sec"><h2>Reward periods</h2><span class="mini">XP, quests and cash tiers reset at 12:00 am CT on the 1st and 16th</span></div>
   <div class="grid g2">${(q.periods||[]).map(pp=>`<div class="metric ${pp.key===q.period_now?'orange':''}"><div class="k">${pp.key===q.period_now?'Now · ':''}${esc(pp.label)}</div><div class="v" style="font-size:16px;font-family:var(--f);font-weight:600">${fmt.date(pp.starts_at)} to ${fmt.date(new Date(new Date(pp.ends_at)-1))}</div></div>`).join('')}</div>`;
@@ -2913,7 +3319,7 @@ route('quests',async(p)=>{
       ['available','Available','Pick one and start.',by('available').sort((a,b)=>(a.locked?1:0)-(b.locked?1:0)||(a.category==='Boss'?1:0)-(b.category==='Boss'?1:0)||b.xp_value-a.xp_value)]];
     const done=L.filter(c=>['approved','approved_period'].includes(states[c.quest_key].state)); const notAp=L.filter(c=>['rejected','expired'].includes(states[c.quest_key].state));
     const qf=S.ui.qf; const fname={needs_changes:'Needs changes',in_progress:'In progress',submitted:'In review',available:'Available'}[qf];
-    const chip=qf?`<div class="qfilter" role="status"><span>Showing only <b>${fname}</b></span><button class="btn gh sm" onclick="go('quests')">Show all quests</button></div>`:'';
+    const chip='';
     if(qf){ const g=groups.find(x=>x[0]===qf); return chip+(g&&g[3].length?`<section class="qsec qsec-${g[0]}"><div class="sec"><h2>${g[1]} <i class="qn">${g[3].length}</i></h2><span class="mini">${g[2]}</span></div><div class="grid g2 qgrid">${g[3].map(c=>questCard(c,states[c.quest_key],H)).join('')}</div></section>`:`<div class="empty"><h3>Nothing ${qf==='needs_changes'?'needs changes':'is '+fname.toLowerCase()} right now</h3><p>That list is clear.</p></div>`); }
     return groups.filter(g=>g[3].length).map(([k,t,sub,arr])=>`<section class="qsec qsec-${k}"><div class="sec"><h2>${t} <i class="qn">${arr.length}</i></h2><span class="mini">${sub}</span></div><div class="grid g2 qgrid">${arr.map(c=>questCard(c,states[c.quest_key],H)).join('')}</div></section>`).join('')
       +(done.length?`<details class="qsec qsec-done"><summary><h2>Completed <i class="qn">${done.length}</i></h2><span class="mini">This half and this campaign</span></summary><div class="grid g2 qgrid" style="margin-top:10px">${done.map(c=>questCard(c,states[c.quest_key],H)).join('')}</div></details>`:'')
@@ -2939,7 +3345,7 @@ function questCard(c,st,H){ const s=st.state; const [k,label]=QSTATE[s]||QSTATE.
     :(st.cur&&st.cur.state==='submitted'?`<div class="prog"><div class="plabel"><span>Sent ${fmt.ago(st.cur.submitted_at)}</span><b>+${c.xp_value} XP pending</b></div><div class="bar"><i style="width:100%;background:var(--warn)"></i></div></div>`:'');
   const fb=s==='needs_changes'&&st.cur?.review_note?`<div class="qfb">💬 ${esc(st.cur.review_note)}</div>`:'';
   const action={available:'Start',in_progress:'Continue',needs_changes:'Fix',submitted:'View submission',approved:'View',approved_period:'View',rejected:'View'}[s]||'Open';
-  return `<button class="qcard v2 ${s==='approved'?'done':''} ${lk?'lock':''}" onclick="openQuest('${c.quest_key}')" aria-label="${esc(c.title)}: ${lk?'locked':label}"><div class="art ph">${thumb(questPhoto(c),c.image_key,c.category)}<span class="qbadge badge ${lk?'n':k}">${lk?'🔒 '+esc(c.min_prestige_name||'Prestige'):label}</span>${c.featured?`<span class="qbadge2">🔥 ${c.xp_mult}x XP this week</span>`:''}${qWin(c)&&qWin(c).open?`<span class="qbadge2 sp">⏱️ ${qWin(c).hrs}h quest${qMult(c)?` · ${qMult(c)}x XP`:''}</span>`:''}</div><div class="qbody"><div class="ttl">${c.category==='Boss'?'⚔️ ':''}${esc(c.title)}</div><div class="out">${esc(c.outcome)}</div>${qmetaChips(c)}${fb}${rewardProgress(c,st,H,{card:true})}${prog}<div class="foot"><span class="mini">${lk?(c.lock_sales?'🔒 Hit $5K in sales this month':`Unlock ${esc(c.min_prestige_name||'a higher level')} first`):qWin(c)&&qWin(c).open?`<span class="sp-left" data-qend="${qWin(c).end}" data-qfmt="chip">⏱️ ${hm(qWin(c).ms)} left</span>`:capText}</span><span class="btn sm ${['approved','approved_period','submitted'].includes(s)||lk?'gh':''}">${lk?'Preview':action}</span></div></div></button>`; }
+  return `<button class="qcard v2 ${s==='approved'?'done':''} ${lk?'lock':''} ${S.ui.qsel===c.quest_key?'sel':''}" data-q="${c.quest_key}" onclick="(window.pickQuest||openQuest)('${c.quest_key}')" aria-label="${esc(c.title)}: ${lk?'locked':label}"><div class="art ph">${thumb(questPhoto(c),c.image_key,c.category)}<span class="qbadge badge ${lk?'n':k}">${lk?'🔒 '+esc(c.min_prestige_name||'Prestige'):label}</span>${c.featured?`<span class="qbadge2">🔥 ${c.xp_mult}x XP this week</span>`:''}${qWin(c)&&qWin(c).open?`<span class="qbadge2 sp">⏱️ ${qWin(c).hrs}h quest${qMult(c)?` · ${qMult(c)}x XP`:''}</span>`:''}</div><div class="qbody"><div class="ttl">${c.category==='Boss'?'⚔️ ':''}${esc(c.title)}</div><div class="out">${esc(c.outcome)}</div>${qmetaChips(c)}${fb}${rewardProgress(c,st,H,{card:true})}${prog}<div class="foot"><span class="mini">${lk?(c.lock_sales?'🔒 Hit $5K in sales this month':`Unlock ${esc(c.min_prestige_name||'a higher level')} first`):qWin(c)&&qWin(c).open?`<span class="sp-left" data-qend="${qWin(c).end}" data-qfmt="chip">⏱️ ${hm(qWin(c).ms)} left</span>`:capText}</span><span class="btn sm ${['approved','approved_period','submitted'].includes(s)||lk?'gh':''}">${lk?'Preview':action}</span></div></div></button>`; }
 
 async function openQuest(key,instId){
   const q=await API.page('my_quests'); let rw=null; try{ rw=await API.page('my_rewards'); }catch(e){} const c=q.catalog.find(x=>x.quest_key===key); if(!c) return; const st=questState(c,q.instances); const inst=instId?q.instances.find(i=>i.id===instId):st.cur;
@@ -3111,25 +3517,40 @@ function novStatusNote(t,ctx){ const pd=payday(ctx); const amt=fmt.usd(t.cash_to
   return `<div class="note">Locked. Needs ${esc(tierNeeds(t,ctx).join(' and '))}.</div>`; }
 const rewardTabs=v=>`<div class="rtabs" role="tablist" aria-label="Rewards views"><button role="tab" aria-selected="${v!=='trophies'}" onclick="go('rewards')">Rewards</button><button role="tab" aria-selected="${v==='trophies'}" onclick="go('rewards',{v:'trophies'})">Trophy Room</button></div>`;
 /* Trophy Room: the same badge records Home shows (badgesOf), as cards. Earned dates only when the record has one. */
-async function trophyRoom(){ let SP={}; try{ SP=await API.page('my_submissions'); }catch(e){} let A=null; try{ A=await myArmory(); }catch(e){}
-  const B=badgesOf(SP.videos||[]); window.__badges=B; const got=B.filter(b=>b.got), open=B.filter(b=>!b.got); const cams=(A?.camos||[]).filter(c=>c.unlocked);
-  const card=(b)=>{ const i=B.indexOf(b); return `<button class="tr-card ${b.got?'got':''}" onclick="openBadge(${i})" aria-label="${esc(b.t)}, ${b.got?'earned':'not earned yet'}"><span class="tr-medal" aria-hidden="true">${b.ic}</span><h3>${esc(b.t)}</h3><p>${esc(b.d)}</p>
-    ${!b.got&&b.prog?`<div class="bar gold"><i style="width:${Math.max(3,Math.min(100,b.prog[0]/b.prog[1]*100)).toFixed(1)}%"></i></div>`:''}
-    <div class="tr-state">${b.got?`<span class="badge g">Earned</span><span>${b.at?esc(fmt.date(b.at,{year:'numeric'})):'Date not recorded'}</span>`:`<span class="badge n">${b.prog?'In progress':'Locked'}</span><span>${b.prog?`${b.prog[0]} of ${b.prog[1]}`:''}</span>`}</div></button>`; };
-  return `${ph('Trophy Room','Permanent records from your own videos. They stay after every reset and never change rank, cash tiers or payouts.',{eyebrow:'Progress',acts:`<button class="btn gh" onclick="go('armory')">${ico('shield')} Armory</button>`})}
-  ${rewardTabs('trophies')}
-  <section class="card hi tr-sum"><div><div class="lbl">Your record</div><h2 style="margin-top:6px">${got.length} of ${B.length} badges earned${A?` · ${cams.length} of ${(A.camos||[]).length} camos`:''}</h2><p class="small" style="margin-top:6px">Tap a badge for the details and the share options.</p></div><img src="../icon-512.png" alt="Ravine Creator Games emblem" width="96" height="96" loading="lazy"></section>
-  <div class="sec"><h2>Earned</h2><span class="mini">${got.length?'Yours for good':'Nothing yet'}</span></div>
-  ${got.length?`<div class="tr-grid">${got.map(card).join('')}</div>`:emptyState('No badges yet','Your first approved video earns the first one.','','star')}
-  ${open.length?`<div class="sec"><h2>In progress and locked</h2><span class="mini">Not counted as earned</span></div><div class="tr-grid">${open.map(card).join('')}</div>`:''}
-  ${SP.source===null||SP.source===undefined&&!(SP.videos||[]).length?`<div class="note" style="margin-top:16px">Badges come from your video records. They fill in after the next numbers update.</div>`:''}`; }
+async function trophyRoom(){ let SP={}; try{ SP=await API.page('my_submissions'); }catch(e){} let A=null; try{ A=await myArmory(); }catch(e){} let r=null; try{ r=await API.page('my_rewards'); }catch(e){} let LB=null; try{ LB=await API.page('my_leaderboard'); }catch(e){} let Q=null; try{ Q=await API.page('my_quests'); }catch(e){}
+  const V=SP.videos||[]; const B=badgesOf(V); window.__badges=B; const got=B.filter(b=>b.got), open=B.filter(b=>!b.got); const cams=(A?.camos||[]).filter(c=>c.unlocked); const me=S.me?.display_name||'You'; const lv=A?.level??r?.prestige?.level??null;
+  const tiers=r?.tiers||[]; const nt=r?nextTier(r):null; const topT=tiers[tiers.length-1]; const xp=r?(r.xp||0):null; const tgt=nt?.xp_required||topT?.xp_required||null; const cc=r?(r.concepts||0):null; const half=r?.period?.label||halfLabel();
+  const reached=[...tiers].reverse().find(t=>R_DONE.includes(t.status)); const lm=LB?.me||{};
+  const cnt=st=>V.filter(v=>v.status===st).length;
+  const card=(b)=>{ const i=B.indexOf(b); const st=b.got?'done':b.prog&&b.prog[0]>0?'cur':'lock'; return `<button class="trophy ${b.got?'got':''}" onclick="openBadge(${i})" aria-label="${esc(b.t)}, ${b.got?'earned':'not earned yet'}">${patch(BADGE_PATCH[b.k]||'star',{size:104,state:st})}<div style="min-width:0"><h3>${esc(b.t)}</h3><p>${esc(b.d)}</p>${b.vid&&b.vid.thumb_url?`<div class="tv"><img src="${esc(b.vid.thumb_url)}" alt="The video that earned it" loading="lazy" onerror="this.parentNode.remove()"></div>`:''}</div>
+    <div class="ftr"><span class="stt">${b.got?`${ico('check',15)} Earned`:b.prog&&b.prog[0]>0?'In progress':`${ico('lock',14)} Locked`}</span><span class="sep" aria-hidden="true"></span><span>${b.got?(b.at?esc(fmt.date(b.at)):'Date not recorded'):b.prog?`${b.prog[0]} of ${b.prog[1]}`:'Not started'}</span></div></button>`; };
+  const imp=(Q?.instances||[]).filter(i=>i.state==='approved').map(i=>({i,c:(Q.catalog||[]).find(c=>c.quest_key===i.quest_key)})).filter(x=>x.c&&x.c.category==='Improve').sort((a,b)=>new Date(b.i.updated_at||0)-new Date(a.i.updated_at||0))[0];
+  const stage=!reached?0:reached.status==='paid'?2:1;
+  return `${ph('Make your progress permanent','Current progress and a lifetime of earned milestones.')}
+  ${progressNav('trophies')}
+  <div class="tr-top"><section class="paper tr-half" aria-label="This half"><span class="tag">This half • ${esc(half)}</span><div class="bnr" style="--phimg:url(../ph/angle-hunting.jpg)"></div><div class="in">
+      <div class="tr-xp"><span class="n">${xp==null?'—':xp}</span><span class="l">Approved<br>XP</span><div class="fatbar" role="img" aria-label="${xp==null?'unavailable':`${xp} of ${tgt||xp} XP`}"><i style="width:${xp!=null&&tgt?Math.max(3,Math.min(100,xp/tgt*100)).toFixed(0):0}%"></i></div></div>
+      <div class="mini" style="color:var(--rg-paper-ink2);margin-top:-8px">${nt?`Next cash tier: ${esc(nt.name)} at ${nt.xp_required} XP and ${nt.concepts_required} approved videos`:reached?`Top tier reached for ${esc(half)}`:''}</div>
+      <div class="tr-vid"><span class="n" style="font:800 48px/1 var(--disp)">${cc==null?'—':cc}</span><span class="l" style="font:800 18px/1.05 var(--disp);letter-spacing:.8px;text-transform:uppercase">Approved<br>videos</span>${cc?Array.from({length:Math.min(cc,6)},()=>'<span class="fchk" aria-hidden="true"></span>').join(''):'<span class="fchk no" aria-hidden="true"></span>'}${cc>6?`<span>+${cc-6}</span>`:''}
+        <div class="tr-pend">Pending progress shown separately.<br><span>${ico('timer',16)} ${r?(r.xp_pending||0):'—'} XP in review</span></div></div>
+      <button class="btn paper-line" onclick="go('rewards')">View reward requirements →</button></div></section>
+    <section class="tr-leg" aria-label="Creator legacy"><div class="lbl" style="font-size:14px;letter-spacing:2.4px">Creator legacy</div>
+      <div class="who2">${avRing(me,64)}<div style="min-width:0;flex:1"><b>${nmc(me,lv)}</b><span style="font-size:16px">${LB&&lm.rank!=null?`#${lm.rank} in ${MONTH_NAME}`:'Not on the board yet'} ${lm.move?`<span class="${lm.move>0?'pill-up':'pill-dn'}" style="padding:2px 10px;font-size:13px">${lm.move>0?'▲ +':'▼ −'}${Math.abs(lm.move)}</span>`:''}</span></div>${A?`<span class="arm-chip" style="margin:0;font-size:14px">${esc(CAMO_NAME[A.equipped||'carbon'])}</span>`:''}</div>
+      <div class="lbl" style="font-size:14px;letter-spacing:2.4px">Lifetime collection</div>
+      <div class="tlc">${patch('trophy',{size:120,state:'cur'}).replace('#5A2E12','#5B4A1E').replace('#8A4317','#7B6428').replace('#FF6E20','#C9A25A')}<ul><li>${ico('play',22)}<b>${cnt('approved')}</b> approved videos</li><li>${ico('refresh',22)}<b>${cnt('changes_requested')}</b> videos need changes</li><li>${ico('timer',22)}<b>${cnt('pending')}</b> videos in review</li><li>${ico('star',22)}<b>${got.length}</b> of ${B.length} badges${A?` · ${cams.length} of ${(A.camos||[]).length} camos`:''}</li></ul></div></section></div>
+  <div class="tr-h"><h2>Your Trophy Room</h2><span>${ico('check',16)} Earned (${got.length})</span><span>${ico('target',16)} In progress or locked (${open.length})</span></div>
+  ${B.length?`<div class="shelf">${[...got,...open].map(card).join('')}</div>`:emptyState('No badges yet','Your first approved video earns the first one.','','star')}
+  <div class="tr-bot" ${imp?'':'style="grid-template-columns:1fr"'}><section class="paper"><h3>Reward status <i style="font:italic 400 14px var(--f);text-transform:none;letter-spacing:0;color:var(--rg-paper-ink2)">· ${esc(half)} · no claim needed</i></h3>
+      <ol class="rstat" aria-label="Where your cash tier stands">${['Locked',reached?`Reached · ${esc(reached.name)}`:'Reached','Paid'].map((t,i)=>`<li class="${stage===i?'on':stage>i?'was':''}"><span>${t}</span></li>`).join('')}</ol>
+      <p style="margin-top:10px">${reached?`${esc(reached.name)} · ${fmt.usd(reached.cash_total_cents,{cents:true})} is your payout for ${esc(half)}${stage===2?', and it has been paid.':`. It pays once, after the half closes (${esc(payday(r))}).`}`:`No tier reached yet for ${esc(half)}. Your highest tier pays once, after the half closes.`} <a href="#/rewards">All tiers and rules</a></p></section>
+    ${imp?`<section class="paper"><h3>Your latest improvement</h3><p style="margin-top:8px;font-size:17px">${esc(imp.c.title)}: approved${imp.i.updated_at?` ${esc(fmt.date(imp.i.updated_at))}`:''}.</p><span class="badge g" style="margin-top:10px">${ico('check',14)} ${imp.i.xp||imp.c.xp_value} XP approved</span></section>`:''}</div>`; }
 route('rewards',async(p)=>{ if(p&&p.v==='trophies') return trophyRoom();
   const r=await API.page('my_rewards'); const tiers=r.tiers||[]; const anyDraft=tiers.some(t=>t.draft||!t.published);
   const lbl=r.period?.label||halfLabel(); const reset=halfReset(r);
   const topT=tiers[tiers.length-1]; const reached=[...tiers].reverse().find(t=>R_DONE.includes(t.status));
   const past=(r.periods||[]).filter(p=>!p.current&&(p.tiers||[]).some(t=>t.status!=='locked'));
   return `${ph('Rewards',`Cash tiers for <b>${esc(lbl)}</b>. Both bars must fill inside this half: XP from quests and approved videos. Resets ${esc(reset)}, 12:00 am CT.`,{eyebrow:MONTH_NAME+' 2026',acts:`<button class="btn gh" onclick="openRewardRules()">📜 Rules</button><button class="btn gh" onclick="go('quests')">${ico('target')} Earn XP</button>`})}
-  ${rewardTabs('rewards')}
+  ${progressNav('rewards')}
   <div class="rwhero" style="margin-bottom:16px"><div class="rwhero-photo" style="background-image:url(../ph/hero-rewards.jpg)"></div><div class="rwhero-in"><div class="lbl" style="color:var(--gold)">${r.prestige?`${PLV(r,r.level||0).emblem} ${esc(PLV(r,r.level||0).name)} · `:''}Cash rewards · ${esc(lbl)}</div>
     <div class="rwhero-amt">Up to ${fmt.usd(topT?.cash_total_cents,{cents:true})||'$0'}</div><div class="rwhero-sub">${reached?`You have unlocked <b>${esc(reached.name)} · ${fmt.usd(reached.cash_total_cents,{cents:true})}</b> for ${esc(lbl)}. Paid on <b>${esc(payday(r))}</b>, after this half closes.`:`Earn XP from quests and get videos approved to unlock cash. Everything resets ${esc(reset)}.`}</div>
     <div class="rwhero-steps">${tiers.map(t=>`<span class="${R_DONE.includes(t.status)?'on':''}">${fmt.usd(t.cash_total_cents,{cents:true})} <i>${esc(tierReq(t))}</i></span>`).join('')}</div></div></div>
@@ -3411,7 +3832,12 @@ async function openRules(){ const lb=await API.page('my_leaderboard'); const c=l
    <section><h3>Privacy</h3><ul><li>Everyone sees names and places.</li><li>Only you see your own GMV. You also see how much more you need to pass the place right above you, and how far ahead you are of the place right below you.</li></ul></section>`); }
 
 /* ---------------- Leaderboard */
-function lbRow(r,lb,{big=false}={}){ const m=r.me; const g=lb.me||{};
+function lbRow(r,lb){ const m=r.me; const g=lb.me||{}; const pz=(lb.campaign?.prizes||[])[r.rank-1];
+  const mvTxt=r.new?'new on the board':r.move>0?`up ${r.move} place${r.move===1?'':'s'}`:r.move<0?`down ${-r.move} place${r.move===-1?'':'s'}`:'';
+  return `<div class="lbrow2 ${m?'me':''}" role="row"><div class="rk" role="cell">#${r.rank}</div><div class="cr" role="cell">${avRing(r.name,30)}<span class="nm">${nmc(r.name,r.lvl)}${m?' <span class="you">YOU</span>':''}${r.tied?' <span class="mini">tie</span>':''}</span></div>
+    <div class="mvc" role="cell">${r.new?'<span class="up">NEW</span>':r.move>0?`<span class="up">▲ +${r.move}</span>`:r.move<0?`<span class="dn">▼ −${-r.move}</span>`:'<span aria-hidden="true">—</span>'}<span class="sr">${mvTxt||(lb.since?'no change':'no earlier snapshot')}</span></div>
+    <div class="st" role="cell"><span>${m?`Your GMV ${money(g.gmv)}`:pz&&r.rank<=3?`${fmt.usd(pz.cents,{cents:true})} prize place`:`${ico('lock',12)} Sales private`}</span></div></div>`; }
+function lbRowOld(r,lb,{big=false}={}){ const m=r.me; const g=lb.me||{};
   return `<div class="lbrow ${m?'me':''} ${r.rank<=3?'p'+r.rank:''}"><div class="rn">${r.rank<=3?['🥇','🥈','🥉'][r.rank-1]:'#'+r.rank}</div>${avatar(r.name,big?40:34)}
     <div style="min-width:0;flex:1"><div class="nm">${nmc(r.name,r.lvl)}${m?' <span class="you">YOU</span>':''}${r.tied?' <span class="mini">tie</span>':''} ${moveTag(r)}</div>
      ${r.rank<=3&&(lb.campaign?.prizes||[])[r.rank-1]?`<div class="mini" style="color:var(--gold)">${fmt.usd((lb.campaign?.prizes||[])[r.rank-1].cents,{cents:true})} prize place</div>`:''}</div>
@@ -3422,23 +3848,25 @@ route('leaderboard',async(p)=>{
   const pct=me.gap!=null&&me.gmv!=null?clamp(me.gmv/(me.gmv+me.gap)*100,2,99):0;
   const pod=rows.filter(r=>r.rank<=3).slice(0,3);
   const CH=NOV?await myChallenge():null;
-  return `${ph(NOV?`${MONTH_NAME} leaderboard`:'October leaderboard',NOV?`Ranked by GMV from videos you posted in ${MONTH_NAME}. Everyone sees the order; only you see your own number.`:'Ranked by GMV from October videos. Everyone sees the order; only you see your own number.',{eyebrow:'Compete',acts:`<button class="btn gh" onclick="openRules()">${ico('book')} Rules</button>`})}
-  ${NOV?(CH?chHero(CH):''):incentiveHero(c)}
-  <div class="lbme">
-   <div class="lbme-a"><div class="lbl">You are</div><div class="lbme-rank">${me.rank==null?'—':'#'+me.rank}</div><div class="mini">${me.rank==null?'not on the board yet':`of ${lb.ranked} ranked${me.tied?' · tied':''}`}</div>${me.move?`<div class="mvline ${me.move>0?'up':'dn'}">${me.move>0?'▲':'▼'} ${Math.abs(me.move)} since ${fmt.date(lb.since)}</div>`:''}</div>
-   <div class="lbme-b"><div class="lbl">${NOV?`Your ${MONTH_NAME} GMV <span class="gmvq">(videos posted in ${MONTH_NAME} only)</span>`:'Your October GMV <span class="gmvq">(videos posted in October only)</span>'}</div><div class="lbme-gmv">${money(me.gmv||0)}</div><div class="mini">only you can see this</div></div>
-   <div class="lbme-c">${me.rank===1?`<div class="lbl">Status</div><div class="lbme-next">👑 You are in first.</div><div class="mini">Keep posting. Everyone below you can see how far behind they are, not your number.</div>`
-     :me.gap!=null?`<div class="lbl">To pass ${me.next_rank?'#'+me.next_rank:''} ${nmc(me.next_name||'',me.next_lvl)}</div><div class="lbme-next"><b>${money(me.gap)}</b> more GMV</div><div class="bar gold" style="margin-top:8px"><i style="width:${pct.toFixed(1)}%"></i></div>`
-     :`<div class="lbl">Get on the board</div><div class="lbme-next">Make your first ${NOV?MONTH_NAME:'October'} sale</div>`}
-     ${me.rank!=null?`<div class="lbme-below">${me.below_name?`<span class="lbl">Behind you</span> #${me.below_rank} ${nmc(me.below_name,me.below_lvl)} is <b>${money(me.lead||0)}</b> back${(me.lead||0)<500?' · they are close, keep posting':''}`:`<span class="lbl">Behind you</span> nobody yet`}</div>`:''}</div>
-  </div>
-  ${pod.length?`<div class="sec"><h2>Top 3</h2><span class="mini">${(c.prizes||[]).length?'Prize places right now':'Leading the team right now'}</span></div>
-  <div class="podium2">${[pod[1],pod[0],pod[2]].filter(Boolean).map(r=>`<div class="pc2 p${r.rank} ${r.me?'me':''}">${r.rank===1?'<div class="crown">👑</div>':''}${avatar(r.name,r.rank===1?64:52)}<div class="n">${nmc(r.name,r.lvl)}${r.me?' <span class="you">YOU</span>':''}</div><div class="pl">${['1st','2nd','3rd'][r.rank-1]} place</div>${(c.prizes||[])[r.rank-1]?`<div class="amt">${fmt.usd((c.prizes||[])[r.rank-1].cents,{cents:true})}</div>`:''}${r.me?`<div class="mini" style="margin-top:4px">Your GMV ${money(me.gmv)}</div>`:''}</div>`).join('')}</div>`:''}
-  <div class="sec"><h2>Every ranked creator</h2><span class="mini">${lb.ranked} ranked${lb.not_ranked?` · ${lb.not_ranked} still at $0`:''}${lb.since?` · ▲▼ = places moved since ${fmt.date(lb.since)}`:''}</span></div>
-  ${rows.length?`<div class="card" style="padding:8px">${shown.map(r=>lbRow(r,lb)).join('')}
-    ${meHidden?`<div class="lbgap">⋯</div>${lbRow(myRow,lb)}`:''}
-    ${rows.length>10?`<button class="btn gh" style="width:100%;margin-top:8px" onclick="go('leaderboard',${all?'{}':"{all:'1'}"})">${all?'Show top 10 only':`Show all ${rows.length} places`}</button>`:''}</div>`
+  const PBG=['../ph/angle-hunting.jpg','../ph/angle-duck.jpg','../ph/angle-range.jpg'];
+  const pcard=r=>`<div class="pcard p${r.rank} ${r.me?'me':''}"><img class="bg" src="${PBG[r.rank-1]||PBG[0]}" alt="" loading="lazy" onerror="this.remove()"><span class="rib" aria-hidden="true">#${r.rank}</span>${avRing(r.name,r.rank===1?84:72)}<div class="pn"><b>${nmc(r.name,r.lvl)}</b><small>${['1st','2nd','3rd'][r.rank-1]} place${r.tied?' · tied':''}${r.me?' · you':''}${(c.prizes||[])[r.rank-1]?` · ${fmt.usd((c.prizes||[])[r.rank-1].cents,{cents:true})}`:''}</small></div>${patch(r.rank===1?'trophy':'medal',{size:r.rank===1?84:70,state:'cur'}).replace('#5A2E12','#5B4A1E').replace('#8A4317','#7B6428').replace('#FF6E20',r.rank===1?'#E8B64A':r.rank===2?'#C9CEC7':'#C98554')}</div>`;
+  const rc=(rank,name,lvl)=>`<div class="rc cm-woodland"><span class="rk">#${rank}</span>${avRing(name,54)}<b class="nm">${nmc(name,lvl)}</b></div>`;
+  const race=`<section class="paper race" aria-label="Your race"><div class="race-t"><b>Your race</b><span>${MONTH_NAME} sales race. Only you see your own number.</span></div>
+    ${me.rank==null?`<div class="rc empty cm-carbon" style="grid-column:span 3"><span>You are not on the board yet. Your first ${NOV?MONTH_NAME:'October'} sale puts you on it.</span></div>`:
+     `${me.next_name&&me.rank!==1?rc(me.next_rank,me.next_name,me.next_lvl):`<div class="rc empty cm-gold"><span>👑 Nobody is ahead of you.</span></div>`}
+      <div class="rc you"><span class="rk">#${me.rank}</span>${me.move?`<span class="mvp ${me.move>0?'':'dn'}">${me.move>0?'▲ +':'▼ −'}${Math.abs(me.move)} PLACE${Math.abs(me.move)===1?'':'S'}<span class="sr"> since ${esc(fmt.date(lb.since))}</span></span>`:''}${avRing(myRow?.name||S.me?.display_name||'You',54)}<b class="nm">${esc(myRow?.name||S.me?.display_name||'You')} · You</b>
+        <div class="facts"><span>Your sales: <b>${money(me.gmv||0)}</b> (private to you)</span>${me.rank!==1&&me.gap!=null?`<span>Next place: <b>${money(me.gap)}</b> away</span>`:''}${me.tied?'<span>Tied</span>':''}</div></div>
+      ${me.below_name?rc(me.below_rank,me.below_name,me.below_lvl):`<div class="rc empty cm-carbon"><span>Nobody is behind you yet.</span></div>`}`}</section>`;
+  return `${ph(NOV?`The ${MONTH_NAME} leaderboard`:'October leaderboard',`Official ${NOV?MONTH_NAME:'October'} sales standings. <span class="mini" style="display:block;margin-top:4px">${ico('info',14)} Ranked by GMV from videos you posted in ${NOV?MONTH_NAME:'October'} · other creators' amounts stay private${lb.data_through?` · updated ${esc(fmt.dt(lb.data_through))}`:''}</span>`,{acts:`<button class="btn gh" onclick="openRules()">${ico('book')} Rules</button>`})}
+  ${pod.length?`<div class="pcards" aria-label="Top 3">${[pod[1],pod[0],pod[2]].filter(Boolean).map(pcard).join('')}</div>`:''}
+  ${race}
+  <div class="sec" style="margin-top:8px"><h2>Official race</h2><span class="mini">${lb.ranked} ranked${lb.not_ranked?` · ${lb.not_ranked} still at $0`:''}${lb.since?` · movement since ${fmt.date(lb.since)}`:' · no earlier snapshot to compare yet'}</span></div>
+  ${rows.length?`<div class="lbt" role="table" aria-label="Standings"><div class="lbt-h" role="row"><span role="columnheader">Rank</span><span role="columnheader">Creator</span><span role="columnheader">Movement</span><span role="columnheader">Status</span></div>${shown.map(r=>lbRow(r,lb)).join('')}
+    ${meHidden?`<div class="lbgap">⋯</div>${lbRow(myRow,lb)}`:''}</div>
+    ${rows.length>10?`<button class="btn gh" style="width:100%;margin-top:10px" onclick="go('leaderboard',${all?'{}':"{all:'1'}"})">${all?'Show top 10 only':`Show all ${rows.length} places`}</button>`:''}`
    :emptyState('Nobody is on the board yet',`The first ${NOV?MONTH_NAME:'October'} sale puts someone in first place.`,'','leader')}
+  <div class="sec"><h2>${NOV?'Your prize race':'Prizes'}</h2><a class="mini" href="#/compete">Full challenge →</a></div>
+  ${NOV?(CH?chHero(CH):''):incentiveHero(c)}
   ${myRow&&all&&myRow.rank>10?`<div class="mestick"><div class="rn">#${myRow.rank}</div>${avatar(myRow.name,30)}<div style="min-width:0;flex:1"><div class="nm">${nmc(myRow.name,myRow.lvl)} <span class="you">YOU</span></div><div class="mini">${me.gap!=null?`${money(me.gap)} to pass #${me.next_rank}`:''}${me.below_name?` · #${me.below_rank} is ${money(me.lead||0)} behind you`:''}</div></div><div style="text-align:right"><div style="font-family:var(--mono);font-weight:800;color:var(--gold)">${money(me.gmv)}</div><div class="mini">your GMV</div></div></div>`:''}
   <div class="note" style="margin-top:14px">Updated with each Trybe refresh${lb.data_through?` · last one ${fmt.dt(lb.data_through)}`:''}. ${NOV?`GMV here only counts videos you posted in ${MONTH_NAME}, resubmits included, so it can be lower than the ${MONTH_NAME} sales on your Home page and in Trybe.`:'GMV here only counts videos you submitted and got approved in October, so it can be lower than the October sales on your Home page.'}</div>`;
 });
