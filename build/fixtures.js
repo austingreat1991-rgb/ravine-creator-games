@@ -20,11 +20,12 @@ const catalog=()=>[
   Q('nov_aff_first','Affiliate','First affiliate sale','Make your first affiliate sale.',15,{per_period_limit:1}),
   Q('nov_boss_p2','Boss','Boss: 10 videos in a half','Ten approved original videos in one half.',60,{locked:true,min_prestige:2,min_prestige_name:'Prestige II',per_period_limit:1}),
 ];
-const tiersOf=(xp,cc)=>[['t1','Builder',50,2,5000],['t2','Operator',100,4,10000],['t3','Elite',200,8,25000]].map(([id,name,x,c,cents])=>({id,name,xp_required:x,concepts_required:c,sales_required_cents:0,cash_total_cents:cents,published:true,draft:false,prestige_level:0,
-  xp_met:xp>=x,concepts_met:cc>=c,status:xp>=x&&cc>=c?'approved_for_payment':'locked',claim:null}));
+const FX_SALES=293000;   // Nov 16 rules: every tier needs sales (Trybe + affiliate)
+const tiersOf=(xp,cc)=>[['t1','Builder',50,2,5000,100000],['t2','Operator',100,4,10000,250000],['t3','Elite',200,8,25000,500000]].map(([id,name,x,c,cents,sc])=>({id,name,xp_required:x,concepts_required:c,sales_required_cents:sc,cash_total_cents:cents,published:true,draft:false,prestige_level:0,
+  xp_met:xp>=x,concepts_met:cc>=c,sales_met:FX_SALES>=sc,status:xp>=x&&cc>=c&&FX_SALES>=sc?'approved_for_payment':'locked',claim:null}));
 const levels=()=>[0,1,2,3,4].map(l=>({level:l,name:['Rookie','Prestige I','Prestige II','Prestige III','Prestige Master'][l],emblem:['🎯','🥉','🥈','🥇','👑'][l],
-  tiers:[['Builder',50,2,5000],['Operator',100,4,10000],['Elite',200,8,25000]].map(([name,x,c,cents],i)=>({id:`l${l}t${i}`,name,xp_required:x+l*25,concepts_required:c+l,sales_required_cents:l>=2?(l-1)*250000:0,cash_total_cents:cents*(1+l),published:true,prestige_level:l})),boss:[]}));
-const rewards=(xp,cc,lv)=>({xp,concepts:cc,sales_cents:293000,xp_pending:0,level:lv,period:{key:P1.key,label:P1.label,ends_at:P1.ends_at,starts_at:P1.starts_at},tiers:tiersOf(xp,cc),
+  tiers:[['Builder',50,2,5000],['Operator',100,4,10000],['Elite',200,8,25000]].map(([name,x,c,cents],i)=>({id:`l${l}t${i}`,name,xp_required:x+l*25,concepts_required:c+l,sales_required_cents:[100000,250000,500000][i]*[1,2.5,5,7.5,10][l],cash_total_cents:cents*(1+l),published:true,prestige_level:l})),boss:[]}));
+const rewards=(xp,cc,lv)=>({xp,concepts:cc,sales_cents:FX_SALES,xp_pending:0,level:lv,period:{key:P1.key,label:P1.label,ends_at:P1.ends_at,starts_at:P1.starts_at},tiers:tiersOf(xp,cc),
   periods:[{...P1,current:true,xp,concepts:cc,tiers:tiersOf(xp,cc)}],history:[],ledger:{reserved_cents:0,paid_cents:0},
   prestige:{level:lv,unlocked:lv,can_change_current:false,change_until:'2026-11-04T06:00:00Z',launch_at:'2026-11-01T05:00:00Z',next:{level:lv,label:P2.label,starts_at:P2.starts_at,has_prestige:true,picked:false},levels:levels()}});
 const vid=(i,st,sales,spend,o={})=>Object.assign({id:'fx'+String(i).padStart(6,'0')+'abcd',title:`Nov ${1+(i%13)}, ${1+(i%11)}:1${i%6} PM`,status:st,submitted_at:iso(-(i+1)*D*1.3),approved_at:st==='approved'?iso(-(i+1)*D*1.3+5*H):null,
