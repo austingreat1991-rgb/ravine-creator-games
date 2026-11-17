@@ -7,11 +7,21 @@ const srv=http.createServer((q,s)=>{ let p=decodeURIComponent(q.url.split('?')[0
   fs.readFile(f,(e,b)=>{ if(e){ s.writeHead(404); return s.end(); } if(p.endsWith('index.html')) b=Buffer.from(b.toString().replace('window.APP_MODE="live"','window.APP_MODE="fixture";window.NO_SW=1').replace('<script>/* Ravine Creator Games · October build · core','<script src="./build/fixtures.js"></script><script>/* Ravine Creator Games · October build · core')); s.writeHead(200,{'content-type':mime[path.extname(f)]||'application/octet-stream'}); s.end(b); }); });
 const results=[]; const ok=(n)=>{ results.push('PASS '+n); }; 
 async function session(b,port,code,vp,opts={}){ const ctx=await b.newContext({viewport:vp,deviceScaleFactor:opts.dsf||1,reducedMotion:'reduce'}); const ext=[]; await ctx.route(u=>!u.href.startsWith('http://127.0.0.1'),r=>{ ext.push(r.request().url()); r.abort(); });
+  if(!opts.showPop) await ctx.addInitScript(()=>{ window.__NO_RPOP=1; });
   const pg=await ctx.newPage(); const errs=[]; pg.on('pageerror',e=>errs.push(e.message)); await pg.goto(`http://127.0.0.1:${port}/`); await pg.fill('#code',code); await pg.evaluate(()=>doLogin()); await pg.waitForTimeout(500);
   await pg.evaluate(()=>{ window.__calls=[]; const o=FX.rpc; FX.rpc=function(n,a){ window.__calls.push(n); return o.call(FX,n,a); }; });
   const go=async h=>{ await pg.evaluate(x=>{ location.hash='#/'+x; },h); await pg.waitForTimeout(700); }; return {ctx,pg,errs,ext,go}; }
 srv.listen(0,async()=>{ const port=srv.address().port; const b=await chromium.launch(); let fail=null;
  try{
+  // ---- 0. Nov 16 rules pop-up: shows once, Got it closes it, it stays closed after a reload, admin never sees it
+  { const {ctx,pg,errs}=await session(b,port,'RVFIXPOPUL',{width:390,height:844},{showPop:true});
+    assert.ok(await pg.evaluate(()=>!!document.querySelector('#rpop')),'pop-up shows on first visit'); ok('rules pop-up shows on the first visit');
+    assert.ok(await pg.evaluate(()=>document.activeElement&&document.activeElement.id==='rpop-ok'),'focus starts on Got it'); ok('pop-up focus starts on Got it');
+    await pg.click('#rpop-ok'); await pg.waitForTimeout(300); assert.ok(!(await pg.evaluate(()=>!!document.querySelector('#rpop'))),'Got it closes it'); ok('Got it closes the pop-up');
+    await pg.reload(); await pg.waitForTimeout(1200); assert.ok(!(await pg.evaluate(()=>!!document.querySelector('#rpop'))),'stays closed'); ok('pop-up does not come back after a reload');
+    assert.deepEqual(errs,[]); await ctx.close(); }
+  { const {ctx,pg}=await session(b,port,'RVFIXADMIN',{width:1440,height:900},{showPop:true});
+    assert.ok(!(await pg.evaluate(()=>!!document.querySelector('#rpop'))),'admin does not see it'); ok('admin does not get the creator pop-up'); await ctx.close(); }
   // ---- 1. quest draft -> save -> validation -> submit -> idempotent
   { const {ctx,pg,errs,go}=await session(b,port,'RVFIXPOPUL',{width:1440,height:900}); await go('quests');
     const calls=()=>pg.evaluate(()=>window.__calls.slice());
