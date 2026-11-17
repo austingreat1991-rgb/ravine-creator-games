@@ -18,7 +18,7 @@ ${vals.join(',\n')||"('none',null,null,now(),0,true)"};
   -- match the affiliate to a creator by name (display name or Trybe name), only when exactly one creator matches
   update _af a set cid = x.cid from (
     select a2.order_id, min(c.id::text)::uuid cid, count(distinct c.reward_identity) k from _af a2
-      join app.creators c on c.active and lower(regexp_replace(trim(a2.affiliate), '\\s+', ' ', 'g')) in
+      join app.creators c on c.active and app.on_roster(c.id) and lower(regexp_replace(trim(a2.affiliate), '\\s+', ' ', 'g')) in
            (lower(regexp_replace(trim(c.display_name), '\\s+', ' ', 'g')), lower(regexp_replace(trim(coalesce(c.trybe_name, '')), '\\s+', ' ', 'g')))
      group by a2.order_id) x where x.order_id = a.order_id and x.k = 1;
   insert into app.affiliate_sales (order_id, creator_id, affiliate_code, placed_at, amount, refunded, source, synced_at)
