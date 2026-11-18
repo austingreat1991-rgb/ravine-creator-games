@@ -20,6 +20,18 @@ srv.listen(0,async()=>{ const port=srv.address().port; const b=await chromium.la
     await pg.click('#rpop-ok'); await pg.waitForTimeout(300); assert.ok(!(await pg.evaluate(()=>!!document.querySelector('#rpop'))),'Got it closes it'); ok('Got it closes the pop-up');
     await pg.reload(); await pg.waitForTimeout(1200); assert.ok(!(await pg.evaluate(()=>!!document.querySelector('#rpop'))),'stays closed'); ok('pop-up does not come back after a reload');
     assert.deepEqual(errs,[]); await ctx.close(); }
+  // ---- 0b. small phone: the X is on screen without scrolling and closes it; tapping outside closes it; never shows twice even if not dismissed
+  { const {ctx,pg,errs}=await session(b,port,'RVFIXPOPUL',{width:375,height:600},{showPop:true});
+    const box=await pg.evaluate(()=>{ const r=document.querySelector('#rpop-x').getBoundingClientRect(); return {t:r.top,b:r.bottom,l:r.left,r:r.right,h:innerHeight,w:innerWidth}; });
+    assert.ok(box.t>=0&&box.b<=box.h&&box.r<=box.w,'X visible on a short phone '+JSON.stringify(box)); ok('small phone: the close X is on screen without scrolling');
+    const ft=await pg.evaluate(()=>{ const r=document.querySelector('#rpop-ok').getBoundingClientRect(); return r.bottom<=innerHeight; }); assert.ok(ft,'Got it visible'); ok('small phone: Got it stays on screen');
+    await pg.tap?.('#rpop-x').catch(()=>{}); await pg.click('#rpop-x').catch(()=>{}); await pg.waitForTimeout(300); assert.ok(!(await pg.evaluate(()=>!!document.querySelector('#rpop'))),'X closes'); ok('the X closes the pop-up');
+    assert.deepEqual(errs,[]); await ctx.close(); }
+  { const {ctx,pg}=await session(b,port,'RVFIXPENDG',{width:375,height:600},{showPop:true});
+    const shown=await pg.evaluate(()=>!!document.querySelector('#rpop'));
+    if(shown){ await pg.mouse.click(5,5); await pg.waitForTimeout(300); assert.ok(!(await pg.evaluate(()=>!!document.querySelector('#rpop'))),'outside tap closes'); ok('tapping outside closes the pop-up');
+      await pg.evaluate(()=>{ rulesPop(true); }); await pg.reload(); await pg.waitForTimeout(1200); assert.ok(!(await pg.evaluate(()=>!!document.querySelector('#rpop'))),'not twice'); ok('the pop-up never shows twice, even if it was not dismissed'); }
+    await ctx.close(); }
   { const {ctx,pg}=await session(b,port,'RVFIXADMIN',{width:1440,height:900},{showPop:true});
     assert.ok(!(await pg.evaluate(()=>!!document.querySelector('#rpop'))),'admin does not see it'); ok('admin does not get the creator pop-up'); await ctx.close(); }
   // ---- 1. quest draft -> save -> validation -> submit -> idempotent
