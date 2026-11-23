@@ -1162,6 +1162,7 @@ details.qmore{margin-top:10px}details.qmore>summary{cursor:pointer;font-size:13p
 .sp-head,.sp-main,.sp-foot,.sp-bar{position:relative}
 .sp-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .sp-live{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--o2)}
+.sp-cl-lbl{font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--tx3);margin:0 0 6px}
 .sp-live i{width:8px;height:8px;border-radius:50%;background:var(--o);animation:sppulse 1.6s infinite}
 @keyframes sppulse{0%{box-shadow:0 0 0 0 rgba(255,110,32,.7)}70%{box-shadow:0 0 0 9px rgba(255,110,32,0)}100%{box-shadow:0 0 0 0 rgba(255,110,32,0)}}
 @media (prefers-reduced-motion:reduce){.sp-live i{animation:none}}
@@ -2170,7 +2171,7 @@ input::placeholder,textarea::placeholder{color:var(--tx3)}
 <aside class="drawer" id="drawer" tabindex="-1" aria-label="Details"></aside>
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
-<script>window.APP_MODE="live";window.BUILD="20261123-130000";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261123-134500";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -3081,6 +3082,7 @@ function tgAnimate(){ const els=[...document.querySelectorAll('.tg [data-countup
   const step=now=>{ const t=Math.min(1,(now-t0)/D); els.forEach(el=>{ el.textContent=fmt.usd(Math.round(Number(el.dataset.countup)*ease(t))); }); if(t<1) requestAnimationFrame(step); };
   requestAnimationFrame(step); }
 route('home',async()=>{
+  try{ await API.page('my_quests'); }catch(e){}   // Nov 23: the quest countdown banner at the top of Home needs the catalog
   const h=await API.page('my_home'); const c=h.campaign||{}; const ct=h.contest||{}; const q=h.quests||{}; const r=h.rewards||{}; const sub=h.submissions||{};
   const N=await myNumbers(); const TG=await teamGoal(); const ES=await myEliteSpot(); let SP={}; try{ SP=await API.page('my_submissions'); }catch(e){} const SUBS=SP.videos||[]; if(SUBS.length&&typeof sub.changes==='number') sub.changes=SUBS.filter(v=>v.status==='changes_requested').length; try{ await API.page('my_quests'); }catch(e){}
   const nt=nextTier(r); const dl=daysLeft(c.ends_at); let RW=null; try{ RW=await API.page('my_rewards'); }catch(e){}
@@ -3102,8 +3104,8 @@ route('home',async()=>{
     const taskRow=a=>`<button class="fl-task ${a.hot?'hot':''}" onclick="go('${a.go}',${JSON.stringify(a.p||{}).replace(/"/g,'&quot;')})"><span class="fl-task-b"><b>${esc(a.t)}</b><span>${esc(a.d)}</span></span>${ico('arrow',16)}</button>`;
     const BF=await homeBriefing({h,q,sub,tasks,RW,C,SUBS,TG});
     return `${ph('Your daily briefing',`Your next move, your progress, your next unlock. <span class="mini" style="white-space:nowrap">${esc(chCountdown(C))}</span>`)}
-    ${BF}
     ${(()=>{ const QQ=S.cache['my_quests{}']; if(!QQ) return ''; const ins=QQ.instances||[]; return sprintBanner(QQ.catalog,Object.fromEntries((QQ.catalog||[]).map(c=>[c.quest_key,questState(c,ins)]))); })()}
+    ${BF}
     <div class="sec"><h2>Team and challenge</h2><a class="mini" href="#/compete">Full challenge rules →</a></div>
     ${TG&&TG.month_key===CAMP?`<section class="card tg fl-tg">${teamGoalHead(TG)}</section>`:''}
     ${C&&C.tiers?`<div class="fl-duo flpf">${chPool(C,{bar:!(TG&&TG.month_key===CAMP)})}${chHero(C)}</div>`:`<div class="card"><p>Your November challenge shows here once the first November numbers are in.</p></div>`}
@@ -3230,8 +3232,19 @@ function ctWhen(ts){ try{ const p=Object.fromEntries(new Intl.DateTimeFormat('en
   return `${p.weekday} ${p.month} ${p.day}, ${p.hour}:${p.minute} ${String(p.dayPeriod||'').toLowerCase()} CT`; }catch(e){ return fmt.date(ts); } }
 function clockHtml(ms){ ms=Math.max(0,ms); const z=n=>String(n).padStart(2,'0'); const h=Math.floor(ms/36e5), m=Math.floor(ms%36e5/6e4), s=Math.floor(ms%6e4/1e3);
   return `<div class="sp-seg"><b>${z(h)}</b><span>hrs</span></div><i>:</i><div class="sp-seg"><b>${z(m)}</b><span>min</span></div><i>:</i><div class="sp-seg"><b>${z(s)}</b><span>sec</span></div>`; }
-function liveQuest(cats){ return (cats||[]).filter(c=>{ const w=qWin(c); return w&&w.open&&!c.locked; }).sort((a,b)=>Date.parse(a.closes_at)-Date.parse(b.closes_at))[0]||null; }
-function sprintBanner(cats,states){ const c=liveQuest(cats); if(!c) return ''; const st=states?.[c.quest_key]||{state:'available'}; if(!['available','in_progress','needs_changes','submitted'].includes(st.state)) return '';
+function liveQuest(cats){ const L=(cats||[]).filter(c=>{ const w=qWin(c); return w&&!c.locked&&(w.open||(w.soon&&w.start-Date.now()<1728e5)); });   // Nov 23: show it 48h before it opens, with a countdown to the start
+  return L.sort((a,b)=>{ const wa=qWin(a), wb=qWin(b); return (wb.open-wa.open)||(Date.parse(a.closes_at)-Date.parse(b.closes_at)); })[0]||null; }
+function sprintBanner(cats,states){ const c=liveQuest(cats); if(!c) return ''; const st=states?.[c.quest_key]||{state:'available'};
+  { const w=qWin(c), mult=qMult(c); if(w.soon){ const ms=w.start-Date.now();
+    return `<section class="card sprint sp-soon" aria-label="${esc(c.title)}">
+    <div class="sp-head"><span class="sp-live"><i></i>Starts soon · ${w.hrs}-hour quest</span>${mult?`<span class="sp-x">${mult}x XP</span>`:''}</div>
+    <div class="sp-main"><div class="sp-copy"><h2>${esc(c.title)}</h2><p>${esc(c.outcome)}</p>
+      <div class="sp-xp">${mult?`<s>${c.xp_normal} XP</s>`:''}<b>${c.xp_value} XP</b> after approval</div></div>
+      <div><div class="sp-cl-lbl">Starts in</div><div class="sp-clock" data-qend="${w.start}" role="timer" aria-label="Starts in: ${hm(ms)}">${clockHtml(ms)}</div></div></div>
+    <div class="sp-foot"><span class="sp-when">Opens <b>${esc(ctWhen(w.start))}</b> · closes <b>${esc(ctWhen(w.end))}</b></span>
+      <div class="sp-acts"><button class="btn line" onclick="openQuest('${c.quest_key}')">Preview the quest</button></div></div>
+  </section>`; } }
+  if(!['available','in_progress','needs_changes','submitted'].includes(st.state)) return '';
   const w=qWin(c), mult=qMult(c), rp=st.cur?reqProgress(c,st.cur):null, kb=(QRES[c.quest_key]||[]).find(r=>r.ext);
   const cta={available:'Start quest',in_progress:'Continue',needs_changes:'Fix and resubmit',submitted:'View entry'}[st.state];
   const status={in_progress:rp?`${rp.have} of ${rp.need} ${rp.unit||'items'} attached`:'Started',submitted:'Sent. Austin is reviewing it.',needs_changes:'Austin asked for a fix'}[st.state]||'';
@@ -3239,7 +3252,7 @@ function sprintBanner(cats,states){ const c=liveQuest(cats); if(!c) return ''; c
     <div class="sp-head"><span class="sp-live"><i></i>Live now · ${w.hrs}-hour quest</span>${mult?`<span class="sp-x">${mult}x XP</span>`:''}</div>
     <div class="sp-main"><div class="sp-copy"><h2>${esc(c.title)}</h2><p>${esc(c.outcome)}</p>
       <div class="sp-xp">${mult?`<s>${c.xp_normal} XP</s>`:''}<b>${c.xp_value} XP</b> after approval</div></div>
-      <div class="sp-clock" data-qend="${w.end}" role="timer" aria-label="Time left: ${hm(w.ms)}">${clockHtml(w.ms)}</div></div>
+      <div><div class="sp-cl-lbl">Ends in</div><div class="sp-clock" data-qend="${w.end}" role="timer" aria-label="Time left: ${hm(w.ms)}">${clockHtml(w.ms)}</div></div></div>
     <div class="sp-bar" aria-hidden="true"><i data-qbar="${w.end}" data-qstart="${w.start}" style="width:${Math.max(0,Math.min(100,w.ms/(w.end-w.start)*100)).toFixed(1)}%"></i></div>
     <div class="sp-foot"><span class="sp-when">Send it before <b>${esc(ctWhen(w.end))}</b>${status?` · <span class="sp-st sp-${st.state}">${esc(status)}</span>`:''}</span>
       <div class="sp-acts">${kb?`<a class="btn gh sm" ${openExt(kb.url)}>${kb.icon} Knowledge Bomb #9 ${ico('ext',12)}</a>`:''}<button class="btn" onclick="openQuest('${c.quest_key}')">${cta}</button></div></div>
@@ -3257,7 +3270,7 @@ function qTick(){ const now=Date.now(); let hit=false;
     else if(el.dataset.qfmt==='chip') el.textContent=ms>0?`⏱️ ${hm(ms)} left`:'⏱️ Closed';
     else el.textContent=ms>0?`${hm(ms)} left`:'closed'; });
   $$('[data-qbar]').forEach(el=>{ const e=+el.dataset.qbar, s=+el.dataset.qstart; el.style.width=Math.max(0,Math.min(100,(e-now)/(e-s)*100)).toFixed(2)+'%'; });
-  if(hit&&!qTick.done){ qTick.done=true; try{ API.bust(); }catch(e){} if(typeof render==='function') render(); } }
+  if(hit&&!qTick.done){ qTick.done=true; try{ API.bust(); }catch(e){} if(typeof render==='function') render(); setTimeout(()=>{ qTick.done=false; },5000); } }
 if(typeof window!=='undefined'&&!window.__qTimer) window.__qTimer=setInterval(qTick,1000);
 /* quests that take a reference video from the Angle Library */
 const REF_QUESTS=['oct_recreate','oct_boss_format','oct_boss_angle','oct_hooks3','oct_unaware','oct_ai_kb9'];
