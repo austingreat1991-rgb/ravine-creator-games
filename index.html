@@ -2171,7 +2171,7 @@ input::placeholder,textarea::placeholder{color:var(--tx3)}
 <aside class="drawer" id="drawer" tabindex="-1" aria-label="Details"></aside>
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
-<script>window.APP_MODE="live";window.BUILD="20261123-134500";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261124-120000";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -3026,9 +3026,9 @@ function numbersCard(N){
   const rk='';
   const fresh=N.data_through?`<span class="badge d noicon">Snapshot · ${esc(fmt.ago(N.data_through))}</span>`:'';
   return `<div class="card hi" style="margin-bottom:12px">
-    <div class="row between"><div class="lbl">Your October numbers</div>${fresh}</div>
-    <div class="kpi" style="margin-top:8px"><span class="big" style="font-size:52px">${fmt.usd(N.month_sales)}</span><span class="lbl">October sales · all videos</span></div>
-    <div class="mini" style="margin-top:6px">${fmt.usd(N.all_sales)} all time · ${fmt.usd(N.base_sales??0)} before Oct 1</div>
+    <div class="row between"><div class="lbl">Your ${esc(MONTH_NAME)} numbers</div>${fresh}</div>
+    <div class="kpi" style="margin-top:8px"><span class="big" style="font-size:52px">${fmt.usd(N.month_sales)}</span><span class="lbl">${esc(MONTH_NAME)} sales · all videos</span></div>
+    <div class="mini" style="margin-top:6px">${fmt.usd(N.all_sales)} all time · ${fmt.usd(N.base_sales??0)} before ${esc(MONTH_NAME.slice(0,3))} 1</div>
     <div class="row" style="margin-top:10px;gap:16px;flex-wrap:wrap;font-size:14px"><span><b>${fmt.int(N.month_approved??0)}</b> approved this month</span>${N.approval_rate!=null?`<span><b>${N.approval_rate}%</b> approval</span>`:''}${N.month_earnings!=null?`<span><b style="color:var(--gr)">${fmt.usd2(N.month_earnings)}</b> earned this month</span>`:''}</div>
     ${N.in_export===false?`<div class="note warn" style="margin-top:10px">Your account was not in today's Trybe export, so these are your numbers as of Sept 30. Message Austin if that looks wrong.</div>`:''}
     <div class="mini" style="margin-top:8px">Pulled from Trybe${N.data_through?' · as of '+esc(fmt.dt(N.data_through)):''}</div>
@@ -3130,7 +3130,7 @@ route('home',async()=>{
   return `${ph('Home','',{eyebrow:`${MONTH_NAME} 2026 · ${dl} day${dl===1?'':'s'} left · ends ${NOV?'Nov 30':'Oct 31'}, 11:59 pm CT`,acts:`<button class="btn" onclick="go('${action.go}',${JSON.stringify(action.p||{}).replace(/"/g,'&quot;')})">${esc(action.t)}</button>`})}
   ${(()=>{ const QQ=S.cache['my_quests{}']; if(!QQ) return ''; const ins=QQ.instances||[]; return sprintBanner(QQ.catalog,Object.fromEntries((QQ.catalog||[]).map(c=>[c.quest_key,questState(c,ins)]))); })()}
   ${NOV?challengeCard(await myChallenge()):teamGoalCard(TG)}
-  ${NOV&&!(N&&N.campaign_key===CAMP)?'':numbersCard(N)}
+  ${NOV?'':numbersCard(N)}
   ${paceCard(SUBS,SP.source)}
   ${eliteSpotCard(ES)}
   ${badgesCard(SUBS)}
@@ -4054,7 +4054,7 @@ async function openVideo(id){
    ${v.ad_only?'':`<div id="vstats"><div class="sk" style="height:160px;margin-top:14px"></div></div>`}
    <div id="oldnums">
    ${cm?`<section><h3>${esc(MONTH_NAME)}</h3>${cm.spend!=null||cm.sales!=null?`<div class="grid g2" style="gap:8px">${metric('Ad spend',money(cm.spend))}${metric('Sales (Trybe)',money(cm.sales),{cls:'gold'})}${metric(RL(),roasX(cm.roas),{cls:cm.roas>=2?'green':''})}${cm.hook!=null?metric('Hook rate',pct(cm.hook)):''}</div>`:`<div class="mini">No ad spend on this video in ${esc(MONTH_NAME)} yet.</div>`}</section>`:''}
-   <section><h3>October</h3>${hasOct?`<div class="grid g2" style="gap:8px">${metric('Ad spend',money(v.oct_spend))}${metric('Sales (Trybe)',money(v.oct_sales),{cls:'gold'})}${metric(RL(),roasX(v.oct_roas),{cls:v.oct_roas>=2?'green':''})}${v.oct_hold_rate!=null||v.oct_atc_rate!=null?metric('Hold rate',v.oct_hold_rate==null?null:pct(v.oct_hold_rate),{sub:'ThruPlays ÷ 3-second plays'})+metric('Add-to-cart rate',v.oct_atc_rate==null?null:pct(v.oct_atc_rate),{sub:'Adds to cart ÷ landing page views'}):''}</div>`:'<div class="mini">No ad spend on this video in October yet.</div>'}</section>
+   ${NOV?'':`<section><h3>October</h3>${hasOct?`<div class="grid g2" style="gap:8px">${metric('Ad spend',money(v.oct_spend))}${metric('Sales (Trybe)',money(v.oct_sales),{cls:'gold'})}${metric(RL(),roasX(v.oct_roas),{cls:v.oct_roas>=2?'green':''})}${v.oct_hold_rate!=null||v.oct_atc_rate!=null?metric('Hold rate',v.oct_hold_rate==null?null:pct(v.oct_hold_rate),{sub:'ThruPlays ÷ 3-second plays'})+metric('Add-to-cart rate',v.oct_atc_rate==null?null:pct(v.oct_atc_rate),{sub:'Adds to cart ÷ landing page views'}):''}</div>`:'<div class="mini">No ad spend on this video in October yet.</div>'}</section>`}
    <section><h3>All time</h3>${hasAll?`<div class="grid g2" style="gap:8px">${metric('Ad spend',money(v.spend))}${metric('Sales (Trybe)',money(v.sales),{cls:'gold'})}${metric(RL(),roasX(v.roas),{cls:v.roas>=2?'green':''})}${metric('Hook rate',v.hook_rate==null?null:Math.round(v.hook_rate)+'%',{sub:'still watching after 3 seconds'})}${v.hold_rate!=null||v.atc_rate!=null?metric('Hold rate',v.hold_rate==null?null:pct(v.hold_rate),{sub:'ThruPlays ÷ 3-second plays'})+metric('Add-to-cart rate',v.atc_rate==null?null:pct(v.atc_rate),{sub:'Adds to cart ÷ landing page views'}):''}</div>`:'<div class="mini">No ads have run from this video yet.</div>'}
      ${hasAll?'<div class="mini" style="margin-top:8px">Every sales number here is Trybe-attributed: what you are paid on. '+RDEF()+'</div>':''}</section></div>
    ${v.ad_only?`<section><div class="note">This video is running as an ad, but it is no longer in your Trybe submissions list. Its ad numbers show here; it does not count toward the contest or rewards.</div></section>`:`
