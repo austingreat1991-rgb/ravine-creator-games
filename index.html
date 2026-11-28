@@ -658,6 +658,23 @@ button.actrow:hover{background:var(--sf2)}
 /* Team goal thermometer (Oct 17 redesign): a glass fundraiser thermometer. Molten-orange mercury in a dark glass
    tube, a glowing bulb that carries the %, graduation ticks underneath, gold checks on passed checkpoints.
    One load moment (mercury rises, numbers count up), then still. */
+/* Nov 27 (Austin): Snowball affiliate sales ticker under the team goal, and confetti once the team goal is hit */
+.card.aff.tg{position:relative;overflow:hidden;margin-bottom:14px;padding:0 0 18px;border-color:rgba(232,182,74,.3);
+  background:radial-gradient(110% 90% at 100% 0%,rgba(232,182,74,.12),transparent 55%),linear-gradient(180deg,#232B25,#1A201C)}
+.aff-strip{overflow:hidden;white-space:nowrap;border-bottom:1px solid rgba(232,182,74,.22);background:rgba(232,182,74,.07);padding:7px 0;
+  font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:#F6D58E}
+.aff-strip-in{display:inline-block;padding-left:100%;animation:affTick 26s linear infinite}
+.aff-strip-in span{margin-right:34px}.aff-strip-in i{font-style:normal;color:rgba(246,213,142,.45);margin-right:34px}
+@keyframes affTick{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+.aff-body{padding:16px 22px 0}
+.aff .tg-num{font-size:46px;background:linear-gradient(180deg,#FFFFFF 30%,#F6D58E);-webkit-background-clip:text;background-clip:text}
+.aff-today{flex:none;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:99px;font-weight:700;font-size:13px;color:#BFF2C9;
+  background:rgba(96,200,120,.12);border:1px solid rgba(96,200,120,.32)}
+.aff-today .dot{width:7px;height:7px;border-radius:50%;background:#60C878;box-shadow:0 0 0 0 rgba(96,200,120,.6);animation:affPulse 1.8s ease-out infinite}
+@keyframes affPulse{0%{box-shadow:0 0 0 0 rgba(96,200,120,.55)}100%{box-shadow:0 0 0 9px rgba(96,200,120,0)}}
+.aff .tg-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tg-confetti{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:9999}
+@media (prefers-reduced-motion:reduce){.aff-strip-in{animation:none;padding-left:0}.aff-today .dot{animation:none}}
 .card.tg{position:relative;overflow:hidden;margin-bottom:14px;padding:22px 22px 20px;border-color:rgba(255,122,46,.32);
   background:radial-gradient(120% 90% at 0% 0%,rgba(255,110,32,.16),transparent 55%),radial-gradient(80% 70% at 100% 100%,rgba(232,182,74,.07),transparent 60%),linear-gradient(180deg,#262F27,#1B221D)}
 .tg-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
@@ -2171,7 +2188,7 @@ input::placeholder,textarea::placeholder{color:var(--tx3)}
 <aside class="drawer" id="drawer" tabindex="-1" aria-label="Details"></aside>
 <div class="toast" id="toast"></div>
 <div class="mode" id="modebadge"></div>
-<script>window.APP_MODE="live";window.BUILD="20261124-124500";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
+<script>window.APP_MODE="live";window.BUILD="20261127-190500";window.SUPABASE_URL="https://wzlsestcuynztzwjidvj.supabase.co";window.SUPABASE_KEY="sb_publishable_mhwRXWamFhAnxUj5svJn6Q_ZQB_Sfht";window.BOOK_URL='';window.AMZ_VIDEO='';</script>
 <script>window.LINKCHECK={"spy_loop": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Loop"}, "spy_raycon": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Raycon"}, "spy_sitka_gear": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "SITKA Gear"}, "spy_kuiu": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "KUIU"}, "spy_dr_squatch": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Dr. Squatch"}, "spy_the_ridge": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "The Ridge"}, "spy_comfrt": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Comfrt"}, "spy_houdini_holster": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Houdini Holster"}, "spy_2tactic": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Forged in the Field - 2Tactic"}, "spy_condition_1_cases": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Condition 1 Cases"}, "spy_undrdog": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "UndrDog Hemp"}, "spy_resilia": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Resilia"}, "spy_smooche": {"ok": true, "at": "2026-10-02T17:26:05.095436Z", "detail": "Smooche"}};</script>
 <script>/* Ravine Creator Games · October build · core: utils, data layer, router, shell */
 'use strict';
@@ -2306,7 +2323,7 @@ const API={
       finally{ if(API.inflight[k]===p) delete API.inflight[k]; } })();
     API.inflight[k]=p; return p; },
   /* Oct 30 (speed): load what every screen needs at once, in parallel, instead of one call after another */
-  WARM:['my_home','my_quests','my_rewards','my_numbers','my_team_goal','my_elite_spot','my_submissions','my_coach_link','my_featured_quest','my_armory','my_leaderboard'],
+  WARM:['my_home','my_quests','my_rewards','my_numbers','my_team_goal','my_affiliate_total','my_elite_spot','my_submissions','my_coach_link','my_featured_quest','my_armory','my_leaderboard'],
   warm(always){ if(!always&&!S.me) return; (S.admin?API.WARM.concat(['admin']):API.WARM).concat(NOV?['my_challenge']:[]).forEach(n=>{ API.page(n).catch(()=>{}); }); if(typeof myIdentity==='function') myIdentity(); },
   TTL:120000,
   bust(){ S.cache={}; S.cacheAt={}; API.inflight={}; API.gen++; if(S.me) setTimeout(()=>API.warm(),0); },
@@ -2347,6 +2364,7 @@ const FX={
         return {on_roster:true,roster:P.roster,move_down:P.move_down,place:P.me.place,tied:1,score:P.me.score,ranked_by:'elite_score',gmv:n.month_sales||0,videos:P.me.approved,videos_target:20,xp:P.me.xp,
           calls:P.me.status==='in'?0:1,calls_pending:0,coach:0,coach_pending:0,ends_at:'2026-11-01T05:00:00Z',data_through:new Date(Date.now()-2*3600e3).toISOString()}; }
       case 'my_team_goal': return d(FX.teamGoalOf(m));
+      case 'my_affiliate_total': return {month_key:'2026-11',label:'November',total_sales:61250.4,total_orders:331,today_sales:4210.75,today_orders:22,data_through:new Date(Date.now()-40*60e3).toISOString()};
       case 'my_challenge': return d(typeof fxChallenge==='function'?fxChallenge(m):{});
       case 'my_armory': return d(FX.armoryOf(m));
       case 'my_links': return {linked:false,program:{rate:15,discount:'10% off',shop:'tryravine.com'}};
@@ -3038,6 +3056,38 @@ function numbersCard(N){
 /* Team goal thermometer (Oct 16, Austin + Chris; redesigned Oct 17): one monthly Trybe sales goal for Ravine Elite,
    drawn like a school fundraiser thermometer. Hit it and the pot is split by share of team sales (20% of the sales =
    20% of the pot). Resets every month. Creators get the team total and only their own numbers; the split is admin only. */
+async function affTotal(){ try{ return await API.page('my_affiliate_total'); }catch(e){ return null; } }
+function affCard(A){ if(!A||!A.month_key) return '';
+  const tot=Number(A.total_sales)||0, today=Number(A.today_sales)||0, to=Number(A.total_orders)||0, tdo=Number(A.today_orders)||0;
+  const bits=[`${esc(A.label||'')} affiliate sales ${esc(fmt.usd(tot))}`,`Today ${esc(fmt.usd(today))}`,`${esc(fmt.int(to))} orders this month`,`${esc(fmt.int(tdo))} orders today`];
+  const run=bits.map(b=>`<span>${b}</span><i>•</i>`).join('');
+  return `<section class="card aff tg" aria-label="Snowball affiliate sales">
+    <div class="aff-strip" aria-hidden="true"><div class="aff-strip-in">${run}${run}</div></div>
+    <div class="aff-body"><div class="tg-head"><div><h3 class="tg-title">Snowball affiliate sales</h3><div class="tg-sub">Every Ravine sale through affiliate links and codes${A.data_through?`, updated ${esc(fmt.ago(A.data_through))}`:''}</div></div>
+      <div class="aff-today"><span class="dot" aria-hidden="true"></span>${esc(fmt.usd(today))} today</div></div>
+    <div class="tg-hero"><span class="tg-num" data-countup="${Math.round(tot)}">${esc(fmt.usd(tot))}</span><span class="tg-of">in ${esc(A.label||'')} so far</span></div>
+    <div class="tg-stats"><div class="tg-stat"><b>${esc(fmt.usd(today))}</b><span>sold today</span></div><div class="tg-stat"><b>${esc(fmt.int(to))}</b><span>orders this month</span></div><div class="tg-stat"><b>${esc(fmt.int(tdo))}</b><span>orders today</span></div></div></div>
+  </section>`; }
+/* Confetti whenever a won team-goal card scrolls into view (at most once every 8 seconds). Skipped for reduced motion. */
+function tgConfetti(){ const card=document.querySelector('.tgm.won'); const host=card&&card.closest('.tg'); if(!host) return;
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if(S.tgObs){ try{ S.tgObs.disconnect(); }catch(e){} }
+  if(!('IntersectionObserver' in window)){ confettiBurst(); return; }
+  S.tgObs=new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting&&e.intersectionRatio>=.35&&Date.now()-(S.tgBoomAt||0)>8000){ S.tgBoomAt=Date.now(); confettiBurst(); } }); },{threshold:[0,.35,.6]});
+  S.tgObs.observe(host);
+  /* also one burst each time Home opens, even before the card is scrolled to */
+  if(S.view==='home'&&Date.now()-(S.tgBoomAt||0)>8000){ S.tgBoomAt=Date.now(); setTimeout(confettiBurst,500); } }
+function confettiBurst(){ const cv=document.createElement('canvas'); cv.className='tg-confetti'; cv.setAttribute('aria-hidden','true'); document.body.appendChild(cv);
+  const dpr=Math.min(2,window.devicePixelRatio||1), W=innerWidth, H=innerHeight; cv.width=W*dpr; cv.height=H*dpr; const c=cv.getContext('2d'); c.scale(dpr,dpr);
+  const cols=['#FF6E20','#FFB36B','#F2B24C','#FFD680','#F4F1EA','#60C878','#E8572A'];
+  const P=Array.from({length:150},(_,i)=>{ const left=i%2===0; return {x:left?-10:W+10,y:H*0.55+Math.random()*H*0.2,vx:(left?1:-1)*(4+Math.random()*7),vy:-(9+Math.random()*9),
+    w:5+Math.random()*6,h:8+Math.random()*8,r:Math.random()*6.28,vr:(Math.random()-.5)*.35,col:cols[i%cols.length],shape:Math.random()<.25?1:0}; });
+  const t0=performance.now(), D=3200;
+  const step=now=>{ const t=now-t0; c.clearRect(0,0,W,H); const fade=t>D-800?Math.max(0,(D-t)/800):1;
+    P.forEach(p=>{ p.vy+=.32; p.vx*=.985; p.vy=Math.min(p.vy,7); p.x+=p.vx; p.y+=p.vy; p.r+=p.vr; c.save(); c.globalAlpha=fade; c.translate(p.x,p.y); c.rotate(p.r); c.fillStyle=p.col;
+      if(p.shape){ c.beginPath(); c.arc(0,0,p.w/2,0,6.28); c.fill(); } else c.fillRect(-p.w/2,-p.h/2,p.w,p.h*Math.abs(Math.cos(p.r*1.7))+2); c.restore(); });
+    if(t<D) requestAnimationFrame(step); else cv.remove(); };
+  requestAnimationFrame(step); }
 async function teamGoal(){ try{ return await API.page('my_team_goal'); }catch(e){ return null; } }
 function fmtK(n){ n=Number(n)||0; if(n>=1e6) return '$'+(+(n/1e6).toFixed(2))+'M'; if(n>=1e3) return '$'+Math.round(n/1e3)+'K'; return '$'+Math.round(n); }
 function fmtShare(s){ const x=Number(s||0)*100; return (x>=1||x===0?x.toFixed(1):x.toFixed(2))+'%'; }
@@ -3084,7 +3134,7 @@ function tgAnimate(){ const els=[...document.querySelectorAll('.tg [data-countup
 route('home',async()=>{
   try{ await API.page('my_quests'); }catch(e){}   // Nov 23: the quest countdown banner at the top of Home needs the catalog
   const h=await API.page('my_home'); const c=h.campaign||{}; const ct=h.contest||{}; const q=h.quests||{}; const r=h.rewards||{}; const sub=h.submissions||{};
-  const N=await myNumbers(); const TG=await teamGoal(); const ES=await myEliteSpot(); let SP={}; try{ SP=await API.page('my_submissions'); }catch(e){} const SUBS=SP.videos||[]; if(SUBS.length&&typeof sub.changes==='number') sub.changes=SUBS.filter(v=>v.status==='changes_requested').length; try{ await API.page('my_quests'); }catch(e){}
+  const N=await myNumbers(); const TG=await teamGoal(); const AF=await affTotal(); const ES=await myEliteSpot(); let SP={}; try{ SP=await API.page('my_submissions'); }catch(e){} const SUBS=SP.videos||[]; if(SUBS.length&&typeof sub.changes==='number') sub.changes=SUBS.filter(v=>v.status==='changes_requested').length; try{ await API.page('my_quests'); }catch(e){}
   const nt=nextTier(r); const dl=daysLeft(c.ends_at); let RW=null; try{ RW=await API.page('my_rewards'); }catch(e){}
   // one practical next action, from real state
   let action;
@@ -3108,6 +3158,7 @@ route('home',async()=>{
     ${BF}
     <div class="sec"><h2>Team and challenge</h2><a class="mini" href="#/compete">Full challenge rules →</a></div>
     ${TG&&TG.month_key===CAMP?`<section class="card tg fl-tg">${teamGoalHead(TG)}</section>`:''}
+    ${affCard(AF)}
     ${C&&C.tiers?`<div class="fl-duo flpf">${chPool(C,{bar:!(TG&&TG.month_key===CAMP)})}${chHero(C)}</div>`:`<div class="card"><p>Your November challenge shows here once the first November numbers are in.</p></div>`}
     <div class="sec"><h2>1:1 coaching</h2><span class="mini">Unlocks from this month's Trybe sales</span></div>
     <section class="card fl-tasks"><div class="fl-task-x" style="border:0;padding-top:0;margin-top:0">${bookCta('mini')}</div></section>
@@ -3690,7 +3741,7 @@ function openClaim(id){ if(S.view!=='rewards') go('rewards'); openReward(id); }
 let BANNER_SEQ=0;
 async function topBanner(){ const seq=++BANNER_SEQ; const view=S.view; if(!S.me||view.startsWith('admin')) return; let r; try{ r=await API.page('my_rewards'); }catch(e){ return; }
   if(seq!==BANNER_SEQ||S.view!==view) return; const html=claimBannerHtml(r); const a=$('#main .anim'); if(!a) return; $('#main .claimwrap')?.remove(); if(html) a.insertAdjacentHTML('afterbegin',`<div class="claimwrap">${html}</div>`); }
-function afterRender(){ tickReset(); topBanner(); hydrateShots($('#main')); tgAnimate(); if(S.view==='links') lkAfter(); rulesPop(); }
+function afterRender(){ tickReset(); topBanner(); hydrateShots($('#main')); tgAnimate(); tgConfetti(); if(S.view==='links') lkAfter(); rulesPop(); }
 /* Nov 16 (Austin): quests got harder for Nov 16-30. One pop-up per creator per device, closed with Got it or See my tiers. */
 const RPOP_KEY='rcg_rules_1116';
 function rulesPopSeen(){ try{ return localStorage.getItem(RPOP_KEY+'_'+(S.me?.code||S.me?.id||'me'))==='1'; }catch(e){ return false; } }
